@@ -4,7 +4,7 @@ const schema = {
     version: "1.0.0",
     flowMCP: "1.0.0",
     root: "https://api.etherscan.io",
-    requiredServerParams: ["ETHERSCAN_API_KEY" ],
+    requiredServerParams: ["ETHERSCAN_API_KEY"],
     headers: {},
     routes: {
       getContractABI: {
@@ -22,7 +22,7 @@ const schema = {
           { _description: "Basic test for getContractABI", address: "0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413"}
         ],
         modifiers: [
-          { phase: "post", handler: "convertToJSON" }
+          { phase: "post", handler: "modifyResult" }
         ]
       },
       getContractSourceCode: {
@@ -39,12 +39,12 @@ const schema = {
           { _description: "Basic test for getContractSourceCode", address: "0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413" }
         ],
         modifiers: [
-          { phase: "post", handler: "convertToJSON" }
+          { phase: "post", handler: "modifyResult" }
         ]
       }
     },
     handlers: {
-      convertToJSON: async ( { struct, payload } ) => {
+      modifyResult: async ( { struct, payload } ) => {
         if( struct['data'].status !== "1" ) {
           struct['status'] = false
           struct['messages'].push(struct.data.message);
