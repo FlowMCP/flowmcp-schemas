@@ -22,7 +22,7 @@ const schema = {
           { _description: "Basic test for getContractABI", address: "0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413"}
         ],
         modifiers: [
-          { phase: "post", handler: "modifyResult" }
+          { phase: "post", handlerName: "modifyResult" }
         ]
       },
       getContractSourceCode: {
@@ -39,7 +39,7 @@ const schema = {
           { _description: "Basic test for getContractSourceCode", address: "0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413" }
         ],
         modifiers: [
-          { phase: "post", handler: "modifyResult" }
+          { phase: "post", handlerName: "modifyResult" }
         ]
       }
     },
