@@ -1,0 +1,176 @@
+const chainsByAlias = {
+    ETHEREUM_MAINNET: { 'chainId': 1, 'name': "Ethereum Mainnet" },
+    SEPOLIA_TESTNET: { 'chainId': 11155111, 'name': "Sepolia Testnet" },
+    HOLESKY_TESTNET: { 'chainId': 17000, 'name': "Holesky Testnet" },
+    ABSTRACT_MAINNET: { 'chainId': 2741, 'name': "Abstract Mainnet" },
+    ABSTRACT_SEPOLIA_TESTNET: { 'chainId': 11124, 'name': "Abstract Sepolia Testnet" },
+    APECHAIN_CURTIS_TESTNET: { 'chainId': 33111, 'name': "ApeChain Curtis Testnet" },
+    APECHAIN_MAINNET: { 'chainId': 33139, 'name': "ApeChain Mainnet" },
+    ARBITRUM_NOVA_MAINNET: { 'chainId': 42170, 'name': "Arbitrum Nova Mainnet" },
+    ARBITRUM_ONE_MAINNET: { 'chainId': 42161, 'name': "Arbitrum One Mainnet" },
+    ARBITRUM_SEPOLIA_TESTNET: { 'chainId': 421614, 'name': "Arbitrum Sepolia Testnet" },
+    AVALANCHE_CCHAIN: { 'chainId': 43114, 'name': "Avalanche C-Chain" },
+    AVALANCHE_FUJI_TESTNET: { 'chainId': 43113, 'name': "Avalanche Fuji Testnet" },
+    BASE_MAINNET: { 'chainId': 8453, 'name': "Base Mainnet" },
+    BASE_SEPOLIA_TESTNET: { 'chainId': 84532, 'name': "Base Sepolia Testnet" },
+    BERACHAIN_MAINNET: { 'chainId': 80094, 'name': "Berachain Mainnet" },
+    BERACHAIN_BEPOLIA_TESTNET: { 'chainId': 80069, 'name': "Berachain Bepolia Testnet" },
+    BITTORRENT_MAINNET: { 'chainId': 199, 'name': "BitTorrent Chain Mainnet" },
+    BITTORRENT_TESTNET: { 'chainId': 1028, 'name': "BitTorrent Chain Testnet" },
+    BLAST_MAINNET: { 'chainId': 81457, 'name': "Blast Mainnet" },
+    BLAST_SEPOLIA_TESTNET: { 'chainId': 168587773, 'name': "Blast Sepolia Testnet" },
+    BINANCE_MAINNET: { 'chainId': 56, 'name': "BNB Smart Chain Mainnet" },
+    BINANCE_TESTNET: { 'chainId': 97, 'name': "BNB Smart Chain Testnet" },
+    CELO_ALFAJORES_TESTNET: { 'chainId': 44787, 'name': "Celo Alfajores Testnet" },
+    CELO_MAINNET: { 'chainId': 42220, 'name': "Celo Mainnet" },
+    CRONOS_MAINNET: { 'chainId': 25, 'name': "Cronos Mainnet" },
+    FRAXTAL_MAINNET: { 'chainId': 252, 'name': "Fraxtal Mainnet" },
+    FRAXTAL_TESTNET: { 'chainId': 2522, 'name': "Fraxtal Testnet" },
+    GNOSIS_MAINNET: { 'chainId': 100, 'name': "Gnosis" },
+    LINEA_MAINNET: { 'chainId': 59144, 'name': "Linea Mainnet" },
+    LINEA_SEPOLIA_TESTNET: { 'chainId': 59141, 'name': "Linea Sepolia Testnet" },
+    MANTLE_MAINNET: { 'chainId': 5000, 'name': "Mantle Mainnet" },
+    MANTLE_SEPOLIA_TESTNET: { 'chainId': 5003, 'name': "Mantle Sepolia Testnet" },
+    MEMECORE_MAINNET: { 'chainId': 4352, 'name': "Memecore Mainnet" },
+    MEMECORE_TESTNET: { 'chainId': 43521, 'name': "Memecore Testnet" },
+    MOONBASE_ALPHA_TESTNET: { 'chainId': 1287, 'name': "Moonbase Alpha Testnet" },
+    MOONBEAM_MAINNET: { 'chainId': 1284, 'name': "Moonbeam Mainnet" },
+    MOONRIVER_MAINNET: { 'chainId': 1285, 'name': "Moonriver Mainnet" },
+    OPTIMISN_MAINNET: { 'chainId': 10, 'name': "OP Mainnet" },
+    OPTIMISN_SEPOLIA_TESTNET: { 'chainId': 11155420, 'name': "OP Sepolia Testnet" },
+    POLYGON_AMOY_TESTNET: { 'chainId': 80002, 'name': "Polygon Amoy Testnet" },
+    POLYGON_MAINNET: { 'chainId': 137, 'name': "Polygon Mainnet" },
+    POLYGONZK_CARDONA_TESTNET: { 'chainId': 2442, 'name': "Polygon zkEVM Cardona Testnet" },
+    POLYGONZK_MAINNET: { 'chainId': 1101, 'name': "Polygon zkEVM Mainnet" },
+    SCROLL_MAINNET: { 'chainId': 534352, 'name': "Scroll Mainnet" },
+    SCROLL_SEPOLIA_TESTNET: { 'chainId': 534351, 'name': "Scroll Sepolia Testnet" },
+    SONIC_BLAZE_TESTNET: { 'chainId': 57054, 'name': "Sonic Blaze Testnet" },
+    SONIC_MAINNET: { 'chainId': 146, 'name': "Sonic Mainnet" },
+    SOPHON_MAINNET: { 'chainId': 50104, 'name': "Sophon Mainnet" },
+    SOPHON_SEPOLIA_TESTNET: { 'chainId': 531050104, 'name': "Sophon Sepolia Testnet" },
+    SWELLCHAIN_MAINNET: { 'chainId': 1923, 'name': "Swellchain Mainnet" },
+    SWELLCHAIN_TESTNET: { 'chainId': 1924, 'name': "Swellchain Testnet" },
+    TAIKO_HEKLA_L2_TESTNET: { 'chainId': 167009, 'name': "Taiko Hekla L2 Testnet" },
+    TAIKO_MAINNET: { 'chainId': 167000, 'name': "Taiko Mainnet" },
+    UNICHAIN_MAINNET: { 'chainId': 130, 'name': "Unichain Mainnet" },
+    UNICHAIN_SEPOLIA_TESTNET: { 'chainId': 1301, 'name': "Unichain Sepolia Testnet" },
+    WEMIX3_MAINNET: { 'chainId': 1111, 'name': "WEMIX3.0 Mainnet" },
+    WEMIX3_TESTNET: { 'chainId': 1112, 'name': "WEMIX3.0 Testnet" },
+    WORLD_MAINNET: { 'chainId': 480, 'name': "World Mainnet" },
+    WORLD_SEPOLIA_TESTNET: { 'chainId': 4801, 'name': "World Sepolia Testnet" },
+    XAI_MAINNET: { 'chainId': 660279, 'name': "Xai Mainnet" },
+    XAI_SEPOLIA_TESTNET: { 'chainId': 37714555429, 'name': "Xai Sepolia Testnet" },
+    XINFIN_TESTNET: { 'chainId': 51, 'name': "XDC Apothem Testnet" },
+    XINFIN_MAINNET: { 'chainId': 50, 'name': "XDC Mainnet" },
+    ZKSYNC_MAINNET: { 'chainId': 324, 'name': "zkSync Mainnet" },
+    ZKSYNC_SEPOLIA_TESTNET: { 'chainId': 300, 'name': "zkSync Sepolia Testnet" }
+}
+
+
+export const schema = {
+    namespace: "etherscan",
+    name: "SmartContractExplorer",
+    description: "Provides available chains and fetches smart contract source code",
+    docs: ["https://docs.etherscan.io"],
+    tags: [],
+    flowMCP: "1.2.0",
+    root: "https://api.etherscan.io/v2/api",
+    requiredServerParams: [ "ETHERSCAN_API_KEY" ],
+    headers: {},
+    routes: {
+      getAvailableChains: {
+        requestMethod: "GET",
+        description: "List available blockchain aliases",
+        route: "/chains",
+        parameters: [],
+        tests: [{ _description: "Fetch available chains" }],
+        modifiers: [{ phase: "execute", handlerName: "getAvailableChains" }]
+      },
+      getSmartContractAbi: {
+        requestMethod: "GET",
+        description: "Fetch smart contract source code by alias",
+        route: "/",
+        parameters: [
+          { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,HOLESKY_TESTNET,ABSTRACT_MAINNET,ABSTRACT_SEPOLIA_TESTNET,APECHAIN_CURTIS_TESTNET,APECHAIN_MAINNET,ARBITRUM_NOVA_MAINNET,ARBITRUM_ONE_MAINNET,ARBITRUM_SEPOLIA_TESTNET,AVALANCHE_CCHAIN,AVALANCHE_FUJI_TESTNET,BASE_MAINNET,BASE_SEPOLIA_TESTNET,BERACHAIN_MAINNET,BERACHAIN_BEPOLIA_TESTNET,BITTORRENT_MAINNET,BITTORRENT_TESTNET,BLAST_MAINNET,BLAST_SEPOLIA_TESTNET,BINANCE_MAINNET,BINANCE_TESTNET,CELO_ALFAJORES_TESTNET,CELO_MAINNET,CRONOS_MAINNET,FRAXTAL_MAINNET,FRAXTAL_TESTNET,GNOSIS_MAINNET,LINEA_MAINNET,LINEA_SEPOLIA_TESTNET,MANTLE_MAINNET,MANTLE_SEPOLIA_TESTNET,MEMECORE_MAINNET,MEMECORE_TESTNET,MOONBASE_ALPHA_TESTNET,MOONBEAM_MAINNET,MOONRIVER_MAINNET,OPTIMISN_MAINNET,OPTIMISN_SEPOLIA_TESTNET,POLYGON_AMOY_TESTNET,POLYGON_MAINNET,POLYGONZK_CARDONA_TESTNET,POLYGONZK_MAINNET,SCROLL_MAINNET,SCROLL_SEPOLIA_TESTNET,SONIC_BLAZE_TESTNET,SONIC_MAINNET,SOPHON_MAINNET,SOPHON_SEPOLIA_TESTNET,SWELLCHAIN_MAINNET,SWELLCHAIN_TESTNET,TAIKO_HEKLA_L2_TESTNET,TAIKO_MAINNET,UNICHAIN_MAINNET,UNICHAIN_SEPOLIA_TESTNET,WEMIX3_MAINNET,WEMIX3_TESTNET,WORLD_MAINNET,WORLD_SEPOLIA_TESTNET,XAI_MAINNET,XAI_SEPOLIA_TESTNET,XINFIN_TESTNET,XINFIN_MAINNET,ZKSYNC_MAINNET,ZKSYNC_SEPOLIA_TESTNET)", options: [] } },
+          { position: { key: "module", value: "contract", location: "query" } },
+          { position: { key: "action", value: "getabi", location: "query" } },
+          { position: { key: "address", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(42)", "max(42)"] } },
+          { position: { key: "apikey", value: "{{ETHERSCAN_API_KEY}}", location: "query" } }
+        ],
+        tests: [
+          { _description: "Uniswap V2 Factory on Ethereum", chainName: "ETHEREUM_MAINNET", address: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" },
+          { _description: "Uniswap V3 Factory on Ethereum", chainName: "ETHEREUM_MAINNET", address: "0x1F98431c8aD98523631AE4a59f267346ea31F984" },
+          { _description: "QuickSwap Factory on Polygon", chainName: "POLYGON_MAINNET", address: "0x5757371414417b8c6caad45baef941abc7d3ab32" },
+          { _description: "PancakeSwap V2 Factory on BNB Chain", chainName: "BINANCE_MAINNET", address: "0xca143ce32fe78f1f7019d7d551a6402fc5350c73" },
+          { _description: "Trader Joe V2.1 Factory on Avalanche", chainName: "AVALANCHE_CCHAIN", address: "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10" }
+        ],
+        modifiers: [ 
+          { phase: "pre", handlerName: "insertChainId" },
+          { phase: "post", handlerName: "modifyAbi" }
+        ]
+
+      },
+      getSourceCode: {
+        requestMethod: "GET",
+        description: "Fetch smart contract source code by alias",
+        route: "/",
+        parameters: [
+          { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,HOLESKY_TESTNET,ABSTRACT_MAINNET,ABSTRACT_SEPOLIA_TESTNET,APECHAIN_CURTIS_TESTNET,APECHAIN_MAINNET,ARBITRUM_NOVA_MAINNET,ARBITRUM_ONE_MAINNET,ARBITRUM_SEPOLIA_TESTNET,AVALANCHE_CCHAIN,AVALANCHE_FUJI_TESTNET,BASE_MAINNET,BASE_SEPOLIA_TESTNET,BERACHAIN_MAINNET,BERACHAIN_BEPOLIA_TESTNET,BITTORRENT_MAINNET,BITTORRENT_TESTNET,BLAST_MAINNET,BLAST_SEPOLIA_TESTNET,BINANCE_MAINNET,BINANCE_TESTNET,CELO_ALFAJORES_TESTNET,CELO_MAINNET,CRONOS_MAINNET,FRAXTAL_MAINNET,FRAXTAL_TESTNET,GNOSIS_MAINNET,LINEA_MAINNET,LINEA_SEPOLIA_TESTNET,MANTLE_MAINNET,MANTLE_SEPOLIA_TESTNET,MEMECORE_MAINNET,MEMECORE_TESTNET,MOONBASE_ALPHA_TESTNET,MOONBEAM_MAINNET,MOONRIVER_MAINNET,OPTIMISN_MAINNET,OPTIMISN_SEPOLIA_TESTNET,POLYGON_AMOY_TESTNET,POLYGON_MAINNET,POLYGONZK_CARDONA_TESTNET,POLYGONZK_MAINNET,SCROLL_MAINNET,SCROLL_SEPOLIA_TESTNET,SONIC_BLAZE_TESTNET,SONIC_MAINNET,SOPHON_MAINNET,SOPHON_SEPOLIA_TESTNET,SWELLCHAIN_MAINNET,SWELLCHAIN_TESTNET,TAIKO_HEKLA_L2_TESTNET,TAIKO_MAINNET,UNICHAIN_MAINNET,UNICHAIN_SEPOLIA_TESTNET,WEMIX3_MAINNET,WEMIX3_TESTNET,WORLD_MAINNET,WORLD_SEPOLIA_TESTNET,XAI_MAINNET,XAI_SEPOLIA_TESTNET,XINFIN_TESTNET,XINFIN_MAINNET,ZKSYNC_MAINNET,ZKSYNC_SEPOLIA_TESTNET)", options: [] } },
+          { position: { key: "module", value: "contract", location: "query" } },
+          { position: { key: "action", value: "getsourcecode", location: "query" } },
+          { position: { key: "address", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(42)", "max(42)"] } },
+          { position: { key: "apikey", value: "{{ETHERSCAN_API_KEY}}", location: "query" } }
+        ],
+        tests: [
+          { _description: "Uniswap V2 Factory on Ethereum", chainName: "ETHEREUM_MAINNET", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
+          { _description: "QuickSwap Factory on Polygon", chainName: "POLYGON_MAINNET", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
+          { _description: "PancakeSwap V2 Factory on BNB Chain", chainName: "BINANCE_MAINNET", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
+          { _description: "Trader Joe V2.1 Factory on Avalanche", chainName: "AVALANCHE_CCHAIN", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
+          { _description: "Trader Joe V2.1 Factory on Avalanche", chainName: "AVALANCHE_CCHAIN", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
+        ],
+        modifiers: [ 
+          { phase: "pre", handlerName: "insertChainId" },
+          { phase: "post", handlerName: "modifySourceCode" }
+        ]
+
+      }
+    },
+    handlers: {
+      getAvailableChains: async ( { struct, payload } ) => {
+        struct['data'] = Object.keys( chainsByAlias )
+        return { struct, payload }
+      },
+      insertChainId: async ( { struct, payload, userParams } ) => {
+        const { chainName } = userParams
+        const { chainId } = chainsByAlias[ chainName ]
+        payload['url'] = payload['url']
+          .replace( `chainName=${chainName}`, `chainid=${chainId}` )
+
+        return { struct, payload };
+      },
+      modifyAbi: async ( { struct, payload } ) => {
+        if( !struct['data'] ) { return { struct, payload } }
+
+        if( struct['data'].status !== "1" ) {
+          struct['status'] = false
+          struct['messages'].push(struct.data.message);
+          return { struct, payload }
+        }
+
+        struct['data'] = JSON.parse( struct['data']?.result )
+        return { struct, payload }
+      },
+      modifySourceCode: async ( { struct, payload } ) => {
+        if( !struct['data'] ) { return { struct, payload } }
+
+        if( struct['data'].status !== "1" ) {
+          struct['status'] = false
+          struct['messages'].push(struct.data.message);
+          return { struct, payload }
+        }
+        struct['data'] = struct['data'].result
+        return { struct, payload }
+      }
+    }
+  }
+  

@@ -1,44 +1,98 @@
-[![CircleCI](https://img.shields.io/circleci/build/github/a6b8/multiThreadz/main)]()  
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+# FlowMCP Schema Library
 
-# flowMCP Schemas
+This repository contains a comprehensive collection of schema modules designed for use with [FlowMCP](../README.md), a framework for adapting and standardizing REST APIs for interaction with AI systems.
 
-This repository contains reusable API schemas that can be imported and used with [a6b8/flowMCP](https://github.com/a6b8/flowMCP).
+Each schema describes the structure, routes, parameters, and integration requirements of a specific API provider, allowing them to be seamlessly activated and queried via the MCP interface.
 
-## Features:
-- Plug & Play integration of REST APIs
-- Schema-based validation and structure
-- Supports env variables, test cases & post-process handlers
-- Easy to extend and maintain
+---
 
-## Quickstart
+## 📦 Available Schemas
 
-Install via:
+Below is a list of all available schemas in this library, grouped by provider and sorted alphabetically. Each schema includes one or more MCP-compatible routes.
 
-```bash
-npm i a6b8/flowMCP-schema
-```
+| Provider         | # Routes | Route Names (Examples)                                   |
+|------------------|----------|----------------------------------------------------------|
+| `alternative`     | 3        | `getCurrentFng`, `getHistoricalFng`, `analyzeFngTrend`   |
+| `bscscan`         | 2        | `getContractABI`, `getContractSourceCode`               |
+| `chainlink`       | 14       | `getAvailableChains`, `getAvailableFeedsForChain`, ...  |
+| `coincap`         | 9        | `listAssets`, `singleAsset`, `assetMarkets`, `listExchanges`, `getExchangeById`, `listMarkets`, `listRates`, `getRateBySlug` |
+| `coingecko`       | 22       | `getCoinsList`, `getCoinsMarkets`, `getCoinById`, `getDerivativeExchangeIds`, `getExchangesList`, `getExchangeById`, `getExchangeTickers`, `getAvailableCoinCategoryIds`, `getGlobalData`, `getSimplePrice`, `getTokenPrice`, `getTrendingCoins`, ... |
+| `coinmarketcap`   | 10       | `getCategories`, `getCategory`, `getIdMap`, `getMetadata`, `getHistorical`, `getLatest`, `getFearAndGreedHistorical`, `getFearAndGreedLatest`, `listingsLatest` |
+| `cointelegraph`   | 1        | `getLatestNews`                                         |
+| `cryptopanic`     | 1        | `getCryptoCryptopanicNews`                              |
+| `dexscreener`     | 8        | `getLatestBoostedTokens`, `getMostActiveBoostedTokens`, `getPairByChainAndAddress`, `checkTokenOrders`, `getLatestTokenProfiles`, `searchPairs`, ... |
+| `duneAnalytics`   | 7        | `farcasterGetTrendingMemecoins`, `getLatestResult`, `getDexPairStats`, `getTrendingContracts`, ... |
+| `etherscan`       | 7        | `getContractABI`, `getContractSourceCode`, `getAvailableChains`, `getSmartContractAbi`, `getSourceCode`, `getGasOracle`, `estimateGasCost` |
+| `llama`           | 2        | `getProjectsByName`, `getPools`                         |
+| `luksoNetwork`    | 50       | `readProfileData`, `fetchProfileMetadata`, `getUniverse`, `listAddresses`, `getBlocks`, `search`, `getNFTsByAddress`, `getTransactions`, ... |
+| `memoryLol`       | 1        | `queryUsernameChanges`                                  |
+| `moralis`         | 67       | `/block/:block_number_or_hash`, `/dateToBlock`, `/wallets/:address/defi/:protocol/positions`, `/market-data/nfts/top-collections`, `/nft/:address/price`, `/pairs/:address/sniper`, `/info/endpointWeights`, `/wallets/:address/chains`, ... |
+| `newsdata`        | 2        | `getLatestNewsdata`, `getCryptoNewsdata`                |
+| `santiment`       | 5        | `get_sentiment_balance`, `get_social_volume`, ...       |
+| `solanatracker`   | 39       | `tokenStats`, `chartData`, `profitAndLossData`, `priceInformation`, `tokenInformation`, `topTradersAll`, `tokenTrades`, `walletInformation`, ... |
+| `solscan`         | 1        | `chainInfo`                                             |
+| `solsniffer`      | 1        | `analysisToken`                                         |
+| `thegraph`        | 3        | `getNewPools`, `getSubgraphSchema`, `querySubgraph`     |
 
-Import a schema:
+---
+
+## 🚀 Example: Start Server with All Schemas
+
+This script loads and activates all available schemas into a local MCP-compatible server.
+
+File: `2-start-server.mjs`
 
 ```js
-import { schema } from 'flowMCP-schema/schemas/{{name}}/schema.mjs'
-```
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+import { FlowMCP, Server } from 'flowmcp'
+import { fileURLToPath } from 'url'
+import path from 'path'
 
-## Table of Contents
-- [flowMCP Schemas](#flowmcp-schemas)
-  - [Features:](#features)
-  - [Quickstart](#quickstart)
-  - [Table of Contents](#table-of-contents)
-  - [Schema List](#schema-list)
-  - [License](#license)
+const config = {
+    name: 'Test',
+    description: 'This is a development server for testing purposes.',
+    version: '1.2.0'
+}
 
-## Schema List
+Server.getArgvParameters({
+    argv: process.argv,
+    includeNamespaces: [],
+    excludeNamespaces: [],
+    activateTags: []
+}).prepare({
+    scriptRootFolder: path.dirname(fileURLToPath(import.meta.url)),
+    schemasRootFolder: './../schemas/v1.2.0/',
+    localEnvPath: './../../.env'
+}).then(async (schemas) => {
+    const server = new McpServer(config)
 
-| Name      | # of Endpoints | Schema File                                  | README File                                  |
-|-----------|----------------|-----------------------------------------------|----------------------------------------------|
-| Etherscan | 2              | [schema.mjs](./schemas/etherscan/schema.mjs) | [README.md](./schemas/etherscan/README.md)   |
+    schemas.forEach(({ schema, serverParams, activateTags }) => {
+        FlowMCP.activateServerTools({
+            server,
+            schema,
+            serverParams,
+            activateTags,
+            silent: false
+        })
+    })
 
-## License
+    const transport = new StdioServerTransport()
+    await server.connect(transport)
+}).catch((e) => {
+    console.error('Error starting server:', e)
+})
+````
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+---
+
+## 🧩 Contributing
+
+Want to add or improve a schema? Fork the repo, add your `.mjs` schema file under `schemas/<provider>/`, and submit a pull request.
+
+Please follow the formatting and conventions described in the [FlowMCP README](../README.md), including:
+
+* 4-space indentation
+* One-line JSON objects for `tests`, `parameters`, and `modifiers`
+* `const schema = { ... }` followed by `export { schema }` with two newlines between
+

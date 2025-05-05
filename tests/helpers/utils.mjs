@@ -1,18 +1,19 @@
-import { all } from 'axios';
 import fs from 'fs';
 import path from 'path';
+
 
 function getAllFiles({ dirPath, arrayOfFiles = [] }) {
     const files = fs.readdirSync( dirPath )
 
-    files.forEach( ( file ) => {
-        const fullPath = path.join( dirPath, file )
-        if( fs.statSync( fullPath ).isDirectory() ) {
-            getAllFiles( { dirPath: fullPath, arrayOfFiles } )
-        } else {
-            arrayOfFiles.push( fullPath )
-        }
-    })
+    files
+        .forEach( ( file ) => {
+            const fullPath = path.join( dirPath, file )
+            if( fs.statSync( fullPath ).isDirectory() ) {
+                getAllFiles( { dirPath: fullPath, arrayOfFiles } )
+            } else {
+                arrayOfFiles.push( fullPath )
+            }
+        } )
 
   return arrayOfFiles
 }
@@ -63,7 +64,6 @@ function getEnv( { path, selection } ) {
 
 
 async function getAllServerParams( { schemas, envPath } ) {
-
     let requiredParams = new Set()
     for( const _schema of schemas ) {
         const { path } = _schema
