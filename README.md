@@ -1,6 +1,6 @@
 # FlowMCP Schema Library
 
-This repository contains a comprehensive collection of schema modules designed for use with [FlowMCP](../README.md), a framework for adapting and standardizing REST APIs for interaction with AI systems.
+This repository contains a comprehensive collection of schema modules designed for use with [FlowMCP](https://github.com/a6b8/FlowMCP), a framework for adapting and standardizing REST APIs for interaction with AI systems.
 
 Each schema describes the structure, routes, parameters, and integration requirements of a specific API provider, allowing them to be seamlessly activated and queried via the MCP interface.
 
