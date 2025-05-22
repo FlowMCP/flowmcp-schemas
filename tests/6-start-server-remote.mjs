@@ -132,7 +132,7 @@ Server
         catch( err ) {
             console.error('Failed to start server:', err)
         }
-        
+
         return true
     } )
     .catch( ( e ) => {
