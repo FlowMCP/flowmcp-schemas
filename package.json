@@ -4,15 +4,25 @@
   "description": "",
   "main": "./src/index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspector": "npx @modelcontextprotocol/inspector node tests/2-start-server.mjs"
   },
   "keywords": [],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@erc725/erc725.js": "^0.27.2",
     "@modelcontextprotocol/sdk": "^1.10.1",
     "ethers": "^6.13.7",
-    "flowmcp": "github:a6b8/flowmcp#d88eae565add9de5a71e92afa611b831fd57799e"
-  }
+    "flowmcp": "github:flowmcp/flowmcp#483cb1e25c626ed135d8b336be6412cb7a083170",
+    "indicatorts": "^2.2.2",
+    "moment": "^2.30.1",
+    "twitter-api-v2": "^1.23.2",
+    "talib": "^1.1.6",
+    "@modelcontextprotocol/inspector": "^0.12.0"
+  },
+  "dependencies": {}
 }

@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs'
+import path from 'path'
+
 
 
 function getAllFiles({ dirPath, arrayOfFiles = [] }) {
@@ -40,15 +41,14 @@ function getEnv( { path, selection } ) {
         [ 'nodeUrl',    'SOLANA_MAINNET_HTTPS'   ]
     ]
 */
+
     const result = fs
         .readFileSync( path, 'utf-8' )
         .split( "\n" )
         .map( line => line.split( '=' ) )
         .reduce( ( acc, [ k, v ] ) => {
-            const find = selection.find( ( [ key, value ] ) => value === k )
-            if( find ) { 
-                acc[ find[ 0 ] ] = v 
-            }
+            const find = selection.find( ( [ _, value ] ) => value === k )
+            if( find ) {  acc[ find[ 0 ] ] = v  }
             return acc
         }, {} )
 

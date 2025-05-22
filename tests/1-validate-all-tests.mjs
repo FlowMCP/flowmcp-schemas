@@ -4,6 +4,7 @@ import { getSchemas, getAllServerParams } from './helpers/utils.mjs'
 import { FlowMCP, Validation } from 'flowmcp'
 
 
+const envPath = path.resolve( process.cwd(), './../../.env' )
 const schemas = getSchemas( { dirPath: './schemas/v1.2.0/' } )
     .filter( ( a ) => {
         const filePath = a.path
@@ -12,10 +13,7 @@ const schemas = getSchemas( { dirPath: './schemas/v1.2.0/' } )
         return lastFolder.substring( 0, 1 ).toLowerCase() > 'm' 
     } )
 
-const { allServerParams } = await getAllServerParams({
-    schemas,
-    envPath: `./../../../.env`
-} )
+const { allServerParams } = await getAllServerParams( { schemas, envPath } )
 
 
 const delay = ( ms ) => new Promise( ( resolve ) => setTimeout( resolve, ms ) )
@@ -45,10 +43,9 @@ for( const _schema of schemas ) {
     const shortPath = schemaPath.split( "schemas/" )[ 1 ] || path.basename( schemaPath )
     console.log(`\n📦 ${shortPath} → ${schema['name']}`)
 
-    const { allServerParams: serverParams } = await getAllServerParams( {
-        schemas: [ _schema ],
-        envPath: `./../../../.env`
-    } )
+    const { allServerParams: serverParams } = await getAllServerParams( 
+        { 'schemas': [ _schema ], envPath } 
+    )
 
     const tests = FlowMCP.getAllTests( { schema } )
     console.log(
