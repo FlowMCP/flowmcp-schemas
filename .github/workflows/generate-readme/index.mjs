@@ -8,7 +8,13 @@ import fs from 'fs'
     const preparedParams = await Files.getSchemaDetails( { files } )
 */
 
-await SchemaImporter.init()
+await SchemaImporter
+    .init( { 
+        schemaRootFolder:"../schemas/v1.2.0/", 
+        onlyWithoutImports:false,
+        withMetaData:true, 
+        withSchema:true
+    } )
 const preparedParams = SchemaImporter.get()
 console.log( `Schemas imported: ${preparedParams.length}` )
 
