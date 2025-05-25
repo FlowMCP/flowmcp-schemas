@@ -14,7 +14,7 @@ class SchemaImporter {
 
     static async init( { 
         schemaRootFolder="../schemas/v1.2.0/", 
-        withMetaData=true, 
+        withMetaData=false, 
         withSchema=false } = {} 
     ) {
         const __filename = fileURLToPath( import.meta.url )
