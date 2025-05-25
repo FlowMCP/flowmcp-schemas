@@ -5,4 +5,4 @@ const allSchemas = await SchemaImporter.init()
 const selection = SchemaImporter.get( { 'selection': [] } )
 
 
-console.log( 'All schemas imported:', allSchemas )
+console.log( 'All schemas imported:', allSchemas[ 0 ] )
