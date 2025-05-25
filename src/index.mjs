@@ -14,6 +14,7 @@ class SchemaImporter {
 
     static async init( { 
         schemaRootFolder="../schemas/v1.2.0/", 
+        onlyWithoutImports=true,
         withMetaData=false, 
         withSchema=false } = {} 
     ) {
@@ -30,8 +31,13 @@ class SchemaImporter {
             .filter( ( { absolutePath } ) => absolutePath.endsWith( '.mjs' ) )
         schemas = this
             .#hasImports( { schemas } )
-
-
+            .filter( ( schema ) => {
+                if( onlyWithoutImports ) {
+                    return !schema.hasImport
+                }
+                return true
+            } )
+        console.log( 'HERE', schemas.length, 'schemas found' )
         if( schemas.length === 0 ) {
             throw new Error( `No schemas found in the directory: ${schemaPath}` )
         }
