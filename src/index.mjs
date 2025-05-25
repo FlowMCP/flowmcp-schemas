@@ -16,8 +16,8 @@ class SchemaImporter {
         schemaRootFolder="../schemas/v1.2.0/", 
         onlyWithoutImports=true,
         withMetaData=false, 
-        withSchema=false } = {} 
-    ) {
+        withSchema=false 
+    } = {} ) {
         const __filename = fileURLToPath( import.meta.url )
         const __dirname = path.dirname( __filename )
         const schemaPath = path.resolve( __dirname, schemaRootFolder )
@@ -37,7 +37,7 @@ class SchemaImporter {
                 }
                 return true
             } )
-        console.log( 'HERE', schemas.length, 'schemas found' )
+
         if( schemas.length === 0 ) {
             throw new Error( `No schemas found in the directory: ${schemaPath}` )
         }
