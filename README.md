@@ -202,4 +202,3 @@ Please follow the formatting and conventions described in the [FlowMCP README](.
 * 4-space indentation
 * One-line JSON objects for `tests`, `parameters`, and `modifiers`
 * `const schema = { ... }` followed by `export { schema }` with two newlines between
- 
