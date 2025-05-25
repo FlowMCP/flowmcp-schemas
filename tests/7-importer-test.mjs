@@ -11,4 +11,4 @@ const allSchemas = await SchemaImporter
 const selection = SchemaImporter.get()
 
 
-console.log( 'All schemas imported:', allSchemas )
+console.log( 'All schemas imported:', selection.length )

@@ -32,9 +32,7 @@ class SchemaImporter {
         schemas = this
             .#hasImports( { schemas } )
             .filter( ( schema ) => {
-                if( onlyWithoutImports ) {
-                    return !schema.hasImport
-                }
+                if( onlyWithoutImports ) { return !schema.hasImport }
                 return true
             } )
 
