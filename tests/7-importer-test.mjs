@@ -5,10 +5,10 @@ const allSchemas = await SchemaImporter
     .init( { 
         schemaRootFolder: "../schemas/v1.2.0/", 
         onlyWithoutImports: true,
-        withMetaData: false, 
+        withMetaData: true, 
         withSchema: false 
     } )
 const selection = SchemaImporter.get()
 
 
-console.log( 'All schemas imported:', selection.length )
+console.log( 'All schemas imported:', selection[ 0 ]  )

@@ -64,7 +64,7 @@ class SchemaImporter {
                     const schemaName = path.basename( absolutePath, '.mjs' )
                     const fileName = path.basename( absolutePath )
 
-                    const result = { schemaFolder, fileName, schemaName, hasImport, namespace, tags, requiredServerParams, routeNames }
+                    const result = { absolutePath, schemaFolder, fileName, schemaName, hasImport, namespace, tags, requiredServerParams, routeNames }
                     withSchema ? result['schema'] = schema : null
 
                     return result
