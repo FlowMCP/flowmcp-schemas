@@ -4,15 +4,9 @@ import { fileURLToPath } from 'url'
 
 
 class SchemaImporter {
-    static #schemas = []
 
 
-    static get() {
-        return this.#schemas
-    } 
-
-
-    static async init( { 
+    static async get( { 
         schemaRootFolder="../schemas/v1.2.0/", 
         onlyWithoutImports=true,
         withMetaData=false, 
@@ -33,7 +27,7 @@ class SchemaImporter {
             .#hasImports( { schemas } )
             .filter( ( schema ) => {
                 if( onlyWithoutImports ) { return !schema.hasImport }
-                return true
+                return schemas
             } )
 
         if( schemas.length === 0 ) {
@@ -41,13 +35,11 @@ class SchemaImporter {
         }
 
         if( !withMetaData ) { 
-            this.#schemas = schemas
-            return true
+            return schemas
         }
 
         const schemasWithMeta = await this
             .#getMetaData( { schemas, withSchema } )
-        this.#schemas = schemasWithMeta
 
         return schemasWithMeta
     }
