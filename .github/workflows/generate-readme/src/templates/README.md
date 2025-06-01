@@ -1,8 +1,8 @@
 # FlowMCP Schema Library
 
-This repository contains a comprehensive collection of schema modules designed for use with [FlowMCP](https://github.com/a6b8/FlowMCP), a framework for adapting and standardizing REST APIs for interaction with AI systems.
+This repository contains a modular collection of schema definitions designed for use with [FlowMCP](https://github.com/a6b8/FlowMCP), a framework that adapts and standardizes REST and GraphQL APIs for interaction with AI systems.
 
-Each schema describes the structure, routes, parameters, and integration requirements of a specific API provider, allowing them to be seamlessly activated and queried via the MCP interface.
+Each schema defines the structure, routes, parameters, and integration logic of a specific API provider. The schemas are fully MCP-compatible and can be seamlessly activated in your local or remote FlowMCP server.
 
 ---
 
@@ -10,60 +10,53 @@ Each schema describes the structure, routes, parameters, and integration require
 
 Below is a list of all available schemas in this library, grouped by provider and sorted alphabetically. Each schema includes one or more MCP-compatible routes.
 
-{{INSERT_TABLE}}
-
+{{INSERT\_TABLE}}
 
 ---
 
-## 🚀 Example: Start Server with All Schemas
+## 🚀 Example: Start Local Server with All Schemas
 
-This script loads and activates all available schemas into a local MCP-compatible server.
+This script dynamically loads and activates all available schemas using the FlowMCP schema importer and local server utilities.
 
-File: `2-start-server.mjs`
+File: `local-server-module.mjs`
 
 ```js
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
-import { FlowMCP, Server } from 'flowmcp'
-import { fileURLToPath } from 'url'
-import path from 'path'
+import fs from 'fs'
+import { SchemaImporter } from 'schemaimporter'
 
-const config = {
-    name: 'Test',
-    description: 'This is a development server for testing purposes.',
-    version: '1.2.0'
-}
+import { FlowMCP } from '../../src/index.mjs'
+import { LocalServer } from '../../src/index.mjs'
 
-Server
-  .getArgvParameters({
-      argv: process.argv,
-      includeNamespaces: [],
-      excludeNamespaces: [],
-      activateTags: []
-  })
-  .prepare({
-      scriptRootFolder: path.dirname(fileURLToPath(import.meta.url)),
-      schemasRootFolder: './../schemas/v1.2.0/',
-      localEnvPath: './../../.env'
-  })
-  .then(async (schemas) => {
-      const server = new McpServer(config)
+console.log('Starting Local Server...')
+const schemaFilePaths = await SchemaImporter.get({
+    onlyWithoutImports: true,
+    withMetaData: true,
+    withSchema: true
+})
+const arrayOfSchemas = schemaFilePaths.map(({ schema }) => schema)
 
-      schemas.forEach(({ schema, serverParams, activateTags }) => {
-          FlowMCP.activateServerTools({
-              server,
-              schema,
-              serverParams,
-              activateTags,
-              silent: false
-          })
-      })
+const { includeNamespaces, excludeNamespaces, activateTags, source } = FlowMCP.getArgvParameters({
+    argv: process.argv,
+    includeNamespaces: [],
+    excludeNamespaces: [],
+    activateTags: [],
+})
 
-      const transport = new StdioServerTransport()
-      await server.connect(transport)
-  }).catch((e) => {
-      console.error('Error starting server:', e)
-  })
+// Provide your environment variables here
+const envObject = /* insert your own environment variable object here */
+
+const { activationPayloads } = FlowMCP.prepareActivations({
+    arrayOfSchemas,
+    envObject,
+    activateTags,
+    includeNamespaces,
+    excludeNamespaces
+})
+
+const localServer = new LocalServer({ silent: true })
+localServer.addActivationPayloads({ activationPayloads })
+await localServer.start()
+console.log('Local Server started successfully.')
 ```
 
 ---
@@ -80,10 +73,10 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
 
 ## 🧹 Contributing
 
-Want to add or improve a schema? Fork the repo, add your `.mjs` schema file under `schemas/<provider>/`, and submit a pull request.
+Want to add or improve a schema? Fork the repo, place your `.mjs` schema file under `schemas/<provider>/`, and submit a pull request.
 
 Please follow the formatting and conventions described in the [FlowMCP README](../README.md), including:
 
 * 4-space indentation
-* One-line JSON objects for `tests`, `parameters`, and `modifiers`
-* `const schema = { ... }` followed by `export { schema }` with two newlines between
+* Single-line JSON objects for `tests`, `parameters`, and `modifiers`
+* Use `const schema = { ... }` followed by `export { schema }` with two line breaks
