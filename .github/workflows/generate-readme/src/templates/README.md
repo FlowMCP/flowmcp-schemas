@@ -10,7 +10,7 @@ Each schema defines the structure, routes, parameters, and integration logic of 
 
 Below is a list of all available schemas in this library, grouped by provider and sorted alphabetically. Each schema includes one or more MCP-compatible routes.
 
-{{INSERT\_TABLE}}
+{{INSERT_TABLE}}
 
 ---
 
