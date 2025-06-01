@@ -1,0 +1,36 @@
+name: Update README on Commit
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Run Node.js Script
+        run: node ./.github/workflows/generate-readme/index.mjs
+
+      - name: Commit and Push Changes
+        env:
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config user.email "${{ secrets.USER_EMAIL }}"
+          git config user.name "a6b8"
+          git add .
+          git commit -m "Update README"
+          git push
