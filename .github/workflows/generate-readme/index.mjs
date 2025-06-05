@@ -5,7 +5,7 @@ import fs from 'fs'
 
 
 const preparedParams = await SchemaImporter
-    .loadFromFile( { 
+    .loadFromFolder( { 
         excludeSchemasWithImports: true,
         excludeSchemasWithRequiredServerParams: false,
         addAdditionalMetaData: true,
