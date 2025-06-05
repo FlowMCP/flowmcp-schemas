@@ -5,11 +5,11 @@ import fs from 'fs'
 
 
 const preparedParams = await SchemaImporter
-    .get( { 
-        schemaRootFolder:"../schemas/v1.2.0/", 
-        onlyWithoutImports: false,
-        withMetaData: true, 
-        withSchema: true
+    .loadFromFile( { 
+        excludeSchemasWithImports: true,
+        excludeSchemasWithRequiredServerParams: false,
+        addAdditionalMetaData: true,
+        outputType: null // [ 'onlyPath', 'onlySchema' ]
     } )
 
 console.log( `Schemas imported: ${preparedParams.length}` )
