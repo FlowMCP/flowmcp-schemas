@@ -1,12 +1,12 @@
-import { SchemaImporter } from "../src/index.mjs"
+import { SchemaImporter } from "./../src/index.mjs"
 import { Print } from "./helpers/Print.mjs"
 
+
 const availableSchemas = await SchemaImporter
-    .get( {
-        schemaRootFolder: "../schemas/v1.2.0/",
-        onlyWithoutImports: false,
-        withMetaData: true,
-        withSchema: true
+    .loadFromFolder( {
+        excludeSchemasWithImport: false,
+        excludeSchemasWithRequiredServerParams: false,
+        addAdditionalMetaData: true
     } )
 
 const overview = availableSchemas

@@ -4,14 +4,28 @@ import { fileURLToPath } from 'url'
 
 
 class SchemaImporter {
+    static async loadFromFolder( {
+        schemaRootFolder = "./../schemas/v1.2.0/",
+        excludeSchemasWithImports = true,
+        excludeSchemasWithRequiredServerParams = false,
+        addAdditionalMetaData = false,
+        outputType = null // [ 'onlyPath', 'onlySchema' ]
+    } ) {
+        let schemas = []
+        schemas = SchemaImporter.#getSchemaPaths( { schemaRootFolder } )
+        schemas = SchemaImporter.#addHasImports( { schemas, excludeSchemasWithImports } )
+        if( outputType === 'onlyPath' ) { return schemas }
+
+        schemas = await SchemaImporter.#addSchemas( { schemas } )
+        schemas = SchemaImporter.#excludeSchemasWithRequiredServerParams( { schemas, excludeSchemasWithRequiredServerParams } )
+        schemas = SchemaImporter.#addSchemaMetaData( { schemas, addAdditionalMetaData } )
+        if( outputType === 'onlySchema' ) { schemas = schemas.map( ( item ) => item['schema'] ) }
+
+        return schemas
+    } 
 
 
-    static async get( { 
-        schemaRootFolder="../schemas/v1.2.0/", 
-        onlyWithoutImports=true,
-        withMetaData=false, 
-        withSchema=false 
-    } = {} ) {
+    static #getSchemaPaths( { schemaRootFolder } ) {
         const __filename = fileURLToPath( import.meta.url )
         const __dirname = path.dirname( __filename )
         const schemaPath = path.resolve( __dirname, schemaRootFolder )
@@ -20,56 +34,78 @@ class SchemaImporter {
             throw new Error( `Schema root folder does not exist: ${schemaPath}` )
         }
 
-        let schemas = this
-            .#getSchemas( { 'dirPath': schemaPath } )
+        const result = this.#getAllFiles( { dirPath: schemaPath } )
+            .filter( ( file ) => !file.endsWith( '.DS_Store' ) )
+            .map( ( file ) => ( {
+                folderName: path.basename( path.dirname( file ) ),
+                absolutePath: path.resolve( file )
+            } ) )
             .filter( ( { absolutePath } ) => absolutePath.endsWith( '.mjs' ) )
-        schemas = this
-            .#hasImports( { schemas } )
-            .filter( ( schema ) => {
-                if( onlyWithoutImports ) { return !schema.hasImport }
-                return schemas
-            } )
-
-        if( schemas.length === 0 ) {
-            throw new Error( `No schemas found in the directory: ${schemaPath}` )
-        }
-
-        if( !withMetaData ) { 
-            return schemas
-        }
-
-        const schemasWithMeta = await this
-            .#getMetaData( { schemas, withSchema } )
-
-        return schemasWithMeta
+        
+        return result
     }
 
 
-    static async #getMetaData( { schemas, withSchema } ) {
-        const all = await Promise.all(
+    static #addHasImports( { schemas, excludeSchemasWithImports } ) {
+        schemas = schemas
+            .map( ( schema ) => {
+                const { absolutePath } = schema
+                const hasImport = fs
+                    .readFileSync( absolutePath, 'utf-8' )
+                    .split( "\n" )
+                    .some( ( line ) => line.trim().startsWith( 'import' ) )
+                schema['hasImport'] = hasImport
+
+                return schema
+            } )
+            .filter( ( schema ) => {
+                if( excludeSchemasWithImports === true ) {
+                    const { hasImport } = schema
+                    if( hasImport === true ) { return false }
+                }
+                return true
+            } )
+
+        return schemas
+    }
+
+
+    static async #addSchemas( { schemas, withSchema } ) {
+        const result = await Promise.all(
             schemas
-                .map( async ( { folderName, absolutePath, hasImport } ) => {
+                .map( async ( item ) => {
+                    const { absolutePath } = item
                     const { schema } = await import( absolutePath )
-                    const { namespace, routes, tags, requiredServerParams } = schema
-                    const routeNames = Object.keys( routes )
-                    const schemaFolder = path.basename( path.dirname( absolutePath ) ) 
-                    const schemaName = path.basename( absolutePath, '.mjs' )
-                    const fileName = path.basename( absolutePath )
-
-                    const result = { absolutePath, schemaFolder, fileName, schemaName, hasImport, namespace, tags, requiredServerParams, routeNames }
-                    withSchema ? result['schema'] = schema : null
-
-                    return result
+                    item['schema'] = schema
+                    return item
                 } )
         )
 
-        return all
+        return result
+    }
+
+
+    static #addSchemaMetaData( { schemas,  addAdditionalMetaData } ) {
+        if( addAdditionalMetaData === false ) { return schemas }
+
+        schemas = schemas
+            .map( ( item ) => {
+                const { schema, absolutePath } = item
+                const { namespace, routes, tags, requiredServerParams } = schema
+                item = { ...item, namespace, tags, requiredServerParams }
+                item['routeNames'] = Object.keys( routes )
+                item['schemaFolder'] = path.basename( path.dirname( absolutePath ) ) 
+                item['schemaName'] = path.basename( absolutePath, '.mjs' )
+                item['fileName'] = path.basename( absolutePath )
+                return item
+            } )
+
+        return schemas
     }
 
 
     static #getAllFiles( { dirPath, arrayOfFiles = [] }) {
         const files = fs.readdirSync( dirPath )
-
         files
             .filter( ( file ) => !file.endsWith( '.DS_Store' ) )
             .forEach( ( file ) => {
@@ -85,30 +121,15 @@ class SchemaImporter {
     }
 
 
-    static #getSchemas( { dirPath } ) {
-        const result = this.#getAllFiles( { dirPath } )
-            .filter( ( file ) => !file.endsWith( '.DS_Store' ) )
-            .map( ( file ) => ( {
-                folderName: path.basename( path.dirname( file ) ),
-                absolutePath: path.resolve( file )
-            } ) )
-
-        return result
-    }
-
-
-    static #hasImports( { schemas } ) {
+    static #excludeSchemasWithRequiredServerParams( { schemas, excludeSchemasWithRequiredServerParams } ) {
+        if( excludeSchemasWithRequiredServerParams === false ) { return schemas }
         schemas = schemas
-            .map( ( schema ) => {
-                const { absolutePath } = schema
-                const hasImport = fs
-                    .readFileSync( absolutePath, 'utf-8' )
-                    .split( "\n" )
-                    .some( ( line ) => line.trim().startsWith( 'import' ) )
-                schema['hasImport'] = hasImport
-
-                return schema
+            .filter( ( item ) => {
+                const { requiredServerParams } = item
+                if( requiredServerParams && requiredServerParams.length > 0 ) { return false }
+                return true
             } )
+
         return schemas
     }
 }
