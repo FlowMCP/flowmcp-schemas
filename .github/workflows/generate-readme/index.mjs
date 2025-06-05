@@ -1,4 +1,3 @@
-// import { Files } from './src/task/Files.mjs'
 import { SchemaImporter } from './../../../src/index.mjs'
 import { Print } from './src/task/Print.mjs'
 import fs from 'fs'
