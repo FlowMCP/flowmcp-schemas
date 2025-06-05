@@ -125,8 +125,14 @@ class SchemaImporter {
         if( excludeSchemasWithRequiredServerParams === false ) { return schemas }
         schemas = schemas
             .filter( ( item ) => {
-                const { requiredServerParams } = item
-                if( requiredServerParams && requiredServerParams.length > 0 ) { return false }
+                const { schema: { requiredServerParams } } = item
+                if( !requiredServerParams ) { 
+                    console.log( `Schema ${item.fileName} has no requiredServerParams` ); 
+                    return false 
+                }
+                if( requiredServerParams.length > 0 ) {
+                    return false 
+                }
                 return true
             } )
 

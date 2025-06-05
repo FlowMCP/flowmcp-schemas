@@ -4,7 +4,7 @@ import { Print } from "./helpers/Print.mjs"
 
 const availableSchemas = await SchemaImporter
     .loadFromFolder( {
-        excludeSchemasWithImport: false,
+        excludeSchemasWithImports: false,
         excludeSchemasWithRequiredServerParams: false,
         addAdditionalMetaData: true
     } )
