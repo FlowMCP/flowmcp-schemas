@@ -17,7 +17,7 @@
     "@erc725/erc725.js": "^0.27.2",
     "@modelcontextprotocol/sdk": "^1.10.1",
     "ethers": "^6.13.7",
-    "flowmcp": "github:flowmcp/flowmcp#0c3c15d41ded418ad70d84d0ee267009e262af29",
+    "flowmcp": "github:flowmcp/flowmcp#a1523aa60699e168a6c7b4ec923ac5ee4f15d89a",
     "indicatorts": "^2.2.2",
     "moment": "^2.30.1",
     "twitter-api-v2": "^1.23.2",
