@@ -17,8 +17,8 @@ const schema = {
             description: "Uploads a plain text file to IPFS using the new Pinata SDK",
             route: "/sdk/upload",
             parameters: [
-                { position: { key: "pinata_jwt_token", value: "{{PINATA_JWT}}", location: "insert" }, z: { primitive: "string()", options: [] } },
-                { position: { key: "pinata_gateway", value: "{{PINATA_GATEWAY}}", location: "insert" }, z: { primitive: "string()", options: [] } },
+                { position: { key: "pinata_jwt_token", value: "{{PINATA_JWT}}", location: "insert" } },
+                { position: { key: "pinata_gateway", value: "{{PINATA_GATEWAY}}", location: "insert" } },
                 { position: { key: "filename", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "content", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
             ],
