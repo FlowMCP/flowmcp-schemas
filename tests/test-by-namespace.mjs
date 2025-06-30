@@ -37,7 +37,7 @@ const availableSchemas = await SchemaImporter
         addAdditionalMetaData: true
     } )
 const filteredSchemas = availableSchemas
-    .filter( ( item ) => item['schema']['namespace'] === 'x402' )
+    .filter( ( item ) => item['schema']['namespace'] === 'chainlinkMulticall' )
 
 await filteredSchemas
     .reduce( ( promise, struct ) => promise.then( async () => {

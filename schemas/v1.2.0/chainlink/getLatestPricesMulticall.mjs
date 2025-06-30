@@ -1,21 +1,28 @@
-import { ethers } from 'ethers'
+import { ethers, Interface } from 'ethers'
 
 
-const infuraSubDomain = {
-    "ARBITRUM_MAINNET": "arbitrum-mainnet",
-    "AVALANCHE_MAINNET": "avalanche-mainnet",
-    "BASE_MAINNET": "base-mainnet",
-    "BINANCE_MAINNET": "bsc-mainnet",
-    "CELO_MAINNET": "celo-mainnet",
-    "ETHEREUM_MAINNET": "mainnet",
-    "LINEA_MAINNET": "linea-mainnet",
-    "MANTLE_MAINNET": "mantle-mainnet",
-    "SCROLL_MAINNET": "scroll-mainnet",
-    "OPTIMISM_MAINNET": "optimism-mainnet",
-    "POLYGON_MAINNET": "polygon-mainnet",
-    "ZKSYNC_MAINNET": "zksync-mainnet",
-  }
-  
+const multicall3Abi = [{
+    name: 'aggregate3',
+    inputs: [{
+        components: [
+            { name: 'target', type: 'address' },
+            { name: 'allowFailure', type: 'bool' },
+            { name: 'callData', type: 'bytes' }
+        ],
+        name: 'calls',
+        type: 'tuple[]'
+    }],
+    outputs: [{
+        components: [
+            { name: 'success', type: 'bool' },
+            { name: 'returnData', type: 'bytes' }
+        ],
+        name: 'returnData',
+        type: 'tuple[]'
+    }],
+    stateMutability: 'view',
+    type: 'function'
+}]
 
 const priceFeedAbi = [
     'function decimals() view returns (uint8)',
@@ -23,241 +30,35 @@ const priceFeedAbi = [
     'function version() view returns (uint256)',
     'function getRoundData(uint80 _roundId) view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)',
     'function latestRoundData() view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)'
-  ];
+]
+const iface = new Interface(priceFeedAbi)
 
-
-const schema = {
-    namespace: "chainlink",
-    name: "ExampleName",
-    description: "A short description of the schema purpose",
-    docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
-    tags: [ 'chainlink.getAvailableChains'],
-    flowMCP: "1.2.0",
-    root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
-    requiredServerParams: [ "INFURA_API_KEY" ],
-    headers: {},
-    routes: {
-        getAvailableChains: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [],
-            tests: [ { _description: "Basic test for exampleRoute" } ],
-            modifiers: [ { phase: "execute", handlerName: "getAvailableChains" } ]
-        },
-        getAvailableFeedsForChain: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [
-                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", chainName: "ETHEREUM_MAINNET" } ],
-            modifiers: [ { phase: "execute", handlerName: "getAvailableFeedsForChain" } ]
-        },
-        getLatestPriceEthereum: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "ETHEREUM_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(FIL/ETH,FDUSD/USD,UNI/ETH,NEIRO/USD,USDT/ETH,CSPX/USD,BAT/ETH,USDT/USD,XAU/USD,SUSHI/ETH,KNC/USD,AVAX/USD,C3M/EUR,PERP/ETH,CBETH/ETH,BAT/USD,COMP/ETH,COMP/USD,KRW/USD,USDC/ETH,STETH/USD,DPI/USD,BAL/USD,1INCH/ETH,MAVIA/USD,LINK/ETH,AAVE/ETH,ZRX/ETH,LUSD/USD,TAO/USD,AUD/USD,PYUSD/USD,XCN/USD,LBTC/BTC,ZBU/USD,RSR/USD,AVAIL/USD,ALCX/ETH,BTC/USD,SWETH/ETH,GRT/ETH,LRC/ETH,YFI/USD,TUSD/ETH,GBP/USD,CHF/USD,USDS/USD,EIGEN/USD,ENJ/ETH,SKY/USD,LINK/USD,SUSHI/USD,PAXG/USD,AGEUR/EUR,1INCH/USD,SAND/USD,ENS/USD,MKR/ETH,RSETH/ETH,DAI/USD,KNC/ETH,USR/USD,BUSD/USD,ETH/BTC,ETH/USD,RLUSD/USD,SWELL/ETH,FTM/ETH,USDM/USD,DPI/ETH,SHV/USD,CNY/USD,BAL/ETH,SNX/ETH,DAI/ETH,APE/USD,FRAX/USD,HIGH/USD,YFI/ETH,MANA/ETH,RDNT/USD,USD0/USD,RPL/USD,GRT/USD,UST/ETH,EUR/USD,MLN/ETH,SUSD/ETH,OETH/ETH,SPELL/USD,FTT/ETH,BADGER/ETH,JPY/USD,CVX/ETH,WBTC/BTC,BNB/USD,XAG/USD,TRY/USD,IDR/USD,MATIC/USD,CVX/USD,STETH/ETH,CAD/USD,TBTC/USD,IB01/USD,STG/USD,REN/ETH,IBTA/USD,SOL/USD,BTC/ETH,CRV/ETH,USDP/USD,NZD/USD,FXS/USD,IMX/USD,FRAX/ETH,SNX/USD,RETH/ETH,USDC/USD,APE/ETH,AMPL/ETH,SHIB/ETH,AAVE/USD,AMPL/USD,CRV/USD,UNI/USD,ZRX/USD,MKR/USD,CRVUSD/USD,ARB/USD,LDO/ETH,SGD/USD,GHO/USD,TUSD/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceBinance: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "BINANCE_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(DOT/USD,TRX/USD,JPY/USD,AXS/USD,INR/USD,LTC/BNB,FIL/USD,WING/USD,COIN/USD,CRV/USD,BUSD/BNB,UNI/BNB,YFI/USD,DOGE/USD,1INCH/USD,CHR/USD,DAI/BNB,NVDA/USD,DOT/BNB,BAND/BNB,XAG/USD,LINK/BNB,TSLA/USD,ADA/USD,USDC/USD,WIN/USD,WSTETH/USD,UNI/USD,EOS/USD,EUR/USD,PFE/USD,XVS/BNB,USDT/BNB,KAVA/USD,ETH/USD,ONT/USD,BTC/BNB,PAXG/USD,MXN/USD,BETH/USD,KNC/USD,SPY/USD,ATOM/USD,SPELL/USD,SUSHI/USD,BTC/USD,C98/USD,TWT/BNB,SHIB/USD,PHP/USD,SOL/USD,CAKE/USD,CFX/USD,INJ/USD,GBP/USD,BAND/USD,ETH/BNB,POL/USD,DODO/USD,BTC/ETH,BUSD/USD,THB/USD,XTZ/BNB,NULS/USD,SXP/USD,FTM/USD,WOO/USD,MS/USD,XRP/USD,LINK/USD,AAVE/USD,AUD/USD,ZBU/USD,FET/USD,VET/USD,CHF/USD,ZAR/USD,GME/USD,ADA/BNB,TUSD/USD,FXS/USD,XRP/BNB,FDUSD/USD,MASK/USD,XVS/USD,ONG/USD,ICP/USD,USDE/USD,JPM/USD,RDNT/USD,GOOGL/USD,WTI/USD,HIGH/USD,BCH/BNB,MATIC/USD,BSW/USD,BNB/USD,AMZN/USD,LINA/USD,AVAX/USD,AAPL/USD,FRAX/USD,COMP/USD,USDC/BNB,XTZ/USD,GMT/USD,NEAR/USD,MSFT/USD,USDT/USD,META/USD,CAKE/BNB,DAI/USD,NFLX/USD,SGD/USD,ALPACA/USD,BCH/USD,YFI/BNB,MRNA/USD,XLM/USD,QQQ/USD,EOS/BNB,XAU/USD,KLAY/USD,BRL/USD,LTC/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-      getLatestPricePolygon: {
-        requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
-        route: "/",
-        parameters: [ 
-            { position: { key: "chainName", value: "POLYGON_MAINNET", location: "insert" } },
-            { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(BTC/USD,WBTC/USD,SGD/USD,PHP/USD,QUICK/USD,XAG/USD,CVX/USD,MANA/USD,XAU/USD,GHST/ETH,MATIC/USD,DODO/USD,UNI/ETH,WOO/USD,MSFT/USD,KRW/USD,OM/USD,KAVA/USD,TUSD/USD,AMZN/USD,AGEUR/USD,DOGE/USD,SUSHI/ETH,BNB/USD,DAI/ETH,FIL/USD,SOL/USD,COP/USD,NZD/USD,CHZ/USD,MXN/USD,QNT/USD,LINK/USD,TSLA/USD,AAVE/ETH,DPI/USD,IDR/USD,GNS/USD,EUR/USD,WSTETH/ETH,USDS/USD,ILS/USD,TRX/USD,GRT/USD,GHST/USD,KNC/USD,LTC/USD,GOOGL/USD,ILV/ETH,ZAR/USD,MLN/ETH,CNY/USD,PLN/USD,BAL/ETH,ETH/USD,COMP/USD,YFI/USD,PAXG/USD,LINK/MATIC,FB/USD,WBTC/ETH,AUD/USD,DOT/USD,XMR/USD,INR/USD,THB/USD,FTM/USD,USDT/USD,BAL/USD,XTZ/USD,XPT/USD,XRP/USD,MKR/USD,CAD/USD,BRL/USD,UNI/USD,EOS/USD,TRY/USD,SNX/USD,FXS/USD,APE/USD,USDT/ETH,BADGER/ETH,AXS/USD,YFI/ETH,AAVE/USD,SEK/USD,SUSHI/USD,CBETH/ETH,CRV/USD,THETA/USD,MKR/ETH,USDC/ETH,OGN/USD,BCH/USD,FTT/USD,JPY/USD,DASH/USD,FRAX/USD,SLP/USD,SHIB/USD,SAND/USD,BTC/ETH,BAT/USD,AVAX/USD,MATIC/ETH,1INCH/USD,BADGER/USD,XLM/USD,ETC/USD,DPI/ETH,ALGO/USD,STORJ/USD,HBAR/USD,USDC/USD,GBP/USD,AAPL/USD,ALCX/USD,ADA/USD,DAI/USD,LINK/ETH,DGB/USD,ZEC/USD,UMA/USD,CRV/ETH,ICP/USD,CHF/USD)", options: [] } }
-        ],
-        tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-        modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-      },
-      getLatestPriceAvalanche: {
-        requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
-        route: "/",
-        parameters: [ 
-            { position: { key: "chainName", value: "AVALANCHE_MAINNET", location: "insert" } },
-            { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(SAND/USD,SNX/USD,XAU/USD,WSTETH/ETH,ALPHA/USD,CVX/USD,QI/USD,EUR/USD,BAT/USD,WOO/ETH,CHF/USD,KNC/USD,SGD/USD,WBTC/USD,ADA/USD,AUSD/USD,XAVA/USD,AXS/USD,FRAX/USD,FXS/USD,JOE/USD,FTM/USD,USDC/USD,LINK/AVAX,SUSHI/USD,CZK/USD,BEAM/USD,POL/USD,SPELL/USD,TRY/USD,FIL/USD,GHO/USD,GMX/USD,ARB/USD,DAI/USD,LINK/USD,ETH/USD,MKR/USD,DOT/USD,UNI/USD,NEAR/USD,XAG/USD,MATIC/USD,JPY/USD,COMP/USD,TUSD/USD,BNB/USD,BTC/USD,UST/USD,COQ/USD,MANA/USD,AAVE/USD,YFI/USD,AVAX/USD,EURC/USD,USDT/USD,CRV/USD,CHZ/USD)", options: [] } }
-        ],
-        tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-        modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-      },
-      getLatestPriceAribitrum: {
-        requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
-        route: "/",
-        parameters: [ 
-            { position: { key: "chainName", value: "ARBITRUM_MAINNET", location: "insert" } },
-            { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(AAPL/USD,SPY/USD,OP/USD,NVDA/USD,XAG/USD,HSK/USD,WSTETH/ETH,TSLA/USD,GOOGL/USD,RETH/ETH,WBTC/BTC,STX/USD,XRP/USD,CNY/USD,KNC/USD,LUSD/USD,KRW/USD,USDC/USD,APE/USD,DOT/USD,PAXG/USD,LTC/USD,ETH/USD,SNX/USD,SWETH/ETH,LBTC/BTC,AAVE/USD,BTC/ETH,CVX/USD,GHO/USD,AUD/USD,RPL/USD,ARB/USD,ORDER/USD,CAKE/USD,WTI/USD,STG/USD,PENDLE/USD,GNS/USD,CAD/USD,COMP/USD,BAL/USD,MKR/USD,AMZN/USD,RSR/USD,MELANIA/USD,FRAX/USD,PHP/USD,MSFT/USD,MAGIC/USD,BRL/USD,COIN/USD,SHIB/USD,YFI/USD,PEPE/USD,AXL/USD,IOTX/USD,WIF/USD,FTM/USD,GRT/USD,ATOM/USD,GBP/USD,CRV/USD,EUR/USD,SHIB/ETH,TIA/USD,SGD/USD,WOO/USD,TRY/USD,ULTI/USD,ENA/USD,SOL/USD,XVS/USD,TBTC/BTC,BTC/USD,RDNT/USD,MLN/USD,LINK/USD,BNB/USD,AXS/USD,MATIC/USD,ZAR/USD,TAO/USD,META/USD,MNT/USD,STETH/ETH,LDO/USD,ZRO/USD,TBTC/USD,USDT/USD,TRUMP/USD,STETH/USD,TUSD/USD,CHF/USD,GMX/USD,DAI/USD,BONE/USD,XAI/USD,CRVUSD/USD,LINK/ETH,JOE/USD,1INCH/USD,JPY/USD,WBTC/USD,NEAR/USD,DOGE/USD,CBETH/ETH,RON/USD,DODO/USD,ORDI/USD,AVAX/USD,SEK/USD,SEI/USD,XAU/USD,ASTR/USD,USDD/USD,USDM/USD,POL/USD,SUSHI/USD,DPI/USD,RSETH/ETH,ADA/USD,UNI/USD,SPELL/USD,FXS/USD,WEMIX/USD,USDV/USD)", options: [] } }
-        ],
-        tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-        modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-      },
-        getLatestPriceOptimism: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "OPTIMISM_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETH/USD,WSTETH/ETH,FLOW/USD,TBTC/USD,BTC/USD,WSTETH/USD,GMX/USD,UMA/USD,STETH/USD,FTM/USD,SUSD/USD,DYDX/USD,LUSD/USD,STX/USD,MATIC/USD,STETH/ETH,RUNE/USD,ZRX/USD,TRX/USD,USDM/USD,BNB/USD,ORDI/USD,INR/USD,ALGO/USD,APT/USD,VELO/USD,APE/USD,ZIL/USD,FLOKI/USD,ANKR/USD,GRT/USD,BAL/USD,MKR/USD,OP/USD,XLM/USD,ETC/USD,JUP/USD,SNX/USD,IMX/USD,LINK/USD,SAND/USD,TIA/USD,WIF/USD,CBETH/ETH,EOS/USD,WBTC/USD,RNDR/USD,ONE/USD,AUD/USD,YFI/USD,ENJ/USD,XTZ/USD,INJ/USD,XAU/USD,AXS/USD,ARB/USD,CRV/USD,AAVE/USD,ATOM/USD,RETH/ETH,SUSHI/USD,UNI/USD,DOGE/USD,PEPE/USD,POL/USD,ETH/BTC,SOL/USD,BCH/USD,FET/USD,EUR/USD,PENDLE/USD,USDT/USD,RPL/USD,WLD/USD,FIL/USD,SHIB/USD,LDO/USD,RSETH/ETH,ADA/USD,SATS/USD,BRL/USD,XMR/USD,BONK/USD,PERP/USD,NEAR/USD,PYTH/USD,MAV/USD,LINK/ETH,DOT/USD,SEI/USD,JTO/USD,AVAX/USD,COMP/USD,FRAX/USD,JPY/USD,XRP/USD,ZEC/USD,WELL/USD,BLUR/USD,DAI/USD,1INCH/USD,STRK/USD,CELO/USD,FXS/USD,CVX/USD,XAG/USD,ICP/USD,USDC/USD,SUI/USD,KNC/USD,MEME/USD,LTC/USD,TRB/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceBase: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "BASE_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(AXL/USD,CBETH/ETH,BRL/USD,TBTC/USD,USDC/USD,RDNT/USD,USR/USD,DAI/USD,OP/USD,LINK/ETH,USDS/USD,CBETH/USD,XAU/USD,USDM/USD,RETH/ETH,RSETH/ETH,EUR/USD,OGN/USD,ETH/USD,COMP/USD,WIF/USD,STG/USD,LINK/USD,SNX/USD,POL/USD,STETH/ETH,PEPE/USD,MEW/USD,AVAX/USD,MATIC/USD,BTC/USD,LBTC/BTC,GHO/USD,SHIB/USD,MAVIA/USD,ZRO/USD,ZBU/USD,WSTETH/ETH,APT/USD,MLN/USD,AERO/USD,USDT/USD,WBTC/USD,SOL/USD,TRUMP/USD,DOGE/USD,MELANIA/USD,DEGEN/USD,BNB/USD,EURC/USD,WELL/USD,YFI/USD,MOG/USD,RSR/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceLinea: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "LINEA_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETH/USD,LINK/USD,WSTETH/USD,FOXY/USD,AAVE/USD,ARB/USD,LINK/ETH,USDC/USD,BTC/USD,EUR/USD,DAI/USD,POL/USD,USDT/USD,RSETH/ETH,MATIC/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceMantle: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "MANTLE_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETH/USD,USDC/USD,LINK/USD,BTC/USD,MNT/USD,USDT/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceScroll: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "SCROLL_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(WSTETH/ETH,COMP/USD,STG/USD,BNB/USD,LINK/USD,ETH/USD,SCR/USD,SOL/USD,AVAX/USD,DAI/USD,RSETH/ETH,CRV/USD,WBTC/USD,LINK/ETH,DOGE/USD,STETH/USD,BTC/USD,RETH/ETH,AAVE/USD,USDT/USD,USDC/USD,WBTC/BTC)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceZksync: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "ZKSYNC_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(PEPE/USD,LINK/USD,LINK/ETH,AAVE/USD,USDC/USD,UNI/USD,MELANIA/USD,DAI/USD,DOGE/USD,ETH/USD,BTC/USD,ZK/USD,TRUMP/USD,USDM/USD,USDT/USD,SOL/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-        getLatestPriceCelo: {
-            requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
-            route: "/",
-            parameters: [ 
-                { position: { key: "chainName", value: "CELO_MAINNET", location: "insert" } },
-                { position: { key: "feedName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(CUSD/USD)", options: [] } }
-            ],
-            tests: [ { _description: "Basic test for exampleRoute", feedName: "ETH/USD" } ],
-            modifiers: [ { phase: "execute", handlerName: "getLatestPrice" } ]
-        },
-    },
-    handlers: {
-        getAvailableChains: async( { struct, payload, userParams, phase } ) => {
-            struct['data'] = { 'chainNames': Object.keys( feeds ) }
-            return { struct, payload }
-        },
-        getAvailableFeedsForChain: async( { struct, payload, userParams, phase } ) => {
-            const { _allParams: { chainName } } = userParams
-            struct['data'] = {
-                'chainName': chainName,
-                'feeds': feeds[ chainName ].map( ( { name} ) => name )
-            }
-            if( !struct['data'] ) {
-                struct['messages'].push( `No feeds found for chain ${chainName}` )
-                struct['status'] = false
-            }
-            return { struct, payload }
-        },
-        getLatestPrice: async( { struct, payload, userParams, phase } ) => {
-            const { _allParams: { chainName } } = userParams
-            const { feedName } = userParams
-            let { url } = payload
-            url = url.replace( '--infura-subdomain--', infuraSubDomain[ chainName ] )
-
-            try {
-                const smartContracts = feeds[ chainName ]
-                if( !smartContracts ) {
-                    struct['messages'].push( `No feeds found for chain ${chainName}` )
-                    struct['status'] = false
-                    return { struct, payload }
-                }
-
-                const item = smartContracts
-                    .find( ( a ) => a['name'] === feedName )
-                if( !item ) {
-                    struct['messages'].push( `No feed found for ${feedName} on ${chainName}` )
-                    struct['status'] = false
-                    return { struct, payload }
-                }
-
-                const { proxyAddress } = item
-                const provider = new ethers
-                    .JsonRpcProvider( url )
-                const priceFeedContract = new ethers
-                    .Contract( proxyAddress, priceFeedAbi, provider )
-                let [ decimals, { answer, updatedAt, roundId } ] = await Promise.all( [
-                    priceFeedContract.decimals(),
-                    priceFeedContract.latestRoundData()
-                ] )
-
-                const price = Number( ethers.formatUnits( answer, decimals ) )
-                const timestamp = Number( updatedAt ) * 1000
-                const timestampISO = new Date( timestamp ).toISOString()
-                decimals = Number( decimals )
-                roundId = roundId.toString()
-                struct['data'] = {
-                    feedName, price,          decimals,
-                    chainName,      feedName,
-                    roundId,        timestampISO,
-                    proxyAddress
-                }
-
-            } catch( e ) {
-                struct['messages'].push( e?.message )
-                struct['status'] = false
-            }
-
-          return { struct, payload: { ...payload } }
-        }
-    }
+const infuraSubDomain = {
+    'ARBITRUM_MAINNET': 'arbitrum-mainnet',
+    'AVALANCHE_MAINNET': 'avalanche-mainnet',
+    'BASE_MAINNET': 'base-mainnet',
+    'BINANCE_MAINNET': 'bsc-mainnet',
+    'CELO_MAINNET': 'celo-mainnet',
+    'ETHEREUM_MAINNET': 'mainnet',
+    'LINEA_MAINNET': 'linea-mainnet',
+    'MANTLE_MAINNET': 'mantle-mainnet',
+    'SCROLL_MAINNET': 'scroll-mainnet',
+    'OPTIMISM_MAINNET': 'optimism-mainnet',
+    'POLYGON_MAINNET': 'polygon-mainnet',
+    'ZKSYNC_MAINNET': 'zksync-mainnet'
 }
+
+const multicallProviders = Object
+    .entries(infuraSubDomain)
+    .reduce((acc, [blockchain, value]) => {
+        const rawUrl = 'https://--infura-subdomain--.infura.io/v3/f3ca3c43f47d43239a1173f115b43df0'
+        const url = rawUrl.replace('--infura-subdomain--', value)
+        const provider = new ethers.JsonRpcProvider(url)
+        const multicall = new ethers
+            .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
+        acc[blockchain] = multicall
+        return acc
+    }, {} )
 
 
 const feeds = {
@@ -4460,6 +4261,212 @@ const feeds = {
 }
 
 
+const methods = ['latestRoundData', 'decimals']
+const multicallCommands = Object
+    .entries(infuraSubDomain)
+    .reduce((acc, [blockchain, _]) => {
+        acc[blockchain] = methods
+            .map((method) => {
+                const tools = feeds[blockchain]
+                    .map(({ proxyAddress }) => ({
+                        target: proxyAddress,
+                        allowFailure: true,
+                        callData: iface.encodeFunctionData(method)
+                    }))
+                return tools
+            })
+        return acc
+    }, [] )
 
-export { schema, feeds }
-  
+
+const schema = {
+    namespace: "chainlinkMulticall",
+    name: "Multicall Latest Prices",
+    description: "A short description of the schema purpose",
+    docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
+    tags: [ 'chainlink.getAvailableChains'],
+    flowMCP: "1.2.0",
+    root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
+    requiredServerParams: [ "INFURA_API_KEY" ],
+    headers: {},
+    routes: {
+        getAvailableChains: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAvailableChains" } ]
+        },
+        getAllLatestPricesEthereum: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "ETHEREUM_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+
+        getAllLatestPricesBinance: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "BINANCE_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesPolygon: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "POLYGON_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+
+        getAllLatestPricesAvalanche: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "AVALANCHE_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesAribitrum: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "ARBITRUM_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesOptimism: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "OPTIMISM_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesBase: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "BASE_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesLinea: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "LINEA_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesMantle: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "MANTLE_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesScroll: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "SCROLL_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesZksync: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "ZKSYNC_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        },
+        getAllLatestPricesCelo: {
+            requestMethod: "GET",
+            description: "Fetches the latest price for a given pair on a specified chain",
+            route: "/",
+            parameters: [ 
+                { position: { key: "chainName", value: "CELO_MAINNET", location: "insert" } }
+            ],
+            tests: [ { _description: "Basic test for exampleRoute" } ],
+            modifiers: [ { phase: "execute", handlerName: "getAllLatestPrices" } ]
+        }
+    },
+    handlers: {
+        getAvailableChains: async( { struct, payload, userParams, phase } ) => {
+            struct['data'] = { 'chainNames': Object.keys( feeds ) }
+            return { struct, payload }
+        },
+        getAllLatestPrices: async( { struct, payload, userParams, phase } ) => {
+            const { _allParams: { chainName } } = userParams
+            const { feedName } = userParams
+            let { url } = payload
+            url = url.replace( '--infura-subdomain--', infuraSubDomain[ chainName ] )
+
+            const provider = new ethers.JsonRpcProvider( url )
+            const multicall = new ethers
+                .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
+
+            const id = chainName
+            const allResponse = await Promise.all( [
+                ...multicallCommands[id].map(cmd => multicallProviders[ id ].aggregate3( cmd ) )
+            ] )
+
+            const [ priceRes, decRes ] = allResponse
+            const allPrices = priceRes
+                .map((latest, i) => {
+                    const decimal = decRes[i]
+                    if (!latest.success || !decimal.success) { return }
+
+                    const latestDecoded = iface.decodeFunctionResult('latestRoundData', latest.returnData)
+                    const decimalsDecoded = iface.decodeFunctionResult('decimals', decimal.returnData)
+                    const decimals = Number(decimalsDecoded[0])
+
+                    const [roundId, answer, , updatedAt] = latestDecoded
+                    const price = Number(ethers.formatUnits(answer, decimals))
+                    const timestamp = Number(updatedAt) * 1000
+                    const timestampISO = new Date(timestamp).toISOString()
+                    const { name, proxyAddress } = feeds[id][i]
+                    const result = [name, price, decimals, timestampISO, proxyAddress]
+                    return result
+                } )
+
+            struct['status'] = true
+            struct['data'] = allPrices
+
+            return { struct, payload }
+        }
+    }
+}
+
+
+export { schema }
