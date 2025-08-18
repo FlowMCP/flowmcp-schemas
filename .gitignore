@@ -1,3 +1,12 @@
 old
 node_modules
 package-lock.json
+.trash
+.not_supported
+.ai/
+.response/
+.env
+.env.*
+*.log
+*.tmp
+.DS_Store

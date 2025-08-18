@@ -1,8 +1,8 @@
 import fs from 'fs'
 
-import { SchemaImporter } from "../src/index.mjs"
+import { SchemaImporter } from "../../src/index.mjs"
 import { FlowMCP } from 'flowmcp'
-import { Print } from "./helpers/Print.mjs"
+import { Print } from "./../helpers/Print.mjs"
 
 
 function getServerParams( { path, requiredServerParams } ) {
@@ -32,12 +32,19 @@ function getServerParams( { path, requiredServerParams } ) {
 
 const availableSchemas = await SchemaImporter
     .loadFromFolder( {
+        schemaRootFolder: "./../schemas/v1.2.0",
         excludeSchemasWithImports: false,
         excludeSchemasWithRequiredServerParams: false,
         addAdditionalMetaData: true
     } )
+const targetNamespace = process.argv[2] || 'chainlinkMulticall'
 const filteredSchemas = availableSchemas
-    .filter( ( item ) => item['schema']['namespace'] === 'chainlinkMulticall' )
+    .filter( ( item ) => item['schema']['namespace'] === targetNamespace )
+
+console.log(`Found ${filteredSchemas.length} schemas for namespace: ${targetNamespace}`)
+if( filteredSchemas.length === 0 ) {
+    console.log('Available namespaces:', availableSchemas.map(s => s.schema.namespace).filter((v, i, a) => a.indexOf(v) === i))
+}
 
 await filteredSchemas
     .reduce( ( promise, struct ) => promise.then( async () => {
