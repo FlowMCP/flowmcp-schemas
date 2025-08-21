@@ -5,14 +5,11 @@
   "main": "./src/index.mjs",
   "scripts": {
     "ai-run-first": "echo \"\\n🤖 FLOWMCP SCHEMA REPOSITORY - AVAILABLE COMMANDS\\n\\n=== 🧪 TESTING & VALIDATION ===\\n• npm run test:new-schemas    - Test all schemas in tests/new-schemas/ (live API calls)\\n• npm run test:schemas        - Alias for test:new-schemas\\n• npm run validate:ai         - Generate AI validation report with detailed analysis\\n• npm run validate:flowmcp     - Test FlowMCP schema loading functionality\\n\\n=== 🔍 DEVELOPMENT TOOLS ===\\n• npm run inspector           - Start MCP Inspector for schema debugging\\n• npm run ai-run-first        - Show this help (run this first!)\\n\\n=== 📁 TARGET DIRECTORIES ===\\n• tests/new-schemas/          - New schemas for testing\\n• schemas/v1.2.0/             - Production-ready schemas\\n• schemas/not_supported/      - Non-functional schemas\\n\\n=== 🎯 USAGE EXAMPLES ===\\n• npm run test:new-schemas    # Test all new schemas\\n• npm run validate:ai         # Get detailed AI analysis\\n• npm run inspector           # Debug schemas interactively\\n\\n📋 Start with: npm run test:new-schemas\\n\"",
-    
     "inspector": "npx @modelcontextprotocol/inspector node tests/2-start-server.mjs",
-    
     "test:new-schemas": "node tests/manual/test-schemas.mjs",
     "test:v1.2.0": "node tests/manual/test-schemas.mjs --folder=./../schemas/v1.2.0",
     "test:debug": "node tests/manual/test-schemas.mjs",
     "test:debug:help": "node tests/manual/test-schemas.mjs --help",
-    
     "validate:ai": "node tests/schema-validation/validate-new-schemas.mjs",
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs"
   },
@@ -29,11 +26,14 @@
     "@thanpolas/univ3prices": "^3.0.2",
     "ccxt": "^4.5.0",
     "ethers": "^6.13.7",
-    "flowmcp": "github:flowmcp/flowmcp#a1523aa60699e168a6c7b4ec923ac5ee4f15d89a",
+    "flowmcp": "github:flowmcp/flowmcp#392a83ce82aaba822fab21c6cfdfac889e940529",
     "indicatorts": "^2.2.2",
     "moment": "^2.30.1",
     "pinata": "^2.4.8",
     "talib": "^1.1.6",
     "twitter-api-v2": "^1.23.2"
+  },
+  "dependencies": {
+    "axios": "^1.11.0"
   }
 }
