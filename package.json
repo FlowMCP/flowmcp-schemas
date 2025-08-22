@@ -26,7 +26,7 @@
     "@thanpolas/univ3prices": "^3.0.2",
     "ccxt": "^4.5.0",
     "ethers": "^6.13.7",
-    "flowmcp": "github:flowmcp/flowmcp#9bdeb70b8a4dacadff65c43675aa7173feff4d6e",
+    "flowmcp": "github:flowmcp/flowmcp#71467de2bade25dca04419def04de3f7ed8295d5",
     "indicatorts": "^2.2.2",
     "moment": "^2.30.1",
     "pinata": "^2.4.8",
