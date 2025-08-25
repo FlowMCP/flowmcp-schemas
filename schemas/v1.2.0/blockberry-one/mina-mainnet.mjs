@@ -3,7 +3,7 @@ export const schema = {
     name: "Blockberry Mina Mainnet API",
     description: "Mina blockchain data API for blocks, accounts, and ZkApps (working endpoints only)",
     docs: ["https://docs.blockberry.one/", "https://docs.blockberry.one/reference/mina-mainnet-quickstart"],
-    tags: ["production", "blockberry.getDashboardInfo", "blockberry.getBlocks", "blockberry.getAccountByHash", "blockberry.getZkAppTransactions"],
+    tags: ["production", "blockchain", "explorer", "mina"],
     flowMCP: "1.2.0",
     root: "https://api.blockberry.one/mina-mainnet/v1",
     requiredServerParams: ["BLOCKBERRY_API_KEY"],

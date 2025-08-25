@@ -31,7 +31,7 @@ const schema = {
     name: "ExampleName",
     description: "A short description of the schema purpose",
     docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
-    tags: [ 'chainlink.getAvailableChains'],
+    tags: ["oracle", "price", "feeds"],
     flowMCP: "1.2.0",
     root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
     requiredServerParams: [ "INFURA_API_KEY" ],

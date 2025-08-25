@@ -3,15 +3,7 @@ const schema = {
     name: "Wormhole Metrics API",
     description: "Query cross-chain transaction metrics from the Wormholescan public API",
     docs: ["https://wormholescan.io", "https://docs.wormholescan.io"],
-    tags: [
-        "wormholescan.getCrossChainActivity",
-        "wormholescan.getMoneyFlow",
-        "wormholescan.getTopAssetsByVolume",
-        "wormholescan.getTopChainPairsByNumTransfers",
-        "wormholescan.getTopSymbolsByVolume",
-        "wormholescan.getTopCorridors",
-        "wormholescan.getKpiList"
-    ],
+    tags: ["data", "api"],
     flowMCP: "1.2.0",
     root: "https://api.wormholescan.io",
     requiredServerParams: [],

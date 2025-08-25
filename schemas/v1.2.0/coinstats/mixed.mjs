@@ -3,7 +3,7 @@ const schema = {
     name: "Get Coins",
     description: "Retrieve comprehensive data about all cryptocurrencies including prices, market cap, volume, price changes, supply info, trading metrics, and metadata.",
     docs: ["https://your.api.documentation/coins"],
-    tags: ["production", "data.getCoins"],
+    tags: ["production", "price", "market", "data"],
     flowMCP: "1.2.0",
     root: "https://openapiv1.coinstats.app",
     requiredServerParams: [

@@ -3,7 +3,7 @@ const schema = {
     name: "Snapshot DAO Proposals",
     description: "Query Snapshot GraphQL API to retrieve DAO spaces and proposals",
     docs: ["https://docs.snapshot.org/"],
-    tags: ["snapshot.listSpaces", "snapshot.listProposals", "snapshot.getProposalDetails"],
+    tags: ["dao", "governance", "voting"],
     flowMCP: "1.2.0",
     root: "https://hub.snapshot.org/graphql",
     requiredServerParams: [],

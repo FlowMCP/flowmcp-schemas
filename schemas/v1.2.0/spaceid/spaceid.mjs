@@ -29,7 +29,7 @@ const schema = {
     name: "SPACE ID Web3 Name API",
     description: "Resolve crypto addresses and domain names via SPACE ID's on-chain resolution API.",
     docs: ["https://nameapi.space.id", "https://space.id", "https://docs.space.id"],
-    tags: ["production", "spaceid.getSupportedChains"],
+    tags: ["production", "domain", "identity", "blockchain"],
     flowMCP: "1.2.0",
     root: "https://nameapi.space.id",
     requiredServerParams: [],

@@ -3,17 +3,7 @@ export const schema = {
     name: "Wallet Inspector",
     description: "Unified wallet insight interface using Dune SIM APIs for EVM and Solana chains",
     docs: ["https://sim.dune.com/docs"],
-    tags: [
-        "production",
-        "walletInspector.getBalance",
-        "walletInspector.getActivity",
-        "walletInspector.getTransactions",
-        "walletInspector.getHoldingsSummary",
-        "walletInspector.getSolBalance",
-        "walletInspector.getEvmNativeBalance",
-        "walletInspector.getTransactionCount",
-        "walletInspector.getChainDistribution"
-    ],
+    tags: ["production", "data", "api"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

@@ -3,7 +3,7 @@ const schema = {
     name: "Sim by Dune - Token Info",
     description: "Fetches token metadata like name, symbol, supply, decimals and USD price for a given contract address on a supported chain.",
     docs: ["https://docs.sim.dune.com/docs/sim-api/token-info"],
-    tags: ["production", "simdune.getTokenInfo"],
+    tags: ["production", "token", "sei", "analytics"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

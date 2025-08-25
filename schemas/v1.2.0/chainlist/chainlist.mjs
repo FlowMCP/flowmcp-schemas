@@ -62,7 +62,7 @@ const schema = {
     name: "Chainlist Tools",
     description: "Query chain metadata (RPCs, explorers, currencies) from Chainlist static feed.",
     docs: ["https://chainlist.org"],
-    tags: ["production", "chainlist.getChainById", "chainlist.getChainsByKeyword", "chainlist.getExplorerURLs", "chainlist.getRPCEndpoints", "chainlist.getWebsocketEndpoints"],
+    tags: ["production", "blockchain", "rpc", "network"],
     flowMCP: "1.2.0",
     root: "https://chainlist.org/rpcs.json",
     requiredServerParams: [],

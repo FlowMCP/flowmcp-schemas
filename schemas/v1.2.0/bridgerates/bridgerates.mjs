@@ -3,7 +3,7 @@ const schema = {
     name: "LiFi Bridge API",
     description: "Fetches bridge quotes, supported chains, tools, and cross-chain transfer data from LiFi API",
     docs: ["https://docs.li.fi/", "https://li.quest/v1"],
-    tags: ["bridgeRates.getSupportedChains", "bridgeRates.getSupportedTools", "bridgeRates.getConnections"],
+    tags: ["bridge", "crosschain", "defi"],
     flowMCP: "1.2.0",
     root: "https://li.quest/v1",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "DexScreener Token Pairs API",
     description: "Access token pair data, price information, and trading metrics from DexScreener across multiple DEX platforms",
     docs: ["https://docs.dexscreener.com/api/reference"],
-    tags: ["dexscreener.getTokenPairs", "dexscreener.searchPairs", "dexscreener.getLatestPairs"],
+    tags: ["dex", "trading", "pairs"],
     flowMCP: "1.2.0",
     root: "https://api.dexscreener.com",
     requiredServerParams: [],

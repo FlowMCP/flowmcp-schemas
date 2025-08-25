@@ -3,7 +3,7 @@ const schema = {
     name: "Lil Nouns Subgraph",
     description: "Fetches proposal data from the Lil Nouns subgraph hosted on Goldsky.",
     docs: ["https://lilnouns.wtf", "https://docs.goldsky.com"],
-    tags: ["production", "goldskyLilNouns.getProposals", "goldskyLilNouns.getProposalById"],
+    tags: ["production", "data", "api"],
     flowMCP: "1.2.0",
     root: "https://api.goldsky.com/api/public/project_cldjvjgtylso13swq3dre13sf/subgraphs/lil-nouns-subgraph/1.0.6/gn",
     requiredServerParams: [],

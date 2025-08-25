@@ -3,7 +3,7 @@ const schema = {
     name: "BICScan API",
     description: "Risk score and asset scanning API for blockchain addresses via BICScan.",
     docs: ["https://api.bicscan.io/docs"],
-    tags: ["bicscan.getRiskScore", "bicscan.getAssets"],
+    tags: ["security", "risk", "scanning"],
     flowMCP: "1.2.0",
     root: "https://api.bicscan.io/v1/scan",
     requiredServerParams: ["BICSCAN_API_KEY"],

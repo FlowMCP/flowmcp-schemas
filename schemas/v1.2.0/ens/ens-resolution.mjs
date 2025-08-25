@@ -24,7 +24,7 @@ const schema = {
     name: "ENS & EVM Name Resolution",
     description: "Resolve ENS (and some EVM name services supported by ethers.js) to addresses and perform reverse lookups from addresses to ENS names.",
     docs: ["https://docs.ethers.org/v6/api/providers/#Provider-resolveName", "https://docs.ethers.org/v6/api/providers/#Provider-lookupAddress", "https://docs.ens.domains/"],
-    tags: ["production", "ens.resolveName", "ens.lookupAddress", "ens.supportMatrix"],
+    tags: ["production", "domain", "identity", "ethereum"],
     flowMCP: "1.2.0",
     root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
     requiredServerParams: ["INFURA_API_KEY"],

@@ -3,7 +3,7 @@ const schema = {
     name: "Honeypot Detector",
     description: "Checks if a token contract is a honeypot using honeypot.is API.",
     docs: ["https://honeypot.is"],
-    tags: ["production", "honeypot.check"],
+    tags: ["production", "security", "token", "validation"],
     flowMCP: "1.2.0",
     root: "https://api.honeypot.is/v2",
     requiredServerParams: [],

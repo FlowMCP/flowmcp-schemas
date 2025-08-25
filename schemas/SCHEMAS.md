@@ -72,9 +72,28 @@ export const schema = {
 
 ### Tags System
 
-- Follow `module.route` format
-- Enable cross-schema functionality grouping
-- Examples: `price.latest`, `data.historical`, `auth.login`
+⚠️ **IMPORTANT**: Tags should NOT contain hardcoded route references!
+
+**✅ CORRECT TAG PATTERNS:**
+- Semantic categories: `["defi", "price", "trading", "nft"]`
+- Functional groups: `["data", "analytics", "historical"]`
+- Generic descriptors: `["production", "beta", "stable"]`
+
+**❌ FORBIDDEN TAG PATTERNS:**
+- `namespace.routeName` (e.g., `"chainlink.getPrice"`)
+- Direct route references that break after server-side filtering
+- Any hardcoded references to specific route names
+
+**Why this matters**: When schemas are filtered by tags on the server (e.g., `activateTags: ["chainlink.getPrice"]`), only matching routes are kept. If tags still contain references to filtered-out routes, FlowMCP validation will fail.
+
+**Examples:**
+```javascript
+// ❌ WRONG - Will break after filtering
+tags: ["production", "chainlink.getPrice", "chainlink.getFeeds"]
+
+// ✅ CORRECT - Semantic and flexible
+tags: ["production", "defi", "price", "oracle"]
+```
 
 ### Parameter Validation
 

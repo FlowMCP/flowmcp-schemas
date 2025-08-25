@@ -70,7 +70,7 @@ export const schema = {
     name: "Passport On-Chain Data API",
     description: "Access Passport scores, credentials, and attestations directly from smart contracts on Ethereum and Arbitrum",
     docs: ["https://docs.passport.xyz/building-with-passport/stamps/smart-contracts/contract-reference"],
-    tags: ["passportOnchain.getFullPassportData"],
+    tags: ["identity", "attestation", "gitcoin"],
     flowMCP: "1.2.0",
     root: "https://dummy-rpc-endpoint.com",
     requiredServerParams: [ 'ETHEREUM_MAINNET_ALCHEMY_HTTP', 'ARBITRUM_MAINNET_ALCHEMY_HTTP' ],

@@ -3,7 +3,7 @@ const schema = {
     name: "MinaScan Mainnet GraphQL API",
     description: "Access Mina Protocol mainnet blockchain data through MinaScan's GraphQL endpoint.",
     docs: ["https://api.minascan.io", "https://minaprotocol.com"],
-    tags: ["production", "minascanMainnet.getMinaMainnetSchema", "minascanMainnet.getMinaMainnetQuery"],
+    tags: ["production", "blockchain", "explorer", "mina"],
     flowMCP: "1.2.0",
     root: "https://api.minascan.io/node/mainnet/v1/graphql",
     requiredServerParams: [],

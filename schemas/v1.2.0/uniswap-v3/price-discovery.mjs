@@ -98,7 +98,7 @@ export const schema = {
     name: "Uniswap V3 Price Server",
     description: "Exposes tools for price discovery via Uniswap V3 pools, with fallback to CryptoCompare",
     docs: ["https://uniswap.org/docs", "https://min-api.cryptocompare.com/documentation"],
-    tags: ["production", "uniswap.getSupportedChains", "uniswap.getTokenPrice"],
+    tags: ["production", "dex", "trading", "defi"],
     flowMCP: "1.2.0",
     root: "https://dummy-rpc-endpoint.com",
     requiredServerParams: ["ETHEREUM_MAINNET_ALCHEMY_HTTP", "POLYGON_MAINNET_ALCHEMY_HTTP", "ARBITRUM_MAINNET_ALCHEMY_HTTP", "OPTIMISM_MAINNET_ALCHEMY_HTTP"],

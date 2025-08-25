@@ -3,7 +3,7 @@ const schema = {
     name: "Nouns DAO Subgraph",
     description: "Access various views into Nouns DAO data from the Goldsky-hosted subgraph.",
     docs: ["https://docs.goldsky.com", "https://nouns.wtf"],
-    tags: ["production", "goldskyNouns.getRecentProposals", "goldskyNouns.getCurrentAuctions", "goldskyNouns.getNounDetails", "goldskyNouns.getTopDelegates"],
+    tags: ["production", "dao", "governance", "nft"],
     flowMCP: "1.2.0",
     root: "https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns/prod/gn",
     requiredServerParams: [],

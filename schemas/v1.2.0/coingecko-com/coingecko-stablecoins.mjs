@@ -3,7 +3,7 @@ const schema = {
     name: "CoinGecko Stablecoins API",
     description: "Access and analyze stablecoin data including market metrics, peg stability and historical trends via CoinGecko API",
     docs: ["https://docs.coingecko.com/reference/simple-price", "https://docs.coingecko.com/reference/coins-id-market-chart"],
-    tags: ["coingecko.getSupportedStablecoins", "coingecko.getCurrentPrice", "coingecko.getHistoricalData", "coingecko.analyzePegStability"],
+    tags: ["price", "market", "stablecoins"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

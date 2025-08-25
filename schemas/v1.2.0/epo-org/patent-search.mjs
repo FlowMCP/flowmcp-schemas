@@ -3,7 +3,7 @@ export const schema = {
     name: "European Patent Office RSS Search",
     description: "Search European patents via RSS feeds from the European Patent Office register",
     docs: ["https://register.epo.org/", "https://www.epo.org/searching-for-patents/"],
-    tags: ["epo.searchPatents", "epo.searchByTechnology", "epo.searchByKeywords"],
+    tags: ["patents", "research", "search"],
     flowMCP: "1.2.0",
     root: "https://register.epo.org",
     requiredServerParams: [],

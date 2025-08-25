@@ -3,7 +3,7 @@ export const schema = {
     name: "SwaggerHub API",
     description: "FlowMCP interface for SwaggerHub registry API, supporting search, metadata listing, and Swagger definition retrieval.",
     docs: ["https://swaggerhub.com/api/swagger-hub/registry-api/1.0.0"],
-    tags: ["production", "swaggerhub.searchApis", "swaggerhub.listApiVersions"],
+    tags: ["production", "api", "documentation", "registry"],
     flowMCP: "1.2.0",
     root: "https://api.swaggerhub.com/apis",
     requiredServerParams: [],

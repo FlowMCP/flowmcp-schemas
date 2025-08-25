@@ -3,7 +3,7 @@ export const schema = {
     name: "Chart Image API",
     description: "High-quality TradingView chart screenshots and financial chart image generation service",
     docs: ["https://doc.chart-img.com"],
-    tags: ["chartImg.getAdvancedChart"],
+    tags: ["charts", "visualization", "trading"],
     flowMCP: "1.2.0",
     root: "https://api.chart-img.com",
     requiredServerParams: ["CHART_IMG_API_KEY"],

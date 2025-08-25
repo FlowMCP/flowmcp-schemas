@@ -1,10 +1,10 @@
 {
   "name": "schema-importer",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "",
   "main": "./src/index.mjs",
   "scripts": {
-    "ai-run-first": "echo \"\\n🤖 FLOWMCP SCHEMA REPOSITORY - AVAILABLE COMMANDS\\n\\n=== 🧪 TESTING & VALIDATION ===\\n• npm run test:new-schemas    - Test all schemas in tests/new-schemas/ (live API calls)\\n• npm run test:schemas        - Alias for test:new-schemas\\n• npm run test:coverage:src   - Run Jest unit tests with coverage for src/\\n• npm run validate:ai         - Generate AI validation report with detailed analysis\\n• npm run validate:flowmcp     - Test FlowMCP schema loading functionality\\n\\n=== 🔍 DEVELOPMENT TOOLS ===\\n• npm run inspector           - Start MCP Inspector for schema debugging\\n• npm run ai-run-first        - Show this help (run this first!)\\n\\n=== 📁 TARGET DIRECTORIES ===\\n• tests/new-schemas/          - New schemas for testing\\n• tests/unit/                 - Jest unit tests for coverage\\n• schemas/v1.2.0/             - Production-ready schemas\\n• schemas/not_supported/      - Non-functional schemas\\n\\n=== 🎯 USAGE EXAMPLES ===\\n• npm run test:new-schemas    # Test all new schemas\\n• npm run test:coverage:src   # Run unit tests with coverage\\n• npm run validate:ai         # Get detailed AI analysis\\n• npm run inspector           # Debug schemas interactively\\n\\n📋 Start with: npm run test:new-schemas\\n\"",
+    "ai-run-first": "echo \"\\n🤖 FLOWMCP SCHEMA REPOSITORY - AVAILABLE COMMANDS\\n\\n=== 🧪 TESTING & VALIDATION ===\\n• npm run test:new-schemas    - Test all schemas in tests/new-schemas/ (live API calls)\\n• npm run test:schemas        - Alias for test:new-schemas\\n• npm run test:coverage:src   - Run Jest unit tests with coverage for src/\\n• npm run validate:all        - Validate ALL schemas in v1.2.0 for structure & duplicates\\n• npm run validate:ai         - Generate AI validation report with detailed analysis\\n• npm run validate:flowmcp     - Test FlowMCP schema loading functionality\\n\\n=== 🔍 DEVELOPMENT TOOLS ===\\n• npm run inspector           - Start MCP Inspector for schema debugging\\n• npm run ai-run-first        - Show this help (run this first!)\\n\\n=== 📁 TARGET DIRECTORIES ===\\n• tests/new-schemas/          - New schemas for testing\\n• tests/unit/                 - Jest unit tests for coverage\\n• schemas/v1.2.0/             - Production-ready schemas\\n• schemas/not_supported/      - Non-functional schemas\\n\\n=== 🎯 USAGE EXAMPLES ===\\n• npm run test:new-schemas    # Test all new schemas\\n• npm run test:coverage:src   # Run unit tests with coverage\\n• npm run validate:all        # Validate all v1.2.0 schemas\\n• npm run validate:ai         # Get detailed AI analysis\\n• npm run inspector           # Debug schemas interactively\\n\\n📋 Start with: npm run test:new-schemas\\n\"",
     "inspector": "npx @modelcontextprotocol/inspector node tests/2-start-server.mjs",
     "test:new-schemas": "node tests/manual/test-schemas.mjs",
     "test:v1.2.0": "node tests/manual/test-schemas.mjs --folder=./../schemas/v1.2.0",
@@ -12,6 +12,8 @@
     "test:debug:help": "node tests/manual/test-schemas.mjs --help",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "test:coverage:src": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
+    "validate:all": "node tests/validate-all-schemas.mjs",
+    "validate:tags": "node tests/detect-hardcoded-tags.mjs",
     "validate:ai": "node tests/schema-validation/validate-new-schemas.mjs",
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs"
   },

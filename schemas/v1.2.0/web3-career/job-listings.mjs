@@ -3,7 +3,7 @@ export const schema = {
     name: "Web3 Career Job API",
     description: "Query job listings from the web3.career API with optional filters and markdown output.",
     docs: ["https://web3.career/developer-api"],
-    tags: ["production", "webcareer.queryJobs"],
+    tags: ["production", "jobs", "career", "crypto"],
     flowMCP: "1.2.0",
     root: "https://web3.career/api/v1",
     requiredServerParams: ["WEB3_CAREER_API_TOKEN"],

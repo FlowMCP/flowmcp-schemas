@@ -3,7 +3,7 @@ export const schema = {
     name: "Ethscriptions API V2",
     description: "Access the Ethscriptions protocol - Ethereum-based digital artifacts and tokens",
     docs: ["https://api.ethscriptions.com/v2", "https://github.com/0xFacet/ethscriptions-indexer"],
-    tags: ["ethscriptions.listEthscriptions", "ethscriptions.getEthscription", "ethscriptions.listTransfers", "ethscriptions.listTokens", "ethscriptions.getIndexerStatus"],
+    tags: ["nft", "ethereum", "inscriptions"],
     flowMCP: "1.2.0",
     root: "https://api.ethscriptions.com/v2",
     requiredServerParams: [],
