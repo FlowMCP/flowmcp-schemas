@@ -1,6 +1,6 @@
 {
   "name": "schema-importer",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "",
   "main": "./src/index.mjs",
   "scripts": {
@@ -28,7 +28,7 @@
     "@thanpolas/univ3prices": "^3.0.2",
     "ccxt": "^4.5.0",
     "ethers": "^6.13.7",
-    "flowmcp": "github:flowmcp/flowmcp#71467de2bade25dca04419def04de3f7ed8295d5",
+    "flowmcp": "github:flowmcp/flowmcp#91ccaf8dc7b61b5df3cfa780699cbf4973cd3cbd",
     "indicatorts": "^2.2.2",
     "jest": "^29.7.0",
     "moment": "^2.30.1",
