@@ -21,6 +21,9 @@ node tests/schema-importer.mjs
 
 # Check required server params
 node tests/required-server-params.mjs
+
+# Run Jest unit tests with coverage
+npm run test:coverage:src
 ```
 
 ## Schema Testing & Debugging
@@ -53,6 +56,31 @@ node tests/manual/test-schemas.mjs --help
 The defaults are configured so the command works immediately without parameters:
 - `.env` is automatically found in project root (../../.env)
 - Schemas are loaded from `tests/new-schemas/`
+
+## Unit Testing & Coverage
+
+### Jest Unit Tests
+The project includes Jest-based unit tests for the core `SchemaImporter` class:
+
+```bash
+# Run unit tests with coverage
+npm run test:coverage:src
+
+# Coverage files are generated in ./coverage/
+# - coverage/lcov-report/index.html (HTML report)
+# - coverage/lcov.info (for CI/CD)
+```
+
+### Coverage Thresholds
+- **Statements**: 70%
+- **Branches**: 60% 
+- **Functions**: 85%
+- **Lines**: 70%
+
+### Test Structure
+- **Unit Tests**: Located in `tests/unit/` with `.test.mjs` extension
+- **Integration Tests**: Existing API-based tests in `tests/manual/` (unchanged)
+- **Coverage Scope**: Only `src/**/*.mjs` files are included in coverage analysis
 
 ## Architecture
 
