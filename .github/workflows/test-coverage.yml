@@ -1,17 +1,20 @@
-name: Run Tests with Coverage
+name: Run Tests with Coverage and Update README
 
-on: push
+on:
+  push:
+    branches:
+      - main
 # optional sinnvoll: auch PRs prüfen
 # on:
 #   push:
 #   pull_request:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write   # << nötig für OIDC
 
 jobs:
-  test:
+  test-and-update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -37,3 +40,21 @@ jobs:
           flags: unittests
         # optional: auch hochladen, wenn Tests fehlschlagen
         # if: ${{ always() }}
+
+      - name: Generate README
+        run: node ./.github/workflows/generate-readme/index.mjs
+
+      - name: Commit and Push README Changes
+        env:
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config user.email "${{ secrets.USER_EMAIL }}"
+          git config user.name "a6b8"
+          git add .
+          if ! git diff --cached --exit-code; then
+            git commit -m "Update README with latest schema changes 🤖"
+            git push
+          else
+            echo "No README changes to commit"
+          fi
