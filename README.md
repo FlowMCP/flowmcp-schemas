@@ -101,8 +101,13 @@ Below is a list of all available schemas in this library, grouped by provider an
 | polymarket | searchBySlug.mjs | 1 | searchBySlug |  |  |
 | redditScanner | getTokenMentions.mjs | 2 | getTokenMentions, getHotMemes |  |  |
 | santiment | schema.mjs | 5 | get_sentiment_balance, get_social_volume, alert_social_shift, get_trending_words, get_social_dominance | SANTIMENT_API_KEY |  |
-| walletInspector | wallet-inspector.mjs | 8 | getBalance, getActivity, getTransactions, getHoldingsSummary, getSolBalance, getEvmNativeBalance, getTransactionCount, getChainDistribution | DUNE_SIM_API_KEY | production, data, api |
-| simdune | sei-token-info.mjs | 1 | getTokenInfo | DUNE_SIM_API_KEY | production, token, sei, analytics |
+| simdune | balancesEVM.mjs | 1 | getBalancesEVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio |
+| simdune | balancesSVM.mjs | 1 | getBalancesSVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio, svm, solana |
+| simdune | collectiblesEVM.mjs | 1 | getCollectiblesEVM | DUNE_SIM_API_KEY | production, nft, collectibles, metadata |
+| simdune | tokenHoldersEVM.mjs | 1 | getTokenHoldersEVM | DUNE_SIM_API_KEY | production, token, analytics, holders |
+| simdune | tokenInfoEVM.mjs | 1 | getTokenInfoEVM | DUNE_SIM_API_KEY | production, token, analytics, metadata |
+| simdune | transactionsEVM.mjs | 1 | getTransactionsEVM | DUNE_SIM_API_KEY | production, transactions, analytics, history |
+| simdune | transactionsSVM.mjs | 1 | getTransactionsSVM | DUNE_SIM_API_KEY | production, transactions, analytics, history, svm, solana |
 | snapshot | snapshot.mjs | 3 | listSpaces, listProposals, getProposalDetails |  | dao, governance, voting |
 | solanatracker | --additionalRoutes.mjs | 2 | tokenStats, tokenStatsByPool | SOLANA_TRACKER_API_KEY |  |
 | solanatracker | --chartRoutes.mjs | 2 | chartData, chartDataByPool | SOLANA_TRACKER_API_KEY |  |
@@ -114,7 +119,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | solanatracker | --walletEndpoints.mjs | 4 | walletInformation, walletTokensBasic, walletTokensPaged, walletTrades | SOLANA_TRACKER_API_KEY |  |
 | solscan | getChainInfo.mjs | 1 | chainInfo | SOLSCAN_API_KEY |  |
 | solsniffer | analysis.mjs | 1 | analysisToken | SOLSNIFFER_API_KEY |  |
-| spaceid | spaceid.mjs | 1 | getSupportedChains |  | production, domain, identity, blockchain |
+| spaceid | spaceid.mjs | 3 | getSupportedChains, getAddress, getName |  | production, domain, identity, blockchain |
 | stolpersteineBerl | memorial-stones.mjs | 5 | getAllStones, searchStones, getStonesByDistrict, getStonesByPerson, getStonesByLocation |  | memorial, history, berlin |
 | swaggerhub | api-registry.mjs | 2 | searchApis, listApiVersions |  | production, api, documentation, registry |
 | thegraph | getNewUniswapPools.mjs | 1 | getNewPools | THEGRAPH_API_KEY |  |
