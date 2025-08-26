@@ -46,6 +46,44 @@ const schema = {
             modifiers: [
                 { phase: "execute", handlerName: "emitSupportedChains" }
             ]
+        },
+        getAddress: {
+            requestMethod: "GET",
+            description: "Resolve domain name to wallet address (e.g. steven.sei → sei1whl4xw...)",
+            route: "/getAddress",
+            parameters: [
+                { 
+                    position: { key: "domain", value: "{{USER_PARAM}}", location: "query" },
+                    z: { primitive: "string()", options: [] }
+                }
+            ],
+            tests: [
+                { _description: "Resolve steven.sei to address", domain: "steven.sei" }
+            ],
+            modifiers: []
+        },
+        getName: {
+            requestMethod: "GET",
+            description: "Resolve wallet address to primary domain name on specified chain",
+            route: "/getName",
+            parameters: [
+                { 
+                    position: { key: "chainid", value: "{{USER_PARAM}}", location: "query" },
+                    z: { primitive: "number()", options: [] }
+                },
+                { 
+                    position: { key: "address", value: "{{USER_PARAM}}", location: "query" },
+                    z: { primitive: "string()", options: [] }
+                }
+            ],
+            tests: [
+                { 
+                    _description: "Resolve Sei address to steven.sei", 
+                    chainid: "902", 
+                    address: "sei1whl4xw33yzgadnm23uhk4q9y39lynlptwjctxp"
+                }
+            ],
+            modifiers: []
         }
     },
     handlers: {

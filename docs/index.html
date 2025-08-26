@@ -348,7 +348,7 @@
                     <div class="stat-label">Schemas</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">528</div>
+                    <div class="stat-number">530</div>
                     <div class="stat-label">Routes</div>
                 </div>
                 <div class="stat-item">
@@ -377,7 +377,7 @@
     </div>
 
     <footer>
-        <p>Generated on 8/26/2025, 3:22:24 PM</p>
+        <p>Generated on 8/26/2025, 3:37:20 PM</p>
         <p>FlowMCP Schema Documentation © 2025</p>
     </footer>
 
@@ -5510,9 +5510,21 @@
           "description": "List supported chains and their domain suffixes (static, compiled from docs).",
           "route": "/",
           "hasTests": true
+        },
+        "getAddress": {
+          "requestMethod": "GET",
+          "description": "Resolve domain name to wallet address (e.g. steven.sei → sei1whl4xw...)",
+          "route": "/getAddress",
+          "hasTests": true
+        },
+        "getName": {
+          "requestMethod": "GET",
+          "description": "Resolve wallet address to primary domain name on specified chain",
+          "route": "/getName",
+          "hasTests": true
         }
       },
-      "routeCount": 1
+      "routeCount": 3
     },
     {
       "namespace": "stolpersteineBerl",
@@ -5951,10 +5963,10 @@
   ],
   "stats": {
     "totalSchemas": 122,
-    "totalRoutes": 528,
+    "totalRoutes": 530,
     "schemasWithApiKeys": 60,
     "namespaces": 69,
-    "generatedAt": "2025-08-26T13:22:24.697Z"
+    "generatedAt": "2025-08-26T13:37:20.787Z"
   }
 };
         
