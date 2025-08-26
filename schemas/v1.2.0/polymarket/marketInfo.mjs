@@ -45,7 +45,6 @@ const schema = {
             const { condition_id } = userParams
             payload['url'] = payload['url']
                 .replace( 'placeholder', `${condition_id}` )
-        console.log( payload )
             return { struct, payload }
         }, 
         modifyResult: ( { struct, payload } ) => {
