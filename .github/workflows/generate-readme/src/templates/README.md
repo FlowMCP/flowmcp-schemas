@@ -4,6 +4,8 @@ This repository contains a modular collection of schema definitions designed for
 
 Each schema defines the structure, routes, parameters, and integration logic of a specific API provider. The schemas are fully MCP-compatible and can be seamlessly activated in your local or remote FlowMCP server.
 
+📚 **[Browse Interactive Documentation](https://flowmcp.github.io/flowmcp-schemas/)** - Visual schema browser with search and filtering
+
 ---
 
 ## 📦 Available Schemas

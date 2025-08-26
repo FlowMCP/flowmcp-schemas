@@ -44,7 +44,10 @@ jobs:
       - name: Generate README
         run: node ./.github/workflows/generate-readme/index.mjs
 
-      - name: Commit and Push README Changes
+      - name: Generate Documentation
+        run: npm run docs:generate
+
+      - name: Commit and Push README & Docs Changes
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -53,8 +56,8 @@ jobs:
           git config user.name "a6b8"
           git add .
           if ! git diff --cached --exit-code; then
-            git commit -m "Update README with latest schema changes 🤖"
+            git commit -m "Update README & Documentation with latest changes 🤖"
             git push
           else
-            echo "No README changes to commit"
+            echo "No changes to commit"
           fi
