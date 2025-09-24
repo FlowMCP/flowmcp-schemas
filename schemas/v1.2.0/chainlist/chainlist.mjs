@@ -86,7 +86,7 @@ const schema = {
             route: "/",
             parameters: [
                 { position: { key: "keyword", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(2)"] } },
-                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()", "default(5)", "min(1)"] } }
+                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()", ] } }
             ],
             tests: [
                 { _description: "Search for Ethereum", keyword: "eth" },
@@ -114,7 +114,7 @@ const schema = {
             parameters: [
                 { position: { key: "chain_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)"] } },
                 { position: { key: "test_speed", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()", "default(false)"] } },
-                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()", "default(10)", "min(1)"] } }
+                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "default(10)", "optional()" ] } }
             ],
             tests: [
                 { _description: "Get Ethereum RPC endpoints", chain_id: 1 },
@@ -129,7 +129,7 @@ const schema = {
             parameters: [
                 { position: { key: "chain_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)"] } },
                 { position: { key: "test_speed", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()", "default(false)"] } },
-                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()", "default(5)", "min(1)"] } }
+                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()", ] } }
             ],
             tests: [
                 { _description: "Get Ethereum WebSocket endpoints", chain_id: 1 },

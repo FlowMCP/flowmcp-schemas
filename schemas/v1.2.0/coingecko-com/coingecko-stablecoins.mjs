@@ -17,7 +17,7 @@ const schema = {
                 { position: { key: "vs_currency", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(usd)"] } },
                 { position: { key: "category", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(stablecoins)"] } },
                 { position: { key: "order", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(market_cap_desc)"] } },
-                { position: { key: "per_page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(50)", "min(1)", "max(250)"] } }
+                { position: { key: "per_page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(250)", "default(50)"] } }
             ],
             tests: [
                 { _description: "Get top 50 stablecoins by market cap", vs_currency: "usd", category: "stablecoins", order: "market_cap_desc", per_page: 50 }
@@ -49,7 +49,7 @@ const schema = {
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(tether,usd-coin,dai,ethena-usde,first-digital-usd,paypal-usd,true-usd,frax,gemini-dollar,paxos-standard)", options: [] } },
                 { position: { key: "vs_currency", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(usd)"] } },
-                { position: { key: "days", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(7)", "min(1)", "max(90)"] } }
+                { position: { key: "days", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(90)", "default(7)"] } }
             ],
             tests: [
                 { _description: "Get 7-day historical data for USDT", id: "tether", vs_currency: "usd", days: 7 },

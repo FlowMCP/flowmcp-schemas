@@ -25,6 +25,7 @@ export const schema = {
             ],
             modifiers: []
         },
+/*
         searchPairs: {
             requestMethod: "GET",
             description: "Search for token pairs by query string (token name, symbol, or address)",
@@ -42,6 +43,7 @@ export const schema = {
             ],
             modifiers: []
         },
+*/
         getLatestPairs: {
             requestMethod: "GET",
             description: "Get specific token pair by chain and pair address",

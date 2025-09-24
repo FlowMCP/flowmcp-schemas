@@ -5,7 +5,7 @@ import path from "path"
 
 const config = {
     'excludeSchemasWithImports': true,
-    'excludeSchemasWithRequiredServerParams': false,
+    'excludeSchemasWithRequiredServerParams': true,
     'addAdditionalMetaData': true
 }
 const { 
@@ -82,7 +82,21 @@ console.log( `Schemas:       ${schemas.length}` )
 console.log( 'Success!')
 // console.log( schema )
 
+import { FlowMCP} from 'flowmcp'
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+const server = new McpServer({
+    name: "FlowMCP Schema Server",
+    version: "1.0.0",
+});
 schemas
-    .forEach( ( { namespace } ) => {
-        console.log( namespace )
+    .forEach( ( schema ) => {
+        console.log( 'Schema: ', schema.namespace )
+        FlowMCP.activateServerTools({
+            server,
+            schema,
+            serverParams: []
+        } )
     } )
+
+
+

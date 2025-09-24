@@ -1,6 +1,6 @@
 {
   "name": "schema-importer",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "description": "",
   "main": "./src/index.mjs",
   "scripts": {
@@ -17,7 +17,7 @@
     "validate:ai": "node tests/schema-validation/validate-new-schemas.mjs",
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs",
     "docs:generate": "node scripts/generate-docs.mjs",
-    "generate:paths": "node tests/manual/0-generate-static-import.mjs"
+    "generate:static": "node tests/manual/0-generate-static-import.mjs"
   },
   "keywords": [],
   "engines": {
