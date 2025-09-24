@@ -1807,12 +1807,6 @@
           "route": "/latest/dex/tokens/:tokenAddress",
           "hasTests": true
         },
-        "searchPairs": {
-          "requestMethod": "GET",
-          "description": "Search for token pairs by query string (token name, symbol, or address)",
-          "route": "/latest/dex/search",
-          "hasTests": true
-        },
         "getLatestPairs": {
           "requestMethod": "GET",
           "description": "Get specific token pair by chain and pair address",
@@ -1832,7 +1826,7 @@
           "hasTests": true
         }
       },
-      "routeCount": 5
+      "routeCount": 4
     },
     {
       "namespace": "duneAnalytics",
@@ -4590,29 +4584,249 @@
     },
     {
       "namespace": "simdune",
-      "name": "Sim by Dune - Token Info",
-      "description": "Fetches token metadata like name, symbol, supply, decimals and USD price for a given contract address on a supported chain.",
+      "name": "Sim by Dune - Activity Feed",
+      "description": "Access decoded activity feed with realtime onchain activity including transfers, swaps, mints, burns, and approvals across EVM chains.",
       "tags": [
         "production",
-        "token",
-        "sei",
-        "analytics"
+        "activity",
+        "analytics",
+        "feed"
       ],
       "docs": [
-        "https://docs.sim.dune.com/docs/sim-api/token-info"
+        "https://docs.sim.dune.com/evm/activity"
       ],
       "flowMCP": "1.2.0",
       "requiredServerParams": [
         "DUNE_SIM_API_KEY"
       ],
       "hasApiKey": true,
-      "path": "simdune/sei-token-info.mjs",
-      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/sei-token-info.mjs",
+      "path": "simdune/activityEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/activityEVM.mjs",
       "routes": {
-        "getTokenInfo": {
+        "getActivityEVM": {
           "requestMethod": "GET",
-          "description": "Returns metadata for a specific token contract on a given chain (e.g. USDC on Sei).",
-          "route": "/evm/token-info/{{token}}",
+          "description": "Get decoded activity feed for a wallet address including transfers, swaps, mints, burns, approvals, and contract interactions. Supported chains: ABSTRACT,ANCIENT8,APE_CHAIN,ARBITRUM_ONE,ARBITRUM_NOVA,AVALANCHE_CCHAIN,AVALANCHE_FUJI,B3,BASE_MAINNET,BASE_SEPOLIA,BERACHAIN,BLAST_MAINNET,BNB_CHAIN,BOB,BOBA_NETWORK,CELO_MAINNET,CORN,CYBER,DEGEN_CHAIN,ETHEREUM_MAINNET,FANTOM,FLARE,FORMA,FRAXTAL,FUNKICHAIN,GNOSIS_CHAIN,HAM_CHAIN,HYCHAIN,HYPER_EVM,INK,KAIA,LINEA_MAINNET,LISK,MANTLE,METIS,MINT_MAINNET,MODE,OMNI,OPBNB,OPTIMISM_MAINNET,POLYGON_MAINNET,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,RARI,REDSTONE,RONIN,SCROLL,SEI,ETHEREUM_SEPOLIA,SHAPE,SONEIUM,SONIC,SUPERPOSITION,SUPERSEED,SWELLCHAIN,UNICHAIN,WEMIX,WORLD,XAI,ZERO_NETWORK,ZKEVM,ZKSYNC_ERA,ZORA_NETWORK",
+          "route": "/evm/activity/{{walletAddress}}",
+          "hasTests": true
+        },
+        "getActivityDetailedEVM": {
+          "requestMethod": "GET",
+          "description": "Get decoded activity feed for a wallet address including transfers, swaps, mints, burns, approvals, and contract interactions. Supported chains: ABSTRACT,ANCIENT8,APE_CHAIN,ARBITRUM_ONE,ARBITRUM_NOVA,AVALANCHE_CCHAIN,AVALANCHE_FUJI,B3,BASE_MAINNET,BASE_SEPOLIA,BERACHAIN,BLAST_MAINNET,BNB_CHAIN,BOB,BOBA_NETWORK,CELO_MAINNET,CORN,CYBER,DEGEN_CHAIN,ETHEREUM_MAINNET,FANTOM,FLARE,FORMA,FRAXTAL,FUNKICHAIN,GNOSIS_CHAIN,HAM_CHAIN,HYCHAIN,HYPER_EVM,INK,KAIA,LINEA_MAINNET,LISK,MANTLE,METIS,MINT_MAINNET,MODE,OMNI,OPBNB,OPTIMISM_MAINNET,POLYGON_MAINNET,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,RARI,REDSTONE,RONIN,SCROLL,SEI,ETHEREUM_SEPOLIA,SHAPE,SONEIUM,SONIC,SUPERPOSITION,SUPERSEED,SWELLCHAIN,UNICHAIN,WEMIX,WORLD,XAI,ZERO_NETWORK,ZKEVM,ZKSYNC_ERA,ZORA_NETWORK",
+          "route": "/evm/activity/{{walletAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - Token Balances",
+      "description": "Access realtime token balances for native and ERC20 tokens with USD valuations across EVM chains.",
+      "tags": [
+        "production",
+        "balances",
+        "analytics",
+        "portfolio"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/evm/balances"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/balancesEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/balancesEVM.mjs",
+      "routes": {
+        "getBalancesEVM": {
+          "requestMethod": "GET",
+          "description": "Get realtime token balances with USD valuations for native and ERC20 tokens across supported chains.",
+          "route": "/evm/balances/{{walletAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - SVM Token Balances",
+      "description": "Access realtime token balances for native, SPL, and SPL-2022 tokens with USD valuations across SVM chains.",
+      "tags": [
+        "production",
+        "balances",
+        "analytics",
+        "portfolio",
+        "svm",
+        "solana"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/svm/balances"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/balancesSVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/balancesSVM.mjs",
+      "routes": {
+        "getBalancesSVM": {
+          "requestMethod": "GET",
+          "description": "Get realtime token balances with USD valuations for native, SPL, and SPL-2022 tokens across supported SVM chains.",
+          "route": "/svm/balances/{{walletAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - NFT Collectibles",
+      "description": "Access NFT collections including ERC721 and ERC1155 tokens with metadata, images, and collection details across EVM chains.",
+      "tags": [
+        "production",
+        "nft",
+        "collectibles",
+        "metadata"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/evm/collectibles"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/collectiblesEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/collectiblesEVM.mjs",
+      "routes": {
+        "getCollectiblesEVM": {
+          "requestMethod": "GET",
+          "description": "Get NFT collectibles (ERC721/ERC1155) with metadata, images, and collection details for a wallet address.",
+          "route": "/evm/collectibles/{{walletAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - Token Holders",
+      "description": "Discover token distribution across ERC20 or ERC721 holders, ranked by wallet value.",
+      "tags": [
+        "production",
+        "token",
+        "analytics",
+        "holders"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/evm/token-holders"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/tokenHoldersEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/tokenHoldersEVM.mjs",
+      "routes": {
+        "getTokenHoldersEVM": {
+          "requestMethod": "GET",
+          "description": "Get token holders for ERC20 or ERC721 tokens, ranked by wallet value with balance details.",
+          "route": "/evm/token-holders/{{chain_id}}/{{token_address}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - Token Info",
+      "description": "Access token metadata including symbol, name, decimals, USD price, and logo URLs for native and ERC20 tokens across EVM chains.",
+      "tags": [
+        "production",
+        "token",
+        "analytics",
+        "metadata"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/evm/token-info"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/tokenInfoEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/tokenInfoEVM.mjs",
+      "routes": {
+        "getTokenInfoEVM": {
+          "requestMethod": "GET",
+          "description": "Get token metadata including symbol, name, decimals, USD price, and logo URLs for native and ERC20 tokens.",
+          "route": "/evm/token-info/{{tokenAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - Transactions",
+      "description": "Retrieve granular transaction details including block information, gas data, and raw values, ordered by descending block time.",
+      "tags": [
+        "production",
+        "transactions",
+        "analytics",
+        "history"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/evm/transactions"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/transactionsEVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/transactionsEVM.mjs",
+      "routes": {
+        "getTransactionsEVM": {
+          "requestMethod": "GET",
+          "description": "Get detailed transaction history for an EVM address across supported chains, with block data and gas information.",
+          "route": "/evm/transactions/{{walletAddress}}",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "simdune",
+      "name": "Sim by Dune - SVM Transactions",
+      "description": "Retrieve detailed transaction history for SVM addresses including block information, ordered by descending block time.",
+      "tags": [
+        "production",
+        "transactions",
+        "analytics",
+        "history",
+        "svm",
+        "solana"
+      ],
+      "docs": [
+        "https://docs.sim.dune.com/svm/transactions"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DUNE_SIM_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "simdune/transactionsSVM.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/simdune/transactionsSVM.mjs",
+      "routes": {
+        "getTransactionsSVM": {
+          "requestMethod": "GET",
+          "description": "Get detailed transaction history for an SVM address, ordered by descending block time with pagination support.",
+          "route": "/svm/transactions/{{walletAddress}}",
           "hasTests": true
         }
       },
@@ -5383,77 +5597,6 @@
       "routeCount": 2
     },
     {
-      "namespace": "walletInspector",
-      "name": "Wallet Inspector",
-      "description": "Unified wallet insight interface using Dune SIM APIs for EVM and Solana chains",
-      "tags": [
-        "production",
-        "data",
-        "api"
-      ],
-      "docs": [
-        "https://sim.dune.com/docs"
-      ],
-      "flowMCP": "1.2.0",
-      "requiredServerParams": [
-        "DUNE_SIM_API_KEY"
-      ],
-      "hasApiKey": true,
-      "path": "sim-dune-com/wallet-inspector.mjs",
-      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/sim-dune-com/wallet-inspector.mjs",
-      "routes": {
-        "getBalance": {
-          "requestMethod": "GET",
-          "description": "Get token balances for a given EVM or Solana wallet",
-          "route": "/balance/:wallet_address",
-          "hasTests": true
-        },
-        "getActivity": {
-          "requestMethod": "GET",
-          "description": "Get recent activity on EVM chains for a wallet address",
-          "route": "/activity/:wallet_address",
-          "hasTests": true
-        },
-        "getTransactions": {
-          "requestMethod": "GET",
-          "description": "Retrieve transactions for a wallet on EVM or Solana chains",
-          "route": "/transactions/:wallet_address",
-          "hasTests": true
-        },
-        "getHoldingsSummary": {
-          "requestMethod": "GET",
-          "description": "Summarize total holdings in USD by token symbol",
-          "route": "/holdings-summary/:wallet_address",
-          "hasTests": true
-        },
-        "getSolBalance": {
-          "requestMethod": "GET",
-          "description": "Return only SOL balance for Solana address",
-          "route": "/sol-balance/:wallet_address",
-          "hasTests": true
-        },
-        "getEvmNativeBalance": {
-          "requestMethod": "GET",
-          "description": "Return only native EVM balance (ETH, MATIC, etc.)",
-          "route": "/evm-native/:wallet_address",
-          "hasTests": true
-        },
-        "getTransactionCount": {
-          "requestMethod": "GET",
-          "description": "Return number of transactions for wallet",
-          "route": "/tx-count/:wallet_address",
-          "hasTests": true
-        },
-        "getChainDistribution": {
-          "requestMethod": "GET",
-          "description": "Show how many tokens or txs appear on each chain",
-          "route": "/chain-distribution/:wallet_address",
-          "hasTests": true
-        }
-      },
-      "routeCount": 8
-    },
-    {
       "namespace": "webcareer",
       "name": "Web3 Career Job API",
       "description": "Query job listings from the web3.career API with optional filters and markdown output.",
@@ -5577,10 +5720,10 @@
     }
   ],
   "stats": {
-    "totalSchemas": 122,
-    "totalRoutes": 530,
-    "schemasWithApiKeys": 60,
-    "namespaces": 69,
-    "generatedAt": "2025-08-26T13:37:20.787Z"
+    "totalSchemas": 128,
+    "totalRoutes": 529,
+    "schemasWithApiKeys": 66,
+    "namespaces": 68,
+    "generatedAt": "2025-09-24T23:34:08.850Z"
   }
 }
