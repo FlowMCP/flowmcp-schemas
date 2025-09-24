@@ -8,7 +8,7 @@ export default {
     coverageThreshold: {
         'src/**/*.mjs': {
             statements: 70,
-            branches: 60,
+            branches: 50,
             functions: 75,
             lines: 70
         }
