@@ -25,6 +25,32 @@ class SchemaImporter {
     } 
 
 
+    static async loadFromFolderWithImport( {
+        schemaRootFolder = "./../schemas/v1.2.0/",
+        excludeSchemasWithImports = true,
+        excludeSchemasWithRequiredServerParams = false,
+        addAdditionalMetaData = false,
+        outputType = null // [ 'onlyPath', 'onlySchema' ]
+    } ) {
+        const { allSchemaPaths } = await import( './data/all-schema-paths.mjs' )
+        let schemas = allSchemaPaths
+            .filter( ( { relativePath } ) => relativePath.includes( schemaRootFolder.replace( './../schemas/', '' ) ) )
+            .filter( ( { hasImport } ) => excludeSchemasWithImports === true ? hasImport === false : true )
+            .filter( ( { requiredServerParams } ) => excludeSchemasWithRequiredServerParams === true ? ( requiredServerParams.length === 0 ) : true )
+        if( outputType === 'onlyPath' ) { return schemas }
+
+        let index = 0
+        for( const { internalImport } of schemas ) {
+            const { schema } = await import( internalImport )
+            schemas[ index ]['schema'] = schema
+            index++
+        }
+        if( outputType === 'onlySchema' ) { schemas = schemas.map( ( item ) => item['schema'] ) }
+
+        return schemas
+    }
+
+
     static #getSchemaPaths( { schemaRootFolder } ) {
         const __filename = fileURLToPath( import.meta.url )
         const __dirname = path.dirname( __filename )

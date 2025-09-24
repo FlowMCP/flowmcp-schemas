@@ -16,7 +16,8 @@
     "validate:tags": "node tests/detect-hardcoded-tags.mjs",
     "validate:ai": "node tests/schema-validation/validate-new-schemas.mjs",
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs",
-    "docs:generate": "node scripts/generate-docs.mjs"
+    "docs:generate": "node scripts/generate-docs.mjs",
+    "generate:paths": "node tests/manual/0-generate-all-schemas-paths.mjs"
   },
   "keywords": [],
   "engines": {
