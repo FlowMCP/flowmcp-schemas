@@ -309,112 +309,6 @@ const allSchemas = [
 		}
     },
     {
-        "id": "cryptoOrderbook_orderbook",
-        "relativePath": "schemas/v1.2.0/ccxt/orderbook.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/ccxt/orderbook.mjs",
-        "internalImport": "./../../schemas/v1.2.0/ccxt/orderbook.mjs",
-        "folderName": "ccxt",
-        "hasImport": true,
-        "namespace": "cryptoOrderbook",
-        "tags": [
-            "production",
-            "trading",
-            "orderbook",
-            "exchange"
-        ],
-        "requiredServerParams": [],
-        "routeNames": [
-            "calculateOrderbook",
-            "compareOrderbook"
-        ],
-        "schemaFolder": "ccxt",
-        "schemaName": "orderbook",
-        "fileName": "orderbook.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/ccxt/orderbook.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "chainlink_getLatestPrices",
-        "relativePath": "schemas/v1.2.0/chainlink/getLatestPrices.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/chainlink/getLatestPrices.mjs",
-        "internalImport": "./../../schemas/v1.2.0/chainlink/getLatestPrices.mjs",
-        "folderName": "chainlink",
-        "hasImport": true,
-        "namespace": "chainlink",
-        "tags": [
-            "oracle",
-            "price",
-            "feeds"
-        ],
-        "requiredServerParams": [
-            "INFURA_API_KEY"
-        ],
-        "routeNames": [
-            "getAvailableChains",
-            "getAvailableFeedsForChain",
-            "getLatestPriceEthereum",
-            "getLatestPriceBinance",
-            "getLatestPricePolygon",
-            "getLatestPriceAvalanche",
-            "getLatestPriceAribitrum",
-            "getLatestPriceOptimism",
-            "getLatestPriceBase",
-            "getLatestPriceLinea",
-            "getLatestPriceMantle",
-            "getLatestPriceScroll",
-            "getLatestPriceZksync",
-            "getLatestPriceCelo"
-        ],
-        "schemaFolder": "chainlink",
-        "schemaName": "getLatestPrices",
-        "fileName": "getLatestPrices.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/chainlink/getLatestPrices.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "chainlinkMulticall_getLatestPricesMulticall",
-        "relativePath": "schemas/v1.2.0/chainlink/getLatestPricesMulticall.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/chainlink/getLatestPricesMulticall.mjs",
-        "internalImport": "./../../schemas/v1.2.0/chainlink/getLatestPricesMulticall.mjs",
-        "folderName": "chainlink",
-        "hasImport": true,
-        "namespace": "chainlinkMulticall",
-        "tags": [
-            "oracle",
-            "price",
-            "feeds"
-        ],
-        "requiredServerParams": [
-            "INFURA_API_KEY"
-        ],
-        "routeNames": [
-            "getAvailableChains",
-            "getAllLatestPricesEthereum",
-            "getAllLatestPricesBinance",
-            "getAllLatestPricesPolygon",
-            "getAllLatestPricesAvalanche",
-            "getAllLatestPricesAribitrum",
-            "getAllLatestPricesOptimism",
-            "getAllLatestPricesBase",
-            "getAllLatestPricesLinea",
-            "getAllLatestPricesMantle",
-            "getAllLatestPricesScroll",
-            "getAllLatestPricesZksync",
-            "getAllLatestPricesCelo"
-        ],
-        "schemaFolder": "chainlink",
-        "schemaName": "getLatestPricesMulticall",
-        "fileName": "getLatestPricesMulticall.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/chainlink/getLatestPricesMulticall.mjs' )
-		    return { schema }
-		}
-    },
-    {
         "id": "chainlist_chainlist",
         "relativePath": "schemas/v1.2.0/chainlist/chainlist.mjs",
         "modulImportPath": "schemaimporter/schemas/v1.2.0/chainlist/chainlist.mjs",
@@ -1237,36 +1131,6 @@ const allSchemas = [
 		}
     },
     {
-        "id": "ens_ens-resolution",
-        "relativePath": "schemas/v1.2.0/ens/ens-resolution.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/ens/ens-resolution.mjs",
-        "internalImport": "./../../schemas/v1.2.0/ens/ens-resolution.mjs",
-        "folderName": "ens",
-        "hasImport": true,
-        "namespace": "ens",
-        "tags": [
-            "production",
-            "domain",
-            "identity",
-            "ethereum"
-        ],
-        "requiredServerParams": [
-            "INFURA_API_KEY"
-        ],
-        "routeNames": [
-            "resolveName",
-            "lookupAddress",
-            "supportMatrix"
-        ],
-        "schemaFolder": "ens",
-        "schemaName": "ens-resolution",
-        "fileName": "ens-resolution.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/ens/ens-resolution.mjs' )
-		    return { schema }
-		}
-    },
-    {
         "id": "epo_patent-search",
         "relativePath": "schemas/v1.2.0/epo-org/patent-search.mjs",
         "modulImportPath": "schemaimporter/schemas/v1.2.0/epo-org/patent-search.mjs",
@@ -1316,29 +1180,6 @@ const allSchemas = [
         "fileName": "profileJump.mjs",
         "loadSchema": async() => {
 		    const { schema } = await import( './../../schemas/v1.2.0/erc725/profileJump.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "luksoNetwork_universalProfile",
-        "relativePath": "schemas/v1.2.0/erc725/universalProfile.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/erc725/universalProfile.mjs",
-        "internalImport": "./../../schemas/v1.2.0/erc725/universalProfile.mjs",
-        "folderName": "erc725",
-        "hasImport": true,
-        "namespace": "luksoNetwork",
-        "tags": [],
-        "requiredServerParams": [],
-        "routeNames": [
-            "readProfileData",
-            "fetchProfileMetadata",
-            "getUniversalReceiverAddress"
-        ],
-        "schemaFolder": "erc725",
-        "schemaName": "universalProfile",
-        "fileName": "universalProfile.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/erc725/universalProfile.mjs' )
 		    return { schema }
 		}
     },
@@ -1556,104 +1397,6 @@ const allSchemas = [
         "fileName": "honeypot.mjs",
         "loadSchema": async() => {
 		    const { schema } = await import( './../../schemas/v1.2.0/honeypot/honeypot.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "indicatorts_indicatorts-schema",
-        "relativePath": "schemas/v1.2.0/indicators/indicatorts-schema.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/indicators/indicatorts-schema.mjs",
-        "internalImport": "./../../schemas/v1.2.0/indicators/indicatorts-schema.mjs",
-        "folderName": "indicators",
-        "hasImport": true,
-        "namespace": "indicatorts",
-        "tags": [],
-        "requiredServerParams": [],
-        "routeNames": [
-            "getAbsolutePriceOscillator",
-            "getAbsolutePriceOscillatorStrategy",
-            "getAccelerationBands",
-            "getAccelerationBandsStrategy",
-            "getAccumulationDistribution",
-            "getAroon",
-            "getAroonStrategy",
-            "getAverageTrueRange",
-            "getAwesomeOscillator",
-            "getAwesomeOscillatorStrategy",
-            "getBalanceOfPower",
-            "getBalanceOfPowerStrategy",
-            "getBollingerBands",
-            "getBollingerBandsStrategy",
-            "getBollingerBandsWidth",
-            "getChaikinMoneyFlow",
-            "getChaikinMoneyFlowStrategy",
-            "getChaikinOscillator",
-            "getChandeForecastOscillator",
-            "getChandeForecastOscillatorStrategy",
-            "getChandelierExit",
-            "getCommunityChannelIndex",
-            "getDonchianChannel",
-            "getDoubleExponentialMovingAverage",
-            "getEaseOfMovement",
-            "getEaseOfMovementStrategy",
-            "getExponentialMovingAverage",
-            "getForceIndex",
-            "getForceIndexStrategy",
-            "getIchimokuCloud",
-            "getIchimokuCloudStrategy",
-            "getKdjStrategy",
-            "getKeltnerChannel",
-            "getMassIndex",
-            "getMoneyFlowIndex",
-            "getMoneyFlowIndexStrategy",
-            "getMovingAverageConvergenceDivergence",
-            "getMovingAverageConvergenceDivergenceStrategy",
-            "getMovingChandeForecastOscillator",
-            "getMovingMax",
-            "getMovingMin",
-            "getMovingStandardDeviation",
-            "getMovingSum",
-            "getNegativeVolumeIndex",
-            "getNegativeVolumeIndexStrategy",
-            "getOnBalanceVolume",
-            "getParabolicSar",
-            "getParabolicSARStrategy",
-            "getPercentagePriceOscillator",
-            "getPercentageVolumeOscillator",
-            "getPriceRateOfChange",
-            "getProjectionOscillator",
-            "getProjectionOscillatorStrategy",
-            "getQstick",
-            "getRandomIndex",
-            "getRelativeStrengthIndex",
-            "getRollingMovingAverage",
-            "getRsi2Strategy",
-            "getSimpleMovingAverage",
-            "getSince",
-            "getStochasticOscillator",
-            "getStochasticOscillatorStrategy",
-            "getTriangularMovingAverage",
-            "getTripleExponentialAverage",
-            "getTripleExponentialMovingAverage",
-            "getTrueRange",
-            "getTypicalPrice",
-            "getTypicalPriceStrategy",
-            "getUlcerIndex",
-            "getVolumePriceTrend",
-            "getVolumeWeightedAveragePrice",
-            "getVolumeWeightedAveragePriceStrategy",
-            "getVolumeWeightedMovingAverage",
-            "getVolumeWeightedMovingAverageStrategy",
-            "getVortex",
-            "getVortexStrategy",
-            "getWilliamsR",
-            "getWilliamsRStrategy"
-        ],
-        "schemaFolder": "indicators",
-        "schemaName": "indicatorts-schema",
-        "fileName": "indicatorts-schema.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/indicators/indicatorts-schema.mjs' )
 		    return { schema }
 		}
     },
@@ -2354,103 +2097,6 @@ const allSchemas = [
 		}
     },
     {
-        "id": "ohlcv_olhcv-moralis-evm",
-        "relativePath": "schemas/v1.2.0/ohlcv/olhcv-moralis-evm.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/ohlcv/olhcv-moralis-evm.mjs",
-        "internalImport": "./../../schemas/v1.2.0/ohlcv/olhcv-moralis-evm.mjs",
-        "folderName": "ohlcv",
-        "hasImport": true,
-        "namespace": "ohlcv",
-        "tags": [],
-        "requiredServerParams": [
-            "MORALIS_API_KEY"
-        ],
-        "routeNames": [
-            "getRecursiveOhlcvEVM"
-        ],
-        "schemaFolder": "ohlcv",
-        "schemaName": "olhcv-moralis-evm",
-        "fileName": "olhcv-moralis-evm.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/ohlcv/olhcv-moralis-evm.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "ohlcv_olhcv-moralis-solana",
-        "relativePath": "schemas/v1.2.0/ohlcv/olhcv-moralis-solana.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/ohlcv/olhcv-moralis-solana.mjs",
-        "internalImport": "./../../schemas/v1.2.0/ohlcv/olhcv-moralis-solana.mjs",
-        "folderName": "ohlcv",
-        "hasImport": true,
-        "namespace": "ohlcv",
-        "tags": [],
-        "requiredServerParams": [
-            "MORALIS_API_KEY"
-        ],
-        "routeNames": [
-            "getRecursiveOhlcvSolana"
-        ],
-        "schemaFolder": "ohlcv",
-        "schemaName": "olhcv-moralis-solana",
-        "fileName": "olhcv-moralis-solana.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/ohlcv/olhcv-moralis-solana.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "ohlcv_olhcv-solana-tracker",
-        "relativePath": "schemas/v1.2.0/ohlcv/olhcv-solana-tracker.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/ohlcv/olhcv-solana-tracker.mjs",
-        "internalImport": "./../../schemas/v1.2.0/ohlcv/olhcv-solana-tracker.mjs",
-        "folderName": "ohlcv",
-        "hasImport": true,
-        "namespace": "ohlcv",
-        "tags": [],
-        "requiredServerParams": [
-            "SOLANA_TRACKER_API_KEY"
-        ],
-        "routeNames": [
-            "getOhlcvSolana"
-        ],
-        "schemaFolder": "ohlcv",
-        "schemaName": "olhcv-solana-tracker",
-        "fileName": "olhcv-solana-tracker.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/ohlcv/olhcv-solana-tracker.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "passportOnchain_onchain-data",
-        "relativePath": "schemas/v1.2.0/passport-xyz/onchain-data.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/passport-xyz/onchain-data.mjs",
-        "internalImport": "./../../schemas/v1.2.0/passport-xyz/onchain-data.mjs",
-        "folderName": "passport-xyz",
-        "hasImport": true,
-        "namespace": "passportOnchain",
-        "tags": [
-            "identity",
-            "attestation",
-            "gitcoin"
-        ],
-        "requiredServerParams": [
-            "ETHEREUM_MAINNET_ALCHEMY_HTTP",
-            "ARBITRUM_MAINNET_ALCHEMY_HTTP"
-        ],
-        "routeNames": [
-            "getFullPassportData"
-        ],
-        "schemaFolder": "passport-xyz",
-        "schemaName": "onchain-data",
-        "fileName": "onchain-data.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/passport-xyz/onchain-data.mjs' )
-		    return { schema }
-		}
-    },
-    {
         "id": "pinata_read",
         "relativePath": "schemas/v1.2.0/pinata/read.mjs",
         "modulImportPath": "schemaimporter/schemas/v1.2.0/pinata/read.mjs",
@@ -2469,30 +2115,6 @@ const allSchemas = [
         "fileName": "read.mjs",
         "loadSchema": async() => {
 		    const { schema } = await import( './../../schemas/v1.2.0/pinata/read.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "pinata_write",
-        "relativePath": "schemas/v1.2.0/pinata/write.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/pinata/write.mjs",
-        "internalImport": "./../../schemas/v1.2.0/pinata/write.mjs",
-        "folderName": "pinata",
-        "hasImport": true,
-        "namespace": "pinata",
-        "tags": [],
-        "requiredServerParams": [
-            "PINATA_JWT",
-            "PINATA_GATEWAY"
-        ],
-        "routeNames": [
-            "upload_text_file"
-        ],
-        "schemaFolder": "pinata",
-        "schemaName": "write",
-        "fileName": "write.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/pinata/write.mjs' )
 		    return { schema }
 		}
     },
@@ -2614,35 +2236,6 @@ const allSchemas = [
         "fileName": "schema.mjs",
         "loadSchema": async() => {
 		    const { schema } = await import( './../../schemas/v1.2.0/santiment-net/schema.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "simdune_activityEVM",
-        "relativePath": "schemas/v1.2.0/simdune/activityEVM.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/simdune/activityEVM.mjs",
-        "internalImport": "./../../schemas/v1.2.0/simdune/activityEVM.mjs",
-        "folderName": "simdune",
-        "hasImport": true,
-        "namespace": "simdune",
-        "tags": [
-            "production",
-            "activity",
-            "analytics",
-            "feed"
-        ],
-        "requiredServerParams": [
-            "DUNE_SIM_API_KEY"
-        ],
-        "routeNames": [
-            "getActivityEVM",
-            "getActivityDetailedEVM"
-        ],
-        "schemaFolder": "simdune",
-        "schemaName": "activityEVM",
-        "fileName": "activityEVM.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/simdune/activityEVM.mjs' )
 		    return { schema }
 		}
     },
@@ -3312,38 +2905,6 @@ const allSchemas = [
         "fileName": "uniswap-pool-explorer.mjs",
         "loadSchema": async() => {
 		    const { schema } = await import( './../../schemas/v1.2.0/uniswap-pools/uniswap-pool-explorer.mjs' )
-		    return { schema }
-		}
-    },
-    {
-        "id": "uniswap_price-discovery",
-        "relativePath": "schemas/v1.2.0/uniswap-v3/price-discovery.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/uniswap-v3/price-discovery.mjs",
-        "internalImport": "./../../schemas/v1.2.0/uniswap-v3/price-discovery.mjs",
-        "folderName": "uniswap-v3",
-        "hasImport": true,
-        "namespace": "uniswap",
-        "tags": [
-            "production",
-            "dex",
-            "trading",
-            "defi"
-        ],
-        "requiredServerParams": [
-            "ETHEREUM_MAINNET_ALCHEMY_HTTP",
-            "POLYGON_MAINNET_ALCHEMY_HTTP",
-            "ARBITRUM_MAINNET_ALCHEMY_HTTP",
-            "OPTIMISM_MAINNET_ALCHEMY_HTTP"
-        ],
-        "routeNames": [
-            "getSupportedChains",
-            "getTokenPrice"
-        ],
-        "schemaFolder": "uniswap-v3",
-        "schemaName": "price-discovery",
-        "fileName": "price-discovery.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/uniswap-v3/price-discovery.mjs' )
 		    return { schema }
 		}
     },

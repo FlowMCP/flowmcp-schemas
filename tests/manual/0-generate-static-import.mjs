@@ -2,11 +2,24 @@ import fs from "fs"
 import { SchemaImporter } from "../../src/index.mjs"
 import path from "path"
 
+
+const config = {
+    'excludeSchemasWithImports': true,
+    'excludeSchemasWithRequiredServerParams': false,
+    'addAdditionalMetaData': true
+}
+const { 
+    excludeSchemasWithImports, 
+    excludeSchemasWithRequiredServerParams, 
+    addAdditionalMetaData 
+} = config
+
+
 let arrayOfSchemas = await SchemaImporter
     .loadFromFolder( {
-        excludeSchemasWithImports: false,
-        excludeSchemasWithRequiredServerParams: false,
-        addAdditionalMetaData: true
+        excludeSchemasWithImports,
+        excludeSchemasWithRequiredServerParams,
+        addAdditionalMetaData,
     } )
 arrayOfSchemas = arrayOfSchemas
     .map( ( schemaItem ) => {
@@ -58,12 +71,18 @@ fs.writeFileSync(
 
 const schemas = await SchemaImporter
     .loadFromFolderStatic( { 
-        excludeSchemasWithImports: true,
-        excludeSchemasWithRequiredServerParams: false,
-        addAdditionalMetaData: false,
-        outputType: null//'onlyPath' 
+        excludeSchemasWithImports,
+        excludeSchemasWithRequiredServerParams,
+        addAdditionalMetaData,
+        outputType: 'onlySchema' 
     } )
 console.log( `Schemas Total: `, schemas.length )
 console.log( `Filepath:      ${staticFilePath}` )
+console.log( `Schemas:       ${schemas.length}` )
 console.log( 'Success!')
 // console.log( schema )
+
+schemas
+    .forEach( ( { namespace } ) => {
+        console.log( namespace )
+    } )
