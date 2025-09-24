@@ -77,11 +77,14 @@ class SchemaImporter {
             .map( ( schema ) => {
                 const { absolutePath } = schema
                 const hasImport = fs
-                    .readFileSync( absolutePath, 'utf-8' )
-                    .split( "\n" )
+                    .readFileSync(absolutePath, "utf-8")
+                    .split("\n")
                     .some( ( line ) => {
-                        const one = line.trim().startsWith( 'import' )
-                        const two = line.includes( 'import(' )
+                        const trimmed = line.trim();
+                        const one = trimmed.startsWith("import ")
+                        const two =
+                            line.indexOf("import(") !== -1 ||
+                            line.indexOf("import (") !== -1
                         return one || two
                     } )
                 schema['hasImport'] = hasImport

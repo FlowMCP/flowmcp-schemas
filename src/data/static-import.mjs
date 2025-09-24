@@ -796,27 +796,6 @@ const allSchemas = [
 		}
     },
     {
-        "id": "cointelegraph_getLatestNews",
-        "relativePath": "schemas/v1.2.0/cointelegraph/getLatestNews.mjs",
-        "modulImportPath": "schemaimporter/schemas/v1.2.0/cointelegraph/getLatestNews.mjs",
-        "internalImport": "./../../schemas/v1.2.0/cointelegraph/getLatestNews.mjs",
-        "folderName": "cointelegraph",
-        "hasImport": false,
-        "namespace": "cointelegraph",
-        "tags": [],
-        "requiredServerParams": [],
-        "routeNames": [
-            "getLatestNews"
-        ],
-        "schemaFolder": "cointelegraph",
-        "schemaName": "getLatestNews",
-        "fileName": "getLatestNews.mjs",
-        "loadSchema": async() => {
-		    const { schema } = await import( './../../schemas/v1.2.0/cointelegraph/getLatestNews.mjs' )
-		    return { schema }
-		}
-    },
-    {
         "id": "context7_getDocumentation",
         "relativePath": "schemas/v1.2.0/context-7/getDocumentation.mjs",
         "modulImportPath": "schemaimporter/schemas/v1.2.0/context-7/getDocumentation.mjs",
