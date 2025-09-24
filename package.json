@@ -18,7 +18,7 @@
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs",
     "docs:generate": "node scripts/generate-docs.mjs",
     "generate:paths": "node tests/manual/0-generate-static-import.mjs"
-  },
+  }, 
   "keywords": [],
   "engines": {
     "node": ">=18.0.0"
