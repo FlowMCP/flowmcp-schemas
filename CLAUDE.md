@@ -138,3 +138,128 @@ Each schema file exports an object with:
 3. **Schema Testing**: Use FlowMCP's `getAllTests()` method to run schema tests
 4. **Error Handling**: Check for missing required params and validate schema structure
 5. **File System Operations**: Use Node.js built-in `fs` and `path` modules for file operations
+
+## Schema Creation (FlowMCP v1.2.2 Spec)
+
+### Top-Level Structure (all 11 fields required)
+
+```javascript
+export const schema = {
+    namespace: "providerName",           // letters only, /^[a-zA-Z]+$/
+    name: "Provider API",                // human-readable name
+    description: "What this API does",   // brief explanation
+    docs: ["https://provider.com/docs"], // array of documentation URLs
+    tags: ["crypto", "defi"],            // semantic tags, NO hardcoded route refs
+    flowMCP: "1.2.0",                    // version string "x.x.x"
+    root: "https://api.provider.com",    // base URL, {{PLACEHOLDER}} allowed
+    requiredServerParams: ["API_KEY"],   // all placeholders except {{USER_PARAM}}
+    headers: {                           // request headers
+        "Authorization": "Bearer {{API_KEY}}"
+    },
+    routes: { /* ... */ },               // route definitions
+    handlers: { /* ... */ }              // handler functions
+}
+```
+
+### Route Structure (all 6 keys required per route)
+
+```javascript
+routes: {
+    getResource: {
+        requestMethod: "GET",                    // GET, POST, PUT, DELETE
+        description: "What this route does",     // brief explanation
+        route: "/resource/:id",                  // path, :param for inserts
+        parameters: [ /* ... */ ],               // array of parameter objects
+        tests: [ /* ... */ ],                    // array of test cases
+        modifiers: [ /* ... */ ]                 // array or empty []
+    }
+}
+```
+
+### Parameter Format (SINGLE LINE! Strict Convention)
+
+```javascript
+parameters: [
+    { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["length(24)"] } },
+    { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(10)"] } },
+    { position: { key: "name", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(2)", "max(50)"] } }
+]
+```
+
+- **`location`** values: `query`, `insert`, `body`
+- **`primitive`** values: `string()`, `number()`, `boolean()`, `enum()`, `array()`
+- **`options`**: `length(n)`, `min(n)`, `max(n)`, `regex(x)`, `optional()`, `default(x)`
+- Every parameter with `{{USER_PARAM}}` MUST have a valid `z` object with `primitive` and `options`
+
+### Modifier Format
+
+```javascript
+modifiers: [
+    { phase: "pre", handlerName: "validateInput" },
+    { phase: "execute", handlerName: "customFetch" },
+    { phase: "post", handlerName: "formatOutput" }
+]
+```
+
+- Valid phases: `pre`, `execute`, `post`
+- Each `handlerName` must match a function in the `handlers` block
+
+### Handler Format
+
+```javascript
+handlers: {
+    formatOutput: async ({ struct, payload, userParams, routeName, phaseType }) => {
+        // struct.data = processed result
+        // struct.status = false for errors
+        // struct.messages.push('error message') for error details
+        return { struct, payload }
+    }
+}
+```
+
+### Test Format
+
+```javascript
+tests: [
+    { _description: "Describe what this test does", id: "abc123", limit: 10 },
+    { _description: "Another test case", id: "xyz789" }
+]
+```
+
+- `_description` is **required** in every test
+- Only keys defined in `parameters` are allowed (no unknown fields)
+
+### Namespace Rules
+- Only letters allowed: `/^[a-zA-Z]+$/`
+- No numbers, hyphens, or underscores
+
+### Tags Rules
+- Use **semantic tags** describing the API domain: `["crypto", "defi", "blockchain"]`
+- Do NOT hardcode route references like `["provider.getRoute1", "provider.getRoute2"]`
+
+### Schema Size
+- Maximum **10 routes** per schema file
+- Split large APIs into multiple schema files by domain
+
+### Validation & Test Commands
+
+```bash
+npm run validate:all        # Validate ALL v1.2.0 schemas for structure & duplicates
+npm run validate:ai         # AI-optimized report for new schemas
+npm run validate:tags       # Detect hardcoded tags
+npm run validate:flowmcp    # FlowMCP schema-loading test
+```
+
+### Schema Lifecycle
+
+1. **Develop** in `tests/new-schemas/PROVIDER/`
+2. **Validate** with `npm run validate:ai`
+3. **Live-test** with `node tests/manual/test-schemas.mjs --namespace=NAME`
+4. **After approval**: Move to `schemas/v1.2.0/`
+
+### Reference Files
+
+- **Official Spec**: `node_modules/flowmcp/spec/v.1.2.2-spec.md`
+- **Perfect Example**: `tests/schema-validation/examples/perfect-schema-example.mjs`
+- **Broken Example**: `tests/schema-validation/examples/broken-schema-example.mjs`
+- **Schema Guidelines**: `schemas/SCHEMAS.md`

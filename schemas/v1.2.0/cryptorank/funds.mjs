@@ -1,0 +1,100 @@
+export const schema = {
+    namespace: "cryptorank",
+    name: "Cryptorank Funds",
+    description: "Sortable, filterable access to Cryptorank funds and detailed fund profiles.",
+    docs: ["https://api.cryptorank.io"],
+    tags: ["funds", "investors", "analytics"],
+    flowMCP: "1.2.0",
+    root: "https://api.cryptorank.io/v2",
+    requiredServerParams: ["CRYPTORANK_API_KEY"],
+    headers: { "X-Api-Key": "{{CRYPTORANK_API_KEY}}" },
+    routes: {
+        searchFunds: {
+            requestMethod: "GET",
+            description: "Fetch a sortable and filterable list of funds and investors with key metrics.",
+            route: "/funds",
+            parameters: [
+                { position: { key: "sortBy", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(tier,fundingRounds,leadInvestments,portfolio,retailRoi)", options: ["default(tier)"] } },
+                { position: { key: "sortDirection", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ASC,DESC)", options: ["default(ASC)"] } },
+                { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(100,200,300)", options: ["default(100)"] } },
+                { position: { key: "skip", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(0)", "default(0)"] } },
+                { position: { key: "tier", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["regex(^[1-5](,[1-5])*$)", "optional()"] } },
+                { position: { key: "type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } }
+            ],
+            tests: [
+                { _description: "Default sort, first 100", sortBy: "tier", sortDirection: "ASC", limit: "100", skip: 0 },
+                { _description: "Filter by tiers 1,2 and Venture type", sortBy: "portfolio", sortDirection: "DESC", limit: "100", skip: 0, tier: "1,2", type: "Venture" }
+            ],
+            modifiers: [
+                { phase: "pre", handlerName: "normalizeCSVLists" }
+            ]
+        },
+        getAllFunds: {
+            requestMethod: "GET",
+            description: "Fetch the complete map/list of investors and funds.",
+            route: "/funds/map",
+            parameters: [],
+            tests: [
+                { _description: "Fetch all funds" }
+            ],
+            modifiers: []
+        },
+        getFundBasic: {
+            requestMethod: "GET",
+            description: "Fetch basic metrics for a specific fund by ID.",
+            route: "/funds/:fund_id",
+            parameters: [
+                { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
+            ],
+            tests: [
+                { _description: "Fetch fund basic data", fund_id: 1 }
+            ],
+            modifiers: []
+        },
+        getFundDetail: {
+            requestMethod: "GET",
+            description: "Fetch comprehensive fund profile, investments, rounds, and metadata by ID.",
+            route: "/funds/:fund_id/full-metadata",
+            parameters: [
+                { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
+            ],
+            tests: [
+                { _description: "Fetch comprehensive fund data", fund_id: 1 }
+            ],
+            modifiers: []
+        },
+        getFundTeam: {
+            requestMethod: "GET",
+            description: "Fetch detailed team information for a specific fund by ID.",
+            route: "/funds/:fund_id/team",
+            parameters: [
+                { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
+            ],
+            tests: [
+                { _description: "Fetch team for fund", fund_id: 1 }
+            ],
+            modifiers: []
+        }
+    },
+    handlers: {
+        normalizeCSVLists: async ( { struct, payload } ) => {
+            const urlObj = new URL( payload.url )
+
+            const tier = urlObj.searchParams.get( 'tier' )
+            if( tier !== null ) {
+                const normalized = Array.isArray( tier ) ? tier.join( ',' ) : tier
+                urlObj.searchParams.set( 'tier', normalized )
+            }
+
+            const type = urlObj.searchParams.get( 'type' )
+            if( type !== null ) {
+                const normalized = Array.isArray( type ) ? type.join( ',' ) : type
+                urlObj.searchParams.set( 'type', normalized )
+            }
+
+            payload.url = urlObj.toString()
+
+            return { struct, payload }
+        }
+    }
+}
