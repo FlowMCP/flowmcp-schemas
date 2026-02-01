@@ -31,7 +31,7 @@ const schema = {
             description: 'Get Governor contracts (DAOs) by organization. Returns governance details, token info, and proposal stats.',
             route: '/query',
             parameters: [
-                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ governors(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 } }) { nodes { id name slug chainId token { name symbol decimals } proposalStats { total active } } pageInfo { firstCursor lastCursor } } }")' ] } }
+                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ governors(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 } }) { nodes { id name slug chainId token { name symbol decimals } proposalStats { total active } } pageInfo { firstCursor lastCursor } } }")', 'optional()' ] } }
             ],
             tests: [
                 { _description: 'Get Uniswap governors' }
@@ -45,7 +45,7 @@ const schema = {
             description: 'Get governance proposals with status, votes, and timeline. Filter by governor or organization.',
             route: '/query',
             parameters: [
-                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ proposals(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { isDescending: true } }) { nodes { id title status { active } governor { id name } proposer { address ens } voteStats { type votesCount votersCount percent } } pageInfo { firstCursor lastCursor } } }")' ] } }
+                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ proposals(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { isDescending: true } }) { nodes { id title status { active } governor { id name } proposer { address ens } voteStats { type votesCount votersCount percent } } pageInfo { firstCursor lastCursor } } }")', 'optional()' ] } }
             ],
             tests: [
                 { _description: 'Get Uniswap proposals' }
@@ -59,7 +59,7 @@ const schema = {
             description: 'Get delegates and their voting power for a specific DAO. Supports filtering by address and sorting.',
             route: '/query',
             parameters: [
-                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ delegates(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { sortBy: votes, isDescending: true } }) { nodes { account { address ens name bio } votesCount delegatorsCount } pageInfo { firstCursor lastCursor } } }")' ] } }
+                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [ 'default("{ delegates(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { sortBy: votes, isDescending: true } }) { nodes { account { address ens name bio } votesCount delegatorsCount } pageInfo { firstCursor lastCursor } } }")', 'optional()' ] } }
             ],
             tests: [
                 { _description: 'Get top Uniswap delegates' }

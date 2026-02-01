@@ -1,9 +1,9 @@
 const schema = {
-    namespace: 'zvg-portal',
+    namespace: 'zvgPortal',
     name: 'ZVG Portal Foreclosure Auctions',
     description: 'German foreclosure auction portal (Zwangsversteigerungsportal) for searching property auction listings across all 16 German states. Returns structured data from zvg-portal.de including auction dates, property details, valuations, and court information.',
     docs: [ 'https://www.zvg-portal.de' ],
-    tags: [ 'real-estate', 'auction', 'foreclosure', 'germany', 'property' ],
+    tags: [ 'immobilien', 'auktionen', 'justiz' ],
     flowMCP: '1.2.0',
     root: 'https://www.zvg-portal.de',
     requiredServerParams: [],
@@ -24,8 +24,8 @@ const schema = {
                 { position: { key: 'obj_art', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [ 'optional()' ] } }
             ],
             tests: [
-                { _description: 'Search Berlin auctions', land_abk: 'be' },
-                { _description: 'Search Bayern auctions', land_abk: 'by' }
+                { _description: 'Search Berlin auctions', land_abk: 'be', ger_id: '0', order_by: '2' },
+                { _description: 'Search Bayern auctions', land_abk: 'by', ger_id: '0', order_by: '2' }
             ],
             modifiers: [
                 { phase: 'execute', handlerName: 'executeSearch' }
