@@ -168,7 +168,7 @@
       "routeCount": 6
     },
     {
-      "namespace": "avalanche-metrics",
+      "namespace": "avalancheMetrics",
       "name": "Avalanche Metrics API",
       "description": "Avalanche Metrics API for on-chain analytics including staking, throughput, gas, TPS, and validator metrics",
       "tags": [
@@ -6924,41 +6924,6 @@
       "routeCount": 2
     },
     {
-      "namespace": "zvg-portal",
-      "name": "ZVG Portal Foreclosure Auctions",
-      "description": "German foreclosure auction portal (Zwangsversteigerungsportal) for searching property auction listings across all 16 German states. Returns structured data from zvg-portal.de including auction dates, property details, valuations, and court information.",
-      "tags": [
-        "real-estate",
-        "auction",
-        "foreclosure",
-        "germany",
-        "property"
-      ],
-      "docs": [
-        "https://www.zvg-portal.de"
-      ],
-      "flowMCP": "1.2.0",
-      "requiredServerParams": [],
-      "hasApiKey": false,
-      "path": "zvg-portal/auctions.mjs",
-      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/zvg-portal/auctions.mjs",
-      "routes": {
-        "searchAuctions": {
-          "requestMethod": "GET",
-          "description": "Search foreclosure auction listings by German state (Bundesland). Supports filtering by court, city, ZIP code, street, property type, and auction type. State codes: bw=Baden-Wuerttemberg, by=Bayern, be=Berlin, br=Brandenburg, hb=Bremen, hh=Hamburg, he=Hessen, mv=Mecklenburg-Vorpommern, ni=Niedersachsen, nw=Nordrhein-Westfalen, rp=Rheinland-Pfalz, sl=Saarland, sn=Sachsen, st=Sachsen-Anhalt, sh=Schleswig-Holstein, th=Thueringen. Property types (obj_art): 1=Reihenhaus, 2=Doppelhaushälfte, 3=Einfamilienhaus, 4=Mehrfamilienhaus, 5=ETW 1-2 Zi, 6=ETW 3-4 Zi, 7=ETW 5+ Zi, 8=Gewerbeeinheit, 9=Garage, 10=Kfz-Stellplatz, 13=Wohn-/Geschäftshaus, 14=Gewerbegrundstück, 15=Baugrundstück, 16=Unbebautes Grundstück, 17=Land-/Forstwirtschaft, 18=Sonstiges. Sort (order_by): 2=Termin, 1=Aktualisierung, 3=Aktenzeichen.",
-          "route": "/index.php",
-          "hasTests": true
-        },
-        "getAuctionDetail": {
-          "requestMethod": "GET",
-          "description": "Get full details of a specific foreclosure auction including property description, valuation (Verkehrswert), court info, auction venue, and links to documents (Bekanntmachung, Exposee, Gutachten, photos). Use the zvg_id and land_abk from searchAuctions results.",
-          "route": "/index.php",
-          "hasTests": true
-        }
-      },
-      "routeCount": 2
-    },
-    {
       "namespace": "zvgportal",
       "name": "ZVG Portal Zwangsversteigerungen",
       "description": "Search German foreclosure auctions (Zwangsversteigerungen) from the official ZVG portal of German courts",
@@ -6984,6 +6949,39 @@
         }
       },
       "routeCount": 1
+    },
+    {
+      "namespace": "zvgPortal",
+      "name": "ZVG Portal Foreclosure Auctions",
+      "description": "German foreclosure auction portal (Zwangsversteigerungsportal) for searching property auction listings across all 16 German states. Returns structured data from zvg-portal.de including auction dates, property details, valuations, and court information.",
+      "tags": [
+        "immobilien",
+        "auktionen",
+        "justiz"
+      ],
+      "docs": [
+        "https://www.zvg-portal.de"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "zvg-portal/auctions.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/zvg-portal/auctions.mjs",
+      "routes": {
+        "searchAuctions": {
+          "requestMethod": "GET",
+          "description": "Search foreclosure auction listings by German state (Bundesland). Supports filtering by court, city, ZIP code, street, property type, and auction type. State codes: bw=Baden-Wuerttemberg, by=Bayern, be=Berlin, br=Brandenburg, hb=Bremen, hh=Hamburg, he=Hessen, mv=Mecklenburg-Vorpommern, ni=Niedersachsen, nw=Nordrhein-Westfalen, rp=Rheinland-Pfalz, sl=Saarland, sn=Sachsen, st=Sachsen-Anhalt, sh=Schleswig-Holstein, th=Thueringen. Property types (obj_art): 1=Reihenhaus, 2=Doppelhaushälfte, 3=Einfamilienhaus, 4=Mehrfamilienhaus, 5=ETW 1-2 Zi, 6=ETW 3-4 Zi, 7=ETW 5+ Zi, 8=Gewerbeeinheit, 9=Garage, 10=Kfz-Stellplatz, 13=Wohn-/Geschäftshaus, 14=Gewerbegrundstück, 15=Baugrundstück, 16=Unbebautes Grundstück, 17=Land-/Forstwirtschaft, 18=Sonstiges. Sort (order_by): 2=Termin, 1=Aktualisierung, 3=Aktenzeichen.",
+          "route": "/index.php",
+          "hasTests": true
+        },
+        "getAuctionDetail": {
+          "requestMethod": "GET",
+          "description": "Get full details of a specific foreclosure auction including property description, valuation (Verkehrswert), court info, auction venue, and links to documents (Bekanntmachung, Exposee, Gutachten, photos). Use the zvg_id and land_abk from searchAuctions results.",
+          "route": "/index.php",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
     }
   ],
   "stats": {
@@ -6991,6 +6989,6 @@
     "totalRoutes": 636,
     "schemasWithApiKeys": 74,
     "namespaces": 95,
-    "generatedAt": "2026-02-01T11:06:11.574Z"
+    "generatedAt": "2026-02-01T11:09:43.457Z"
   }
 }

@@ -18,7 +18,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | alternative | fearAndGreed.mjs | 3 | getCurrentFng, getHistoricalFng, analyzeFngTrend |  |  |
 | arbeitsagentur | jobsuche.mjs | 2 | searchJobs, searchJobsApp |  | jobs, employment, germany |
 | autobahn | traffic.mjs | 6 | listRoads, getRoadworks, getWarnings, getClosures, getChargingStations, getWebcams |  | traffic, germany, infrastructure |
-| avalanche-metrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics |
+| avalancheMetrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics |
 | beaconchain | validatorQueue.mjs | 3 | getActivationQueue, getExitQueue, getValidatorStatus |  | ethereum, validators, staking |
 | berlinevents | events.mjs | 4 | markets_festivals, street_festivals, christmas_markets, police_assemblies |  |  |
 | berlinfunds | funds.mjs | 2 | funding_opportunities, continuing_education |  |  |
@@ -154,7 +154,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | webcareer | job-listings.mjs | 1 | queryJobs | WEB3_CAREER_API_TOKEN | production, jobs, career, crypto |
 | wormholescan | wormholescan.mjs | 7 | getCrossChainActivity, getMoneyFlow, getTopAssetsByVolume, getTopChainPairsByNumTransfers, getTopSymbolsByVolume, getTopCorridors, getKpiList |  | data, api |
 | x402 | ping.mjs | 2 | free_ping, paid_ping |  |  |
-| zvg-portal | auctions.mjs | 2 | searchAuctions, getAuctionDetail |  | real-estate, auction, foreclosure, germany, property |
+| zvgPortal | auctions.mjs | 2 | searchAuctions, getAuctionDetail |  | immobilien, auktionen, justiz |
 | zvgportal | zwangsversteigerungen.mjs | 1 | searchAuctions |  | immobilien, auktionen, justiz |
 
 ---
