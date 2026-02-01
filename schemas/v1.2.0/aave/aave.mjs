@@ -14,7 +14,7 @@ const schema = {
             description: "Returns AAVE reserves data including symbols, liquidity, rates, and timestamps from Ethereum mainnet.",
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/Cd2gEDVeqnjBn1hSeqFMitw8Q1iiyV9FYUZkLNRcL87g",
             parameters: [
-                { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["default(20)", "min(1)", "max(100)"] } }
+                { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(20)"] } }
             ],
             tests: [
                 { _description: "Fetch top 20 AAVE reserves", first: 20 }
@@ -29,7 +29,7 @@ const schema = {
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/Cd2gEDVeqnjBn1hSeqFMitw8Q1iiyV9FYUZkLNRcL87g",
             parameters: [
                 { position: { key: "userAddress", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },
-                { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["default(10)", "min(1)", "max(50)"] } }
+                { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(50)", "default(10)"] } }
             ],
             tests: [
                 { _description: "Get user reserves data", userAddress: "0x1234567890abcdef1234567890abcdef12345678", first: 10 }
