@@ -78,6 +78,78 @@
       "routeCount": 3
     },
     {
+      "namespace": "arbeitsagentur",
+      "name": "Arbeitsagentur Jobsuche",
+      "description": "Search job listings from the German Federal Employment Agency (Bundesagentur fuer Arbeit) public job board API",
+      "tags": [
+        "jobs",
+        "employment",
+        "germany"
+      ],
+      "docs": [
+        "https://jobsuche.api.bund.dev/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "arbeitsagentur/jobsuche.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/arbeitsagentur/jobsuche.mjs",
+      "routes": {
+        "searchJobs": {
+          "requestMethod": "GET",
+          "description": "Search for job listings with filters for keywords, location, job type, and working hours",
+          "route": "/pc/v4/jobs",
+          "hasTests": true
+        },
+        "searchJobsApp": {
+          "requestMethod": "GET",
+          "description": "Search for job listings via the app-optimized endpoint with the same filters",
+          "route": "/pc/v4/app/jobs",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
+      "namespace": "beaconchain",
+      "name": "Ethereum Validator Queue API",
+      "description": "Exposes real-time queue stats and validator information from the Beaconcha.in Ethereum API.",
+      "tags": [
+        "ethereum",
+        "validators",
+        "staking"
+      ],
+      "docs": [
+        "https://beaconcha.in/api/v1/docs"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "beaconchain/validatorQueue.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/beaconchain/validatorQueue.mjs",
+      "routes": {
+        "getActivationQueue": {
+          "requestMethod": "GET",
+          "description": "Fetches current Ethereum validator activation queue statistics.",
+          "route": "/validators/queue",
+          "hasTests": true
+        },
+        "getExitQueue": {
+          "requestMethod": "GET",
+          "description": "Fetches current Ethereum validator exit queue statistics.",
+          "route": "/validators/queue",
+          "hasTests": true
+        },
+        "getValidatorStatus": {
+          "requestMethod": "GET",
+          "description": "Fetches validator status details by public key.",
+          "route": "/validator/:pubkey",
+          "hasTests": true
+        }
+      },
+      "routeCount": 3
+    },
+    {
       "namespace": "berlinevents",
       "name": "Berlin Events API",
       "description": "Access to Berlin city events data including markets, festivals, and public assemblies",
@@ -334,6 +406,39 @@
         }
       },
       "routeCount": 6
+    },
+    {
+      "namespace": "blockchaininfo",
+      "name": "Bitcoin UTXO Analytics",
+      "description": "Provides insights into Bitcoin UTXOs and block statistics using blockchain.info endpoints.",
+      "tags": [
+        "bitcoin",
+        "blockchain",
+        "utxo"
+      ],
+      "docs": [
+        "https://www.blockchain.com/api/blockchain_api"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "blockchain-info/utxoAndBlocks.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/blockchain-info/utxoAndBlocks.mjs",
+      "routes": {
+        "getUTXO": {
+          "requestMethod": "GET",
+          "description": "Fetch UTXO summary for a Bitcoin address.",
+          "route": "/unspent",
+          "hasTests": true
+        },
+        "getBlockStats": {
+          "requestMethod": "GET",
+          "description": "Fetch block statistics for a given block height.",
+          "route": "/block-height/:block_height",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
     },
     {
       "namespace": "blocknative",
@@ -1537,6 +1642,59 @@
       "routeCount": 1
     },
     {
+      "namespace": "cryptorank",
+      "name": "Cryptorank Funds",
+      "description": "Sortable, filterable access to Cryptorank funds and detailed fund profiles.",
+      "tags": [
+        "funds",
+        "investors",
+        "analytics"
+      ],
+      "docs": [
+        "https://api.cryptorank.io"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "CRYPTORANK_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "cryptorank/funds.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/cryptorank/funds.mjs",
+      "routes": {
+        "searchFunds": {
+          "requestMethod": "GET",
+          "description": "Fetch a sortable and filterable list of funds and investors with key metrics.",
+          "route": "/funds",
+          "hasTests": true
+        },
+        "getAllFunds": {
+          "requestMethod": "GET",
+          "description": "Fetch the complete map/list of investors and funds.",
+          "route": "/funds/map",
+          "hasTests": true
+        },
+        "getFundBasic": {
+          "requestMethod": "GET",
+          "description": "Fetch basic metrics for a specific fund by ID.",
+          "route": "/funds/:fund_id",
+          "hasTests": true
+        },
+        "getFundDetail": {
+          "requestMethod": "GET",
+          "description": "Fetch comprehensive fund profile, investments, rounds, and metadata by ID.",
+          "route": "/funds/:fund_id/full-metadata",
+          "hasTests": true
+        },
+        "getFundTeam": {
+          "requestMethod": "GET",
+          "description": "Fetch detailed team information for a specific fund by ID.",
+          "route": "/funds/:fund_id/team",
+          "hasTests": true
+        }
+      },
+      "routeCount": 5
+    },
+    {
       "namespace": "cryptowizards",
       "name": "CryptoWizards Analytics API",
       "description": "Statistical finance endpoints for backtesting, correlation, cointegration, and copula analysis using real market data.",
@@ -1683,6 +1841,69 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "dexpaprika",
+      "name": "DexPaprika DeFi Prices",
+      "description": "Query decentralized exchange data including token prices, pools, liquidity, and transactions via dexpaprika.com",
+      "tags": [
+        "defi",
+        "prices",
+        "liquidity"
+      ],
+      "docs": [
+        "https://api.dexpaprika.com/docs"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "dexpaprika/defiPrices.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/dexpaprika/defiPrices.mjs",
+      "routes": {
+        "getNetworks": {
+          "requestMethod": "GET",
+          "description": "Get all supported blockchain networks",
+          "route": "/networks",
+          "hasTests": true
+        },
+        "getToken": {
+          "requestMethod": "GET",
+          "description": "Get detailed token information on a specific network",
+          "route": "/networks/:network_id/tokens/:token_address",
+          "hasTests": true
+        },
+        "getMultiPrices": {
+          "requestMethod": "GET",
+          "description": "Get prices for multiple tokens on a network",
+          "route": "/networks/:network_id/multi/prices",
+          "hasTests": true
+        },
+        "getPool": {
+          "requestMethod": "GET",
+          "description": "Get detailed pool information on a specific network",
+          "route": "/networks/:network_id/pools/:pool_address",
+          "hasTests": true
+        },
+        "getTokenPools": {
+          "requestMethod": "GET",
+          "description": "Get all pools for a specific token on a network",
+          "route": "/networks/:network_id/tokens/:token_address/pools",
+          "hasTests": true
+        },
+        "getPoolTransactions": {
+          "requestMethod": "GET",
+          "description": "Get recent transactions for a specific pool",
+          "route": "/networks/:network_id/pools/:pool_address/transactions",
+          "hasTests": true
+        },
+        "searchTokens": {
+          "requestMethod": "GET",
+          "description": "Search for tokens across all networks",
+          "route": "/search",
+          "hasTests": true
+        }
+      },
+      "routeCount": 7
     },
     {
       "namespace": "dexscreener",
@@ -2205,6 +2426,47 @@
       "routeCount": 11
     },
     {
+      "namespace": "geoapify",
+      "name": "Geoapify Geocoding",
+      "description": "Forward geocoding, reverse geocoding, and address autocomplete via geoapify.com",
+      "tags": [
+        "geocoding",
+        "maps",
+        "places"
+      ],
+      "docs": [
+        "https://apidocs.geoapify.com/docs/geocoding/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "GEOAPIFY_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "geoapify/geocoding.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/geoapify/geocoding.mjs",
+      "routes": {
+        "forwardGeocode": {
+          "requestMethod": "GET",
+          "description": "Convert an address or place name into geographic coordinates",
+          "route": "/v1/geocode/search",
+          "hasTests": true
+        },
+        "reverseGeocode": {
+          "requestMethod": "GET",
+          "description": "Convert geographic coordinates into an address",
+          "route": "/v1/geocode/reverse",
+          "hasTests": true
+        },
+        "autocomplete": {
+          "requestMethod": "GET",
+          "description": "Get address suggestions as you type for autocomplete functionality",
+          "route": "/v1/geocode/autocomplete",
+          "hasTests": true
+        }
+      },
+      "routeCount": 3
+    },
+    {
       "namespace": "goldskyLilNouns",
       "name": "Lil Nouns Subgraph",
       "description": "Fetches proposal data from the Lil Nouns subgraph hosted on Goldsky.",
@@ -2325,6 +2587,33 @@
         }
       },
       "routeCount": 3
+    },
+    {
+      "namespace": "hnrss",
+      "name": "Hacker News JSON Feeds",
+      "description": "Access Hacker News content via realtime JSON feeds: new posts, comments, jobs, replies, favorites, and more.",
+      "tags": [
+        "news",
+        "hackernews",
+        "feeds"
+      ],
+      "docs": [
+        "https://hnrss.org"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "hnrss/jsonFeeds.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/hnrss/jsonFeeds.mjs",
+      "routes": {
+        "getFeed": {
+          "requestMethod": "GET",
+          "description": "Retrieves a Hacker News JSON Feed based on feed type and optional filters like query, points, or comment count.",
+          "route": "/:feedPath",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
     },
     {
       "namespace": "honeypot",
@@ -4272,6 +4561,46 @@
       "routeCount": 1
     },
     {
+      "namespace": "overpass",
+      "name": "Overpass OSM Query",
+      "description": "Query OpenStreetMap data using the Overpass API for geographic searches and nearby point-of-interest lookups",
+      "tags": [
+        "openstreetmap",
+        "geodata",
+        "maps"
+      ],
+      "docs": [
+        "https://wiki.openstreetmap.org/wiki/Overpass_API",
+        "https://overpass-turbo.eu/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "overpass/osmQuery.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/overpass/osmQuery.mjs",
+      "routes": {
+        "queryRaw": {
+          "requestMethod": "GET",
+          "description": "Execute a raw OverpassQL query against OpenStreetMap data",
+          "route": "/interpreter",
+          "hasTests": true
+        },
+        "findNearby": {
+          "requestMethod": "GET",
+          "description": "Find nearby points of interest by coordinates, radius, and amenity type",
+          "route": "/interpreter",
+          "hasTests": true
+        },
+        "status": {
+          "requestMethod": "GET",
+          "description": "Get the current status of the Overpass API server",
+          "route": "/status",
+          "hasTests": true
+        }
+      },
+      "routeCount": 3
+    },
+    {
       "namespace": "passportOnchain",
       "name": "Passport On-Chain Data API",
       "description": "Access Passport scores, credentials, and attestations directly from smart contracts on Ethereum and Arbitrum",
@@ -4410,6 +4739,45 @@
     {
       "namespace": "polymarket",
       "name": "Polymarket Predictions",
+      "description": "FlowMCP schema for Polymarket's public Gamma API: search events, list events, and list markets with readable, table-like summaries.",
+      "tags": [
+        "predictions",
+        "markets",
+        "events"
+      ],
+      "docs": [
+        "https://gamma-api.polymarket.com"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "polymarket/gammaApi.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/polymarket/gammaApi.mjs",
+      "routes": {
+        "searchEvents": {
+          "requestMethod": "GET",
+          "description": "Search for events. Mirrors /public-search with rich post-formatting of results.",
+          "route": "/public-search",
+          "hasTests": true
+        },
+        "getEvents": {
+          "requestMethod": "GET",
+          "description": "List events with embedded markets. Mirrors /events and formats each event with a markets table.",
+          "route": "/events",
+          "hasTests": true
+        },
+        "getMarkets": {
+          "requestMethod": "GET",
+          "description": "List markets. Mirrors /markets and returns an ASCII table.",
+          "route": "/markets",
+          "hasTests": true
+        }
+      },
+      "routeCount": 3
+    },
+    {
+      "namespace": "polymarket",
+      "name": "Polymarket Predictions",
       "description": "Access prediction market data from Polymarket via CLOB API",
       "tags": [],
       "docs": [],
@@ -4532,6 +4900,63 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "rugcheck",
+      "name": "Rugcheck Token Safety",
+      "description": "Check Solana token safety scores, risk reports, votes, and trending tokens via rugcheck.xyz",
+      "tags": [
+        "solana",
+        "security",
+        "tokens"
+      ],
+      "docs": [
+        "https://api.rugcheck.xyz/swagger/index.html"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "rugcheck/tokenSafety.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/rugcheck/tokenSafety.mjs",
+      "routes": {
+        "getTokenReport": {
+          "requestMethod": "GET",
+          "description": "Get a summarized safety report for a Solana token by its mint address",
+          "route": "/v1/tokens/:mint/report/summary",
+          "hasTests": true
+        },
+        "getTokenVotes": {
+          "requestMethod": "GET",
+          "description": "Get community votes for a Solana token",
+          "route": "/v1/tokens/:mint/votes",
+          "hasTests": true
+        },
+        "getRecentTokens": {
+          "requestMethod": "GET",
+          "description": "Get recently analyzed tokens",
+          "route": "/v1/stats/recent",
+          "hasTests": true
+        },
+        "getTrendingTokens": {
+          "requestMethod": "GET",
+          "description": "Get currently trending tokens on Solana",
+          "route": "/v1/stats/trending",
+          "hasTests": true
+        },
+        "getNewTokens": {
+          "requestMethod": "GET",
+          "description": "Get newly created tokens on Solana",
+          "route": "/v1/stats/new_tokens",
+          "hasTests": true
+        },
+        "getVerifiedTokens": {
+          "requestMethod": "GET",
+          "description": "Get verified tokens on Solana",
+          "route": "/v1/stats/verified",
+          "hasTests": true
+        }
+      },
+      "routeCount": 6
     },
     {
       "namespace": "santiment",
@@ -5442,6 +5867,41 @@
       "routeCount": 2
     },
     {
+      "namespace": "talentprotocol",
+      "name": "Talent Protocol - Advanced Profile Search",
+      "description": "Search Profiles with rich filters, sorting, and pagination (page-based or point-in-time).",
+      "tags": [
+        "identity",
+        "talent",
+        "profiles"
+      ],
+      "docs": [
+        "https://api.talentprotocol.com"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "TALENT_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "talent-protocol/advancedSearch.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/talent-protocol/advancedSearch.mjs",
+      "routes": {
+        "searchAdvancedProfiles": {
+          "requestMethod": "GET",
+          "description": "Get profiles that match input query and sort specification.",
+          "route": "/search/advanced/profiles",
+          "hasTests": true
+        },
+        "getDefaultFields": {
+          "requestMethod": "GET",
+          "description": "Returns the fields that are allowed in customQuery for profiles (paying API keys only).",
+          "route": "/search/advanced/metadata/fields/profiles/default",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
       "namespace": "thegraph",
       "name": "UniswapPools",
       "description": "Fetches recently created Uniswap V3 trading pools across multiple blockchains.",
@@ -5717,13 +6177,40 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "zvgportal",
+      "name": "ZVG Portal Zwangsversteigerungen",
+      "description": "Search German foreclosure auctions (Zwangsversteigerungen) from the official ZVG portal of German courts",
+      "tags": [
+        "immobilien",
+        "auktionen",
+        "justiz"
+      ],
+      "docs": [
+        "https://www.zvg-portal.de"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "zvg-portal/zwangsversteigerungen.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/zvg-portal/zwangsversteigerungen.mjs",
+      "routes": {
+        "searchAuctions": {
+          "requestMethod": "POST",
+          "description": "Search for foreclosure auctions by federal state, court, property type, location, and date range",
+          "route": "/index.php?button=Suchen",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
     }
   ],
   "stats": {
-    "totalSchemas": 128,
-    "totalRoutes": 529,
-    "schemasWithApiKeys": 66,
-    "namespaces": 68,
-    "generatedAt": "2026-02-01T03:35:10.295Z"
+    "totalSchemas": 140,
+    "totalRoutes": 567,
+    "schemasWithApiKeys": 69,
+    "namespaces": 79,
+    "generatedAt": "2026-02-01T04:59:01.689Z"
   }
 }
