@@ -17,6 +17,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | aave | aave.mjs | 3 | getReserves, getUserData, getProtocolData | THEGRAPH_API_KEY | defi, lending, protocol |
 | alternative | fearAndGreed.mjs | 3 | getCurrentFng, getHistoricalFng, analyzeFngTrend |  |  |
 | arbeitsagentur | jobsuche.mjs | 2 | searchJobs, searchJobsApp |  | jobs, employment, germany |
+| autobahn | traffic.mjs | 6 | listRoads, getRoadworks, getWarnings, getClosures, getChargingStations, getWebcams |  | traffic, germany, infrastructure |
+| avalanche-metrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics |
 | beaconchain | validatorQueue.mjs | 3 | getActivationQueue, getExitQueue, getValidatorStatus |  | ethereum, validators, staking |
 | berlinevents | events.mjs | 4 | markets_festivals, street_festivals, christmas_markets, police_assemblies |  |  |
 | berlinfunds | funds.mjs | 2 | funding_opportunities, continuing_education |  |  |
@@ -31,6 +33,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | bscscan | getContractBinance.mjs | 2 | getContractABI, getContractSourceCode | BSCSCAN_API_KEY | test |
 | chainlist | chainlist.mjs | 5 | getChainById, getChainsByKeyword, getExplorerURLs, getRPCEndpoints, getWebsocketEndpoints |  | production, blockchain, rpc, network |
 | chartImg | tradingview-charts.mjs | 1 | getAdvancedChart | CHART_IMG_API_KEY | charts, visualization, trading |
+| coinbaseBazaar | discovery.mjs | 1 | listResources |  | payments, marketplace, crypto |
 | coincap | assets.mjs | 4 | listAssets, singleAsset, assetMarkets, assetHistory | COINCAP_API_KEY |  |
 | coincap | exchanges.mjs | 2 | listExchanges, getExchangeById | COINCAP_API_KEY |  |
 | coincap | markets.mjs | 1 | listMarkets | COINCAP_API_KEY |  |
@@ -52,6 +55,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | cryptopanic | getNews.mjs | 1 | getCryptoCryptopanicNews | CRYPTOPANIC_API_KEY |  |
 | cryptorank | funds.mjs | 5 | searchFunds, getAllFunds, getFundBasic, getFundDetail, getFundTeam | CRYPTORANK_API_KEY | funds, investors, analytics |
 | cryptowizards | analytics.mjs | 6 | runBacktest, checkCointegration, getCorrelations, analyzeCopula, analyzeSpread, analyzeZScores | CRYPTOWIZARDS_API_KEY | production, analytics, trading, backtest |
+| debank | portfolio.mjs | 6 | getTotalBalance, getUsedChains, getTokenList, getProtocolList, getAllProtocols, getTokenInfo | DEBANK_ACCESS_KEY | defi, portfolio, wallet, crypto |
 | defillama | api.mjs | 3 | getProtocols, getProtocolTvl, getChainTvl |  |  |
 | defillama | coins.mjs | 1 | getTokenPrices |  |  |
 | defillama | yields.mjs | 2 | getPools, getPoolTvl |  |  |
@@ -70,9 +74,11 @@ Below is a list of all available schemas in this library, grouped by provider an
 | etherscan | getGaspriceMultichain.mjs | 2 | getGasOracle, estimateGasCost | ETHERSCAN_API_KEY |  |
 | ethscriptions | ethscriptions-api.mjs | 11 | listEthscriptions, getEthscription, getEthscriptionData, getEthscriptionAttachment, checkEthscriptionExists, checkMultipleEthscriptionsExistence, listTransfers, listTokens, getTokenDetails, getTokenHistoricalState, getIndexerStatus |  | nft, ethereum, inscriptions |
 | geoapify | geocoding.mjs | 3 | forwardGeocode, reverseGeocode, autocomplete | GEOAPIFY_API_KEY | geocoding, maps, places |
+| goldrush | streaming.mjs | 2 | searchToken, getWalletPnL | GOLDRUSH_API_KEY | crypto, defi, blockchain, tokens |
 | goldskyNouns | goldsky-nouns.mjs | 4 | getRecentProposals, getCurrentAuctions, getNounDetails, getTopDelegates |  | production, dao, governance, nft |
 | goldskyLilNouns | lil-nouns.mjs | 2 | getProposals, getProposalById |  | production, data, api |
 | goldskyNouns | nouns.mjs | 3 | getCandidateProposals, getActivePendingUpdatableProposers, getLatestAuctions |  | production, dao, governance, nft |
+| govdata | datasets.mjs | 5 | searchDatasets, getDataset, listGroups, listOrganizations, searchTags |  | government, opendata, germany |
 | hnrss | jsonFeeds.mjs | 1 | getFeed |  | news, hackernews, feeds |
 | honeypot | honeypot.mjs | 1 | check |  | production, security, token, validation |
 | jupiter | jupiter-all.mjs | 7 | getTokenPrice, getTokenInfo, getTokensInMarket, getAllTradableTokens, getTaggedTokens, getNewTokens, getAllTokens |  |  |
@@ -87,6 +93,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | luksoNetwork | stats.mjs | 3 | getStats, getTransactionChart, getMarketChart |  |  |
 | luksoNetwork | tokens.mjs | 5 | listTokens, getTokenByAddress, getTokenTransfersByAddress, getTokenHolders, getTokenCounters |  |  |
 | luksoNetwork | transactions.mjs | 7 | getTransactions, getTransactionByHash, getTokenTransfersByTransactionHash, getInternalTransactions, getLogs, getRawTrace, getStateChanges |  |  |
+| mcpRegistry | servers.mjs | 2 | listServers, searchServers |  | mcp, registry, ai, tools |
 | medium | rss-feeds.mjs | 4 | getTagFeed, getUserFeed, getPublicationFeed, getTopicFeed |  | content, social, feeds |
 | memoryLol | twitterNameChanges.mjs | 1 | queryUsernameChanges |  |  |
 | minascanDevnet | mina-devnet.mjs | 2 | getMinaDevnetSchema, getMinaDevnetQuery |  | production, blockchain, explorer, mina |
@@ -101,6 +108,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | moralis | walletApi.mjs | 11 | /wallets/:address/chains, /:address/balance, /wallets/:address/history, /wallets/:address/net-worth, /wallets/:address/profitability/summary, /wallets/:address/profitability, /wallets/:address/stats, /resolve/:address/domain, /resolve/:address/reverse, /resolve/:domain, /resolve/ens/:domain | MORALIS_API_KEY |  |
 | newsapi | news.mjs | 3 | getTopHeadlines, getEverything, getSources | NEWSAPI_API_KEY | news, media, content |
 | newsdata | getNews.mjs | 2 | getLatestNewsdata, getCryptoNewsdata | NEWSDATA_API_KEY |  |
+| nina | warnings.mjs | 4 | getDwdWarnings, getMowasWarnings, getBiwappWarnings, getKatwarnWarnings |  | warnings, germany, safety |
+| oneInch | swap.mjs | 5 | getQuote, getSwap, getTokens, getApprove, getAllowance | ONEINCH_API_KEY | defi, swap, ethereum, trading |
 | overpass | osmQuery.mjs | 3 | queryRaw, findNearby, status |  | openstreetmap, geodata, maps |
 | pinata | read.mjs | 2 | free_read_example, free_read_cid |  |  |
 | poap | graphql.mjs | 5 | getTypename, getSchemaDefinition, getPredefinedQueryList, executePrefinedQuery, querySubgraph |  | production, graphql, poap |
@@ -109,6 +118,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | polymarket | searchBySlug.mjs | 1 | searchBySlug |  |  |
 | redditScanner | getTokenMentions.mjs | 2 | getTokenMentions, getHotMemes |  |  |
 | rugcheck | tokenSafety.mjs | 6 | getTokenReport, getTokenVotes, getRecentTokens, getTrendingTokens, getNewTokens, getVerifiedTokens |  | solana, security, tokens |
+| safeGlobal | transaction-service.mjs | 4 | getSafeInfo, getSafeBalances, getMultisigTransactions, getIncomingTransfers |  | ethereum, multisig, defi, wallet |
 | santiment | schema.mjs | 5 | get_sentiment_balance, get_social_volume, alert_social_shift, get_trending_words, get_social_dominance | SANTIMENT_API_KEY |  |
 | simdune | balancesEVM.mjs | 1 | getBalancesEVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio |
 | simdune | balancesSVM.mjs | 1 | getBalancesSVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio, svm, solana |
@@ -128,10 +138,15 @@ Below is a list of all available schemas in this library, grouped by provider an
 | solanatracker | --walletEndpoints.mjs | 4 | walletInformation, walletTokensBasic, walletTokensPaged, walletTrades | SOLANA_TRACKER_API_KEY |  |
 | solscan | getChainInfo.mjs | 1 | chainInfo | SOLSCAN_API_KEY |  |
 | solsniffer | analysis.mjs | 1 | analysisToken | SOLSNIFFER_API_KEY |  |
+| sourcify | verification.mjs | 5 | getVerificationStatus, checkByAddresses, getSourceFileTree, getSourceFiles, getSupportedChains |  | ethereum, verification, smartcontracts |
 | spaceid | spaceid.mjs | 3 | getSupportedChains, getAddress, getName |  | production, domain, identity, blockchain |
 | stolpersteineBerl | memorial-stones.mjs | 5 | getAllStones, searchStones, getStonesByDistrict, getStonesByPerson, getStonesByLocation |  | memorial, history, berlin |
 | swaggerhub | api-registry.mjs | 2 | searchApis, listApiVersions |  | production, api, documentation, registry |
+| taapi | indicators.mjs | 10 | getRSI, getMACD, getBollingerBands, getEMA, getSMA, getStochastic, getATR, getStochRSI, getVWAP, getIchimoku | TAAPI_SECRET | crypto, trading, indicators |
+| tagesschau | news.mjs | 4 | getHomepage, getNews, searchArticles, getChannels |  | news, germany, media |
 | talentprotocol | advancedSearch.mjs | 2 | searchAdvancedProfiles, getDefaultFields | TALENT_API_KEY | identity, talent, profiles |
+| tally | governance.mjs | 4 | getChains, getGovernors, getProposals, getDelegates | TALLY_API_KEY | governance, dao, proposals, voting |
+| tenderly | public-contracts.mjs | 1 | getPublicContract |  | ethereum, smartcontracts, debugging |
 | thegraph | getNewUniswapPools.mjs | 1 | getNewPools | THEGRAPH_API_KEY |  |
 | thegraph | getSchema.mjs | 2 | getSubgraphSchema, querySubgraph | THEGRAPH_API_KEY |  |
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN |  |
@@ -139,6 +154,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | webcareer | job-listings.mjs | 1 | queryJobs | WEB3_CAREER_API_TOKEN | production, jobs, career, crypto |
 | wormholescan | wormholescan.mjs | 7 | getCrossChainActivity, getMoneyFlow, getTopAssetsByVolume, getTopChainPairsByNumTransfers, getTopSymbolsByVolume, getTopCorridors, getKpiList |  | data, api |
 | x402 | ping.mjs | 2 | free_ping, paid_ping |  |  |
+| zvg-portal | auctions.mjs | 2 | searchAuctions, getAuctionDetail |  | real-estate, auction, foreclosure, germany, property |
 | zvgportal | zwangsversteigerungen.mjs | 1 | searchAuctions |  | immobilien, auktionen, justiz |
 
 ---
@@ -219,18 +235,23 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "CRYPTOPANIC_API_KEY": "",
                 "CRYPTORANK_API_KEY": "",
                 "CRYPTOWIZARDS_API_KEY": "",
+                "DEBANK_ACCESS_KEY": "",
                 "DUNE_API_KEY": "",
                 "DUNE_SIM_API_KEY": "",
                 "ETHERSCAN_API_KEY": "",
                 "GEOAPIFY_API_KEY": "",
+                "GOLDRUSH_API_KEY": "",
                 "MORALIS_API_KEY": "",
                 "NEWSAPI_API_KEY": "",
                 "NEWSDATA_API_KEY": "",
+                "ONEINCH_API_KEY": "",
                 "SANTIMENT_API_KEY": "",
                 "SOLANA_TRACKER_API_KEY": "",
                 "SOLSCAN_API_KEY": "",
                 "SOLSNIFFER_API_KEY": "",
+                "TAAPI_SECRET": "",
                 "TALENT_API_KEY": "",
+                "TALLY_API_KEY": "",
                 "THEGRAPH_API_KEY": "",
                 "TWITTER_BEARER_TOKEN": "",
                 "WEB3_CAREER_API_TOKEN": ""

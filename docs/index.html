@@ -344,19 +344,19 @@
             
             <div class="stats-bar">
                 <div class="stat-item">
-                    <div class="stat-number">140</div>
+                    <div class="stat-number">156</div>
                     <div class="stat-label">Schemas</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">567</div>
+                    <div class="stat-number">636</div>
                     <div class="stat-label">Routes</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">79</div>
+                    <div class="stat-number">95</div>
                     <div class="stat-label">Namespaces</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">69</div>
+                    <div class="stat-number">74</div>
                     <div class="stat-label">Require API Key</div>
                 </div>
             </div>
@@ -377,7 +377,7 @@
     </div>
 
     <footer>
-        <p>Generated on 2/1/2026, 5:18:20 AM</p>
+        <p>Generated on 2/1/2026, 11:06:11 AM</p>
         <p>FlowMCP Schema Documentation © 2026</p>
     </footer>
 
@@ -494,6 +494,134 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "autobahn",
+      "name": "Autobahn App API",
+      "description": "Real-time traffic data for German motorways including roadworks, warnings, closures, webcams, and electric charging stations",
+      "tags": [
+        "traffic",
+        "germany",
+        "infrastructure"
+      ],
+      "docs": [
+        "https://autobahn.api.bund.dev/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "autobahn/traffic.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/autobahn/traffic.mjs",
+      "routes": {
+        "listRoads": {
+          "requestMethod": "GET",
+          "description": "List all available German motorway identifiers (A1, A2, etc.)",
+          "route": "/",
+          "hasTests": true
+        },
+        "getRoadworks": {
+          "requestMethod": "GET",
+          "description": "Get current roadworks and construction sites for a specific motorway",
+          "route": "/:roadId/services/roadworks",
+          "hasTests": true
+        },
+        "getWarnings": {
+          "requestMethod": "GET",
+          "description": "Get current traffic warnings for a specific motorway",
+          "route": "/:roadId/services/warning",
+          "hasTests": true
+        },
+        "getClosures": {
+          "requestMethod": "GET",
+          "description": "Get current road closures for a specific motorway",
+          "route": "/:roadId/services/closure",
+          "hasTests": true
+        },
+        "getChargingStations": {
+          "requestMethod": "GET",
+          "description": "Get electric vehicle charging stations along a specific motorway",
+          "route": "/:roadId/services/electric_charging_station",
+          "hasTests": true
+        },
+        "getWebcams": {
+          "requestMethod": "GET",
+          "description": "Get traffic webcams along a specific motorway",
+          "route": "/:roadId/services/webcam",
+          "hasTests": true
+        }
+      },
+      "routeCount": 6
+    },
+    {
+      "namespace": "avalanche-metrics",
+      "name": "Avalanche Metrics API",
+      "description": "Avalanche Metrics API for on-chain analytics including staking, throughput, gas, TPS, and validator metrics",
+      "tags": [
+        "blockchain",
+        "avalanche",
+        "metrics",
+        "staking",
+        "analytics"
+      ],
+      "docs": [
+        "https://metrics.avax.network"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "avalanche/metrics-api.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/avalanche/metrics-api.mjs",
+      "routes": {
+        "listChains": {
+          "requestMethod": "GET",
+          "description": "Get a list of all supported EVM blockchains with their chain IDs.",
+          "route": "/chains",
+          "hasTests": true
+        },
+        "getChainInfo": {
+          "requestMethod": "GET",
+          "description": "Get chain information for a specific supported blockchain.",
+          "route": "/chains/:chainId",
+          "hasTests": true
+        },
+        "getChainMetrics": {
+          "requestMethod": "GET",
+          "description": "Get metrics for an EVM chain (gasUsed, txCount, activeAddresses, tps, gasPrice, deployedContracts, cumulativeAddresses, etc.).",
+          "route": "/chains/:chainId/metrics/:metric",
+          "hasTests": true
+        },
+        "getRollingWindowMetrics": {
+          "requestMethod": "GET",
+          "description": "Get rolling window metrics for an EVM chain for short-term and long-term trend analysis.",
+          "route": "/chains/:chainId/rollingWindowMetrics/:metric",
+          "hasTests": true
+        },
+        "getStakingMetrics": {
+          "requestMethod": "GET",
+          "description": "Get staking metrics for a given network/subnet including total stake weight and delegation data.",
+          "route": "/networks/:network/metrics/:metric",
+          "hasTests": true
+        },
+        "getValidatorMetrics": {
+          "requestMethod": "GET",
+          "description": "Get metrics for all L1 validators including uptime, stake weight, and delegation info.",
+          "route": "/validators/metrics/:metric",
+          "hasTests": true
+        },
+        "getICMSummary": {
+          "requestMethod": "GET",
+          "description": "Get Interchain Messaging (ICM) summary metrics including message count and volume.",
+          "route": "/icm/summary",
+          "hasTests": true
+        },
+        "getICMTimeseries": {
+          "requestMethod": "GET",
+          "description": "Get Interchain Messaging (ICM) timeseries metrics for cross-chain message analytics.",
+          "route": "/icm/timeseries",
+          "hasTests": true
+        }
+      },
+      "routeCount": 8
     },
     {
       "namespace": "beaconchain",
@@ -1215,6 +1343,34 @@
           "requestMethod": "POST",
           "description": "Capture a high-quality screenshot of a TradingView advanced chart with specified symbol and settings",
           "route": "/v2/tradingview/advanced-chart",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
+      "namespace": "coinbaseBazaar",
+      "name": "Coinbase Bazaar x402 Discovery",
+      "description": "Discover x402-compatible paid resources and services available on the Coinbase Bazaar marketplace",
+      "tags": [
+        "payments",
+        "marketplace",
+        "crypto"
+      ],
+      "docs": [
+        "https://docs.cdp.coinbase.com/x402/bazaar",
+        "https://www.x402.org/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "coinbase-bazaar/discovery.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/coinbase-bazaar/discovery.mjs",
+      "routes": {
+        "listResources": {
+          "requestMethod": "GET",
+          "description": "List all x402-compatible paid resources registered on Coinbase Bazaar",
+          "route": "/resources",
           "hasTests": true
         }
       },
@@ -2141,6 +2297,67 @@
       "routeCount": 6
     },
     {
+      "namespace": "debank",
+      "name": "DeBank Portfolio API",
+      "description": "Track DeFi portfolio data including token balances, protocol positions and total balance across all major chains via DeBank",
+      "tags": [
+        "defi",
+        "portfolio",
+        "wallet",
+        "crypto"
+      ],
+      "docs": [
+        "https://docs.cloud.debank.com/",
+        "https://debank.com/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DEBANK_ACCESS_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "debank/portfolio.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/debank/portfolio.mjs",
+      "routes": {
+        "getTotalBalance": {
+          "requestMethod": "GET",
+          "description": "Get total USD balance of a wallet address across all supported chains",
+          "route": "/user/total_balance",
+          "hasTests": true
+        },
+        "getUsedChains": {
+          "requestMethod": "GET",
+          "description": "Get list of chains that a wallet address has interacted with",
+          "route": "/user/used_chain_list",
+          "hasTests": true
+        },
+        "getTokenList": {
+          "requestMethod": "GET",
+          "description": "Get all token balances of a wallet address on a specific chain",
+          "route": "/user/token_list",
+          "hasTests": true
+        },
+        "getProtocolList": {
+          "requestMethod": "GET",
+          "description": "Get DeFi protocol positions and balances for a wallet on a specific chain",
+          "route": "/user/simple_protocol_list",
+          "hasTests": true
+        },
+        "getAllProtocols": {
+          "requestMethod": "GET",
+          "description": "Get all DeFi protocol positions across all chains for a wallet",
+          "route": "/user/all_simple_protocol_list",
+          "hasTests": true
+        },
+        "getTokenInfo": {
+          "requestMethod": "GET",
+          "description": "Get detailed token information including price, logo and market data",
+          "route": "/token",
+          "hasTests": true
+        }
+      },
+      "routeCount": 6
+    },
+    {
       "namespace": "defillama",
       "name": "DeFi Llama MCP",
       "description": "Provides access to DeFi protocol and liquidity data from DeFi Llama",
@@ -2642,13 +2859,13 @@
         "getContractABI": {
           "requestMethod": "GET",
           "description": "Returns the Contract ABI of a verified smart contract.",
-          "route": "/api",
+          "route": "/",
           "hasTests": true
         },
         "getContractSourceCode": {
           "requestMethod": "GET",
           "description": "Returns the Solidity source code of a verified smart contract.",
-          "route": "/api",
+          "route": "/",
           "hasTests": true
         }
       },
@@ -2852,6 +3069,43 @@
       "routeCount": 3
     },
     {
+      "namespace": "goldrush",
+      "name": "GoldRush Streaming API",
+      "description": "Search tokens and query wallet PnL data across multiple chains using the GoldRush (Covalent) Streaming GraphQL API",
+      "tags": [
+        "crypto",
+        "defi",
+        "blockchain",
+        "tokens"
+      ],
+      "docs": [
+        "https://goldrush.dev/docs/overview",
+        "https://goldrush.dev/docs/goldrush-streaming-api/overview"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "GOLDRUSH_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "goldrush/streaming.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/goldrush/streaming.mjs",
+      "routes": {
+        "searchToken": {
+          "requestMethod": "POST",
+          "description": "Search for tokens by name, ticker symbol, or contract address across supported chains",
+          "route": "/streaming/graphql",
+          "hasTests": true
+        },
+        "getWalletPnL": {
+          "requestMethod": "POST",
+          "description": "Get unrealized profit and loss data for a wallet address on a specific chain",
+          "route": "/streaming/graphql",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
       "namespace": "goldskyLilNouns",
       "name": "Lil Nouns Subgraph",
       "description": "Fetches proposal data from the Lil Nouns subgraph hosted on Goldsky.",
@@ -2972,6 +3226,58 @@
         }
       },
       "routeCount": 3
+    },
+    {
+      "namespace": "govdata",
+      "name": "GovData.de Open Data Portal",
+      "description": "Search and explore German open government data (CKAN API) with 175k+ datasets from federal, state, and municipal authorities",
+      "tags": [
+        "government",
+        "opendata",
+        "germany"
+      ],
+      "docs": [
+        "https://www.govdata.de/",
+        "https://docs.ckan.org/en/latest/api/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "govdata-de/datasets.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/govdata-de/datasets.mjs",
+      "routes": {
+        "searchDatasets": {
+          "requestMethod": "GET",
+          "description": "Search datasets by keyword, filter by organization or group",
+          "route": "/package_search",
+          "hasTests": true
+        },
+        "getDataset": {
+          "requestMethod": "GET",
+          "description": "Get full details for a specific dataset by its name or ID",
+          "route": "/package_show",
+          "hasTests": true
+        },
+        "listGroups": {
+          "requestMethod": "GET",
+          "description": "List all thematic groups (categories) with dataset counts",
+          "route": "/group_list",
+          "hasTests": true
+        },
+        "listOrganizations": {
+          "requestMethod": "GET",
+          "description": "List all publishing organizations with dataset counts",
+          "route": "/organization_list",
+          "hasTests": true
+        },
+        "searchTags": {
+          "requestMethod": "GET",
+          "description": "Search for tags matching a query string",
+          "route": "/tag_list",
+          "hasTests": true
+        }
+      },
+      "routeCount": 5
     },
     {
       "namespace": "hnrss",
@@ -4107,6 +4413,41 @@
       "routeCount": 7
     },
     {
+      "namespace": "mcpRegistry",
+      "name": "MCP Server Registry",
+      "description": "Browse and search the official Model Context Protocol server registry to discover available MCP servers",
+      "tags": [
+        "mcp",
+        "registry",
+        "ai",
+        "tools"
+      ],
+      "docs": [
+        "https://registry.modelcontextprotocol.io/",
+        "https://modelcontextprotocol.io/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "mcp-registry/servers.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/mcp-registry/servers.mjs",
+      "routes": {
+        "listServers": {
+          "requestMethod": "GET",
+          "description": "List MCP servers from the official registry with cursor-based pagination",
+          "route": "/servers",
+          "hasTests": true
+        },
+        "searchServers": {
+          "requestMethod": "GET",
+          "description": "Search MCP servers by name or keyword using the registry endpoint",
+          "route": "/servers",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
       "namespace": "medium",
       "name": "Medium RSS Feeds",
       "description": "Access Medium articles and posts via RSS feeds by tag, user, or publication",
@@ -4871,6 +5212,51 @@
       "routeCount": 2
     },
     {
+      "namespace": "nina",
+      "name": "NINA Warn-App API",
+      "description": "German federal warning system (NINA) providing DWD weather warnings, MOWAS civil protection alerts, BIWAPP and KATWARN notifications",
+      "tags": [
+        "warnings",
+        "germany",
+        "safety"
+      ],
+      "docs": [
+        "https://nina.api.bund.dev/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "nina/warnings.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/nina/warnings.mjs",
+      "routes": {
+        "getDwdWarnings": {
+          "requestMethod": "GET",
+          "description": "Get current DWD (Deutscher Wetterdienst) weather warnings across Germany",
+          "route": "/dwd/mapData.json",
+          "hasTests": true
+        },
+        "getMowasWarnings": {
+          "requestMethod": "GET",
+          "description": "Get current MOWAS (Modulares Warnsystem) official civil protection warnings",
+          "route": "/mowas/mapData.json",
+          "hasTests": true
+        },
+        "getBiwappWarnings": {
+          "requestMethod": "GET",
+          "description": "Get current BIWAPP (Buerger Info und Warn App) municipal warnings",
+          "route": "/biwapp/mapData.json",
+          "hasTests": true
+        },
+        "getKatwarnWarnings": {
+          "requestMethod": "GET",
+          "description": "Get current KATWARN alerts for disaster and crisis situations",
+          "route": "/katwarn/mapData.json",
+          "hasTests": true
+        }
+      },
+      "routeCount": 4
+    },
+    {
       "namespace": "ohlcv",
       "name": "Moralis Recursive OHLCV EVM and Ethereum",
       "description": "Recursively fetches OHLCV data from Moralis for EVM token pairs.",
@@ -4944,6 +5330,61 @@
         }
       },
       "routeCount": 1
+    },
+    {
+      "namespace": "oneInch",
+      "name": "1inch Swap API",
+      "description": "Get swap quotes and generate swap transaction data across 13+ EVM chains using the 1inch aggregation protocol",
+      "tags": [
+        "defi",
+        "swap",
+        "ethereum",
+        "trading"
+      ],
+      "docs": [
+        "https://business.1inch.com/portal/documentation/apis/swap/introduction",
+        "https://1inch.io/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "ONEINCH_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "oneinch/swap.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/oneinch/swap.mjs",
+      "routes": {
+        "getQuote": {
+          "requestMethod": "GET",
+          "description": "Get a swap quote with estimated output amount for a token pair on a specific chain",
+          "route": "/:chainId/quote",
+          "hasTests": true
+        },
+        "getSwap": {
+          "requestMethod": "GET",
+          "description": "Generate swap transaction data ready for on-chain execution",
+          "route": "/:chainId/swap",
+          "hasTests": true
+        },
+        "getTokens": {
+          "requestMethod": "GET",
+          "description": "List all tokens available for swapping on a specific chain",
+          "route": "/:chainId/tokens",
+          "hasTests": true
+        },
+        "getApprove": {
+          "requestMethod": "GET",
+          "description": "Get the approve transaction calldata for token allowance to the 1inch router",
+          "route": "/:chainId/approve/transaction",
+          "hasTests": true
+        },
+        "getAllowance": {
+          "requestMethod": "GET",
+          "description": "Check current allowance of a token for the 1inch router",
+          "route": "/:chainId/approve/allowance",
+          "hasTests": true
+        }
+      },
+      "routeCount": 5
     },
     {
       "namespace": "overpass",
@@ -5342,6 +5783,53 @@
         }
       },
       "routeCount": 6
+    },
+    {
+      "namespace": "safeGlobal",
+      "name": "Safe Transaction Service",
+      "description": "Query Gnosis Safe multisig wallets including balances, transactions, owners and modules on Ethereum mainnet",
+      "tags": [
+        "ethereum",
+        "multisig",
+        "defi",
+        "wallet"
+      ],
+      "docs": [
+        "https://docs.safe.global/core-api/transaction-service-overview",
+        "https://safe.global/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "safe-global/transaction-service.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/safe-global/transaction-service.mjs",
+      "routes": {
+        "getSafeInfo": {
+          "requestMethod": "GET",
+          "description": "Get Safe multisig wallet information including owners, threshold, nonce and modules",
+          "route": "/safes/:address/",
+          "hasTests": true
+        },
+        "getSafeBalances": {
+          "requestMethod": "GET",
+          "description": "Get token balances of a Safe multisig wallet including ETH and ERC-20 tokens",
+          "route": "/safes/:address/balances/",
+          "hasTests": true
+        },
+        "getMultisigTransactions": {
+          "requestMethod": "GET",
+          "description": "Get multisig transactions of a Safe wallet with execution status and confirmations",
+          "route": "/safes/:address/multisig-transactions/",
+          "hasTests": true
+        },
+        "getIncomingTransfers": {
+          "requestMethod": "GET",
+          "description": "Get incoming token transfers to a Safe wallet",
+          "route": "/safes/:address/incoming-transfers/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 4
     },
     {
       "namespace": "santiment",
@@ -6124,6 +6612,58 @@
       "routeCount": 1
     },
     {
+      "namespace": "sourcify",
+      "name": "Sourcify Contract Verification",
+      "description": "Verify and lookup Ethereum smart contract source code verification status across multiple chains using Sourcify",
+      "tags": [
+        "ethereum",
+        "verification",
+        "smartcontracts"
+      ],
+      "docs": [
+        "https://docs.sourcify.dev/",
+        "https://sourcify.dev/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "sourcify/verification.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/sourcify/verification.mjs",
+      "routes": {
+        "getVerificationStatus": {
+          "requestMethod": "GET",
+          "description": "Check if a contract is verified on Sourcify and get match type (full or partial)",
+          "route": "/v2/contract/:chainId/:address",
+          "hasTests": true
+        },
+        "checkByAddresses": {
+          "requestMethod": "GET",
+          "description": "Check verification status of a contract address across one or multiple chains",
+          "route": "/check-all-by-addresses",
+          "hasTests": true
+        },
+        "getSourceFileTree": {
+          "requestMethod": "GET",
+          "description": "Get the list of verified source files for a contract",
+          "route": "/files/tree/any/:chainId/:address",
+          "hasTests": true
+        },
+        "getSourceFiles": {
+          "requestMethod": "GET",
+          "description": "Get full source code and metadata of a verified contract",
+          "route": "/files/any/:chainId/:address",
+          "hasTests": true
+        },
+        "getSupportedChains": {
+          "requestMethod": "GET",
+          "description": "Get the list of all chains supported by Sourcify",
+          "route": "/chains",
+          "hasTests": true
+        }
+      },
+      "routeCount": 5
+    },
+    {
       "namespace": "spaceid",
       "name": "SPACE ID Web3 Name API",
       "description": "Resolve crypto addresses and domain names via SPACE ID's on-chain resolution API.",
@@ -6252,6 +6792,135 @@
       "routeCount": 2
     },
     {
+      "namespace": "taapi",
+      "name": "TAAPI.IO Technical Indicators",
+      "description": "Access 208+ technical analysis indicators (RSI, MACD, Bollinger Bands, EMA, SMA and more) via the TAAPI.IO REST API",
+      "tags": [
+        "crypto",
+        "trading",
+        "indicators"
+      ],
+      "docs": [
+        "https://taapi.io/indicators/",
+        "https://taapi.io/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "TAAPI_SECRET"
+      ],
+      "hasApiKey": true,
+      "path": "taapi/indicators.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/taapi/indicators.mjs",
+      "routes": {
+        "getRSI": {
+          "requestMethod": "GET",
+          "description": "Get the Relative Strength Index (RSI) for a trading pair",
+          "route": "/rsi",
+          "hasTests": true
+        },
+        "getMACD": {
+          "requestMethod": "GET",
+          "description": "Get the Moving Average Convergence Divergence (MACD) for a trading pair",
+          "route": "/macd",
+          "hasTests": true
+        },
+        "getBollingerBands": {
+          "requestMethod": "GET",
+          "description": "Get Bollinger Bands (upper, middle, lower) for a trading pair",
+          "route": "/bbands",
+          "hasTests": true
+        },
+        "getEMA": {
+          "requestMethod": "GET",
+          "description": "Get the Exponential Moving Average (EMA) for a trading pair",
+          "route": "/ema",
+          "hasTests": true
+        },
+        "getSMA": {
+          "requestMethod": "GET",
+          "description": "Get the Simple Moving Average (SMA) for a trading pair",
+          "route": "/sma",
+          "hasTests": true
+        },
+        "getStochastic": {
+          "requestMethod": "GET",
+          "description": "Get Stochastic oscillator (K and D values) for a trading pair",
+          "route": "/stoch",
+          "hasTests": true
+        },
+        "getATR": {
+          "requestMethod": "GET",
+          "description": "Get the Average True Range (ATR) volatility indicator for a trading pair",
+          "route": "/atr",
+          "hasTests": true
+        },
+        "getStochRSI": {
+          "requestMethod": "GET",
+          "description": "Get the Stochastic RSI for a trading pair",
+          "route": "/stochrsi",
+          "hasTests": true
+        },
+        "getVWAP": {
+          "requestMethod": "GET",
+          "description": "Get the Volume Weighted Average Price (VWAP) for a trading pair",
+          "route": "/vwap",
+          "hasTests": true
+        },
+        "getIchimoku": {
+          "requestMethod": "GET",
+          "description": "Get Ichimoku Cloud indicator values for a trading pair",
+          "route": "/ichimoku",
+          "hasTests": true
+        }
+      },
+      "routeCount": 10
+    },
+    {
+      "namespace": "tagesschau",
+      "name": "Tagesschau API",
+      "description": "Access German public broadcasting news from ARD tagesschau including headlines, search, and live channels",
+      "tags": [
+        "news",
+        "germany",
+        "media"
+      ],
+      "docs": [
+        "https://www.tagesschau.de/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "tagesschau/news.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/tagesschau/news.mjs",
+      "routes": {
+        "getHomepage": {
+          "requestMethod": "GET",
+          "description": "Get current homepage news with top stories and regional coverage",
+          "route": "/homepage",
+          "hasTests": true
+        },
+        "getNews": {
+          "requestMethod": "GET",
+          "description": "Get news articles filtered by region or editorial section (ressort)",
+          "route": "/news",
+          "hasTests": true
+        },
+        "searchArticles": {
+          "requestMethod": "GET",
+          "description": "Search tagesschau articles by keyword",
+          "route": "/search",
+          "hasTests": true
+        },
+        "getChannels": {
+          "requestMethod": "GET",
+          "description": "Get available live streaming channels (tagesschau24, tagesschau, tagesthemen)",
+          "route": "/channels",
+          "hasTests": true
+        }
+      },
+      "routeCount": 4
+    },
+    {
       "namespace": "talentprotocol",
       "name": "Talent Protocol - Advanced Profile Search",
       "description": "Search Profiles with rich filters, sorting, and pagination (page-based or point-in-time).",
@@ -6285,6 +6954,82 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "tally",
+      "name": "Tally Governance API",
+      "description": "Tally DAO governance API for proposals, delegates, voting power, and Governor contract data via GraphQL",
+      "tags": [
+        "governance",
+        "dao",
+        "proposals",
+        "voting"
+      ],
+      "docs": [
+        "https://docs.tally.xyz/tally-features/welcome"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "TALLY_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "tally/governance.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/tally/governance.mjs",
+      "routes": {
+        "getChains": {
+          "requestMethod": "POST",
+          "description": "Get all supported blockchain networks for DAO governance on Tally.",
+          "route": "/query",
+          "hasTests": true
+        },
+        "getGovernors": {
+          "requestMethod": "POST",
+          "description": "Get Governor contracts (DAOs) by organization. Returns governance details, token info, and proposal stats.",
+          "route": "/query",
+          "hasTests": true
+        },
+        "getProposals": {
+          "requestMethod": "POST",
+          "description": "Get governance proposals with status, votes, and timeline. Filter by governor or organization.",
+          "route": "/query",
+          "hasTests": true
+        },
+        "getDelegates": {
+          "requestMethod": "POST",
+          "description": "Get delegates and their voting power for a specific DAO. Supports filtering by address and sorting.",
+          "route": "/query",
+          "hasTests": true
+        }
+      },
+      "routeCount": 4
+    },
+    {
+      "namespace": "tenderly",
+      "name": "Tenderly Public Contracts",
+      "description": "Lookup public smart contract information including source code verification, compiler details and token metadata via Tenderly",
+      "tags": [
+        "ethereum",
+        "smartcontracts",
+        "debugging"
+      ],
+      "docs": [
+        "https://docs.tenderly.co/",
+        "https://tenderly.co/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "tenderly/public-contracts.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/tenderly/public-contracts.mjs",
+      "routes": {
+        "getPublicContract": {
+          "requestMethod": "GET",
+          "description": "Get detailed public contract information including compiler version, standards, token info and verification status",
+          "route": "/public-contracts/:networkId/:address",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
     },
     {
       "namespace": "thegraph",
@@ -6564,6 +7309,41 @@
       "routeCount": 2
     },
     {
+      "namespace": "zvg-portal",
+      "name": "ZVG Portal Foreclosure Auctions",
+      "description": "German foreclosure auction portal (Zwangsversteigerungsportal) for searching property auction listings across all 16 German states. Returns structured data from zvg-portal.de including auction dates, property details, valuations, and court information.",
+      "tags": [
+        "real-estate",
+        "auction",
+        "foreclosure",
+        "germany",
+        "property"
+      ],
+      "docs": [
+        "https://www.zvg-portal.de"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "zvg-portal/auctions.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/zvg-portal/auctions.mjs",
+      "routes": {
+        "searchAuctions": {
+          "requestMethod": "GET",
+          "description": "Search foreclosure auction listings by German state (Bundesland). Supports filtering by court, city, ZIP code, street, property type, and auction type. State codes: bw=Baden-Wuerttemberg, by=Bayern, be=Berlin, br=Brandenburg, hb=Bremen, hh=Hamburg, he=Hessen, mv=Mecklenburg-Vorpommern, ni=Niedersachsen, nw=Nordrhein-Westfalen, rp=Rheinland-Pfalz, sl=Saarland, sn=Sachsen, st=Sachsen-Anhalt, sh=Schleswig-Holstein, th=Thueringen. Property types (obj_art): 1=Reihenhaus, 2=Doppelhaushälfte, 3=Einfamilienhaus, 4=Mehrfamilienhaus, 5=ETW 1-2 Zi, 6=ETW 3-4 Zi, 7=ETW 5+ Zi, 8=Gewerbeeinheit, 9=Garage, 10=Kfz-Stellplatz, 13=Wohn-/Geschäftshaus, 14=Gewerbegrundstück, 15=Baugrundstück, 16=Unbebautes Grundstück, 17=Land-/Forstwirtschaft, 18=Sonstiges. Sort (order_by): 2=Termin, 1=Aktualisierung, 3=Aktenzeichen.",
+          "route": "/index.php",
+          "hasTests": true
+        },
+        "getAuctionDetail": {
+          "requestMethod": "GET",
+          "description": "Get full details of a specific foreclosure auction including property description, valuation (Verkehrswert), court info, auction venue, and links to documents (Bekanntmachung, Exposee, Gutachten, photos). Use the zvg_id and land_abk from searchAuctions results.",
+          "route": "/index.php",
+          "hasTests": true
+        }
+      },
+      "routeCount": 2
+    },
+    {
       "namespace": "zvgportal",
       "name": "ZVG Portal Zwangsversteigerungen",
       "description": "Search German foreclosure auctions (Zwangsversteigerungen) from the official ZVG portal of German courts",
@@ -6592,11 +7372,11 @@
     }
   ],
   "stats": {
-    "totalSchemas": 140,
-    "totalRoutes": 567,
-    "schemasWithApiKeys": 69,
-    "namespaces": 79,
-    "generatedAt": "2026-02-01T05:18:20.370Z"
+    "totalSchemas": 156,
+    "totalRoutes": 636,
+    "schemasWithApiKeys": 74,
+    "namespaces": 95,
+    "generatedAt": "2026-02-01T11:06:11.574Z"
   }
 };
         
