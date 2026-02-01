@@ -1,0 +1,80 @@
+{
+    "name": "flowmcp-schemas",
+    "version": "1.0.0",
+    "description": "Official FlowMCP community schemas - Starter Pack (no API keys, no npm modules)",
+    "schemaSpec": "1.2.0",
+    "baseDir": "schemas/v1.2.0",
+    "registryType": "starter",
+    "schemas": [
+        {
+            "namespace": "alternative",
+            "file": "alternative-me/fearAndGreed.mjs",
+            "name": "FearGreedIndex",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/simplePrice.mjs",
+            "name": "CoinGeckoSimplePrice",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "cointelegraph",
+            "file": "cointelegraph/getLatestNews.mjs",
+            "name": "CointelegraphRSS",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "context7",
+            "file": "context-7/getDocumentation.mjs",
+            "name": "Context7 Library Docs",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "defillama",
+            "file": "defilama/api.mjs",
+            "name": "DeFi Llama MCP",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "epo",
+            "file": "epo-org/patent-search.mjs",
+            "name": "European Patent Office RSS Search",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "honeypot",
+            "file": "honeypot/honeypot.mjs",
+            "name": "Honeypot Detector",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "medium",
+            "file": "medium-com/rss-feeds.mjs",
+            "name": "Medium RSS Feeds",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/marketInfo.mjs",
+            "name": "Polymarket Predictions",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "swaggerhub",
+            "file": "swaggerhub-com/api-registry.mjs",
+            "name": "SwaggerHub API",
+            "requiredServerParams": [],
+            "requiredModules": []
+        }
+    ]
+}

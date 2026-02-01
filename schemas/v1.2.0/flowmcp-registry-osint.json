@@ -1,0 +1,109 @@
+{
+    "name": "flowmcp-schemas",
+    "version": "1.0.0",
+    "description": "Official FlowMCP community schemas - Research, News & Social",
+    "schemaSpec": "1.2.0",
+    "baseDir": "schemas/v1.2.0",
+    "registryType": "osint",
+    "schemas": [
+        {
+            "namespace": "cointelegraph",
+            "file": "cointelegraph/getLatestNews.mjs",
+            "name": "CointelegraphRSS",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "context7",
+            "file": "context-7/getDocumentation.mjs",
+            "name": "Context7 Library Docs",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "epo",
+            "file": "epo-org/patent-search.mjs",
+            "name": "European Patent Office RSS Search",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "medium",
+            "file": "medium-com/rss-feeds.mjs",
+            "name": "Medium RSS Feeds",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "memoryLol",
+            "file": "memory-lol/twitterNameChanges.mjs",
+            "name": "TwitterUsernameChanges",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "newsapi",
+            "file": "newsapi-org/news.mjs",
+            "name": "NewsAPI.org",
+            "requiredServerParams": [
+                "NEWSAPI_API_KEY"
+            ],
+            "requiredModules": []
+        },
+        {
+            "namespace": "newsdata",
+            "file": "newsdata-io/getNews.mjs",
+            "name": "CryptoNews",
+            "requiredServerParams": [
+                "NEWSDATA_API_KEY"
+            ],
+            "requiredModules": []
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/marketInfo.mjs",
+            "name": "Polymarket Predictions",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/searchBySlug.mjs",
+            "name": "Fed Rate Cuts 2025",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "redditScanner",
+            "file": "reddit/getTokenMentions.mjs",
+            "name": "Reddit Token Mention Search",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "swaggerhub",
+            "file": "swaggerhub-com/api-registry.mjs",
+            "name": "SwaggerHub API",
+            "requiredServerParams": [],
+            "requiredModules": []
+        },
+        {
+            "namespace": "twitter",
+            "file": "twitter/search.mjs",
+            "name": "Twitter Recent Search",
+            "requiredServerParams": [
+                "TWITTER_BEARER_TOKEN"
+            ],
+            "requiredModules": []
+        },
+        {
+            "namespace": "webcareer",
+            "file": "web3-career/job-listings.mjs",
+            "name": "Web3 Career Job API",
+            "requiredServerParams": [
+                "WEB3_CAREER_API_TOKEN"
+            ],
+            "requiredModules": []
+        }
+    ]
+}

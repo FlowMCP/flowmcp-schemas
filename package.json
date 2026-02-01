@@ -17,7 +17,8 @@
     "validate:ai": "node tests/schema-validation/validate-new-schemas.mjs",
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs",
     "docs:generate": "node scripts/generate-docs.mjs",
-    "generate:static": "node tests/manual/0-generate-static-import.mjs"
+    "generate:static": "node tests/manual/0-generate-static-import.mjs",
+    "generate:registry": "node scripts/generate-registry.mjs"
   },
   "keywords": [],
   "engines": {
