@@ -1,5 +1,5 @@
 const schema = {
-    namespace: 'avalanche-metrics',
+    namespace: 'avalancheMetrics',
     name: 'Avalanche Metrics API',
     description: 'Avalanche Metrics API for on-chain analytics including staking, throughput, gas, TPS, and validator metrics',
     docs: [ 'https://metrics.avax.network' ],
