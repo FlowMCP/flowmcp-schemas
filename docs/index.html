@@ -344,19 +344,19 @@
             
             <div class="stats-bar">
                 <div class="stat-item">
-                    <div class="stat-number">176</div>
+                    <div class="stat-number">184</div>
                     <div class="stat-label">Schemas</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">689</div>
+                    <div class="stat-number">750</div>
                     <div class="stat-label">Routes</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">112</div>
+                    <div class="stat-number">115</div>
                     <div class="stat-label">Namespaces</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">74</div>
+                    <div class="stat-number">78</div>
                     <div class="stat-label">Require API Key</div>
                 </div>
             </div>
@@ -377,7 +377,7 @@
     </div>
 
     <footer>
-        <p>Generated on 2/2/2026, 8:46:53 AM</p>
+        <p>Generated on 2/2/2026, 11:22:23 PM</p>
         <p>FlowMCP Schema Documentation © 2026</p>
     </footer>
 
@@ -427,6 +427,176 @@
         }
       },
       "routeCount": 3
+    },
+    {
+      "namespace": "alchemy",
+      "name": "Alchemy Contract Read",
+      "description": "Read smart contract state on 20+ EVM mainnets via Alchemy. Includes ERC-20 token info and balances, ERC-721 NFT ownership and metadata, ERC-1155 multi-token queries, and a generic readContract route for any view function using human-readable ABI signatures.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "smartcontract",
+        "token",
+        "multichain",
+        "alchemy",
+        "cacheTtlRealtime"
+      ],
+      "docs": [
+        "https://docs.alchemy.com/reference/api-overview",
+        "https://docs.ethers.org/v6/api/contract/",
+        "https://eips.ethereum.org/EIPS/eip-20"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "ALCHEMY_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "alchemy/contract-read.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/alchemy/contract-read.mjs",
+      "routes": {
+        "readContract": {
+          "requestMethod": "GET",
+          "description": "Call any read-only (view/pure) function on a smart contract using a human-readable function signature. Provide args as a JSON array string.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20TokenInfo": {
+          "requestMethod": "GET",
+          "description": "Get ERC-20 token info: name, symbol, decimals, and total supply for a contract address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-20 token balance for a wallet address on a specific contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20Allowance": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-20 allowance granted by an owner to a spender for a specific token contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721TokenInfo": {
+          "requestMethod": "GET",
+          "description": "Get ERC-721 NFT collection info: name and symbol for a contract address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721OwnerOf": {
+          "requestMethod": "GET",
+          "description": "Get the owner address of a specific ERC-721 token by its token ID.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721TokenURI": {
+          "requestMethod": "GET",
+          "description": "Get the token URI (metadata URL) for a specific ERC-721 token by its token ID.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the number of ERC-721 tokens owned by a wallet address for a specific collection.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc1155BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-1155 token balance for a wallet address and token ID on a specific contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc1155Uri": {
+          "requestMethod": "GET",
+          "description": "Get the metadata URI for a specific ERC-1155 token ID on a contract.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 10
+    },
+    {
+      "namespace": "alchemy",
+      "name": "Alchemy Node Read",
+      "description": "Read blockchain data from EVM mainnets via JSON-RPC through Alchemy. Supports 20+ chains including Ethereum, Polygon, Arbitrum, Optimism, Base, BSC, Avalanche, Linea, Scroll, zkSync, Mantle, Celo, Gnosis, Blast, Fantom, Moonbeam, and more. Query blocks, balances, transactions, receipts, contract code, gas prices, and event logs.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "rpc",
+        "multichain",
+        "alchemy",
+        "cacheTtlRealtime"
+      ],
+      "docs": [
+        "https://docs.alchemy.com/reference/api-overview",
+        "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "ALCHEMY_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "alchemy/node-read.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/alchemy/node-read.mjs",
+      "routes": {
+        "getBlockNumber": {
+          "requestMethod": "GET",
+          "description": "Get the latest block number and timestamp for a selected EVM chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getBalance": {
+          "requestMethod": "GET",
+          "description": "Get the native token balance (ETH, POL, BNB, etc.) for an address on the selected chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getGasPrice": {
+          "requestMethod": "GET",
+          "description": "Get the current gas price in wei and gwei for the selected chain, including EIP-1559 maxFeePerGas when available.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getBlock": {
+          "requestMethod": "GET",
+          "description": "Get block details by block number, including hash, parentHash, timestamp, gasUsed, transaction count, and miner.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getCode": {
+          "requestMethod": "GET",
+          "description": "Get the bytecode deployed at an address. Returns whether the address is a contract and the bytecode length.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionCount": {
+          "requestMethod": "GET",
+          "description": "Get the transaction count (nonce) for an address on the selected chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionByHash": {
+          "requestMethod": "GET",
+          "description": "Get transaction details by transaction hash, including from, to, value, gasPrice, blockNumber, and input data.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionReceipt": {
+          "requestMethod": "GET",
+          "description": "Get the transaction receipt by hash, including status, gasUsed, logs count, and created contract address if applicable.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getLogs": {
+          "requestMethod": "GET",
+          "description": "Get event logs for a contract address within a block range (max 10000 blocks). Returns topics, data, and transaction hash per log entry.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 9
     },
     {
       "namespace": "alternative",
@@ -3266,6 +3436,240 @@
       "routeCount": 4
     },
     {
+      "namespace": "ethers",
+      "name": "Ethers ABI Utils",
+      "description": "Offline ABI encoding and decoding utilities powered by ethers.js. Decode calldata, encode function calls, decode event logs, compute function selectors, and ABI encode/decode arbitrary parameters. No RPC or API key required.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "abi",
+        "encoding",
+        "decoding",
+        "offline"
+      ],
+      "docs": [
+        "https://docs.ethers.org/v6/api/abi/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "ethers/abi-utils.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/ethers/abi-utils.mjs",
+      "routes": {
+        "decodeFunctionData": {
+          "requestMethod": "GET",
+          "description": "Decode calldata (transaction input) using a human-readable ABI fragment. Returns the function name and decoded arguments.",
+          "route": "/",
+          "hasTests": true
+        },
+        "encodeFunctionData": {
+          "requestMethod": "GET",
+          "description": "Encode a function call into calldata using a human-readable ABI fragment and arguments as a JSON array string.",
+          "route": "/",
+          "hasTests": true
+        },
+        "decodeEventLog": {
+          "requestMethod": "GET",
+          "description": "Decode an event log using a human-readable event ABI fragment, log data, and topics array (as JSON string).",
+          "route": "/",
+          "hasTests": true
+        },
+        "computeSelector": {
+          "requestMethod": "GET",
+          "description": "Compute the 4-byte function selector from a function signature string (e.g. 'transfer(address,uint256)').",
+          "route": "/",
+          "hasTests": true
+        },
+        "encodeParameters": {
+          "requestMethod": "GET",
+          "description": "ABI encode parameters given types and values as JSON array strings. Types example: '[\"address\",\"uint256\"]', values example: '[\"0xabc...\",\"100\"]'.",
+          "route": "/",
+          "hasTests": true
+        },
+        "decodeParameters": {
+          "requestMethod": "GET",
+          "description": "ABI decode hex data back to values given types as a JSON array string. Types example: '[\"address\",\"uint256\"]'.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 6
+    },
+    {
+      "namespace": "ethers",
+      "name": "Ethers Convert Utils",
+      "description": "Offline unit conversion and data transformation utilities powered by ethers.js. Convert between wei and human-readable units, format and parse ether values, hexlify numbers, and convert between hex and UTF-8. No RPC or API key required.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "conversion",
+        "units",
+        "encoding",
+        "offline"
+      ],
+      "docs": [
+        "https://docs.ethers.org/v6/api/utils/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "ethers/convert-utils.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/ethers/convert-utils.mjs",
+      "routes": {
+        "formatUnits": {
+          "requestMethod": "GET",
+          "description": "Format a wei value into a human-readable string with the specified number of decimals. Default is 18 (like ETH). Use 6 for USDC/USDT, 8 for WBTC.",
+          "route": "/",
+          "hasTests": true
+        },
+        "parseUnits": {
+          "requestMethod": "GET",
+          "description": "Parse a human-readable value string into wei with the specified number of decimals. Default is 18. Use 6 for USDC/USDT, 8 for WBTC.",
+          "route": "/",
+          "hasTests": true
+        },
+        "formatEther": {
+          "requestMethod": "GET",
+          "description": "Format a wei value to ether (18 decimals). Shorthand for formatUnits(value, 18).",
+          "route": "/",
+          "hasTests": true
+        },
+        "parseEther": {
+          "requestMethod": "GET",
+          "description": "Parse an ether string to wei. Shorthand for parseUnits(value, 18).",
+          "route": "/",
+          "hasTests": true
+        },
+        "hexlify": {
+          "requestMethod": "GET",
+          "description": "Convert a number or numeric string to a 0x-prefixed hex string.",
+          "route": "/",
+          "hasTests": true
+        },
+        "toUtf8String": {
+          "requestMethod": "GET",
+          "description": "Decode a hex-encoded byte string to its UTF-8 text representation.",
+          "route": "/",
+          "hasTests": true
+        },
+        "toUtf8Bytes": {
+          "requestMethod": "GET",
+          "description": "Encode a UTF-8 text string to its hex-encoded byte representation.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 7
+    },
+    {
+      "namespace": "ethers",
+      "name": "Ethers Hash & Address Utils",
+      "description": "Offline hash and address computation utilities powered by ethers.js. Compute keccak256 hashes, Solidity packed hashes, CREATE2 and CREATE addresses, ENS namehash, and checksum addresses. No RPC or API key required.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "hash",
+        "address",
+        "offline"
+      ],
+      "docs": [
+        "https://docs.ethers.org/v6/api/crypto/",
+        "https://docs.ethers.org/v6/api/address/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "ethers/hash-address.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/ethers/hash-address.mjs",
+      "routes": {
+        "keccak256": {
+          "requestMethod": "GET",
+          "description": "Compute the keccak256 hash of hex data (0x-prefixed) or UTF-8 text. For text input, it is first converted to UTF-8 bytes.",
+          "route": "/",
+          "hasTests": true
+        },
+        "solidityPackedKeccak256": {
+          "requestMethod": "GET",
+          "description": "Compute keccak256 of Solidity tightly-packed encoded data. Provide types and values as JSON array strings. Equivalent to keccak256(abi.encodePacked(...)) in Solidity.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getCreate2Address": {
+          "requestMethod": "GET",
+          "description": "Compute the CREATE2 contract address from deployer address, salt (bytes32 hex), and init code hash (bytes32 hex). Used for predicting Uniswap pool addresses and other deterministic deployments.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getCreateAddress": {
+          "requestMethod": "GET",
+          "description": "Compute the CREATE contract address from deployer address and nonce. Predicts the address of the next contract deployed by an account.",
+          "route": "/",
+          "hasTests": true
+        },
+        "checksumAddress": {
+          "requestMethod": "GET",
+          "description": "Convert an Ethereum address to its EIP-55 checksummed format. Validates that the input is a valid 20-byte address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "namehash": {
+          "requestMethod": "GET",
+          "description": "Compute the ENS namehash for a domain name. Used for resolving ENS names on-chain.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 6
+    },
+    {
+      "namespace": "ethers",
+      "name": "Ethers Signature Utils",
+      "description": "Offline signature verification and recovery utilities powered by ethers.js. Verify personal signatures, verify EIP-712 typed data, hash messages with Ethereum prefix, and recover signer addresses. No RPC or API key required.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "signature",
+        "verification",
+        "offline"
+      ],
+      "docs": [
+        "https://docs.ethers.org/v6/api/crypto/#signing-key",
+        "https://eips.ethereum.org/EIPS/eip-712"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "ethers/signature-utils.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/ethers/signature-utils.mjs",
+      "routes": {
+        "verifyMessage": {
+          "requestMethod": "GET",
+          "description": "Recover the signer address from a personal_sign signature. Verifies that a message was signed by a specific address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "verifyTypedData": {
+          "requestMethod": "GET",
+          "description": "Recover the signer address from an EIP-712 typed data signature. Provide domain, types, value as JSON strings, and the signature hex.",
+          "route": "/",
+          "hasTests": true
+        },
+        "hashMessage": {
+          "requestMethod": "GET",
+          "description": "Hash a message with the Ethereum signed message prefix: '\\x19Ethereum Signed Message:\\n' + length + message. Returns the digest used for signature verification.",
+          "route": "/",
+          "hasTests": true
+        },
+        "recoverAddress": {
+          "requestMethod": "GET",
+          "description": "Recover the signer address from a message digest (hash) and signature. Use hashMessage first to get the digest from a text message.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 4
+    },
+    {
       "namespace": "etherscan",
       "name": "Etherscan",
       "description": "Retrieve smart contract ABI and verified Solidity source code from Etherscan (Ethereum mainnet). Returns the contract interface definition and full source for any verified contract address on Ethereum.",
@@ -4306,6 +4710,176 @@
         }
       },
       "routeCount": 78
+    },
+    {
+      "namespace": "infura",
+      "name": "Infura Contract Read",
+      "description": "Read smart contract state on EVM mainnets via Infura. Includes ERC-20 token info and balances, ERC-721 NFT ownership and metadata, ERC-1155 multi-token queries, and a generic readContract route for any view function using human-readable ABI signatures.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "smartcontract",
+        "token",
+        "multichain",
+        "infura",
+        "cacheTtlRealtime"
+      ],
+      "docs": [
+        "https://docs.infura.io/api/networks",
+        "https://docs.ethers.org/v6/api/contract/",
+        "https://eips.ethereum.org/EIPS/eip-20"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "INFURA_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "infura/contract-read.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/infura/contract-read.mjs",
+      "routes": {
+        "readContract": {
+          "requestMethod": "GET",
+          "description": "Call any read-only (view/pure) function on a smart contract using a human-readable function signature. Provide args as a JSON array string.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20TokenInfo": {
+          "requestMethod": "GET",
+          "description": "Get ERC-20 token info: name, symbol, decimals, and total supply for a contract address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-20 token balance for a wallet address on a specific contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc20Allowance": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-20 allowance granted by an owner to a spender for a specific token contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721TokenInfo": {
+          "requestMethod": "GET",
+          "description": "Get ERC-721 NFT collection info: name and symbol for a contract address.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721OwnerOf": {
+          "requestMethod": "GET",
+          "description": "Get the owner address of a specific ERC-721 token by its token ID.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721TokenURI": {
+          "requestMethod": "GET",
+          "description": "Get the token URI (metadata URL) for a specific ERC-721 token by its token ID.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc721BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the number of ERC-721 tokens owned by a wallet address for a specific collection.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc1155BalanceOf": {
+          "requestMethod": "GET",
+          "description": "Get the ERC-1155 token balance for a wallet address and token ID on a specific contract.",
+          "route": "/",
+          "hasTests": true
+        },
+        "erc1155Uri": {
+          "requestMethod": "GET",
+          "description": "Get the metadata URI for a specific ERC-1155 token ID on a contract.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 10
+    },
+    {
+      "namespace": "infura",
+      "name": "Infura Node Read",
+      "description": "Read blockchain data from EVM mainnets via JSON-RPC through Infura. Supports Ethereum, Polygon, Arbitrum, Optimism, Base, BSC, Avalanche, Linea, Scroll, zkSync, Mantle, and Celo. Query blocks, balances, transactions, receipts, contract code, gas prices, and event logs.",
+      "tags": [
+        "blockchain",
+        "evm",
+        "rpc",
+        "multichain",
+        "infura",
+        "cacheTtlRealtime"
+      ],
+      "docs": [
+        "https://docs.infura.io/api/networks",
+        "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "INFURA_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "infura/node-read.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/infura/node-read.mjs",
+      "routes": {
+        "getBlockNumber": {
+          "requestMethod": "GET",
+          "description": "Get the latest block number and timestamp for a selected EVM chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getBalance": {
+          "requestMethod": "GET",
+          "description": "Get the native token balance (ETH, POL, BNB, etc.) for an address on the selected chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getGasPrice": {
+          "requestMethod": "GET",
+          "description": "Get the current gas price in wei and gwei for the selected chain, including EIP-1559 maxFeePerGas when available.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getBlock": {
+          "requestMethod": "GET",
+          "description": "Get block details by block number, including hash, parentHash, timestamp, gasUsed, transaction count, and miner.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getCode": {
+          "requestMethod": "GET",
+          "description": "Get the bytecode deployed at an address. Returns whether the address is a contract and the bytecode length.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionCount": {
+          "requestMethod": "GET",
+          "description": "Get the transaction count (nonce) for an address on the selected chain.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionByHash": {
+          "requestMethod": "GET",
+          "description": "Get transaction details by transaction hash, including from, to, value, gasPrice, blockNumber, and input data.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getTransactionReceipt": {
+          "requestMethod": "GET",
+          "description": "Get the transaction receipt by hash, including status, gasUsed, logs count, and created contract address if applicable.",
+          "route": "/",
+          "hasTests": true
+        },
+        "getLogs": {
+          "requestMethod": "GET",
+          "description": "Get event logs for a contract address within a block range (max 10000 blocks). Returns topics, data, and transaction hash per log entry.",
+          "route": "/",
+          "hasTests": true
+        }
+      },
+      "routeCount": 9
     },
     {
       "namespace": "itausschreibung",
@@ -8637,11 +9211,11 @@
     }
   ],
   "stats": {
-    "totalSchemas": 176,
-    "totalRoutes": 689,
-    "schemasWithApiKeys": 74,
-    "namespaces": 112,
-    "generatedAt": "2026-02-02T08:46:53.950Z"
+    "totalSchemas": 184,
+    "totalRoutes": 750,
+    "schemasWithApiKeys": 78,
+    "namespaces": 115,
+    "generatedAt": "2026-02-02T23:22:23.141Z"
   }
 };
         
