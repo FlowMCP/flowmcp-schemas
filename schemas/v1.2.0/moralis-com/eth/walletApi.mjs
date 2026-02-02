@@ -1,7 +1,7 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis walletApi API',
-    'description': 'Moralis walletApi API',
+    'description': 'Wallet intelligence via Moralis — native balance, transaction history, net worth, profitability analysis, active chain detection, plus ENS and Unstoppable Domains name resolution across EVM chains.',
     'docs': ["https://docs.moralis.com"],
     tags: [],
     'flowMCP': '1.2.0',
@@ -331,7 +331,7 @@ const schema = {
 */
 		"/wallets/:address/chains": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the active chains for a wallet address.",
+		    "description": "Get the active chains for a wallet address via Moralis — query by address. Supports chains filters.",
 		    "route": "/wallets/:address/chains",
 		    "parameters": [
 				{"position":{"key":"chains","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"array()","options":["optional()"]}},
@@ -347,7 +347,7 @@ const schema = {
 	
 		"/:address/balance": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the native balance for a specific wallet address.",
+		    "description": "Get the native balance for a specific wallet address via Moralis — query by address.",
 		    "route": "/:address/balance",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -444,7 +444,7 @@ const schema = {
 	
 		"/wallets/:address/stats": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the stats for a wallet address.",
+		    "description": "Get the stats for a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/stats",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -460,7 +460,7 @@ const schema = {
 	
 		"/resolve/:address/domain": 		{
 		    "requestMethod": "GET",
-		    "description": "Resolve a specific address to its Unstoppable domain",
+		    "description": "Resolve a specific address to its Unstoppable domain via Moralis — query by address.",
 		    "route": "/resolve/:address/domain",
 		    "parameters": [
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
@@ -475,7 +475,7 @@ const schema = {
 	
 		"/resolve/:address/reverse": 		{
 		    "requestMethod": "GET",
-		    "description": "Reverse resolve a given ETH address to its ENS domain.",
+		    "description": "Reverse resolve a given ETH address to its ENS domain via Moralis — query by address.",
 		    "route": "/resolve/:address/reverse",
 		    "parameters": [
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
@@ -490,7 +490,7 @@ const schema = {
 	
 		"/resolve/:domain": 		{
 		    "requestMethod": "GET",
-		    "description": "Resolve a specific Unstoppable domain to its address.",
+		    "description": "Resolve a specific Unstoppable domain to its address via Moralis — query by domain.",
 		    "route": "/resolve/:domain",
 		    "parameters": [
 				{"position":{"key":"currency","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
@@ -506,7 +506,7 @@ const schema = {
 	
 		"/resolve/ens/:domain": 		{
 		    "requestMethod": "GET",
-		    "description": "Resolve a specific ENS domain to its address.",
+		    "description": "Resolve a specific ENS domain to its address via Moralis — query by domain. Returns structured JSON response data.",
 		    "route": "/resolve/ens/:domain",
 		    "parameters": [
 				{"position":{"key":"domain","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}

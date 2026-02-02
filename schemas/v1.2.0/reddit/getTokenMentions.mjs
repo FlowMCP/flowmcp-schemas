@@ -27,7 +27,7 @@ const schema = {
         },
         getHotMemes: {
             requestMethod: "GET",
-            description: "Retrieve hot posts from r/memes subreddit.",
+            description: "Retrieve hot posts from r/memes subreddit via redditScanner. Returns structured JSON response data.",
             route: "/r/memes/hot/.json",
             parameters: [],
             tests: [

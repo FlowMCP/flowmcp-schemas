@@ -126,7 +126,7 @@ const schema = {
         },
         getTickerExchanges: {
             requestMethod: "GET",
-            description: "Get a list of supported exchanges.",
+            description: "Get a list of supported exchanges via cryptodata. Returns structured JSON response data.",
             route: "/tickers/exchanges",
             parameters: [],
             tests: [
@@ -139,7 +139,7 @@ const schema = {
         },
         getTickerMarkets: {
             requestMethod: "GET",
-            description: "Get a list of tickers for a specific cryptocurrency across different exchanges.",
+            description: "Get a list of tickers for a specific cryptocurrency across different exchanges. Optional filters: page, limit, exchange, fromCoin, toCoin, coinId, onlyVerified.",
             route: "/tickers/markets",
             parameters: [
                 { position: { key: "page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()", "default(1)"] } },
@@ -161,7 +161,7 @@ const schema = {
         },
         getBlockchains: {
             requestMethod: "GET",
-            description: "Get a list of supported blockchains by CoinStats.",
+            description: "Get a list of supported blockchains by CoinStats via cryptodata. Returns structured JSON response data.",
             route: "/wallet/blockchains",
             parameters: [],
             tests: [
@@ -268,7 +268,7 @@ const schema = {
 */
         getExchanges: {
             requestMethod: "GET",
-            description: "Get a list of supported exchange portfolio connections by CoinStats.",
+            description: "Get a list of supported exchange portfolio connections by CoinStats. via cryptodata.",
             route: "/exchange/support",
             parameters: [],
             tests: [
@@ -340,7 +340,7 @@ const schema = {
 */
         getFiatCurrencies: {
             requestMethod: "GET",
-            description: "Get a list of fiat currencies supported by CoinStats.",
+            description: "Get a list of fiat currencies supported by CoinStats via cryptodata. Returns structured JSON response data.",
             route: "/fiats",
             parameters: [],
             tests: [
@@ -353,7 +353,7 @@ const schema = {
         },
         getNewsSources: {
             requestMethod: "GET",
-            description: "Get news sources.",
+            description: "Get the list of available cryptocurrency news sources via cryptodata. Returns structured JSON response data.",
             route: "/news/sources",
             parameters: [],
             tests: [
@@ -366,7 +366,7 @@ const schema = {
         },
         getNews: {
             requestMethod: "GET",
-            description: "Get news articles with pagination.",
+            description: "Get news articles with pagination via cryptodata. Supports page, limit, from filters.",
             route: "/news",
             parameters: [
                 { position: { key: "page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()", "default(1)"] } },
@@ -385,7 +385,7 @@ const schema = {
         },
         getNewsByType: {
             requestMethod: "GET",
-            description: "Get news articles based on a type.",
+            description: "Get news articles based on a type via cryptodata — query by type. Supports page, limit filters.",
             route: "/news/type/:type",
             parameters: [
                 { position: { key: "type", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(['handpicked','trending','latest','bullish','bearish'])", options: [] } },
@@ -403,7 +403,7 @@ const schema = {
         },
         getNewsById: {
             requestMethod: "GET",
-            description: "Get news by id.",
+            description: "Get news by id via cryptodata — query by id. Returns structured JSON response data.",
             route: "/news/:id",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -418,7 +418,7 @@ const schema = {
         },
         getMarketCap: {
             requestMethod: "GET",
-            description: "Get global market data.",
+            description: "Get global cryptocurrency market data including total market cap, volume, and dominance metrics via cryptodata.",
             route: "/markets",
             parameters: [],
             tests: [
@@ -526,7 +526,7 @@ const schema = {
 */
         getCurrencies: {
             requestMethod: "GET",
-            description: "Get a list of fiat currencies supported by CoinStats.",
+            description: "Get a list of fiat currencies supported by CoinStats via cryptodata. Returns structured JSON response data.",
             route: "/currencies",
             parameters: [],
             tests: [

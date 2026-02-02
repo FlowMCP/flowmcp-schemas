@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coingecko",
     name: "CoinGeckoTrending",
-    description: "Retrieve trending coins, NFTs, and categories from CoinGecko trending search",
+    description: "Retrieve trending cryptocurrency data from CoinGecko — currently trending coins, trending NFT collections, and trending market categories with price and volume.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getTrendingCoins: {
             requestMethod: "GET",
-            description: "Fetch trending coins from CoinGecko",
+            description: "Fetch the top trending cryptocurrency coins from CoinGecko based on recent search activity and market interest.",
             route: "/search/trending",
             parameters: [ ],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
         },
         getTrendingNfts: {
             requestMethod: "GET",
-            description: "Fetch trending NFTs from CoinGecko",
+            description: "Fetch the top trending NFT collections from CoinGecko based on recent search activity and market interest.",
             route: "/search/trending",
             parameters: [ 
             ],
@@ -36,7 +36,7 @@ export const schema = {
         },
         getTrendingCategories: {
             requestMethod: "GET",
-            description: "Fetch trending categories from CoinGecko",
+            description: "Fetch trending categories from CoinGecko. Returns structured JSON response data.",
             route: "/search/trending",
             parameters: [ 
             ],

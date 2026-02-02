@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "dexscreener",
     name: "dexscreener-tokeninfo",
-    description: "DexScreener API – Token search and profile data",
+    description: "Search tokens and retrieve profile data from DexScreener — latest token profiles, pair search, token-to-pair lookups, and pool listings across all DEX chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getLatestTokenProfiles: {
         requestMethod: "GET",
-        description: "Get the latest token profiles",
+        description: "Get the latest token profiles via DexScreener. Returns structured JSON response data.",
         route: "/token-profiles/latest/v1",
         parameters: [],
         tests: [{ _description: "Fetch latest token profiles" }],
@@ -19,7 +19,7 @@ export const schema = {
       },
       searchPairs: {
         requestMethod: "GET",
-        description: "Search pairs by query string",
+        description: "Search pairs by query string via DexScreener. Returns structured JSON response data.",
         route: "/latest/dex/search",
         parameters: [
           { position: { key: "q", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -29,7 +29,7 @@ export const schema = {
       },
       getPairsByToken: {
         requestMethod: "GET",
-        description: "Get pairs by token address",
+        description: "Get pairs by token address via DexScreener — query by chainId and tokenAddress. Returns structured JSON response data.",
         route: "/tokens/v1/:chainId/:tokenAddress",
         parameters: [
           { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -40,7 +40,7 @@ export const schema = {
       },
       getTokenPools: {
         requestMethod: "GET",
-        description: "Get token pools by chain and address",
+        description: "Get token pools by chain and address via DexScreener — query by chainId and tokenAddress.",
         route: "/token-pairs/v1/:chainId/:tokenAddress",
         parameters: [
           { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },

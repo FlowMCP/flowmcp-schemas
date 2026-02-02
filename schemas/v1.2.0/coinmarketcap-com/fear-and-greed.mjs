@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coinmarketcap",
     name: "CMCCryptoFearAndGreed",
-    description: "Retrieve historical and latest CMC Crypto Fear and Greed Index data.",
+    description: "Retrieve the CoinMarketCap Crypto Fear and Greed Index — latest sentiment reading plus historical time-series data for market psychology tracking.",
     docs: ["https://coinmarketcap.com/api/documentation/v1/"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       getFearAndGreedHistorical: {
         requestMethod: "GET",
-        description: "Fetch historical CMC Crypto Fear and Greed values.",
+        description: "Fetch historical CMC Crypto Fear and Greed values via CoinMarketCap. Supports start, limit filters.",
         route: "/v3/fear-and-greed/historical",
         parameters: [
           { position: { key: "start", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()"] } },
@@ -29,7 +29,7 @@ export const schema = {
       },
       getFearAndGreedLatest: {
         requestMethod: "GET",
-        description: "Fetch the latest CMC Crypto Fear and Greed value.",
+        description: "Fetch the latest CMC Crypto Fear and Greed value via CoinMarketCap. Returns structured JSON response data.",
         route: "/v3/fear-and-greed/latest",
         parameters: [],
         tests: [

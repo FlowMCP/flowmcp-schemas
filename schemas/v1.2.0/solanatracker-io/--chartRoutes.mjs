@@ -88,7 +88,7 @@ const chartRoutes = {
 const schema = {
     namespace: "solanatracker",
     name: "TokenChartAPI",
-    description: "Schema for accessing OHLCV and holder chart data for specific tokens and pools.",
+    description: "Retrieve OHLCV candlestick and holder distribution chart data from Solana Tracker for specific tokens and pools on the Solana blockchain.",
     docs: ["https://docs.solanatracker.io"],
     tags: [],
     flowMCP: "1.2.0",
@@ -118,7 +118,7 @@ const schema = {
       },
       chartDataByPool: {
         requestMethod: "GET",
-        description: "Get OHLCV chart data for a specific token in a specific pool.",
+        description: "Get OHLCV chart data for a specific token in a specific pool. Required: token, pool. Optional filters: type, time_from, time_to, marketCap, removeOutliers.",
         route: "/chart/:token/:pool",
         parameters: [
           { position: { key: "token", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

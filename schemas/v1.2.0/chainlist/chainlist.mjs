@@ -60,7 +60,7 @@ async function testWebSocketSpeed(url, expectedChainId) {
 const schema = {
     namespace: "chainlist",
     name: "Chainlist Tools",
-    description: "Query chain metadata (RPCs, explorers, currencies) from Chainlist static feed.",
+    description: "Query EVM chain metadata from Chainlist — look up chains by ID or keyword, get RPC endpoints, block explorer URLs, WebSocket endpoints, and native currency info.",
     docs: ["https://chainlist.org"],
     tags: ["production", "blockchain", "rpc", "network"],
     flowMCP: "1.2.0",
@@ -70,7 +70,7 @@ const schema = {
     routes: {
         getChainById: {
             requestMethod: "GET",
-            description: "Returns detailed information for a chain given its numeric chainId.",
+            description: "Returns detailed information for a chain given its numeric chainId. Required: chain_id.",
             route: "/",
             parameters: [
                 { position: { key: "chain_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)"] } }
@@ -82,7 +82,7 @@ const schema = {
         },
         getChainsByKeyword: {
             requestMethod: "GET",
-            description: "Returns all chains that match a keyword substring (case-insensitive).",
+            description: "Returns all chains that match a keyword substring (case-insensitive). Required: keyword. Optional filters: limit.",
             route: "/",
             parameters: [
                 { position: { key: "keyword", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(2)"] } },
@@ -96,7 +96,7 @@ const schema = {
         },
         getExplorerURLs: {
             requestMethod: "GET",
-            description: "Returns all block explorer URLs for a specific chain ID.",
+            description: "Returns all block explorer URLs for a specific chain ID via Chainlist. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "chain_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)"] } }

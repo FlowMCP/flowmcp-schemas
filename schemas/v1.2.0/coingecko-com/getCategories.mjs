@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coingecko",
     name: "CoinGeckoCategories",
-    description: "Retrieve coin categories and category names using CoinGecko public API",
+    description: "Retrieve cryptocurrency category data from CoinGecko — list all available category IDs or get detailed market stats (market cap, volume, change) per category.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getAvailableCoinCategoryIds: {
             requestMethod: "GET",
-            description: "Fetch a short list of coin category names",
+            description: "Fetch a short list of coin category names via CoinGecko. Returns structured JSON response data.",
             route: "/coins/categories/list",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
           },
       getCoinCategoryDetailsByIds: {
         requestMethod: "GET",
-        description: "Fetch the full list of coin categories including detailed metrics",
+        description: "Fetch the full list of coin categories including detailed metrics. Required: category_ids.",
         route: "/coins/categories",
         parameters: [
             { position: { key: "category_ids", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "array()", options: [] } }

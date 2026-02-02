@@ -1,7 +1,7 @@
 const schema = {
     namespace: "goldskyNouns",
     name: "Nouns DAO Subgraph",
-    description: "Access various views into Nouns DAO data from the Goldsky-hosted subgraph.",
+    description: "Query Nouns DAO governance data from the Goldsky subgraph — recent proposals, current auctions, individual Noun details, and top delegates by voting power.",
     docs: ["https://docs.goldsky.com", "https://nouns.wtf"],
     tags: ["production", "dao", "governance", "nft"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getRecentProposals: {
             requestMethod: "POST",
-            description: "Retrieve recent proposals with detailed voting information.",
+            description: "Retrieve recent proposals with detailed voting information via Goldsky. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(10)"] } }
@@ -26,7 +26,7 @@ const schema = {
         },
         getCurrentAuctions: {
             requestMethod: "POST",
-            description: "Get current and recent auction data with bid information.",
+            description: "Get current and recent auction data with bid information via Goldsky. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(50)", "default(5)"] } }
@@ -41,7 +41,7 @@ const schema = {
         },
         getNounDetails: {
             requestMethod: "POST",
-            description: "Get detailed Noun information including traits, owner, and voting history.",
+            description: "Get detailed Noun information including traits, owner, and voting history. Required: nounId.",
             route: "/",
             parameters: [
                 { position: { key: "nounId", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: [] } }
@@ -56,7 +56,7 @@ const schema = {
         },
         getTopDelegates: {
             requestMethod: "POST",
-            description: "Get delegates with the highest voting power in the Nouns DAO.",
+            description: "Get delegates with the highest voting power in the Nouns DAO. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(50)", "default(10)"] } }

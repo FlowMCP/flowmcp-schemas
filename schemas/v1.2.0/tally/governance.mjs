@@ -14,7 +14,7 @@ const schema = {
     routes: {
         getChains: {
             requestMethod: 'POST',
-            description: 'Get all supported blockchain networks for DAO governance on Tally.',
+            description: 'Get all supported blockchain networks for DAO governance on Tally. Returns structured JSON response data.',
             route: '/query',
             parameters: [
                 { position: { key: 'query', value: '{ chains { id name mediumName shortName blockTime isTestnet nativeCurrency { name symbol decimals } } }', location: 'body' } }

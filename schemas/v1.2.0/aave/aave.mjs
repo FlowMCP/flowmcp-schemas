@@ -25,7 +25,7 @@ const schema = {
         },
         getUserData: {
             requestMethod: "POST",
-            description: "Fetches user-specific reserve data like debt and balances from AAVE subgraph.",
+            description: "Fetches user-specific reserve data like debt and balances from AAVE subgraph. Required: userAddress, first.",
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/Cd2gEDVeqnjBn1hSeqFMitw8Q1iiyV9FYUZkLNRcL87g",
             parameters: [
                 { position: { key: "userAddress", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },
@@ -40,7 +40,7 @@ const schema = {
         },
         getProtocolData: {
             requestMethod: "POST",
-            description: "Get general AAVE protocol statistics and market overview.",
+            description: "Get general AAVE protocol statistics and market overview. Returns structured JSON response data.",
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/Cd2gEDVeqnjBn1hSeqFMitw8Q1iiyV9FYUZkLNRcL87g",
             parameters: [],
             tests: [

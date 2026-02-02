@@ -106,7 +106,7 @@ export const schema = {
     routes: {
         getSupportedChains: {
             requestMethod: "GET",
-            description: "Returns a Markdown-formatted list of supported chain IDs and names",
+            description: "Returns a Markdown-formatted list of supported chain IDs and names Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "ethereum_mainnet", value: "{{ETHEREUM_MAINNET_ALCHEMY_HTTP}}", location: "insert" } },

@@ -13,7 +13,7 @@ const tradeRoutes = {
       matchesSchemaRoute: "tokenTrades", // ✅ schema.routes.tokenTrades
       tokenTrades: {
         requestMethod: "GET",
-        description: "Get the latest trades for a token across all pools.",
+        description: "Get the latest trades for a token across all pools via Solana Tracker — query by tokenAddress.",
         route: "/trades/:tokenAddress",
         parameters: [
           {
@@ -67,7 +67,7 @@ const tradeRoutes = {
       matchesSchemaRoute: "tradesByWallet", // ✅ schema.routes.tradesByWallet
       tradesByWallet: {
         requestMethod: "GET",
-        description: "Get the latest trades for a specific token and wallet address.",
+        description: "Get the latest trades for a specific token and wallet address. Required: tokenAddress, owner. Optional filters: showMeta, parseJupiter, hideArb.",
         route: "/trades/:tokenAddress/by-wallet/:owner",
         parameters: [
           {
@@ -103,7 +103,7 @@ const tradeRoutes = {
 const schema = {
     namespace: "solanatracker",
     name: "TokenTradeTracker",
-    description: "API zur Ermittlung von Handelsdaten für Token, Pools und Wallets.",
+    description: "Retrieve Solana DEX trade data via Solana Tracker — latest trades by token, pool, wallet, or combination. Supports pagination and Jupiter parse mode.",
     docs: ["https://docs.solanatracker.io"],
     tags: [],
     flowMCP: "1.2.0",
@@ -148,7 +148,7 @@ const schema = {
       },
       tokenPoolTrades: {
         requestMethod: "GET",
-        description: "Get the latest trades for a specific token and pool.",
+        description: "Get the latest trades for a specific token and pool via Solana Tracker — query by tokenAddress and poolAddress.",
         route: "/trades/:tokenAddress/:poolAddress",
         parameters: [
           { position: { key: "tokenAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
@@ -165,7 +165,7 @@ const schema = {
       },
       userPoolTrades: {
         requestMethod: "GET",
-        description: "Get the latest trades for a specific token, pool, and user.",
+        description: "Get the latest trades for a specific token, pool, and user via Solana Tracker — query by tokenAddress and poolAddress and owner.",
         route: "/trades/:tokenAddress/:poolAddress/:owner",
         parameters: [
           { position: { key: "tokenAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

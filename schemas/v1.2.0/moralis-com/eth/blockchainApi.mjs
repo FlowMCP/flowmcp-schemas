@@ -1,7 +1,7 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis blockchainApi API',
-    'description': 'Moralis blockchainApi API',
+    'description': 'Low-level blockchain data via Moralis — block lookups (by number, hash, or date), transaction details, native transaction history for addresses, and latest block numbers across 30+ EVM chains.',
     'docs': ["https://docs.moralis.com"],
     tags: [],
     'flowMCP': '1.2.0',
@@ -15,7 +15,7 @@ const schema = {
     'routes': {	
 		"/block/:block_number_or_hash": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the contents of a block given the block hash.",
+		    "description": "Get the contents of a block given the block hash via Moralis — query by block number or hash.",
 		    "route": "/block/:block_number_or_hash",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -39,7 +39,7 @@ const schema = {
 	
 		"/dateToBlock": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the closest block given the date.",
+		    "description": "Get the closest block given the date via Moralis. Returns structured JSON response data.",
 		    "route": "/dateToBlock",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -86,7 +86,7 @@ const schema = {
 	
 		"/:address/verbose": 		{
 		    "requestMethod": "GET",
-		    "description": "Get native transactions and logs ordered by block number in descending order.",
+		    "description": "Get native transactions and logs ordered by block number in descending order. Required: chain, address. Optional filters: from_block, to_block, from_date, to_date, cursor, include, limit, order.",
 		    "route": "/:address/verbose",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -117,7 +117,7 @@ const schema = {
 	
 		"/latestBlockNumber/:chain": 		{
 		    "requestMethod": "GET",
-		    "description": "Returns the latest block number for the given chain.",
+		    "description": "Returns the latest block number for the given chain via Moralis — query by chain.",
 		    "route": "/latestBlockNumber/:chain",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}}
@@ -156,7 +156,7 @@ const schema = {
 	
 		"/:address": 		{
 		    "requestMethod": "GET",
-		    "description": "Get native transactions ordered by block number in descending order.",
+		    "description": "Get native transactions ordered by block number in descending order. Required: chain, address. Optional filters: from_block, to_block, from_date, to_date, cursor, include, limit, order.",
 		    "route": "/:address",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},

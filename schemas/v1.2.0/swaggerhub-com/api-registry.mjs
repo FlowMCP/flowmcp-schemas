@@ -26,7 +26,7 @@ export const schema = {
         },
         listApiVersions: {
             requestMethod: "GET",
-            description: "Returns metadata for all versions of a specified API.",
+            description: "Returns metadata for all versions of a specified API via swaggerhub — query by owner and api.",
             route: "/:owner/:api",
             parameters: [
                 { position: { key: "owner", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },

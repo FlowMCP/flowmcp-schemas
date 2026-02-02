@@ -11,7 +11,7 @@ const schema = {
     routes: {
         listChains: {
             requestMethod: 'GET',
-            description: 'Get a list of all supported EVM blockchains with their chain IDs.',
+            description: 'Get a list of all supported EVM blockchains with their chain IDs. via avalancheMetrics.',
             route: '/chains',
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ const schema = {
         },
         getChainInfo: {
             requestMethod: 'GET',
-            description: 'Get chain information for a specific supported blockchain.',
+            description: 'Get chain information for a specific supported blockchain via avalancheMetrics — query by chainId.',
             route: '/chains/:chainId',
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [ 'default("43114")' ] } }

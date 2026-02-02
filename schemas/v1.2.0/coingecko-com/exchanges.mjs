@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getExchangesList: {
         requestMethod: "GET",
-        description: "Fetch the list of all supported exchanges",
+        description: "Fetch the list of all supported exchanges via CoinGecko. Returns structured JSON response data.",
         route: "/exchanges/list",
         parameters: [],
         tests: [{ _description: "Test getExchangesList - should return a list of exchanges" }],
@@ -21,7 +21,7 @@ export const schema = {
       },
       getExchangeById: {
         requestMethod: "GET",
-        description: "Fetch details of a specific exchange",
+        description: "Fetch details of a specific exchange via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/exchanges/:id",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -33,7 +33,7 @@ export const schema = {
       },
       getExchangeTickers: {
         requestMethod: "GET",
-        description: "Fetch trading pairs (tickers) for a specific exchange",
+        description: "Fetch trading pairs (tickers) for a specific exchange via CoinGecko — query by id.",
         route: "/exchanges/:id/tickers",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }

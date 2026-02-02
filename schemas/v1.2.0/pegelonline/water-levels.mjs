@@ -43,7 +43,7 @@ export const schema = {
         },
         getWaters: {
             requestMethod: "GET",
-            description: "Get list of all waterways (rivers, canals, lakes) with gauging stations.",
+            description: "Get list of all waterways (rivers, canals, lakes) with gauging stations. via pegelonline.",
             route: "/waters.json",
             parameters: [],
             tests: [

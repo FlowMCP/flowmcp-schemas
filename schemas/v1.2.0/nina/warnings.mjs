@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getDwdWarnings: {
             requestMethod: "GET",
-            description: "Get current DWD (Deutscher Wetterdienst) weather warnings across Germany",
+            description: "Get current DWD (Deutscher Wetterdienst) weather warnings across Germany via nina.",
             route: "/dwd/mapData.json",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
         },
         getMowasWarnings: {
             requestMethod: "GET",
-            description: "Get current MOWAS (Modulares Warnsystem) official civil protection warnings",
+            description: "Get current MOWAS (Modulares Warnsystem) official civil protection warnings via nina.",
             route: "/mowas/mapData.json",
             parameters: [],
             tests: [
@@ -35,7 +35,7 @@ export const schema = {
         },
         getBiwappWarnings: {
             requestMethod: "GET",
-            description: "Get current BIWAPP (Buerger Info und Warn App) municipal warnings",
+            description: "Get current BIWAPP (Buerger Info und Warn App) municipal warnings Returns structured JSON response data.",
             route: "/biwapp/mapData.json",
             parameters: [],
             tests: [
@@ -47,7 +47,7 @@ export const schema = {
         },
         getKatwarnWarnings: {
             requestMethod: "GET",
-            description: "Get current KATWARN alerts for disaster and crisis situations",
+            description: "Get current KATWARN alerts for disaster and crisis situations Returns structured JSON response data.",
             route: "/katwarn/mapData.json",
             parameters: [],
             tests: [

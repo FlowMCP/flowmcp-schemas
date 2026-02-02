@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       getLatestNewsdata: {
         requestMethod: "GET",
-        description: "Fetch the latest general crypto news from NewsData.io.",
+        description: "Fetch the latest general crypto news from NewsData.io. Returns structured JSON response data.",
         route: "/",
         parameters: [],
         tests: [
@@ -25,7 +25,7 @@ export const schema = {
       },
       getCryptoNewsdata: {
         requestMethod: "GET",
-        description: "Fetch topic-specific crypto news for a given query and max number of pages.",
+        description: "Fetch topic-specific crypto news for a given query and max number of pages. Required: query, max_pages.",
         route: "/",
         parameters: [
           { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },

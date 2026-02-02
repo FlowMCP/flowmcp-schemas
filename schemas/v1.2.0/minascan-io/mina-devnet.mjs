@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getMinaDevnetSchema: {
             requestMethod: "POST",
-            description: "Get the complete GraphQL schema structure from MinaScan devnet endpoint.",
+            description: "Get the complete GraphQL schema structure from MinaScan devnet endpoint. Returns structured JSON response data.",
             route: "/",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ const schema = {
         },
         getMinaDevnetQuery: {
             requestMethod: "POST",
-            description: "Execute a custom GraphQL query against the MinaScan devnet endpoint.",
+            description: "Execute a custom GraphQL query against the MinaScan devnet endpoint. Required: query.",
             route: "/",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: [] } }

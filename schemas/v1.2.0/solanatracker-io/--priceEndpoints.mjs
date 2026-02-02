@@ -7,7 +7,7 @@ const priceRoutes = {
       matchesSchemaRoute: "priceInformation", // ✅ schema.routes.priceInformation
       priceInformation: {
         requestMethod: "GET",
-        description: "Get price information for a single token.",
+        description: "Get price information for a single token via Solana Tracker. Supports priceChanges filters.",
         route: "/price",
         parameters: [
           {
@@ -33,7 +33,7 @@ const priceRoutes = {
       matchesSchemaRoute: "postPrice", // ✅ schema.routes.postPrice
       postPrice: {
         requestMethod: "POST",
-        description: "Similar to GET /price, but accepts token address in the request body.",
+        description: "Similar to GET /price, but accepts token address in the request body. Required: token.",
         route: "/price",
         parameters: [
           {
@@ -50,21 +50,21 @@ const priceRoutes = {
     getHistoricPrice: {
       method: "GET",
       path: "/price/history",
-      description: "Get historic price points for a token (3d, 5d, 7d, 14d, 30d).",
+      description: "Get historic price points for a token (3d, 5d, 7d, 14d, 30d). via Solana Tracker.",
       queryParams: ["token (required)"],
       matchesSchemaRoute: null // ❌ nicht im schema.mjs enthalten
     },
     getPriceAtTimestamp: {
       method: "GET",
       path: "/price/history/timestamp",
-      description: "Get price at a specific timestamp for a token.",
+      description: "Get price at a specific timestamp for a token via Solana Tracker. Returns structured JSON response data.",
       queryParams: ["token (required)", "timestamp (required)"],
       matchesSchemaRoute: null // ❌ nicht im schema.mjs enthalten
     },
     getPriceRange: {
       method: "GET",
       path: "/price/history/range",
-      description: "Get lowest and highest prices for a token within a time range.",
+      description: "Get lowest and highest prices for a token within a time range. Required: token, time_from, time_to.",
       queryParams: ["token (required)", "time_from (required)", "time_to (required)"],
       matchesSchemaRoute: null // ❌ nicht im schema.mjs enthalten
     },
@@ -76,7 +76,7 @@ const priceRoutes = {
       matchesSchemaRoute: "multiPriceInformation", // ✅ schema.routes.multiPriceInformation
       multiPriceInformation: {
         requestMethod: "GET",
-        description: "Get price information for multiple tokens (up to 100).",
+        description: "Get price information for multiple tokens (up to 100) via Solana Tracker. Supports priceChanges filters.",
         route: "/price/multi",
         parameters: [
           {
@@ -97,7 +97,7 @@ const priceRoutes = {
     postMultiPrice: {
       method: "POST",
       path: "/price/multi",
-      description: "Get price info for multiple tokens (POST version).",
+      description: "Get price info for multiple tokens (POST version) via Solana Tracker. Returns structured JSON response data.",
       bodyParams: ["tokens"],
       matchesSchemaRoute: null // ❌ nicht im schema.mjs enthalten
     }
@@ -107,7 +107,7 @@ const priceRoutes = {
 const schema = {
     namespace: "solanatracker",
     name: "TokenPriceAPI",
-    description: "Provides real-time and historical token price information",
+    description: "Solana token price data via Solana Tracker — real-time prices, historical prices, price at specific timestamps, price ranges, and batch multi-token queries.",
     docs: ["https://docs.solanatracker.io"],
     tags: [],
     flowMCP: "1.2.0",

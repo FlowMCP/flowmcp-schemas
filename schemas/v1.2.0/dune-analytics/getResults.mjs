@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "duneAnalytics",
     name: "DuneAnalytics",
-    description: "Interface with Dune Analytics to execute and retrieve query results.",
+    description: "Retrieve results from Dune Analytics queries — fetch the latest cached result for any public Dune query by its numeric query ID. Returns structured row data.",
     docs: ["https://docs.dune.com/api-reference/overview/introduction"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       getLatestResult: {
         requestMethod: "GET",
-        description: "Fetch latest result for a Dune query ID (returns CSV string).",
+        description: "Fetch latest result for a Dune query ID (returns CSV string). Required: query_id.",
         route: "/query/:query_id/results",
         parameters: [
           {

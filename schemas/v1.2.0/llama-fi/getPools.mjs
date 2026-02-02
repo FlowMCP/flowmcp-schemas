@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "llama",
     name: "DeFiYieldsServer",
-    description: "Fetch and analyze DeFi yield pools from yields.llama.fi",
+    description: "Fetch and analyze DeFi yield farming pools from DeFi Llama — search projects by name and query pool data including APY, TVL, and protocol details.",
     docs: ["https://docs.llama.fi/pro-api"],
     tags: [],
     flowMCP: "1.2.0",
@@ -19,7 +19,7 @@ export const schema = {
       },
       getPools: {
         requestMethod: "GET",
-        description: "Fetch DeFi yield pools, optionally filtering by blockchain or project name",
+        description: "Fetch DeFi yield pools, optionally filtering by blockchain or project name. Optional filters: chain, project.",
         route: "/pools",
         parameters: [
           { position: { key: "chain", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },

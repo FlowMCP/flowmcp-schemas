@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getUTXO: {
             requestMethod: "GET",
-            description: "Fetch UTXO summary for a Bitcoin address.",
+            description: "Fetch UTXO summary for a Bitcoin address via blockchaininfo. Returns structured JSON response data.",
             route: "/unspent",
             parameters: [
                 { position: { key: "active", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["regex(^([13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59})$)"] } }
@@ -23,7 +23,7 @@ export const schema = {
         },
         getBlockStats: {
             requestMethod: "GET",
-            description: "Fetch block statistics for a given block height.",
+            description: "Fetch block statistics for a given block height via blockchaininfo — query by block height.",
             route: "/block-height/:block_height",
             parameters: [
                 { position: { key: "block_height", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(0)"] } },

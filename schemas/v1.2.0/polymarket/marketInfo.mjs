@@ -1,7 +1,7 @@
 const schema = {
     namespace: "polymarket",
     name: "Polymarket Predictions",
-    description: "Access prediction market data from Polymarket via CLOB API",
+    description: "Access prediction market data from Polymarket via the CLOB API — list active markets with filters or retrieve detailed info for a specific market by condition ID.",
     docs: [],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getMarkets: {
             requestMethod: "GET",
-            description: "List prediction markets with optional filters",
+            description: "List prediction markets with optional filters via Polymarket. Returns structured JSON response data.",
             route: "/markets",
             parameters: [
                 { position: { key: "status", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(active,resolved)", options: [] } },
@@ -27,7 +27,7 @@ const schema = {
         },
         getMarketInfo: {
             requestMethod: "GET",
-            description: "Get detailed information about a specific prediction market",
+            description: "Get detailed information about a specific prediction market via Polymarket — query by condition id.",
             route: "/markets/:condition_id",
             parameters: [
                 { position: { key: "condition_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

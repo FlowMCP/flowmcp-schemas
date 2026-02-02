@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         listResources: {
             requestMethod: "GET",
-            description: "List all x402-compatible paid resources registered on Coinbase Bazaar",
+            description: "List all x402-compatible paid resources registered on Coinbase Bazaar. Optional filters: limit, offset.",
             route: "/resources",
             parameters: [
                 { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(20)", "optional()"] } },

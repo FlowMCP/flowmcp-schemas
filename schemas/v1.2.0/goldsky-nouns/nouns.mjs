@@ -1,7 +1,7 @@
 const schema = {
     namespace: "goldskyNouns",
     name: "Nouns DAO Subgraph",
-    description: "Access various views into Nouns DAO data from the Goldsky-hosted subgraph.",
+    description: "Query Nouns DAO candidate proposals and auction data from the Goldsky subgraph — pending proposals, active proposers, and latest auction bids.",
     docs: ["https://docs.goldsky.com", "https://nouns.wtf"],
     tags: ["production", "dao", "governance", "nft"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getCandidateProposals: {
             requestMethod: "POST",
-            description: "Retrieve up to 1000 candidate proposals from the subgraph.",
+            description: "Retrieve up to 1000 candidate proposals from the subgraph via Goldsky. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "default(1000)"] } }
@@ -39,7 +39,7 @@ const schema = {
         },
         getLatestAuctions: {
             requestMethod: "POST",
-            description: "Fetch up to 1000 latest auctions and their bid data.",
+            description: "Fetch up to 1000 latest auctions and their bid data via Goldsky. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "default(1000)"] } },

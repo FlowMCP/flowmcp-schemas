@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Statistics",
-    description: "Charts and blockchain stats from LUKSO BlockScout",
+    description: "LUKSO blockchain statistics via BlockScout — network stats overview, transaction volume charts, and market price chart data for the LUKSO Mainnet.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getStats: {
         requestMethod: "GET",
-        description: "General blockchain stats",
+        description: "General blockchain stats via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/stats",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }
@@ -23,7 +23,7 @@ export const schema = {
       },
       getTransactionChart: {
         requestMethod: "GET",
-        description: "Transaction activity chart",
+        description: "Transaction activity chart via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/stats/charts/transactions",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }
@@ -35,7 +35,7 @@ export const schema = {
       },
       getMarketChart: {
         requestMethod: "GET",
-        description: "Token market stats (price, cap, etc.)",
+        description: "Token market stats (price, cap, etc.) via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/stats/charts/market",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }

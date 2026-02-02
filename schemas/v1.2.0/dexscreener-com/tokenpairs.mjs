@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getTokenPairs: {
             requestMethod: "GET",
-            description: "Get token pairs by token address on specific blockchain",
+            description: "Get token pairs by token address on specific blockchain via DexScreener — query by tokenAddress.",
             route: "/latest/dex/tokens/:tokenAddress",
             parameters: [
                 { 
@@ -46,7 +46,7 @@ export const schema = {
 */
         getLatestPairs: {
             requestMethod: "GET",
-            description: "Get specific token pair by chain and pair address",
+            description: "Get specific token pair by chain and pair address via DexScreener — query by chainId and pairId.",
             route: "/latest/dex/pairs/:chainId/:pairId",
             parameters: [
                 { 
@@ -65,7 +65,7 @@ export const schema = {
         },
         getPairsByChain: {
             requestMethod: "GET",
-            description: "Get trending token pairs by chain",
+            description: "Get trending token pairs by chain via DexScreener — query by chainId and sortBy.",
             route: "/orders/v1/:chainId/:sortBy",
             parameters: [
                 { 
@@ -86,7 +86,7 @@ export const schema = {
         },
         getSpecificPair: {
             requestMethod: "GET",
-            description: "Get detailed information about a specific token pair by chain and address",
+            description: "Get detailed information about a specific token pair by chain and address. Required: chainId, pairAddress.",
             route: "/latest/dex/pairs/:chainId/:pairAddress",
             parameters: [
                 { 

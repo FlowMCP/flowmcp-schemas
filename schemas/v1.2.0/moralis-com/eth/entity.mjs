@@ -1,7 +1,7 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis entity API',
-    'description': 'Moralis entity API',
+    'description': 'Retrieve entity classification categories from Moralis for categorizing wallet addresses and on-chain entities across EVM chains.',
     'docs': ["https://docs.moralis.com"],
     tags: [],
     'flowMCP': '1.2.0',
@@ -15,7 +15,7 @@ const schema = {
     'routes': {	
 		"/entities/categories": 		{
 		    "requestMethod": "GET",
-		    "description": "Get Entity Categories",
+		    "description": "Get Entity Categories via Moralis. Supports limit filters. Returns structured JSON response data.",
 		    "route": "/entities/categories",
 		    "parameters": [
 				{"position":{"key":"limit","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}}

@@ -38,7 +38,7 @@ export const schema = {
         },
         getGeoData: {
             requestMethod: "GET",
-            description: "Get GeoJSON data of all German federal states for mapping.",
+            description: "Get GeoJSON data of all German federal states for mapping via dashboardDeutschland.",
             route: "/geojson/de-all.geo.json",
             parameters: [],
             tests: [

@@ -1,7 +1,7 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis nftApi API',
-    'description': 'Moralis nftApi API',
+    'description': 'Comprehensive NFT data via Moralis — collection stats, metadata, ownership, transfers, trades, traits, and market rankings across 30+ EVM chains.',
     'docs': ["https://docs.moralis.com"],
     tags: [],
     'flowMCP': '1.2.0',
@@ -15,7 +15,7 @@ const schema = {
     'routes': {	
 		"/market-data/nfts/top-collections": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the top NFT collections by market cap",
+		    "description": "Get the top NFT collections by market cap via Moralis. Returns structured JSON response data.",
 		    "route": "/market-data/nfts/top-collections",
 		    "parameters": [],
 		    "tests": [
@@ -28,7 +28,7 @@ const schema = {
 	
 		"/market-data/nfts/hottest-collections": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the top NFT collections by trading volume",
+		    "description": "Get the top NFT collections by trading volume via Moralis. Returns structured JSON response data.",
 		    "route": "/market-data/nfts/hottest-collections",
 		    "parameters": [],
 		    "tests": [
@@ -65,7 +65,7 @@ const schema = {
 	
 		"/nft/:address/stats": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the stats for a nft collection address.",
+		    "description": "Get the stats for a nft collection address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/nft/:address/stats",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -115,7 +115,7 @@ const schema = {
 */
 		"/nft/:address/transfers": 		{
 		    "requestMethod": "GET",
-		    "description": "Get transfers of NFTs for a given contract and other parameters.",
+		    "description": "Get transfers of NFTs for a given contract and other parameters. Required: chain, address. Optional filters: from_block, to_block, from_date, to_date, format, limit, order, cursor, include_prices.",
 		    "route": "/nft/:address/transfers",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -217,7 +217,7 @@ const schema = {
 	
 		"/nft/:address/owners": 		{
 		    "requestMethod": "GET",
-		    "description": "Get owners of NFTs for a given contract.",
+		    "description": "Get owners of NFTs for a given contract via Moralis — query by address. Supports format, limit, cursor filters.",
 		    "route": "/nft/:address/owners",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -256,7 +256,7 @@ const schema = {
 */
 		"/nft/:address/:token_id/owners": 		{
 		    "requestMethod": "GET",
-		    "description": "Get owners of a specific NFT given the contract address and token ID.",
+		    "description": "Get owners of a specific NFT given the contract address and token ID. Required: chain, address, token_id. Optional filters: format, limit, cursor, normalizeMetadata, media_items.",
 		    "route": "/nft/:address/:token_id/owners",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -278,7 +278,7 @@ const schema = {
 	
 		"/nft/:address/:token_id/trades": 		{
 		    "requestMethod": "GET",
-		    "description": "Get trades of NFTs for a given contract and token ID.",
+		    "description": "Get trades of NFTs for a given contract and token ID via Moralis — query by address and token id.",
 		    "route": "/nft/:address/:token_id/trades",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,arbitrum,0xa4b1,base,0x2105,optimism,0xa)","options":[]}},
@@ -302,7 +302,7 @@ const schema = {
 	
 		"/wallets/:address/nfts/trades": 		{
 		    "requestMethod": "GET",
-		    "description": "Get trades of NFTs for a given wallet.",
+		    "description": "Get trades of NFTs for a given wallet via Moralis — query by address. Supports from_block, to_block, from_date filters.",
 		    "route": "/wallets/:address/nfts/trades",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,arbitrum,0xa4b1,base,0x2105,optimism,0xa)","options":[]}},
@@ -325,7 +325,7 @@ const schema = {
 	
 		"/nft/:address/trades": 		{
 		    "requestMethod": "GET",
-		    "description": "Get trades of NFTs for a given contract and marketplace.",
+		    "description": "Get trades of NFTs for a given contract and marketplace via Moralis — query by address.",
 		    "route": "/nft/:address/trades",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -384,7 +384,7 @@ const schema = {
 	
 		"/nft/:address/:token_id/transfers": 		{
 		    "requestMethod": "GET",
-		    "description": "Get transfers of an NFT given a contract address and token ID.",
+		    "description": "Get transfers of an NFT given a contract address and token ID. Required: chain, address, token_id. Optional filters: format, limit, order, cursor, include_prices.",
 		    "route": "/nft/:address/:token_id/transfers",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -406,7 +406,7 @@ const schema = {
 	
 		"/:address/nft/collections": 		{
 		    "requestMethod": "GET",
-		    "description": "Get NFT collections owned by a given wallet address.",
+		    "description": "Get NFT collections owned by a given wallet address via Moralis — query by address.",
 		    "route": "/:address/nft/collections",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -453,7 +453,7 @@ const schema = {
 	
 		"/:address/nft": 		{
 		    "requestMethod": "GET",
-		    "description": "Get NFTs owned by a given address.",
+		    "description": "Get NFTs owned by a given address via Moralis — query by address. Supports format, limit, exclude_spam filters.",
 		    "route": "/:address/nft",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -477,7 +477,7 @@ const schema = {
 	
 		"/nft/:address/:token_id/metadata/resync": 		{
 		    "requestMethod": "GET",
-		    "description": "Resync the metadata for an NFT",
+		    "description": "Resync the metadata for an NFT via Moralis — query by address and token id. Supports flag, mode filters.",
 		    "route": "/nft/:address/:token_id/metadata/resync",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},
@@ -496,7 +496,7 @@ const schema = {
 	
 		"/nft/:address/traits/resync": 		{
 		    "requestMethod": "GET",
-		    "description": "Resync the NFT Trait for a given contract",
+		    "description": "Resync the NFT Trait for a given contract via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/nft/:address/traits/resync",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a)","options":[]}},

@@ -27,7 +27,7 @@ export const schema = {
         // Working Account Endpoints
         getAccountByHash: {
             requestMethod: "GET",
-            description: "Get detailed account information by public key hash",
+            description: "Get detailed account information by public key hash via Blockberry. Returns structured JSON response data.",
             route: "/accounts/{publicKeyHash}",
             parameters: [
                 { position: { key: "publicKeyHash", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -39,7 +39,7 @@ export const schema = {
         },
         getAccountBalance: {
             requestMethod: "GET",
-            description: "Get current balance for a specific Mina account",
+            description: "Get current balance for a specific Mina account via Blockberry. Returns structured JSON response data.",
             route: "/accounts/{publicKeyHash}/balance",
             parameters: [
                 { position: { key: "publicKeyHash", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -53,7 +53,7 @@ export const schema = {
         // Working Block Endpoints
         getBlocks: {
             requestMethod: "GET",
-            description: "Get list of Mina blocks (canonical and orphaned) with pagination",
+            description: "Get list of Mina blocks (canonical and orphaned) with pagination. Optional filters: page, size, orderBy, sortBy, type.",
             route: "/blocks",
             parameters: [
                 { position: { key: "page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(0)", "default(0)", "optional()"] } },
@@ -71,7 +71,7 @@ export const schema = {
         // Working ZkApp Endpoints
         getZkAppTransactions: {
             requestMethod: "GET",
-            description: "Get list of ZkApp transactions with filtering options",
+            description: "Get list of ZkApp transactions with filtering options via Blockberry. Supports page, size filters.",
             route: "/zkapps/transactions",
             parameters: [
                 { position: { key: "page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(0)", "default(0)", "optional()"] } },
@@ -84,7 +84,7 @@ export const schema = {
         },
         getZkAppByAddress: {
             requestMethod: "GET",
-            description: "Get ZkApp information by account address",
+            description: "Get ZkApp information by account address via Blockberry. Returns structured JSON response data.",
             route: "/zkapps/{address}",
             parameters: [
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }

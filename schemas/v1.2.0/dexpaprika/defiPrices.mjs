@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getNetworks: {
             requestMethod: "GET",
-            description: "Get all supported blockchain networks",
+            description: "Get all supported blockchain networks via DexPaprika. Returns structured JSON response data.",
             route: "/networks",
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ export const schema = {
         },
         getToken: {
             requestMethod: "GET",
-            description: "Get detailed token information on a specific network",
+            description: "Get detailed token information on a specific network via DexPaprika — query by network id and token address.",
             route: "/networks/:network_id/tokens/:token_address",
             parameters: [
                 { position: { key: "network_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -34,7 +34,7 @@ export const schema = {
         },
         getMultiPrices: {
             requestMethod: "GET",
-            description: "Get prices for multiple tokens on a network",
+            description: "Get prices for multiple tokens on a network via DexPaprika — query by network id.",
             route: "/networks/:network_id/multi/prices",
             parameters: [
                 { position: { key: "network_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -47,7 +47,7 @@ export const schema = {
         },
         getPool: {
             requestMethod: "GET",
-            description: "Get detailed pool information on a specific network",
+            description: "Get detailed pool information on a specific network via DexPaprika — query by network id and pool address.",
             route: "/networks/:network_id/pools/:pool_address",
             parameters: [
                 { position: { key: "network_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -60,7 +60,7 @@ export const schema = {
         },
         getTokenPools: {
             requestMethod: "GET",
-            description: "Get all pools for a specific token on a network",
+            description: "Get all pools for a specific token on a network via DexPaprika — query by network id and token address.",
             route: "/networks/:network_id/tokens/:token_address/pools",
             parameters: [
                 { position: { key: "network_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -74,7 +74,7 @@ export const schema = {
         },
         getPoolTransactions: {
             requestMethod: "GET",
-            description: "Get recent transactions for a specific pool",
+            description: "Get recent transactions for a specific pool via DexPaprika — query by network id and pool address.",
             route: "/networks/:network_id/pools/:pool_address/transactions",
             parameters: [
                 { position: { key: "network_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -88,7 +88,7 @@ export const schema = {
         },
         searchTokens: {
             requestMethod: "GET",
-            description: "Search for tokens across all networks",
+            description: "Search for tokens across all networks via DexPaprika. Returns structured JSON response data.",
             route: "/search",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } }

@@ -1,7 +1,7 @@
 const schema = {
     namespace: "thegraph",
     name: "UniswapPools",
-    description: "Fetches recently created Uniswap V3 trading pools across multiple blockchains.",
+    description: "Fetch recently created Uniswap V3 trading pools across multiple blockchains via The Graph — discover new liquidity pools with token pairs and creation timestamps.",
     docs: ["https://thegraph.com/docs/en/"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ const schema = {
     routes: {
       getNewPools: {
         requestMethod: "POST",
-        description: "List new Uniswap V3 pools by chain and order criteria within a time range.",
+        description: "List new Uniswap V3 pools by chain and order criteria within a time range. Required: chain, orderBy, time_range_seconds, limit.",
         route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/--subgraph-id--",
         parameters: [
           {

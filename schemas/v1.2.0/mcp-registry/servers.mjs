@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         listServers: {
             requestMethod: "GET",
-            description: "List MCP servers from the official registry with cursor-based pagination",
+            description: "List MCP servers from the official registry with cursor-based pagination. Optional filters: count, cursor.",
             route: "/servers",
             parameters: [
                 { position: { key: "count", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(30)", "optional()"] } },
@@ -24,7 +24,7 @@ export const schema = {
         },
         searchServers: {
             requestMethod: "GET",
-            description: "Search MCP servers by name or keyword using the registry endpoint",
+            description: "Search MCP servers by name or keyword using the registry endpoint. Optional filters: count, cursor.",
             route: "/servers",
             parameters: [
                 { position: { key: "count", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(30)", "optional()"] } },

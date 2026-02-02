@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "dexscreener",
     name: "dexscreener-boosted",
-    description: "DexScreener API – Boosted token insights",
+    description: "Discover trending boosted tokens on DexScreener — latest and most actively boosted token listings across all DEX chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getLatestBoostedTokens: {
         requestMethod: "GET",
-        description: "Get the latest boosted tokens",
+        description: "Get the latest boosted tokens via DexScreener. Returns structured JSON response data.",
         route: "/token-boosts/latest/v1",
         parameters: [],
         tests: [{ _description: "Fetch latest boosted tokens" }],
@@ -19,7 +19,7 @@ export const schema = {
       },
       getMostActiveBoostedTokens: {
         requestMethod: "GET",
-        description: "Get tokens with most active boosts",
+        description: "Get tokens with most active boosts via DexScreener. Returns structured JSON response data.",
         route: "/token-boosts/top/v1",
         parameters: [],
         tests: [{ _description: "Fetch most active boosted tokens" }],

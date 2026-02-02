@@ -1,7 +1,7 @@
 const schema = {
     namespace: "pinata",
     name: "Pinata IPFS Read MCP Interface",
-    description: "A FlowMCP interface for reading content from the Pinata IPFS gateway",
+    description: "Read content from IPFS via the Pinata gateway — access files by CID (Content Identifier) through Pinata's dedicated IPFS gateway with API key authentication.",
     docs: ["https://gateway.pinata.cloud/"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         free_read_example: {
             requestMethod: "GET",
-            description: "Returns a static IPFS-hosted example image",
+            description: "Returns a static IPFS-hosted example image via Pinata IPFS. Returns structured JSON response data.",
             route: "/{{cid}}",
             parameters: [
                 { position: { key: "cid", value: 'QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/1', location: "insert" } }
@@ -21,7 +21,7 @@ const schema = {
         },
         free_read_cid: {
             requestMethod: "GET",
-            description: "Reads content from any IPFS CID",
+            description: "Reads content from any IPFS CID via Pinata IPFS. Returns structured JSON response data.",
             route: "/{{cid}}",
             parameters: [
                 { position: { key: "cid", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }

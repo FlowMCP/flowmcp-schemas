@@ -65,7 +65,7 @@ const schema = {
         },
         supportMatrix: {
             requestMethod: "GET",
-            description: "Returns the supported networks for ENS resolution and whether SEI is supported.",
+            description: "Returns the supported networks for ENS resolution and whether SEI is supported. Required: includeAll.",
             route: "/support",
             parameters: [
                 { position: { key: "includeAll", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: [] } }

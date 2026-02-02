@@ -32,7 +32,7 @@ const schema = {
     },
     get_social_volume: {
       requestMethod: "POST",
-      description: "Get total social media volume for a crypto asset.",
+      description: "Get total social media volume for a crypto asset via Santiment. Returns structured JSON response data.",
       route: "/graphql",
       parameters: [
         {
@@ -49,7 +49,7 @@ const schema = {
     },
     alert_social_shift: {
       requestMethod: "POST",
-      description: "Detect significant changes in social media volume for a crypto asset.",
+      description: "Detect significant changes in social media volume for a crypto asset. Required: asset, threshold, days.",
       route: "/graphql",
       parameters: [
         {
@@ -70,7 +70,7 @@ const schema = {
     },
     get_trending_words: {
       requestMethod: "POST",
-      description: "Retrieve top trending words in crypto discussions.",
+      description: "Retrieve top trending words in crypto discussions via Santiment. Returns structured JSON response data.",
       route: "/graphql",
       parameters: [
         {
@@ -87,7 +87,7 @@ const schema = {
     },
     get_social_dominance: {
       requestMethod: "POST",
-      description: "Get average social dominance for a crypto asset.",
+      description: "Get average social dominance for a crypto asset via Santiment. Returns structured JSON response data.",
       route: "/graphql",
       parameters: [
         {

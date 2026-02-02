@@ -71,7 +71,7 @@ export const schema = {
         },
         getGermanStates: {
             requestMethod: "GET",
-            description: "Get all 16 German federal states with their geographic center coordinates.",
+            description: "Get all 16 German federal states with their geographic center coordinates. via klinikatlas.",
             route: "/german-states.json",
             parameters: [],
             tests: [

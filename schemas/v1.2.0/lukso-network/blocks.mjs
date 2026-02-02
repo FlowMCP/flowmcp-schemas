@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Blocks",
-    description: "Retrieve blocks and related data from LUKSO BlockScout",
+    description: "Retrieve block data from LUKSO BlockScout — list blocks, get block details by number or hash, view block transactions, and block withdrawals.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getBlocks: {
         requestMethod: "GET",
-        description: "List recent blocks (optional filtering)",
+        description: "List recent blocks (optional filtering) via LUKSO BlockScout. Supports type filters.",
         route: "/blocks",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -25,7 +25,7 @@ export const schema = {
       },
       getBlockById: {
         requestMethod: "GET",
-        description: "Get detailed info for a block",
+        description: "Get detailed info for a block via LUKSO BlockScout — query by block id. Returns structured JSON response data.",
         route: "/blocks/:block_id",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -39,7 +39,7 @@ export const schema = {
       },
       getBlockTransactions: {
         requestMethod: "GET",
-        description: "Get transactions within a block",
+        description: "Get transactions within a block via LUKSO BlockScout — query by block id. Returns structured JSON response data.",
         route: "/blocks/:block_id/transactions",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -52,7 +52,7 @@ export const schema = {
       },
       getBlockWithdrawals: {
         requestMethod: "GET",
-        description: "Get withdrawals from a block",
+        description: "Get withdrawals from a block via LUKSO BlockScout — query by block id. Returns structured JSON response data.",
         route: "/blocks/:block_id/withdrawals",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

@@ -37,7 +37,7 @@ export const schema = {
         },
         getProjectStations: {
             requestMethod: "POST",
-            description: "Get monitoring stations associated with specific research projects.",
+            description: "Get monitoring stations associated with specific research projects. Returns structured JSON response data.",
             route: "/PROJECTSTATION_SMALL",
             parameters: [],
             tests: [

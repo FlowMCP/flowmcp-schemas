@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "ethscriptions",
     name: "Ethscriptions API V2",
-    description: "Access the Ethscriptions protocol - Ethereum-based digital artifacts and tokens",
+    description: "Access the Ethscriptions protocol for Ethereum-based digital artifacts — list, search, and inspect ethscriptions, transfers, tokens, and indexer status via the V2 API.",
     docs: ["https://api.ethscriptions.com/v2", "https://github.com/0xFacet/ethscriptions-indexer"],
     tags: ["nft", "ethereum", "inscriptions"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         listEthscriptions: {
             requestMethod: "GET",
-            description: "Retrieve a list of ethscriptions with various filtering options",
+            description: "Retrieve a list of ethscriptions with various filtering options Returns structured JSON response data.",
             route: "/ethscriptions",
             parameters: [
                 { position: { key: "current_owner", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)", "optional()"] } },
@@ -49,7 +49,7 @@ export const schema = {
         },
         getEthscriptionData: {
             requestMethod: "GET",
-            description: "Retrieve the raw content data of an ethscription",
+            description: "Retrieve the raw content data of an ethscription via Ethscriptions — query by id.",
             route: "/ethscriptions/:id/data",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -62,7 +62,7 @@ export const schema = {
         },
         getEthscriptionAttachment: {
             requestMethod: "GET",
-            description: "Retrieve the raw attachment data of an ethscription",
+            description: "Retrieve the raw attachment data of an ethscription via Ethscriptions — query by id.",
             route: "/ethscriptions/:id/attachment",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -74,7 +74,7 @@ export const schema = {
         },
         checkEthscriptionExists: {
             requestMethod: "GET",
-            description: "Check if an ethscription exists by its content SHA hash",
+            description: "Check if an ethscription exists by its content SHA hash via Ethscriptions — query by sha.",
             route: "/ethscriptions/exists/:sha",
             parameters: [
                 { position: { key: "sha", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -86,7 +86,7 @@ export const schema = {
         },
         checkMultipleEthscriptionsExistence: {
             requestMethod: "POST",
-            description: "Check existence of multiple ethscriptions by SHA hashes (max 100)",
+            description: "Check existence of multiple ethscriptions by SHA hashes (max 100). Required: shas.",
             route: "/ethscriptions/exists_multi",
             parameters: [
                 { position: { key: "shas", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "array()", options: ["min(1)", "max(100)"] } }
@@ -98,7 +98,7 @@ export const schema = {
         },
         listTransfers: {
             requestMethod: "GET",
-            description: "List ethscription transfers with filtering options",
+            description: "List ethscription transfers with filtering options via Ethscriptions. Supports from_address, to_address, transaction_hash filters.",
             route: "/ethscription_transfers",
             parameters: [
                 { position: { key: "from_address", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)", "optional()"] } },
@@ -119,7 +119,7 @@ export const schema = {
         },
         listTokens: {
             requestMethod: "GET",
-            description: "List ethscription tokens with filtering options",
+            description: "List ethscription tokens with filtering options via Ethscriptions. Supports protocol, tick, sort_by filters.",
             route: "/tokens",
             parameters: [
                 { position: { key: "protocol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
@@ -137,7 +137,7 @@ export const schema = {
         },
         getTokenDetails: {
             requestMethod: "GET",
-            description: "Get detailed information about a specific token including balances",
+            description: "Get detailed information about a specific token including balances. Required: protocol, tick.",
             route: "/tokens/:protocol/:tick",
             parameters: [
                 { position: { key: "protocol", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -151,7 +151,7 @@ export const schema = {
         },
         getTokenHistoricalState: {
             requestMethod: "GET",
-            description: "Get historical state of a token at a specific block number",
+            description: "Get historical state of a token at a specific block number via Ethscriptions — query by protocol and tick.",
             route: "/tokens/:protocol/:tick/historical_state",
             parameters: [
                 { position: { key: "protocol", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -165,7 +165,7 @@ export const schema = {
         },
         getIndexerStatus: {
             requestMethod: "GET",
-            description: "Get current status of the ethscriptions indexer",
+            description: "Get current status of the ethscriptions indexer. Returns structured JSON response data.",
             route: "/status",
             parameters: [],
             tests: [

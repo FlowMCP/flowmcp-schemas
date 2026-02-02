@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout NFTs",
-    description: "Query NFTs owned by address or smart contract",
+    description: "Query NFT data on LUKSO via BlockScout — collections, instances, holders, and transfers for any address or smart contract on LUKSO Mainnet.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getNFTsByAddress: {
         requestMethod: "GET",
-        description: "NFTs owned by address",
+        description: "NFTs owned by address via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/addresses/:address_hash/nft",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -24,7 +24,7 @@ export const schema = {
       },
       getNFTCollectionsByAddress: {
         requestMethod: "GET",
-        description: "NFTs grouped by collection",
+        description: "NFTs grouped by collection via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/addresses/:address_hash/nft/collections",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -37,7 +37,7 @@ export const schema = {
       },
       getNFTInstancesByContract: {
         requestMethod: "GET",
-        description: "List all NFT instances in contract",
+        description: "List all NFT instances in contract via LUKSO BlockScout — query by address hash.",
         route: "/tokens/:address_hash/instances",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -50,7 +50,7 @@ export const schema = {
       },
       getNFTInstanceById: {
         requestMethod: "GET",
-        description: "Get one NFT by ID",
+        description: "Get one NFT by ID via LUKSO BlockScout — query by address hash and id. Returns structured JSON response data.",
         route: "/tokens/:address_hash/instances/:id",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -64,7 +64,7 @@ export const schema = {
       },
       getNFTInstanceTransfers: {
         requestMethod: "GET",
-        description: "Transfers of a specific NFT",
+        description: "Transfers of a specific NFT via LUKSO BlockScout — query by address hash and id.",
         route: "/tokens/:address_hash/instances/:id/transfers",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -78,7 +78,7 @@ export const schema = {
       },
       getNFTInstanceHolders: {
         requestMethod: "GET",
-        description: "Get holders of an NFT instance",
+        description: "Get holders of an NFT instance via LUKSO BlockScout — query by address hash and id.",
         route: "/tokens/:address_hash/instances/:id/holders",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -92,7 +92,7 @@ export const schema = {
       },
       getNFTInstanceTransfersCount: {
         requestMethod: "GET",
-        description: "Count transfers of an NFT instance",
+        description: "Count transfers of an NFT instance via LUKSO BlockScout — query by address hash and id.",
         route: "/tokens/:address_hash/instances/:id/transfers-count",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

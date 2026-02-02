@@ -30,7 +30,7 @@ export const schema = {
         },
         getWalletPnL: {
             requestMethod: "POST",
-            description: "Get unrealized profit and loss data for a wallet address on a specific chain",
+            description: "Get unrealized profit and loss data for a wallet address on a specific chain. Required: address. Optional filters: chain.",
             route: "/streaming/graphql",
             parameters: [
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(10)"] } },

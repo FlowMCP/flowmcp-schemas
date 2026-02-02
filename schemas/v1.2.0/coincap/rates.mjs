@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coincap",
     name: "CoinCapRates",
-    description: "Access fiat and crypto conversion rates from CoinCap",
+    description: "Access fiat and cryptocurrency conversion rates from CoinCap — list all available exchange rates or look up a specific currency rate by slug.",
     docs: ["https://pro.coincap.io/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       listRates: {
         requestMethod: "GET",
-        description: "Retrieve all conversion rates or filter by comma-separated slugs",
+        description: "Retrieve all conversion rates or filter by comma-separated slugs. Optional filters: ids.",
         route: "/rates",
         parameters: [
           { position: { key: "ids", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } }
@@ -28,7 +28,7 @@ export const schema = {
       },
       getRateBySlug: {
             requestMethod: "GET",
-            description: "Retrieve a specific conversion rate by slug",
+            description: "Retrieve a specific conversion rate by slug via CoinCap — query by slug. Returns structured JSON response data.",
             route: "/rates/:slug",
             parameters: [
                 { position: { key: "slug", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }

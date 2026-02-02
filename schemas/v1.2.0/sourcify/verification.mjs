@@ -24,7 +24,7 @@ export const schema = {
         },
         checkByAddresses: {
             requestMethod: "GET",
-            description: "Check verification status of a contract address across one or multiple chains",
+            description: "Check verification status of a contract address across one or multiple chains. Required: addresses, chainIds.",
             route: "/check-all-by-addresses",
             parameters: [
                 { position: { key: "addresses", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(42)"] } },
@@ -37,7 +37,7 @@ export const schema = {
         },
         getSourceFileTree: {
             requestMethod: "GET",
-            description: "Get the list of verified source files for a contract",
+            description: "Get the list of verified source files for a contract via sourcify — query by chainId and address.",
             route: "/files/tree/any/:chainId/:address",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } },
@@ -50,7 +50,7 @@ export const schema = {
         },
         getSourceFiles: {
             requestMethod: "GET",
-            description: "Get full source code and metadata of a verified contract",
+            description: "Get full source code and metadata of a verified contract via sourcify — query by chainId and address.",
             route: "/files/any/:chainId/:address",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } },
@@ -63,7 +63,7 @@ export const schema = {
         },
         getSupportedChains: {
             requestMethod: "GET",
-            description: "Get the list of all chains supported by Sourcify",
+            description: "Get the list of all chains supported by Sourcify. Returns structured JSON response data.",
             route: "/chains",
             parameters: [],
             tests: [

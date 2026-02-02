@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coincap",
     name: "CoinCapMarkets",
-    description: "Access CoinCap market data including price, volume, and exchange metadata",
+    description: "Access CoinCap market pair data — list trading pairs across exchanges with price, volume, spread, and exchange metadata. Supports filtering by exchange or asset.",
     docs: ["https://pro.coincap.io/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       listMarkets: {
         requestMethod: "GET",
-        description: "Retrieve a list of markets with optional filters",
+        description: "Retrieve a list of markets with optional filters via CoinCap. Supports exchangeId, baseSymbol, baseId filters.",
         route: "/markets",
         parameters: [
           { position: { key: "exchangeId", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },

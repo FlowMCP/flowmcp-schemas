@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getHomepage: {
             requestMethod: "GET",
-            description: "Get current homepage news with top stories and regional coverage",
+            description: "Get current homepage news with top stories and regional coverage via tagesschau.",
             route: "/homepage",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
         },
         getNews: {
             requestMethod: "GET",
-            description: "Get news articles filtered by region or editorial section (ressort)",
+            description: "Get news articles filtered by region or editorial section (ressort). Optional filters: regions, ressort.",
             route: "/news",
             parameters: [
                 { position: { key: "regions", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(16)", "optional()"] } },
@@ -40,7 +40,7 @@ export const schema = {
         },
         searchArticles: {
             requestMethod: "GET",
-            description: "Search tagesschau articles by keyword",
+            description: "Search tagesschau articles by keyword. Supports pageSize, resultPage filters. Returns structured JSON response data.",
             route: "/search",
             parameters: [
                 { position: { key: "searchText", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -58,7 +58,7 @@ export const schema = {
         },
         getChannels: {
             requestMethod: "GET",
-            description: "Get available live streaming channels (tagesschau24, tagesschau, tagesthemen)",
+            description: "Get available live streaming channels (tagesschau24, tagesschau, tagesthemen) Returns structured JSON response data.",
             route: "/channels",
             parameters: [],
             tests: [

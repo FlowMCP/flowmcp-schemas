@@ -29,7 +29,7 @@ const priceFeedAbi = [
 const schema = {
     namespace: "chainlink",
     name: "ExampleName",
-    description: "A short description of the schema purpose",
+    description: "Read individual Chainlink oracle price feeds on 12 EVM chains (Ethereum, Polygon, Arbitrum, Base, etc.) via Infura RPC. Returns the latest price for a selected trading pair (e.g., ETH/USD) by calling latestRoundData() on-chain. Also lists available chains and feeds per chain.",
     docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
     tags: ["oracle", "price", "feeds"],
     flowMCP: "1.2.0",
@@ -39,7 +39,7 @@ const schema = {
     routes: {
         getAvailableChains: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "List all supported EVM chains for Chainlink single-feed price lookups (Ethereum, Binance, Polygon, Avalanche, Arbitrum, Optimism, Base, Linea, Mantle, Scroll, zkSync, Celo).",
             route: "/",
             parameters: [],
             tests: [ { _description: "Basic test for exampleRoute" } ],
@@ -47,7 +47,7 @@ const schema = {
         },
         getAvailableFeedsForChain: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "List all available Chainlink price feed pairs for a selected chain. Returns feed names (e.g., ETH/USD, BTC/USD) that can be queried via the chain-specific getLatestPrice routes.",
             route: "/",
             parameters: [
                 { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)", options: [] } }
@@ -57,7 +57,7 @@ const schema = {
         },
         getLatestPriceEthereum: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Ethereum Mainnet. Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "ETHEREUM_MAINNET", location: "insert" } },
@@ -68,7 +68,7 @@ const schema = {
         },
         getLatestPriceBinance: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Binance Smart Chain (BSC). Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "BINANCE_MAINNET", location: "insert" } },
@@ -79,7 +79,7 @@ const schema = {
         },
       getLatestPricePolygon: {
         requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
+        description: "Fetch the latest Chainlink oracle price for a selected trading pair on Polygon Mainnet. Calls latestRoundData() on-chain via Infura RPC.",
         route: "/",
         parameters: [ 
             { position: { key: "chainName", value: "POLYGON_MAINNET", location: "insert" } },
@@ -90,7 +90,7 @@ const schema = {
       },
       getLatestPriceAvalanche: {
         requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
+        description: "Fetch the latest Chainlink oracle price for a selected trading pair on Avalanche C-Chain. Calls latestRoundData() on-chain via Infura RPC.",
         route: "/",
         parameters: [ 
             { position: { key: "chainName", value: "AVALANCHE_MAINNET", location: "insert" } },
@@ -101,7 +101,7 @@ const schema = {
       },
       getLatestPriceAribitrum: {
         requestMethod: "GET",
-        description: "Fetches the latest price for a given pair on a specified chain",
+        description: "Fetch the latest Chainlink oracle price for a selected trading pair on Arbitrum One. Calls latestRoundData() on-chain via Infura RPC.",
         route: "/",
         parameters: [ 
             { position: { key: "chainName", value: "ARBITRUM_MAINNET", location: "insert" } },
@@ -112,7 +112,7 @@ const schema = {
       },
         getLatestPriceOptimism: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Optimism Mainnet (OP Stack). Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "OPTIMISM_MAINNET", location: "insert" } },
@@ -123,7 +123,7 @@ const schema = {
         },
         getLatestPriceBase: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Base Mainnet (Coinbase L2). Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "BASE_MAINNET", location: "insert" } },
@@ -134,7 +134,7 @@ const schema = {
         },
         getLatestPriceLinea: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Linea Mainnet (Consensys zkEVM). Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "LINEA_MAINNET", location: "insert" } },
@@ -145,7 +145,7 @@ const schema = {
         },
         getLatestPriceMantle: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Mantle Mainnet. Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "MANTLE_MAINNET", location: "insert" } },
@@ -156,7 +156,7 @@ const schema = {
         },
         getLatestPriceScroll: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Scroll Mainnet (zkEVM L2). Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "SCROLL_MAINNET", location: "insert" } },
@@ -167,7 +167,7 @@ const schema = {
         },
         getLatestPriceZksync: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on zkSync Era Mainnet. Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "ZKSYNC_MAINNET", location: "insert" } },
@@ -178,7 +178,7 @@ const schema = {
         },
         getLatestPriceCelo: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Fetch the latest Chainlink oracle price for a selected trading pair on Celo Mainnet. Calls latestRoundData() on-chain via Infura RPC.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "CELO_MAINNET", location: "insert" } },

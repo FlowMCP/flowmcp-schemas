@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       farcasterGetTrendingMemecoins: {
         requestMethod: "GET",
-        description: "Get trending Farcaster memecoins from Dune Analytics.",
+        description: "Get trending Farcaster memecoins from Dune Analytics. Supports sort_by, filters, columns filters.",
         route: "/memecoins",
         parameters: [
           {
@@ -42,7 +42,7 @@ export const schema = {
       },
       farcasterGetTrendingChannels: {
         requestMethod: "GET",
-        description: "Get trending Farcaster channels from Dune Analytics.",
+        description: "Get trending Farcaster channels from Dune Analytics. Supports sort_by, filters, columns filters.",
         route: "/channels",
         parameters: [
           {
@@ -71,7 +71,7 @@ export const schema = {
       },
       farcasterGetTrendingUsers: {
         requestMethod: "GET",
-        description: "Get trending Farcaster users who casted in the last 14 days.",
+        description: "Get trending Farcaster users who casted in the last 14 days. Required: limit. Optional filters: sort_by, filters, columns.",
         route: "/users",
         parameters: [
           {

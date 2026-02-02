@@ -37,7 +37,7 @@ const schema = {
     routes: {
         getSupportedChains: {
             requestMethod: "GET",
-            description: "List supported chains and their domain suffixes (static, compiled from docs).",
+            description: "List supported chains and their domain suffixes (static, compiled from docs). via spaceid.",
             route: "/",
             parameters: [],
             tests: [
@@ -49,7 +49,7 @@ const schema = {
         },
         getAddress: {
             requestMethod: "GET",
-            description: "Resolve domain name to wallet address (e.g. steven.sei → sei1whl4xw...)",
+            description: "Resolve domain name to wallet address (e.g. steven.sei → sei1whl4xw...). Required: domain.",
             route: "/getAddress",
             parameters: [
                 { 
@@ -64,7 +64,7 @@ const schema = {
         },
         getName: {
             requestMethod: "GET",
-            description: "Resolve wallet address to primary domain name on specified chain",
+            description: "Resolve wallet address to primary domain name on specified chain. Required: chainid, address.",
             route: "/getName",
             parameters: [
                 { 

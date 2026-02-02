@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "memoryLol",
     name: "TwitterUsernameChanges",
-    description: "Get Twitter username change history via memory.lol API.",
+    description: "Retrieve the full history of Twitter/X username changes for any account via memory.lol — track handle renames and previous usernames.",
     docs: ["https://github.com/travisbrown/memory.lol"],
     tags: [],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       queryUsernameChanges: {
         requestMethod: "GET",
-        description: "Fetch username change history for a Twitter user.",
+        description: "Fetch username change history for a Twitter user via memoryLol — query by screen name.",
         route: "/v1/tw/:screen_name",
         parameters: [
           {

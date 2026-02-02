@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "cryptorank",
     name: "Cryptorank Funds",
-    description: "Sortable, filterable access to Cryptorank funds and detailed fund profiles.",
+    description: "Access cryptocurrency investment fund data from Cryptorank — search, filter, and sort funds with detailed profiles including team members and portfolio analytics.",
     docs: ["https://api.cryptorank.io"],
     tags: ["funds", "investors", "analytics"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         searchFunds: {
             requestMethod: "GET",
-            description: "Fetch a sortable and filterable list of funds and investors with key metrics.",
+            description: "Fetch a sortable and filterable list of funds and investors with key metrics. Required: sortBy, sortDirection, limit, skip. Optional filters: tier, type.",
             route: "/funds",
             parameters: [
                 { position: { key: "sortBy", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(tier,fundingRounds,leadInvestments,portfolio,retailRoi)", options: ["default(tier)"] } },
@@ -31,7 +31,7 @@ export const schema = {
         },
         getAllFunds: {
             requestMethod: "GET",
-            description: "Fetch the complete map/list of investors and funds.",
+            description: "Fetch the complete map/list of investors and funds via Cryptorank. Returns structured JSON response data.",
             route: "/funds/map",
             parameters: [],
             tests: [
@@ -41,7 +41,7 @@ export const schema = {
         },
         getFundBasic: {
             requestMethod: "GET",
-            description: "Fetch basic metrics for a specific fund by ID.",
+            description: "Fetch basic metrics for a specific fund by ID via Cryptorank — query by fund id.",
             route: "/funds/:fund_id",
             parameters: [
                 { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
@@ -53,7 +53,7 @@ export const schema = {
         },
         getFundDetail: {
             requestMethod: "GET",
-            description: "Fetch comprehensive fund profile, investments, rounds, and metadata by ID.",
+            description: "Fetch comprehensive fund profile, investments, rounds, and metadata by ID. Required: fund_id.",
             route: "/funds/:fund_id/full-metadata",
             parameters: [
                 { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
@@ -65,7 +65,7 @@ export const schema = {
         },
         getFundTeam: {
             requestMethod: "GET",
-            description: "Fetch detailed team information for a specific fund by ID.",
+            description: "Fetch detailed team information for a specific fund by ID via Cryptorank — query by fund id.",
             route: "/funds/:fund_id/team",
             parameters: [
                 { position: { key: "fund_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }

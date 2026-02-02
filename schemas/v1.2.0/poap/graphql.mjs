@@ -49,7 +49,7 @@ const poapQueries = {
 const schema = {
     namespace: "poap",
     name: "POAP GraphQL",
-    description: "GraphQL endpoint for accessing POAP event data and metadata",
+    description: "Query the POAP protocol via GraphQL — introspect the schema, run predefined queries, or execute custom GraphQL queries for event attendance and token metadata.",
     docs: ["https://public.compass.poap.tech/v1/graphql"],
     tags: ["production", "graphql", "poap"],
     flowMCP: "1.2.0",
@@ -73,7 +73,7 @@ const schema = {
         },
         getSchemaDefinition: {
             requestMethod: "POST",
-            description: "Returns the full GraphQL schema via introspection",
+            description: "Returns the full GraphQL schema via introspection via POAP. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 {
@@ -92,7 +92,7 @@ const schema = {
         },
         getPredefinedQueryList: {
             requestMethod: "GET",
-            description: "Run a predefined GraphQL query.",
+            description: "List all available predefined GraphQL queries for the POAP subgraph via the query catalog endpoint.",
             route: "/",
             parameters: [],
             tests: [
@@ -104,7 +104,7 @@ const schema = {
         },
         executePrefinedQuery: {
             requestMethod: "POST",
-            description: "Run a predefined GraphQL query.",
+            description: "Execute a predefined GraphQL query on the POAP subgraph — select a query by ID from available templates.",
             route: "/",
             parameters: [
                 { position: { key: "queryId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: `enum(${Object.keys( poapQueries )})`, options: [] } },
@@ -121,7 +121,7 @@ const schema = {
         },
         querySubgraph: {
             requestMethod: "POST",
-            description: "Run a raw GraphQL query.",
+            description: "Execute a custom raw GraphQL query on the POAP subgraph — pass any valid GraphQL query string directly.",
             route: "/",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: [] } }

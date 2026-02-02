@@ -1,7 +1,7 @@
 export const schema = {
   namespace: "solscan",
   name: "SolscanChainInfo",
-  description: "Fetches general blockchain information from Solana via Solscan public API.",
+  description: "Fetch general Solana blockchain information via Solscan — current block height, transaction count, TPS, total supply, and network health metrics.",
   docs: ["https://docs.solscan.io/api-access/pro-api-endpoints"],
   tags: [],
   flowMCP: "1.2.0",

@@ -64,7 +64,7 @@ const chainSelections = {
 const schema = {
     namespace: "ohlcv",
     name: "Moralis Recursive OHLCV EVM and Ethereum",
-    description: "Recursively fetches OHLCV data from Moralis for EVM token pairs.",
+    description: "Recursively fetch OHLCV candlestick data from Moralis for any EVM token pair — auto-paginates through all available timeframes for complete price history.",
     docs: ["https://docs.moralis.io/web3-data-api/evm/reference/get-ohlcv-by-pair-address"],
     tags: [],
     flowMCP: "1.2.0",
@@ -74,7 +74,7 @@ const schema = {
     routes: {
         getRecursiveOhlcvEVM: {
             requestMethod: "GET",
-            description: "Fetch OHLCV data recursively until max length or iteration limit is reached.",
+            description: "Fetch OHLCV data recursively until max length or iteration limit is reached. Required: pairAddress, chain, timeframe, currency, fromDateAmount, fromDateUnit, maxResultLength.",
             route: "/api/v2.2/pairs/{{pairAddress}}/ohlcv",
             parameters: [
                 { position: { key: "pairAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

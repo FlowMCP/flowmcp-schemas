@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getCryptoCryptopanicNews: {
         requestMethod: "GET",
-        description: "Get a list of crypto news headlines from CryptoPanic.",
+        description: "Get a list of crypto news headlines from CryptoPanic. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "kind", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(news,media,analysis)",   options: [ "default(news)"] } },

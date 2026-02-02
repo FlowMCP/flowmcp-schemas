@@ -70,7 +70,7 @@ const schema = {
     routes: {
       topTradersAll: {
         requestMethod: "GET",
-        description: "Get the most profitable traders across all tokens.",
+        description: "Get the most profitable traders across all tokens via Solana Tracker. Supports expandPnl, sortBy filters.",
         route: "/top-traders/all",
         parameters: [
           {
@@ -105,7 +105,7 @@ const schema = {
       },
       topTradersAllPaged: {
         requestMethod: "GET",
-        description: "Get the most profitable traders across all tokens, paginated by page number.",
+        description: "Get the most profitable traders across all tokens, paginated by page number. Required: page.",
         route: "/top-traders/all/:page",
         parameters: [
           {
@@ -129,7 +129,7 @@ const schema = {
       },
       topTradersByToken: {
         requestMethod: "GET",
-        description: "Get the top 100 most profitable traders for a specific token.",
+        description: "Get the top 100 most profitable traders for a specific token. via Solana Tracker.",
         route: "/top-traders/:token",
         parameters: [
           {

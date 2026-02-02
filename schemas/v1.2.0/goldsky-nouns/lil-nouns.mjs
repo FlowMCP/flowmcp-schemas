@@ -1,7 +1,7 @@
 const schema = {
     namespace: "goldskyLilNouns",
     name: "Lil Nouns Subgraph",
-    description: "Fetches proposal data from the Lil Nouns subgraph hosted on Goldsky.",
+    description: "Fetch governance proposal data from the Lil Nouns DAO subgraph on Goldsky — list all proposals or retrieve a specific proposal by ID with vote details.",
     docs: ["https://lilnouns.wtf", "https://docs.goldsky.com"],
     tags: ["production", "data", "api"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getProposals: {
             requestMethod: "POST",
-            description: "Retrieves the first 1000 proposals ordered by createdBlock in ascending order.",
+            description: "Retrieves the first 1000 proposals ordered by createdBlock in ascending order. via Goldsky.",
             route: "/",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ const schema = {
         },
         getProposalById: {
             requestMethod: "POST",
-            description: "Fetch a single proposal by its numeric ID.",
+            description: "Fetch a single proposal by its numeric ID via Goldsky. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["regex(^\\\\d+$)"] } }

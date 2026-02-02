@@ -3,7 +3,7 @@
 export const schema = {
     namespace: "dexscreener",
     name: "Dexscreener Pairs",
-    description: "DexScreener API – Pair data and token orders by chain",
+    description: "Retrieve DEX trading pair data from DexScreener — pair details by chain and address, plus token buy/sell order checks across supported chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
         getPairByChainAndAddress: {
             requestMethod: "GET",
-            description: "Get pair by chain and pair address",
+            description: "Get pair by chain and pair address via DexScreener — query by chainId and pairAddress.",
             route: "/latest/dex/pairs/:chainId/:pairAddress",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -24,7 +24,7 @@ export const schema = {
         },
         checkTokenOrders: {
             requestMethod: "GET",
-            description: "Check token orders by chain and token address",
+            description: "Check token orders by chain and token address via DexScreener — query by chainId and tokenAddress.",
             route: "/orders/v1/:chainId/:tokenAddress",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } },

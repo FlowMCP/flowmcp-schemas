@@ -6,7 +6,7 @@ const sources = [
 const schema = {
     namespace: "defillama",
     name: "DeFi Llama Token Prices",
-    description: "Provides current token price data using DeFi Llama",
+    description: "Fetch current token prices across multiple chains via DeFi Llama — batch query ERC20 and native token prices by contract address with USD values.",
     docs: ["https://docs.llama.fi"],
     tags: [],
     flowMCP: "1.2.0",
@@ -16,7 +16,7 @@ const schema = {
     routes: {
         getTokenPrices: {
             requestMethod: "GET",
-            description: "Get current price information for a specific token",
+            description: "Get current price information for a specific token via defillama. Returns structured JSON response data.",
             route: "/prices/current/_tokenName_",
             parameters: [
                 { position: { key: "source", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: `enum(${sources.join(',')})`, options: [] } },

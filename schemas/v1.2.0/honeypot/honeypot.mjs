@@ -1,7 +1,7 @@
 const schema = {
     namespace: "honeypot",
     name: "Honeypot Detector",
-    description: "Checks if a token contract is a honeypot using honeypot.is API.",
+    description: "Detect honeypot token contracts using the honeypot.is API — checks buy/sell tax, liquidity locks, and contract risks for any EVM token address.",
     docs: ["https://honeypot.is"],
     tags: ["production", "security", "token", "validation"],
     flowMCP: "1.2.0",
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         check: {
             requestMethod: "GET",
-            description: "Checks if a token address is a honeypot on Ethereum, BSC, or Base.",
+            description: "Checks if a token address is a honeypot on Ethereum, BSC, or Base. Required: address.",
             route: "/IsHoneypot",
             parameters: [
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["regex(^0x[a-fA-F0-9]{40}$)"] } }

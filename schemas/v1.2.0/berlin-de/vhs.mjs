@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         all_courses: {
             requestMethod: "GET",
-            description: "Complete catalog of VHS courses across all Berlin districts",
+            description: "Complete catalog of VHS courses across all Berlin districts via Berlin.de. Returns structured JSON response data.",
             route: "/VHSKURSE/OpenData/Kurse.json",
             parameters: [],
             tests: [

@@ -1,7 +1,7 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis defiApi API',
-    'description': 'Moralis defiApi API',
+    'description': 'DeFi portfolio analysis via Moralis — wallet positions across protocols (Uniswap, Aave, Lido, MakerDAO, EigenLayer, etc.) with per-protocol detail and summary views across EVM chains.',
     'docs': ["https://docs.moralis.com"],
     tags: [],
     'flowMCP': '1.2.0',
@@ -15,7 +15,7 @@ const schema = {
     'routes': {	
 		"/wallets/:address/defi/:protocol/positions": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the detailed defi positions by protocol for a wallet address.",
+		    "description": "Get the detailed defi positions by protocol for a wallet address. Required: chain, address, protocol.",
 		    "route": "/wallets/:address/defi/:protocol/positions",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z": {"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},
@@ -32,7 +32,7 @@ const schema = {
 	
 		"/wallets/:address/defi/positions": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the positions summary of a wallet address.",
+		    "description": "Get the positions summary of a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/defi/positions",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},
@@ -48,7 +48,7 @@ const schema = {
 	
 		"/wallets/:address/defi/summary": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the defi summary of a wallet address.",
+		    "description": "Get the defi summary of a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/defi/summary",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},

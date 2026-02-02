@@ -6,7 +6,7 @@ const selection = {
 const schema = {
     namespace: "polymarket",
     name: "Fed Rate Cuts 2025",
-    description: "Zeigt Marktprognosen für Fed-Zinssenkungen im Jahr 2025.",
+    description: "Access Polymarket prediction market data for Fed rate cut events via the Gamma API. Returns market outcomes, probabilities, and trading volume.",
     docs: ["https://polymarket.com"],
     tags: [],
     flowMCP: "1.2.0",
@@ -16,7 +16,7 @@ const schema = {
     routes: {
         searchBySlug: {
             requestMethod: "GET",
-            description: "Get market data for Fed rate cuts in 2025 by slug",
+            description: "Get market data for Fed rate cuts in 2025 by slug via Polymarket — query by slug.",
             route: "/events/slug/:slug",
             parameters: [
                 { position: { key: "slug", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: `enum(${Object.keys(selection)})`, options: [] } }

@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         searchAdvancedProfiles: {
             requestMethod: "GET",
-            description: "Get profiles that match input query and sort specification.",
+            description: "Get profiles that match input query and sort specification via talentprotocol. Supports query, aggregations, returnItems filters.",
             route: "/search/advanced/profiles",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },

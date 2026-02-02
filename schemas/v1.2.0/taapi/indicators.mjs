@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getRSI: {
             requestMethod: "GET",
-            description: "Get the Relative Strength Index (RSI) for a trading pair",
+            description: "Get the Relative Strength Index (RSI) for a trading pair via TAAPI. Supports exchange, interval, backtrack filters.",
             route: "/rsi",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -28,7 +28,7 @@ export const schema = {
         },
         getMACD: {
             requestMethod: "GET",
-            description: "Get the Moving Average Convergence Divergence (MACD) for a trading pair",
+            description: "Get the Moving Average Convergence Divergence (MACD) for a trading pair. Required: symbol. Optional filters: exchange, interval, backtrack.",
             route: "/macd",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -44,7 +44,7 @@ export const schema = {
         },
         getBollingerBands: {
             requestMethod: "GET",
-            description: "Get Bollinger Bands (upper, middle, lower) for a trading pair",
+            description: "Get Bollinger Bands (upper, middle, lower) for a trading pair. Required: symbol. Optional filters: exchange, interval, optInTimePeriod.",
             route: "/bbands",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -60,7 +60,7 @@ export const schema = {
         },
         getEMA: {
             requestMethod: "GET",
-            description: "Get the Exponential Moving Average (EMA) for a trading pair",
+            description: "Get the Exponential Moving Average (EMA) for a trading pair via TAAPI. Supports exchange, interval, optInTimePeriod filters.",
             route: "/ema",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -76,7 +76,7 @@ export const schema = {
         },
         getSMA: {
             requestMethod: "GET",
-            description: "Get the Simple Moving Average (SMA) for a trading pair",
+            description: "Get the Simple Moving Average (SMA) for a trading pair via TAAPI. Supports exchange, interval, optInTimePeriod filters.",
             route: "/sma",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -92,7 +92,7 @@ export const schema = {
         },
         getStochastic: {
             requestMethod: "GET",
-            description: "Get Stochastic oscillator (K and D values) for a trading pair",
+            description: "Get Stochastic oscillator (K and D values) for a trading pair. Required: symbol. Optional filters: exchange, interval.",
             route: "/stoch",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -107,7 +107,7 @@ export const schema = {
         },
         getATR: {
             requestMethod: "GET",
-            description: "Get the Average True Range (ATR) volatility indicator for a trading pair",
+            description: "Get the Average True Range (ATR) volatility indicator for a trading pair. Required: symbol. Optional filters: exchange, interval, optInTimePeriod.",
             route: "/atr",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -123,7 +123,7 @@ export const schema = {
         },
         getStochRSI: {
             requestMethod: "GET",
-            description: "Get the Stochastic RSI for a trading pair",
+            description: "Get the Stochastic RSI for a trading pair via TAAPI. Supports exchange, interval filters.",
             route: "/stochrsi",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -138,7 +138,7 @@ export const schema = {
         },
         getVWAP: {
             requestMethod: "GET",
-            description: "Get the Volume Weighted Average Price (VWAP) for a trading pair",
+            description: "Get the Volume Weighted Average Price (VWAP) for a trading pair. Required: symbol. Optional filters: exchange, interval.",
             route: "/vwap",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -153,7 +153,7 @@ export const schema = {
         },
         getIchimoku: {
             requestMethod: "GET",
-            description: "Get Ichimoku Cloud indicator values for a trading pair",
+            description: "Get Ichimoku Cloud indicator values for a trading pair via TAAPI. Supports exchange, interval filters.",
             route: "/ichimoku",
             parameters: [
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },

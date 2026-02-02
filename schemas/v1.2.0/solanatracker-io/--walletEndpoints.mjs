@@ -6,7 +6,7 @@ const walletRoutes = {
       matchesSchemaRoute: "walletInformation", // ✅ schema.routes.walletInformation
       walletInformation: {
         requestMethod: "GET",
-        description: "Get all tokens in a wallet with current value in USD.",
+        description: "Get all tokens in a wallet with current value in USD via Solana Tracker — query by owner.",
         route: "/wallet/:owner",
         parameters: [
           {
@@ -40,7 +40,7 @@ const walletRoutes = {
       matchesSchemaRoute: "walletTrades", // ✅ schema.routes.walletTrades
       walletTrades: {
         requestMethod: "GET",
-        description: "Get the latest trades of a wallet.",
+        description: "Get the latest trades of a wallet via Solana Tracker — query by owner. Supports cursor filters.",
         route: "/wallet/:owner/trades",
         parameters: [
           {
@@ -64,7 +64,7 @@ const walletRoutes = {
 const schema = {
     namespace: "solanatracker",
     name: "WalletExplorer",
-    description: "API zur Abfrage von Token-Balances und Handelsdaten für Wallets.",
+    description: "Query Solana wallet data via Solana Tracker — token balances with USD values, recent trades, and paginated portfolio views for any wallet address.",
     docs: ["https://docs.solanatracker.io"],
     tags: [],
     flowMCP: "1.2.0",
@@ -89,7 +89,7 @@ const schema = {
       },
       walletTokensBasic: {
         requestMethod: "GET",
-        description: "Lightweight version: token balances and values without full metadata.",
+        description: "Lightweight version: token balances and values without full metadata. Required: owner.",
         route: "/wallet/:owner/basic",
         parameters: [
           { position: { key: "owner", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -101,7 +101,7 @@ const schema = {
       },
       walletTokensPaged: {
         requestMethod: "GET",
-        description: "Paginated version: fetch wallet tokens page by page (250 per page).",
+        description: "Paginated version: fetch wallet tokens page by page (250 per page). Required: owner, page.",
         route: "/wallet/:owner/page/:page",
         parameters: [
           { position: { key: "owner", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

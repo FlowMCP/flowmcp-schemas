@@ -4282,7 +4282,7 @@ const multicallCommands = Object
 const schema = {
     namespace: "chainlinkMulticall",
     name: "Multicall Latest Prices",
-    description: "A short description of the schema purpose",
+    description: "Batch-fetch ALL Chainlink oracle prices for an entire EVM chain in a single Multicall3 aggregate3 call. Returns all available price feeds at once for 12 chains (Ethereum, Polygon, Arbitrum, Base, etc.). Bulk variant of the single-feed chainlink schema.",
     docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
     tags: ["oracle", "price", "feeds"],
     flowMCP: "1.2.0",
@@ -4292,7 +4292,7 @@ const schema = {
     routes: {
         getAvailableChains: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "List all supported EVM chains for Chainlink bulk price feed lookups via Multicall3 (Ethereum, Binance, Polygon, Avalanche, Arbitrum, Optimism, Base, Linea, Mantle, Scroll, zkSync, Celo).",
             route: "/",
             parameters: [],
             tests: [ { _description: "Basic test for exampleRoute" } ],
@@ -4300,7 +4300,7 @@ const schema = {
         },
         getAllLatestPricesEthereum: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Ethereum Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "ETHEREUM_MAINNET", location: "insert" } }
@@ -4311,7 +4311,7 @@ const schema = {
 
         getAllLatestPricesBinance: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Binance Smart Chain (BSC) in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "BINANCE_MAINNET", location: "insert" } }
@@ -4321,7 +4321,7 @@ const schema = {
         },
         getAllLatestPricesPolygon: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Polygon Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "POLYGON_MAINNET", location: "insert" } }
@@ -4332,7 +4332,7 @@ const schema = {
 
         getAllLatestPricesAvalanche: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Avalanche C-Chain in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "AVALANCHE_MAINNET", location: "insert" } }
@@ -4342,7 +4342,7 @@ const schema = {
         },
         getAllLatestPricesAribitrum: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Arbitrum One in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "ARBITRUM_MAINNET", location: "insert" } }
@@ -4352,7 +4352,7 @@ const schema = {
         },
         getAllLatestPricesOptimism: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Optimism Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "OPTIMISM_MAINNET", location: "insert" } }
@@ -4362,7 +4362,7 @@ const schema = {
         },
         getAllLatestPricesBase: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Base Mainnet (Coinbase L2) in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "BASE_MAINNET", location: "insert" } }
@@ -4372,7 +4372,7 @@ const schema = {
         },
         getAllLatestPricesLinea: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Linea Mainnet (Consensys zkEVM) in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "LINEA_MAINNET", location: "insert" } }
@@ -4382,7 +4382,7 @@ const schema = {
         },
         getAllLatestPricesMantle: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Mantle Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "MANTLE_MAINNET", location: "insert" } }
@@ -4392,7 +4392,7 @@ const schema = {
         },
         getAllLatestPricesScroll: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Scroll Mainnet (zkEVM L2) in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "SCROLL_MAINNET", location: "insert" } }
@@ -4402,7 +4402,7 @@ const schema = {
         },
         getAllLatestPricesZksync: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on zkSync Era Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "ZKSYNC_MAINNET", location: "insert" } }
@@ -4412,7 +4412,7 @@ const schema = {
         },
         getAllLatestPricesCelo: {
             requestMethod: "GET",
-            description: "Fetches the latest price for a given pair on a specified chain",
+            description: "Batch-fetch all Chainlink oracle prices on Celo Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.",
             route: "/",
             parameters: [ 
                 { position: { key: "chainName", value: "CELO_MAINNET", location: "insert" } }

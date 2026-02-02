@@ -13,7 +13,7 @@ export const schema = {
   routes: {
     listingsLatest: {
       requestMethod: "GET",
-      description: "Get latest listings of cryptocurrencies sorted and paginated.",
+      description: "Get latest listings of cryptocurrencies sorted and paginated. via CoinMarketCap.",
       route: "/cryptocurrency/listings/latest",
       parameters: [
         { position: { key: "start", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()"] } },

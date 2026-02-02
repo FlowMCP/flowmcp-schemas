@@ -1,7 +1,7 @@
 export const schema = {
     namespace: "coincap",
     name: "AssetsAPI",
-    description: "Retrieve data about crypto assets and markets",
+    description: "Retrieve cryptocurrency asset data from CoinCap — prices, market caps, supply, volume, and historical data for thousands of tokens.",
     docs: ["https://pro.coincap.io/api-docs"],
     tags: [],
     flowMCP: "1.2.0",
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       listAssets: {
         requestMethod: "GET",
-        description: "Retrieve a list of assets",
+        description: "Retrieve a list of assets via CoinCap. Supports search, ids, limit filters. Returns structured JSON response data.",
         route: "/assets",
         parameters: [
           { position: { key: "search", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] }},
@@ -29,7 +29,7 @@ export const schema = {
       },
       singleAsset: {
         requestMethod: "GET",
-        description: "Retrieve details for a specific asset",
+        description: "Retrieve details for a specific asset via CoinCap — query by slug. Returns structured JSON response data.",
         route: "/assets/:slug",
         parameters: [
           { position: { key: "slug", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] }}
@@ -41,7 +41,7 @@ export const schema = {
       },
       assetMarkets: {
         requestMethod: "GET",
-        description: "Retrieve market data for an asset",
+        description: "Retrieve market data for an asset via CoinCap — query by slug. Supports limit, offset filters.",
         route: "/assets/:slug/markets",
         parameters: [
           { position: { key: "slug", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] }},
@@ -55,7 +55,7 @@ export const schema = {
       },
       assetHistory: {
         requestMethod: "GET",
-        description: "Retrieve historical data for an asset",
+        description: "Retrieve historical data for an asset via CoinCap — query by slug. Supports start, end filters.",
         route: "/assets/:slug/history",
         parameters: [
           { position: { key: "slug", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] }},

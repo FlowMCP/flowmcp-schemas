@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getCoinsList: {
         requestMethod: "GET",
-        description: "Fetch the list of all coins (id, symbol, name)",
+        description: "Fetch the list of all coins (id, symbol, name) via CoinGecko. Returns structured JSON response data.",
         route: "/coins/list",
         parameters: [],
         tests: [{ _description: "Test getCoinsList - should return list of coins" }],
@@ -19,7 +19,7 @@ export const schema = {
       },
       getCoinsMarkets: {
         requestMethod: "GET",
-        description: "Fetch market data for coins",
+        description: "Fetch market data for coins via CoinGecko. Supports ids filters. Returns structured JSON response data.",
         route: "/coins/markets",
         parameters: [
           { position: { key: "vs_currency", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -30,7 +30,7 @@ export const schema = {
       },
       getCoinById: {
         requestMethod: "GET",
-        description: "Fetch detailed info for a specific coin",
+        description: "Fetch detailed info for a specific coin via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/coins/:id",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -40,7 +40,7 @@ export const schema = {
       },
       getCoinMarketChart: {
         requestMethod: "GET",
-        description: "Fetch historical market chart data for a coin",
+        description: "Fetch historical market chart data for a coin via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/coins/:id/market_chart",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
@@ -52,7 +52,7 @@ export const schema = {
       },
       getCoinHistory: {
         requestMethod: "GET",
-        description: "Fetch historical coin data by date",
+        description: "Fetch historical coin data by date via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/coins/:id/history",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
@@ -63,7 +63,7 @@ export const schema = {
       },
       getCoinTickers: {
         requestMethod: "GET",
-        description: "Fetch all trading pairs (tickers) for a coin",
+        description: "Fetch all trading pairs (tickers) for a coin via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/coins/:id/tickers",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -73,7 +73,7 @@ export const schema = {
       },
       getCoinContractInfo: {
         requestMethod: "GET",
-        description: "Fetch coin information by contract address",
+        description: "Fetch coin information by contract address via CoinGecko — query by id and contract address.",
         route: "/coins/:id/contract/:contract_address",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
