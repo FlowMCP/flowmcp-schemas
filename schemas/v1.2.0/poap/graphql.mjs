@@ -51,7 +51,7 @@ const schema = {
     name: "POAP GraphQL",
     description: "Query the POAP protocol via GraphQL — introspect the schema, run predefined queries, or execute custom GraphQL queries for event attendance and token metadata.",
     docs: ["https://public.compass.poap.tech/v1/graphql"],
-    tags: ["production", "graphql", "poap"],
+    tags: ["nft", "attendance", "graphql", "events"],
     flowMCP: "1.2.0",
     root: "https://public.compass.poap.tech/v1/graphql",
     requiredServerParams: [],

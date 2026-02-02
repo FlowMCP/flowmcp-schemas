@@ -2,7 +2,7 @@ const schema = {
     namespace: "polymarket",
     name: "Polymarket Predictions",
     description: "Access prediction market data from Polymarket via the CLOB API — list active markets with filters or retrieve detailed info for a specific market by condition ID.",
-    docs: [],
+    docs: ["https://docs.polymarket.com"],
     tags: [],
     flowMCP: "1.2.0",
     root: "https://clob.polymarket.com",
