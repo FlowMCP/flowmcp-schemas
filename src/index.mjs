@@ -67,6 +67,7 @@ class SchemaImporter {
                 absolutePath: path.resolve( file )
             } ) )
             .filter( ( { absolutePath } ) => absolutePath.endsWith( '.mjs' ) )
+            .filter( ( { absolutePath } ) => !absolutePath.includes( '/_shared/' ) )
         
         return result
     }
@@ -80,12 +81,13 @@ class SchemaImporter {
                     .readFileSync(absolutePath, "utf-8")
                     .split("\n")
                     .some( ( line ) => {
-                        const trimmed = line.trim();
-                        const one = trimmed.startsWith("import ")
-                        const two =
-                            line.indexOf("import(") !== -1 ||
-                            line.indexOf("import (") !== -1
-                        return one || two
+                        const trimmed = line.trim()
+                        const isStaticImport = trimmed.startsWith( "import " )
+                        const isSharedImport = trimmed.includes( '_shared/' )
+                        const isDynamicImport =
+                            line.indexOf( "import(" ) !== -1 ||
+                            line.indexOf( "import (" ) !== -1
+                        return ( isStaticImport && !isSharedImport ) || isDynamicImport
                     } )
                 schema['hasImport'] = hasImport
 

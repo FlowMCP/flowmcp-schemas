@@ -119,4 +119,29 @@ describe('SchemaImporter Integration Tests', () => {
             schemaRootFolder: "./non-existent-folder/"
         })).rejects.toThrow('Schema root folder does not exist');
     });
+
+    test('should not include _shared/ files as schemas', async () => {
+        const result = await SchemaImporter.loadFromFolder({
+            schemaRootFolder: "./../schemas/v1.2.0/",
+            excludeSchemasWithImports: false,
+            outputType: 'onlyPath'
+        });
+
+        const sharedFiles = result
+            .filter( ( { absolutePath } ) => absolutePath.includes( '/_shared/' ) )
+        expect(sharedFiles.length).toBe(0);
+    });
+
+    test('should treat _shared/ imports as allowed (not external)', async () => {
+        const result = await SchemaImporter.loadFromFolder({
+            schemaRootFolder: "./../schemas/v1.2.0/",
+            excludeSchemasWithImports: false,
+            outputType: 'onlyPath'
+        });
+
+        // _shared/ files must never appear in schema listing
+        const sharedInResults = result
+            .filter( ( { folderName } ) => folderName === '_shared' )
+        expect(sharedInResults.length).toBe(0);
+    });
 });
