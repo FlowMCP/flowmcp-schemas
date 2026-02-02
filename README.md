@@ -25,6 +25,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | beaconchain | validatorQueue.mjs | 3 | getActivationQueue, getExitQueue, getValidatorStatus |  | ethereum, validators, staking, cacheTtlDaily |
 | berlinevents | events.mjs | 4 | markets_festivals, street_festivals, christmas_markets, police_assemblies |  | berlin, events, opendata, cacheTtlDaily |
 | berlinfunds | funds.mjs | 2 | funding_opportunities, continuing_education |  | berlin, funding, opendata, cacheTtlDaily |
+| berlinvergabe | procurement.mjs | 1 | getProcurementNotices |  | procurement, berlin, germany, opendata, cacheTtlDaily |
 | berlinvhs | vhs.mjs | 1 | all_courses |  | berlin, education, opendata, cacheTtlDaily |
 | berlinwfs | wfs-locations.mjs | 2 | dog_parks, bbq_areas |  | berlin, geodata, opendata, cacheTtlDaily |
 | bicscan | bicscan.mjs | 2 | getRiskScore, getAssets | BICSCAN_API_KEY | security, risk, scanning, cacheTtlDaily |
@@ -69,6 +70,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | dexscreener | tokenInfo.mjs | 4 | getLatestTokenProfiles, searchPairs, getPairsByToken, getTokenPools |  | defi, tokens, discovery, cacheTtlFrequent |
 | dexscreener | tokenpairs.mjs | 4 | getTokenPairs, getLatestPairs, getPairsByChain, getSpecificPair |  | dex, trading, pairs, cacheTtlFrequent |
 | digitaleVerwaltung | services.mjs | 2 | getServices, getAdminRegions |  | government, germany, administration, services, cacheTtlDaily |
+| dip | documents.mjs | 8 | listDrucksachen, getDrucksache, listDrucksacheTexts, getDrucksacheText, listPlenarprotokolle, getPlenarprotokoll, listPlenarprotokollTexts, getPlenarprotokollText | DIP_API_KEY | parliament, germany, opendata, legislation, cacheTtlDaily |
+| dip | proceedings.mjs | 8 | listVorgaenge, getVorgang, listVorgangspositionen, getVorgangsposition, listAktivitaeten, getAktivitaet, listPersonen, getPerson | DIP_API_KEY | parliament, germany, opendata, legislation, cacheTtlDaily |
 | duneAnalytics | farcaster.mjs | 3 | farcasterGetTrendingMemecoins, farcasterGetTrendingChannels, farcasterGetTrendingUsers | DUNE_API_KEY | analytics, farcaster, social, cacheTtlDaily |
 | duneAnalytics | getResults.mjs | 1 | getLatestResult | DUNE_API_KEY | analytics, queries, data, cacheTtlDaily |
 | duneAnalytics | trendingContracts.mjs | 3 | getDexPairStats, getTrendingContracts, getMarketShare | DUNE_API_KEY | analytics, contracts, trending, cacheTtlFrequent |
@@ -255,6 +258,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "CRYPTORANK_API_KEY": "",
                 "CRYPTOWIZARDS_API_KEY": "",
                 "DEBANK_ACCESS_KEY": "",
+                "DIP_API_KEY": "",
                 "DUNE_API_KEY": "",
                 "DUNE_SIM_API_KEY": "",
                 "ETHERSCAN_API_KEY": "",

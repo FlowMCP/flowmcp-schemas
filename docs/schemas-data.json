@@ -643,6 +643,35 @@
       "routeCount": 2
     },
     {
+      "namespace": "berlinvergabe",
+      "name": "Berlin Vergabeplattform RSS",
+      "description": "RSS feed of public procurement notices from the Berlin Vergabeplattform providing current tender announcements for goods, services, and construction contracts",
+      "tags": [
+        "procurement",
+        "berlin",
+        "germany",
+        "opendata",
+        "cacheTtlDaily"
+      ],
+      "docs": [
+        "https://www.berlin.de/vergabeplattform/"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [],
+      "hasApiKey": false,
+      "path": "berlin-de/procurement.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/berlin-de/procurement.mjs",
+      "routes": {
+        "getProcurementNotices": {
+          "requestMethod": "GET",
+          "description": "Get current public procurement notices from the Berlin Vergabeplattform. Returns tender announcements including title, description, link, and publication date.",
+          "route": "/vergabeplattform/veroeffentlichungen/bekanntmachungen/feed.rss",
+          "hasTests": true
+        }
+      },
+      "routeCount": 1
+    },
+    {
       "namespace": "berlinvhs",
       "name": "Berlin VHS API",
       "description": "Access to Berlin Volkshochschule (VHS) course catalog with detailed course information",
@@ -2786,6 +2815,152 @@
         }
       },
       "routeCount": 2
+    },
+    {
+      "namespace": "dip",
+      "name": "DIP Bundestag Documents",
+      "description": "German Bundestag Documentation and Information System (DIP) API providing access to Drucksachen (printed papers) and Plenarprotokolle (plenary protocols) of the German parliament",
+      "tags": [
+        "parliament",
+        "germany",
+        "opendata",
+        "legislation",
+        "cacheTtlDaily"
+      ],
+      "docs": [
+        "https://dip.bundestag.de/über-dip/hilfe/api"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DIP_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "dip/documents.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/dip/documents.mjs",
+      "routes": {
+        "listDrucksachen": {
+          "requestMethod": "GET",
+          "description": "Search and list Drucksachen (printed papers) of the German Bundestag. Filter by legislative period, date range, or title. Returns paginated results.",
+          "route": "/drucksache",
+          "hasTests": true
+        },
+        "getDrucksache": {
+          "requestMethod": "GET",
+          "description": "Get a single Drucksache (printed paper) by its ID from the German Bundestag. Returns full document details.",
+          "route": "/drucksache/:id",
+          "hasTests": true
+        },
+        "listDrucksacheTexts": {
+          "requestMethod": "GET",
+          "description": "Search and list full texts of Drucksachen from the German Bundestag. Filter by legislative period, date range, or title.",
+          "route": "/drucksache-text",
+          "hasTests": true
+        },
+        "getDrucksacheText": {
+          "requestMethod": "GET",
+          "description": "Get the full text of a single Drucksache by its ID from the German Bundestag.",
+          "route": "/drucksache-text/:id",
+          "hasTests": true
+        },
+        "listPlenarprotokolle": {
+          "requestMethod": "GET",
+          "description": "Search and list Plenarprotokolle (plenary protocols) of the German Bundestag. Filter by legislative period, date range, or title.",
+          "route": "/plenarprotokoll",
+          "hasTests": true
+        },
+        "getPlenarprotokoll": {
+          "requestMethod": "GET",
+          "description": "Get a single Plenarprotokoll (plenary protocol) by its ID from the German Bundestag.",
+          "route": "/plenarprotokoll/:id",
+          "hasTests": true
+        },
+        "listPlenarprotokollTexts": {
+          "requestMethod": "GET",
+          "description": "Search and list full texts of Plenarprotokolle from the German Bundestag. Filter by legislative period or date range.",
+          "route": "/plenarprotokoll-text",
+          "hasTests": true
+        },
+        "getPlenarprotokollText": {
+          "requestMethod": "GET",
+          "description": "Get the full text of a single Plenarprotokoll by its ID from the German Bundestag.",
+          "route": "/plenarprotokoll-text/:id",
+          "hasTests": true
+        }
+      },
+      "routeCount": 8
+    },
+    {
+      "namespace": "dip",
+      "name": "DIP Bundestag Proceedings",
+      "description": "German Bundestag Documentation and Information System (DIP) API providing access to Vorgaenge (proceedings), Vorgangspositionen (proceeding positions), Aktivitaeten (activities), and Personen (members of parliament)",
+      "tags": [
+        "parliament",
+        "germany",
+        "opendata",
+        "legislation",
+        "cacheTtlDaily"
+      ],
+      "docs": [
+        "https://dip.bundestag.de/über-dip/hilfe/api"
+      ],
+      "flowMCP": "1.2.0",
+      "requiredServerParams": [
+        "DIP_API_KEY"
+      ],
+      "hasApiKey": true,
+      "path": "dip/proceedings.mjs",
+      "githubUrl": "https://github.com/FlowMCP/flowmcp-schemas/blob/main/schemas/v1.2.0/dip/proceedings.mjs",
+      "routes": {
+        "listVorgaenge": {
+          "requestMethod": "GET",
+          "description": "Search and list Vorgaenge (legislative proceedings) of the German Bundestag. Filter by legislative period, date range, type, or descriptor.",
+          "route": "/vorgang",
+          "hasTests": true
+        },
+        "getVorgang": {
+          "requestMethod": "GET",
+          "description": "Get a single Vorgang (legislative proceeding) by its ID from the German Bundestag. Returns full proceeding details including related documents and activities.",
+          "route": "/vorgang/:id",
+          "hasTests": true
+        },
+        "listVorgangspositionen": {
+          "requestMethod": "GET",
+          "description": "Search and list Vorgangspositionen (proceeding positions) of the German Bundestag. Filter by legislative period or date range.",
+          "route": "/vorgangsposition",
+          "hasTests": true
+        },
+        "getVorgangsposition": {
+          "requestMethod": "GET",
+          "description": "Get a single Vorgangsposition (proceeding position) by its ID from the German Bundestag.",
+          "route": "/vorgangsposition/:id",
+          "hasTests": true
+        },
+        "listAktivitaeten": {
+          "requestMethod": "GET",
+          "description": "Search and list Aktivitaeten (parliamentary activities) of the German Bundestag. Filter by legislative period, date range, person, or document type.",
+          "route": "/aktivitaet",
+          "hasTests": true
+        },
+        "getAktivitaet": {
+          "requestMethod": "GET",
+          "description": "Get a single Aktivitaet (parliamentary activity) by its ID from the German Bundestag.",
+          "route": "/aktivitaet/:id",
+          "hasTests": true
+        },
+        "listPersonen": {
+          "requestMethod": "GET",
+          "description": "Search and list Personen (members of parliament) in the German Bundestag. Filter by legislative period or name.",
+          "route": "/person",
+          "hasTests": true
+        },
+        "getPerson": {
+          "requestMethod": "GET",
+          "description": "Get a single Person (member of parliament) by their ID from the German Bundestag. Returns full biographical and political details.",
+          "route": "/person/:id",
+          "hasTests": true
+        }
+      },
+      "routeCount": 8
     },
     {
       "namespace": "duneAnalytics",
@@ -8826,10 +9001,10 @@
     }
   ],
   "stats": {
-    "totalSchemas": 184,
-    "totalRoutes": 750,
-    "schemasWithApiKeys": 78,
-    "namespaces": 115,
-    "generatedAt": "2026-02-02T23:22:23.141Z"
+    "totalSchemas": 187,
+    "totalRoutes": 767,
+    "schemasWithApiKeys": 80,
+    "namespaces": 117,
+    "generatedAt": "2026-02-02T23:41:01.340Z"
   }
 }
