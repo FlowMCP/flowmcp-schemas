@@ -1,46 +1,16 @@
-const chainNames = {
-    ARBITRUM_ONE: 42161,
-    AVALANCHE: 43114,
-    BASE: 8453,
-    BERACHAIN_MAINNET: 80094,
-    BINANCE_MAINNET: 56,
-    BITCOIN_MAINNET: 0,
-    BLAST_MAINNET: 81457,
-    BOB_MAINNET: 60808,
-    CHILIZ_MAINNET: 88888,
-    CRONOS_MAINNET: 25,
-    ETHEREUM_MAINNET: 1,
-    FANTOM_MAINNET: 250,
-    FRAXTAL_MAINNET: 252,
-    GNOSIS_MAINNET: 100,
-    IMMUTABLE_ZKEVM_MAINNET: 13371,
-    INK_MAINNET: 57073,
-    LENS_SEPOLIA_TESTNET: 37111,
-    LINEA_MAINNET: 59144,
-    LISK_MAINNET: 1135,
-    MANTLE_MAINNET: 5000,
-    METIS_MAINNET: 1088,
-    MODE_TESTNET: 34443,
-    MOONBEAM_MAINNET: 1284,
-    OPBNB_MAINNET: 204,
-    OPTIMISN_MAINNET: 10,
-    PALM_MAINNET: 11297108109,
-    POLYGON_MAINNET: 137,
-    POLYGONZK_MAINNET: 1101,
-    RONIN_MAINNET: 2020,
-    RSK_MAINNET: 30,
-    SCROLL_MAINNET: 534352,
-    SEI_MAINNET: 1329,
-    SNAXCHAIN_MAINNET: 2192,
-    SONEIUM_MAINNET: 1868,
-    STORY_MAINNET: 1514,
-    TAIKO_MAINNET: 167000,
-    UNICHAIN_MAINNET: 130,
-    WORLDCHAIN_MAINNET: 480,
-    ZETACHAIN_MAINNET: 7000,
-    ZKSYNC_MAINNET: 324,
-    ZORA_MAINNET: 7777777
-}
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+
+const blocknativeChains = EVM_CHAINS
+    .filter( ( c ) => c.blocknativeAlias !== undefined )
+
+const chainNames = blocknativeChains
+    .reduce( ( acc, chain ) => {
+        acc[ chain.blocknativeAlias ] = chain.blocknativeChainId
+
+        return acc
+    }, {} )
+
+const chainEnum = 'enum(' + Object.keys( chainNames ).join( ',' ) + ')'
 
 const schema = {
     namespace: "blocknative",
@@ -58,7 +28,7 @@ const schema = {
             description: "Returns a range of gas price estimates for the next block across defined confidence levels.",
             route: "/gasprices/blockprices",
             parameters: [
-                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ARBITRUM_ONE,AVALANCHE,BASE,BERACHAIN_MAINNET,BINANCE_MAINNET,BITCOIN_MAINNET,BLAST_MAINNET,BOB_MAINNET,CHILIZ_MAINNET,CRONOS_MAINNET,ETHEREUM_MAINNET,FANTOM_MAINNET,FRAXTAL_MAINNET,GNOSIS_MAINNET,IMMUTABLE_ZKEVM_MAINNET,INK_MAINNET,LENS_SEPOLIA_TESTNET,LINEA_MAINNET,LISK_MAINNET,MANTLE_MAINNET,METIS_MAINNET,MODE_TESTNET,MOONBEAM_MAINNET,OPBNB_MAINNET,OPTIMISN_MAINNET,PALM_MAINNET,POLYGON_MAINNET,POLYGONZK_MAINNET,RONIN_MAINNET,RSK_MAINNET,SCROLL_MAINNET,SEI_MAINNET,SNAXCHAIN_MAINNET,SONEIUM_MAINNET,STORY_MAINNET,TAIKO_MAINNET,UNICHAIN_MAINNET,WORLDCHAIN_MAINNET,ZETACHAIN_MAINNET,ZKSYNC_MAINNET,ZORA_MAINNET)", options: [] } },
+                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: chainEnum, options: [] } },
                 { position: { key: "system", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "network", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "confidenceLevels", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "array()", options: ["optional()"] } }

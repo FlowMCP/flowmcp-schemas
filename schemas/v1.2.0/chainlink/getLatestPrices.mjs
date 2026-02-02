@@ -1,20 +1,13 @@
 import { ethers } from 'ethers'
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
 
 
-const infuraSubDomain = {
-    "ARBITRUM_MAINNET": "arbitrum-mainnet",
-    "AVALANCHE_MAINNET": "avalanche-mainnet",
-    "BASE_MAINNET": "base-mainnet",
-    "BINANCE_MAINNET": "bsc-mainnet",
-    "CELO_MAINNET": "celo-mainnet",
-    "ETHEREUM_MAINNET": "mainnet",
-    "LINEA_MAINNET": "linea-mainnet",
-    "MANTLE_MAINNET": "mantle-mainnet",
-    "SCROLL_MAINNET": "scroll-mainnet",
-    "OPTIMISM_MAINNET": "optimism-mainnet",
-    "POLYGON_MAINNET": "polygon-mainnet",
-    "ZKSYNC_MAINNET": "zksync-mainnet",
-  }
+const infuraSubDomain = EVM_CHAINS
+    .filter( ( c ) => c.infuraSubdomain !== undefined )
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.infuraSubdomain
+        return acc
+    }, {} )
   
 
 const priceFeedAbi = [

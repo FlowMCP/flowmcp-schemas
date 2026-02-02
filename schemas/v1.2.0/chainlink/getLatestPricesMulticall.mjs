@@ -1,4 +1,5 @@
 import { ethers, Interface } from 'ethers'
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
 
 
 const multicall3Abi = [{
@@ -33,32 +34,14 @@ const priceFeedAbi = [
 ]
 const iface = new Interface(priceFeedAbi)
 
-const infuraSubDomain = {
-    'ARBITRUM_MAINNET': 'arbitrum-mainnet',
-    'AVALANCHE_MAINNET': 'avalanche-mainnet',
-    'BASE_MAINNET': 'base-mainnet',
-    'BINANCE_MAINNET': 'bsc-mainnet',
-    'CELO_MAINNET': 'celo-mainnet',
-    'ETHEREUM_MAINNET': 'mainnet',
-    'LINEA_MAINNET': 'linea-mainnet',
-    'MANTLE_MAINNET': 'mantle-mainnet',
-    'SCROLL_MAINNET': 'scroll-mainnet',
-    'OPTIMISM_MAINNET': 'optimism-mainnet',
-    'POLYGON_MAINNET': 'polygon-mainnet',
-    'ZKSYNC_MAINNET': 'zksync-mainnet'
-}
-
-const multicallProviders = Object
-    .entries(infuraSubDomain)
-    .reduce((acc, [blockchain, value]) => {
-        const rawUrl = 'https://--infura-subdomain--.infura.io/v3/f3ca3c43f47d43239a1173f115b43df0'
-        const url = rawUrl.replace('--infura-subdomain--', value)
-        const provider = new ethers.JsonRpcProvider(url)
-        const multicall = new ethers
-            .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
-        acc[blockchain] = multicall
+const infuraSubDomain = EVM_CHAINS
+    .filter( ( c ) => c.infuraSubdomain !== undefined )
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.infuraSubdomain
         return acc
     }, {} )
+
+const MULTICALL3_ADDRESS = '0xca11bde05977b3631167028862be2a173976ca11'
 
 
 const feeds = {
@@ -4264,6 +4247,7 @@ const feeds = {
 const methods = ['latestRoundData', 'decimals']
 const multicallCommands = Object
     .entries(infuraSubDomain)
+    .filter(([blockchain, _]) => feeds[blockchain] !== undefined)
     .reduce((acc, [blockchain, _]) => {
         acc[blockchain] = methods
             .map((method) => {
@@ -4428,17 +4412,16 @@ const schema = {
         },
         getAllLatestPrices: async( { struct, payload, userParams, phase } ) => {
             const { _allParams: { chainName } } = userParams
-            const { feedName } = userParams
             let { url } = payload
             url = url.replace( '--infura-subdomain--', infuraSubDomain[ chainName ] )
 
             const provider = new ethers.JsonRpcProvider( url )
             const multicall = new ethers
-                .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
+                .Contract( MULTICALL3_ADDRESS, multicall3Abi, provider )
 
             const id = chainName
             const allResponse = await Promise.all( [
-                ...multicallCommands[id].map(cmd => multicallProviders[ id ].aggregate3( cmd ) )
+                ...multicallCommands[id].map( ( cmd ) => multicall.aggregate3( cmd ) )
             ] )
 
             const [ priceRes, decRes ] = allResponse

@@ -1,3 +1,8 @@
+import { GERMAN_BUNDESLAENDER } from '../_shared/germanBundeslaender.mjs'
+
+const bundeslandEnum = 'enum(' + GERMAN_BUNDESLAENDER.map( ( b ) => b.code ).join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "zvgportal",
     name: "ZVG Portal Zwangsversteigerungen",
@@ -14,7 +19,7 @@ export const schema = {
             description: "Search for foreclosure auctions by federal state, court, property type, location, and date range",
             route: "/index.php?button=Suchen",
             parameters: [
-                { position: { key: "land_abk", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(be,bw,by,br,hb,hh,he,mv,ni,nw,rp,sl,sn,st,sh,th)", options: [] } },
+                { position: { key: "land_abk", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: bundeslandEnum, options: [] } },
                 { position: { key: "ger_id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["default(0)", "optional()"] } },
                 { position: { key: "art", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(-1,0,1,2,3,4,5,6,7,8)", options: ["optional()"] } },
                 { position: { key: "obj_arr", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)", options: ["optional()"] } },

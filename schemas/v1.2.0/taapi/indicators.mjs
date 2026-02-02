@@ -1,3 +1,11 @@
+import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
+
+const taapiIntervalEnum = 'enum(' + TRADING_TIMEFRAMES
+    .filter( ( t ) => t.taapiSlug !== undefined )
+    .map( ( t ) => t.alias )
+    .join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "taapi",
     name: "TAAPI.IO Technical Indicators",
@@ -17,7 +25,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "backtrack", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(0)", "max(50)", "optional()"] } },
                 { position: { key: "optInTimePeriod", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(2)", "max(100)", "default(14)", "optional()"] } }
             ],
@@ -34,7 +42,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "backtrack", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(0)", "max(50)", "optional()"] } }
             ],
             tests: [
@@ -50,7 +58,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "optInTimePeriod", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(2)", "max(100)", "default(20)", "optional()"] } }
             ],
             tests: [
@@ -66,7 +74,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "optInTimePeriod", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(2)", "max(200)", "default(20)", "optional()"] } }
             ],
             tests: [
@@ -82,7 +90,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "optInTimePeriod", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(2)", "max(200)", "default(20)", "optional()"] } }
             ],
             tests: [
@@ -98,7 +106,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } }
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } }
             ],
             tests: [
                 { _description: "BTC/USDT Stochastic 1h", symbol: "BTC/USDT", interval: "1h" }
@@ -113,7 +121,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } },
                 { position: { key: "optInTimePeriod", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(2)", "max(100)", "default(14)", "optional()"] } }
             ],
             tests: [
@@ -129,7 +137,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } }
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } }
             ],
             tests: [
                 { _description: "BTC/USDT StochRSI 1h", symbol: "BTC/USDT", interval: "1h" }
@@ -144,7 +152,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } }
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } }
             ],
             tests: [
                 { _description: "BTC/USDT VWAP 1h", symbol: "BTC/USDT", interval: "1h" }
@@ -159,7 +167,7 @@ export const schema = {
                 { position: { key: "secret", value: "{{TAAPI_SECRET}}", location: "query" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(binance)", "optional()"] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)", options: ["default(1h)", "optional()"] } }
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: taapiIntervalEnum, options: ["default(1h)", "optional()"] } }
             ],
             tests: [
                 { _description: "BTC/USDT Ichimoku 1d", symbol: "BTC/USDT", interval: "1d" }

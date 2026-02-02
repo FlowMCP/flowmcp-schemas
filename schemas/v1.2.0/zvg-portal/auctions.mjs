@@ -1,3 +1,8 @@
+import { GERMAN_BUNDESLAENDER } from '../_shared/germanBundeslaender.mjs'
+
+const bundeslandEnum = 'enum(' + GERMAN_BUNDESLAENDER.map( ( b ) => b.code ).join( ',' ) + ')'
+
+
 const schema = {
     namespace: 'zvgPortal',
     name: 'ZVG Portal Foreclosure Auctions',
@@ -14,7 +19,7 @@ const schema = {
             description: 'Search foreclosure auction listings by German state (Bundesland). Supports filtering by court, city, ZIP code, street, property type, and auction type. State codes: bw=Baden-Wuerttemberg, by=Bayern, be=Berlin, br=Brandenburg, hb=Bremen, hh=Hamburg, he=Hessen, mv=Mecklenburg-Vorpommern, ni=Niedersachsen, nw=Nordrhein-Westfalen, rp=Rheinland-Pfalz, sl=Saarland, sn=Sachsen, st=Sachsen-Anhalt, sh=Schleswig-Holstein, th=Thueringen. Property types (obj_art): 1=Reihenhaus, 2=Doppelhaushälfte, 3=Einfamilienhaus, 4=Mehrfamilienhaus, 5=ETW 1-2 Zi, 6=ETW 3-4 Zi, 7=ETW 5+ Zi, 8=Gewerbeeinheit, 9=Garage, 10=Kfz-Stellplatz, 13=Wohn-/Geschäftshaus, 14=Gewerbegrundstück, 15=Baugrundstück, 16=Unbebautes Grundstück, 17=Land-/Forstwirtschaft, 18=Sonstiges. Sort (order_by): 2=Termin, 1=Aktualisierung, 3=Aktenzeichen.',
             route: '/index.php',
             parameters: [
-                { position: { key: 'land_abk', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [ 'min(2)', 'max(2)' ] } },
+                { position: { key: 'land_abk', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: bundeslandEnum, options: [] } },
                 { position: { key: 'ger_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [ 'default("0")' ] } },
                 { position: { key: 'order_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [ 'default("2")' ] } },
                 { position: { key: 'plz', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [ 'optional()' ] } },

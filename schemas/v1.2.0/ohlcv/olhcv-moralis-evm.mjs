@@ -1,22 +1,17 @@
 import axios from "axios"
 import moment from "moment"
 
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
 
-const timeframes = {
-    "1s": 1,
-    "10s": 10,
-    "30s": 30,
-    "1min": 60,
-    "5min": 300,
-    "10min": 600,
-    "30min": 1800,
-    "1h": 3600,
-    "4h": 14400,
-    "12h": 43200,
-    "1d": 86400,
-    "1w": 604800,
-    "1M": 2592000
-}
+
+const moralisTimeframes = TRADING_TIMEFRAMES
+    .filter( ( t ) => t.moralisSlug !== undefined )
+    .reduce( ( acc, t ) => {
+        acc[ t.alias ] = t.moralisSlug
+
+        return acc
+    }, {} )
 
 const fromDateUnits = {
     "minutes": 60,
@@ -27,38 +22,26 @@ const fromDateUnits = {
     "years": 31536000
 }
 
-const chainSelections = {
-    "ETHEREUM_MAINNET": "eth",
-    "ETHEREUM_SEPOLIA": "sepolia",
-    "ETHEREUM_HOLESKY": "holesky",
-    "POLYGON_MAINNET": "polygon",
-    "POLYGON_AMOY": "polygon amoy",
-    "BSC_MAINNET": "bsc",
-    "BSC_TESTNET": "bsc testnet",
-    "AVALANCHE_MAINNET": "avalanche",
-    "FANTOM_MAINNET": "fantom",
-    "CRONOS_MAINNET": "cronos",
-    "ARBITRUM_MAINNET": "arbitrum",
-    "GNOSIS_MAINNET": "gnosis",
-    "GNOSIS_TESTNET": "gnosis testnet",
-    "CHILIZ_MAINNET": "chiliz",
-    "CHILIZ_TESTNET": "chiliz testnet",
-    "BASE_MAINNET": "base",
-    "BASE_SEPOLIA": "base sepolia",
-    "OPTIMISM_MAINNET": "optimism",
-    "LINEA_MAINNET": "linea",
-    "LINEA_SEPOLIA": "linea sepolia",
-    "MOONBEAM_MAINNET": "moonbeam",
-    "MOONRIVER_MAINNET": "moonriver",
-    "MOONBASE_TESTNET": "moonbase",
-    "FLOW_MAINNET": "flow",
-    "FLOW_TESTNET": "flow-testnet",
-    "RONIN_MAINNET": "ronin",
-    "RONIN_TESTNET": "ronin-testnet",
-    "LISK_MAINNET": "lisk",
-    "LISK_SEPOLIA": "lisk-sepolia",
-    "PULSE_MAINNET": "pulse"
-}
+const moralisChainAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'HOLESKY_TESTNET',
+    'POLYGON_MAINNET', 'POLYGON_AMOY_TESTNET', 'BINANCE_MAINNET',
+    'BINANCE_TESTNET', 'AVALANCHE_MAINNET', 'FANTOM_MAINNET',
+    'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET', 'GNOSIS_MAINNET',
+    'GNOSIS_TESTNET', 'CHILIZ_MAINNET', 'CHILIZ_TESTNET',
+    'BASE_MAINNET', 'BASE_SEPOLIA_TESTNET', 'OPTIMISM_MAINNET',
+    'LINEA_MAINNET', 'LINEA_SEPOLIA_TESTNET', 'MOONBEAM_MAINNET',
+    'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET', 'FLOW_MAINNET',
+    'FLOW_TESTNET', 'RONIN_MAINNET', 'RONIN_TESTNET',
+    'LISK_MAINNET', 'LISK_SEPOLIA_TESTNET', 'PULSECHAIN_MAINNET'
+]
+
+const chainSelections = EVM_CHAINS
+    .filter( ( c ) => moralisChainAliases.includes( c.alias ) && c.moralisChainSlug !== undefined )
+    .reduce( ( acc, chain ) => {
+        acc[ chain.alias ] = chain.moralisChainSlug
+
+        return acc
+    }, {} )
 
 
 const schema = {
@@ -79,14 +62,14 @@ const schema = {
             parameters: [
                 { position: { key: "pairAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "chain", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: `enum(${Object.keys(chainSelections).join(",")})`, options: [] } },
-                { position: { key: "timeframe", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(" + Object.keys(timeframes).join(",") + ")", options: [] } },
+                { position: { key: "timeframe", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(" + Object.keys(moralisTimeframes).join(",") + ")", options: [] } },
                 { position: { key: "currency", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(usd,native)", options: ["default(usd)"] } },
                 { position: { key: "fromDateAmount", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: [] } },
                 { position: { key: "fromDateUnit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(" + Object.keys(fromDateUnits).join(",") + ")", options: [] } },
                 { position: { key: "maxResultLength", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional(), default(1000)"] } }
             ],
             tests: [
-                { _description: "Fetch 7-day OHLCV data for Uniswap pair on Ethereum", pairAddress: "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f", chain: "eth", timeframe: "1min", currency: "usd", fromDateAmount: 7, fromDateUnit: "days", maxResultLength: 1000 }
+                { _description: "Fetch 7-day OHLCV data for Uniswap pair on Ethereum", pairAddress: "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f", chain: "ETHEREUM_MAINNET", timeframe: "1m", currency: "usd", fromDateAmount: 7, fromDateUnit: "days", maxResultLength: 1000 }
             ],
             modifiers: [
                 { phase: "execute", handlerName: "fetchRecursiveOhlcvEvm" }
@@ -95,8 +78,9 @@ const schema = {
     },
     handlers: {
         fetchRecursiveOhlcvEvm: async ( { struct, payload, userParams } ) => {
-            const { pairAddress, chain: _chainValue, timeframe, currency, fromDateAmount, fromDateUnit, maxResultLength = 1000 } = userParams
+            const { pairAddress, chain: _chainValue, timeframe: _timeframeAlias, currency, fromDateAmount, fromDateUnit, maxResultLength = 1000 } = userParams
             const chain = chainSelections[ _chainValue ]
+            const timeframe = moralisTimeframes[ _timeframeAlias ]
             const fromDate = moment().subtract(fromDateAmount, fromDateUnit).toISOString();
             const toDate = moment().toISOString();
             const url = `https://deep-index.moralis.io/api/v2.2/pairs/${pairAddress}/ohlcv`;

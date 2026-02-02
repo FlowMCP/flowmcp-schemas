@@ -1,3 +1,21 @@
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+
+const theGraphChains = EVM_CHAINS
+    .filter( ( c ) => c.theGraphSlug !== undefined )
+
+const aliasToSlug = theGraphChains
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.theGraphSlug
+        return acc
+    }, {} )
+
+const poolExplorerAliases = [
+    'ETHEREUM_MAINNET', 'ARBITRUM_MAINNET', 'OPTIMISM_MAINNET',
+    'POLYGON_MAINNET', 'BASE_MAINNET', 'BINANCE_MAINNET', 'CELO_MAINNET'
+]
+const poolExplorerChainEnum = 'enum(' + poolExplorerAliases.join( ',' ) + ')'
+
+
 const schema = {
     namespace: "uniswap",
     name: "Uniswap Pool Explorer",
@@ -15,12 +33,13 @@ const schema = {
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/--subgraph-id--",
             parameters: [
                 { position: { key: "token_address", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },
-                { position: { key: "chain", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(ethereum,arbitrum,optimism,polygon,base,bsc,celo)", options: ["default(ethereum)"] } }
+                { position: { key: "chain", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: poolExplorerChainEnum, options: ["default(ETHEREUM_MAINNET)"] } }
             ],
             tests: [
-                { _description: "Query USDC pools on Ethereum", token_address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", chain: "ethereum" }
+                { _description: "Query USDC pools on Ethereum", token_address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", chain: "ETHEREUM_MAINNET" }
             ],
             modifiers: [
+                { phase: "pre", handlerName: "mapChainToSlug" },
                 { phase: "pre", handlerName: "buildTokenPoolsQuery" }
             ]
         },
@@ -30,17 +49,30 @@ const schema = {
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/--subgraph-id--",
             parameters: [
                 { position: { key: "pool_id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },
-                { position: { key: "chain", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(ethereum,arbitrum,optimism,polygon,base,bsc,celo)", options: ["default(ethereum)"] } }
+                { position: { key: "chain", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: poolExplorerChainEnum, options: ["default(ETHEREUM_MAINNET)"] } }
             ],
             tests: [
-                { _description: "Get data for USDC/ETH pool", pool_id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8", chain: "ethereum" }
+                { _description: "Get data for USDC/ETH pool", pool_id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8", chain: "ETHEREUM_MAINNET" }
             ],
             modifiers: [
+                { phase: "pre", handlerName: "mapChainToSlug" },
                 { phase: "pre", handlerName: "buildPoolDataQuery" }
             ]
         }
     },
     handlers: {
+        mapChainToSlug: async( { struct, payload, userParams } ) => {
+            const chainAlias = userParams.chain
+            if( !chainAlias ) { return { struct, payload } }
+            const slug = aliasToSlug[ chainAlias ]
+            if( !slug ) {
+                struct.status = false
+                struct.messages.push( `Unsupported chain: ${chainAlias}` )
+                return { struct, payload }
+            }
+            userParams.chain = slug
+            return { struct, payload }
+        },
         buildTokenPoolsQuery: async ({ struct, payload, userParams }) => {
             const { token_address, chain } = userParams;
             

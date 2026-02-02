@@ -1,3 +1,27 @@
+import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
+import { TRADING_EXCHANGES } from '../_shared/tradingExchanges.mjs'
+
+
+const cwExchanges = TRADING_EXCHANGES
+    .filter( ( e ) => e.cryptoWizardsSlug !== undefined )
+    .reduce( ( acc, e ) => {
+        acc[ e.alias ] = e.cryptoWizardsSlug
+
+        return acc
+    }, {} )
+
+const cwTimeframes = TRADING_TIMEFRAMES
+    .filter( ( t ) => t.cryptoWizardsSlug !== undefined )
+    .reduce( ( acc, t ) => {
+        acc[ t.alias ] = t.cryptoWizardsSlug
+
+        return acc
+    }, {} )
+
+const cwExchangeEnum = 'enum(' + Object.keys( cwExchanges ).join( ',' ) + ')'
+const cwIntervalEnum = 'enum(' + Object.keys( cwTimeframes ).join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "cryptowizards",
     name: "CryptoWizards Analytics API",
@@ -16,8 +40,8 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } },
                 { position: { key: "strategy", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Spread,ZScoreRoll,Copula)", options: [] } },
                 { position: { key: "spread_type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Dynamic,Ou,Static)", options: ["default(Dynamic)", "optional()"] } },
@@ -31,9 +55,11 @@ export const schema = {
                 { position: { key: "stop_loss_rate", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional()"] } }
             ],
             tests: [
-                { _description: "BTC/ETH pair trading backtest", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BinanceUs", interval: "Daily", period: 365, strategy: "ZScoreRoll", spread_type: "Static", with_history: false }
+                { _description: "BTC/ETH pair trading backtest", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE_US", interval: "1d", period: 365, strategy: "ZScoreRoll", spread_type: "Static", with_history: false }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         },
         checkCointegration: {
             requestMethod: "GET",
@@ -42,17 +68,19 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } },
                 { position: { key: "spread_type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Dynamic,Ou,Static)", options: ["default(Dynamic)", "optional()"] } },
                 { position: { key: "roll_w", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(42)", "optional()"] } },
                 { position: { key: "with_history", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: ["default(false)", "optional()"] } }
             ],
             tests: [
-                { _description: "BTC/ETH cointegration analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "Binance", interval: "Daily", period: 365, spread_type: "Static", with_history: false }
+                { _description: "BTC/ETH cointegration analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE", interval: "1d", period: 365, spread_type: "Static", with_history: false }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         },
         getCorrelations: {
             requestMethod: "GET",
@@ -61,14 +89,16 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } }
             ],
             tests: [
-                { _description: "BTC/ETH correlation analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "Binance", interval: "Daily", period: 365 }
+                { _description: "BTC/ETH correlation analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE", interval: "1d", period: 365 }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         },
         analyzeCopula: {
             requestMethod: "GET",
@@ -77,14 +107,16 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } }
             ],
             tests: [
-                { _description: "BTC/ETH copula dependency analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "Binance", interval: "Daily", period: 365 }
+                { _description: "BTC/ETH copula dependency analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE", interval: "1d", period: 365 }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         },
         analyzeSpread: {
             requestMethod: "GET",
@@ -93,17 +125,19 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } },
                 { position: { key: "spread_type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Dynamic,Ou,Static)", options: ["default(Dynamic)", "optional()"] } },
                 { position: { key: "roll_w", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(42)", "optional()"] } },
                 { position: { key: "with_history", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: ["default(false)", "optional()"] } }
             ],
             tests: [
-                { _description: "BTC/ETH spread analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "Binance", interval: "Daily", period: 365, spread_type: "Static", with_history: false }
+                { _description: "BTC/ETH spread analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE", interval: "1d", period: 365, spread_type: "Static", with_history: false }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         },
         analyzeZScores: {
             requestMethod: "GET",
@@ -112,18 +146,35 @@ export const schema = {
             parameters: [
                 { position: { key: "symbol_1", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "symbol_2", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Binance,BinanceUs,ByBit,Coinbase,Dydx,Forex,Stocks)", options: [] } },
-                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Daily,Hourly,Min5)", options: [] } },
+                { position: { key: "exchange", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwExchangeEnum, options: [] } },
+                { position: { key: "interval", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: cwIntervalEnum, options: [] } },
                 { position: { key: "period", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(30)", "max(1000)"] } },
                 { position: { key: "spread_type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Dynamic,Ou,Static)", options: ["default(Dynamic)", "optional()"] } },
                 { position: { key: "roll_w", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(42)", "optional()"] } },
                 { position: { key: "with_history", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: ["default(false)", "optional()"] } }
             ],
             tests: [
-                { _description: "BTC/ETH z-score analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "Binance", interval: "Daily", period: 365, spread_type: "Static", with_history: false }
+                { _description: "BTC/ETH z-score analysis", symbol_1: "BTCUSDT", symbol_2: "ETHUSDT", exchange: "BINANCE", interval: "1d", period: 365, spread_type: "Static", with_history: false }
             ],
-            modifiers: []
+            modifiers: [
+                { phase: "pre", handlerName: "mapTradingParams" }
+            ]
         }
     },
-    handlers: {}
+    handlers: {
+        mapTradingParams: async ( { struct, payload, userParams } ) => {
+            const { exchange, interval } = userParams
+            const exchangeSlug = cwExchanges[ exchange ]
+            const intervalSlug = cwTimeframes[ interval ]
+
+            if( exchangeSlug ) {
+                payload.url = payload.url.replace( `exchange=${exchange}`, `exchange=${exchangeSlug}` )
+            }
+            if( intervalSlug ) {
+                payload.url = payload.url.replace( `interval=${interval}`, `interval=${intervalSlug}` )
+            }
+
+            return { struct, payload }
+        }
+    }
 }
