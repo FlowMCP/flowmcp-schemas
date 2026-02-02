@@ -174,7 +174,8 @@ const EVM_CHAINS = [
         simduneChainSlug: 'scroll',
         blocknativeAlias: 'SCROLL_MAINNET',
         blocknativeChainId: 534352,
-        infuraSubdomain: 'scroll-mainnet'
+        infuraSubdomain: 'scroll-mainnet',
+        alchemyNetworkSlug: 'scroll-mainnet'
     },
     {
         alias: 'ZKSYNC_MAINNET',
@@ -189,7 +190,8 @@ const EVM_CHAINS = [
         simduneChainSlug: 'zksync',
         blocknativeAlias: 'ZKSYNC_MAINNET',
         blocknativeChainId: 324,
-        infuraSubdomain: 'zksync-mainnet'
+        infuraSubdomain: 'zksync-mainnet',
+        alchemyNetworkSlug: 'zksync-mainnet'
     },
     {
         alias: 'MANTLE_MAINNET',
@@ -204,7 +206,8 @@ const EVM_CHAINS = [
         simduneChainSlug: 'mantle',
         blocknativeAlias: 'MANTLE_MAINNET',
         blocknativeChainId: 5000,
-        infuraSubdomain: 'mantle-mainnet'
+        infuraSubdomain: 'mantle-mainnet',
+        alchemyNetworkSlug: 'mantle-mainnet'
     },
     {
         alias: 'CELO_MAINNET',
@@ -220,6 +223,7 @@ const EVM_CHAINS = [
         moralisChainSlug: 'celo',
         moralisChainHex: '0xa4ec',
         infuraSubdomain: 'celo-mainnet',
+        alchemyNetworkSlug: 'celo-mainnet',
         theGraphSlug: 'celo'
     },
     {
@@ -236,7 +240,8 @@ const EVM_CHAINS = [
         moralisChainSlug: 'gnosis',
         moralisChainHex: '0x64',
         blocknativeAlias: 'GNOSIS_MAINNET',
-        blocknativeChainId: 100
+        blocknativeChainId: 100,
+        alchemyNetworkSlug: 'gnosis-mainnet'
     },
     {
         alias: 'FANTOM_MAINNET',
@@ -250,7 +255,8 @@ const EVM_CHAINS = [
         moralisChainSlug: 'fantom',
         moralisChainHex: '0xfa',
         blocknativeAlias: 'FANTOM_MAINNET',
-        blocknativeChainId: 250
+        blocknativeChainId: 250,
+        alchemyNetworkSlug: 'fantom-mainnet'
     },
     {
         alias: 'CRONOS_MAINNET',
@@ -276,7 +282,8 @@ const EVM_CHAINS = [
         moralisChainSlug: 'moonbeam',
         moralisChainHex: '0x504',
         blocknativeAlias: 'MOONBEAM_MAINNET',
-        blocknativeChainId: 1284
+        blocknativeChainId: 1284,
+        alchemyNetworkSlug: 'moonbeam-mainnet'
     },
     {
         alias: 'MOONRIVER_MAINNET',
@@ -314,6 +321,7 @@ const EVM_CHAINS = [
         simduneChainSlug: 'blast',
         blocknativeAlias: 'BLAST_MAINNET',
         blocknativeChainId: 81457,
+        alchemyNetworkSlug: 'blast-mainnet',
         theGraphSlug: 'blast'
     },
     {
@@ -340,7 +348,8 @@ const EVM_CHAINS = [
         simduneChainId: 80094,
         simduneChainSlug: 'berachain',
         blocknativeAlias: 'BERACHAIN_MAINNET',
-        blocknativeChainId: 80094
+        blocknativeChainId: 80094,
+        alchemyNetworkSlug: 'berachain-mainnet'
     },
     {
         alias: 'UNICHAIN_MAINNET',
@@ -354,7 +363,8 @@ const EVM_CHAINS = [
         simduneChainId: 130,
         simduneChainSlug: 'unichain',
         blocknativeAlias: 'UNICHAIN_MAINNET',
-        blocknativeChainId: 130
+        blocknativeChainId: 130,
+        alchemyNetworkSlug: 'unichain-mainnet'
     },
     {
         alias: 'POLYGONZK_MAINNET',
@@ -368,7 +378,8 @@ const EVM_CHAINS = [
         simduneChainId: 1101,
         simduneChainSlug: 'zkevm',
         blocknativeAlias: 'POLYGONZK_MAINNET',
-        blocknativeChainId: 1101
+        blocknativeChainId: 1101,
+        alchemyNetworkSlug: 'polygonzkevm-mainnet'
     },
     {
         alias: 'FRAXTAL_MAINNET',
@@ -382,7 +393,8 @@ const EVM_CHAINS = [
         simduneChainId: 252,
         simduneChainSlug: 'fraxtal',
         blocknativeAlias: 'FRAXTAL_MAINNET',
-        blocknativeChainId: 252
+        blocknativeChainId: 252,
+        alchemyNetworkSlug: 'frax-mainnet'
     },
     {
         alias: 'BITTORRENT_MAINNET',
@@ -429,7 +441,8 @@ const EVM_CHAINS = [
         simduneChainId: 480,
         simduneChainSlug: 'world',
         blocknativeAlias: 'WORLDCHAIN_MAINNET',
-        blocknativeChainId: 480
+        blocknativeChainId: 480,
+        alchemyNetworkSlug: 'worldchain-mainnet'
     },
     {
         alias: 'SWELLCHAIN_MAINNET',
@@ -678,7 +691,8 @@ const EVM_CHAINS = [
         simduneChainId: 204,
         simduneChainSlug: 'opbnb',
         blocknativeAlias: 'OPBNB_MAINNET',
-        blocknativeChainId: 204
+        blocknativeChainId: 204,
+        alchemyNetworkSlug: 'opbnb-mainnet'
     },
     {
         alias: 'BOB_MAINNET',
@@ -776,7 +790,8 @@ const EVM_CHAINS = [
         simduneChainId: 1868,
         simduneChainSlug: 'soneium',
         blocknativeAlias: 'SONEIUM_MAINNET',
-        blocknativeChainId: 1868
+        blocknativeChainId: 1868,
+        alchemyNetworkSlug: 'soneium-mainnet'
     },
     {
         alias: 'SHAPE_MAINNET',
@@ -961,7 +976,8 @@ const EVM_CHAINS = [
         isTestnet: false,
         nativeCurrency: 'ZETA',
         blocknativeAlias: 'ZETACHAIN_MAINNET',
-        blocknativeChainId: 7000
+        blocknativeChainId: 7000,
+        alchemyNetworkSlug: 'zetachain-mainnet'
     },
     {
         alias: 'BITCOIN_MAINNET',
@@ -1049,7 +1065,8 @@ const EVM_CHAINS = [
         simduneChainSlug: 'sepolia',
         moralisChainSlug: 'sepolia',
         moralisChainHex: '0xaa36a7',
-        infuraSubdomain: 'sepolia'
+        infuraSubdomain: 'sepolia',
+        alchemyNetworkSlug: 'eth-sepolia'
     },
     {
         alias: 'HOLESKY_TESTNET',
@@ -1074,7 +1091,8 @@ const EVM_CHAINS = [
         simduneChainId: 84532,
         simduneChainSlug: 'base_sepolia',
         moralisChainSlug: 'base sepolia',
-        moralisChainHex: '0x14a34'
+        moralisChainHex: '0x14a34',
+        alchemyNetworkSlug: 'base-sepolia'
     },
     {
         alias: 'POLYGON_AMOY_TESTNET',
@@ -1085,7 +1103,8 @@ const EVM_CHAINS = [
         etherscanAlias: 'POLYGON_AMOY_TESTNET',
         etherscanChainId: 80002,
         moralisChainSlug: 'polygon amoy',
-        moralisChainHex: '0x13882'
+        moralisChainHex: '0x13882',
+        alchemyNetworkSlug: 'polygon-amoy'
     },
     {
         alias: 'BINANCE_TESTNET',
@@ -1117,7 +1136,8 @@ const EVM_CHAINS = [
         isTestnet: true,
         nativeCurrency: 'ETH',
         etherscanAlias: 'ARBITRUM_SEPOLIA_TESTNET',
-        etherscanChainId: 421614
+        etherscanChainId: 421614,
+        alchemyNetworkSlug: 'arb-sepolia'
     },
     {
         alias: 'OPTIMISM_SEPOLIA_TESTNET',
@@ -1126,7 +1146,8 @@ const EVM_CHAINS = [
         isTestnet: true,
         nativeCurrency: 'ETH',
         etherscanAlias: 'OPTIMISN_SEPOLIA_TESTNET',
-        etherscanChainId: 11155420
+        etherscanChainId: 11155420,
+        alchemyNetworkSlug: 'opt-sepolia'
     },
     {
         alias: 'LINEA_SEPOLIA_TESTNET',
