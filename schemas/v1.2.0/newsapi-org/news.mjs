@@ -1,3 +1,10 @@
+import { ISO_COUNTRY_CODES } from '../_shared/isoCountryCodes.mjs'
+import { ISO_LANGUAGE_CODES } from '../_shared/isoLanguageCodes.mjs'
+
+const countryEnum = 'enum(' + ISO_COUNTRY_CODES.map( ( c ) => c.alpha2 ).join( ',' ) + ')'
+const languageEnum = 'enum(' + ISO_LANGUAGE_CODES.map( ( c ) => c.code ).join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "newsapi",
     name: "NewsAPI.org",
@@ -14,7 +21,7 @@ export const schema = {
             description: "Get breaking news headlines for a country or category via newsapi. Supports country, category, sources filters.",
             route: "/top-headlines",
             parameters: [
-                { position: { key: "country", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ae,ar,at,au,be,bg,br,ca,ch,cn,co,cu,cz,de,eg,fr,gb,gr,hk,hu,id,ie,il,in,it,jp,kr,lt,lv,ma,mx,my,ng,nl,no,nz,ph,pl,pt,ro,rs,ru,sa,se,sg,si,sk,th,tr,tw,ua,us,ve,za)", options: ["optional()"] } },
+                { position: { key: "country", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: countryEnum, options: ["optional()"] } },
                 { position: { key: "category", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(business,entertainment,general,health,science,sports,technology)", options: ["optional()"] } },
                 { position: { key: "sources", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "q", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
@@ -40,7 +47,7 @@ export const schema = {
                 { position: { key: "excludeDomains", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "from", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "to", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
-                { position: { key: "language", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ar,de,en,es,fr,he,it,nl,no,pt,ru,sv,ud,zh)", options: ["optional()"] } },
+                { position: { key: "language", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: languageEnum, options: ["optional()"] } },
                 { position: { key: "sortBy", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(relevancy,popularity,publishedAt)", options: ["optional()"] } },
                 { position: { key: "pageSize", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "optional()"] } },
                 { position: { key: "page", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()"] } }
@@ -58,8 +65,8 @@ export const schema = {
             route: "/top-headlines/sources",
             parameters: [
                 { position: { key: "category", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(business,entertainment,general,health,science,sports,technology)", options: ["optional()"] } },
-                { position: { key: "language", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ar,de,en,es,fr,he,it,nl,no,pt,ru,sv,ud,zh)", options: ["optional()"] } },
-                { position: { key: "country", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ae,ar,at,au,be,bg,br,ca,ch,cn,co,cu,cz,de,eg,fr,gb,gr,hk,hu,id,ie,il,in,it,jp,kr,lt,lv,ma,mx,my,ng,nl,no,nz,ph,pl,pt,ro,rs,ru,sa,se,sg,si,sk,th,tr,tw,ua,us,ve,za)", options: ["optional()"] } }
+                { position: { key: "language", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: languageEnum, options: ["optional()"] } },
+                { position: { key: "country", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: countryEnum, options: ["optional()"] } }
             ],
             tests: [
                 { _description: "Get all sources" },

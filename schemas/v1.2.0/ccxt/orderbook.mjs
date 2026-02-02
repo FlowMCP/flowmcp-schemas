@@ -1,5 +1,19 @@
 import ccxt from 'ccxt'
 
+import { TRADING_EXCHANGES } from '../_shared/tradingExchanges.mjs'
+
+
+const ccxtExchanges = TRADING_EXCHANGES
+    .filter( ( e ) => e.ccxtSlug !== undefined )
+    .reduce( ( acc, e ) => {
+        acc[ e.alias ] = e.ccxtSlug
+
+        return acc
+    }, {} )
+
+const ccxtExchangeEnum = 'enum(' + Object.keys( ccxtExchanges ).join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "cryptoOrderbook",
     name: "Crypto Order Book Metrics",
@@ -16,12 +30,12 @@ export const schema = {
             description: "Calculate bid/ask depth, imbalance and mid-price for a given trading pair on one exchange.",
             route: "/calculate",
             parameters: [
-                { position: { key: "exchange_id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "enum(binance,kraken,coinbase,bitfinex,okx,bybit)", options: [] } },
+                { position: { key: "exchange_id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: ccxtExchangeEnum, options: [] } },
                 { position: { key: "symbol", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "depth_percentage", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(0.01)", "max(10)", "default(1.0)"] } }
             ],
             tests: [
-                { _description: "Basic ETH/USDT test on Binance", exchange_id: "binance", symbol: "ETH/USDT", depth_percentage: 1.0 }
+                { _description: "Basic ETH/USDT test on Binance", exchange_id: "BINANCE", symbol: "ETH/USDT", depth_percentage: 1.0 }
             ],
             modifiers: [
                 { phase: "execute", handlerName: "calculateOrderbook" }
@@ -38,7 +52,7 @@ export const schema = {
             ],
             tests: [
                 { _description: "Compare ETH/USDT across all supported exchanges", symbol: "ETH/USDT", depth_percentage: 1.0 },
-                { _description: "Compare BTC/USDT on Binance and Kraken", symbol: "BTC/USDT", exchanges: ["binance", "kraken"], depth_percentage: 1.0 }
+                { _description: "Compare BTC/USDT on Binance and Kraken", symbol: "BTC/USDT", exchanges: ["BINANCE", "KRAKEN"], depth_percentage: 1.0 }
             ],
             modifiers: [
                 { phase: "execute", handlerName: "compareOrderbook" }
@@ -48,7 +62,8 @@ export const schema = {
     handlers: {
         calculateOrderbook: async ({ struct, userParams }) => {
             try {
-                const { exchange_id, symbol, depth_percentage = 1.0 } = userParams
+                const { exchange_id: _exchangeAlias, symbol, depth_percentage = 1.0 } = userParams
+                const exchange_id = ccxtExchanges[ _exchangeAlias ]
                 const exchangeClass = ccxt[exchange_id]
                 if (!exchangeClass) throw new Error(`Unsupported exchange: ${exchange_id}`)
                 const exchange = new exchangeClass()
@@ -73,7 +88,8 @@ export const schema = {
 
         compareOrderbook: async ({ struct, userParams }) => {
             try {
-                const { symbol, depth_percentage = 1.0, exchanges = ["binance", "kraken", "coinbase", "bitfinex", "okx", "bybit"] } = userParams
+                const { symbol, depth_percentage = 1.0, exchanges: _exchangeAliases = Object.keys( ccxtExchanges ) } = userParams
+                const exchanges = _exchangeAliases.map( ( a ) => ccxtExchanges[ a ] || a )
                 const results = []
                 for (const ex of exchanges) {
                     const exchangeClass = ccxt[ex]

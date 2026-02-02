@@ -1,3 +1,12 @@
+import { ISO_LANGUAGE_CODES } from '../_shared/isoLanguageCodes.mjs'
+
+const epoLanguageAliases = [ 'de', 'en', 'fr' ]
+const epoLanguageEnum = 'enum(' + ISO_LANGUAGE_CODES
+    .filter( ( c ) => epoLanguageAliases.includes( c.code ) )
+    .map( ( c ) => c.code )
+    .join( ',' ) + ')'
+
+
 export const schema = {
     namespace: "epo",
     name: "European Patent Office RSS Search",
@@ -15,7 +24,7 @@ export const schema = {
             route: "/rssSearch",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
-                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(de,en,fr)", options: ["default(en)", "optional()"] } }
+                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: epoLanguageEnum, options: ["default(en)", "optional()"] } }
             ],
             tests: [
                 { _description: "Search for AI patents in English", query: "txt = artificial and txt = intelligence", lng: "en" },
@@ -30,7 +39,7 @@ export const schema = {
             route: "/rssSearch",
             parameters: [
                 { position: { key: "technology", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(artificial intelligence,machine learning,blockchain,renewable energy,biotechnology,nanotechnology,quantum computing,robotics,autonomous vehicles,5G)", options: [] } },
-                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(de,en,fr)", options: ["default(en)", "optional()"] } }
+                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: epoLanguageEnum, options: ["default(en)", "optional()"] } }
             ],
             tests: [
                 { _description: "Search AI technology patents", technology: "artificial intelligence", lng: "en" },
@@ -50,7 +59,7 @@ export const schema = {
                 { position: { key: "keywords", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "array()", options: ["min(1)"] } },
                 { position: { key: "operator", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(AND,OR)", options: ["default(AND)", "optional()"] } },
                 { position: { key: "field", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(txt,ti,ab,in)", options: ["default(txt)", "optional()"] } },
-                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(de,en,fr)", options: ["default(en)", "optional()"] } }
+                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: epoLanguageEnum, options: ["default(en)", "optional()"] } }
             ],
             tests: [
                 { _description: "Search patents with multiple keywords", keywords: ["neural", "network", "deep"], operator: "AND", field: "txt", lng: "en" },
@@ -70,7 +79,7 @@ export const schema = {
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
                 { position: { key: "from_date", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
                 { position: { key: "to_date", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
-                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(de,en,fr)", options: ["default(en)", "optional()"] } }
+                { position: { key: "lng", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: epoLanguageEnum, options: ["default(en)", "optional()"] } }
             ],
             tests: [
                 { _description: "Search recent AI patents", query: "txt = artificial intelligence", from_date: "2023-01-01", to_date: "2024-12-31", lng: "en" },

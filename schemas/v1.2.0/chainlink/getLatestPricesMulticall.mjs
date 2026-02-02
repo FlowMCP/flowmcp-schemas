@@ -1,4 +1,5 @@
 import { ethers, Interface } from 'ethers'
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
 
 
 const multicall3Abi = [{
@@ -33,20 +34,12 @@ const priceFeedAbi = [
 ]
 const iface = new Interface(priceFeedAbi)
 
-const infuraSubDomain = {
-    'ARBITRUM_MAINNET': 'arbitrum-mainnet',
-    'AVALANCHE_MAINNET': 'avalanche-mainnet',
-    'BASE_MAINNET': 'base-mainnet',
-    'BINANCE_MAINNET': 'bsc-mainnet',
-    'CELO_MAINNET': 'celo-mainnet',
-    'ETHEREUM_MAINNET': 'mainnet',
-    'LINEA_MAINNET': 'linea-mainnet',
-    'MANTLE_MAINNET': 'mantle-mainnet',
-    'SCROLL_MAINNET': 'scroll-mainnet',
-    'OPTIMISM_MAINNET': 'optimism-mainnet',
-    'POLYGON_MAINNET': 'polygon-mainnet',
-    'ZKSYNC_MAINNET': 'zksync-mainnet'
-}
+const infuraSubDomain = EVM_CHAINS
+    .filter( ( c ) => c.infuraSubdomain !== undefined )
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.infuraSubdomain
+        return acc
+    }, {} )
 
 const MULTICALL3_ADDRESS = '0xca11bde05977b3631167028862be2a173976ca11'
 
@@ -4254,6 +4247,7 @@ const feeds = {
 const methods = ['latestRoundData', 'decimals']
 const multicallCommands = Object
     .entries(infuraSubDomain)
+    .filter(([blockchain, _]) => feeds[blockchain] !== undefined)
     .reduce((acc, [blockchain, _]) => {
         acc[blockchain] = methods
             .map((method) => {

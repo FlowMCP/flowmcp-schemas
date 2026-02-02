@@ -140,7 +140,8 @@ const EVM_CHAINS = [
         blocknativeAlias: 'AVALANCHE',
         blocknativeChainId: 43114,
         infuraSubdomain: 'avalanche-mainnet',
-        alchemyNetworkSlug: 'avax-mainnet'
+        alchemyNetworkSlug: 'avax-mainnet',
+        theGraphSlug: 'avalanche'
     },
     {
         alias: 'LINEA_MAINNET',
@@ -312,7 +313,8 @@ const EVM_CHAINS = [
         simduneChainId: 81457,
         simduneChainSlug: 'blast',
         blocknativeAlias: 'BLAST_MAINNET',
-        blocknativeChainId: 81457
+        blocknativeChainId: 81457,
+        theGraphSlug: 'blast'
     },
     {
         alias: 'SONIC_MAINNET',

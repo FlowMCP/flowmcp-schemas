@@ -1,26 +1,15 @@
 import moment from "moment"
 
+import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
 
-const timeframes = {
-    "1s": 1,
-    "5s": 5,
-    "15s": 15,
-    "1m": 60,
-    "3m": 180,
-    "5m": 300,
-    "15m": 900,
-    "30m": 1800,
-    "1h": 3600,
-    "2h": 7200,
-    "4h": 14400,
-    "6h": 21600,
-    "8h": 28800,
-    "12h": 43200,
-    "1d": 86400,
-    "3d": 259200,
-    "1w": 604800,
-    "1mn": 2592000
-}
+
+const solanaTrackerTimeframes = TRADING_TIMEFRAMES
+    .filter( ( t ) => t.solanaTrackerSlug !== undefined )
+    .reduce( ( acc, t ) => {
+        acc[ t.alias ] = t.seconds
+
+        return acc
+    }, {} )
 
 const fromDateUnits = {
     "minutes": 60,
@@ -53,7 +42,7 @@ const schema = {
             parameters: [
                 { position: { key: "token", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
                 { position: { key: "pool", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },
-                { position: { key: "type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: `enum(${Object.keys(timeframes).join(",")})`, options: [] } },
+                { position: { key: "type", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: `enum(${Object.keys(solanaTrackerTimeframes).join(",")})`, options: [] } },
                 { position: { key: "fromDateAmount", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: [] } },
                 { position: { key: "fromDateUnit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: `enum(${Object.keys(fromDateUnits).join(",")})`, options: [] } },
                 { position: { key: "marketCap", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: ["default(false)" ] } },
@@ -80,7 +69,7 @@ const schema = {
 
             delete params['fromDateAmount']
             delete params['fromDateUnit']
-            params[ 'type' ] = timeframes[ params[ 'type' ] ]
+            params[ 'type' ] = solanaTrackerTimeframes[ params[ 'type' ] ]
             params[ 'time_from' ] = from
             params[ 'time_to' ] = to
 

@@ -1,3 +1,22 @@
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+
+const theGraphChains = EVM_CHAINS
+    .filter( ( c ) => c.theGraphSlug !== undefined )
+
+const aliasToSlug = theGraphChains
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.theGraphSlug
+        return acc
+    }, {} )
+
+const poolChainAliases = [
+    'ETHEREUM_MAINNET', 'BASE_MAINNET', 'OPTIMISM_MAINNET',
+    'ARBITRUM_MAINNET', 'POLYGON_MAINNET', 'BINANCE_MAINNET',
+    'AVALANCHE_MAINNET', 'CELO_MAINNET', 'BLAST_MAINNET'
+]
+const poolChainEnum = 'enum(' + poolChainAliases.join( ',' ) + ')'
+
+
 const schema = {
     namespace: "thegraph",
     name: "UniswapPools",
@@ -19,8 +38,8 @@ const schema = {
           {
             position: { key: "chain", value: "{{USER_PARAM}}", location: "query" },
             z: {
-              primitive: "enum(ethereum,base,optimism,arbitrum,polygon,bsc,avalanche,celo,blast)",
-              options: [ "default(ethereum)"]
+              primitive: poolChainEnum,
+              options: [ "default(ETHEREUM_MAINNET)"]
             }
           },
           {
@@ -39,19 +58,32 @@ const schema = {
         tests: [
           {
             _description: "Fetch most recent pools on Optimism ordered by volume",
-            chain: "optimism",
+            chain: "OPTIMISM_MAINNET",
             orderBy: "volume",
             time_range_seconds: 70777,
             limit: 567
           }
         ],
         modifiers: [
+          { phase: "pre", handlerName: "mapChainToSlug" },
           { phase: "pre", handlerName: "setEnums" },
           { phase: "post", handlerName: "formatResult" }
         ]
       }
     },
     handlers: {
+      mapChainToSlug: async( { struct, payload, userParams } ) => {
+          const chainAlias = userParams.chain
+          if( !chainAlias ) { return { struct, payload } }
+          const slug = aliasToSlug[ chainAlias ]
+          if( !slug ) {
+              struct.status = false
+              struct.messages.push( `Unsupported chain: ${chainAlias}` )
+              return { struct, payload }
+          }
+          userParams.chain = slug
+          return { struct, payload }
+      },
       setEnums: async( { struct, payload, userParams } ) => {
 
         const SUBGRAPH_URLS = {

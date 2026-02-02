@@ -1,3 +1,26 @@
+import { EVM_CHAINS } from '../../_shared/evmChains.mjs'
+
+const moralisChains = EVM_CHAINS
+    .filter( ( c ) => c.moralisChainSlug !== undefined )
+
+const aliasToSlug = moralisChains
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.moralisChainSlug
+        return acc
+    }, {} )
+
+const defiAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'POLYGON_MAINNET',
+    'BINANCE_MAINNET', 'BINANCE_TESTNET', 'AVALANCHE_MAINNET',
+    'FANTOM_MAINNET', 'PALM_MAINNET', 'CRONOS_MAINNET',
+    'ARBITRUM_ONE_MAINNET', 'CHILIZ_MAINNET', 'CHILIZ_TESTNET',
+    'GNOSIS_MAINNET', 'GNOSIS_TESTNET', 'BASE_MAINNET',
+    'BASE_SEPOLIA_TESTNET', 'OPTIMISM_MAINNET', 'HOLESKY_TESTNET',
+    'POLYGON_AMOY_TESTNET', 'LINEA_MAINNET', 'MOONBEAM_MAINNET',
+    'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET', 'LINEA_SEPOLIA_TESTNET'
+]
+const defiChainEnum = 'enum(' + defiAliases.join( ',' ) + ')'
+
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis defiApi API',
@@ -12,62 +35,77 @@ const schema = {
     'headers': {
         "X-API-Key": "{{MORALIS_API_KEY}}"
     },
-    'routes': {	
+    'routes': {
 		"/wallets/:address/defi/:protocol/positions": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the detailed defi positions by protocol for a wallet address. Required: chain, address, protocol.",
 		    "route": "/wallets/:address/defi/:protocol/positions",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z": {"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},
-				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z": {"primitive":"string()","options":[]}},
-				{"position":{"key":"protocol","value":"{{USER_PARAM}}","location":"insert"},"z": {"primitive":"enum(uniswap-v2,uniswap-v3,pancakeswap-v2,pancakeswap-v3,quickswap-v2,sushiswap-v2,aave-v2,aave-v3,fraxswap-v1,fraxswap-v2,lido,makerdao,eigenlayer)","options":[]}}
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":defiChainEnum,"options":[]}},
+				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}},
+				{"position":{"key":"protocol","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"enum(uniswap-v2,uniswap-v3,pancakeswap-v2,pancakeswap-v3,quickswap-v2,sushiswap-v2,aave-v2,aave-v3,fraxswap-v1,fraxswap-v2,lido,makerdao,eigenlayer)","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the detailed defi positions by protocol for a wallet address.", "chain": "eth", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd", "protocol": "aave-v3" }
+		        { "_description": "Get the detailed defi positions by protocol for a wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd", "protocol": "aave-v3" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/defi/positions": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the positions summary of a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/defi/positions",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":defiChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the positions summary of a wallet address.", "chain": "eth", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd" }
+		        { "_description": "Get the positions summary of a wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/defi/summary": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the defi summary of a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/defi/summary",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,polygon,0x89,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,chiliz testnet,0x15b32,gnosis,0x64,gnosis testnet,0x27d8,base,0x2105,base sepolia,0x14a34,optimism,0xa,holesky,0x4268,polygon amoy,0x13882,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,linea sepolia,0xe705)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":defiChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the defi summary of a wallet address.", "chain": "eth", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd" }
+		        { "_description": "Get the defi summary of a wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xd100d8b69c5ae23d6aa30c6c3874bf47539b95fd" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		}
 	},
     'handlers': {
+        'mapChainToSlug': async( { struct, payload, userParams } ) => {
+            const chainAlias = userParams.chain
+            if( !chainAlias ) { return { struct, payload } }
+            const slug = aliasToSlug[ chainAlias ]
+            if( !slug ) {
+                struct.status = false
+                struct.messages.push( `Unsupported chain: ${chainAlias}` )
+                return { struct, payload }
+            }
+            payload['url'] = payload['url'].replace( `chain=${chainAlias}`, `chain=${slug}` )
+            return { struct, payload }
+        },
         'modifyResult': async( { struct, payload } ) => {
             return { struct, payload }
         }
     }
 }
-   
+
 
 export { schema }

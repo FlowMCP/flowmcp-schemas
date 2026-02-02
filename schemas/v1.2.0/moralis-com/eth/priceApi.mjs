@@ -1,3 +1,51 @@
+import { EVM_CHAINS } from '../../_shared/evmChains.mjs'
+
+const moralisChains = EVM_CHAINS
+    .filter( ( c ) => c.moralisChainSlug !== undefined )
+
+const aliasToSlug = moralisChains
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.moralisChainSlug
+        return acc
+    }, {} )
+
+const fullChainAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'HOLESKY_TESTNET',
+    'POLYGON_MAINNET', 'POLYGON_AMOY_TESTNET', 'BINANCE_MAINNET',
+    'BINANCE_TESTNET', 'AVALANCHE_MAINNET', 'FANTOM_MAINNET',
+    'PALM_MAINNET', 'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET',
+    'GNOSIS_MAINNET', 'GNOSIS_TESTNET', 'CHILIZ_MAINNET',
+    'CHILIZ_TESTNET', 'BASE_MAINNET', 'BASE_SEPOLIA_TESTNET',
+    'OPTIMISM_MAINNET', 'LINEA_MAINNET', 'LINEA_SEPOLIA_TESTNET',
+    'MOONBEAM_MAINNET', 'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET',
+    'FLOW_MAINNET', 'FLOW_TESTNET', 'RONIN_MAINNET', 'RONIN_TESTNET',
+    'LISK_MAINNET', 'LISK_SEPOLIA_TESTNET', 'PULSECHAIN_MAINNET'
+]
+const fullChainEnum = 'enum(' + fullChainAliases.join( ',' ) + ')'
+
+const nftPriceAliases = [
+    'ETHEREUM_MAINNET', 'POLYGON_MAINNET', 'BINANCE_MAINNET',
+    'AVALANCHE_MAINNET', 'ARBITRUM_ONE_MAINNET', 'BASE_MAINNET',
+    'OPTIMISM_MAINNET'
+]
+const nftPriceChainEnum = 'enum(' + nftPriceAliases.join( ',' ) + ')'
+
+const floorPriceAliases = [
+    'ETHEREUM_MAINNET', 'BASE_MAINNET'
+]
+const floorPriceChainEnum = 'enum(' + floorPriceAliases.join( ',' ) + ')'
+
+const erc20PriceAliases = [
+    'ETHEREUM_MAINNET', 'POLYGON_MAINNET', 'BINANCE_MAINNET',
+    'AVALANCHE_MAINNET', 'FANTOM_MAINNET', 'PALM_MAINNET',
+    'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET', 'GNOSIS_MAINNET',
+    'CHILIZ_MAINNET', 'BASE_MAINNET', 'OPTIMISM_MAINNET',
+    'LINEA_MAINNET', 'MOONBEAM_MAINNET', 'MOONRIVER_MAINNET',
+    'MOONBASE_ALPHA_TESTNET', 'FLOW_MAINNET', 'RONIN_MAINNET',
+    'LISK_MAINNET', 'PULSECHAIN_MAINNET'
+]
+const erc20PriceChainEnum = 'enum(' + erc20PriceAliases.join( ',' ) + ')'
+
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis priceApi API',
@@ -12,99 +60,104 @@ const schema = {
     'headers': {
         "X-API-Key": "{{MORALIS_API_KEY}}"
     },
-    'routes': {	
+    'routes': {
 		"/nft/:address/price": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the sold price for an NFT contract for the last x days (only trades paid in ETH).",
 		    "route": "/nft/:address/price",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,arbitrum,0xa4b1,base,0x2105,optimism,0xa)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":nftPriceChainEnum,"options":[]}},
 				{"position":{"key":"days","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the sold price for an NFT contract for the last x days.", "chain": "eth", "address": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" }
+		        { "_description": "Get the sold price for an NFT contract for the last x days.", "chain": "ETHEREUM_MAINNET", "address": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/nft/:address/floor-price": 		{
 		    "requestMethod": "GET",
 		    "description": "Get floor price for a given contract via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/nft/:address/floor-price",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,base,0x2105)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":floorPriceChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get floor price for a given contract.", "chain": "eth", "address": "0x524cab2ec69124574082676e6f654a18df49a048" }
+		        { "_description": "Get floor price for a given contract.", "chain": "ETHEREUM_MAINNET", "address": "0x524cab2ec69124574082676e6f654a18df49a048" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/nft/:address/:token_id/floor-price": 		{
 		    "requestMethod": "GET",
 		    "description": "Get floor price for a given token via Moralis — query by address and token id. Returns structured JSON response data.",
 		    "route": "/nft/:address/:token_id/floor-price",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,base,0x2105)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":floorPriceChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}},
 				{"position":{"key":"token_id","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get floor price.", "chain": "eth", "address": "0x524cab2ec69124574082676e6f654a18df49a048", "token_id": "2441" }
+		        { "_description": "Get floor price.", "chain": "ETHEREUM_MAINNET", "address": "0x524cab2ec69124574082676e6f654a18df49a048", "token_id": "2441" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/nft/:address/floor-price/historical": 		{
 		    "requestMethod": "GET",
 		    "description": "Get historical floor price for a given contract via Moralis — query by address. Supports cursor filters.",
 		    "route": "/nft/:address/floor-price/historical",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,base,0x2105)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":floorPriceChainEnum,"options":[]}},
 				{"position":{"key":"interval","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(1d,7d,30d,60d,90d,1y,all)","options":[]}},
 				{"position":{"key":"cursor","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get historical floor price.", "chain": "eth", "interval": "1d", "address": "0x524cab2ec69124574082676e6f654a18df49a048" }
+		        { "_description": "Get historical floor price.", "chain": "ETHEREUM_MAINNET", "interval": "1d", "address": "0x524cab2ec69124574082676e6f654a18df49a048" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/nft/:address/:token_id/price": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the sold price for an NFT token for the last x days (only trades paid in ETH).",
 		    "route": "/nft/:address/:token_id/price",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,arbitrum,0xa4b1,base,0x2105,optimism,0xa)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":nftPriceChainEnum,"options":[]}},
 				{"position":{"key":"days","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}},
 				{"position":{"key":"token_id","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the sold price for an NFT token for the last x days.", "chain": "eth", "address": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", "token_id": "1" }
+		        { "_description": "Get the sold price for an NFT token for the last x days.", "chain": "ETHEREUM_MAINNET", "address": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", "token_id": "1" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/pairs/:address/ohlcv": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the OHLCV candle stick by using pair address via Moralis — query by address. Supports limit, cursor filters.",
 		    "route": "/pairs/:address/ohlcv",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":fullChainEnum,"options":[]}},
 				{"position":{"key":"timeframe","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(1s,10s,30s,1min,5min,10min,30min,1h,4h,12h,1d,1w,1M)","options":[]}},
 				{"position":{"key":"currency","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(usd,native)","options":[]}},
 				{"position":{"key":"fromDate","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":[]}},
@@ -114,40 +167,54 @@ const schema = {
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the OHLCV candle stick by using pair address", "chain": "eth", "timeframe": "1h", "currency": "usd", "fromDate": "2025-01-01T10:00:00.000", "toDate": "2025-01-02T10:00:00.000", "address": "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f" }
+		        { "_description": "Get the OHLCV candle stick by using pair address", "chain": "ETHEREUM_MAINNET", "timeframe": "1h", "currency": "usd", "fromDate": "2025-01-01T10:00:00.000", "toDate": "2025-01-02T10:00:00.000", "address": "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/erc20/:address/price": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the token price denominated in the blockchain's native token and USD. View supported exchanges here",
 		    "route": "/erc20/:address/price",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,chiliz,0x15b38,base,0x2105,optimism,0xa,linea,0xe708,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,ronin,0x7e4,lisk,0x46f,pulse,0x171)","options":[]}},
-				{"position":{"key":"include","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(percent_change)","options":["optional()",]}},
-				{"position":{"key":"exchange","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(uniswapv2,uniswapv3,sushiswapv2,pancakeswapv1,pancakeswapv2,pancakeswapv3,quickswap,quickswapv2,traderjoe,pangolin,spookyswap,vvs,mm finance,crodex,camelotv2)","options":["optional()",]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":erc20PriceChainEnum,"options":[]}},
+				{"position":{"key":"include","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(percent_change)","options":["optional()"]}},
+				{"position":{"key":"exchange","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(uniswapv2,uniswapv3,sushiswapv2,pancakeswapv1,pancakeswapv2,pancakeswapv3,quickswap,quickswapv2,traderjoe,pangolin,spookyswap,vvs,mm finance,crodex,camelotv2)","options":["optional()"]}},
 				{"position":{"key":"to_block","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"max_token_inactivity","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"min_pair_side_liquidity_usd","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the token price denominated in the blockchain's native token and USD.", "chain": "eth", "address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0" }
+		        { "_description": "Get the token price denominated in the blockchain's native token and USD.", "chain": "ETHEREUM_MAINNET", "address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		}
 	},
     'handlers': {
+        'mapChainToSlug': async( { struct, payload, userParams } ) => {
+            const chainAlias = userParams.chain
+            if( !chainAlias ) { return { struct, payload } }
+            const slug = aliasToSlug[ chainAlias ]
+            if( !slug ) {
+                struct.status = false
+                struct.messages.push( `Unsupported chain: ${chainAlias}` )
+                return { struct, payload }
+            }
+            payload['url'] = payload['url'].replace( `chain=${chainAlias}`, `chain=${slug}` )
+            return { struct, payload }
+        },
         'modifyResult': async( { struct, payload } ) => {
             return { struct, payload }
         }
     }
 }
-   
+
 
 export { schema }
