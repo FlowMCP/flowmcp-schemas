@@ -3,7 +3,7 @@ export const schema = {
     name: "DeFiYieldsServer",
     description: "Fetch and analyze DeFi yield farming pools from DeFi Llama — search projects by name and query pool data including APY, TVL, and protocol details.",
     docs: ["https://docs.llama.fi/pro-api"],
-    tags: [],
+    tags: ["defi", "pools", "liquidity"],
     flowMCP: "1.2.0",
     root: "https://yields.llama.fi",
     requiredServerParams: [],

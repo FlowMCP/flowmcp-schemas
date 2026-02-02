@@ -3,7 +3,7 @@ const schema = {
     name: "DeFi Llama Liquidity Pools",
     description: "Access DeFi Llama liquidity pool analytics — query current pool yields (APY, TVL, rewards) and historical TVL chart data for individual pools.",
     docs: ["https://docs.llama.fi"],
-    tags: [],
+    tags: ["defi", "yields", "farming"],
     flowMCP: "1.2.0",
     root: "https://yields.llama.fi",
     requiredServerParams: [],

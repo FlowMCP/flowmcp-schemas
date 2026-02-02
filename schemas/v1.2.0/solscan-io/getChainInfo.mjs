@@ -3,7 +3,7 @@ export const schema = {
   name: "SolscanChainInfo",
   description: "Fetch general Solana blockchain information via Solscan — current block height, transaction count, TPS, total supply, and network health metrics.",
   docs: ["https://docs.solscan.io/api-access/pro-api-endpoints"],
-  tags: [],
+  tags: ["solana", "explorer", "blocks"],
   flowMCP: "1.2.0",
   root: "https://public-api.solscan.io",
   requiredServerParams: ["SOLSCAN_API_KEY"],

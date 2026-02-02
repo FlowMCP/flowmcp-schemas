@@ -3,7 +3,7 @@ export const schema = {
     name: "TwitterUsernameChanges",
     description: "Retrieve the full history of Twitter/X username changes for any account via memory.lol — track handle renames and previous usernames.",
     docs: ["https://github.com/travisbrown/memory.lol"],
-    tags: [],
+    tags: ["social", "twitter", "history"],
     flowMCP: "1.2.0",
     root: "https://api.memory.lol",
     requiredServerParams: [],

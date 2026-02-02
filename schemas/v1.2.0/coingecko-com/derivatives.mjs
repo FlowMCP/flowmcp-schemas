@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoDerivatives",
     description: "Retrieve cryptocurrency derivatives data from CoinGecko — list derivative exchanges, get exchange details by ID, and fetch derivative products per exchange.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "derivatives", "trading"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

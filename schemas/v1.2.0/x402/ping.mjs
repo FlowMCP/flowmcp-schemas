@@ -3,7 +3,7 @@ const schema = {
     name: "x402 Experimental MCP Interface",
     description: "Test schema for verifying free and paid route behavior under FlowMCP v1.2.0 — includes a free ping endpoint and a paid ping requiring x402 payment headers.",
     docs: ["https://example.com/x402/docs"],
-    tags: [],
+    tags: ["payments", "protocol", "micropayments"],
     flowMCP: "1.2.0",
     root: "https://api.x402.test/v1",
     requiredServerParams: [],

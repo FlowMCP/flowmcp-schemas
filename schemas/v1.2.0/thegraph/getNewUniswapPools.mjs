@@ -3,7 +3,7 @@ const schema = {
     name: "UniswapPools",
     description: "Fetch recently created Uniswap V3 trading pools across multiple blockchains via The Graph — discover new liquidity pools with token pairs and creation timestamps.",
     docs: ["https://thegraph.com/docs/en/"],
-    tags: [],
+    tags: ["defi", "uniswap", "graphql"],
     flowMCP: "1.2.0",
     root: "https://gateway.thegraph.com",
     requiredServerParams: ["THEGRAPH_API_KEY"],

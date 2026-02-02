@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinCapExchanges",
     description: "Access cryptocurrency exchange data from CoinCap — list all exchanges with volume rankings or retrieve detailed metadata for a specific exchange by ID.",
     docs: ["https://pro.coincap.io/api-docs"],
-    tags: [],
+    tags: ["crypto", "exchanges", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://rest.coincap.io/v3",
     requiredServerParams: ["COINCAP_API_KEY"],

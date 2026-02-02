@@ -3,7 +3,7 @@ export const schema = {
     name: "ProfileJump",
     description: "Access LUKSO Universal Profile data via ProfileJump — token prices, trending profiles, token listings, and profile lookups by address.",
     docs: ["https://profilejump.com"],
-    tags: [],
+    tags: ["lukso", "identity", "profiles"],
     flowMCP: "1.2.0",
     root: "https://api.profilejump.com",
     requiredServerParams: [],

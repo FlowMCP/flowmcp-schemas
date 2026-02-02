@@ -66,7 +66,7 @@ const schema = {
     name: "WalletExplorer",
     description: "Query Solana wallet data via Solana Tracker — token balances with USD values, recent trades, and paginated portfolio views for any wallet address.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "wallet", "portfolio"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

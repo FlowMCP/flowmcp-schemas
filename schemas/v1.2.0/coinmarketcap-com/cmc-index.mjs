@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinMarketCap100",
     description: "Retrieve the CoinMarketCap 100 Index — latest index value and historical time-series data for the CMC100 benchmark of top cryptocurrencies.",
     docs: ["https://coinmarketcap.com/api/documentation/v1/"],
-    tags: [],
+    tags: ["crypto", "index", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://pro-api.coinmarketcap.com",
     requiredServerParams: ["CMC_API_KEY"],

@@ -182,7 +182,7 @@ const schema = {
     name: "TokenAPI",
     description: "Provides endpoints for retrieving information about tokens, their holders, search capabilities, and statistical metrics like volume and trending status.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "tokens", "discovery"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

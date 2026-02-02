@@ -3,7 +3,7 @@ export const schema = {
     name: "CryptoNews",
     description: "Fetches general or topic-specific cryptocurrency news articles from NewsData.io.",
     docs: ["https://newsdata.io/documentation/"],
-    tags: [],
+    tags: ["news", "media", "global"],
     flowMCP: "1.2.0",
     root: "https://newsdata.io/api/1/crypto",
     requiredServerParams: ["NEWSDATA_API_KEY"],

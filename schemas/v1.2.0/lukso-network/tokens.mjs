@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout Tokens",
     description: "LUKSO token data via BlockScout — list tokens, get token details by address, transfer history, holder lists, and token counter statistics.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "tokens", "balances"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

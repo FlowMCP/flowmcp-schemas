@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis defiApi API',
     'description': 'DeFi portfolio analysis via Moralis — wallet positions across protocols (Uniswap, Aave, Lido, MakerDAO, EigenLayer, etc.) with per-protocol detail and summary views across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "defi", "positions"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

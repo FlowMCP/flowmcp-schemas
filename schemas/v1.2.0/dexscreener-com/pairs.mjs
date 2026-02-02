@@ -5,7 +5,7 @@ export const schema = {
     name: "Dexscreener Pairs",
     description: "Retrieve DEX trading pair data from DexScreener — pair details by chain and address, plus token buy/sell order checks across supported chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
-    tags: [],
+    tags: ["defi", "trading", "pairs"],
     flowMCP: "1.2.0",
     root: "https://api.dexscreener.com",
     requiredServerParams: [],

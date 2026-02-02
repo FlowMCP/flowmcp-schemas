@@ -6,7 +6,7 @@ const schema = {
     name: "Pinata SDK Upload",
     description: "Upload text content to IPFS via Pinata — creates a text file and pins it to IPFS using the Pinata SDK, returning the CID for permanent decentralized storage.",
     docs: ["https://docs.pinata.cloud/sdk-pinning/pinata-upload"],
-    tags: [],
+    tags: ["ipfs", "storage", "write"],
     flowMCP: "1.2.0",
     root: "https:...",
     requiredServerParams: ["PINATA_JWT", "PINATA_GATEWAY"],

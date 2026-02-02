@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoCategories",
     description: "Retrieve cryptocurrency category data from CoinGecko — list all available category IDs or get detailed market stats (market cap, volume, change) per category.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "categories", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

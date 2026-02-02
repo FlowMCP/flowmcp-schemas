@@ -3,7 +3,7 @@ const schema = {
     name: "Polymarket Predictions",
     description: "Access prediction market data from Polymarket via the CLOB API — list active markets with filters or retrieve detailed info for a specific market by condition ID.",
     docs: ["https://docs.polymarket.com"],
-    tags: [],
+    tags: ["prediction", "markets", "trading"],
     flowMCP: "1.2.0",
     root: "https://clob.polymarket.com",
     requiredServerParams: [],

@@ -109,7 +109,7 @@ const schema = {
     name: "TokenPriceAPI",
     description: "Solana token price data via Solana Tracker — real-time prices, historical prices, price at specific timestamps, price ranges, and batch multi-token queries.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "prices", "tokens"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

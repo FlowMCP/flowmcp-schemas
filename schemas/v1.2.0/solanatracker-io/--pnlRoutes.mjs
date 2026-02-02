@@ -68,7 +68,7 @@ const schema = {
     name: "PnL Analytics API",
     description: "Retrieve profit and loss analytics for Solana wallets via Solana Tracker — full PnL breakdown, per-token PnL, and first-buyer analysis for any wallet address.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "pnl", "portfolio"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

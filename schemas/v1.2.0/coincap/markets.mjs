@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinCapMarkets",
     description: "Access CoinCap market pair data — list trading pairs across exchanges with price, volume, spread, and exchange metadata. Supports filtering by exchange or asset.",
     docs: ["https://pro.coincap.io/api-docs"],
-    tags: [],
+    tags: ["crypto", "markets", "trading"],
     flowMCP: "1.2.0",
     root: "https://rest.coincap.io/v3",
     requiredServerParams: ["COINCAP_API_KEY"],

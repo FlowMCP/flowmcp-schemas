@@ -3,7 +3,7 @@ const schema = {
     name: "LuksoMainnetSubgraph",
     description: "Query the LUKSO Mainnet blockchain via GraphQL — introspect the schema and run custom queries against the LUKSO subgraph explorer.",
     docs: ["https://explorer.execution.testnet.lukso.network/graphiql", "https://explorer.execution.mainnet.lukso.network/graphiql"],
-    tags: [],
+    tags: ["lukso", "graphql", "explorer"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.mainnet.lukso.network/api",
     requiredServerParams: [],

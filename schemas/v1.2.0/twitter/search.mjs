@@ -7,7 +7,7 @@ const schema = {
     name: "Twitter Recent Search",
     description: "Search for Tweets from the last 7 days using the Twitter/X API v2 recent search endpoint. Supports advanced query operators for precise tweet filtering.",
     docs: ["https://developer.twitter.com/en/docs/twitter-api/tweets/search/quick-start/recent-search"],
-    tags: [],
+    tags: ["social", "search", "mentions"],
     flowMCP: "1.2.0",
     root: "https://api.twitter.com/2",
     requiredServerParams: ["TWITTER_BEARER_TOKEN"],

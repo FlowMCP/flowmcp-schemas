@@ -49,7 +49,7 @@ const schema = {
     name: "TopTradersAPI",
     description: "Provides access to the most profitable traders across all tokens, with support for pagination and token-specific queries.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "trading", "leaderboard"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

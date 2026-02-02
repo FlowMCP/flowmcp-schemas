@@ -376,7 +376,7 @@ const schema = {
 	name: "OHLCV Indicators",
 	description: "Compute 80+ technical analysis indicators from OHLCV data using the indicatorts library. Covers momentum (RSI, MACD, Stochastic), trend (SMA, EMA, Bollinger Bands, Ichimoku), volume (OBV, VWAP, MFI) indicators and their BUY/SELL/HOLD trading strategies. No external API — all computation is local.",
 	docs: ["https://github.com/cinar/indicatorts"],
-	tags: [],
+	tags: ["trading", "indicators", "analysis"],
 	flowMCP: "1.2.0",
 	root: "https://...",
 	requiredServerParams: [],

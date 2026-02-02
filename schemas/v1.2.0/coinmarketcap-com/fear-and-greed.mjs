@@ -3,7 +3,7 @@ export const schema = {
     name: "CMCCryptoFearAndGreed",
     description: "Retrieve the CoinMarketCap Crypto Fear and Greed Index — latest sentiment reading plus historical time-series data for market psychology tracking.",
     docs: ["https://coinmarketcap.com/api/documentation/v1/"],
-    tags: [],
+    tags: ["crypto", "sentiment", "index"],
     flowMCP: "1.2.0",
     root: "https://pro-api.coinmarketcap.com",
     requiredServerParams: ["CMC_API_KEY"],

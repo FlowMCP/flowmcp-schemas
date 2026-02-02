@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout Statistics",
     description: "LUKSO blockchain statistics via BlockScout — network stats overview, transaction volume charts, and market price chart data for the LUKSO Mainnet.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "statistics", "network"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

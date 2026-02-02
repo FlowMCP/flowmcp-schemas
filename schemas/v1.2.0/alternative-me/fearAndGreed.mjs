@@ -3,7 +3,7 @@ export const schema = {
     name: "FearGreedIndex",
     description: "Fetch and analyze the Crypto Fear and Greed Index from alternative.me — current reading, historical data with configurable lookback, and trend analysis.",
     docs: ["https://alternative.me/crypto/api/"],
-    tags: [],
+    tags: ["crypto", "sentiment", "index"],
     flowMCP: "1.2.0",
     root: "https://api.alternative.me/fng",
     requiredServerParams: [],

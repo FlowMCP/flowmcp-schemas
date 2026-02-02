@@ -3,7 +3,7 @@ export const schema = {
     name: "SolSniffer",
     description: "Analyze Solana token security via SolSniffer — assess contract risks, detect rug-pull indicators, check mint authority, and retrieve token safety scores.",
     docs: ["https://solsniffer.gitbook.io/solsniffer-user-guide"],
-    tags: [],
+    tags: ["solana", "security", "analysis"],
     flowMCP: "1.2.0",
     root: "https://solsniffer.com/api/v2/token",
     requiredServerParams: ["SOLSNIFFER_API_KEY"],

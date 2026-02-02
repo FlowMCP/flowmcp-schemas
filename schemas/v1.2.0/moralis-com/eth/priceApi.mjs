@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis priceApi API',
     'description': 'Token and NFT price data via Moralis — ERC20 token prices, NFT floor prices (current and historical), NFT sale history, and DEX pair OHLCV candlestick data across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "prices", "tokens"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

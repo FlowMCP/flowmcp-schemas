@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin Funds API",
     description: "Access Berlin city funding data — search available funding opportunities and continuing education programs from the Berlin.de portal (German language).",
     docs: ["https://www.berlin.de/"],
-    tags: [],
+    tags: ["berlin", "funding", "opendata"],
     flowMCP: "1.2.0",
     root: "https://www.berlin.de",
     requiredServerParams: [],

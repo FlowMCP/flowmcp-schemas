@@ -3,7 +3,7 @@ export const schema = {
     name: "Contract",
     description: "Retrieve smart contract data from LUKSO BlockScout — list verified contracts, get ABI, fetch source code, and look up contract creation transaction details.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "contracts", "sourcecode"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api",
     requiredServerParams: [],

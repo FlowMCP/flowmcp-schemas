@@ -3,7 +3,7 @@ export const schema = {
     name: "AssetsAPI",
     description: "Retrieve cryptocurrency asset data from CoinCap — prices, market caps, supply, volume, and historical data for thousands of tokens.",
     docs: ["https://pro.coincap.io/api-docs"],
-    tags: [],
+    tags: ["crypto", "prices", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://rest.coincap.io/v3",
     requiredServerParams: ["COINCAP_API_KEY"],

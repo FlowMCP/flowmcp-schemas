@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin WFS Locations API",
     description: "Access to Berlin geographic data including dog parks and BBQ areas via WFS services",
     docs: ["https://gdi.berlin.de/"],
-    tags: [],
+    tags: ["berlin", "geodata", "opendata"],
     flowMCP: "1.2.0",
     root: "https://gdi.berlin.de",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis utils API',
     'description': 'Moralis platform utility endpoints for API introspection. Check endpoint costs, rate limits, and the current Moralis Web3 API version.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "utilities", "conversion"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

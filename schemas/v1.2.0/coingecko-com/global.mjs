@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoGlobal",
     description: "Fetch global cryptocurrency market data from CoinGecko — total market cap, 24h volume, BTC/ETH dominance, plus DeFi-specific global metrics.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "global", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

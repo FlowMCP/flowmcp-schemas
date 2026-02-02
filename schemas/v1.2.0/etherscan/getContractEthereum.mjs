@@ -3,7 +3,7 @@ const schema = {
     name: "Etherscan",
     description: "Retrieve smart contract ABI and verified Solidity source code from Etherscan (Ethereum mainnet). Returns the contract interface definition and full source for any verified contract address on Ethereum.",
     docs: ["https://docs.etherscan.io"],
-    tags: [],
+    tags: ["ethereum", "contracts", "explorer"],
     flowMCP: "1.2.0",
     root: "https://api.etherscan.io/v2/api",
     requiredServerParams: [ "ETHERSCAN_API_KEY" ],

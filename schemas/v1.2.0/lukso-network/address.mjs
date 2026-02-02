@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout Addresses",
     description: "Comprehensive address data on LUKSO via BlockScout — transactions, token transfers, internal txs, logs, balances, and coin balance history for any address.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "address", "explorer"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ const schema = {
     name: "Pinata IPFS Read MCP Interface",
     description: "Read content from IPFS via the Pinata gateway — access files by CID (Content Identifier) through Pinata's dedicated IPFS gateway with API key authentication.",
     docs: ["https://gateway.pinata.cloud/"],
-    tags: [],
+    tags: ["ipfs", "storage", "read"],
     flowMCP: "1.2.0",
     root: "https://gateway.pinata.cloud/ipfs",
     requiredServerParams: [], //[ 'PINATA_GATEWAY' ],

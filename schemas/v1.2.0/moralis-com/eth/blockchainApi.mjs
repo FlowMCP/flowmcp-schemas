@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis blockchainApi API',
     'description': 'Low-level blockchain data via Moralis — block lookups (by number, hash, or date), transaction details, native transaction history for addresses, and latest block numbers across 30+ EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "blockchain", "blocks"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

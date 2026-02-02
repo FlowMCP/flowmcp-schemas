@@ -3,7 +3,7 @@ const schema = {
     name: "CointelegraphRSS",
     description: "Fetch the latest cryptocurrency news from Cointelegraph via RSS — filter articles by category (Bitcoin, Ethereum, Altcoin, DeFi, etc.) and time range.",
     docs: ["https://cointelegraph.com/rss-feeds"],
-    tags: [],
+    tags: ["crypto", "news", "media"],
     flowMCP: "1.2.0",
     root: "https://cointelegraph.com",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoCoins",
     description: "Fetch coins list, markets, details, history, tickers, and token info from CoinGecko",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "prices", "marketdata"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

@@ -105,7 +105,7 @@ const schema = {
     name: "TokenTradeTracker",
     description: "Retrieve Solana DEX trade data via Solana Tracker — latest trades by token, pool, wallet, or combination. Supports pagination and Jupiter parse mode.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "trading", "swaps"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

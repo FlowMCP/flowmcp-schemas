@@ -12,7 +12,7 @@ export const schema = {
   name: "ERC725UniversalProfile",
   description: "Read LUKSO Universal Profile data on-chain via ERC725 — call getData for raw key-value storage and fetchData for resolved metadata with IPFS content.",
   docs: ["https://github.com/ERC725Alliance/erc725.js", "https://docs.lukso.tech/learn/overview"],
-  tags: [],
+  tags: ["lukso", "identity", "profiles"],
   flowMCP: "1.2.0",
   root: "https://rpc.--chain--.lukso.network",
   requiredServerParams: [],
