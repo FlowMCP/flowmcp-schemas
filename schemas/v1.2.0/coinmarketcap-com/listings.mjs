@@ -3,7 +3,7 @@ export const schema = {
   name: "CoinMarketCapListingsLatest",
   description: "Returns a paginated list of all active cryptocurrencies with latest market data.",
   docs: ["https://coinmarketcap.com/api/documentation/v1/"],
-  tags: ["crypto", "listings", "marketdata"],
+  tags: ["crypto", "listings", "marketdata", "cacheTtlFrequent"],
   flowMCP: "1.2.0",
   root: "https://pro-api.coinmarketcap.com/v1",
   requiredServerParams: ["CMC_API_KEY"],

@@ -3,7 +3,7 @@ const schema = {
   name: "TheGraphSubgraphTools",
   description: "Introspect and query The Graph protocol subgraphs — fetch GraphQL schemas and execute arbitrary queries against any hosted subgraph.",
   docs: ["https://thegraph.com/docs/en/"],
-  tags: ["defi", "subgraph", "graphql"],
+  tags: ["defi", "subgraph", "graphql", "cacheTtlStatic"],
   flowMCP: "1.2.0",
   root: "https://gateway.thegraph.com",
   requiredServerParams: ["THEGRAPH_API_KEY"],

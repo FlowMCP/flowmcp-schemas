@@ -3,7 +3,7 @@ export const schema = {
     name: "Rugcheck Token Safety",
     description: "Check Solana token safety scores, risk reports, votes, and trending tokens via rugcheck.xyz",
     docs: ["https://api.rugcheck.xyz/swagger/index.html"],
-    tags: ["solana", "security", "tokens"],
+    tags: ["solana", "security", "tokens", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.rugcheck.xyz",
     requiredServerParams: [],

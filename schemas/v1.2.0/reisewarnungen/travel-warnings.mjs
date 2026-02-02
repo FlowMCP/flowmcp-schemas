@@ -3,7 +3,7 @@ export const schema = {
     name: "Reisewarnungen API",
     description: "German Federal Foreign Office (Auswaertiges Amt) travel warnings and safety advisories for all countries worldwide",
     docs: ["https://reisewarnungen.api.bund.dev/"],
-    tags: ["travel", "warnings", "germany", "safety"],
+    tags: ["travel", "warnings", "germany", "safety", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.auswaertiges-amt.de/opendata",
     requiredServerParams: [],

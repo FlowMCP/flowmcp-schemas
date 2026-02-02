@@ -4284,7 +4284,7 @@ const schema = {
     name: "Multicall Latest Prices",
     description: "Batch-fetch ALL Chainlink oracle prices for an entire EVM chain in a single Multicall3 aggregate3 call. Returns all available price feeds at once for 12 chains (Ethereum, Polygon, Arbitrum, Base, etc.). Bulk variant of the single-feed chainlink schema.",
     docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
-    tags: ["oracle", "price", "feeds"],
+    tags: ["oracle", "price", "feeds", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
     requiredServerParams: [ "INFURA_API_KEY" ],

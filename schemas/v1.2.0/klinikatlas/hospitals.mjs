@@ -3,7 +3,7 @@ export const schema = {
     name: "Bundes-Klinik-Atlas API",
     description: "German Federal Hospital Atlas (Bundes-Klinik-Atlas) providing hospital locations, medical procedure codes, ICD diagnostic codes, and state-level healthcare statistics",
     docs: ["https://klinikatlas.api.bund.dev/"],
-    tags: ["healthcare", "germany", "hospitals", "medical"],
+    tags: ["healthcare", "germany", "hospitals", "medical", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://klinikatlas.api.proxy.bund.dev/fileadmin/json",
     requiredServerParams: [],

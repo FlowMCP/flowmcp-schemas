@@ -3,7 +3,7 @@ export const schema = {
     name: "Arbeitsagentur Ausbildungssuche API",
     description: "German Federal Employment Agency apprenticeship and training search API providing access to vocational training offers across Germany with filtering options",
     docs: ["https://ausbildungssuche.api.bund.dev/"],
-    tags: ["education", "germany", "apprenticeship", "training"],
+    tags: ["education", "germany", "apprenticeship", "training", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://rest.arbeitsagentur.de/infosysbub/absuche",
     requiredServerParams: [],

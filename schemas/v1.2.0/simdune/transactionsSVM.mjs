@@ -13,7 +13,7 @@ const schema = {
     name: "Sim by Dune - SVM Transactions",
     description: "Retrieve detailed transaction history for SVM addresses including block information, ordered by descending block time.",
     docs: ["https://docs.sim.dune.com/svm/transactions"],
-    tags: ["production", "transactions", "analytics", "history", "svm", "solana"],
+    tags: ["production", "transactions", "analytics", "history", "svm", "solana", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/beta",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

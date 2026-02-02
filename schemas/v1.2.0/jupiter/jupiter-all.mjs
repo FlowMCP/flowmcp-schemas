@@ -3,7 +3,7 @@ const schema = {
     name: "Jupiter Token Price Checker",
     description: "Fetches token prices from Jupiter DEX aggregator, priced by default against USDC, with optional vsToken.",
     docs: ["https://station.jup.ag/docs/api/lite-api", "https://dev.jup.ag/docs/price-api/"],
-    tags: ["solana", "defi", "swap"],
+    tags: ["solana", "defi", "swap", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://lite-api.jup.ag",
     requiredServerParams: [],

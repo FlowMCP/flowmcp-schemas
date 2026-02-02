@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinCapRates",
     description: "Access fiat and cryptocurrency conversion rates from CoinCap — list all available exchange rates or look up a specific currency rate by slug.",
     docs: ["https://pro.coincap.io/api-docs"],
-    tags: ["crypto", "rates", "conversion"],
+    tags: ["crypto", "rates", "conversion", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://rest.coincap.io/v3",
     requiredServerParams: ["COINCAP_API_KEY"],

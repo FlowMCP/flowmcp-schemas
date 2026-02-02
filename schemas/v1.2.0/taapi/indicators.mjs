@@ -3,7 +3,7 @@ export const schema = {
     name: "TAAPI.IO Technical Indicators",
     description: "Access 208+ technical analysis indicators (RSI, MACD, Bollinger Bands, EMA, SMA and more) via the TAAPI.IO REST API",
     docs: ["https://taapi.io/indicators/", "https://taapi.io/"],
-    tags: ["crypto", "trading", "indicators"],
+    tags: ["crypto", "trading", "indicators", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.taapi.io",
     requiredServerParams: ["TAAPI_SECRET"],

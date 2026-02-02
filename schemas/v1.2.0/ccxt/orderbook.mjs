@@ -5,7 +5,7 @@ export const schema = {
     name: "Crypto Order Book Metrics",
     description: "Fetches and compares bid/ask depth and imbalance for trading pairs across supported exchanges using CCXT.",
     docs: ["https://github.com/ccxt/ccxt"],
-    tags: ["production", "trading", "orderbook", "exchange"],
+    tags: ["production", "trading", "orderbook", "exchange", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "local://ccxt",
     requiredServerParams: [],

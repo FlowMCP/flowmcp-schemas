@@ -3,7 +3,7 @@ export const schema = {
     name: "Geoapify Geocoding",
     description: "Forward geocoding, reverse geocoding, and address autocomplete via Geoapify — convert addresses to coordinates, coordinates to addresses, and type-ahead suggestions.",
     docs: ["https://apidocs.geoapify.com/docs/geocoding/"],
-    tags: ["geocoding", "maps", "places"],
+    tags: ["geocoding", "maps", "places", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.geoapify.com",
     requiredServerParams: ["GEOAPIFY_API_KEY"],

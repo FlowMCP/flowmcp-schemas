@@ -3,7 +3,7 @@ const schema = {
     name: "Wormhole Metrics API",
     description: "Query cross-chain bridge metrics from Wormholescan — activity stats, money flow, top assets by volume, top chain pairs, top corridors, and KPI summaries.",
     docs: ["https://wormholescan.io", "https://docs.wormholescan.io"],
-    tags: ["data", "api"],
+    tags: ["data", "api", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.wormholescan.io",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "Pegel-Online API",
     description: "German federal waterway gauging stations API providing real-time water levels, measurements, and station data from the WSV",
     docs: ["https://pegel-online.api.bund.dev/"],
-    tags: ["water", "germany", "environment", "hydrology"],
+    tags: ["water", "germany", "environment", "hydrology", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://www.pegelonline.wsv.de/webservices/rest-api/v2",
     requiredServerParams: [],

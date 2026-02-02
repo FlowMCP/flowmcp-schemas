@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis nftApi API',
     'description': 'Comprehensive NFT data via Moralis — collection stats, metadata, ownership, transfers, trades, traits, and market rankings across 30+ EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: ["evm", "nft", "collectibles"],
+    tags: ["evm", "nft", "collectibles", "cacheTtlFrequent"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

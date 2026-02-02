@@ -3,7 +3,7 @@ export const schema = {
     name: "Eco-Visio Counter API",
     description: "Eco-Counter bicycle and pedestrian counting stations API providing traffic counting data from automated sensors across German cities and worldwide",
     docs: ["https://eco-visio.api.bund.dev/"],
-    tags: ["mobility", "germany", "cycling", "pedestrian"],
+    tags: ["mobility", "germany", "cycling", "pedestrian", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.eco-visio.net/api/aladdin/1.0.0",
     requiredServerParams: [],

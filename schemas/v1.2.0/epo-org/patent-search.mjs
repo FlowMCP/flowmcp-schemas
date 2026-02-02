@@ -3,7 +3,7 @@ export const schema = {
     name: "European Patent Office RSS Search",
     description: "Search European patents via RSS from the European Patent Office — query by technology class (IPC/CPC), keywords, date ranges, or combined filters.",
     docs: ["https://register.epo.org/", "https://www.epo.org/searching-for-patents/"],
-    tags: ["patents", "research", "search"],
+    tags: ["patents", "research", "search", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://register.epo.org",
     requiredServerParams: [],

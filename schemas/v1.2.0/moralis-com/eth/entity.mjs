@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis entity API',
     'description': 'Retrieve entity classification categories from Moralis for categorizing wallet addresses and on-chain entities across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: ["evm", "identity", "entities"],
+    tags: ["evm", "identity", "entities", "cacheTtlDaily"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

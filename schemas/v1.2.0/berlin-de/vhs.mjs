@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin VHS API",
     description: "Access to Berlin Volkshochschule (VHS) course catalog with detailed course information",
     docs: ["https://www.vhsit.berlin.de/"],
-    tags: ["berlin", "education", "opendata"],
+    tags: ["berlin", "education", "opendata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.vhsit.berlin.de",
     requiredServerParams: [],

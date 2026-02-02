@@ -3,7 +3,7 @@ export const schema = {
     name: "DuneAnalytics",
     description: "Retrieve results from Dune Analytics queries — fetch the latest cached result for any public Dune query by its numeric query ID. Returns structured row data.",
     docs: ["https://docs.dune.com/api-reference/overview/introduction"],
-    tags: ["analytics", "queries", "data"],
+    tags: ["analytics", "queries", "data", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.dune.com/api/v1",
     requiredServerParams: ["DUNE_API_KEY"],

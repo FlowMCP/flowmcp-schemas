@@ -3,7 +3,7 @@ export const schema = {
     name: "FarcasterTrends",
     description: "Fetches trending memecoins, channels, and users from Farcaster via Dune Analytics.",
     docs: ["https://docs.dune.com/api-reference/overview/introduction"],
-    tags: ["analytics", "farcaster", "social"],
+    tags: ["analytics", "farcaster", "social", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.dune.com/api/v1/farcaster/trends",
     requiredServerParams: ["DUNE_API_KEY"],

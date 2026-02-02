@@ -3,7 +3,7 @@ const schema = {
     name: "AAVE Protocol API",
     description: "Fetch and analyze liquidity and account data from AAVE v3 via The Graph subgraph",
     docs: ["https://thegraph.com/explorer/subgraphs/aave/protocol-v3", "https://docs.aave.com/developers/"],
-    tags: ["defi", "lending", "protocol"],
+    tags: ["defi", "lending", "protocol", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://gateway.thegraph.com",
     requiredServerParams: ["THEGRAPH_API_KEY"],

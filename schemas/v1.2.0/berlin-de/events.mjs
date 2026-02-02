@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin Events API",
     description: "Access to Berlin city events data including markets, festivals, and public assemblies",
     docs: ["https://www.berlin.de/"],
-    tags: ["berlin", "events", "opendata"],
+    tags: ["berlin", "events", "opendata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.berlin.de",
     requiredServerParams: [],

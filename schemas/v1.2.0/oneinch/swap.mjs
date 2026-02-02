@@ -3,7 +3,7 @@ export const schema = {
     name: "1inch Swap API",
     description: "Get swap quotes and generate swap transaction data across 13+ EVM chains using the 1inch aggregation protocol",
     docs: ["https://business.1inch.com/portal/documentation/apis/swap/introduction", "https://1inch.io/"],
-    tags: ["defi", "swap", "ethereum", "trading"],
+    tags: ["defi", "swap", "ethereum", "trading", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.1inch.dev/swap/v6.0",
     requiredServerParams: ["ONEINCH_API_KEY"],

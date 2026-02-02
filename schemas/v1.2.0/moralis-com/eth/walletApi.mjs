@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis walletApi API',
     'description': 'Wallet intelligence via Moralis — native balance, transaction history, net worth, profitability analysis, active chain detection, plus ENS and Unstoppable Domains name resolution across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: ["evm", "wallet", "portfolio"],
+    tags: ["evm", "wallet", "portfolio", "cacheTtlFrequent"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

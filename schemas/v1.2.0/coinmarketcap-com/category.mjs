@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinMarketCap Categories",
     description: "Retrieve cryptocurrency category data from CoinMarketCap — list categories, get category details, map coin IDs, fetch metadata, and query latest market quotes.",
     docs: ["https://coinmarketcap.com/api/documentation/v1/"],
-    tags: ["crypto", "categories", "marketdata"],
+    tags: ["crypto", "categories", "marketdata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://pro-api.coinmarketcap.com",
     requiredServerParams: ["CMC_API_KEY"],

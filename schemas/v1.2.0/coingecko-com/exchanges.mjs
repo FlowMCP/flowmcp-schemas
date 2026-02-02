@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoExchanges",
     description: "Fetch exchanges list, exchange details, and exchange trading pairs from CoinGecko",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: ["crypto", "exchanges", "marketdata"],
+    tags: ["crypto", "exchanges", "marketdata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

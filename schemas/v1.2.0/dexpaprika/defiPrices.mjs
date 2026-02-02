@@ -3,7 +3,7 @@ export const schema = {
     name: "DexPaprika DeFi Prices",
     description: "Query decentralized exchange data including token prices, pools, liquidity, and transactions via dexpaprika.com",
     docs: ["https://api.dexpaprika.com/docs"],
-    tags: ["defi", "prices", "liquidity"],
+    tags: ["defi", "prices", "liquidity", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.dexpaprika.com",
     requiredServerParams: [],

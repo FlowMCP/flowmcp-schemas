@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout Search",
     description: "Search the LUKSO blockchain via BlockScout — full-text search across addresses, transactions, blocks, and tokens with redirect support.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: ["lukso", "search", "explorer"],
+    tags: ["lukso", "search", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

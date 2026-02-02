@@ -90,7 +90,7 @@ const schema = {
     name: "TokenChartAPI",
     description: "Retrieve OHLCV candlestick and holder distribution chart data from Solana Tracker for specific tokens and pools on the Solana blockchain.",
     docs: ["https://docs.solanatracker.io"],
-    tags: ["solana", "charts", "ohlcv"],
+    tags: ["solana", "charts", "ohlcv", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

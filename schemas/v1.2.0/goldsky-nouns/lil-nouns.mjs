@@ -3,7 +3,7 @@ const schema = {
     name: "Lil Nouns Subgraph",
     description: "Fetch governance proposal data from the Lil Nouns DAO subgraph on Goldsky — list all proposals or retrieve a specific proposal by ID with vote details.",
     docs: ["https://lilnouns.wtf", "https://docs.goldsky.com"],
-    tags: ["production", "data", "api"],
+    tags: ["production", "data", "api", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.goldsky.com/api/public/project_cldjvjgtylso13swq3dre13sf/subgraphs/lil-nouns-subgraph/1.0.6/gn",
     requiredServerParams: [],

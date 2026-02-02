@@ -3,7 +3,7 @@ const schema = {
     'name': 'Moralis tokenApi API',
     'description': 'ERC20 token analytics via Moralis — metadata, holder analysis, transfer history, DEX swap transactions, sniper detection, liquidity reserves, wallet balances, approvals, and market rankings across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: ["evm", "tokens", "balances"],
+    tags: ["evm", "tokens", "balances", "cacheTtlFrequent"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [

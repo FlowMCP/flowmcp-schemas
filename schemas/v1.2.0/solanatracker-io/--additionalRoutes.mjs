@@ -53,7 +53,7 @@ const schema = {
     name: "TokenStatsAPI",
     description: "Provides detailed statistics for tokens and token-pool pairs over multiple time intervals.",
     docs: ["https://docs.solanatracker.io"],
-    tags: ["solana", "analytics", "tokens"],
+    tags: ["solana", "analytics", "tokens", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

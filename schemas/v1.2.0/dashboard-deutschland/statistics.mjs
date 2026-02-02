@@ -3,7 +3,7 @@ export const schema = {
     name: "Dashboard Deutschland API",
     description: "DESTATIS Dashboard Deutschland providing German economic indicators, labour market data, energy statistics, trade figures, and financial market data",
     docs: ["https://bundesapi.github.io/dashboard-deutschland-api/"],
-    tags: ["statistics", "germany", "economy", "destatis"],
+    tags: ["statistics", "germany", "economy", "destatis", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.dashboard-deutschland.de",
     requiredServerParams: [],

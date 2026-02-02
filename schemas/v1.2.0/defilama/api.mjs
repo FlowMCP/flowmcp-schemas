@@ -3,7 +3,7 @@ const schema = {
     name: "DeFi Llama MCP",
     description: "Access DeFi protocol analytics from DeFi Llama — list all tracked protocols, get per-protocol TVL history, and query chain-level TVL aggregates.",
     docs: ["https://docs.llama.fi"],
-    tags: ["defi", "tvl", "protocols"],
+    tags: ["defi", "tvl", "protocols", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.llama.fi",
     requiredServerParams: [],

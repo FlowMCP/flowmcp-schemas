@@ -3,7 +3,7 @@ export const schema = {
     name: "VAG Nuernberg Transit API",
     description: "Real-time public transit data for Nuremberg (VAG) including stops, departures, and service information for buses, trams, and subway",
     docs: ["https://bundesapi.github.io/vag-api/"],
-    tags: ["transit", "germany", "realtime", "nuremberg"],
+    tags: ["transit", "germany", "realtime", "nuremberg", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://start.vag.de/dm/api/v1",
     requiredServerParams: [],

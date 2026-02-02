@@ -6,7 +6,7 @@ export const schema = {
     name: "Oeffentliche Vergabe API",
     description: "German public procurement notice service (Bekanntmachungsservice) providing tender notices in OCDS format with buyer, title, CPV codes, and delivery location",
     docs: ["https://oeffentlichevergabe.de/documentation/swagger-ui/opendata/index.html"],
-    tags: ["procurement", "germany", "tenders", "government"],
+    tags: ["procurement", "germany", "tenders", "government", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://oeffentlichevergabe.de",
     requiredServerParams: [],

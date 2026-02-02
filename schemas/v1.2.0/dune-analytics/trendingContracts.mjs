@@ -3,7 +3,7 @@ export const schema = {
     name: "DexAndContracts",
     description: "Provides insights into DEX trading pairs, trending contracts, and market share across chains via Dune Analytics.",
     docs: ["https://docs.dune.com/api-reference/overview/introduction"],
-    tags: ["analytics", "contracts", "trending"],
+    tags: ["analytics", "contracts", "trending", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.dune.com/api/v1",
     requiredServerParams: ["DUNE_API_KEY"],

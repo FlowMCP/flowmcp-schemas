@@ -3,7 +3,7 @@ export const schema = {
     name: "MUDAB Marine Environment Database API",
     description: "German Federal Institute of Hydrology (BfG) marine environment database providing monitoring data from coastal states and research institutions",
     docs: ["https://mudab.api.bund.dev/"],
-    tags: ["marine", "germany", "environment", "monitoring"],
+    tags: ["marine", "germany", "environment", "monitoring", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://geoportal.bafg.de/mudab/rest/BaseController/FilterElements",
     requiredServerParams: [],

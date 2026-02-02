@@ -3,7 +3,7 @@ export const schema = {
     name: "Cryptorank Funds",
     description: "Access cryptocurrency investment fund data from Cryptorank — search, filter, and sort funds with detailed profiles including team members and portfolio analytics.",
     docs: ["https://api.cryptorank.io"],
-    tags: ["funds", "investors", "analytics"],
+    tags: ["funds", "investors", "analytics", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.cryptorank.io/v2",
     requiredServerParams: ["CRYPTORANK_API_KEY"],

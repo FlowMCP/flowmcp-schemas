@@ -3,7 +3,7 @@ export const schema = {
     name: "Stolpersteine Berlin API",
     description: "Access information about Stolpersteine (memorial stones) in Berlin commemorating victims of Nazi persecution",
     docs: ["https://www.stolpersteine-berlin.de/", "https://www.stolpersteine-berlin.de/de/api"],
-    tags: ["memorial", "history", "berlin"],
+    tags: ["memorial", "history", "berlin", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.stolpersteine-berlin.de",
     requiredServerParams: [],

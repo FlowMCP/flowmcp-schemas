@@ -3,7 +3,7 @@ export const schema = {
     name: "TED EU Public Procurement API",
     description: "Tenders Electronic Daily (TED) API providing access to EU public procurement notices with expert query search across all EU member states",
     docs: ["https://docs.ted.europa.eu/api/latest/index.html"],
-    tags: ["procurement", "europe", "tenders", "government"],
+    tags: ["procurement", "europe", "tenders", "government", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.ted.europa.eu/v3/notices",
     requiredServerParams: [],

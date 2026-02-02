@@ -3,7 +3,7 @@ export const schema = {
     name: "ZVG Portal Zwangsversteigerungen",
     description: "Search German foreclosure auctions (Zwangsversteigerungen) from the official ZVG portal of German courts",
     docs: ["https://www.zvg-portal.de"],
-    tags: ["immobilien", "auktionen", "justiz"],
+    tags: ["immobilien", "auktionen", "justiz", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.zvg-portal.de",
     requiredServerParams: [],

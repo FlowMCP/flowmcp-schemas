@@ -3,7 +3,7 @@ const schema = {
     name: 'Avalanche Metrics API',
     description: 'Avalanche Metrics API for on-chain analytics including staking, throughput, gas, TPS, and validator metrics',
     docs: [ 'https://metrics.avax.network' ],
-    tags: [ 'blockchain', 'avalanche', 'metrics', 'staking', 'analytics' ],
+    tags: [ 'blockchain', 'avalanche', 'metrics', 'staking', 'analytics' , "cacheTtlDaily"],
     flowMCP: '1.2.0',
     root: 'https://metrics.avax.network/v2',
     requiredServerParams: [],

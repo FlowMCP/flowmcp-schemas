@@ -3,7 +3,7 @@ export const schema = {
     name: "Hacker News JSON Feeds",
     description: "Access Hacker News content via realtime JSON feeds: new posts, comments, jobs, replies, favorites, and more.",
     docs: ["https://hnrss.org"],
-    tags: ["news", "hackernews", "feeds"],
+    tags: ["news", "hackernews", "feeds", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://hnrss.org",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "DeBank Portfolio API",
     description: "Track DeFi portfolio data including token balances, protocol positions and total balance across all major chains via DeBank",
     docs: ["https://docs.cloud.debank.com/", "https://debank.com/"],
-    tags: ["defi", "portfolio", "wallet", "crypto"],
+    tags: ["defi", "portfolio", "wallet", "crypto", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://pro-openapi.debank.com/v1",
     requiredServerParams: ["DEBANK_ACCESS_KEY"],

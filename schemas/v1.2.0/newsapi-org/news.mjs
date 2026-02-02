@@ -3,7 +3,7 @@ export const schema = {
     name: "NewsAPI.org",
     description: "Access breaking news headlines and search through articles from news sources and blogs across the web",
     docs: ["https://newsapi.org/docs"],
-    tags: ["news", "media", "content"],
+    tags: ["news", "media", "content", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://newsapi.org/v2",
     requiredServerParams: ["NEWSAPI_API_KEY"],

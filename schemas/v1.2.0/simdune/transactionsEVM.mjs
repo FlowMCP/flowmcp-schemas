@@ -46,7 +46,7 @@ const schema = {
     name: "Sim by Dune - Transactions",
     description: "Retrieve granular transaction details including block information, gas data, and raw values, ordered by descending block time.",
     docs: ["https://docs.sim.dune.com/evm/transactions"],
-    tags: ["production", "transactions", "analytics", "history"],
+    tags: ["production", "transactions", "analytics", "history", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

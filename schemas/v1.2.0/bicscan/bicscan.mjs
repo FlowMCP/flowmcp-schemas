@@ -3,7 +3,7 @@ const schema = {
     name: "BICScan API",
     description: "Assess blockchain address risk scores and scan held assets via BICScan — get compliance risk ratings and token portfolio details for any wallet address.",
     docs: ["https://api.bicscan.io/docs"],
-    tags: ["security", "risk", "scanning"],
+    tags: ["security", "risk", "scanning", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.bicscan.io/v1/scan",
     requiredServerParams: ["BICSCAN_API_KEY"],

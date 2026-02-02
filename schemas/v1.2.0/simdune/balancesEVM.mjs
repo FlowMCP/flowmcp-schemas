@@ -46,7 +46,7 @@ const schema = {
     name: "Sim by Dune - Token Balances",
     description: "Access realtime token balances for native and ERC20 tokens with USD valuations across EVM chains.",
     docs: ["https://docs.sim.dune.com/evm/balances"],
-    tags: ["production", "balances", "analytics", "portfolio"],
+    tags: ["production", "balances", "analytics", "portfolio", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

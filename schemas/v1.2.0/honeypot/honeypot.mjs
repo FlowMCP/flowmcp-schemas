@@ -3,7 +3,7 @@ const schema = {
     name: "Honeypot Detector",
     description: "Detect honeypot token contracts using the honeypot.is API — checks buy/sell tax, liquidity locks, and contract risks for any EVM token address.",
     docs: ["https://honeypot.is"],
-    tags: ["production", "security", "token", "validation"],
+    tags: ["production", "security", "token", "validation", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.honeypot.is/v2",
     requiredServerParams: [],

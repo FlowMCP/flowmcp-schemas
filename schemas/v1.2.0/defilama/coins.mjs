@@ -8,7 +8,7 @@ const schema = {
     name: "DeFi Llama Token Prices",
     description: "Fetch current token prices across multiple chains via DeFi Llama — batch query ERC20 and native token prices by contract address with USD values.",
     docs: ["https://docs.llama.fi"],
-    tags: ["defi", "prices", "tokens"],
+    tags: ["defi", "prices", "tokens", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://coins.llama.fi",
     requiredServerParams: [],

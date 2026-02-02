@@ -62,7 +62,7 @@ const schema = {
     name: "Chainlist Tools",
     description: "Query EVM chain metadata from Chainlist — look up chains by ID or keyword, get RPC endpoints, block explorer URLs, WebSocket endpoints, and native currency info.",
     docs: ["https://chainlist.org"],
-    tags: ["production", "blockchain", "rpc", "network"],
+    tags: ["production", "blockchain", "rpc", "network", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://chainlist.org/rpcs.json",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "GovData.de Open Data Portal",
     description: "Search and explore German open government data (CKAN API) with 175k+ datasets from federal, state, and municipal authorities",
     docs: ["https://www.govdata.de/", "https://docs.ckan.org/en/latest/api/"],
-    tags: ["government", "opendata", "germany"],
+    tags: ["government", "opendata", "germany", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.govdata.de/ckan/api/3/action",
     requiredServerParams: [],

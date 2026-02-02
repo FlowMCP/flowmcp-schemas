@@ -3,7 +3,7 @@ export const schema = {
     name: "MCP Server Registry",
     description: "Browse and search the official Model Context Protocol server registry to discover available MCP servers",
     docs: ["https://registry.modelcontextprotocol.io/", "https://modelcontextprotocol.io/"],
-    tags: ["mcp", "registry", "ai", "tools"],
+    tags: ["mcp", "registry", "ai", "tools", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://registry.modelcontextprotocol.io/v0",
     requiredServerParams: [],

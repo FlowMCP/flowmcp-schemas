@@ -3,7 +3,7 @@ export const schema = {
     name: "NINA Warn-App API",
     description: "German federal warning system (NINA) providing DWD weather warnings, MOWAS civil protection alerts, BIWAPP and KATWARN notifications",
     docs: ["https://nina.api.bund.dev/"],
-    tags: ["warnings", "germany", "safety"],
+    tags: ["warnings", "germany", "safety", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://warnung.bund.de/api31",
     requiredServerParams: [],

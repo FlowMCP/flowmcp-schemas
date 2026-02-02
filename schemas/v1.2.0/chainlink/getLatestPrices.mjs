@@ -31,7 +31,7 @@ const schema = {
     name: "ExampleName",
     description: "Read individual Chainlink oracle price feeds on 12 EVM chains (Ethereum, Polygon, Arbitrum, Base, etc.) via Infura RPC. Returns the latest price for a selected trading pair (e.g., ETH/USD) by calling latestRoundData() on-chain. Also lists available chains and feeds per chain.",
     docs: ["https://docs.chain.link/data-feeds/price-feeds/addresses"],
-    tags: ["oracle", "price", "feeds"],
+    tags: ["oracle", "price", "feeds", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
     requiredServerParams: [ "INFURA_API_KEY" ],

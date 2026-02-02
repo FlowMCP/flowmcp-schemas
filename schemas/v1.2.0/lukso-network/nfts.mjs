@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout NFTs",
     description: "Query NFT data on LUKSO via BlockScout — collections, instances, holders, and transfers for any address or smart contract on LUKSO Mainnet.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: ["lukso", "nft", "collectibles"],
+    tags: ["lukso", "nft", "collectibles", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

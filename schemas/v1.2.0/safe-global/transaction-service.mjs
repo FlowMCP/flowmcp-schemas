@@ -3,7 +3,7 @@ export const schema = {
     name: "Safe Transaction Service",
     description: "Query Gnosis Safe multisig wallets including balances, transactions, owners and modules on Ethereum mainnet",
     docs: ["https://docs.safe.global/core-api/transaction-service-overview", "https://safe.global/"],
-    tags: ["ethereum", "multisig", "defi", "wallet"],
+    tags: ["ethereum", "multisig", "defi", "wallet", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://safe-transaction-mainnet.safe.global/api/v1",
     requiredServerParams: [],

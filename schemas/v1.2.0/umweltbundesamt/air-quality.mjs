@@ -3,7 +3,7 @@ export const schema = {
     name: "Umweltbundesamt Air Quality API",
     description: "German Federal Environment Agency (Umweltbundesamt) air quality data including stations, pollutant measurements, and air quality index",
     docs: ["https://luftqualitaet.api.bund.dev/"],
-    tags: ["airquality", "germany", "environment", "pollution"],
+    tags: ["airquality", "germany", "environment", "pollution", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://umweltbundesamt.api.proxy.bund.dev/api/air_data/v3",
     requiredServerParams: [],

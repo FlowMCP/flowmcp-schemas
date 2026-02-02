@@ -3,7 +3,7 @@ const schema = {
   name: "SantimentAnalytics",
   description: "Provides sentiment and social metrics for crypto assets using the Santiment API.",
   docs: ["https://academy.santiment.net/for-developers/"],
-  tags: ["crypto", "analytics", "sentiment"],
+  tags: ["crypto", "analytics", "sentiment", "cacheTtlFrequent"],
   flowMCP: "1.2.0",
   root: "https://api.santiment.net",
   requiredServerParams: ["SANTIMENT_API_KEY"],

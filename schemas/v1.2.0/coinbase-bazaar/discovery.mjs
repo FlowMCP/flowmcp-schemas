@@ -3,7 +3,7 @@ export const schema = {
     name: "Coinbase Bazaar x402 Discovery",
     description: "Discover x402-compatible paid resources and services available on the Coinbase Bazaar marketplace",
     docs: ["https://docs.cdp.coinbase.com/x402/bazaar", "https://www.x402.org/"],
-    tags: ["payments", "marketplace", "crypto"],
+    tags: ["payments", "marketplace", "crypto", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.cdp.coinbase.com/platform/v2/x402/discovery",
     requiredServerParams: [],

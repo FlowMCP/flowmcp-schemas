@@ -3,7 +3,7 @@ export const schema = {
     name: "Tagesschau API",
     description: "Access German public broadcasting news from ARD tagesschau including headlines, search, and live channels",
     docs: ["https://www.tagesschau.de/"],
-    tags: ["news", "germany", "media"],
+    tags: ["news", "germany", "media", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://www.tagesschau.de/api2u",
     requiredServerParams: [],

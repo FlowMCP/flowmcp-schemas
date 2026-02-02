@@ -3,7 +3,7 @@ export const schema = {
     name: "Bitcoin UTXO Analytics",
     description: "Provides insights into Bitcoin UTXOs and block statistics using blockchain.info endpoints.",
     docs: ["https://www.blockchain.com/api/blockchain_api"],
-    tags: ["bitcoin", "blockchain", "utxo"],
+    tags: ["bitcoin", "blockchain", "utxo", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://blockchain.info",
     requiredServerParams: [],

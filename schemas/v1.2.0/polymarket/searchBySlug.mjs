@@ -8,7 +8,7 @@ const schema = {
     name: "Fed Rate Cuts 2025",
     description: "Access Polymarket prediction market data for Fed rate cut events via the Gamma API. Returns market outcomes, probabilities, and trading volume.",
     docs: ["https://polymarket.com"],
-    tags: ["prediction", "markets", "events"],
+    tags: ["prediction", "markets", "events", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://gamma-api.polymarket.com",
     requiredServerParams: [],

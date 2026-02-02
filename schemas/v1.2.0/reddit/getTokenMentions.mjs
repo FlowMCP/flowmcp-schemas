@@ -3,7 +3,7 @@ const schema = {
     name: "Reddit Token Mention Search",
     description: "Searches Reddit for mentions of a token symbol or name related to crypto topics.",
     docs: ["https://www.reddit.com/dev/api/"],
-    tags: ["social", "sentiment", "crypto"],
+    tags: ["social", "sentiment", "crypto", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://www.reddit.com",
     requiredServerParams: [],

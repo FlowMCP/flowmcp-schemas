@@ -3,7 +3,7 @@ export const schema = {
     name: "DWD WarnWetter API",
     description: "German Weather Service (Deutscher Wetterdienst) weather forecasts and station data via the WarnWetter app API",
     docs: ["https://dwd.api.bund.dev/"],
-    tags: ["weather", "germany", "forecast"],
+    tags: ["weather", "germany", "forecast", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://app-prod-ws.warnwetter.de/v30",
     requiredServerParams: [],

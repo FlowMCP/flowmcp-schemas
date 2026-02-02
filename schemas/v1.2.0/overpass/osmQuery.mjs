@@ -3,7 +3,7 @@ export const schema = {
     name: "Overpass OSM Query",
     description: "Query OpenStreetMap data using the Overpass API for geographic searches and nearby point-of-interest lookups",
     docs: ["https://wiki.openstreetmap.org/wiki/Overpass_API", "https://overpass-turbo.eu/"],
-    tags: ["openstreetmap", "geodata", "maps"],
+    tags: ["openstreetmap", "geodata", "maps", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://overpass-api.de/api",
     requiredServerParams: [],

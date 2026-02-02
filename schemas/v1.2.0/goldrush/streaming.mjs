@@ -3,7 +3,7 @@ export const schema = {
     name: "GoldRush Streaming API",
     description: "Search tokens and query wallet PnL data across multiple chains using the GoldRush (Covalent) Streaming GraphQL API",
     docs: ["https://goldrush.dev/docs/overview", "https://goldrush.dev/docs/goldrush-streaming-api/overview"],
-    tags: ["crypto", "defi", "blockchain", "tokens"],
+    tags: ["crypto", "defi", "blockchain", "tokens", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.covalenthq.com/v1",
     requiredServerParams: ["GOLDRUSH_API_KEY"],

@@ -3,7 +3,7 @@ const schema = {
     name: "Nouns DAO Subgraph",
     description: "Query Nouns DAO governance data from the Goldsky subgraph — recent proposals, current auctions, individual Noun details, and top delegates by voting power.",
     docs: ["https://docs.goldsky.com", "https://nouns.wtf"],
-    tags: ["production", "dao", "governance", "nft"],
+    tags: ["production", "dao", "governance", "nft", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns/prod/gn",
     requiredServerParams: [],

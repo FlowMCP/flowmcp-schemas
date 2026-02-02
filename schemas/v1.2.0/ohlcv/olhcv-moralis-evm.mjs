@@ -66,7 +66,7 @@ const schema = {
     name: "Moralis Recursive OHLCV EVM and Ethereum",
     description: "Recursively fetch OHLCV candlestick data from Moralis for any EVM token pair — auto-paginates through all available timeframes for complete price history.",
     docs: ["https://docs.moralis.io/web3-data-api/evm/reference/get-ohlcv-by-pair-address"],
-    tags: ["evm", "ohlcv", "charts"],
+    tags: ["evm", "ohlcv", "charts", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://deep-index.moralis.io",
     requiredServerParams: ["MORALIS_API_KEY"],

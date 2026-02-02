@@ -3,7 +3,7 @@ export const schema = {
     name: "Arbeitsagentur Berufenet API",
     description: "German Federal Employment Agency BERUFENET encyclopedia providing comprehensive information on over 3500 professions in Germany with classification and grouping",
     docs: ["https://berufenet.api.bund.dev/"],
-    tags: ["professions", "germany", "employment", "education"],
+    tags: ["professions", "germany", "employment", "education", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://rest.arbeitsagentur.de/infosysbub/bnet",
     requiredServerParams: [],

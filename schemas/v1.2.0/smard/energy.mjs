@@ -3,7 +3,7 @@ export const schema = {
     name: "SMARD Energy Data API",
     description: "German energy market data from SMARD (Strommarktdaten) by Bundesnetzagentur. Provides electricity generation, consumption, and market data.",
     docs: ["https://smard.api.bund.dev/"],
-    tags: ["energy", "germany", "electricity", "market"],
+    tags: ["energy", "germany", "electricity", "market", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://www.smard.de/app/chart_data",
     requiredServerParams: [],

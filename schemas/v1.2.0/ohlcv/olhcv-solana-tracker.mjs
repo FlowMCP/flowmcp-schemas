@@ -37,7 +37,7 @@ const schema = {
     name: "Solana Tracker OHLCV for Solana",
     description: "Retrieve OHLCV candlestick chart data from Solana Tracker for any Solana token and pool pair — configurable timeframes for price history visualization.",
     docs: ["https://data.solanatracker.io"],
-    tags: ["solana", "ohlcv", "charts"],
+    tags: ["solana", "ohlcv", "charts", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

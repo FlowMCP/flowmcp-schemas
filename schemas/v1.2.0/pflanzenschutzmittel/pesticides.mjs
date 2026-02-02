@@ -3,7 +3,7 @@ export const schema = {
     name: "BVL Pflanzenschutzmittel API",
     description: "German Federal Office of Consumer Protection (BVL) pesticide registration database with approved products, active ingredients, companies, and usage restrictions",
     docs: ["https://pflanzenschutzmittelzulassung.api.bund.dev/"],
-    tags: ["agriculture", "germany", "pesticides", "regulation"],
+    tags: ["agriculture", "germany", "pesticides", "regulation", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://psm-api.bvl.bund.de/ords/psm/api-v1",
     requiredServerParams: [],

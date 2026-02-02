@@ -32,7 +32,7 @@ const schema = {
     name: "Moralis Recursive OHLCV Solana",
     description: "Recursively fetch OHLCV candlestick data from Moralis for any Solana token pair — auto-paginates through all available timeframes for complete price history.",
     docs: ["https://docs.moralis.io/web3-data-api/solana/reference/get-ohlcv-by-pair-address"],
-    tags: ["solana", "ohlcv", "charts"],
+    tags: ["solana", "ohlcv", "charts", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://solana-gateway.moralis.io",
     requiredServerParams: ["MORALIS_API_KEY"],

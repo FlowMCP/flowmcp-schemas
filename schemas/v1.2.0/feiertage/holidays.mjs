@@ -3,7 +3,7 @@ export const schema = {
     name: "Feiertage API",
     description: "German public holidays API providing holiday dates for all federal states with optional state filtering",
     docs: ["https://feiertage-api.de/"],
-    tags: ["holidays", "germany", "calendar"],
+    tags: ["holidays", "germany", "calendar", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://feiertage-api.de/api",
     requiredServerParams: [],

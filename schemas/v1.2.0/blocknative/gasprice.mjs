@@ -47,7 +47,7 @@ const schema = {
     name: "Gas Price Estimator",
     description: "Accurate next-block gas price predictions for Ethereum, Bitcoin, and other supported chains.",
     docs: ["https://docs.blocknative.com"],
-    tags: ["new"],
+    tags: ["new", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.blocknative.com",
     requiredServerParams: ["BLOCKNATIVE_API_KEY"],

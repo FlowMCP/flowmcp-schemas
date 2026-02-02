@@ -3,7 +3,7 @@ const schema = {
     name: "Bitget Crypto Tools",
     description: "Provides crypto data utilities like token prices, announcements, and coin info via Bitget API.",
     docs: ["https://www.bitget.com/api-doc"],
-    tags: ["production", "exchange", "trading", "price"],
+    tags: ["production", "exchange", "trading", "price", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.bitget.com",
     requiredServerParams: [],

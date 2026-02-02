@@ -3,7 +3,7 @@ export const schema = {
     name: "dexscreener-tokeninfo",
     description: "Search tokens and retrieve profile data from DexScreener — latest token profiles, pair search, token-to-pair lookups, and pool listings across all DEX chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
-    tags: ["defi", "tokens", "discovery"],
+    tags: ["defi", "tokens", "discovery", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.dexscreener.com",
     requiredServerParams: [],

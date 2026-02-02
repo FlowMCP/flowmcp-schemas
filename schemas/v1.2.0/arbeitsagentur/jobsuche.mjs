@@ -3,7 +3,7 @@ export const schema = {
     name: "Arbeitsagentur Jobsuche",
     description: "Search job listings from the German Federal Employment Agency (Bundesagentur fuer Arbeit) public job board API",
     docs: ["https://jobsuche.api.bund.dev/"],
-    tags: ["jobs", "employment", "germany"],
+    tags: ["jobs", "employment", "germany", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://rest.arbeitsagentur.de/jobboerse/jobsuche-service",
     requiredServerParams: [],

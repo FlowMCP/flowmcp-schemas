@@ -3,7 +3,7 @@ export const schema = {
     name: "Autobahn App API",
     description: "Real-time traffic data for German motorways including roadworks, warnings, closures, webcams, and electric charging stations",
     docs: ["https://autobahn.api.bund.dev/"],
-    tags: ["traffic", "germany", "infrastructure"],
+    tags: ["traffic", "germany", "infrastructure", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://verkehr.autobahn.de/o/autobahn",
     requiredServerParams: [],

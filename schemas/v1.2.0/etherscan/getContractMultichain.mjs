@@ -72,7 +72,7 @@ export const schema = {
     name: "SmartContractExplorer",
     description: "Retrieve smart contract ABI and verified source code across 60+ EVM chains via Etherscan v2 API. Lists available chains and fetches contract data by address.",
     docs: ["https://docs.etherscan.io"],
-    tags: ["evm", "contracts", "explorer"],
+    tags: ["evm", "contracts", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.etherscan.io/v2/api",
     requiredServerParams: [ "ETHERSCAN_API_KEY" ],

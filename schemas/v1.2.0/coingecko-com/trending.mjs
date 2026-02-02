@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoTrending",
     description: "Retrieve trending cryptocurrency data from CoinGecko — currently trending coins, trending NFT collections, and trending market categories with price and volume.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: ["crypto", "trending", "discovery"],
+    tags: ["crypto", "trending", "discovery", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

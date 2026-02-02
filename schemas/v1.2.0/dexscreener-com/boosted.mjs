@@ -3,7 +3,7 @@ export const schema = {
     name: "dexscreener-boosted",
     description: "Discover trending boosted tokens on DexScreener — latest and most actively boosted token listings across all DEX chains.",
     docs: ["https://docs.dexscreener.com/api/reference"],
-    tags: ["defi", "trading", "boosted"],
+    tags: ["defi", "trading", "boosted", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.dexscreener.com",
     requiredServerParams: [],

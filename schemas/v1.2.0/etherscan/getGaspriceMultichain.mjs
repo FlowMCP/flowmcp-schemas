@@ -72,7 +72,7 @@ export const schema = {
     name: "SmartContractExplorer",
     description: "Fetch current gas oracle data (safe, proposed, fast gas prices) across multiple EVM chains via the Etherscan v2 API. Supports Ethereum, Arbitrum, Polygon, Binance, Avalanche and more.",
     docs: ["https://docs.etherscan.io"],
-    tags: ["evm", "gas", "fees"],
+    tags: ["evm", "gas", "fees", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.etherscan.io/v2/api",
     requiredServerParams: ["ETHERSCAN_API_KEY"],

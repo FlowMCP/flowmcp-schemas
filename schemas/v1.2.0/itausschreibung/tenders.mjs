@@ -3,7 +3,7 @@ export const schema = {
     name: "IT-Ausschreibung.de RSS Feed",
     description: "German IT procurement and tender platform providing RSS feeds for IT-related tenders across categories like software, hardware, internet, telecom, and consulting",
     docs: ["https://www.it-ausschreibung.de/rss"],
-    tags: ["procurement", "germany", "tenders", "it"],
+    tags: ["procurement", "germany", "tenders", "it", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.it-ausschreibung.de",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ const schema = {
     name: "BSC Scan",
     description: "Retrieve smart contract ABI and verified Solidity source code from BSCScan (Binance Smart Chain explorer). Returns the contract interface definition and full source for any verified contract address on BSC.",
     docs: ["https://docs.bscscan.com/"],
-    tags: [ 'test'],
+    tags: [ 'test', "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.bscscan.com/",
     requiredServerParams: [ "BSCSCAN_API_KEY" ],

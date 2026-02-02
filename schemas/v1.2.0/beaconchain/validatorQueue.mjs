@@ -3,7 +3,7 @@ export const schema = {
     name: "Ethereum Validator Queue API",
     description: "Exposes real-time queue stats and validator information from the Beaconcha.in Ethereum API.",
     docs: ["https://beaconcha.in/api/v1/docs"],
-    tags: ["ethereum", "validators", "staking"],
+    tags: ["ethereum", "validators", "staking", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://beaconcha.in/api/v1",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "BfS Strahlenschutz ODL API",
     description: "German Federal Office for Radiation Protection (BfS) ambient dose rate monitoring data via WFS/OGC service with 1685 measuring stations across Germany",
     docs: ["https://strahlenschutz.api.bund.dev/"],
-    tags: ["radiation", "germany", "environment", "safety"],
+    tags: ["radiation", "germany", "environment", "safety", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://www.imis.bfs.de/ogc/opendata/ows",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "LUKSO BlockScout Meta",
     description: "LUKSO BlockScout internal endpoints — latest main page transactions and blocks, node health, JSON-RPC config, and Celestia blob metadata.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: ["lukso", "internal", "explorer"],
+    tags: ["lukso", "internal", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],

@@ -3,7 +3,7 @@ export const schema = {
     name: "Digitale Verwaltung API",
     description: "German Digital Administration API providing online government services catalog with OZG status, administrative region codes, and service availability across federal states",
     docs: ["https://digitale-verwaltung.api.bund.dev/"],
-    tags: ["government", "germany", "administration", "services"],
+    tags: ["government", "germany", "administration", "services", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://digitale-verwaltung.api.proxy.bund.dev/api/v1",
     requiredServerParams: [],

@@ -131,7 +131,7 @@ export const schema = {
     name: "Polymarket Predictions",
     description: "FlowMCP schema for Polymarket's public Gamma API: search events, list events, and list markets with readable, table-like summaries.",
     docs: ["https://gamma-api.polymarket.com"],
-    tags: ["predictions", "markets", "events"],
+    tags: ["predictions", "markets", "events", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://gamma-api.polymarket.com",
     requiredServerParams: [],

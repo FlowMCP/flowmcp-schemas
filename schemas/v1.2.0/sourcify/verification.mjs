@@ -3,7 +3,7 @@ export const schema = {
     name: "Sourcify Contract Verification",
     description: "Verify and lookup Ethereum smart contract source code verification status across multiple chains using Sourcify",
     docs: ["https://docs.sourcify.dev/", "https://sourcify.dev/"],
-    tags: ["ethereum", "verification", "smartcontracts"],
+    tags: ["ethereum", "verification", "smartcontracts", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://sourcify.dev/server",
     requiredServerParams: [],

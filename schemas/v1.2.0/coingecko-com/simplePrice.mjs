@@ -3,7 +3,7 @@ export const schema = {
     name: "CoinGeckoSimplePrice",
     description: "Fetch current cryptocurrency prices via CoinGecko Simple API — get coin prices by ID or ERC20 token prices by contract address in multiple fiat currencies.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: ["crypto", "prices", "conversion"],
+    tags: ["crypto", "prices", "conversion", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],

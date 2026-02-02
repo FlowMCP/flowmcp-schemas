@@ -3,7 +3,7 @@ export const schema = {
     name: "Medium RSS Feeds",
     description: "Access Medium articles via RSS feeds — fetch latest posts by tag, user profile, publication, or topic with full article metadata and summaries.",
     docs: ["https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds"],
-    tags: ["content", "social", "feeds"],
+    tags: ["content", "social", "feeds", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://medium.com/feed",
     requiredServerParams: [],
