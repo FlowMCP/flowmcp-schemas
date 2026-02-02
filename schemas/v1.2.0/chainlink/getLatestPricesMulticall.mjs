@@ -48,17 +48,7 @@ const infuraSubDomain = {
     'ZKSYNC_MAINNET': 'zksync-mainnet'
 }
 
-const multicallProviders = Object
-    .entries(infuraSubDomain)
-    .reduce((acc, [blockchain, value]) => {
-        const rawUrl = 'https://--infura-subdomain--.infura.io/v3/f3ca3c43f47d43239a1173f115b43df0'
-        const url = rawUrl.replace('--infura-subdomain--', value)
-        const provider = new ethers.JsonRpcProvider(url)
-        const multicall = new ethers
-            .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
-        acc[blockchain] = multicall
-        return acc
-    }, {} )
+const MULTICALL3_ADDRESS = '0xca11bde05977b3631167028862be2a173976ca11'
 
 
 const feeds = {
@@ -4428,17 +4418,16 @@ const schema = {
         },
         getAllLatestPrices: async( { struct, payload, userParams, phase } ) => {
             const { _allParams: { chainName } } = userParams
-            const { feedName } = userParams
             let { url } = payload
             url = url.replace( '--infura-subdomain--', infuraSubDomain[ chainName ] )
 
             const provider = new ethers.JsonRpcProvider( url )
             const multicall = new ethers
-                .Contract('0xca11bde05977b3631167028862be2a173976ca11', multicall3Abi, provider)
+                .Contract( MULTICALL3_ADDRESS, multicall3Abi, provider )
 
             const id = chainName
             const allResponse = await Promise.all( [
-                ...multicallCommands[id].map(cmd => multicallProviders[ id ].aggregate3( cmd ) )
+                ...multicallCommands[id].map( ( cmd ) => multicall.aggregate3( cmd ) )
             ] )
 
             const [ priceRes, decRes ] = allResponse
