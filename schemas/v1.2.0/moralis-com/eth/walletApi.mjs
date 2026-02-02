@@ -1,3 +1,45 @@
+import { EVM_CHAINS } from '../../_shared/evmChains.mjs'
+
+const moralisChains = EVM_CHAINS
+    .filter( ( c ) => c.moralisChainSlug !== undefined )
+
+const aliasToSlug = moralisChains
+    .reduce( ( acc, c ) => {
+        acc[ c.alias ] = c.moralisChainSlug
+        return acc
+    }, {} )
+
+const fullChainAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'HOLESKY_TESTNET',
+    'POLYGON_MAINNET', 'POLYGON_AMOY_TESTNET', 'BINANCE_MAINNET',
+    'BINANCE_TESTNET', 'AVALANCHE_MAINNET', 'FANTOM_MAINNET',
+    'PALM_MAINNET', 'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET',
+    'GNOSIS_MAINNET', 'GNOSIS_TESTNET', 'CHILIZ_MAINNET',
+    'CHILIZ_TESTNET', 'BASE_MAINNET', 'BASE_SEPOLIA_TESTNET',
+    'OPTIMISM_MAINNET', 'LINEA_MAINNET', 'LINEA_SEPOLIA_TESTNET',
+    'MOONBEAM_MAINNET', 'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET',
+    'FLOW_MAINNET', 'FLOW_TESTNET', 'RONIN_MAINNET', 'RONIN_TESTNET',
+    'LISK_MAINNET', 'LISK_SEPOLIA_TESTNET', 'PULSECHAIN_MAINNET'
+]
+const fullChainEnum = 'enum(' + fullChainAliases.join( ',' ) + ')'
+
+const historyAliases = [
+    'ETHEREUM_MAINNET', 'POLYGON_MAINNET', 'BINANCE_MAINNET',
+    'AVALANCHE_MAINNET', 'FANTOM_MAINNET', 'PALM_MAINNET',
+    'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET', 'CHILIZ_MAINNET',
+    'GNOSIS_MAINNET', 'BASE_MAINNET', 'OPTIMISM_MAINNET',
+    'LINEA_MAINNET', 'MOONBEAM_MAINNET', 'MOONRIVER_MAINNET',
+    'FLOW_MAINNET', 'RONIN_MAINNET', 'LISK_MAINNET', 'PULSECHAIN_MAINNET'
+]
+const historyChainEnum = 'enum(' + historyAliases.join( ',' ) + ')'
+
+const profitabilityAliases = [
+    'ETHEREUM_MAINNET', 'POLYGON_MAINNET', 'BINANCE_MAINNET',
+    'FANTOM_MAINNET', 'ARBITRUM_ONE_MAINNET', 'OPTIMISM_MAINNET',
+    'PULSECHAIN_MAINNET', 'BASE_MAINNET', 'LINEA_MAINNET'
+]
+const profitabilityChainEnum = 'enum(' + profitabilityAliases.join( ',' ) + ')'
+
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis walletApi API',
@@ -12,7 +54,7 @@ const schema = {
     'headers': {
         "X-API-Key": "{{MORALIS_API_KEY}}"
     },
-    'routes': {	
+    'routes': {
 /*
 		"/:address/verbose": 		{
 		    "requestMethod": "GET",
@@ -213,7 +255,7 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-*/	
+*/
 /*
 		"/wallets/:address/swaps": 		{
 		    "requestMethod": "GET",
@@ -344,30 +386,31 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/:address/balance": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the native balance for a specific wallet address via Moralis — query by address.",
 		    "route": "/:address/balance",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":fullChainEnum,"options":[]}},
 				{"position":{"key":"to_block","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the native balance for a specific wallet address.", "chain": "eth", "address": "0xDC24316b9AE028F1497c275EB9192a3Ea0f67022" }
+		        { "_description": "Get the native balance for a specific wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xDC24316b9AE028F1497c275EB9192a3Ea0f67022" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/history": 		{
 		    "requestMethod": "GET",
 		    "description": "Retrieve the full transaction history of a specified wallet address, including sends, receives, token and NFT transfers, and contract interactions.",
 		    "route": "/wallets/:address/history",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,chiliz,0x15b38,gnosis,0x64,base,0x2105,optimism,0xa,linea,0xe708,moonbeam,0x504,moonriver,0x505,flow,0x2eb,ronin,0x7e4,lisk,0x46f,pulse,0x171)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":historyChainEnum,"options":[]}},
 				{"position":{"key":"from_block","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"to_block","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"number()","options":["optional()"]}},
 				{"position":{"key":"from_date","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
@@ -380,13 +423,14 @@ const schema = {
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Retrieve the full transaction history of a specified wallet address.", "chain": "eth", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
+		        { "_description": "Retrieve the full transaction history of a specified wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/net-worth": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the net worth of a wallet in USD. We recommend to filter out spam tokens and unverified contracts to get a more accurate result.",
@@ -406,58 +450,61 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/profitability/summary": 		{
 		    "requestMethod": "GET",
 		    "description": "Retrieves a summary of wallet profitability based on specified parameters including optional token addresses.",
 		    "route": "/wallets/:address/profitability/summary",
 		    "parameters": [
 				{"position":{"key":"days","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,mainnet,0x1,matic,0x89,polygon,bsc,binance,0x38,fantom,ftm,0xfa,arbitrum,0xa4b1,optimism,0xa,pulsechain,0x171,base,0x2105,linea,0xe708)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":profitabilityChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get a summary of wallet profitability based on specified parameters including optional token addresses.", "chain": "eth", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
+		        { "_description": "Get a summary of wallet profitability based on specified parameters including optional token addresses.", "chain": "ETHEREUM_MAINNET", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/profitability": 		{
 		    "requestMethod": "GET",
 		    "description": "Retrieves profitability information for a specific wallet address. Can be filtered by one or more tokens.",
 		    "route": "/wallets/:address/profitability",
 		    "parameters": [
 				{"position":{"key":"days","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,mainnet,0x1,matic,0x89,polygon,bsc,binance,0x38,fantom,ftm,0xfa,arbitrum,0xa4b1,optimism,0xa,pulsechain,0x171,base,0x2105,linea,0xe708)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":profitabilityChainEnum,"options":[]}},
 				{"position":{"key":"token_addresses","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"array()","options":["optional()"]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get profitability information for a specific wallet address.", "chain": "eth", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
+		        { "_description": "Get profitability information for a specific wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/wallets/:address/stats": 		{
 		    "requestMethod": "GET",
 		    "description": "Get the stats for a wallet address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/wallets/:address/stats",
 		    "parameters": [
-				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
+				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":fullChainEnum,"options":[]}},
 				{"position":{"key":"address","value":"{{USER_PARAM}}","location":"insert"},"z":{"primitive":"string()","options":[]}}
 			],
 		    "tests": [
-		        { "_description": "Get the stats for a wallet address.", "chain": "eth", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
+		        { "_description": "Get the stats for a wallet address.", "chain": "ETHEREUM_MAINNET", "address": "0xcB1C1FdE09f811B294172696404e88E658659905" }
 		    ],
 		    "modifiers": [
+		        { "phase": "pre", "handlerName": "mapChainToSlug" },
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/resolve/:address/domain": 		{
 		    "requestMethod": "GET",
 		    "description": "Resolve a specific address to its Unstoppable domain via Moralis — query by address.",
@@ -472,7 +519,7 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/resolve/:address/reverse": 		{
 		    "requestMethod": "GET",
 		    "description": "Reverse resolve a given ETH address to its ENS domain via Moralis — query by address.",
@@ -487,7 +534,7 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/resolve/:domain": 		{
 		    "requestMethod": "GET",
 		    "description": "Resolve a specific Unstoppable domain to its address via Moralis — query by domain.",
@@ -503,7 +550,7 @@ const schema = {
 		        { "phase": "post", "handlerName": "modifyResult" }
 		    ]
 		},
-	
+
 		"/resolve/ens/:domain": 		{
 		    "requestMethod": "GET",
 		    "description": "Resolve a specific ENS domain to its address via Moralis — query by domain. Returns structured JSON response data.",
@@ -520,11 +567,23 @@ const schema = {
 		}
 	},
     'handlers': {
+        'mapChainToSlug': async( { struct, payload, userParams } ) => {
+            const chainAlias = userParams.chain
+            if( !chainAlias ) { return { struct, payload } }
+            const slug = aliasToSlug[ chainAlias ]
+            if( !slug ) {
+                struct.status = false
+                struct.messages.push( `Unsupported chain: ${chainAlias}` )
+                return { struct, payload }
+            }
+            payload['url'] = payload['url'].replace( `chain=${chainAlias}`, `chain=${slug}` )
+            return { struct, payload }
+        },
         'modifyResult': async( { struct, payload } ) => {
             return { struct, payload }
         }
     }
 }
-   
+
 
 export { schema }
