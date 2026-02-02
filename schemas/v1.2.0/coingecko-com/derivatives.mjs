@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "coingecko",
     name: "CoinGeckoDerivatives",
-    description: "Retrieve derivatives markets and derivative exchanges from CoinGecko",
+    description: "Retrieve cryptocurrency derivatives data from CoinGecko — list derivative exchanges, get exchange details by ID, and fetch derivative products per exchange.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "derivatives", "trading", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getDerivativeExchangeIds: {
         requestMethod: "GET",
-        description: "Fetch the list of derivative exchanges",
+        description: "Fetch the list of derivative exchanges via CoinGecko. Returns structured JSON response data.",
         route: "/derivatives/exchanges",
         parameters: [],
         tests: [
@@ -23,7 +23,7 @@ export const schema = {
       },
       getDerivativeExchangesByIds: {
         requestMethod: "GET",
-        description: "Fetch the list of derivative exchanges by IDs",
+        description: "Fetch the list of derivative exchanges by IDs via CoinGecko. Returns structured JSON response data.",
         route: "/derivatives/exchanges/",
         parameters: [
           { position: { key: "exchange_ids", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "array()", options: [] } }
@@ -37,7 +37,7 @@ export const schema = {
       },
       getDerivativeProductsByExchangeId: {
         requestMethod: "GET",
-        description: "Fetch the list of derivative products by exchange ID",
+        description: "Fetch the list of derivative products by exchange ID via CoinGecko. Supports minimal_output filters.",
         route: "/derivatives/",
         parameters: [
           { position: { key: "exchange_id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

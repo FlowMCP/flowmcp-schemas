@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "Contract",
-    description: "API for interacting with smart contract metadata and state on LUKSO chains.",
+    description: "Retrieve smart contract data from LUKSO BlockScout — list verified contracts, get ABI, fetch source code, and look up contract creation transaction details.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "contracts", "sourcecode", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       listcontracts: {
         requestMethod: "GET",
-        description: "List sorted contracts, optionally filtered.",
+        description: "List sorted contracts, optionally filtered via LUKSO BlockScout. Supports page, offset, filter filters.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -33,7 +33,7 @@ export const schema = {
       },
       getabi: {
         requestMethod: "GET",
-        description: "Get ABI for a verified contract.",
+        description: "Get ABI for a verified contract via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -51,7 +51,7 @@ export const schema = {
       },
       getsourcecode: {
         requestMethod: "GET",
-        description: "Get contract source code.",
+        description: "Get contract source code via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -69,7 +69,7 @@ export const schema = {
       },
       getcontractcreation: {
         requestMethod: "GET",
-        description: "Get contract creator and creation tx hash.",
+        description: "Get contract creator and creation tx hash via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

@@ -3,7 +3,7 @@ const schema = {
     name: "Uniswap Pool Explorer",
     description: "Query Uniswap V2, V3, and V4 pools for a given token address or pool ID using The Graph subgraphs.",
     docs: ["https://thegraph.com/explorer/subgraphs?id=A3Np3RQbaBA6oKJgiwDJeo5T3zrYfGHPWFYayMwtNDum", "https://thegraph.com/explorer"],
-    tags: ["production"],
+    tags: ["production", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://gateway.thegraph.com",
     requiredServerParams: ["THEGRAPH_API_KEY"],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getTokenPools: {
             requestMethod: "POST",
-            description: "Returns Uniswap V3 pools for a given token address using TheGraph subgraph.",
+            description: "Returns Uniswap V3 pools for a given token address using TheGraph subgraph. Required: token_address, chain.",
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/--subgraph-id--",
             parameters: [
                 { position: { key: "token_address", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },
@@ -26,7 +26,7 @@ const schema = {
         },
         getPoolData: {
             requestMethod: "POST",
-            description: "Fetch details for a specific Uniswap pool by ID using TheGraph subgraph.",
+            description: "Fetch details for a specific Uniswap pool by ID using TheGraph subgraph. Required: pool_id, chain.",
             route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/--subgraph-id--",
             parameters: [
                 { position: { key: "pool_id", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["length(42)"] } },

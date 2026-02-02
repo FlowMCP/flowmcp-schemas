@@ -3,7 +3,7 @@ export const schema = {
     name: "Stolpersteine Berlin API",
     description: "Access information about Stolpersteine (memorial stones) in Berlin commemorating victims of Nazi persecution",
     docs: ["https://www.stolpersteine-berlin.de/", "https://www.stolpersteine-berlin.de/de/api"],
-    tags: ["memorial", "history", "berlin"],
+    tags: ["memorial", "history", "berlin", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.stolpersteine-berlin.de",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getAllStones: {
             requestMethod: "GET",
-            description: "Get all Stolpersteine in Berlin",
+            description: "Get all Stolpersteine in Berlin via stolpersteineBerl. Supports limit, offset filters.",
             route: "/de/api/json/stolpersteine.json",
             parameters: [
                 { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(1000)", "default(100)", "optional()"] } },
@@ -24,7 +24,7 @@ export const schema = {
         },
         searchStones: {
             requestMethod: "GET",
-            description: "Search Stolpersteine by person name, address, or other criteria",
+            description: "Search Stolpersteine by person name, address, or other criteria. Optional filters: q, name, address, birth_year, death_year, persecution_reason.",
             route: "/de/api/json/stolpersteine.json",
             parameters: [
                 { position: { key: "q", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)", "optional()"] } },
@@ -44,7 +44,7 @@ export const schema = {
         },
         getStonesByDistrict: {
             requestMethod: "GET",
-            description: "Get Stolpersteine in specific Berlin districts",
+            description: "Get Stolpersteine in specific Berlin districts via stolpersteineBerl. Supports ortsteil, sort_by filters.",
             route: "/de/api/json/stolpersteine.json",
             parameters: [
                 { position: { key: "bezirk", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(Mitte,Friedrichshain-Kreuzberg,Pankow,Charlottenburg-Wilmersdorf,Spandau,Steglitz-Zehlendorf,Tempelhof-Schoeneberg,Neukoelln,Treptow-Koepenick,Marzahn-Hellersdorf,Lichtenberg,Reinickendorf)", options: [] } },
@@ -61,7 +61,7 @@ export const schema = {
         },
         getStonesByPerson: {
             requestMethod: "GET",
-            description: "Get detailed information about specific victims commemorated by Stolpersteine",
+            description: "Get detailed information about specific victims commemorated by Stolpersteine. Optional filters: person_id, age_at_death, family_group, include_biography.",
             route: "/de/api/json/stolpersteine.json",
             parameters: [
                 { position: { key: "person_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)", "optional()"] } },
@@ -79,7 +79,7 @@ export const schema = {
         },
         getStonesByLocation: {
             requestMethod: "GET",
-            description: "Get Stolpersteine near a specific location or coordinates",
+            description: "Get Stolpersteine near a specific location or coordinates via stolpersteineBerl. Supports lat, lon, radius filters.",
             route: "/de/api/json/stolpersteine.json",
             parameters: [
                 { position: { key: "lat", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(52.3)", "max(52.7)", "optional()"] } },

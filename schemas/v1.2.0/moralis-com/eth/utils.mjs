@@ -1,9 +1,9 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis utils API',
-    'description': 'Moralis utils API',
+    'description': 'Moralis platform utility endpoints for API introspection. Check endpoint costs, rate limits, and the current Moralis Web3 API version.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "utilities", "conversion", "cacheTtlDaily"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [
@@ -15,7 +15,7 @@ const schema = {
     'routes': {	
 		"/info/endpointWeights": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the cost and rate limit for each API endpoint.",
+		    "description": "Get the cost and rate limit for each API endpoint via Moralis. Returns structured JSON response data.",
 		    "route": "/info/endpointWeights",
 		    "parameters": [
 		
@@ -35,7 +35,7 @@ const schema = {
 	
 		"/web3/version": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the current version of the Moralis Web3 API.",
+		    "description": "Get the current version of the Moralis Web3 API. Returns structured JSON response data.",
 		    "route": "/web3/version",
 		    "parameters": [
 		

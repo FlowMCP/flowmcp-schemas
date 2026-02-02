@@ -3,7 +3,7 @@ export const schema = {
     name: "DeBank Portfolio API",
     description: "Track DeFi portfolio data including token balances, protocol positions and total balance across all major chains via DeBank",
     docs: ["https://docs.cloud.debank.com/", "https://debank.com/"],
-    tags: ["defi", "portfolio", "wallet", "crypto"],
+    tags: ["defi", "portfolio", "wallet", "crypto", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://pro-openapi.debank.com/v1",
     requiredServerParams: ["DEBANK_ACCESS_KEY"],
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
         getTotalBalance: {
             requestMethod: "GET",
-            description: "Get total USD balance of a wallet address across all supported chains",
+            description: "Get total USD balance of a wallet address across all supported chains. Required: id.",
             route: "/user/total_balance",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)"] } }
@@ -25,7 +25,7 @@ export const schema = {
         },
         getUsedChains: {
             requestMethod: "GET",
-            description: "Get list of chains that a wallet address has interacted with",
+            description: "Get list of chains that a wallet address has interacted with Returns structured JSON response data.",
             route: "/user/used_chain_list",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)"] } }
@@ -37,7 +37,7 @@ export const schema = {
         },
         getTokenList: {
             requestMethod: "GET",
-            description: "Get all token balances of a wallet address on a specific chain",
+            description: "Get all token balances of a wallet address on a specific chain. Required: id, chain_id. Optional filters: is_all.",
             route: "/user/token_list",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)"] } },
@@ -51,7 +51,7 @@ export const schema = {
         },
         getProtocolList: {
             requestMethod: "GET",
-            description: "Get DeFi protocol positions and balances for a wallet on a specific chain",
+            description: "Get DeFi protocol positions and balances for a wallet on a specific chain. Required: id, chain_id.",
             route: "/user/simple_protocol_list",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)"] } },
@@ -64,7 +64,7 @@ export const schema = {
         },
         getAllProtocols: {
             requestMethod: "GET",
-            description: "Get all DeFi protocol positions across all chains for a wallet",
+            description: "Get all DeFi protocol positions across all chains for a wallet Returns structured JSON response data.",
             route: "/user/all_simple_protocol_list",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)"] } }
@@ -76,7 +76,7 @@ export const schema = {
         },
         getTokenInfo: {
             requestMethod: "GET",
-            description: "Get detailed token information including price, logo and market data",
+            description: "Get detailed token information including price, logo and market data. Required: chain_id, id.",
             route: "/token",
             parameters: [
                 { position: { key: "chain_id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(2)"] } },

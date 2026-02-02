@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "medium",
     name: "Medium RSS Feeds",
-    description: "Access Medium articles and posts via RSS feeds by tag, user, or publication",
+    description: "Access Medium articles via RSS feeds — fetch latest posts by tag, user profile, publication, or topic with full article metadata and summaries.",
     docs: ["https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds"],
-    tags: ["content", "social", "feeds"],
+    tags: ["content", "social", "feeds", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://medium.com/feed",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getTagFeed: {
             requestMethod: "GET",
-            description: "Get RSS feed for articles with a specific tag",
+            description: "Get RSS feed for articles with a specific tag via Medium — query by tag. Returns structured JSON response data.",
             route: "/tag/:tag",
             parameters: [
                 { position: { key: "tag", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -25,7 +25,7 @@ export const schema = {
         },
         getUserFeed: {
             requestMethod: "GET",
-            description: "Get RSS feed for a specific Medium user's articles",
+            description: "Get RSS feed for a specific Medium user's articles. Returns structured JSON response data.",
             route: "/@:username",
             parameters: [
                 { position: { key: "username", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -38,7 +38,7 @@ export const schema = {
         },
         getPublicationFeed: {
             requestMethod: "GET",
-            description: "Get RSS feed for a specific Medium publication",
+            description: "Get RSS feed for a specific Medium publication — query by publication. Returns structured JSON response data.",
             route: "/:publication",
             parameters: [
                 { position: { key: "publication", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -52,7 +52,7 @@ export const schema = {
         },
         getTopicFeed: {
             requestMethod: "GET",
-            description: "Get RSS feed for a specific Medium topic",
+            description: "Get RSS feed for a specific Medium topic — query by topic. Returns structured JSON response data.",
             route: "/topic/:topic",
             parameters: [
                 { position: { key: "topic", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(technology,programming,data-science,artificial-intelligence,machine-learning,blockchain,cryptocurrency,startup,business,design,ux,ui,marketing,science,health,politics,culture,sports,entertainment,travel,food,lifestyle)", options: [] } }

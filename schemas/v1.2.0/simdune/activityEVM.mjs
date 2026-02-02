@@ -81,7 +81,7 @@ const schema = {
     name: "Sim by Dune - Activity Feed",
     description: "Access decoded activity feed with realtime onchain activity including transfers, swaps, mints, burns, and approvals across EVM chains.",
     docs: ["https://docs.sim.dune.com/evm/activity"],
-    tags: ["production", "activity", "analytics", "feed"],
+    tags: ["production", "activity", "analytics", "feed", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

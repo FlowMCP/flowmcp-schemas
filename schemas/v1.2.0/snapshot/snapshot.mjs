@@ -1,9 +1,9 @@
 const schema = {
     namespace: "snapshot",
     name: "Snapshot DAO Proposals",
-    description: "Query Snapshot GraphQL API to retrieve DAO spaces and proposals",
+    description: "Query the Snapshot governance protocol via GraphQL — list DAO spaces, browse proposals, and retrieve detailed proposal information including votes and outcomes.",
     docs: ["https://docs.snapshot.org/"],
-    tags: ["dao", "governance", "voting"],
+    tags: ["dao", "governance", "voting", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://hub.snapshot.org/graphql",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         listSpaces: {
             requestMethod: "POST",
-            description: "Fetch a list of available Snapshot spaces",
+            description: "Fetch a list of available Snapshot spaces. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "first", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(10)"] } }
@@ -21,7 +21,7 @@ const schema = {
         },
         listProposals: {
             requestMethod: "POST",
-            description: "Fetch recent proposals for a given Snapshot space",
+            description: "Fetch recent proposals for a given Snapshot space. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "space", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -32,7 +32,7 @@ const schema = {
         },
         getProposalDetails: {
             requestMethod: "POST",
-            description: "Fetch detailed information for a specific proposal",
+            description: "Fetch detailed information for a specific proposal via Snapshot. Returns structured JSON response data.",
             route: "/",
             parameters: [
                 { position: { key: "proposalId", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(1)"] } }

@@ -85,7 +85,7 @@ const schema = {
     name: "Sim by Dune - Token Info",
     description: "Access token metadata including symbol, name, decimals, USD price, and logo URLs for native and ERC20 tokens across EVM chains.",
     docs: ["https://docs.sim.dune.com/evm/token-info"],
-    tags: ["production", "token", "analytics", "metadata"],
+    tags: ["production", "token", "analytics", "metadata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

@@ -1,9 +1,9 @@
 const schema = {
 	'namespace': 'moralis',
     'name': 'Moralis tokenApi API',
-    'description': 'Moralis tokenApi API',
+    'description': 'ERC20 token analytics via Moralis — metadata, holder analysis, transfer history, DEX swap transactions, sniper detection, liquidity reserves, wallet balances, approvals, and market rankings across EVM chains.',
     'docs': ["https://docs.moralis.com"],
-    tags: [],
+    tags: ["evm", "tokens", "balances", "cacheTtlFrequent"],
     'flowMCP': '1.2.0',
     'root': 'https://deep-index.moralis.io/api/v2.2',
     'requiredServerParams': [
@@ -95,7 +95,7 @@ const schema = {
 	
 		"/pairs/:address/swaps": 		{
 		    "requestMethod": "GET",
-		    "description": "Get all swap related transactions (buy, sell, add liquidity & remove liquidity)",
+		    "description": "Get all swap related transactions (buy, sell, add liquidity & remove liquidity) via Moralis.",
 		    "route": "/pairs/:address/swaps",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -119,7 +119,7 @@ const schema = {
 	
 		"/wallets/:address/swaps": 		{
 		    "requestMethod": "GET",
-		    "description": "Get all swap related transactions (buy, sell)",
+		    "description": "Get all swap related transactions (buy, sell) via Moralis — query by address. Supports cursor, limit, fromBlock filters.",
 		    "route": "/wallets/:address/swaps",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -143,7 +143,7 @@ const schema = {
 	
 		"/tokens/:address/analytics": 		{
 		    "requestMethod": "GET",
-		    "description": "Get analytics for a token by token address",
+		    "description": "Get analytics for a token by token address via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/tokens/:address/analytics",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,polygon,0x89,bsc,0x38,avalanche,0xa86a,fantom,0xfa,arbitrum,0xa4b1,gnosis,0x64,base,0x2105,optimism,0xa,linea,0xe708,moonbeam,0x504,ronin,0x7e4,pulse,0x171)","options":[]}},
@@ -178,7 +178,7 @@ const schema = {
 	
 		"/erc20/metadata/symbols": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the metadata for a list of token symbols (name, symbol, decimals, logo).",
+		    "description": "Get the metadata for a list of token symbols (name, symbol, decimals, logo). Required: chain, symbols.",
 		    "route": "/erc20/metadata/symbols",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -210,7 +210,7 @@ const schema = {
 	
 		"/erc20/:address/stats": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the stats for a erc20 token",
+		    "description": "Get the stats for a erc20 token via Moralis — query by address. Returns structured JSON response data.",
 		    "route": "/erc20/:address/stats",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -249,7 +249,7 @@ const schema = {
 	
 		"/market-data/erc20s/top-tokens": 		{
 		    "requestMethod": "GET",
-		    "description": "Get the top ERC20 tokens by market cap",
+		    "description": "Get the top ERC20 tokens by market cap via Moralis. Returns structured JSON response data.",
 		    "route": "/market-data/erc20s/top-tokens",
 		    "parameters": [],
 		    "tests": [
@@ -262,7 +262,7 @@ const schema = {
 	
 		"/erc20/:address/top-gainers": 		{
 		    "requestMethod": "GET",
-		    "description": "Retrieves a list of the top profitable wallets for a specific ERC20 token.",
+		    "description": "Retrieves a list of the top profitable wallets for a specific ERC20 token. Required: chain, address. Optional filters: days.",
 		    "route": "/erc20/:address/top-gainers",
 		    "parameters": [
 				{"position":{"key":"days","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"string()","options":["optional()"]}},
@@ -279,7 +279,7 @@ const schema = {
 	
 		"/wallets/:address/approvals": 		{
 		    "requestMethod": "GET",
-		    "description": "Retrieve active ERC20 token approvals for the specified wallet address",
+		    "description": "Retrieve active ERC20 token approvals for the specified wallet address. Required: chain, address. Optional filters: cursor, limit.",
 		    "route": "/wallets/:address/approvals",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -297,7 +297,7 @@ const schema = {
 	
 		"/wallets/:address/tokens": 		{
 		    "requestMethod": "GET",
-		    "description": "Get token balances for a specific wallet address and their token prices in USD.",
+		    "description": "Get token balances for a specific wallet address and their token prices in USD. via Moralis.",
 		    "route": "/wallets/:address/tokens",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -322,7 +322,7 @@ const schema = {
 	
 		"/:address/erc20": 		{
 		    "requestMethod": "GET",
-		    "description": "Get token balances for a specific wallet address.",
+		    "description": "Get token balances for a specific wallet address via Moralis — query by address. Supports to_block, token_addresses, exclude_spam filters.",
 		    "route": "/:address/erc20",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},
@@ -341,7 +341,7 @@ const schema = {
 	
 		"/:address/erc20/transfers": 		{
 		    "requestMethod": "GET",
-		    "description": "Get ERC20 token transactions ordered by block number in descending order.",
+		    "description": "Get ERC20 token transactions ordered by block number in descending order. via Moralis.",
 		    "route": "/:address/erc20/transfers",
 		    "parameters": [
 				{"position":{"key":"chain","value":"{{USER_PARAM}}","location":"query"},"z":{"primitive":"enum(eth,0x1,sepolia,0xaa36a7,holesky,0x4268,polygon,0x89,polygon amoy,0x13882,bsc,0x38,bsc testnet,0x61,avalanche,0xa86a,fantom,0xfa,palm,0x2a15c308d,cronos,0x19,arbitrum,0xa4b1,gnosis,0x64,gnosis testnet,0x27d8,chiliz,0x15b38,chiliz testnet,0x15b32,base,0x2105,base sepolia,0x14a34,optimism,0xa,linea,0xe708,linea sepolia,0xe705,moonbeam,0x504,moonriver,0x505,moonbase,0x507,flow,0x2eb,flow-testnet,0x221,ronin,0x7e4,ronin-testnet,0x7e5,lisk,0x46f,lisk-sepolia,0x106a,pulse,0x171)","options":[]}},

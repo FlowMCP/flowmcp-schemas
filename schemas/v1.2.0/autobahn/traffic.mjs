@@ -3,7 +3,7 @@ export const schema = {
     name: "Autobahn App API",
     description: "Real-time traffic data for German motorways including roadworks, warnings, closures, webcams, and electric charging stations",
     docs: ["https://autobahn.api.bund.dev/"],
-    tags: ["traffic", "germany", "infrastructure"],
+    tags: ["traffic", "germany", "infrastructure", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://verkehr.autobahn.de/o/autobahn",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         listRoads: {
             requestMethod: "GET",
-            description: "List all available German motorway identifiers (A1, A2, etc.)",
+            description: "List all available German motorway identifiers (A1, A2, etc.) Returns structured JSON response data.",
             route: "/",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
         },
         getRoadworks: {
             requestMethod: "GET",
-            description: "Get current roadworks and construction sites for a specific motorway",
+            description: "Get current roadworks and construction sites for a specific motorway. Required: roadId.",
             route: "/:roadId/services/roadworks",
             parameters: [
                 { position: { key: "roadId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -38,7 +38,7 @@ export const schema = {
         },
         getWarnings: {
             requestMethod: "GET",
-            description: "Get current traffic warnings for a specific motorway",
+            description: "Get current traffic warnings for a specific motorway via Autobahn API — query by roadId.",
             route: "/:roadId/services/warning",
             parameters: [
                 { position: { key: "roadId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -53,7 +53,7 @@ export const schema = {
         },
         getClosures: {
             requestMethod: "GET",
-            description: "Get current road closures for a specific motorway",
+            description: "Get current road closures for a specific motorway via Autobahn API — query by roadId.",
             route: "/:roadId/services/closure",
             parameters: [
                 { position: { key: "roadId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -68,7 +68,7 @@ export const schema = {
         },
         getChargingStations: {
             requestMethod: "GET",
-            description: "Get electric vehicle charging stations along a specific motorway",
+            description: "Get electric vehicle charging stations along a specific motorway. Required: roadId.",
             route: "/:roadId/services/electric_charging_station",
             parameters: [
                 { position: { key: "roadId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -83,7 +83,7 @@ export const schema = {
         },
         getWebcams: {
             requestMethod: "GET",
-            description: "Get traffic webcams along a specific motorway",
+            description: "Get traffic webcams along a specific motorway via Autobahn API — query by roadId.",
             route: "/:roadId/services/webcam",
             parameters: [
                 { position: { key: "roadId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }

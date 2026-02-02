@@ -3,7 +3,7 @@ const schema = {
     name: "LiFi Bridge API",
     description: "Fetches bridge quotes, supported chains, tools, and cross-chain transfer data from LiFi API",
     docs: ["https://docs.li.fi/", "https://li.quest/v1"],
-    tags: ["bridge", "crosschain", "defi"],
+    tags: ["bridge", "crosschain", "defi", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://li.quest/v1",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getSupportedChains: {
             requestMethod: "GET",
-            description: "Get information about all currently supported chains for cross-chain transfers.",
+            description: "Get information about all currently supported chains for cross-chain transfers. via bridgeRates.",
             route: "/chains",
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ const schema = {
         },
         getSupportedTools: {
             requestMethod: "GET",
-            description: "Get information about the bridges and exchanges available through LiFi service.",
+            description: "Get information about the bridges and exchanges available through LiFi service. via bridgeRates.",
             route: "/tools",
             parameters: [],
             tests: [
@@ -47,7 +47,7 @@ const schema = {
         },
         getTransferStatus: {
             requestMethod: "GET",
-            description: "Check the status of a cross-chain transfer by transaction hash.",
+            description: "Check the status of a cross-chain transfer by transaction hash. Required: txHash. Optional filters: fromChain, toChain, bridge.",
             route: "/status",
             parameters: [
                 { position: { key: "txHash", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(66)"] } },

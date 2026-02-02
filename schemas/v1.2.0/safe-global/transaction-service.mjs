@@ -3,7 +3,7 @@ export const schema = {
     name: "Safe Transaction Service",
     description: "Query Gnosis Safe multisig wallets including balances, transactions, owners and modules on Ethereum mainnet",
     docs: ["https://docs.safe.global/core-api/transaction-service-overview", "https://safe.global/"],
-    tags: ["ethereum", "multisig", "defi", "wallet"],
+    tags: ["ethereum", "multisig", "defi", "wallet", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://safe-transaction-mainnet.safe.global/api/v1",
     requiredServerParams: [],
@@ -23,7 +23,7 @@ export const schema = {
         },
         getSafeBalances: {
             requestMethod: "GET",
-            description: "Get token balances of a Safe multisig wallet including ETH and ERC-20 tokens",
+            description: "Get token balances of a Safe multisig wallet including ETH and ERC-20 tokens. Required: address. Optional filters: trusted, exclude_spam.",
             route: "/safes/:address/balances/",
             parameters: [
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["length(42)"] } },
@@ -52,7 +52,7 @@ export const schema = {
         },
         getIncomingTransfers: {
             requestMethod: "GET",
-            description: "Get incoming token transfers to a Safe wallet",
+            description: "Get incoming token transfers to a Safe wallet via safeGlobal — query by address. Supports limit filters.",
             route: "/safes/:address/incoming-transfers/",
             parameters: [
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["length(42)"] } },

@@ -3,7 +3,7 @@ const schema = {
     name: 'Avalanche Metrics API',
     description: 'Avalanche Metrics API for on-chain analytics including staking, throughput, gas, TPS, and validator metrics',
     docs: [ 'https://metrics.avax.network' ],
-    tags: [ 'blockchain', 'avalanche', 'metrics', 'staking', 'analytics' ],
+    tags: [ 'blockchain', 'avalanche', 'metrics', 'staking', 'analytics' , "cacheTtlDaily"],
     flowMCP: '1.2.0',
     root: 'https://metrics.avax.network/v2',
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         listChains: {
             requestMethod: 'GET',
-            description: 'Get a list of all supported EVM blockchains with their chain IDs.',
+            description: 'Get a list of all supported EVM blockchains with their chain IDs. via avalancheMetrics.',
             route: '/chains',
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ const schema = {
         },
         getChainInfo: {
             requestMethod: 'GET',
-            description: 'Get chain information for a specific supported blockchain.',
+            description: 'Get chain information for a specific supported blockchain via avalancheMetrics — query by chainId.',
             route: '/chains/:chainId',
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [ 'default("43114")' ] } }

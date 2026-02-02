@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "solsniffer",
     name: "SolSniffer",
-    description: "Analyzes Solana tokens using the Solsniffer API to assess risks and metadata.",
+    description: "Analyze Solana token security via SolSniffer — assess contract risks, detect rug-pull indicators, check mint authority, and retrieve token safety scores.",
     docs: ["https://solsniffer.gitbook.io/solsniffer-user-guide"],
-    tags: [],
+    tags: ["solana", "security", "analysis", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://solsniffer.com/api/v2/token",
     requiredServerParams: ["SOLSNIFFER_API_KEY"],
@@ -14,7 +14,7 @@ export const schema = {
     routes: {
       analysisToken: {
         requestMethod: "GET",
-        description: "Analyze a Solana token using its address and return risk and token metadata.",
+        description: "Analyze a Solana token using its address and return risk and token metadata. Required: token_address.",
         route: "/:token_address",
         parameters: [
           {

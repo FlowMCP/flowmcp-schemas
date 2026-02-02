@@ -3,7 +3,7 @@ export const schema = {
     name: "DexAndContracts",
     description: "Provides insights into DEX trading pairs, trending contracts, and market share across chains via Dune Analytics.",
     docs: ["https://docs.dune.com/api-reference/overview/introduction"],
-    tags: [],
+    tags: ["analytics", "contracts", "trending", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.dune.com/api/v1",
     requiredServerParams: ["DUNE_API_KEY"],
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       getDexPairStats: {
         requestMethod: "GET",
-        description: "Get DEX pair statistics for a given blockchain.",
+        description: "Get DEX pair statistics for a given blockchain via Dune Analytics — query by chain.",
         route: "/dex/pairs/:chain",
         parameters: [
           { position: { key: "chain", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(arbitrum,base,bnb,celo,ethereum,fantom,gnosis,optimism,polygon,scroll,zk_sync,solana)", options: [] } },
@@ -31,7 +31,7 @@ export const schema = {
       },
       getTrendingContracts: {
         requestMethod: "GET",
-        description: "Get trending contracts deployed on EVM chains based on the last 30 days.",
+        description: "Get trending contracts deployed on EVM chains based on the last 30 days. Required: chain, limit. Optional filters: sort_by, filters, columns.",
         route: "/trends/evm/contracts/:chain",
         parameters: [
           { position: { key: "chain", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(arbitrum,base,bnb,celo,ethereum,fantom,gnosis,optimism,polygon,scroll,zk_sync,solana)", options: [] } },
@@ -49,7 +49,7 @@ export const schema = {
       },
       getMarketShare: {
         requestMethod: "GET",
-        description: "Get DEX or NFT market share on a specific chain.",
+        description: "Get DEX or NFT market share on a specific chain via Dune Analytics — query by market and chain.",
         route: "/marketshare/:market/:chain",
         parameters: [
           { position: { key: "market", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(dex,nft)", options: [] } },

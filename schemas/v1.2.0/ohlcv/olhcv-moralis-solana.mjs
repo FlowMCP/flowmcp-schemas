@@ -30,9 +30,9 @@ const fromDateUnits = {
 const schema = {
     namespace: "ohlcv",
     name: "Moralis Recursive OHLCV Solana",
-    description: "Recursively fetches OHLCV data from Moralis for Solana token pairs.",
+    description: "Recursively fetch OHLCV candlestick data from Moralis for any Solana token pair — auto-paginates through all available timeframes for complete price history.",
     docs: ["https://docs.moralis.io/web3-data-api/solana/reference/get-ohlcv-by-pair-address"],
-    tags: [],
+    tags: ["solana", "ohlcv", "charts", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://solana-gateway.moralis.io",
     requiredServerParams: ["MORALIS_API_KEY"],
@@ -40,7 +40,7 @@ const schema = {
     routes: {
         getRecursiveOhlcvSolana: {
             requestMethod: "GET",
-            description: "Fetch OHLCV data recursively until max length or iteration limit is reached.",
+            description: "Fetch OHLCV data recursively until max length or iteration limit is reached. Required: chain, pairAddress, timeframe, fromDateAmount, fromDateUnit, maxResultLength. Optional filters: currency.",
             route: "/",
             parameters: [
                 { position: { key: "chain", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(mainnet,devnet)", options: [] } },

@@ -3,7 +3,7 @@ export const schema = {
     name: "Coinbase Bazaar x402 Discovery",
     description: "Discover x402-compatible paid resources and services available on the Coinbase Bazaar marketplace",
     docs: ["https://docs.cdp.coinbase.com/x402/bazaar", "https://www.x402.org/"],
-    tags: ["payments", "marketplace", "crypto"],
+    tags: ["payments", "marketplace", "crypto", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.cdp.coinbase.com/platform/v2/x402/discovery",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         listResources: {
             requestMethod: "GET",
-            description: "List all x402-compatible paid resources registered on Coinbase Bazaar",
+            description: "List all x402-compatible paid resources registered on Coinbase Bazaar. Optional filters: limit, offset.",
             route: "/resources",
             parameters: [
                 { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(20)", "optional()"] } },

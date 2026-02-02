@@ -3,7 +3,7 @@ export const schema = {
     name: "Ethereum Validator Queue API",
     description: "Exposes real-time queue stats and validator information from the Beaconcha.in Ethereum API.",
     docs: ["https://beaconcha.in/api/v1/docs"],
-    tags: ["ethereum", "validators", "staking"],
+    tags: ["ethereum", "validators", "staking", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://beaconcha.in/api/v1",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getActivationQueue: {
             requestMethod: "GET",
-            description: "Fetches current Ethereum validator activation queue statistics.",
+            description: "Fetches current Ethereum validator activation queue statistics. via beaconchain.",
             route: "/validators/queue",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ export const schema = {
         },
         getExitQueue: {
             requestMethod: "GET",
-            description: "Fetches current Ethereum validator exit queue statistics.",
+            description: "Fetches current Ethereum validator exit queue statistics via beaconchain. Returns structured JSON response data.",
             route: "/validators/queue",
             parameters: [],
             tests: [
@@ -35,7 +35,7 @@ export const schema = {
         },
         getValidatorStatus: {
             requestMethod: "GET",
-            description: "Fetches validator status details by public key.",
+            description: "Fetches validator status details by public key via beaconchain — query by pubkey.",
             route: "/validator/:pubkey",
             parameters: [
                 { position: { key: "pubkey", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["regex(^0x[a-fA-F0-9]{96}$)"] } }

@@ -3,7 +3,7 @@ export const schema = {
     name: "CryptoWizards Analytics API",
     description: "Statistical finance endpoints for backtesting, correlation, cointegration, and copula analysis using real market data.",
     docs: ["https://api.cryptowizards.net", "https://github.com/cryptowizards"],
-    tags: ["production", "analytics", "trading", "backtest"],
+    tags: ["production", "analytics", "trading", "backtest", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.cryptowizards.net",
     requiredServerParams: ["CRYPTOWIZARDS_API_KEY"],

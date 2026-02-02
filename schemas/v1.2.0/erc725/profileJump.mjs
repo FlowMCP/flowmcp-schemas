@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "profilejump",
     name: "ProfileJump",
-    description: "Schema for interacting with the ProfileJump API",
+    description: "Access LUKSO Universal Profile data via ProfileJump — token prices, trending profiles, token listings, and profile lookups by address.",
     docs: ["https://profilejump.com"],
-    tags: [],
+    tags: ["lukso", "identity", "profiles", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.profilejump.com",
     requiredServerParams: [],
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       prices: {
         requestMethod: "GET",
-        description: "Fetch price data",
+        description: "Fetch current token price data from ProfileJump for LUKSO Universal Profile ecosystem tokens and assets.",
         route: "/api/prices",
         parameters: [],
         tests: [{ _description: "Fetch default prices" }],
@@ -21,7 +21,7 @@ export const schema = {
       },
       hotProfiles: {
         requestMethod: "GET",
-        description: "Fetch hot profiles",
+        description: "Fetch currently trending Universal Profiles from ProfileJump ranked by recent activity and engagement.",
         route: "/api/profiles/hot-profiles",
         parameters: [],
         tests: [{ _description: "Fetch trending profiles" }],
@@ -29,7 +29,7 @@ export const schema = {
       },
       tokensList: {
         requestMethod: "GET",
-        description: "Fetch list of tokens with pagination",
+        description: "Fetch list of tokens with pagination via profilejump. Returns structured JSON response data.",
         route: "/api/tokens-list",
         parameters: [
           { position: { key: "limit", value: "100", location: "query" } },
@@ -40,7 +40,7 @@ export const schema = {
       },
       profilesList: {
         requestMethod: "GET",
-        description: "Fetch list of profiles filtered by view",
+        description: "Fetch list of profiles filtered by view via profilejump. Returns structured JSON response data.",
         route: "/api/profiles-list",
         parameters: [
           { position: { key: "limit", value: "100", location: "query" } },
@@ -55,7 +55,7 @@ export const schema = {
       },
       profileByAddress: {
         requestMethod: "GET",
-        description: "Fetch profile details by wallet address",
+        description: "Fetch profile details by wallet address via profilejump — query by address. Returns structured JSON response data.",
         route: "/api/profiles/:address",
         parameters: [
             { position: { key: "address", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["regex(^0x[a-fA-F0-9]{40}$)"] } }

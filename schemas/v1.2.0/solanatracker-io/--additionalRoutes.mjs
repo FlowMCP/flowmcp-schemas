@@ -6,7 +6,7 @@ const additionalRoutes = {
       matchesSchemaRoute: "tokenStats", // → schema.routes.tokenStats
       tokenStats: {
         requestMethod: "GET",
-        description: "Get detailed stats for a token over various time intervals.",
+        description: "Get detailed stats for a token over various time intervals via Solana Tracker — query by token.",
         route: "/stats/:token",
         parameters: [
           {
@@ -27,7 +27,7 @@ const additionalRoutes = {
       matchesSchemaRoute: "tokenStatsByPool", // → schema.routes.tokenStatsByPool
       tokenStatsByPool: {
         requestMethod: "GET",
-        description: "Get detailed stats for a token-pool pair over various time intervals.",
+        description: "Get detailed stats for a token-pool pair over various time intervals. Required: token, pool.",
         route: "/stats/:token/:pool",
         parameters: [
           {
@@ -53,7 +53,7 @@ const schema = {
     name: "TokenStatsAPI",
     description: "Provides detailed statistics for tokens and token-pool pairs over multiple time intervals.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "analytics", "tokens", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],

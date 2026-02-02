@@ -1,9 +1,9 @@
 const schema = {
     namespace: "bicscan",
     name: "BICScan API",
-    description: "Risk score and asset scanning API for blockchain addresses via BICScan.",
+    description: "Assess blockchain address risk scores and scan held assets via BICScan — get compliance risk ratings and token portfolio details for any wallet address.",
     docs: ["https://api.bicscan.io/docs"],
-    tags: ["security", "risk", "scanning"],
+    tags: ["security", "risk", "scanning", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.bicscan.io/v1/scan",
     requiredServerParams: ["BICSCAN_API_KEY"],
@@ -24,7 +24,7 @@ const schema = {
         },
         getAssets: {
             requestMethod: "POST",
-            description: "Fetches the asset holdings of a given crypto address using OFAC engine.",
+            description: "Fetches the asset holdings of a given crypto address using OFAC engine. Required: query, engines.",
             route: "/",
             parameters: [ 
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(3)"] } },

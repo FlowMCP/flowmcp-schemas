@@ -3,7 +3,7 @@ const schema = {
     name: 'ZVG Portal Foreclosure Auctions',
     description: 'German foreclosure auction portal (Zwangsversteigerungsportal) for searching property auction listings across all 16 German states. Returns structured data from zvg-portal.de including auction dates, property details, valuations, and court information.',
     docs: [ 'https://www.zvg-portal.de' ],
-    tags: [ 'immobilien', 'auktionen', 'justiz' ],
+    tags: [ 'immobilien', 'auktionen', 'justiz' , "cacheTtlDaily"],
     flowMCP: '1.2.0',
     root: 'https://www.zvg-portal.de',
     requiredServerParams: [],

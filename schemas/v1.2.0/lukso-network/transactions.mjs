@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Transactions",
-    description: "Fetch transactions and their associated data from LUKSO BlockScout",
+    description: "Fetch transaction data from LUKSO BlockScout — list transactions, get details by hash, token transfers, internal txs, logs, raw traces, and state changes.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "transactions", "explorer", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getTransactions: {
         requestMethod: "GET",
-        description: "List transactions (filterable)",
+        description: "List transactions (filterable) via LUKSO BlockScout. Supports type filters. Returns structured JSON response data.",
         route: "/transactions",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -25,7 +25,7 @@ export const schema = {
       },
       getTransactionByHash: {
         requestMethod: "GET",
-        description: "Details of a transaction",
+        description: "Details of a transaction via LUKSO BlockScout — query by transaction hash. Returns structured JSON response data.",
         route: "/transactions/:transaction_hash",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -38,7 +38,7 @@ export const schema = {
       },
       getTokenTransfersByTransactionHash: {
         requestMethod: "GET",
-        description: "Token transfers in transaction",
+        description: "Token transfers in transaction via LUKSO BlockScout — query by transaction hash.",
         route: "/transactions/:transaction_hash/token-transfers",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -51,7 +51,7 @@ export const schema = {
       },
       getInternalTransactions: {
         requestMethod: "GET",
-        description: "Internal txs in transaction",
+        description: "Internal txs in transaction via LUKSO BlockScout — query by transaction hash. Returns structured JSON response data.",
         route: "/transactions/:transaction_hash/internal-transactions",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -64,7 +64,7 @@ export const schema = {
       },
       getLogs: {
         requestMethod: "GET",
-        description: "Logs from transaction",
+        description: "Logs from transaction via LUKSO BlockScout — query by transaction hash. Returns structured JSON response data.",
         route: "/transactions/:transaction_hash/logs",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -80,7 +80,7 @@ export const schema = {
       },
       getRawTrace: {
         requestMethod: "GET",
-        description: "Raw trace of transaction",
+        description: "Raw trace of transaction via LUKSO BlockScout — query by transaction hash. Returns structured JSON response data.",
         route: "/transactions/:transaction_hash/raw-trace",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -96,7 +96,7 @@ export const schema = {
       },
       getStateChanges: {
         requestMethod: "GET",
-        description: "State changes in transaction",
+        description: "State changes in transaction via LUKSO BlockScout — query by transaction hash. Returns structured JSON response data.",
         route: "/transactions/:transaction_hash/state-changes",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

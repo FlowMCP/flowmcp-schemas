@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "coinmarketcap",
     name: "CoinMarketCap Categories",
-    description: "Retrieve information about cryptocurrency categories from CoinMarketCap.",
+    description: "Retrieve cryptocurrency category data from CoinMarketCap — list categories, get category details, map coin IDs, fetch metadata, and query latest market quotes.",
     docs: ["https://coinmarketcap.com/api/documentation/v1/"],
-    tags: [],
+    tags: ["crypto", "categories", "marketdata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://pro-api.coinmarketcap.com",
     requiredServerParams: ["CMC_API_KEY"],
@@ -13,7 +13,7 @@ export const schema = {
     routes: {
       getCategories: {
         requestMethod: "GET",
-        description: "Get a list of all cryptocurrency categories.",
+        description: "Get a list of all cryptocurrency categories via CoinMarketCap. Supports start, limit, id filters.",
         route: "/v1/cryptocurrency/categories",
         parameters: [
           { position: { key: "start", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "optional()"] } },
@@ -33,7 +33,7 @@ export const schema = {
       },
       getCategory: {
         requestMethod: "GET",
-        description: "Get information about a single cryptocurrency category.",
+        description: "Get information about a single cryptocurrency category via CoinMarketCap. Supports start, limit, convert filters.",
         route: "/v1/cryptocurrency/category",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } },
@@ -52,7 +52,7 @@ export const schema = {
       },
       getIdMap: {
         requestMethod: "GET",
-        description: "Get a mapping of all cryptocurrencies to unique CoinMarketCap IDs.",
+        description: "Get a mapping of all cryptocurrencies to unique CoinMarketCap IDs. Optional filters: listing_status, start, limit, sort, symbol, aux.",
         route: "/v1/cryptocurrency/map",
         parameters: [
           { position: { key: "listing_status", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(active,inactive,untracked)", options: ["optional()"] } },

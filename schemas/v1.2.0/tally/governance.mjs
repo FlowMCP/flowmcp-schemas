@@ -3,7 +3,7 @@ const schema = {
     name: 'Tally Governance API',
     description: 'Tally DAO governance API for proposals, delegates, voting power, and Governor contract data via GraphQL',
     docs: [ 'https://docs.tally.xyz/tally-features/welcome' ],
-    tags: [ 'governance', 'dao', 'proposals', 'voting' ],
+    tags: [ 'governance', 'dao', 'proposals', 'voting' , "cacheTtlDaily"],
     flowMCP: '1.2.0',
     root: 'https://api.tally.xyz',
     requiredServerParams: [ 'TALLY_API_KEY' ],
@@ -14,7 +14,7 @@ const schema = {
     routes: {
         getChains: {
             requestMethod: 'POST',
-            description: 'Get all supported blockchain networks for DAO governance on Tally.',
+            description: 'Get all supported blockchain networks for DAO governance on Tally. Returns structured JSON response data.',
             route: '/query',
             parameters: [
                 { position: { key: 'query', value: '{ chains { id name mediumName shortName blockTime isTestnet nativeCurrency { name symbol decimals } } }', location: 'body' } }

@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Meta",
-    description: "Main page, config, health and Celestia-specific endpoints",
+    description: "LUKSO BlockScout internal endpoints — latest main page transactions and blocks, node health, JSON-RPC config, and Celestia blob metadata.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "internal", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getMainPageTransactions: {
         requestMethod: "GET",
-        description: "Latest transactions for main page",
+        description: "Latest transactions for main page via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/main-page/transactions",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }
@@ -23,7 +23,7 @@ export const schema = {
       },
       getMainPageBlocks: {
         requestMethod: "GET",
-        description: "Latest blocks for main page",
+        description: "Latest blocks for main page via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/main-page/blocks",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }

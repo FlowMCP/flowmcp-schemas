@@ -3,7 +3,7 @@ export const schema = {
     name: "Tenderly Public Contracts",
     description: "Lookup public smart contract information including source code verification, compiler details and token metadata via Tenderly",
     docs: ["https://docs.tenderly.co/", "https://tenderly.co/"],
-    tags: ["ethereum", "smartcontracts", "debugging"],
+    tags: ["ethereum", "smartcontracts", "debugging", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://api.tenderly.co/api/v1",
     requiredServerParams: [],

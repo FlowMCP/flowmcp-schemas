@@ -70,9 +70,9 @@ const chainsByAlias = {
 export const schema = {
     namespace: "etherscan",
     name: "SmartContractExplorer",
-    description: "Provides available chains and fetches smart contract source code",
+    description: "Fetch current gas oracle data (safe, proposed, fast gas prices) across multiple EVM chains via the Etherscan v2 API. Supports Ethereum, Arbitrum, Polygon, Binance, Avalanche and more.",
     docs: ["https://docs.etherscan.io"],
-    tags: [],
+    tags: ["evm", "gas", "fees", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.etherscan.io/v2/api",
     requiredServerParams: ["ETHERSCAN_API_KEY"],
@@ -80,7 +80,7 @@ export const schema = {
     routes: {
       getGasOracle: {
         requestMethod: "GET",
-        description: "Fetch current gas oracle data for a given chain",
+        description: "Fetch current gas oracle data for a given chain via Etherscan. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,POLYGON_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN)", options: [] } },
@@ -101,7 +101,7 @@ export const schema = {
       },
       estimateGasCost: {
         requestMethod: "GET",
-        description: "Estimate gas cost using a specific gas price for a given chain",
+        description: "Estimate gas cost using a specific gas price for a given chain. Required: chainName, gasprice.",
         route: "/",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,POLYGON_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN)", options: [] } },

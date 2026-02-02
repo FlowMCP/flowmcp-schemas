@@ -1,9 +1,9 @@
 const schema = {
   namespace: "thegraph",
   name: "TheGraphSubgraphTools",
-  description: "Introspect and query The Graph subgraphs.",
+  description: "Introspect and query The Graph protocol subgraphs — fetch GraphQL schemas and execute arbitrary queries against any hosted subgraph.",
   docs: ["https://thegraph.com/docs/en/"],
-  tags: [],
+  tags: ["defi", "subgraph", "graphql", "cacheTtlStatic"],
   flowMCP: "1.2.0",
   root: "https://gateway.thegraph.com",
   requiredServerParams: ["THEGRAPH_API_KEY"],
@@ -13,7 +13,7 @@ const schema = {
   routes: {
     getSubgraphSchema: {
       requestMethod: "POST",
-      description: "Fetch the schema of a subgraph via introspection query.",
+      description: "Fetch the schema of a subgraph via introspection query via The Graph. Returns structured JSON response data.",
       route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/{{subgraphId}}",
       parameters: [
         {
@@ -34,7 +34,7 @@ const schema = {
     },
     querySubgraph: {
       requestMethod: "POST",
-      description: "Run a raw GraphQL query on a subgraph.",
+      description: "Run a raw GraphQL query on a subgraph via The Graph. Returns structured JSON response data.",
       route: "/api/{{THEGRAPH_API_KEY}}/subgraphs/id/{{subgraphId}}",
       parameters: [
         {

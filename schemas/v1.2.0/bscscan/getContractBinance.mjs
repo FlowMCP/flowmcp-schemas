@@ -1,9 +1,9 @@
 const schema = {
     namespace: "bscscan",
     name: "BSC Scan",
-    description: "BSC Scan API",
+    description: "Retrieve smart contract ABI and verified Solidity source code from BSCScan (Binance Smart Chain explorer). Returns the contract interface definition and full source for any verified contract address on BSC.",
     docs: ["https://docs.bscscan.com/"],
-    tags: [ 'test'],
+    tags: [ 'test', "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.bscscan.com/",
     requiredServerParams: [ "BSCSCAN_API_KEY" ],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
       getContractABI: {
         requestMethod: "GET",
-        description: "Returns the Contract ABI of a verified smart contract.",
+        description: "Returns the Contract ABI of a verified smart contract via BSCScan. Returns structured JSON response data.",
         route: "/api",
         parameters: [
           { position: { key: "module", value: "contract", location: "body" } },
@@ -29,7 +29,7 @@ const schema = {
       },
       getContractSourceCode: {
         requestMethod: "GET",
-        description: "Returns the Solidity source code of a verified smart contract.",
+        description: "Returns the Solidity source code of a verified smart contract. Required: address.",
         route: "/api",
         parameters: [
           { position: { key: "module", value: "contract", location: "query" } },

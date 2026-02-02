@@ -24,7 +24,7 @@ const schema = {
     name: "ENS & EVM Name Resolution",
     description: "Resolve ENS (and some EVM name services supported by ethers.js) to addresses and perform reverse lookups from addresses to ENS names.",
     docs: ["https://docs.ethers.org/v6/api/providers/#Provider-resolveName", "https://docs.ethers.org/v6/api/providers/#Provider-lookupAddress", "https://docs.ens.domains/"],
-    tags: ["production", "domain", "identity", "ethereum"],
+    tags: ["production", "domain", "identity", "ethereum", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}",
     requiredServerParams: ["INFURA_API_KEY"],
@@ -65,7 +65,7 @@ const schema = {
         },
         supportMatrix: {
             requestMethod: "GET",
-            description: "Returns the supported networks for ENS resolution and whether SEI is supported.",
+            description: "Returns the supported networks for ENS resolution and whether SEI is supported. Required: includeAll.",
             route: "/support",
             parameters: [
                 { position: { key: "includeAll", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "boolean()", options: [] } }

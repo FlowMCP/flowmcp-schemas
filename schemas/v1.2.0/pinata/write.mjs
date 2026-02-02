@@ -4,9 +4,9 @@ import { PinataSDK } from "pinata";
 const schema = {
     namespace: "pinata",
     name: "Pinata SDK Upload",
-    description: "Uploads a text file to IPFS using the new Pinata SDK and File object",
+    description: "Upload text content to IPFS via Pinata — creates a text file and pins it to IPFS using the Pinata SDK, returning the CID for permanent decentralized storage.",
     docs: ["https://docs.pinata.cloud/sdk-pinning/pinata-upload"],
-    tags: [],
+    tags: ["ipfs", "storage", "write", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https:...",
     requiredServerParams: ["PINATA_JWT", "PINATA_GATEWAY"],
@@ -14,7 +14,7 @@ const schema = {
     routes: {
         upload_text_file: {
             requestMethod: "POST",
-            description: "Uploads a plain text file to IPFS using the new Pinata SDK",
+            description: "Uploads a plain text file to IPFS using the new Pinata SDK via Pinata IPFS. Returns structured JSON response data.",
             route: "/sdk/upload",
             parameters: [
                 { position: { key: "pinata_jwt_token", value: "{{PINATA_JWT}}", location: "insert" } },

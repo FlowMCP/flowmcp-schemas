@@ -1,9 +1,9 @@
 const schema = {
     namespace: "x402",
     name: "x402 Experimental MCP Interface",
-    description: "A test schema for verifying free and paid route behavior under FlowMCP v1.2.0",
+    description: "Test schema for verifying free and paid route behavior under FlowMCP v1.2.0 — includes a free ping endpoint and a paid ping requiring x402 payment headers.",
     docs: ["https://example.com/x402/docs"],
-    tags: [],
+    tags: ["payments", "protocol", "micropayments", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://api.x402.test/v1",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         free_ping: {
             requestMethod: "GET",
-            description: "Simple free route to verify server responsiveness",
+            description: "Simple free route to verify server responsiveness via x402. Returns structured JSON response data.",
             route: "/ping",
             parameters: [],
             tests: [ { _description: "Basic ping test" } ],
@@ -19,7 +19,7 @@ const schema = {
         },
         paid_ping: {
             requestMethod: "GET",
-            description: "Simulated paid route to test vault access",
+            description: "Simulated paid route to test vault access via x402. Returns structured JSON response data.",
             route: "/vault/item",
             parameters: [],
             tests: [ { _description: "Basic paid ping test" } ],

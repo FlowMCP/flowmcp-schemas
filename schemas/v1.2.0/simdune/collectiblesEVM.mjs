@@ -77,7 +77,7 @@ const schema = {
     name: "Sim by Dune - NFT Collectibles",
     description: "Access NFT collections including ERC721 and ERC1155 tokens with metadata, images, and collection details across EVM chains.",
     docs: ["https://docs.sim.dune.com/evm/collectibles"],
-    tags: ["production", "nft", "collectibles", "metadata"],
+    tags: ["production", "nft", "collectibles", "metadata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

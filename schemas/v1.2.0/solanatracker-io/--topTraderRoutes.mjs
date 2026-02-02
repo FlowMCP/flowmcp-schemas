@@ -49,7 +49,7 @@ const schema = {
     name: "TopTradersAPI",
     description: "Provides access to the most profitable traders across all tokens, with support for pagination and token-specific queries.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "trading", "leaderboard", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],
@@ -70,7 +70,7 @@ const schema = {
     routes: {
       topTradersAll: {
         requestMethod: "GET",
-        description: "Get the most profitable traders across all tokens.",
+        description: "Get the most profitable traders across all tokens via Solana Tracker. Supports expandPnl, sortBy filters.",
         route: "/top-traders/all",
         parameters: [
           {
@@ -105,7 +105,7 @@ const schema = {
       },
       topTradersAllPaged: {
         requestMethod: "GET",
-        description: "Get the most profitable traders across all tokens, paginated by page number.",
+        description: "Get the most profitable traders across all tokens, paginated by page number. Required: page.",
         route: "/top-traders/all/:page",
         parameters: [
           {
@@ -129,7 +129,7 @@ const schema = {
       },
       topTradersByToken: {
         requestMethod: "GET",
-        description: "Get the top 100 most profitable traders for a specific token.",
+        description: "Get the top 100 most profitable traders for a specific token. via Solana Tracker.",
         route: "/top-traders/:token",
         parameters: [
           {

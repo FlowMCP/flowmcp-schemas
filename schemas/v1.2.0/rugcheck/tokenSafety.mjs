@@ -3,7 +3,7 @@ export const schema = {
     name: "Rugcheck Token Safety",
     description: "Check Solana token safety scores, risk reports, votes, and trending tokens via rugcheck.xyz",
     docs: ["https://api.rugcheck.xyz/swagger/index.html"],
-    tags: ["solana", "security", "tokens"],
+    tags: ["solana", "security", "tokens", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.rugcheck.xyz",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         getTokenReport: {
             requestMethod: "GET",
-            description: "Get a summarized safety report for a Solana token by its mint address",
+            description: "Get a summarized safety report for a Solana token by its mint address. Required: mint.",
             route: "/v1/tokens/:mint/report/summary",
             parameters: [
                 { position: { key: "mint", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(32)"] } }
@@ -23,7 +23,7 @@ export const schema = {
         },
         getTokenVotes: {
             requestMethod: "GET",
-            description: "Get community votes for a Solana token",
+            description: "Get community votes for a Solana token via Rugcheck — query by mint. Returns structured JSON response data.",
             route: "/v1/tokens/:mint/votes",
             parameters: [
                 { position: { key: "mint", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["min(32)"] } }
@@ -35,7 +35,7 @@ export const schema = {
         },
         getRecentTokens: {
             requestMethod: "GET",
-            description: "Get recently analyzed tokens",
+            description: "Get recently analyzed tokens via Rugcheck. Returns structured JSON response data.",
             route: "/v1/stats/recent",
             parameters: [],
             tests: [
@@ -45,7 +45,7 @@ export const schema = {
         },
         getTrendingTokens: {
             requestMethod: "GET",
-            description: "Get currently trending tokens on Solana",
+            description: "Get currently trending tokens on Solana via Rugcheck. Returns structured JSON response data.",
             route: "/v1/stats/trending",
             parameters: [],
             tests: [
@@ -55,7 +55,7 @@ export const schema = {
         },
         getNewTokens: {
             requestMethod: "GET",
-            description: "Get newly created tokens on Solana",
+            description: "Get newly created tokens on Solana via Rugcheck. Returns structured JSON response data.",
             route: "/v1/stats/new_tokens",
             parameters: [],
             tests: [
@@ -65,7 +65,7 @@ export const schema = {
         },
         getVerifiedTokens: {
             requestMethod: "GET",
-            description: "Get verified tokens on Solana",
+            description: "Get verified tokens on Solana via Rugcheck. Returns structured JSON response data.",
             route: "/v1/stats/verified",
             parameters: [],
             tests: [

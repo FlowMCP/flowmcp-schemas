@@ -5,9 +5,9 @@ const negativeWords = ['dump', 'scam', 'rug', 'sell', 'red', 'loss', 'crash', 'b
 const schema = {
     namespace: "twitter",
     name: "Twitter Recent Search",
-    description: "Search for Tweets from the last 7 days using Twitter's recent search endpoint",
+    description: "Search for Tweets from the last 7 days using the Twitter/X API v2 recent search endpoint. Supports advanced query operators for precise tweet filtering.",
     docs: ["https://developer.twitter.com/en/docs/twitter-api/tweets/search/quick-start/recent-search"],
-    tags: [],
+    tags: ["social", "search", "mentions", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.twitter.com/2",
     requiredServerParams: ["TWITTER_BEARER_TOKEN"],
@@ -15,7 +15,7 @@ const schema = {
     routes: {
         searchRecentTweets: {
             requestMethod: "GET",
-            description: "Search for recent tweets matching a given query",
+            description: "Search for recent tweets matching a given query via Twitter/X. Returns structured JSON response data.",
             route: "/tweets/search/recent",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } },

@@ -11,7 +11,7 @@ const pnlRoutes = {
       matchesSchemaRoute: "profitAndLossData", // → schema.routes.profitAndLossData
       profitAndLossData: {
         requestMethod: "GET",
-        description: "Get Profit and Loss data for all positions of a wallet.",
+        description: "Get Profit and Loss data for all positions of a wallet via Solana Tracker — query by wallet.",
         route: "/pnl/:wallet",
         parameters: [
           {
@@ -36,7 +36,7 @@ const pnlRoutes = {
       matchesSchemaRoute: "pnlForSpecificToken", // → schema.routes.pnlForSpecificToken
       pnlForSpecificToken: {
         requestMethod: "GET",
-        description: "Get Profit and Loss data for a specific token in a wallet.",
+        description: "Get Profit and Loss data for a specific token in a wallet via Solana Tracker — query by wallet and token.",
         route: "/pnl/:wallet/:token",
         parameters: [
           {
@@ -66,9 +66,9 @@ const pnlRoutes = {
 const schema = {
     namespace: "solanatracker",
     name: "PnL Analytics API",
-    description: "API to retrieve profit and loss data for wallets and tokens on-chain.",
+    description: "Retrieve profit and loss analytics for Solana wallets via Solana Tracker — full PnL breakdown, per-token PnL, and first-buyer analysis for any wallet address.",
     docs: ["https://docs.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "pnl", "portfolio", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],
@@ -132,7 +132,7 @@ const schema = {
       },
       firstBuyers: {
         requestMethod: "GET",
-        description: "Get the first 100 buyers of a token, with full PnL breakdown per wallet.",
+        description: "Get the first 100 buyers of a token, with full PnL breakdown per wallet. Required: token.",
         route: "/first-buyers/:token",
         parameters: [
           {

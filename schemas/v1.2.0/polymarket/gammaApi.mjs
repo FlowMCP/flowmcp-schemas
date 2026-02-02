@@ -131,7 +131,7 @@ export const schema = {
     name: "Polymarket Predictions",
     description: "FlowMCP schema for Polymarket's public Gamma API: search events, list events, and list markets with readable, table-like summaries.",
     docs: ["https://gamma-api.polymarket.com"],
-    tags: ["predictions", "markets", "events"],
+    tags: ["predictions", "markets", "events", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://gamma-api.polymarket.com",
     requiredServerParams: [],
@@ -139,7 +139,7 @@ export const schema = {
     routes: {
         searchEvents: {
             requestMethod: "GET",
-            description: "Search for events. Mirrors /public-search with rich post-formatting of results.",
+            description: "Search for events. Mirrors /public-search with rich post-formatting of results. via Polymarket.",
             route: "/public-search",
             parameters: [
                 { position: { key: "q", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -189,7 +189,7 @@ export const schema = {
         },
         getMarkets: {
             requestMethod: "GET",
-            description: "List markets. Mirrors /markets and returns an ASCII table.",
+            description: "List markets. Mirrors /markets and returns an ASCII table via Polymarket. Supports id, slug, condition_ids filters.",
             route: "/markets",
             parameters: [
                 { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["default(10)"] } },

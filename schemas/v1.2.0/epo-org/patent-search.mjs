@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "epo",
     name: "European Patent Office RSS Search",
-    description: "Search European patents via RSS feeds from the European Patent Office register",
+    description: "Search European patents via RSS from the European Patent Office — query by technology class (IPC/CPC), keywords, date ranges, or combined filters.",
     docs: ["https://register.epo.org/", "https://www.epo.org/searching-for-patents/"],
-    tags: ["patents", "research", "search"],
+    tags: ["patents", "research", "search", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://register.epo.org",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         searchPatents: {
             requestMethod: "GET",
-            description: "Search for patents using custom query and language",
+            description: "Search for patents using custom query and language via European Patent Office. Supports lng filters.",
             route: "/rssSearch",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -26,7 +26,7 @@ export const schema = {
         },
         searchByTechnology: {
             requestMethod: "GET",
-            description: "Search patents by predefined technology areas",
+            description: "Search patents by predefined technology areas via European Patent Office. Supports lng filters.",
             route: "/rssSearch",
             parameters: [
                 { position: { key: "technology", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(artificial intelligence,machine learning,blockchain,renewable energy,biotechnology,nanotechnology,quantum computing,robotics,autonomous vehicles,5G)", options: [] } },
@@ -44,7 +44,7 @@ export const schema = {
         },
         searchByKeywords: {
             requestMethod: "GET",
-            description: "Search patents using multiple keywords with AND/OR operators",
+            description: "Search patents using multiple keywords with AND/OR operators. Required: keywords. Optional filters: operator, field, lng.",
             route: "/rssSearch",
             parameters: [
                 { position: { key: "keywords", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "array()", options: ["min(1)"] } },
@@ -64,7 +64,7 @@ export const schema = {
         },
         searchByDate: {
             requestMethod: "GET",
-            description: "Search patents within specific date ranges",
+            description: "Search patents within specific date ranges via European Patent Office. Supports from_date, to_date, lng filters.",
             route: "/rssSearch",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },

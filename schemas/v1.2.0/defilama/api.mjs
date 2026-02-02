@@ -1,9 +1,9 @@
 const schema = {
     namespace: "defillama",
     name: "DeFi Llama MCP",
-    description: "Provides access to DeFi protocol and liquidity data from DeFi Llama",
+    description: "Access DeFi protocol analytics from DeFi Llama — list all tracked protocols, get per-protocol TVL history, and query chain-level TVL aggregates.",
     docs: ["https://docs.llama.fi"],
-    tags: [],
+    tags: ["defi", "tvl", "protocols", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.llama.fi",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getProtocols: {
             requestMethod: "GET",
-            description: "Retrieve a list of all DeFi protocols from DeFi Llama (first 20)",
+            description: "Retrieve a list of all DeFi protocols from DeFi Llama (first 20) Returns structured JSON response data.",
             route: "/protocols",
             parameters: [],
             tests: [
@@ -23,7 +23,7 @@ const schema = {
         },
         getProtocolTvl: {
             requestMethod: "GET",
-            description: "Get TVL data for a specific DeFi protocol",
+            description: "Get TVL data for a specific DeFi protocol via defillama — query by protocol. Returns structured JSON response data.",
             route: "/protocol/:protocol",
             parameters: [
                 { position: { key: "protocol", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -37,7 +37,7 @@ const schema = {
         },
         getChainTvl: {
             requestMethod: "GET",
-            description: "Retrieve historical TVL data for a specific blockchain",
+            description: "Retrieve historical TVL data for a specific blockchain via defillama — query by chain.",
             route: "/v2/historicalChainTvl/:chain",
             parameters: [
                 { position: { key: "chain", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }

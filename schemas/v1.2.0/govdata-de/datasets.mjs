@@ -3,7 +3,7 @@ export const schema = {
     name: "GovData.de Open Data Portal",
     description: "Search and explore German open government data (CKAN API) with 175k+ datasets from federal, state, and municipal authorities",
     docs: ["https://www.govdata.de/", "https://docs.ckan.org/en/latest/api/"],
-    tags: ["government", "opendata", "germany"],
+    tags: ["government", "opendata", "germany", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.govdata.de/ckan/api/3/action",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         searchDatasets: {
             requestMethod: "GET",
-            description: "Search datasets by keyword, filter by organization or group",
+            description: "Search datasets by keyword, filter by organization or group via govdata. Supports q, fq, sort filters.",
             route: "/package_search",
             parameters: [
                 { position: { key: "q", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },
@@ -31,7 +31,7 @@ export const schema = {
         },
         getDataset: {
             requestMethod: "GET",
-            description: "Get full details for a specific dataset by its name or ID",
+            description: "Get full details for a specific dataset by its name or ID via govdata. Returns structured JSON response data.",
             route: "/package_show",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } }
@@ -45,7 +45,7 @@ export const schema = {
         },
         listGroups: {
             requestMethod: "GET",
-            description: "List all thematic groups (categories) with dataset counts",
+            description: "List all thematic groups (categories) with dataset counts via govdata. Supports limit, offset filters.",
             route: "/group_list",
             parameters: [
                 { position: { key: "all_fields", value: "true", location: "query" }, z: { primitive: "boolean()", options: ["default(true)"] } },
@@ -61,7 +61,7 @@ export const schema = {
         },
         listOrganizations: {
             requestMethod: "GET",
-            description: "List all publishing organizations with dataset counts",
+            description: "List all publishing organizations with dataset counts via govdata. Supports limit, offset filters.",
             route: "/organization_list",
             parameters: [
                 { position: { key: "all_fields", value: "true", location: "query" }, z: { primitive: "boolean()", options: ["default(true)"] } },
@@ -77,7 +77,7 @@ export const schema = {
         },
         searchTags: {
             requestMethod: "GET",
-            description: "Search for tags matching a query string",
+            description: "Search for tags matching a query string via govdata. Supports limit filters. Returns structured JSON response data.",
             route: "/tag_list",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: [] } },

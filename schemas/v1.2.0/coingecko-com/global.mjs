@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "coingecko",
     name: "CoinGeckoGlobal",
-    description: "Fetch global and DeFi global market data from CoinGecko",
+    description: "Fetch global cryptocurrency market data from CoinGecko — total market cap, 24h volume, BTC/ETH dominance, plus DeFi-specific global metrics.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "global", "marketdata", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getGlobalData: {
         requestMethod: "GET",
-        description: "Fetch overall global market data",
+        description: "Fetch overall global market data via CoinGecko. Returns structured JSON response data.",
         route: "/global",
         parameters: [],
         tests: [ 
@@ -23,7 +23,7 @@ export const schema = {
       },
       getDeFiGlobalData: {
         requestMethod: "GET",
-        description: "Fetch global DeFi market data",
+        description: "Fetch global DeFi market data via CoinGecko. Returns structured JSON response data.",
         route: "/global/decentralized_finance_defi",
         parameters: [],
         tests: [

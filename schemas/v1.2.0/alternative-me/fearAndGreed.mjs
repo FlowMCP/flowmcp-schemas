@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "alternative",
     name: "FearGreedIndex",
-    description: "Fetches and analyzes the Crypto Fear & Greed Index from alternative.me.",
+    description: "Fetch and analyze the Crypto Fear and Greed Index from alternative.me — current reading, historical data with configurable lookback, and trend analysis.",
     docs: ["https://alternative.me/crypto/api/"],
-    tags: [],
+    tags: ["crypto", "sentiment", "index", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.alternative.me/fng",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getCurrentFng: {
         requestMethod: "GET",
-        description: "Retrieve the latest Fear & Greed Index.",
+        description: "Retrieve the latest Fear & Greed Index via alternative.me. Returns structured JSON response data.",
         route: "/",
         parameters: [],
         tests: [
@@ -23,7 +23,7 @@ export const schema = {
       },
       getHistoricalFng: {
         requestMethod: "GET",
-        description: "Get historical Fear & Greed Index values for past days.",
+        description: "Get historical Fear & Greed Index values for past days via alternative.me. Returns structured JSON response data.",
         route: "/",
         parameters: [
           {
@@ -40,7 +40,7 @@ export const schema = {
       },
       analyzeFngTrend: {
         requestMethod: "GET",
-        description: "Analyze the trend of the Fear & Greed Index over a number of days.",
+        description: "Analyze the trend of the Fear & Greed Index over a number of days. Required: days.",
         route: "/",
         parameters: [
           {

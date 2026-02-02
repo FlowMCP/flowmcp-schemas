@@ -3,7 +3,7 @@ const schema = {
     name: "Jupiter Token Price Checker",
     description: "Fetches token prices from Jupiter DEX aggregator, priced by default against USDC, with optional vsToken.",
     docs: ["https://station.jup.ag/docs/api/lite-api", "https://dev.jup.ag/docs/price-api/"],
-    tags: [],
+    tags: ["solana", "defi", "swap", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://lite-api.jup.ag",
     requiredServerParams: [],
@@ -27,7 +27,7 @@ const schema = {
         },
         getTokenInfo: {
             requestMethod: "GET",
-            description: "Get information about a token using its mint address.",
+            description: "Get information about a token using its mint address via Jupiter — query by mintAddress.",
             route: "/tokens/v1/token/:mintAddress",
             parameters: [
                 { position: { key: "mintAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -41,7 +41,7 @@ const schema = {
         },
         getTokensInMarket: {
             requestMethod: "GET",
-            description: "Get list of token mints belonging to a market address.",
+            description: "Get list of token mints belonging to a market address via Jupiter — query by marketAddress.",
             route: "/tokens/v1/market/:marketAddress/mints",
             parameters: [
                 { position: { key: "marketAddress", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -55,7 +55,7 @@ const schema = {
         },
         getAllTradableTokens: {
             requestMethod: "GET",
-            description: "Retrieve a list of all tradable token mints on Jupiter.",
+            description: "Retrieve a list of all tradable token mints on Jupiter. Returns structured JSON response data.",
             route: "/tokens/v1/mints/tradable",
             parameters: [],
             tests: [
@@ -67,7 +67,7 @@ const schema = {
         },
         getTaggedTokens: {
             requestMethod: "GET",
-            description: "Fetch token info for tokens matching specific tags.",
+            description: "Fetch token info for tokens matching specific tags via Jupiter — query by tags. Returns structured JSON response data.",
             route: "/tokens/v1/tagged/:tags",
             parameters: [
                 { position: { key: "tags", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } }
@@ -81,7 +81,7 @@ const schema = {
         },
         getNewTokens: {
             requestMethod: "GET",
-            description: "Retrieve new tokens, ordered by creation timestamp.",
+            description: "Retrieve new tokens, ordered by creation timestamp via Jupiter. Returns structured JSON response data.",
             route: "/tokens/v1/new",
             parameters: [],
             tests: [
@@ -93,7 +93,7 @@ const schema = {
         },
         getAllTokens: {
             requestMethod: "GET",
-            description: "Fetch all tokens indexed by Jupiter. This is a large payload.",
+            description: "Fetch all tokens indexed by Jupiter. This is a large payload. Returns structured JSON response data.",
             route: "/tokens/v1/all",
             parameters: [],
             tests: [

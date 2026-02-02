@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin WFS Locations API",
     description: "Access to Berlin geographic data including dog parks and BBQ areas via WFS services",
     docs: ["https://gdi.berlin.de/"],
-    tags: [],
+    tags: ["berlin", "geodata", "opendata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://gdi.berlin.de",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         dog_parks: {
             requestMethod: "GET",
-            description: "All dog parks (Hundefreiläufe) in Berlin as GeoJSON FeatureCollection",
+            description: "All dog parks (Hundefreiläufe) in Berlin as GeoJSON FeatureCollection via Berlin.de.",
             route: "/services/wfs/hundefreilauf?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=hundefreilauf%3Ahundefreilauf&OUTPUTFORMAT=application/json",
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ export const schema = {
         },
         bbq_areas: {
             requestMethod: "GET",
-            description: "All BBQ areas (Grillflächen) in Berlin as GeoJSON FeatureCollection",
+            description: "All BBQ areas (Grillflächen) in Berlin as GeoJSON FeatureCollection via Berlin.de.",
             route: "/services/wfs/grillflaechen?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=grillflaechen%3Agrillflaechen&OUTPUTFORMAT=application/json",
             parameters: [],
             tests: [

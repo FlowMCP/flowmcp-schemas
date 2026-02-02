@@ -3,7 +3,7 @@ const schema = {
     name: "CoinGecko Stablecoins API",
     description: "Access and analyze stablecoin data including market metrics, peg stability and historical trends via CoinGecko API",
     docs: ["https://docs.coingecko.com/reference/simple-price", "https://docs.coingecko.com/reference/coins-id-market-chart"],
-    tags: ["price", "market", "stablecoins"],
+    tags: ["price", "market", "stablecoins", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getSupportedStablecoins: {
             requestMethod: "GET",
-            description: "Get list of all stablecoins from CoinGecko with market data.",
+            description: "Get list of all stablecoins from CoinGecko with market data. Required: vs_currency, category, order, per_page.",
             route: "/coins/markets",
             parameters: [
                 { position: { key: "vs_currency", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(usd)"] } },
@@ -28,7 +28,7 @@ const schema = {
         },
         getCurrentPrice: {
             requestMethod: "GET",
-            description: "Fetches current prices for major stablecoins with peg stability analysis.",
+            description: "Fetches current prices for major stablecoins with peg stability analysis. Required: ids, vs_currencies, include_24hr_change.",
             route: "/simple/price",
             parameters: [
                 { position: { key: "ids", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["default(tether,usd-coin,dai,ethena-usde,first-digital-usd,paypal-usd,true-usd)"] } },
@@ -44,7 +44,7 @@ const schema = {
         },
         getHistoricalData: {
             requestMethod: "GET",
-            description: "Fetch historical market chart data for a specific stablecoin.",
+            description: "Fetch historical market chart data for a specific stablecoin. Required: id, vs_currency, days.",
             route: "/coins/:id/market_chart",
             parameters: [
                 { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(tether,usd-coin,dai,ethena-usde,first-digital-usd,paypal-usd,true-usd,frax,gemini-dollar,paxos-standard)", options: [] } },

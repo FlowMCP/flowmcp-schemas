@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Tokens",
-    description: "Token-related endpoints for transfers, holders, and stats",
+    description: "LUKSO token data via BlockScout — list tokens, get token details by address, transfer history, holder lists, and token counter statistics.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "tokens", "balances", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       listTokens: {
         requestMethod: "GET",
-        description: "List all tokens",
+        description: "List all tokens registered on the LUKSO blockchain via BlockScout. Returns structured JSON response data.",
         route: "/tokens",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } }
@@ -23,7 +23,7 @@ export const schema = {
       },
       getTokenByAddress: {
         requestMethod: "GET",
-        description: "Get token metadata",
+        description: "Get token metadata via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/tokens/:address_hash",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -36,7 +36,7 @@ export const schema = {
       },
       getTokenTransfersByAddress: {
         requestMethod: "GET",
-        description: "Token transfer history",
+        description: "Token transfer history via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/tokens/:address_hash/transfers",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -49,7 +49,7 @@ export const schema = {
       },
       getTokenHolders: {
         requestMethod: "GET",
-        description: "List token holders",
+        description: "List token holders via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/tokens/:address_hash/holders",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -62,7 +62,7 @@ export const schema = {
       },
       getTokenCounters: {
         requestMethod: "GET",
-        description: "Token analytics counters",
+        description: "Token analytics counters via LUKSO BlockScout — query by address hash. Returns structured JSON response data.",
         route: "/tokens/:address_hash/counters",
         parameters: [
           { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

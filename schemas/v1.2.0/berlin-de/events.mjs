@@ -3,7 +3,7 @@ export const schema = {
     name: "Berlin Events API",
     description: "Access to Berlin city events data including markets, festivals, and public assemblies",
     docs: ["https://www.berlin.de/"],
-    tags: [],
+    tags: ["berlin", "events", "opendata", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://www.berlin.de",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         markets_festivals: {
             requestMethod: "GET",
-            description: "Weekly and flea markets in Berlin",
+            description: "Weekly and flea markets in Berlin via Berlin.de. Returns structured JSON response data.",
             route: "/sen/web/service/maerkte-feste/wochen-troedelmaerkte/index.php/index/all.json",
             parameters: [],
             tests: [
@@ -21,7 +21,7 @@ export const schema = {
         },
         street_festivals: {
             requestMethod: "GET",
-            description: "Street and folk festivals in Berlin",
+            description: "Street and folk festivals in Berlin via Berlin.de. Returns structured JSON response data.",
             route: "/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json",
             parameters: [],
             tests: [
@@ -31,7 +31,7 @@ export const schema = {
         },
         christmas_markets: {
             requestMethod: "GET",
-            description: "Christmas markets in Berlin",
+            description: "Christmas markets in Berlin via Berlin.de. Returns structured JSON response data.",
             route: "/sen/web/service/maerkte-feste/weihnachtsmaerkte/index.php/index/all.json",
             parameters: [],
             tests: [
@@ -41,7 +41,7 @@ export const schema = {
         },
         police_assemblies: {
             requestMethod: "GET",
-            description: "Police registered assemblies and demonstrations in Berlin",
+            description: "Police registered assemblies and demonstrations in Berlin via Berlin.de. Returns structured JSON response data.",
             route: "/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json",
             parameters: [],
             tests: [

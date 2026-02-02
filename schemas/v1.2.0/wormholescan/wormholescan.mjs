@@ -1,9 +1,9 @@
 const schema = {
     namespace: "wormholescan",
     name: "Wormhole Metrics API",
-    description: "Query cross-chain transaction metrics from the Wormholescan public API",
+    description: "Query cross-chain bridge metrics from Wormholescan — activity stats, money flow, top assets by volume, top chain pairs, top corridors, and KPI summaries.",
     docs: ["https://wormholescan.io", "https://docs.wormholescan.io"],
-    tags: ["data", "api"],
+    tags: ["data", "api", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://api.wormholescan.io",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
         getCrossChainActivity: {
             requestMethod: "GET",
-            description: "Returns cross-chain volume between source and destination chains.",
+            description: "Returns cross-chain volume between source and destination chains. Required: timeSpan, by. Optional filters: apps.",
             route: "/api/v1/x-chain-activity",
             parameters: [
                 { position: { key: "timeSpan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(7d,30d,90d,1y,all-time)", options: ["default(7d)"] } },
@@ -26,7 +26,7 @@ const schema = {
         },
         getMoneyFlow: {
             requestMethod: "GET",
-            description: "Returns top money flow data by chain and volume.",
+            description: "Returns top money flow data by chain and volume via Wormholescan. Supports from, to, appId filters.",
             route: "/api/v1/x-chain-activity/tops",
             parameters: [
                 { position: { key: "timespan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(1h,1d,1mo,1y)", options: ["default(1d)"] } },
@@ -44,7 +44,7 @@ const schema = {
         },
         getTopAssetsByVolume: {
             requestMethod: "GET",
-            description: "Returns top assets by transfer volume.",
+            description: "Returns top assets by transfer volume via Wormholescan. Returns structured JSON response data.",
             route: "/api/v1/top-assets-by-volume",
             parameters: [
                 { position: { key: "timeSpan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(7d,15d,30d)", options: ["default(7d)"] } }
@@ -57,7 +57,7 @@ const schema = {
         },
         getTopChainPairsByNumTransfers: {
             requestMethod: "GET",
-            description: "Returns top chain pairs by number of transfers.",
+            description: "Returns top chain pairs by number of transfers via Wormholescan. Returns structured JSON response data.",
             route: "/api/v1/top-chain-pairs-by-num-transfers",
             parameters: [
                 { position: { key: "timeSpan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(7d,15d,30d)", options: ["default(7d)"] } }
@@ -70,7 +70,7 @@ const schema = {
         },
         getTopSymbolsByVolume: {
             requestMethod: "GET",
-            description: "Returns top transferred token symbols by volume.",
+            description: "Returns top transferred token symbols by volume via Wormholescan. Returns structured JSON response data.",
             route: "/api/v1/top-symbols-by-volume",
             parameters: [
                 { position: { key: "timeSpan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(7d,15d,30d)", options: ["default(7d)"] } }
@@ -83,7 +83,7 @@ const schema = {
         },
         getTopCorridors: {
             requestMethod: "GET",
-            description: "Returns top 100 token corridors by number of transfers.",
+            description: "Returns top 100 token corridors by number of transfers via Wormholescan. Returns structured JSON response data.",
             route: "/api/v1/top-100-corridors",
             parameters: [
                 { position: { key: "timeSpan", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(2d,7d)", options: ["default(2d)"] } }
@@ -96,7 +96,7 @@ const schema = {
         },
         getKpiList: {
             requestMethod: "GET",
-            description: "Returns Wormhole KPIs including volume, message count, and TVL.",
+            description: "Returns Wormhole KPIs including volume, message count, and TVL. via Wormholescan.",
             route: "/api/v1/scorecards",
             parameters: [],
             tests: [

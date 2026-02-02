@@ -1,9 +1,9 @@
 const schema = {
     namespace: "cointelegraph",
     name: "CointelegraphRSS",
-    description: "Fetch latest Cointelegraph news filtered by category and time range.",
+    description: "Fetch the latest cryptocurrency news from Cointelegraph via RSS — filter articles by category (Bitcoin, Ethereum, Altcoin, DeFi, etc.) and time range.",
     docs: ["https://cointelegraph.com/rss-feeds"],
-    tags: [],
+    tags: ["crypto", "news", "media", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://cointelegraph.com",
     requiredServerParams: [],

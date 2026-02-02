@@ -3,7 +3,7 @@ export const schema = {
     name: "Talent Protocol - Advanced Profile Search",
     description: "Search Profiles with rich filters, sorting, and pagination (page-based or point-in-time).",
     docs: ["https://api.talentprotocol.com"],
-    tags: ["identity", "talent", "profiles"],
+    tags: ["identity", "talent", "profiles", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.talentprotocol.com",
     requiredServerParams: ["TALENT_API_KEY"],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         searchAdvancedProfiles: {
             requestMethod: "GET",
-            description: "Get profiles that match input query and sort specification.",
+            description: "Get profiles that match input query and sort specification via talentprotocol. Supports query, aggregations, returnItems filters.",
             route: "/search/advanced/profiles",
             parameters: [
                 { position: { key: "query", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["optional()"] } },

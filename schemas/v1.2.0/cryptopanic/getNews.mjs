@@ -3,7 +3,7 @@ export const schema = {
     name: "CryptoPanic",
     description: "Fetches cryptocurrency news headlines from CryptoPanic across different content types.",
     docs: ["https://cryptopanic.com/developers/api/"],
-    tags: [],
+    tags: ["crypto", "news", "aggregator", "cacheTtlFrequent"],
     flowMCP: "1.2.0",
     root: "https://cryptopanic.com/api/v1/posts",
     requiredServerParams: ["CRYPTOPANIC_API_KEY"],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getCryptoCryptopanicNews: {
         requestMethod: "GET",
-        description: "Get a list of crypto news headlines from CryptoPanic.",
+        description: "Get a list of crypto news headlines from CryptoPanic. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "kind", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "enum(news,media,analysis)",   options: [ "default(news)"] } },

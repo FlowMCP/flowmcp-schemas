@@ -1,9 +1,9 @@
 const schema = {
     namespace: "etherscan",
     name: "Etherscan",
-    description: "Etherscan API",
+    description: "Retrieve smart contract ABI and verified Solidity source code from Etherscan (Ethereum mainnet). Returns the contract interface definition and full source for any verified contract address on Ethereum.",
     docs: ["https://docs.etherscan.io"],
-    tags: [],
+    tags: ["ethereum", "contracts", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.etherscan.io/v2/api",
     requiredServerParams: [ "ETHERSCAN_API_KEY" ],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
       getContractABI: {
         requestMethod: "GET",
-        description: "Returns the Contract ABI of a verified smart contract.",
+        description: "Returns the Contract ABI of a verified smart contract via Etherscan. Returns structured JSON response data.",
         route: "/",
         parameters: [
           { position: { key: "chainid", value: "1", location: "query" } },
@@ -30,7 +30,7 @@ const schema = {
       },
       getContractSourceCode: {
         requestMethod: "GET",
-        description: "Returns the Solidity source code of a verified smart contract.",
+        description: "Returns the Solidity source code of a verified smart contract. Required: address.",
         route: "/",
         parameters: [
           { position: { key: "chainid", value: "1", location: "query" } },

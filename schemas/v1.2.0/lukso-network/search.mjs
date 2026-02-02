@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "luksoNetwork",
     name: "LUKSO BlockScout Search",
-    description: "Search and redirect endpoints from LUKSO BlockScout API",
+    description: "Search the LUKSO blockchain via BlockScout — full-text search across addresses, transactions, blocks, and tokens with redirect support.",
     docs: ["https://explorer.execution.mainnet.lukso.network/api-docs", "https://explorer.execution.testnet.lukso.network/api-docs"],
-    tags: [],
+    tags: ["lukso", "search", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.--chain--.lukso.network/api/v2",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       search: {
         requestMethod: "GET",
-        description: "Search across tokens, addresses, blocks and transactions",
+        description: "Search across tokens, addresses, blocks and transactions via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/search",
         parameters: [
             { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -28,7 +28,7 @@ export const schema = {
       },
       searchRedirect: {
         requestMethod: "GET",
-        description: "Check if search redirects to a specific resource",
+        description: "Check if search redirects to a specific resource via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/search/check-redirect",
         parameters: [
             { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

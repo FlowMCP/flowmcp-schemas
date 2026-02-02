@@ -10,9 +10,9 @@ const erc725_schema = [
 export const schema = {
   namespace: "luksoNetwork",
   name: "ERC725UniversalProfile",
-  description: "Minimal schema for reading Universal Profile data via getData and fetchData",
+  description: "Read LUKSO Universal Profile data on-chain via ERC725 — call getData for raw key-value storage and fetchData for resolved metadata with IPFS content.",
   docs: ["https://github.com/ERC725Alliance/erc725.js", "https://docs.lukso.tech/learn/overview"],
-  tags: [],
+  tags: ["lukso", "identity", "profiles", "cacheTtlDaily"],
   flowMCP: "1.2.0",
   root: "https://rpc.--chain--.lukso.network",
   requiredServerParams: [],
@@ -20,7 +20,7 @@ export const schema = {
   routes: {
     readProfileData: {
       requestMethod: "GET",
-      description: "Calls getData() to retrieve full profile data",
+      description: "Calls getData() to retrieve full profile data via LUKSO BlockScout. Returns structured JSON response data.",
       route: "/",
       parameters: [
         { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -38,7 +38,7 @@ export const schema = {
     },
     fetchProfileMetadata: {
       requestMethod: "GET",
-      description: "Calls fetchData() to retrieve LSP3Profile metadata",
+      description: "Calls fetchData() to retrieve LSP3Profile metadata via LUKSO BlockScout. Returns structured JSON response data.",
       route: "/",
       parameters: [
         { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },
@@ -56,7 +56,7 @@ export const schema = {
     },
     getUniversalReceiverAddress: {
       requestMethod: "GET",
-      description: "Calls getData() to retrieve LSP1UniversalReceiverDelegate address",
+      description: "Calls getData() to retrieve LSP1UniversalReceiverDelegate address. Required: chainName, address.",
       route: "/",
       parameters: [
         { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(LUKSO_MAINNET,LUKSO_TESTNET)", options: [] } },

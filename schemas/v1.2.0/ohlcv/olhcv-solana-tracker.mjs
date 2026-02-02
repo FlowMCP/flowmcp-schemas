@@ -35,9 +35,9 @@ const fromDateUnits = {
 const schema = {
     namespace: "ohlcv",
     name: "Solana Tracker OHLCV for Solana",
-    description: "Retrieves OHLCV chart data from Solana Tracker API for a given token and pool.",
+    description: "Retrieve OHLCV candlestick chart data from Solana Tracker for any Solana token and pool pair — configurable timeframes for price history visualization.",
     docs: ["https://data.solanatracker.io"],
-    tags: [],
+    tags: ["solana", "ohlcv", "charts", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://data.solanatracker.io",
     requiredServerParams: ["SOLANA_TRACKER_API_KEY"],
@@ -48,7 +48,7 @@ const schema = {
     routes: {
         getOhlcvSolana: {
             requestMethod: "GET",
-            description: "Fetch OHLCV chart data for a specific token and pool on Solana.",
+            description: "Fetch OHLCV chart data for a specific token and pool on Solana. Required: token, pool, type, fromDateAmount, fromDateUnit, marketCap, removeOutliers.",
             route: "/chart/:token/:pool",
             parameters: [
                 { position: { key: "token", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

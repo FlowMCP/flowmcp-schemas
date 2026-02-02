@@ -45,7 +45,7 @@ const schema = {
     name: "Sim by Dune - Token Holders",
     description: "Discover token distribution across ERC20 or ERC721 holders, ranked by wallet value.",
     docs: ["https://docs.sim.dune.com/evm/token-holders"],
-    tags: ["production", "token", "analytics", "holders"],
+    tags: ["production", "token", "analytics", "holders", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/v1",
     requiredServerParams: ["DUNE_SIM_API_KEY"],

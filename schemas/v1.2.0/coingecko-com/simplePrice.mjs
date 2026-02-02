@@ -1,9 +1,9 @@
 export const schema = {
   namespace: "coingecko",
     name: "CoinGeckoSimplePrice",
-    description: "Fetch current prices for coins and tokens using CoinGecko's Simple API",
+    description: "Fetch current cryptocurrency prices via CoinGecko Simple API — get coin prices by ID or ERC20 token prices by contract address in multiple fiat currencies.",
     docs: ["https://docs.coingecko.com/reference/introduction"],
-    tags: [],
+    tags: ["crypto", "prices", "conversion", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.coingecko.com/api/v3",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
       getSimplePrice: {
         requestMethod: "GET",
-        description: "Fetch current price for one or more coins",
+        description: "Fetch current price for one or more coins via CoinGecko. Returns structured JSON response data.",
         route: "/simple/price",
         parameters: [
           { position: { key: "ids", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "array()", options: [] } },
@@ -26,7 +26,7 @@ export const schema = {
       },
       getTokenPrice: {
         requestMethod: "GET",
-        description: "Fetch token price by contract address and chain",
+        description: "Fetch token price by contract address and chain via CoinGecko — query by id. Returns structured JSON response data.",
         route: "/simple/token_price/:id",
         parameters: [
           { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: [] } },

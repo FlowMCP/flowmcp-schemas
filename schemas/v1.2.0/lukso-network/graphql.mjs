@@ -1,9 +1,9 @@
 const schema = {
     namespace: "luksoNetwork",
     name: "LuksoMainnetSubgraph",
-    description: "Query the Lukso Mainnet GraphQL endpoint.",
+    description: "Query the LUKSO Mainnet blockchain via GraphQL — introspect the schema and run custom queries against the LUKSO subgraph explorer.",
     docs: ["https://explorer.execution.testnet.lukso.network/graphiql", "https://explorer.execution.mainnet.lukso.network/graphiql"],
-    tags: [],
+    tags: ["lukso", "graphql", "explorer", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://explorer.execution.mainnet.lukso.network/api",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ const schema = {
     routes: {
       getLuksoExplorerSchema: {
         requestMethod: "POST",
-        description: "Execute a GraphQL query against the LUKSO mainnet subgraph.",
+        description: "Execute a GraphQL query against the LUKSO mainnet subgraph via LUKSO BlockScout.",
         route: "/v1/graphql",
         parameters: [
             { position: { key: "query", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: [] } }
@@ -26,7 +26,7 @@ const schema = {
       },
       fectchLuksoExplorer: {
         requestMethod: "POST",
-        description: "Run a raw GraphQL query on a lukso explorer.",
+        description: "Run a raw GraphQL query on a lukso explorer via LUKSO BlockScout. Returns structured JSON response data.",
         route: "/v1/graphql",
         parameters: [
           { position: { key: "query", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: [] }

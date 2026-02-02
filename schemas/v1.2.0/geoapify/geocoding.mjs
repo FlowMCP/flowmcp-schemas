@@ -1,9 +1,9 @@
 export const schema = {
     namespace: "geoapify",
     name: "Geoapify Geocoding",
-    description: "Forward geocoding, reverse geocoding, and address autocomplete via geoapify.com",
+    description: "Forward geocoding, reverse geocoding, and address autocomplete via Geoapify — convert addresses to coordinates, coordinates to addresses, and type-ahead suggestions.",
     docs: ["https://apidocs.geoapify.com/docs/geocoding/"],
-    tags: ["geocoding", "maps", "places"],
+    tags: ["geocoding", "maps", "places", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.geoapify.com",
     requiredServerParams: ["GEOAPIFY_API_KEY"],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         forwardGeocode: {
             requestMethod: "GET",
-            description: "Convert an address or place name into geographic coordinates",
+            description: "Convert an address or place name into geographic coordinates. Required: text. Optional filters: lang, limit.",
             route: "/v1/geocode/search",
             parameters: [
                 { position: { key: "text", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },
@@ -27,7 +27,7 @@ export const schema = {
         },
         reverseGeocode: {
             requestMethod: "GET",
-            description: "Convert geographic coordinates into an address",
+            description: "Convert geographic coordinates into an address via Geoapify. Returns structured JSON response data.",
             route: "/v1/geocode/reverse",
             parameters: [
                 { position: { key: "lat", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(-90)", "max(90)"] } },
@@ -41,7 +41,7 @@ export const schema = {
         },
         autocomplete: {
             requestMethod: "GET",
-            description: "Get address suggestions as you type for autocomplete functionality",
+            description: "Get address suggestions as you type for autocomplete functionality. Required: text. Optional filters: lang, limit.",
             route: "/v1/geocode/autocomplete",
             parameters: [
                 { position: { key: "text", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } },

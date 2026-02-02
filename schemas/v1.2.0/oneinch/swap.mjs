@@ -3,7 +3,7 @@ export const schema = {
     name: "1inch Swap API",
     description: "Get swap quotes and generate swap transaction data across 13+ EVM chains using the 1inch aggregation protocol",
     docs: ["https://business.1inch.com/portal/documentation/apis/swap/introduction", "https://1inch.io/"],
-    tags: ["defi", "swap", "ethereum", "trading"],
+    tags: ["defi", "swap", "ethereum", "trading", "cacheTtlRealtime"],
     flowMCP: "1.2.0",
     root: "https://api.1inch.dev/swap/v6.0",
     requiredServerParams: ["ONEINCH_API_KEY"],
@@ -30,7 +30,7 @@ export const schema = {
         },
         getSwap: {
             requestMethod: "GET",
-            description: "Generate swap transaction data ready for on-chain execution",
+            description: "Generate swap transaction data ready for on-chain execution via oneInch — query by chainId.",
             route: "/:chainId/swap",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } },
@@ -48,7 +48,7 @@ export const schema = {
         },
         getTokens: {
             requestMethod: "GET",
-            description: "List all tokens available for swapping on a specific chain",
+            description: "List all tokens available for swapping on a specific chain via oneInch — query by chainId.",
             route: "/:chainId/tokens",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } }
@@ -60,7 +60,7 @@ export const schema = {
         },
         getApprove: {
             requestMethod: "GET",
-            description: "Get the approve transaction calldata for token allowance to the 1inch router",
+            description: "Get the approve transaction calldata for token allowance to the 1inch router. Required: chainId, tokenAddress. Optional filters: amount.",
             route: "/:chainId/approve/transaction",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } },
@@ -74,7 +74,7 @@ export const schema = {
         },
         getAllowance: {
             requestMethod: "GET",
-            description: "Check current allowance of a token for the 1inch router",
+            description: "Check current allowance of a token for the 1inch router via oneInch — query by chainId.",
             route: "/:chainId/approve/allowance",
             parameters: [
                 { position: { key: "chainId", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "number()", options: ["min(1)"] } },

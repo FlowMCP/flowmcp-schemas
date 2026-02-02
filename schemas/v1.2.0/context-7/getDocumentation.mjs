@@ -3,7 +3,7 @@ const schema = {
     name: "Context7 Library Docs",
     description: "Accesses searchable documentation and examples for programming libraries using Context7.",
     docs: ["https://context7.com/docs"],
-    tags: [],
+    tags: ["documentation", "search", "developer", "cacheTtlStatic"],
     flowMCP: "1.2.0",
     root: "https://context7.com/api",
     requiredServerParams: [],

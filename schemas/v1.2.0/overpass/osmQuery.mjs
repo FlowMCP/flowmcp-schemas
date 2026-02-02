@@ -3,7 +3,7 @@ export const schema = {
     name: "Overpass OSM Query",
     description: "Query OpenStreetMap data using the Overpass API for geographic searches and nearby point-of-interest lookups",
     docs: ["https://wiki.openstreetmap.org/wiki/Overpass_API", "https://overpass-turbo.eu/"],
-    tags: ["openstreetmap", "geodata", "maps"],
+    tags: ["openstreetmap", "geodata", "maps", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://overpass-api.de/api",
     requiredServerParams: [],
@@ -11,7 +11,7 @@ export const schema = {
     routes: {
         queryRaw: {
             requestMethod: "GET",
-            description: "Execute a raw OverpassQL query against OpenStreetMap data",
+            description: "Execute a raw OverpassQL query against OpenStreetMap data. Returns structured JSON response data.",
             route: "/interpreter",
             parameters: [
                 { position: { key: "data", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(1)"] } }
@@ -24,7 +24,7 @@ export const schema = {
         },
         findNearby: {
             requestMethod: "GET",
-            description: "Find nearby points of interest by coordinates, radius, and amenity type",
+            description: "Find nearby points of interest by coordinates, radius, and amenity type. Required: lat, lon, amenity. Optional filters: radius.",
             route: "/interpreter",
             parameters: [
                 { position: { key: "lat", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(-90)", "max(90)"] } },
@@ -42,7 +42,7 @@ export const schema = {
         },
         status: {
             requestMethod: "GET",
-            description: "Get the current status of the Overpass API server",
+            description: "Get the current status of the Overpass API server. Returns structured JSON response data.",
             route: "/status",
             parameters: [],
             tests: [

@@ -14,7 +14,7 @@ const schema = {
     name: "Sim by Dune - SVM Token Balances",
     description: "Access realtime token balances for native, SPL, and SPL-2022 tokens with USD valuations across SVM chains.",
     docs: ["https://docs.sim.dune.com/svm/balances"],
-    tags: ["production", "balances", "analytics", "portfolio", "svm", "solana"],
+    tags: ["production", "balances", "analytics", "portfolio", "svm", "solana", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://api.sim.dune.com/beta",
     requiredServerParams: ["DUNE_SIM_API_KEY"],
