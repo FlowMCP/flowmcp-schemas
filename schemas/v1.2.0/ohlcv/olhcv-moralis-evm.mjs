@@ -27,38 +27,28 @@ const fromDateUnits = {
     "years": 31536000
 }
 
-const chainSelections = {
-    "ETHEREUM_MAINNET": "eth",
-    "ETHEREUM_SEPOLIA": "sepolia",
-    "ETHEREUM_HOLESKY": "holesky",
-    "POLYGON_MAINNET": "polygon",
-    "POLYGON_AMOY": "polygon amoy",
-    "BSC_MAINNET": "bsc",
-    "BSC_TESTNET": "bsc testnet",
-    "AVALANCHE_MAINNET": "avalanche",
-    "FANTOM_MAINNET": "fantom",
-    "CRONOS_MAINNET": "cronos",
-    "ARBITRUM_MAINNET": "arbitrum",
-    "GNOSIS_MAINNET": "gnosis",
-    "GNOSIS_TESTNET": "gnosis testnet",
-    "CHILIZ_MAINNET": "chiliz",
-    "CHILIZ_TESTNET": "chiliz testnet",
-    "BASE_MAINNET": "base",
-    "BASE_SEPOLIA": "base sepolia",
-    "OPTIMISM_MAINNET": "optimism",
-    "LINEA_MAINNET": "linea",
-    "LINEA_SEPOLIA": "linea sepolia",
-    "MOONBEAM_MAINNET": "moonbeam",
-    "MOONRIVER_MAINNET": "moonriver",
-    "MOONBASE_TESTNET": "moonbase",
-    "FLOW_MAINNET": "flow",
-    "FLOW_TESTNET": "flow-testnet",
-    "RONIN_MAINNET": "ronin",
-    "RONIN_TESTNET": "ronin-testnet",
-    "LISK_MAINNET": "lisk",
-    "LISK_SEPOLIA": "lisk-sepolia",
-    "PULSE_MAINNET": "pulse"
-}
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+
+const moralisChainAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'HOLESKY_TESTNET',
+    'POLYGON_MAINNET', 'POLYGON_AMOY_TESTNET', 'BINANCE_MAINNET',
+    'BINANCE_TESTNET', 'AVALANCHE_MAINNET', 'FANTOM_MAINNET',
+    'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET', 'GNOSIS_MAINNET',
+    'GNOSIS_TESTNET', 'CHILIZ_MAINNET', 'CHILIZ_TESTNET',
+    'BASE_MAINNET', 'BASE_SEPOLIA_TESTNET', 'OPTIMISM_MAINNET',
+    'LINEA_MAINNET', 'LINEA_SEPOLIA_TESTNET', 'MOONBEAM_MAINNET',
+    'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET', 'FLOW_MAINNET',
+    'FLOW_TESTNET', 'RONIN_MAINNET', 'RONIN_TESTNET',
+    'LISK_MAINNET', 'LISK_SEPOLIA_TESTNET', 'PULSECHAIN_MAINNET'
+]
+
+const chainSelections = EVM_CHAINS
+    .filter( ( c ) => moralisChainAliases.includes( c.alias ) && c.moralisChainSlug !== undefined )
+    .reduce( ( acc, chain ) => {
+        acc[ chain.alias ] = chain.moralisChainSlug
+
+        return acc
+    }, {} )
 
 
 const schema = {
@@ -86,7 +76,7 @@ const schema = {
                 { position: { key: "maxResultLength", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["optional(), default(1000)"] } }
             ],
             tests: [
-                { _description: "Fetch 7-day OHLCV data for Uniswap pair on Ethereum", pairAddress: "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f", chain: "eth", timeframe: "1min", currency: "usd", fromDateAmount: 7, fromDateUnit: "days", maxResultLength: 1000 }
+                { _description: "Fetch 7-day OHLCV data for Uniswap pair on Ethereum", pairAddress: "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f", chain: "ETHEREUM_MAINNET", timeframe: "1min", currency: "usd", fromDateAmount: 7, fromDateUnit: "days", maxResultLength: 1000 }
             ],
             modifiers: [
                 { phase: "execute", handlerName: "fetchRecursiveOhlcvEvm" }

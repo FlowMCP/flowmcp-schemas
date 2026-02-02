@@ -1,20 +1,21 @@
 import { ethers } from 'ethers'
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
 
-const infuraSubDomain = {
-    "ETHEREUM_MAINNET": "mainnet",
-    "SEPOLIA_TESTNET": "sepolia",
-    "ARBITRUM_MAINNET": "arbitrum-mainnet",
-    "AVALANCHE_MAINNET": "avalanche-mainnet",
-    "BASE_MAINNET": "base-mainnet",
-    "BINANCE_MAINNET": "bsc-mainnet",
-    "CELO_MAINNET": "celo-mainnet",
-    "LINEA_MAINNET": "linea-mainnet",
-    "MANTLE_MAINNET": "mantle-mainnet",
-    "SCROLL_MAINNET": "scroll-mainnet",
-    "OPTIMISM_MAINNET": "optimism-mainnet",
-    "POLYGON_MAINNET": "polygon-mainnet",
-    "ZKSYNC_MAINNET": "zksync-mainnet"
-}
+const ensChainAliases = [
+    'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'ARBITRUM_ONE_MAINNET',
+    'AVALANCHE_MAINNET', 'BASE_MAINNET', 'BINANCE_MAINNET',
+    'CELO_MAINNET', 'LINEA_MAINNET', 'MANTLE_MAINNET',
+    'SCROLL_MAINNET', 'OPTIMISM_MAINNET', 'POLYGON_MAINNET',
+    'ZKSYNC_MAINNET'
+]
+
+const infuraSubDomain = EVM_CHAINS
+    .filter( ( c ) => ensChainAliases.includes( c.alias ) && c.infuraSubdomain !== undefined )
+    .reduce( ( acc, chain ) => {
+        acc[ chain.alias ] = chain.infuraSubdomain
+
+        return acc
+    }, {} )
 
 const ENS_SUPPORTED_NATIVE = ["ETHEREUM_MAINNET", "SEPOLIA_TESTNET"]
 const SEI_SUPPORT = { supported: false, reason: "Sei is not natively supported by ENS via ethers.js; use a Cosmos/ICNS-style resolver instead." }
@@ -35,7 +36,7 @@ const schema = {
             description: "Resolves a human-readable name (e.g., vitalik.eth) to a checksummed address on the selected chain.",
             route: "/",
             parameters: [
-                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)", options: [] } },
+                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: 'enum(' + ensChainAliases.join( ',' ) + ')', options: [] } },
                 { position: { key: "name", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["min(3)"] } }
             ],
             tests: [
@@ -52,7 +53,7 @@ const schema = {
             description: "Looks up the primary ENS name for a given address (reverse record) on the selected chain.",
             route: "/",
             parameters: [
-                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)", options: [] } },
+                { position: { key: "chainName", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: 'enum(' + ensChainAliases.join( ',' ) + ')', options: [] } },
                 { position: { key: "address", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "string()", options: ["length(42)", "regex(^0x[a-fA-F0-9]{40}$)"] } }
             ],
             tests: [

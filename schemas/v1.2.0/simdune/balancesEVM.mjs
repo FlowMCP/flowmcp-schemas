@@ -1,45 +1,20 @@
-// Supported chains for balances endpoint (from API documentation)
-const SUPPORTED_CHAINS = [
-    { alias: "ETHEREUM_MAINNET", id: 1, name: "ethereum" },
-    { alias: "BNB_CHAIN", id: 56, name: "bnb" },
-    { alias: "POLYGON_MAINNET", id: 137, name: "polygon" },
-    { alias: "ARBITRUM_ONE", id: 42161, name: "arbitrum" },
-    { alias: "OPTIMISM_MAINNET", id: 10, name: "optimism" },
-    { alias: "BASE_MAINNET", id: 8453, name: "base" },
-    { alias: "AVALANCHE_CCHAIN", id: 43114, name: "avalanche_c" },
-    { alias: "GNOSIS_CHAIN", id: 100, name: "gnosis" },
-    { alias: "CELO_MAINNET", id: 42220, name: "celo" },
-    { alias: "ZKSYNC_ERA", id: 324, name: "zksync" },
-    { alias: "ZORA_NETWORK", id: 7777777, name: "zora" },
-    { alias: "LINEA_MAINNET", id: 59144, name: "linea" },
-    { alias: "SCROLL", id: 534352, name: "scroll" },
-    { alias: "MODE", id: 34443, name: "mode" },
-    { alias: "BLAST_MAINNET", id: 81457, name: "blast" },
-    { alias: "ARBITRUM_NOVA", id: 42170, name: "arbitrum_nova" },
-    { alias: "MANTLE", id: 5000, name: "mantle" },
-    { alias: "METIS", id: 1088, name: "metis" },
-    { alias: "FANTOM", id: 250, name: "fantom" },
-    { alias: "BOBA_NETWORK", id: 288, name: "boba" },
-    { alias: "MINT_MAINNET", id: 185, name: "mint" },
-    { alias: "DEGEN_CHAIN", id: 666666666, name: "degen" },
-    { alias: "ANCIENT8", id: 888888888, name: "ancient8" },
-    { alias: "KAIA", id: 8217, name: "kaia" },
-    { alias: "LISK", id: 1135, name: "lisk" },
-    { alias: "OPBNB", id: 204, name: "opbnb" },
-    { alias: "PROOF_OF_PLAY", id: 70700, name: "proof_of_play" },
-    { alias: "CYBER", id: 7560, name: "cyber" },
-    { alias: "BOB", id: 60808, name: "bob" },
-    { alias: "FLARE", id: 14, name: "flare" },
-    { alias: "BERACHAIN", id: 80094, name: "berachain" },
-    { alias: "HYPER_EVM", id: 999, name: "hyper_evm" },
-    { alias: "BASE_SEPOLIA", id: 84532, name: "base_sepolia" },
-    { alias: "AVALANCHE_FUJI", id: 43113, name: "avalanche_fuji" }
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+
+const routeAliases = [
+    'ETHEREUM_MAINNET', 'BNB_CHAIN', 'POLYGON_MAINNET', 'ARBITRUM_ONE',
+    'OPTIMISM_MAINNET', 'BASE_MAINNET', 'AVALANCHE_CCHAIN', 'GNOSIS_CHAIN',
+    'CELO_MAINNET', 'ZKSYNC_ERA', 'ZORA_NETWORK', 'LINEA_MAINNET',
+    'SCROLL', 'MODE', 'BLAST_MAINNET', 'ARBITRUM_NOVA', 'MANTLE', 'METIS',
+    'FANTOM', 'BOBA_NETWORK', 'MINT_MAINNET', 'DEGEN_CHAIN', 'ANCIENT8',
+    'KAIA', 'LISK', 'OPBNB', 'PROOF_OF_PLAY', 'CYBER', 'BOB', 'FLARE',
+    'BERACHAIN', 'HYPER_EVM', 'BASE_SEPOLIA', 'AVALANCHE_FUJI'
 ]
 
-let chainAliasEnum
-chainAliasEnum = 'enum('
-chainAliasEnum += SUPPORTED_CHAINS.map( ( { alias } ) => alias ).join( ',' )
-chainAliasEnum += ')'
+const SUPPORTED_CHAINS = EVM_CHAINS
+    .filter( ( c ) => c.simduneAlias !== undefined && routeAliases.includes( c.simduneAlias ) )
+    .map( ( c ) => ( { alias: c.simduneAlias, id: c.simduneChainId, name: c.simduneChainSlug } ) )
+
+const chainAliasEnum = 'enum(' + SUPPORTED_CHAINS.map( ( { alias } ) => alias ).join( ',' ) + ')'
 
 const schema = {
     namespace: "simdune",

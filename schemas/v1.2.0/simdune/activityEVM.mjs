@@ -1,77 +1,31 @@
 import { max } from "indicatorts"
+import { EVM_CHAINS } from '../_shared/evmChains.mjs'
 
-// Supported chains for activity endpoint (from API documentation)
-const SUPPORTED_CHAINS = [
-    { alias: "ABSTRACT", id: 2741, name: "abstract" },
-    { alias: "ANCIENT8", id: 888888888, name: "ancient8" },
-    { alias: "APE_CHAIN", id: 33139, name: "ape_chain" },
-    { alias: "ARBITRUM_ONE", id: 42161, name: "arbitrum" },
-    { alias: "ARBITRUM_NOVA", id: 42170, name: "arbitrum_nova" },
-    { alias: "AVALANCHE_CCHAIN", id: 43114, name: "avalanche_c" },
-    { alias: "AVALANCHE_FUJI", id: 43113, name: "avalanche_fuji" },
-    { alias: "B3", id: 8333, name: "b3" },
-    { alias: "BASE_MAINNET", id: 8453, name: "base" },
-    { alias: "BASE_SEPOLIA", id: 84532, name: "base_sepolia" },
-    { alias: "BERACHAIN", id: 80094, name: "berachain" },
-    { alias: "BLAST_MAINNET", id: 81457, name: "blast" },
-    { alias: "BNB_CHAIN", id: 56, name: "bnb" },
-    { alias: "BOB", id: 60808, name: "bob" },
-    { alias: "BOBA_NETWORK", id: 288, name: "boba" },
-    { alias: "CELO_MAINNET", id: 42220, name: "celo" },
-    { alias: "CORN", id: 21000000, name: "corn" },
-    { alias: "CYBER", id: 7560, name: "cyber" },
-    { alias: "DEGEN_CHAIN", id: 666666666, name: "degen" },
-    { alias: "ETHEREUM_MAINNET", id: 1, name: "ethereum" },
-    { alias: "FANTOM", id: 250, name: "fantom" },
-    { alias: "FLARE", id: 14, name: "flare" },
-    { alias: "FORMA", id: 984122, name: "forma" },
-    { alias: "FRAXTAL", id: 252, name: "fraxtal" },
-    { alias: "FUNKICHAIN", id: 33979, name: "funkichain" },
-    { alias: "GNOSIS_CHAIN", id: 100, name: "gnosis" },
-    { alias: "HAM_CHAIN", id: 5112, name: "ham" },
-    { alias: "HYCHAIN", id: 2911, name: "hychain" },
-    { alias: "HYPER_EVM", id: 999, name: "hyper_evm" },
-    { alias: "INK", id: 57073, name: "ink" },
-    { alias: "KAIA", id: 8217, name: "kaia" },
-    { alias: "LINEA_MAINNET", id: 59144, name: "linea" },
-    { alias: "LISK", id: 1135, name: "lisk" },
-    { alias: "MANTLE", id: 5000, name: "mantle" },
-    { alias: "METIS", id: 1088, name: "metis" },
-    { alias: "MINT_MAINNET", id: 185, name: "mint" },
-    { alias: "MODE", id: 34443, name: "mode" },
-    { alias: "OMNI", id: 166, name: "omni" },
-    { alias: "OPBNB", id: 204, name: "opbnb" },
-    { alias: "OPTIMISM_MAINNET", id: 10, name: "optimism" },
-    { alias: "POLYGON_MAINNET", id: 137, name: "polygon" },
-    { alias: "PROOF_OF_PLAY", id: 70700, name: "proof_of_play" },
-    { alias: "PROOF_OF_PLAY_BOSS", id: 70701, name: "proof_of_play_boss" },
-    { alias: "RARI", id: 1380012617, name: "rari" },
-    { alias: "REDSTONE", id: 690, name: "redstone" },
-    { alias: "RONIN", id: 2020, name: "ronin" },
-    { alias: "SCROLL", id: 534352, name: "scroll" },
-    { alias: "SEI", id: 1329, name: "sei" },
-    { alias: "ETHEREUM_SEPOLIA", id: 11155111, name: "sepolia" },
-    { alias: "SHAPE", id: 360, name: "shape" },
-    { alias: "SONEIUM", id: 1868, name: "soneium" },
-    { alias: "SONIC", id: 146, name: "sonic" },
-    { alias: "SUPERPOSITION", id: 55244, name: "superposition" },
-    { alias: "SUPERSEED", id: 5330, name: "superseed" },
-    { alias: "SWELLCHAIN", id: 1923, name: "swellchain" },
-    { alias: "UNICHAIN", id: 130, name: "unichain" },
-    { alias: "WEMIX", id: 1111, name: "wemix" },
-    { alias: "WORLD", id: 480, name: "world" },
-    { alias: "XAI", id: 660279, name: "xai" },
-    { alias: "ZERO_NETWORK", id: 543210, name: "zero_network" },
-    { alias: "ZKEVM", id: 1101, name: "zkevm" },
-    { alias: "ZKSYNC_ERA", id: 324, name: "zksync" },
-    { alias: "ZORA_NETWORK", id: 7777777, name: "zora" }
+const routeAliases = [
+    'ABSTRACT', 'ANCIENT8', 'APE_CHAIN', 'ARBITRUM_ONE', 'ARBITRUM_NOVA',
+    'AVALANCHE_CCHAIN', 'AVALANCHE_FUJI', 'B3', 'BASE_MAINNET', 'BASE_SEPOLIA',
+    'BERACHAIN', 'BLAST_MAINNET', 'BNB_CHAIN', 'BOB', 'BOBA_NETWORK',
+    'CELO_MAINNET', 'CORN', 'CYBER', 'DEGEN_CHAIN', 'ETHEREUM_MAINNET',
+    'FANTOM', 'FLARE', 'FORMA', 'FRAXTAL', 'FUNKICHAIN', 'GNOSIS_CHAIN',
+    'HAM_CHAIN', 'HYCHAIN', 'HYPER_EVM', 'INK', 'KAIA', 'LINEA_MAINNET',
+    'LISK', 'MANTLE', 'METIS', 'MINT_MAINNET', 'MODE', 'OMNI', 'OPBNB',
+    'OPTIMISM_MAINNET', 'POLYGON_MAINNET', 'PROOF_OF_PLAY',
+    'PROOF_OF_PLAY_BOSS', 'RARI', 'REDSTONE', 'RONIN', 'SCROLL', 'SEI',
+    'ETHEREUM_SEPOLIA', 'SHAPE', 'SONEIUM', 'SONIC', 'SUPERPOSITION',
+    'SUPERSEED', 'SWELLCHAIN', 'UNICHAIN', 'WEMIX', 'WORLD', 'XAI',
+    'ZERO_NETWORK', 'ZKEVM', 'ZKSYNC_ERA', 'ZORA_NETWORK'
 ]
+
+const SUPPORTED_CHAINS = EVM_CHAINS
+    .filter( ( c ) => c.simduneAlias !== undefined && routeAliases.includes( c.simduneAlias ) )
+    .map( ( c ) => ( { alias: c.simduneAlias, id: c.simduneChainId, name: c.simduneChainSlug } ) )
 
 const supportedChainsStr = SUPPORTED_CHAINS.map( ( { alias } ) => alias ).join( ',' )
 
 
 function getChainAlias( { chainId } ) {
-    const chain = SUPPORTED_CHAINS.find( c => c.id === chainId )
+    const chain = SUPPORTED_CHAINS.find( ( c ) => c.id === chainId )
+
     return chain ? chain.alias : `UNKNOWN_${chainId}`
 }
 
