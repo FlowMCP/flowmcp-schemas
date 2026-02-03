@@ -1,4 +1,4 @@
-import { readdir, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join, relative, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -27,6 +27,59 @@ async function collectMjsFiles( { dir } ) {
 }
 
 
+function separateFiles( { files } ) {
+    const sharedFiles = files
+        .filter( ( f ) => {
+            const isShared = relative( SCHEMA_DIR, f ).startsWith( '_shared/' )
+
+            return isShared
+        } )
+    const schemaFiles = files
+        .filter( ( f ) => {
+            const isShared = relative( SCHEMA_DIR, f ).startsWith( '_shared/' )
+
+            return !isShared
+        } )
+
+    return { sharedFiles, schemaFiles }
+}
+
+
+function buildSharedEntries( { sharedFiles } ) {
+    const entries = sharedFiles
+        .map( ( filePath ) => {
+            const relativePath = relative( SCHEMA_DIR, filePath ).split( sep ).join( '/' )
+            const entry = { file: relativePath }
+
+            return entry
+        } )
+
+    return { entries }
+}
+
+
+async function detectSharedImports( { filePath } ) {
+    const content = await readFile( filePath, 'utf-8' )
+    const sharedImports = content
+        .split( '\n' )
+        .filter( ( line ) => {
+            const trimmed = line.trim()
+            const isSharedImport = trimmed.startsWith( 'import ' ) && trimmed.includes( '_shared/' )
+
+            return isSharedImport
+        } )
+        .map( ( line ) => {
+            const match = line.match( /_shared\/([^'"`]+)/ )
+            const file = match ? `_shared/${match[ 1 ]}` : null
+
+            return file
+        } )
+        .filter( ( file ) => file !== null )
+
+    return { sharedImports }
+}
+
+
 async function importSchema( { filePath } ) {
     try {
         const fileUrl = pathToFileURL( filePath ).href
@@ -46,7 +99,7 @@ async function importSchema( { filePath } ) {
 }
 
 
-function buildEntry( { schema, filePath } ) {
+function buildEntry( { schema, filePath, sharedImports } ) {
     const relativePath = relative( SCHEMA_DIR, filePath ).split( sep ).join( '/' )
     const namespace = schema.namespace || relativePath.split( '/' )[ 0 ] || 'unknown'
     const name = schema.name || namespace
@@ -59,6 +112,10 @@ function buildEntry( { schema, filePath } ) {
         requiredServerParams
     }
 
+    if( sharedImports.length > 0 ) {
+        entry[ 'shared' ] = sharedImports
+    }
+
     return { entry }
 }
 
@@ -67,22 +124,26 @@ async function main() {
     console.log( `\nScanning ${BASE_DIR}...\n` )
 
     const { files } = await collectMjsFiles( { dir: SCHEMA_DIR } )
-    console.log( `Found ${files.length} .mjs files\n` )
+    const { sharedFiles, schemaFiles } = separateFiles( { files } )
+    console.log( `Found ${schemaFiles.length} schema files, ${sharedFiles.length} shared files\n` )
+
+    const { entries: sharedEntries } = buildSharedEntries( { sharedFiles } )
 
     const entries = []
     const warnings = []
     const errors = []
 
     const importResults = await Promise.all(
-        files.map( async ( filePath ) => {
+        schemaFiles.map( async ( filePath ) => {
             const result = await importSchema( { filePath } )
+            const { sharedImports } = await detectSharedImports( { filePath } )
 
-            return { filePath, ...result }
+            return { filePath, sharedImports, ...result }
         } )
     )
 
     importResults
-        .forEach( ( { filePath, schema, error } ) => {
+        .forEach( ( { filePath, sharedImports, schema, error } ) => {
             const rel = relative( SCHEMA_DIR, filePath )
 
             if( error ) {
@@ -105,7 +166,7 @@ async function main() {
                 warnings.push( `${rel}: Missing name, using namespace` )
             }
 
-            const { entry } = buildEntry( { schema, filePath } )
+            const { entry } = buildEntry( { schema, filePath, sharedImports } )
             entries.push( entry )
         } )
 
@@ -116,6 +177,8 @@ async function main() {
     } )
 
     const namespaces = [ ...new Set( entries.map( ( entry ) => entry.namespace ) ) ]
+    const schemasWithShared = entries
+        .filter( ( entry ) => entry[ 'shared' ] )
 
     const registry = {
         name: 'flowmcp-schemas',
@@ -124,6 +187,7 @@ async function main() {
         schemaSpec: '1.2.0',
         baseDir: BASE_DIR,
         registryType: 'all',
+        shared: sharedEntries,
         schemas: entries
     }
 
@@ -133,6 +197,7 @@ async function main() {
     console.log( `Registry written to ${BASE_DIR}/flowmcp-registry-all.json` )
     console.log( `  Schemas:    ${entries.length}` )
     console.log( `  Namespaces: ${namespaces.length}` )
+    console.log( `  Shared:     ${sharedEntries.length} files, ${schemasWithShared.length} schemas reference them` )
 
     if( warnings.length > 0 ) {
         console.log( `\nWarnings (${warnings.length}):` )

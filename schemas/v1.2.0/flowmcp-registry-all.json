@@ -5,6 +5,32 @@
     "schemaSpec": "1.2.0",
     "baseDir": "schemas/v1.2.0",
     "registryType": "all",
+    "shared": [
+        {
+            "file": "_shared/alchemyRpcUrls.mjs"
+        },
+        {
+            "file": "_shared/evmChains.mjs"
+        },
+        {
+            "file": "_shared/germanBundeslaender.mjs"
+        },
+        {
+            "file": "_shared/infuraRpcUrls.mjs"
+        },
+        {
+            "file": "_shared/isoCountryCodes.mjs"
+        },
+        {
+            "file": "_shared/isoLanguageCodes.mjs"
+        },
+        {
+            "file": "_shared/tradingExchanges.mjs"
+        },
+        {
+            "file": "_shared/tradingTimeframes.mjs"
+        }
+    ],
     "schemas": [
         {
             "namespace": "aave",
@@ -15,6 +41,28 @@
             ]
         },
         {
+            "namespace": "alchemy",
+            "file": "alchemy/contract-read.mjs",
+            "name": "Alchemy Contract Read",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
+            ]
+        },
+        {
+            "namespace": "alchemy",
+            "file": "alchemy/node-read.mjs",
+            "name": "Alchemy Node Read",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
+            ]
+        },
+        {
             "namespace": "alternative",
             "file": "alternative-me/fearAndGreed.mjs",
             "name": "FearGreedIndex",
@@ -22,8 +70,38 @@
         },
         {
             "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/education.mjs",
+            "name": "Arbeitsagentur Ausbildungssuche API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/jobs.mjs",
+            "name": "Arbeitsagentur Jobsuche API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "arbeitsagentur",
             "file": "arbeitsagentur/jobsuche.mjs",
             "name": "Arbeitsagentur Jobsuche",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/professions.mjs",
+            "name": "Arbeitsagentur Berufenet API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "autobahn",
+            "file": "autobahn/traffic.mjs",
+            "name": "Autobahn App API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "avalancheMetrics",
+            "file": "avalanche/metrics-api.mjs",
+            "name": "Avalanche Metrics API",
             "requiredServerParams": []
         },
         {
@@ -45,9 +123,9 @@
             "requiredServerParams": []
         },
         {
-            "namespace": "berlinplaces",
-            "file": "berlin-de/places.mjs",
-            "name": "Berlin Places API",
+            "namespace": "berlinvergabe",
+            "file": "berlin-de/procurement.mjs",
+            "name": "Berlin Vergabeplattform RSS",
             "requiredServerParams": []
         },
         {
@@ -96,6 +174,9 @@
             "name": "Gas Price Estimator",
             "requiredServerParams": [
                 "BLOCKNATIVE_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -116,7 +197,10 @@
             "namespace": "cryptoOrderbook",
             "file": "ccxt/orderbook.mjs",
             "name": "Crypto Order Book Metrics",
-            "requiredServerParams": []
+            "requiredServerParams": [],
+            "shared": [
+                "_shared/tradingExchanges.mjs"
+            ]
         },
         {
             "namespace": "chainlink",
@@ -124,6 +208,9 @@
             "name": "ExampleName",
             "requiredServerParams": [
                 "INFURA_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -132,6 +219,9 @@
             "name": "Multicall Latest Prices",
             "requiredServerParams": [
                 "INFURA_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -147,6 +237,12 @@
             "requiredServerParams": [
                 "CHART_IMG_API_KEY"
             ]
+        },
+        {
+            "namespace": "coinbaseBazaar",
+            "file": "coinbase-bazaar/discovery.mjs",
+            "name": "Coinbase Bazaar x402 Discovery",
+            "requiredServerParams": []
         },
         {
             "namespace": "coincap",
@@ -302,6 +398,24 @@
             "name": "CryptoWizards Analytics API",
             "requiredServerParams": [
                 "CRYPTOWIZARDS_API_KEY"
+            ],
+            "shared": [
+                "_shared/tradingTimeframes.mjs",
+                "_shared/tradingExchanges.mjs"
+            ]
+        },
+        {
+            "namespace": "dashboardDeutschland",
+            "file": "dashboard-deutschland/statistics.mjs",
+            "name": "Dashboard Deutschland API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "debank",
+            "file": "debank/portfolio.mjs",
+            "name": "DeBank Portfolio API",
+            "requiredServerParams": [
+                "DEBANK_ACCESS_KEY"
             ]
         },
         {
@@ -353,6 +467,28 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "digitaleVerwaltung",
+            "file": "digitale-verwaltung/services.mjs",
+            "name": "Digitale Verwaltung API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "dip",
+            "file": "dip/documents.mjs",
+            "name": "DIP Bundestag Documents",
+            "requiredServerParams": [
+                "DIP_API_KEY"
+            ]
+        },
+        {
+            "namespace": "dip",
+            "file": "dip/proceedings.mjs",
+            "name": "DIP Bundestag Proceedings",
+            "requiredServerParams": [
+                "DIP_API_KEY"
+            ]
+        },
+        {
             "namespace": "duneAnalytics",
             "file": "dune-analytics/farcaster.mjs",
             "name": "FarcasterTrends",
@@ -377,18 +513,36 @@
             ]
         },
         {
+            "namespace": "dwd",
+            "file": "dwd/weather.mjs",
+            "name": "DWD WarnWetter API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ecovisio",
+            "file": "ecovisio/counters.mjs",
+            "name": "Eco-Visio Counter API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "ens",
             "file": "ens/ens-resolution.mjs",
             "name": "ENS & EVM Name Resolution",
             "requiredServerParams": [
                 "INFURA_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
             "namespace": "epo",
             "file": "epo-org/patent-search.mjs",
             "name": "European Patent Office RSS Search",
-            "requiredServerParams": []
+            "requiredServerParams": [],
+            "shared": [
+                "_shared/isoLanguageCodes.mjs"
+            ]
         },
         {
             "namespace": "profilejump",
@@ -400,6 +554,30 @@
             "namespace": "luksoNetwork",
             "file": "erc725/universalProfile.mjs",
             "name": "ERC725UniversalProfile",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/abi-utils.mjs",
+            "name": "Ethers ABI Utils",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/convert-utils.mjs",
+            "name": "Ethers Convert Utils",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/hash-address.mjs",
+            "name": "Ethers Hash & Address Utils",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/signature-utils.mjs",
+            "name": "Ethers Signature Utils",
             "requiredServerParams": []
         },
         {
@@ -416,6 +594,9 @@
             "name": "SmartContractExplorer",
             "requiredServerParams": [
                 "ETHERSCAN_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -424,6 +605,9 @@
             "name": "SmartContractExplorer",
             "requiredServerParams": [
                 "ETHERSCAN_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -433,12 +617,10 @@
             "requiredServerParams": []
         },
         {
-            "namespace": "evmRpc",
-            "file": "evm-rpc/readContract.mjs",
-            "name": "EVM RPC Read",
-            "requiredServerParams": [
-                "EVM_RPC_URL"
-            ]
+            "namespace": "feiertage",
+            "file": "feiertage/holidays.mjs",
+            "name": "Feiertage API",
+            "requiredServerParams": []
         },
         {
             "namespace": "geoapify",
@@ -446,6 +628,14 @@
             "name": "Geoapify Geocoding",
             "requiredServerParams": [
                 "GEOAPIFY_API_KEY"
+            ]
+        },
+        {
+            "namespace": "goldrush",
+            "file": "goldrush/streaming.mjs",
+            "name": "GoldRush Streaming API",
+            "requiredServerParams": [
+                "GOLDRUSH_API_KEY"
             ]
         },
         {
@@ -467,6 +657,12 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "govdata",
+            "file": "govdata-de/datasets.mjs",
+            "name": "GovData.de Open Data Portal",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "hnrss",
             "file": "hnrss/jsonFeeds.mjs",
             "name": "Hacker News JSON Feeds",
@@ -485,15 +681,43 @@
             "requiredServerParams": []
         },
         {
-            "namespace": "itausschreibungen",
-            "file": "it-ausschreibungen/it-ausschreibungen.mjs",
-            "name": "IT-Ausschreibungen RSS API",
+            "namespace": "infura",
+            "file": "infura/contract-read.mjs",
+            "name": "Infura Contract Read",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
+            ]
+        },
+        {
+            "namespace": "infura",
+            "file": "infura/node-read.mjs",
+            "name": "Infura Node Read",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
+            ]
+        },
+        {
+            "namespace": "itausschreibung",
+            "file": "itausschreibung/tenders.mjs",
+            "name": "IT-Ausschreibung.de RSS Feed",
             "requiredServerParams": []
         },
         {
             "namespace": "jupiter",
             "file": "jupiter/jupiter-all.mjs",
             "name": "Jupiter Token Price Checker",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "klinikatlas",
+            "file": "klinikatlas/hospitals.mjs",
+            "name": "Bundes-Klinik-Atlas API",
             "requiredServerParams": []
         },
         {
@@ -563,6 +787,12 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "mcpRegistry",
+            "file": "mcp-registry/servers.mjs",
+            "name": "MCP Server Registry",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "medium",
             "file": "medium-com/rss-feeds.mjs",
             "name": "Medium RSS Feeds",
@@ -572,18 +802,6 @@
             "namespace": "memoryLol",
             "file": "memory-lol/twitterNameChanges.mjs",
             "name": "TwitterUsernameChanges",
-            "requiredServerParams": []
-        },
-        {
-            "namespace": "metis",
-            "file": "metis-blockchain/explorer.mjs",
-            "name": "Metis Andromeda Blockchain Explorer API",
-            "requiredServerParams": []
-        },
-        {
-            "namespace": "minascan",
-            "file": "minascan-io/blockchain-explorer.mjs",
-            "name": "MinaScan Blockchain Explorer API",
             "requiredServerParams": []
         },
         {
@@ -604,6 +822,9 @@
             "name": "Moralis blockchainApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -612,6 +833,9 @@
             "name": "Moralis defiApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -628,6 +852,9 @@
             "name": "Moralis nftApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -636,6 +863,9 @@
             "name": "Moralis priceApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -644,6 +874,9 @@
             "name": "Moralis tokenApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -660,7 +893,16 @@
             "name": "Moralis walletApi API",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
+        },
+        {
+            "namespace": "mudab",
+            "file": "mudab/marine-data.mjs",
+            "name": "MUDAB Marine Environment Database API",
+            "requiredServerParams": []
         },
         {
             "namespace": "newsapi",
@@ -668,6 +910,10 @@
             "name": "NewsAPI.org",
             "requiredServerParams": [
                 "NEWSAPI_API_KEY"
+            ],
+            "shared": [
+                "_shared/isoCountryCodes.mjs",
+                "_shared/isoLanguageCodes.mjs"
             ]
         },
         {
@@ -679,11 +925,27 @@
             ]
         },
         {
+            "namespace": "nina",
+            "file": "nina/warnings.mjs",
+            "name": "NINA Warn-App API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "oeffentlichevergabe",
+            "file": "oeffentlichevergabe/tenders.mjs",
+            "name": "Oeffentliche Vergabe API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "ohlcv",
             "file": "ohlcv/olhcv-moralis-evm.mjs",
             "name": "Moralis Recursive OHLCV EVM and Ethereum",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs",
+                "_shared/tradingTimeframes.mjs"
             ]
         },
         {
@@ -692,6 +954,9 @@
             "name": "Moralis Recursive OHLCV Solana",
             "requiredServerParams": [
                 "MORALIS_API_KEY"
+            ],
+            "shared": [
+                "_shared/tradingTimeframes.mjs"
             ]
         },
         {
@@ -700,6 +965,17 @@
             "name": "Solana Tracker OHLCV for Solana",
             "requiredServerParams": [
                 "SOLANA_TRACKER_API_KEY"
+            ],
+            "shared": [
+                "_shared/tradingTimeframes.mjs"
+            ]
+        },
+        {
+            "namespace": "oneInch",
+            "file": "oneinch/swap.mjs",
+            "name": "1inch Swap API",
+            "requiredServerParams": [
+                "ONEINCH_API_KEY"
             ]
         },
         {
@@ -716,6 +992,18 @@
                 "ETHEREUM_MAINNET_ALCHEMY_HTTP",
                 "ARBITRUM_MAINNET_ALCHEMY_HTTP"
             ]
+        },
+        {
+            "namespace": "pegelonline",
+            "file": "pegelonline/water-levels.mjs",
+            "name": "Pegel-Online API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "pflanzenschutzmittel",
+            "file": "pflanzenschutzmittel/pesticides.mjs",
+            "name": "BVL Pflanzenschutzmittel API",
+            "requiredServerParams": []
         },
         {
             "namespace": "pinata",
@@ -763,9 +1051,21 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "reisewarnungen",
+            "file": "reisewarnungen/travel-warnings.mjs",
+            "name": "Reisewarnungen API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "rugcheck",
             "file": "rugcheck/tokenSafety.mjs",
             "name": "Rugcheck Token Safety",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "safeGlobal",
+            "file": "safe-global/transaction-service.mjs",
+            "name": "Safe Transaction Service",
             "requiredServerParams": []
         },
         {
@@ -782,6 +1082,9 @@
             "name": "Sim by Dune - Activity Feed",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -790,6 +1093,9 @@
             "name": "Sim by Dune - Token Balances",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -806,6 +1112,9 @@
             "name": "Sim by Dune - NFT Collectibles",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -814,6 +1123,9 @@
             "name": "Sim by Dune - Token Holders",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -822,6 +1134,9 @@
             "name": "Sim by Dune - Token Info",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -830,6 +1145,9 @@
             "name": "Sim by Dune - Transactions",
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -839,6 +1157,12 @@
             "requiredServerParams": [
                 "DUNE_SIM_API_KEY"
             ]
+        },
+        {
+            "namespace": "smard",
+            "file": "smard/energy.mjs",
+            "name": "SMARD Energy Data API",
+            "requiredServerParams": []
         },
         {
             "namespace": "snapshot",
@@ -927,6 +1251,12 @@
             ]
         },
         {
+            "namespace": "sourcify",
+            "file": "sourcify/verification.mjs",
+            "name": "Sourcify Contract Verification",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "spaceid",
             "file": "spaceid/spaceid.mjs",
             "name": "SPACE ID Web3 Name API",
@@ -939,9 +1269,32 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "strahlenschutz",
+            "file": "strahlenschutz/radiation.mjs",
+            "name": "BfS Strahlenschutz ODL API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "swaggerhub",
             "file": "swaggerhub-com/api-registry.mjs",
             "name": "SwaggerHub API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "taapi",
+            "file": "taapi/indicators.mjs",
+            "name": "TAAPI.IO Technical Indicators",
+            "requiredServerParams": [
+                "TAAPI_SECRET"
+            ],
+            "shared": [
+                "_shared/tradingTimeframes.mjs"
+            ]
+        },
+        {
+            "namespace": "tagesschau",
+            "file": "tagesschau/news.mjs",
+            "name": "Tagesschau API",
             "requiredServerParams": []
         },
         {
@@ -953,11 +1306,34 @@
             ]
         },
         {
+            "namespace": "tally",
+            "file": "tally/governance.mjs",
+            "name": "Tally Governance API",
+            "requiredServerParams": [
+                "TALLY_API_KEY"
+            ]
+        },
+        {
+            "namespace": "ted",
+            "file": "ted/procurement.mjs",
+            "name": "TED EU Public Procurement API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "tenderly",
+            "file": "tenderly/public-contracts.mjs",
+            "name": "Tenderly Public Contracts",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "thegraph",
             "file": "thegraph/getNewUniswapPools.mjs",
             "name": "UniswapPools",
             "requiredServerParams": [
                 "THEGRAPH_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -977,11 +1353,20 @@
             ]
         },
         {
+            "namespace": "umweltbundesamt",
+            "file": "umweltbundesamt/air-quality.mjs",
+            "name": "Umweltbundesamt Air Quality API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "uniswap",
             "file": "uniswap-pools/uniswap-pool-explorer.mjs",
             "name": "Uniswap Pool Explorer",
             "requiredServerParams": [
                 "THEGRAPH_API_KEY"
+            ],
+            "shared": [
+                "_shared/evmChains.mjs"
             ]
         },
         {
@@ -996,19 +1381,17 @@
             ]
         },
         {
+            "namespace": "vag",
+            "file": "vag/transit.mjs",
+            "name": "VAG Nuernberg Transit API",
+            "requiredServerParams": []
+        },
+        {
             "namespace": "webcareer",
             "file": "web3-career/job-listings.mjs",
             "name": "Web3 Career Job API",
             "requiredServerParams": [
                 "WEB3_CAREER_API_TOKEN"
-            ]
-        },
-        {
-            "namespace": "whalealert",
-            "file": "whale-alert/whale-alert.mjs",
-            "name": "Whale Alert API",
-            "requiredServerParams": [
-                "WHALE_ALERT_API_KEY"
             ]
         },
         {
@@ -1024,10 +1407,22 @@
             "requiredServerParams": []
         },
         {
+            "namespace": "zvgPortal",
+            "file": "zvg-portal/auctions.mjs",
+            "name": "ZVG Portal Foreclosure Auctions",
+            "requiredServerParams": [],
+            "shared": [
+                "_shared/germanBundeslaender.mjs"
+            ]
+        },
+        {
             "namespace": "zvgportal",
             "file": "zvg-portal/zwangsversteigerungen.mjs",
             "name": "ZVG Portal Zwangsversteigerungen",
-            "requiredServerParams": []
+            "requiredServerParams": [],
+            "shared": [
+                "_shared/germanBundeslaender.mjs"
+            ]
         }
     ]
 }
