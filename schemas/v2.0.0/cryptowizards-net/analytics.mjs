@@ -55,6 +55,16 @@ export const main = {
                     with_history: false
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { strat_returns: { type: 'object', properties: { annual_return: { type: 'number' }, mean_period_return: { type: 'number' }, total_return: { type: 'number' } } }, max_drawdown: { type: 'number' }, sharpe_ratio: { type: 'number' }, sortino_ratio: { type: 'number' }, cvar: { type: 'number' }, var: { type: 'number' }, win_rate: { type: 'number' } } },
+                        history: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         checkCointegration: {
             method: 'GET',
@@ -82,6 +92,16 @@ export const main = {
                     with_history: false
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { p_value: { type: 'number' }, t_stat: { type: 'number' }, cv: { type: 'number' }, is_coint: { type: 'boolean' }, inc_trend: { type: 'boolean' } } },
+                        history: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         getCorrelations: {
             method: 'GET',
@@ -104,6 +124,17 @@ export const main = {
                     period: 365
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        kendall: { type: 'number' },
+                        spearman: { type: 'number' },
+                        pearson: { type: 'number' }
+                    }
+                }
+            },
         },
         analyzeCopula: {
             method: 'GET',
@@ -126,6 +157,17 @@ export const main = {
                     period: 365
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        copula_name: { type: 'string' },
+                        u1_given_u2: { type: 'number' },
+                        u2_given_u1: { type: 'number' }
+                    }
+                }
+            },
         },
         analyzeSpread: {
             method: 'GET',
@@ -153,6 +195,24 @@ export const main = {
                     with_history: false
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        spread: { type: 'array', items: { type: 'string' } },
+                        zscore: { type: 'array', items: { type: 'string' } },
+                        zscore_roll: { type: 'array', items: { type: 'string' } },
+                        hedge_ratio: { type: 'number' },
+                        half_life: { type: 'number' },
+                        hurst: { type: 'number' },
+                        sigma0crossings: { type: 'number' },
+                        sigma2crossings: { type: 'number' },
+                        log_used: { type: 'boolean' },
+                        last_zscore: { type: 'object', properties: { zscore: { type: 'number' }, zscore_roll: { type: 'number' } } }
+                    }
+                }
+            },
         },
         analyzeZScores: {
             method: 'GET',
@@ -180,6 +240,16 @@ export const main = {
                     with_history: false
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { zscore: { type: 'number' }, zscore_roll: { type: 'number' } } },
+                        history: { type: 'string', nullable: true }
+                    }
+                }
+            },
         }
     }
 }

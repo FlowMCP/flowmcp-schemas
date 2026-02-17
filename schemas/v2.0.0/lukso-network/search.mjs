@@ -23,6 +23,16 @@ export const main = {
                 { _description: 'Search for USDT on mainnet', chainName: 'LUKSO_MAINNET', search_query: 'USDT' },
                 { _description: 'Search for LYX on testnet', chainName: 'LUKSO_TESTNET', search_query: 'LYX' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { address_hash: { type: 'string' }, address_url: { type: 'string' }, certified: { type: 'boolean' }, circulating_market_cap: { type: 'number', nullable: true }, exchange_rate: { type: 'number', nullable: true }, icon_url: { type: 'string', nullable: true }, is_smart_contract_verified: { type: 'boolean' }, is_verified_via_admin_panel: { type: 'boolean' }, name: { type: 'string' }, priority: { type: 'number' }, reputation: { type: 'string' }, symbol: { type: 'string' }, token_type: { type: 'string' }, token_url: { type: 'string' }, total_supply: { type: 'string' }, type: { type: 'string' } } } },
+                        next_page_params: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         searchRedirect: {
             method: 'GET',
@@ -36,6 +46,17 @@ export const main = {
                 { _description: 'Redirect check for USDT', chainName: 'LUKSO_MAINNET', search_query: 'USDT' },
                 { _description: 'Redirect check for LYX', chainName: 'LUKSO_TESTNET', search_query: 'LYX' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        parameter: { type: 'string', nullable: true },
+                        redirect: { type: 'boolean' },
+                        type: { type: 'string', nullable: true }
+                    }
+                }
+            },
         }
     }
 }

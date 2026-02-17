@@ -23,6 +23,15 @@ export const main = {
             tests: [
                 { _description: 'Test list of Snapshot spaces', first: 10 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { spaces: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         listProposals: {
             method: 'POST',
@@ -35,6 +44,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch proposals for ENS space', space: 'ens.eth', first: 10 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposals: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getProposalDetails: {
             method: 'POST',
@@ -46,6 +64,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch proposal details for a known proposal ID', proposalId: '0x123abc456def' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposal: { type: 'string', nullable: true } } }
+                    }
+                }
+            },
         }
     }
 }

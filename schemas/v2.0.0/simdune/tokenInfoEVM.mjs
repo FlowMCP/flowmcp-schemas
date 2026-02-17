@@ -40,6 +40,16 @@ export const main = {
                     chainName: 'BASE_MAINNET'
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        contract_address: { type: 'string' },
+                        tokens: { type: 'array', items: { type: 'object', properties: { chain_id: { type: 'number' }, chain: { type: 'string' }, price_usd: { type: 'number' }, pool_size: { type: 'number' }, total_supply: { type: 'string' }, fully_diluted_value: { type: 'number' }, symbol: { type: 'string' }, name: { type: 'string' }, decimals: { type: 'number' }, logo: { type: 'string' }, pool: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

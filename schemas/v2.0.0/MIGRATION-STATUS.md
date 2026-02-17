@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T15:40
+Generated: 2026-02-17T15:54
 
 ## Summary
 
@@ -8,10 +8,10 @@ Generated: 2026-02-17T15:40
 |--------|------:|--------:|
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
-| With Output Schema | 354 | 51% |
-| Complete (Tests + Output) | 354 | 51% |
-| Capture OK | 344 | 49% |
-| Capture Failed | 73 | 10% |
+| With Output Schema | 369 | 53% |
+| Complete (Tests + Output) | 369 | 53% |
+| Capture OK | 369 | 53% |
+| Capture Failed | 48 | 7% |
 | Not Captured | 283 | 40% |
 | Has Handler (post/exec) | 337 | 48% |
 | Needs API Key | 269 | 38% |
@@ -130,12 +130,12 @@ Generated: 2026-02-17T15:40
 | wfs-locations | dog_parks | Y | Y | ok | - | - | - |  |
 | wfs-locations | bbq_areas | Y | Y | ok | - | - | - |  |
 
-### bicscan (1/2 complete)
+### bicscan (2/2 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | bicscan | getRiskScore | Y | Y | ok | - | Y | - |  |
-| bicscan | getAssets | Y | - | fail | - | Y | - | HTTP 429 |
+| bicscan | getAssets | Y | Y | ok | - | Y | - |  |
 
 ### bitget (0/3 complete)
 
@@ -273,15 +273,15 @@ Generated: 2026-02-17T15:40
 | coins | getCoinById | Y | Y | ok | - | - | - |  |
 | coins | getCoinMarketChart | Y | Y | ok | - | - | - |  |
 | coins | getCoinHistory | Y | Y | ok | - | - | - |  |
-| coins | getCoinTickers | Y | Y | fail | - | - | - | HTTP 429 |
-| coins | getCoinContractInfo | Y | Y | fail | - | - | - | HTTP 429 |
-| derivatives | getDerivativeExchangeIds | Y | Y | fail | post | - | - | HTTP 429 |
-| derivatives | getDerivativeExchangesByIds | Y | Y | fail | post | - | - | HTTP 429 |
-| derivatives | getDerivativeProductsByExchangeId | Y | Y | fail | - | - | - | HTTP 429 |
-| exchanges | getExchangesList | Y | Y | fail | - | - | - | HTTP 429 |
-| exchanges | getExchangeById | Y | Y | fail | post | - | - | HTTP 429 |
-| exchanges | getExchangeTickers | Y | Y | fail | post | - | - | HTTP 429 |
-| getCategories | getAvailableCoinCategoryIds | Y | Y | fail | post | - | - | HTTP 429 |
+| coins | getCoinTickers | Y | Y | ok | - | - | - |  |
+| coins | getCoinContractInfo | Y | Y | ok | - | - | - |  |
+| derivatives | getDerivativeExchangeIds | Y | Y | ok | post | - | - |  |
+| derivatives | getDerivativeExchangesByIds | Y | Y | ok | post | - | - |  |
+| derivatives | getDerivativeProductsByExchangeId | Y | Y | ok | - | - | - |  |
+| exchanges | getExchangesList | Y | Y | ok | - | - | - |  |
+| exchanges | getExchangeById | Y | Y | ok | post | - | - |  |
+| exchanges | getExchangeTickers | Y | Y | ok | post | - | - |  |
+| getCategories | getAvailableCoinCategoryIds | Y | Y | ok | post | - | - |  |
 | getCategories | getCoinCategoryDetailsByIds | Y | Y | ok | post | - | - |  |
 | global | getGlobalData | Y | Y | ok | post | - | - |  |
 | global | getDeFiGlobalData | Y | Y | ok | post | - | - |  |
@@ -358,16 +358,16 @@ Generated: 2026-02-17T15:40
 | funds | getFundDetail | Y | - | fail | - | Y | - | HTTP 401 |
 | funds | getFundTeam | Y | - | fail | - | Y | - | HTTP 401 |
 
-### cryptowizards-net (0/6 complete)
+### cryptowizards-net (6/6 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| analytics | runBacktest | Y | - | fail | - | Y | - | non-JSON response |
-| analytics | checkCointegration | Y | - | fail | - | Y | - | non-JSON response |
-| analytics | getCorrelations | Y | - | fail | - | Y | - | non-JSON response |
-| analytics | analyzeCopula | Y | - | fail | - | Y | - | non-JSON response |
-| analytics | analyzeSpread | Y | - | fail | - | Y | - | non-JSON response |
-| analytics | analyzeZScores | Y | - | fail | - | Y | - | non-JSON response |
+| analytics | runBacktest | Y | Y | ok | - | Y | - |  |
+| analytics | checkCointegration | Y | Y | ok | - | Y | - |  |
+| analytics | getCorrelations | Y | Y | ok | - | Y | - |  |
+| analytics | analyzeCopula | Y | Y | ok | - | Y | - |  |
+| analytics | analyzeSpread | Y | Y | ok | - | Y | - |  |
+| analytics | analyzeZScores | Y | Y | ok | - | Y | - |  |
 
 ### dashboard-deutschland (3/3 complete)
 
@@ -772,7 +772,7 @@ Generated: 2026-02-17T15:40
 | getPools | getProjectsByName | Y | Y | ok | post | - | - |  |
 | getPools | getPools | Y | Y | ok | post | - | - |  |
 
-### lukso-network (46/48 complete)
+### lukso-network (48/48 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
@@ -803,8 +803,8 @@ Generated: 2026-02-17T15:40
 | nfts | getNFTInstanceTransfers | Y | Y | ok | post | - | - |  |
 | nfts | getNFTInstanceHolders | Y | Y | ok | post | - | - |  |
 | nfts | getNFTInstanceTransfersCount | Y | Y | ok | post | - | - |  |
-| search | search | Y | - | fail | - | - | - | HTTP 400 |
-| search | searchRedirect | Y | - | fail | - | - | - | HTTP 400 |
+| search | search | Y | Y | ok | - | - | - |  |
+| search | searchRedirect | Y | Y | ok | - | - | - |  |
 | sourceCode | listcontracts | Y | Y | ok | post | - | - |  |
 | sourceCode | getabi | Y | Y | ok | post | - | - |  |
 | sourceCode | getsourcecode | Y | Y | ok | post | - | - |  |
@@ -822,7 +822,7 @@ Generated: 2026-02-17T15:40
 | transactions | getTokenTransfersByTransactionHash | Y | Y | ok | - | - | - |  |
 | transactions | getInternalTransactions | Y | Y | ok | - | - | - |  |
 | transactions | getLogs | Y | Y | ok | - | - | - |  |
-| transactions | getRawTrace | Y | Y | fail | - | - | - | HTTP 500 |
+| transactions | getRawTrace | Y | Y | ok | - | - | - |  |
 | transactions | getStateChanges | Y | Y | ok | - | - | - |  |
 
 ### mcp-registry (2/2 complete)
@@ -913,12 +913,12 @@ Generated: 2026-02-17T15:40
 | swap | getApprove | Y | - | - | - | Y | - |  |
 | swap | getAllowance | Y | - | - | - | Y | - |  |
 
-### overpass (1/3 complete)
+### overpass (2/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | osmQuery | queryRaw | Y | Y | ok | - | - | - |  |
-| osmQuery | findNearby | Y | - | fail | - | - | - | non-JSON response |
+| osmQuery | findNearby | Y | Y | ok | - | - | - |  |
 | osmQuery | status | Y | - | fail | - | - | - | non-JSON response |
 
 ### passport-xyz (0/1 complete)
@@ -963,7 +963,7 @@ Generated: 2026-02-17T15:40
 | graphql | executePrefinedQuery | Y | - | - | - | - | - |  |
 | graphql | querySubgraph | Y | - | - | - | - | - |  |
 
-### polymarket (5/6 complete)
+### polymarket (6/6 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
@@ -972,7 +972,7 @@ Generated: 2026-02-17T15:40
 | gammaApi | getMarkets | Y | Y | ok | post | - | - |  |
 | marketInfo | getMarkets | Y | Y | ok | - | - | - |  |
 | marketInfo | getMarketInfo | Y | Y | ok | - | - | - |  |
-| searchBySlug | searchBySlug | Y | - | fail | post | - | - | HTTP 404 |
+| searchBySlug | searchBySlug | Y | Y | ok | post | - | - |  |
 
 ### reddit (2/2 complete)
 
@@ -1018,7 +1018,7 @@ Generated: 2026-02-17T15:40
 | schema | get_trending_words | Y | - | - | - | Y | - |  |
 | schema | get_social_dominance | Y | - | - | - | Y | - |  |
 
-### simdune (6/9 complete)
+### simdune (7/9 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
@@ -1028,7 +1028,7 @@ Generated: 2026-02-17T15:40
 | balancesSVM | getBalancesSVM | Y | Y | ok | - | Y | - |  |
 | collectiblesEVM | getCollectiblesEVM | Y | Y | ok | - | Y | - |  |
 | tokenHoldersEVM | getTokenHoldersEVM | Y | Y | ok | - | Y | - |  |
-| tokenInfoEVM | getTokenInfoEVM | Y | - | fail | - | Y | - | HTTP 400 |
+| tokenInfoEVM | getTokenInfoEVM | Y | Y | ok | - | Y | - |  |
 | transactionsEVM | getTransactionsEVM | Y | Y | ok | - | Y | - |  |
 | transactionsSVM | getTransactionsSVM | Y | Y | ok | - | Y | - |  |
 
@@ -1039,13 +1039,13 @@ Generated: 2026-02-17T15:40
 | energy | getFilterIndex | Y | - | - | post | - | - |  |
 | energy | getLatestData | Y | - | - | exec | - | - |  |
 
-### snapshot (0/3 complete)
+### snapshot (3/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| snapshot | listSpaces | Y | - | fail | - | - | - | HTTP 400 |
-| snapshot | listProposals | Y | - | fail | - | - | - | HTTP 400 |
-| snapshot | getProposalDetails | Y | - | fail | - | - | - | HTTP 400 |
+| snapshot | listSpaces | Y | Y | ok | - | - | - |  |
+| snapshot | listProposals | Y | Y | ok | - | - | - |  |
+| snapshot | getProposalDetails | Y | Y | ok | - | - | - |  |
 
 ### solanatracker-io (40/40 complete)
 

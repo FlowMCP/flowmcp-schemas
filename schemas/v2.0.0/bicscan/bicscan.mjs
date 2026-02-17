@@ -63,6 +63,28 @@ export const main = {
                     engines: ['ofac']
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        id: { type: 'number' },
+                        query: { type: 'string' },
+                        status: { type: 'string' },
+                        type: { type: 'string' },
+                        premium: { type: 'boolean' },
+                        timestamp: { type: 'string' },
+                        networks: { type: 'array', items: { type: 'string' } },
+                        summary: { type: 'object', properties: { bicscan_score: { type: 'string', nullable: true }, detected_engines: { type: 'number' }, total_engines: { type: 'number' } } },
+                        category: { type: 'array', items: { type: 'string' } },
+                        assets: { type: 'array', items: { type: 'object', properties: { network: { type: 'string' }, status: { type: 'string' }, results: { type: 'array', items: { type: 'object' } } } } },
+                        transactions: { type: 'string', nullable: true },
+                        nfts: { type: 'string', nullable: true },
+                        scan_metadata: { type: 'object', properties: { plan: { type: 'string' }, web3_dns: { type: 'array', items: { type: 'string' } }, domain_info: { type: 'string', nullable: true }, token_info: { type: 'string', nullable: true }, query_options: { type: 'object', properties: { sync: { type: 'boolean' }, assets: { type: 'boolean' }, engines: { type: 'array', items: { type: 'string' } } } }, engines: { type: 'array', items: { type: 'string' } } } },
+                        results: { type: 'array', items: { type: 'object', properties: { vendor: { type: 'string' }, detected: { type: 'boolean' }, status: { type: 'string' }, score: { type: 'string', nullable: true }, source: { type: 'string' }, category: { type: 'string', nullable: true }, networks: { type: 'string', nullable: true }, rawdata: { type: 'string', nullable: true }, premium: { type: 'boolean' } } } }
+                    }
+                }
+            },
         }
     }
 }

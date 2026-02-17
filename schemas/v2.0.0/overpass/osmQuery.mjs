@@ -60,6 +60,18 @@ export const main = {
                 },
                 { _description: 'Find pharmacies near Brandenburg Gate', lat: 52.5163, lon: 13.3777, radius: 1000, amenity: 'pharmacy' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        version: { type: 'number' },
+                        generator: { type: 'string' },
+                        osm3s: { type: 'object', properties: { timestamp_osm_base: { type: 'string' }, copyright: { type: 'string' } } },
+                        elements: { type: 'array', items: { type: 'object', properties: { type: { type: 'string' }, id: { type: 'number' }, lat: { type: 'number' }, lon: { type: 'number' }, tags: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         status: {
             method: 'GET',

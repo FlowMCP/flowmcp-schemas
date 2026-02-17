@@ -76,6 +76,35 @@ function resolveServerParams( { text } ) {
 
 const V2_DIR = path.resolve( 'schemas/v2.0.0' )
 const CAPTURE_DIR = path.resolve( '.captures/v2.0.0' )
+const SHARED_DIR = path.resolve( 'schemas/v1.2.0/_shared' )
+
+
+// ──────────────────────────────────────────────
+// Shared Lists Loader (for preRequest handlers)
+// ──────────────────────────────────────────────
+
+const sharedLists = {}
+
+if ( fs.existsSync( SHARED_DIR ) ) {
+    const sharedFiles = fs.readdirSync( SHARED_DIR )
+        .filter( ( f ) => f.endsWith( '.mjs' ) )
+
+    await sharedFiles.reduce( ( chain, fileName ) => chain.then( async () => {
+        const refName = fileName.replace( '.mjs', '' )
+        try {
+            const mod = await import( pathToFileURL( path.join( SHARED_DIR, fileName ) ).href )
+            const exportValues = Object.values( mod )
+            const arrayExport = exportValues.find( ( v ) => Array.isArray( v ) )
+            if ( arrayExport ) {
+                sharedLists[refName] = arrayExport
+            } else {
+                sharedLists[refName] = mod
+            }
+        } catch ( e ) {
+            if ( verbose ) { console.log( `  WARN: shared list ${refName}: ${e.message}` ) }
+        }
+    } ), Promise.resolve() )
+}
 
 
 // ──────────────────────────────────────────────
@@ -227,7 +256,12 @@ async function executeTest( { method, url, headers, bodyParams } ) {
 
     if ( bodyParams && ( method === 'POST' || method === 'PUT' ) ) {
         fetchOpts.body = JSON.stringify( bodyParams )
-        fetchOpts.headers['Content-Type'] = 'application/json'
+        // Only set Content-Type if not already provided by schema headers
+        const hasContentType = Object.keys( fetchOpts.headers )
+            .some( ( k ) => k.toLowerCase() === 'content-type' )
+        if ( !hasContentType ) {
+            fetchOpts.headers['Content-Type'] = 'application/json'
+        }
     }
 
     const startTime = Date.now()
@@ -362,11 +396,11 @@ const processAll = async () => {
             const schema = mod.main || mod.default
             if ( !schema || !schema.routes ) { return }
 
-            // Build handler map for qualification check
+            // Build handler map with shared lists for qualification + preRequest
             let handlerMap = null
             if ( mod.handlers && typeof mod.handlers === 'function' ) {
                 try {
-                    handlerMap = mod.handlers( { sharedLists: {}, libraries: {} } )
+                    handlerMap = mod.handlers( { sharedLists, libraries: {} } )
                 } catch {
                     // Handler factory might fail without proper deps — that's ok for qualification
                 }
@@ -412,7 +446,7 @@ const processAll = async () => {
                         }
                     }
 
-                    const { url, bodyParams, reason: urlReason } = buildRequestUrl( {
+                    let { url, bodyParams, reason: urlReason } = buildRequestUrl( {
                         root: schema.root,
                         routePath: route.path,
                         parameters: route.parameters || [],
@@ -423,6 +457,21 @@ const processAll = async () => {
                         if ( verbose ) { console.log( `    SKIP ${routeName}[${testIndex}] — ${urlReason}` ) }
                         stats.testsSkipped++
                         return
+                    }
+
+                    // Run preRequest handler if available
+                    if ( handlerMap && handlerMap[routeName] && handlerMap[routeName].preRequest ) {
+                        try {
+                            const struct = { url, method: route.method || 'GET', body: bodyParams }
+                            const payload = { ...testObj }
+                            const result = await handlerMap[routeName].preRequest( { struct, payload } )
+                            if ( result && result.struct ) {
+                                if ( result.struct.url ) { url = result.struct.url }
+                                if ( result.struct.body ) { bodyParams = result.struct.body }
+                            }
+                        } catch ( e ) {
+                            if ( verbose ) { console.log( `    WARN: preRequest ${routeName}: ${e.message}` ) }
+                        }
                     }
 
                     if ( dryRun ) {
