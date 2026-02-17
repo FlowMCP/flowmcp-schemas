@@ -90,6 +90,10 @@ export const main = {
             tests: [
                 { _description: 'Get attachment of ethscription #1', id: '1' }
             ],
+            output: {
+                mimeType: 'application/octet-stream',
+                schema: { type: 'string', format: 'binary', description: 'Raw ethscription attachment data (image/text/binary)' }
+            },
         },
         checkEthscriptionExists: {
             method: 'GET',

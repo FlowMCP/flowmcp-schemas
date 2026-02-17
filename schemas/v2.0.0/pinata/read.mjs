@@ -18,6 +18,16 @@ export const main = {
             tests: [
                 { _description: 'Load BAYC #1 metadata from IPFS' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        image: { type: 'string' },
+                        attributes: { type: 'array', items: { type: 'object', properties: { trait_type: { type: 'string' }, value: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         free_read_cid: {
             method: 'GET',

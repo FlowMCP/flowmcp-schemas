@@ -25,6 +25,7 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{value:{type:'number'}}}},
             tests: [
                 { _description: 'Get BTC/USDT VWAP', symbol: 'BTC/USDT' }
             ],
@@ -38,6 +39,7 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{conversion:{type:'number'},base:{type:'number'},spanA:{type:'number'},spanB:{type:'number'}}}},
             tests: [
                 { _description: 'Get BTC/USDT Ichimoku Cloud', symbol: 'BTC/USDT' },
                 { _description: 'Get ETH/USDT Ichimoku on daily', symbol: 'ETH/USDT', interval: '1d' }

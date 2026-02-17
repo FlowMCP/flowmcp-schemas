@@ -22,6 +22,7 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'array',items:{type:'object',properties:{id:{type:'string'},text:{type:'string'},created_at:{type:'string'},author_id:{type:'string'}}}},meta:{type:'object',properties:{result_count:{type:'number'},next_token:{type:'string'}}}}}},
             tests: [
                 { _description: 'Get tweets from twitterdev', query: 'bitcoin' }
             ],

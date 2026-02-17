@@ -21,6 +21,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{total_usd_value:{type:'number'},chain_list:{type:'array',items:{type:'object',properties:{id:{type:'string'},usd_value:{type:'number'}}}}}}},
             tests: [
                 { _description: 'Get Vitalik total balance', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
             ],
@@ -32,6 +33,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{id:{type:'string'},name:{type:'string'},logo_url:{type:'string'}}}}},
             tests: [
                 { _description: 'Get Vitalik used chains', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
             ],
@@ -45,6 +47,7 @@ export const main = {
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'is_all', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{id:{type:'string'},chain:{type:'string'},name:{type:'string'},symbol:{type:'string'},amount:{type:'number'},price:{type:'number'}}}}},
             tests: [
                 { _description: 'Get Ethereum tokens for Vitalik', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain_id: 'eth' }
             ],
@@ -57,6 +60,7 @@ export const main = {
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{id:{type:'string'},chain:{type:'string'},name:{type:'string'},net_usd_value:{type:'number'}}}}},
             tests: [
                 { _description: 'Get Ethereum protocol positions', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain_id: 'eth' }
             ],
@@ -68,6 +72,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{id:{type:'string'},name:{type:'string'},chain:{type:'string'},tvl:{type:'number'}}}}},
             tests: [
                 { _description: 'Get all protocol positions for Vitalik', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
             ],
@@ -80,6 +85,7 @@ export const main = {
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'string'},chain:{type:'string'},name:{type:'string'},symbol:{type:'string'},decimals:{type:'number'},price:{type:'number'}}}},
             tests: [
                 { _description: 'Get USDC token info on Ethereum', chain_id: 'eth', id: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' }
             ],

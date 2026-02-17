@@ -25,6 +25,15 @@ export const main = {
                 { _description: 'Fetch recent proposals', first: 10 },
                 { _description: 'Fetch 5 proposals', first: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposals: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, status: { type: 'string' }, createdTimestamp: { type: 'string' }, proposer: { type: 'object', properties: { id: { type: 'string' } } }, forVotes: { type: 'string' }, againstVotes: { type: 'string' }, abstainVotes: { type: 'string' } } } } } }
+                    }
+                }
+            },
         },
         getCurrentAuctions: {
             method: 'POST',
@@ -37,6 +46,15 @@ export const main = {
                 { _description: 'Fetch recent auctions', first: 5 },
                 { _description: 'Fetch 3 auctions', first: 3 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { auctions: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, noun: { type: 'object', properties: { id: { type: 'string' } } }, amount: { type: 'string' }, startTime: { type: 'string' }, endTime: { type: 'string' }, bidder: { type: 'object', properties: { id: { type: 'string' } } }, settled: { type: 'boolean' }, bids: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, amount: { type: 'string' }, bidder: { type: 'object', properties: { id: { type: 'string' } } }, blockTimestamp: { type: 'string' } } } } } } } } }
+                    }
+                }
+            },
         },
         getNounDetails: {
             method: 'POST',
@@ -49,6 +67,15 @@ export const main = {
                 { _description: 'Get details for Noun #1', nounId: '1' },
                 { _description: 'Get details for Noun #100', nounId: '100' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { noun: { type: 'object', properties: { id: { type: 'string' }, owner: { type: 'object', properties: { id: { type: 'string' } } }, seed: { type: 'object', properties: { background: { type: 'number' }, body: { type: 'number' }, accessory: { type: 'number' }, head: { type: 'number' }, glasses: { type: 'number' } } }, votes: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, support: { type: 'boolean' }, votes: { type: 'number' }, proposal: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } } } } } } } }
+                    }
+                }
+            },
         },
         getTopDelegates: {
             method: 'POST',
@@ -60,6 +87,15 @@ export const main = {
             tests: [
                 { _description: 'Get top 10 delegates', first: 10 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { delegates: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, delegatedVotes: { type: 'string' }, tokenHoldersRepresentedAmount: { type: 'number' }, proposals: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } }, votes: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, support: { type: 'boolean' }, proposal: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } } } } } } } } }
+                    }
+                }
+            },
         }
     }
 }

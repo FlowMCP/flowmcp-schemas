@@ -28,6 +28,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch top 5 memecoins', limit: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         },
         farcasterGetTrendingChannels: {
             method: 'GET',
@@ -42,6 +51,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch top 3 channels', limit: 3 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         },
         farcasterGetTrendingUsers: {
             method: 'GET',
@@ -56,6 +74,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch top 5 users', limit: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         }
     }
 }

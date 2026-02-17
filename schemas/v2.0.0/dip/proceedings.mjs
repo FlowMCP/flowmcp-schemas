@@ -25,6 +25,7 @@ export const main = {
                 { position: { key: 'f.deskriptor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},typ:{type:'string'},titel:{type:'string'},wahlperiode:{type:'number'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Vorgaenge of current legislative period', 'f.wahlperiode': 20 },
                 { _description: 'Search Vorgaenge by descriptor', 'f.deskriptor': 'Klimaschutz', 'f.wahlperiode': 20 }
@@ -37,6 +38,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},typ:{type:'string'},titel:{type:'string'},wahlperiode:{type:'number'},aktualisiert:{type:'string'},beratungsstand:{type:'string'}}}},
             tests: [
                 { _description: 'Get Vorgang by ID', id: 306510 }
             ],
@@ -52,6 +54,7 @@ export const main = {
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},titel:{type:'string'},datum:{type:'string'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Vorgangspositionen of current period', 'f.wahlperiode': 20 }
             ],
@@ -63,6 +66,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},titel:{type:'string'},datum:{type:'string'},aktivitaet_anzeige:{type:'string'}}}},
             tests: [
                 { _description: 'Get Vorgangsposition by ID', id: 362553 }
             ],
@@ -79,6 +83,7 @@ export const main = {
                 { position: { key: 'f.dokumentart', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Aktivitaeten of current period', 'f.wahlperiode': 20 },
                 { _description: 'List Aktivitaeten by date range', 'f.datum.start': '2024-01-01', 'f.datum.end': '2024-06-30' }
@@ -91,6 +96,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'},wahlperiode:{type:'number'}}}},
             tests: [
                 { _description: 'Get Aktivitaet by ID', id: 944899 }
             ],
@@ -106,6 +112,7 @@ export const main = {
                 { position: { key: 'f.person', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},nachname:{type:'string'},vorname:{type:'string'},titel:{type:'string'},fraktion:{type:'string'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Personen of current period', 'f.wahlperiode': 20 },
                 { _description: 'Search Personen by name', 'f.person': 'Merz' }
@@ -118,6 +125,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},nachname:{type:'string'},vorname:{type:'string'},titel:{type:'string'},fraktion:{type:'string'},wahlperiode:{type:'number'}}}},
             tests: [
                 { _description: 'Get Person by ID', id: 857 }
             ],

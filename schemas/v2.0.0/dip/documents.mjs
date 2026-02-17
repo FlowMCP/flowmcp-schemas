@@ -24,6 +24,7 @@ export const main = {
                 { position: { key: 'f.zuordnung', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BT,BR,BV,EK)', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'},wahlperiode:{type:'number'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Drucksachen of current legislative period', 'f.wahlperiode': 20 },
                 { _description: 'Search Drucksachen by title', 'f.titel': 'Klimaschutz', 'f.wahlperiode': 20 }
@@ -36,6 +37,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'},wahlperiode:{type:'number'},aktualisiert:{type:'string'},fundstelle:{type:'object'}}}},
             tests: [
                 { _description: 'Get Drucksache by ID', id: 305038 }
             ],
@@ -51,6 +53,7 @@ export const main = {
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},titel:{type:'string'},text:{type:'string'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Drucksache full texts', 'f.wahlperiode': 20 }
             ],
@@ -62,6 +65,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},titel:{type:'string'},text:{type:'string'},datum:{type:'string'}}}},
             tests: [
                 { _description: 'Get Drucksache full text by ID', id: 305038 }
             ],
@@ -79,6 +83,7 @@ export const main = {
                 { position: { key: 'f.zuordnung', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BT,BR,BV,EK)', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'},wahlperiode:{type:'number'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Plenarprotokolle of current period', 'f.wahlperiode': 20 },
                 { _description: 'List Plenarprotokolle by date range', 'f.datum.start': '2024-01-01', 'f.datum.end': '2024-12-31' }
@@ -91,6 +96,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},typ:{type:'string'},titel:{type:'string'},datum:{type:'string'},wahlperiode:{type:'number'}}}},
             tests: [
                 { _description: 'Get Plenarprotokoll by ID', id: 118542 }
             ],
@@ -106,6 +112,7 @@ export const main = {
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{documents:{type:'array',items:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},titel:{type:'string'},text:{type:'string'}}}},cursor:{type:'string'},numFound:{type:'number'}}}},
             tests: [
                 { _description: 'List Plenarprotokoll full texts', 'f.wahlperiode': 20 }
             ],
@@ -117,6 +124,7 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{id:{type:'number'},dokumentnummer:{type:'string'},titel:{type:'string'},text:{type:'string'},datum:{type:'string'}}}},
             tests: [
                 { _description: 'Get Plenarprotokoll full text by ID', id: 118542 }
             ],

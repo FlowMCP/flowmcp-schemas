@@ -43,6 +43,7 @@ export const main = {
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{result:{type:'object',properties:{rows:{type:'array',items:{type:'object'}},metadata:{type:'object'}}}}}},
             tests: [
                 {
                     _description: 'Get Vitalik\'s activity feed on all supported chains',

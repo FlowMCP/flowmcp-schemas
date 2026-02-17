@@ -27,6 +27,7 @@ export const main = {
                 { position: { key: 'fee', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(3)', 'optional()'] } },
                 { position: { key: 'protocols', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{dstAmount:{type:'string'},protocols:{type:'array',items:{type:'array'}},gas:{type:'number'}}}},
             tests: [
                 {
                     _description: 'Quote 1 ETH to USDC on Ethereum',
@@ -50,6 +51,7 @@ export const main = {
                 { position: { key: 'slippage', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(50)'] } },
                 { position: { key: 'protocols', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{dstAmount:{type:'string'},tx:{type:'object',properties:{from:{type:'string'},to:{type:'string'},data:{type:'string'},value:{type:'string'},gas:{type:'number'},gasPrice:{type:'string'}}}}}},
             tests: [
                 {
                     _description: 'Swap 1 ETH to USDC',
@@ -69,6 +71,7 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{tokens:{type:'object'}}}},
             tests: [
                 { _description: 'List Ethereum tokens', chainId: 1 }
             ],
@@ -82,6 +85,7 @@ export const main = {
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'amount', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'string'},gasPrice:{type:'string'},to:{type:'string'},value:{type:'string'}}}},
             tests: [
                 { _description: 'Approve USDC on Ethereum', chainId: 1, tokenAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' }
             ],
@@ -95,6 +99,7 @@ export const main = {
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{allowance:{type:'string'}}}},
             tests: [
                 {
                     _description: 'Check USDC allowance',

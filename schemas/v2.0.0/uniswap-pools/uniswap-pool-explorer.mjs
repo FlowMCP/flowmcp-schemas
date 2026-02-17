@@ -27,6 +27,7 @@ export const main = {
                 { position: { key: 'token_address', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET)', options: ['default(ETHEREUM_MAINNET)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{pools:{type:'array',items:{type:'object',properties:{id:{type:'string'},token0:{type:'object'},token1:{type:'object'},volumeUSD:{type:'string'}}}}}}}}},
             tests: [
                 {
                     _description: 'Query USDC pools on Ethereum',
@@ -43,6 +44,7 @@ export const main = {
                 { position: { key: 'pool_id', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET)', options: ['default(ETHEREUM_MAINNET)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{pool:{type:'object',properties:{id:{type:'string'},token0:{type:'object'},token1:{type:'object'},liquidity:{type:'string'},volumeUSD:{type:'string'},feeTier:{type:'string'}}}}}}}},
             tests: [
                 {
                     _description: 'Get data for USDC/ETH pool',

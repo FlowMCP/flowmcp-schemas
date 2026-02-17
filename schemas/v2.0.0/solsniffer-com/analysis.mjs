@@ -22,6 +22,7 @@ export const main = {
             parameters: [
                 { position: { key: 'token_address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(32)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{score:{type:'number'},risks:{type:'array',items:{type:'object'}},tokenData:{type:'object'}}}},
             tests: [
                 { _description: 'Analyze example token address', token_address: 'So11111111111111111111111111111111111111112' }
             ],

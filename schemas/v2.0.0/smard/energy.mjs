@@ -20,6 +20,15 @@ export const main = {
             tests: [
                 { _description: 'Get index for realized generation', filterId: '1223' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamps: { type: 'array', items: { type: 'number' } }
+                    }
+                }
+            },
         },
         getLatestData: {
             method: 'GET',

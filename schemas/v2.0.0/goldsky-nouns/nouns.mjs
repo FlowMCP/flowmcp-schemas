@@ -24,6 +24,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch candidate proposals', first: 1000 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposalCandidates: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, slug: { type: 'string' }, proposer: { type: 'string' }, lastUpdatedTimestamp: { type: 'string' }, canceled: { type: 'boolean' }, versions: { type: 'array', items: { type: 'object' } }, latestVersion: { type: 'object' } } } } } }
+                    }
+                }
+            },
         },
         getActivePendingUpdatableProposers: {
             method: 'POST',
@@ -35,6 +44,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch active and pending proposals', first: 1000 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposals: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' }, status: { type: 'string' }, proposer: { type: 'object', properties: { id: { type: 'string' } } } } } } } }
+                    }
+                }
+            },
         },
         getLatestAuctions: {
             method: 'POST',
@@ -47,6 +65,15 @@ export const main = {
             tests: [
                 { _description: 'Fetch 1000 latest auctions', first: 1000, skip: 0 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { auctions: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, amount: { type: 'string' }, settled: { type: 'boolean' }, bidder: { type: 'object', properties: { id: { type: 'string' } } }, startTime: { type: 'string' }, endTime: { type: 'string' }, noun: { type: 'object', properties: { id: { type: 'string' }, owner: { type: 'object', properties: { id: { type: 'string' } } } } }, bids: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, amount: { type: 'string' }, blockNumber: { type: 'string' }, blockTimestamp: { type: 'string' }, txHash: { type: 'string' }, bidder: { type: 'object', properties: { id: { type: 'string' } } } } } } } } } } }
+                    }
+                }
+            },
         }
     }
 }

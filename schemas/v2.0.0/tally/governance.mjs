@@ -20,6 +20,7 @@ export const main = {
             path: '/query',
             description: 'Get all supported blockchain networks for DAO governance on Tally. Returns structured JSON response data.',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{chains:{type:'array',items:{type:'object',properties:{id:{type:'string'},name:{type:'string'}}}}}}}}},
             tests: [
                 { _description: 'Get all supported chains' }
             ],
@@ -31,6 +32,7 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['default("{ governors(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 } }) { nodes { id name slug chainId token { name symbol decimals } proposalStats { total active } } pageInfo { firstCursor lastCursor } } }")', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{governors:{type:'object',properties:{nodes:{type:'array',items:{type:'object'}}}}}}}}},
             tests: [
                 { _description: 'Get Uniswap governors' }
             ],
@@ -42,6 +44,7 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['default("{ proposals(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { isDescending: true } }) { nodes { id title status { active } governor { id name } proposer { address ens } voteStats { type votesCount votersCount percent } } pageInfo { firstCursor lastCursor } } }")', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{proposals:{type:'object',properties:{nodes:{type:'array',items:{type:'object'}}}}}}}}},
             tests: [
                 { _description: 'Get Uniswap proposals' }
             ],
@@ -53,6 +56,7 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['default("{ delegates(input: { filters: { organizationId: \\"uniswap\\" }, page: { limit: 10 }, sort: { sortBy: votes, isDescending: true } }) { nodes { account { address ens name bio } votesCount delegatorsCount } pageInfo { firstCursor lastCursor } } }")', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{delegates:{type:'object',properties:{nodes:{type:'array',items:{type:'object'}}}}}}}}},
             tests: [
                 { _description: 'Get top Uniswap delegates' }
             ],

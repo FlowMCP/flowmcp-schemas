@@ -23,6 +23,7 @@ export const main = {
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(BASE_MAINNET,SOLANA_MAINNET,BSC_MAINNET,ETH_MAINNET,MONAD_MAINNET)', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{searchTokens:{type:'array',items:{type:'object',properties:{name:{type:'string'},symbol:{type:'string'},contractAddress:{type:'string'}}}}}}}}},
             tests: [
                 { _description: 'Search for Ethereum token', query: 'ethereum' }
             ],
@@ -35,6 +36,7 @@ export const main = {
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(BASE_MAINNET,SOLANA_MAINNET,BSC_MAINNET,ETH_MAINNET,MONAD_MAINNET)', options: ['default(ETH_MAINNET)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{walletPnL:{type:'object',properties:{totalPnL:{type:'number'},tokens:{type:'array',items:{type:'object'}}}}}}}}},
             tests: [
                 {
                     _description: 'Get wallet PnL on Ethereum',

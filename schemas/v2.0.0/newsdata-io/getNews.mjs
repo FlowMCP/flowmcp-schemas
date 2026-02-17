@@ -22,6 +22,18 @@ export const main = {
             tests: [
                 { _description: 'Get latest general crypto news' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        totalResults: { type: 'number' },
+                        results: { type: 'array', items: { type: 'object', properties: { article_id: { type: 'string' }, link: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, content: { type: 'string' }, keywords: { type: 'array', items: { type: 'string' } }, creator: { type: 'array', items: { type: 'string' } }, coin: { type: 'string', nullable: true }, language: { type: 'string' }, pubDate: { type: 'string' }, pubDateTZ: { type: 'string' }, fetched_at: { type: 'string' }, image_url: { type: 'string' }, video_url: { type: 'string', nullable: true }, source_id: { type: 'string' }, source_name: { type: 'string', nullable: true }, source_priority: { type: 'number' }, source_url: { type: 'string', nullable: true }, source_icon: { type: 'string', nullable: true }, sentiment: { type: 'string' }, sentiment_stats: { type: 'string' }, ai_tag: { type: 'string' }, duplicate: { type: 'boolean' } } } },
+                        nextPage: { type: 'string' }
+                    }
+                }
+            },
         },
         getCryptoNewsdata: {
             method: 'GET',
@@ -35,6 +47,18 @@ export const main = {
             tests: [
                 { _description: 'Fetch Bitcoin news', q: 'bitcoin', category: 'business' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        totalResults: { type: 'number' },
+                        results: { type: 'array', items: { type: 'object', properties: { article_id: { type: 'string' }, link: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, content: { type: 'string' }, keywords: { type: 'array', items: { type: 'string' } }, creator: { type: 'array', items: { type: 'string' } }, language: { type: 'string' }, country: { type: 'array', items: { type: 'string' } }, category: { type: 'array', items: { type: 'string' } }, datatype: { type: 'string' }, pubDate: { type: 'string' }, pubDateTZ: { type: 'string' }, fetched_at: { type: 'string' }, image_url: { type: 'string' }, video_url: { type: 'string', nullable: true }, source_id: { type: 'string' }, source_name: { type: 'string' }, source_priority: { type: 'number' }, source_url: { type: 'string' }, source_icon: { type: 'string' }, sentiment: { type: 'string' }, sentiment_stats: { type: 'string' }, ai_tag: { type: 'string' }, ai_region: { type: 'string' }, ai_org: { type: 'string' }, ai_summary: { type: 'string' }, duplicate: { type: 'boolean' } } } },
+                        nextPage: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

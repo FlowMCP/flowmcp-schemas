@@ -32,6 +32,7 @@ export const main = {
                 { position: { key: 'view', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(normal,minimal,scores_minimal)', options: ['default(normal)', 'optional()'] } },
                 { position: { key: 'debug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{passports:{type:'array',items:{type:'object',properties:{passport_id:{type:'number'},score:{type:'number'},user:{type:'object'}}}},pagination:{type:'object'}}}},
             tests: [
                 {
                     _description: 'Top Builder Score (page-based)',
@@ -62,6 +63,7 @@ export const main = {
             path: '/search/advanced/metadata/fields/profiles/default',
             description: 'Returns the fields that are allowed in customQuery for profiles (paying API keys only).',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{fields:{type:'array',items:{type:'object',properties:{name:{type:'string'},type:{type:'string'}}}}}}},
             tests: [
                 { _description: 'Fetch default metadata fields' }
             ],

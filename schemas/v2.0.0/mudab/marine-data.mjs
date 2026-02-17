@@ -21,6 +21,15 @@ export const main = {
             tests: [
                 { _description: 'Get all marine stations' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        V_STATION_SMALL: { type: 'array', items: { type: 'object', properties: { metadataid: { type: 'number' }, STATNAME_ST: { type: 'string' }, NAME_PS: { type: 'string' }, STATIONTYPE_ST: { type: 'string' }, COMPT_DS: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getParameters: {
             method: 'POST',
@@ -30,6 +39,15 @@ export const main = {
             tests: [
                 { _description: 'Get all measurement parameters' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        MV_PARAMETER: { type: 'array', items: { type: 'object', properties: { metadataid: { type: 'number' }, COMPT_DS: { type: 'string' }, PARAMETER: { type: 'string' }, PARAMETERGRUPPE: { type: 'string' }, PARAM_NAME: { type: 'string' }, PARGROUP: { type: 'string' }, PARAMGROUP_NAME: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getProjectStations: {
             method: 'POST',
@@ -39,6 +57,15 @@ export const main = {
             tests: [
                 { _description: 'Get project stations' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        V_MUDAB_PROJECTSTATION: { type: 'array', items: { type: 'object', properties: { metadataid: { type: 'number' }, PROJECTSTATIONID: { type: 'number' }, NAME_PS: { type: 'string' }, REGION: { type: 'string' }, INSTITUT: { type: 'string' } } } }
+                    }
+                }
+            },
         }
     }
 }

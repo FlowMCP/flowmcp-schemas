@@ -29,6 +29,7 @@ export const main = {
                 { position: { key: 'time_range_seconds', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(60)', 'max(86400)', 'default(300)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(100)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{pools:{type:'array',items:{type:'object',properties:{id:{type:'string'},token0:{type:'object'},token1:{type:'object'},feeTier:{type:'string'}}}}}}}}},
             tests: [
                 {
                     _description: 'Fetch most recent pools on Optimism ordered by volume',

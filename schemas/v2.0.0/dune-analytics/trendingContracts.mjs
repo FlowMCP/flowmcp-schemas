@@ -29,6 +29,15 @@ export const main = {
             tests: [
                 { _description: 'Get DEX pairs for optimism', chain: 'optimism', limit: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         },
         getTrendingContracts: {
             method: 'GET',
@@ -44,6 +53,15 @@ export const main = {
             tests: [
                 { _description: 'Get trending contracts on base', chain: 'base', limit: 3 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         },
         getMarketShare: {
             method: 'GET',
@@ -60,6 +78,15 @@ export const main = {
             tests: [
                 { _description: 'Get DEX market share for polygon', market: 'dex', chain: 'polygon', limit: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object' } } }
+                    }
+                }
+            },
         }
     }
 }

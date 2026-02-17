@@ -21,6 +21,7 @@ export const main = {
             parameters: [
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object'},timeTaken:{type:'number'}}}},
             tests: [
                 {
                     _description: 'Preis von JUP und SOL gegen USDC',
@@ -35,6 +36,7 @@ export const main = {
             parameters: [
                 { position: { key: 'mintAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{address:{type:'string'},name:{type:'string'},symbol:{type:'string'},decimals:{type:'number'},logoURI:{type:'string'},tags:{type:'array',items:{type:'string'}}}}},
             tests: [
                 { _description: 'Info for JUP token', mintAddress: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN' }
             ],
@@ -46,6 +48,7 @@ export const main = {
             parameters: [
                 { position: { key: 'marketAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'string'}}},
             tests: [
                 { _description: 'Tokens in SOL-USDC market', marketAddress: 'BVRbyLjjfSBcoyiYFuxbgKYnWuiFaF9CSXEa5vdSZ9Hh' }
             ],
@@ -55,6 +58,7 @@ export const main = {
             path: '/tokens/v1/mints/tradable',
             description: 'Retrieve a list of all tradable token mints on Jupiter. Returns structured JSON response data.',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'string'}}},
             tests: [
                 { _description: 'Fetch tradable token mints' }
             ],
@@ -66,6 +70,7 @@ export const main = {
             parameters: [
                 { position: { key: 'tags', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{address:{type:'string'},name:{type:'string'},symbol:{type:'string'},decimals:{type:'number'}}}}},
             tests: [
                 { _description: 'Fetch LST tagged tokens', tags: 'lst' }
             ],
@@ -75,6 +80,7 @@ export const main = {
             path: '/tokens/v1/new',
             description: 'Retrieve new tokens, ordered by creation timestamp via Jupiter. Returns structured JSON response data.',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{address:{type:'string'},name:{type:'string'},symbol:{type:'string'},decimals:{type:'number'}}}}},
             tests: [
                 { _description: 'Fetch newly listed tokens' }
             ],
@@ -84,6 +90,7 @@ export const main = {
             path: '/tokens/v1/all',
             description: 'Fetch all tokens indexed by Jupiter. This is a large payload. Returns structured JSON response data.',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'array',items:{type:'object',properties:{address:{type:'string'},name:{type:'string'},symbol:{type:'string'},decimals:{type:'number'}}}}},
             tests: [
                 { _description: 'Fetch all token metadata' }
             ],

@@ -19,6 +19,7 @@ export const main = {
                 { position: { key: 'kind', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(news,media,analysis)', options: ['default(news)'] } },
                 { position: { key: 'num_pages', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(10)', 'default(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{count:{type:'number'},results:{type:'array',items:{type:'object',properties:{id:{type:'number'},title:{type:'string'},url:{type:'string'},source:{type:'object'},published_at:{type:'string'}}}}}}},
             tests: [
                 { _description: 'Get general crypto news headlines from 2 pages', kind: 'news', num_pages: 2 }
             ],

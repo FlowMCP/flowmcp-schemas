@@ -20,6 +20,7 @@ export const main = {
                 { position: { key: 'lang', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{type:{type:'string'},features:{type:'array',items:{type:'object',properties:{type:{type:'string'},properties:{type:'object'},geometry:{type:'object',properties:{type:{type:'string'},coordinates:{type:'array',items:{type:'number'}}}}}}}}}},
             tests: [
                 { _description: 'Geocode Berlin address', text: 'Brandenburger Tor, Berlin' },
                 { _description: 'Geocode with language', text: 'Eiffel Tower, Paris', lang: 'en', limit: 3 }
@@ -33,6 +34,7 @@ export const main = {
                 { position: { key: 'lat', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(-90)', 'max(90)'] } },
                 { position: { key: 'lon', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(-180)', 'max(180)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{type:{type:'string'},features:{type:'array',items:{type:'object',properties:{type:{type:'string'},properties:{type:'object'},geometry:{type:'object'}}}}}}},
             tests: [
                 { _description: 'Reverse geocode Berlin coordinates', lat: 52.5163, lon: 13.3777 }
             ],
@@ -46,6 +48,7 @@ export const main = {
                 { position: { key: 'lang', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{type:{type:'string'},features:{type:'array',items:{type:'object',properties:{type:{type:'string'},properties:{type:'object'},geometry:{type:'object'}}}}}}},
             tests: [
                 { _description: 'Autocomplete Berlin address', text: 'Alexanderpl' },
                 { _description: 'Autocomplete with limit', text: 'Münch', lang: 'de', limit: 5 }

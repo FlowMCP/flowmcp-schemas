@@ -24,6 +24,17 @@ export const main = {
             tests: [
                 { _description: 'Get first page of apprenticeships', size: 5 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        _embedded: { type: 'object', properties: { termine: { type: 'array', items: { type: 'object' } } } },
+                        _links: { type: 'object', properties: { first: { type: 'object', properties: { href: { type: 'string' } } }, self: { type: 'object', properties: { href: { type: 'string' } } }, next: { type: 'object', properties: { href: { type: 'string' } } }, last: { type: 'object', properties: { href: { type: 'string' } } } } },
+                        page: { type: 'object', properties: { size: { type: 'number' }, totalElements: { type: 'number' }, totalPages: { type: 'number' }, number: { type: 'number' } } }
+                    }
+                }
+            },
         },
         searchStudyPrograms: {
             method: 'GET',

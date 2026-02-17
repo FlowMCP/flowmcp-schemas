@@ -82,6 +82,7 @@ export const main = {
                 { position: { key: 'toChain', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'bridge', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{status:{type:'string'},substatus:{type:'string'},sending:{type:'object'},receiving:{type:'object'},tool:{type:'string'}}}},
             tests: [
                 {
                     _description: 'Check transfer status with example hash',

@@ -26,6 +26,7 @@ export const main = {
                 { position: { key: 'tier', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^[1-5](,[1-5])*$)', 'optional()'] } },
                 { position: { key: 'type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'array',items:{type:'object',properties:{id:{type:'number'},name:{type:'string'},slug:{type:'string'}}}}}}},
             tests: [
                 { _description: 'Default sort, first 100', sortBy: 'tier', sortDirection: 'ASC', limit: '100', skip: 0 },
                 {
@@ -44,6 +45,7 @@ export const main = {
             path: '/funds/map',
             description: 'Fetch the complete map/list of investors and funds via Cryptorank. Returns structured JSON response data.',
             parameters: [],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'array',items:{type:'object',properties:{id:{type:'number'},name:{type:'string'},tier:{type:'string'},type:{type:'string'}}}},totalCount:{type:'number'}}}},
             tests: [
                 { _description: 'Fetch all funds' }
             ],
@@ -55,6 +57,7 @@ export const main = {
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{id:{type:'number'},name:{type:'string'},description:{type:'string'},website:{type:'string'}}}}}},
             tests: [
                 { _description: 'Fetch fund basic data', fund_id: 1 }
             ],
@@ -66,6 +69,7 @@ export const main = {
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'object',properties:{id:{type:'number'},name:{type:'string'},portfolio:{type:'array',items:{type:'object'}}}}}}},
             tests: [
                 { _description: 'Fetch comprehensive fund data', fund_id: 1 }
             ],
@@ -77,6 +81,7 @@ export const main = {
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
             ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{data:{type:'array',items:{type:'object',properties:{name:{type:'string'},role:{type:'string'}}}}}}},
             tests: [
                 { _description: 'Fetch team for fund', fund_id: 1 }
             ],

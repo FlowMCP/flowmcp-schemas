@@ -237,7 +237,6 @@ async function executeTest( { method, url, headers, bodyParams } ) {
     const fetchOpts = {
         method: method || 'GET',
         headers: {
-            'Accept': 'application/json',
             'User-Agent': 'FlowMCP-TestCapture/1.0',
             ...( headers || {} )
         }
