@@ -1,0 +1,56 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+
+export const main = {
+    namespace: 'ecovisio',
+    name: 'Eco-Visio Counter API',
+    description: 'Eco-Counter bicycle and pedestrian counting stations API providing traffic counting data from automated sensors across German cities and worldwide',
+    version: '2.0.0',
+    docs: ['https://eco-visio.api.bund.dev/'],
+    tags: ['mobility', 'germany', 'cycling', 'pedestrian', 'cacheTtlDaily'],
+    root: 'https://www.eco-visio.net/api/aladdin/1.0.0',
+    routes: {
+        getCountersByOrganization: {
+            method: 'GET',
+            path: '/pbl/publicwebpageplus/:idOrganisme',
+            description: 'Get all counting stations for a public organization by its ID. Known German IDs: 888 (Rostock), 4586 (global bike display), 6116 (Schwerin), 6997 (Greifswald), 6811 (Boeblingen). Returns station name, coordinates, and photo URLs.',
+            parameters: [
+                { position: { key: 'idOrganisme', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
+            ]
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    getCountersByOrganization: {
+        postRequest: async ( { response, struct, payload } ) => {
+            const raw = struct?.data
+            if( !Array.isArray( raw ) ) { return { response }}
+
+            const counters = raw
+            .slice( 0, 200 )
+            .map( ( counter ) => {
+            const result = {
+            id: counter.idPdc || null,
+            name: counter.nom || null,
+            latitude: counter.lat || null,
+            longitude: counter.lon || null,
+            startDate: counter.debut || null,
+            periodStart: counter.debutPeriode || null,
+            mainType: counter.mainPratique || null
+            }
+
+            return result
+            } )
+
+            response = {
+            totalCounters: raw.length,
+            counterCount: counters.length,
+            counters
+            }
+
+            return { response }
+        }
+    }
+} )

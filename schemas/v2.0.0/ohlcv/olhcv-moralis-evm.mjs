@@ -1,0 +1,142 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-imports
+// REPLACE: axios -> native fetch (not in requiredLibraries)
+// REPLACE: moment -> native Date/Intl (not in requiredLibraries)
+// Import: import axios from "axios"
+// Import: import moment from "moment"
+// Import: import { EVM_CHAINS } from '../_shared/evmChains.mjs'
+// Import: import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
+// Module-level code: 32 lines
+
+export const main = {
+    namespace: 'ohlcv',
+    name: 'Moralis Recursive OHLCV EVM and Ethereum',
+    description: 'Recursively fetch OHLCV candlestick data from Moralis for any EVM token pair — auto-paginates through all available timeframes for complete price history.',
+    version: '2.0.0',
+    docs: ['https://docs.moralis.io/web3-data-api/evm/reference/get-ohlcv-by-pair-address'],
+    tags: ['evm', 'ohlcv', 'charts', 'cacheTtlRealtime'],
+    sharedLists: [
+        { ref: 'evmChains', version: '2.0.0' },
+        { ref: 'tradingTimeframes', version: '2.0.0' }
+    ],
+    root: 'https://deep-index.moralis.io',
+    requiredServerParams: ['MORALIS_API_KEY'],
+    headers: {
+        'X-API-Key': '{{MORALIS_API_KEY}}'
+    },
+    routes: {
+        getRecursiveOhlcvEVM: {
+            method: 'GET',
+            path: '/api/v2.2/pairs/{{pairAddress}}/ohlcv',
+            description: 'Fetch OHLCV data recursively until max length or iteration limit is reached. Required: pairAddress, chain, timeframe, currency, fromDateAmount, fromDateUnit, maxResultLength.',
+            parameters: [
+                { position: { key: 'pairAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,CRONOS_MAINNET,MOONBEAM_MAINNET,MOONRIVER_MAINNET,PULSECHAIN_MAINNET,CHILIZ_MAINNET,FLOW_MAINNET,RONIN_MAINNET,LISK_MAINNET,SEPOLIA_TESTNET,HOLESKY_TESTNET,BASE_SEPOLIA_TESTNET,POLYGON_AMOY_TESTNET,BINANCE_TESTNET,LINEA_SEPOLIA_TESTNET,MOONBASE_ALPHA_TESTNET,GNOSIS_TESTNET,CHILIZ_TESTNET,FLOW_TESTNET,RONIN_TESTNET,LISK_SEPOLIA_TESTNET)', options: [] } },
+                { position: { key: 'timeframe', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1s,10s,30s,1m,5m,10m,30m,1h,4h,12h,1d,1w,1M)', options: [] } },
+                { position: { key: 'currency', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(usd,native)', options: ['default(usd)'] } },
+                { position: { key: 'fromDateAmount', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } },
+                { position: { key: 'fromDateUnit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(minutes,hours,days,weeks,months,years)', options: [] } },
+                { position: { key: 'maxResultLength', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional(), default(1000)'] } }
+            ]
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => {
+    const EVM_CHAINS = sharedLists['evmChains']
+    const TRADING_TIMEFRAMES = sharedLists['tradingTimeframes']
+
+    const moralisTimeframes = TRADING_TIMEFRAMES
+        .filter( ( t ) => t.moralisSlug !== undefined )
+        .reduce( ( acc, t ) => {
+            acc[ t.alias ] = t.moralisSlug
+            return acc
+        }, {} )
+    const fromDateUnits = {
+        "minutes": 60,
+        "hours": 3600,
+        "days": 86400,
+        "weeks": 604800,
+        "months": 2592000,
+        "years": 31536000
+    }
+    const moralisChainAliases = [
+        'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'HOLESKY_TESTNET',
+        'POLYGON_MAINNET', 'POLYGON_AMOY_TESTNET', 'BINANCE_MAINNET',
+        'BINANCE_TESTNET', 'AVALANCHE_MAINNET', 'FANTOM_MAINNET',
+        'CRONOS_MAINNET', 'ARBITRUM_ONE_MAINNET', 'GNOSIS_MAINNET',
+        'GNOSIS_TESTNET', 'CHILIZ_MAINNET', 'CHILIZ_TESTNET',
+        'BASE_MAINNET', 'BASE_SEPOLIA_TESTNET', 'OPTIMISM_MAINNET',
+        'LINEA_MAINNET', 'LINEA_SEPOLIA_TESTNET', 'MOONBEAM_MAINNET',
+        'MOONRIVER_MAINNET', 'MOONBASE_ALPHA_TESTNET', 'FLOW_MAINNET',
+        'FLOW_TESTNET', 'RONIN_MAINNET', 'RONIN_TESTNET',
+        'LISK_MAINNET', 'LISK_SEPOLIA_TESTNET', 'PULSECHAIN_MAINNET'
+    ]
+    const chainSelections = EVM_CHAINS
+        .filter( ( c ) => moralisChainAliases.includes( c.alias ) && c.moralisChainSlug !== undefined )
+        .reduce( ( acc, chain ) => {
+            acc[ chain.alias ] = chain.moralisChainSlug
+            return acc
+        }, {} )
+
+    return {
+        getRecursiveOhlcvEVM: {
+            executeRequest: async ( { struct, payload } ) => {
+                const { userParams } = payload
+                const { pairAddress, chain: _chainValue, timeframe: _timeframeAlias, currency, fromDateAmount, fromDateUnit, maxResultLength = 1000 } = userParams
+                const chain = chainSelections[ _chainValue ]
+                const timeframe = moralisTimeframes[ _timeframeAlias ]
+                const fromDate = moment().subtract(fromDateAmount, fromDateUnit).toISOString();
+                const toDate = moment().toISOString();
+                const url = `https://deep-index.moralis.io/api/v2.2/pairs/${pairAddress}/ohlcv`;
+
+                let accumulated = [], cursor = null, iteration = 0, maxIterations = 5;
+                while (iteration < maxIterations && accumulated.length < maxResultLength) {
+                try {
+                const { headers } = payload
+                const params = { chain, timeframe, currency, fromDate, toDate, cursor, limit: 1000 }
+                const res = await axios.get(url, { headers, params } )
+                const { result, cursor: next } = res.data
+                if( !Array.isArray( result ) ) { break }
+                accumulated.push( ...result )
+                if( !next ) { break }
+                cursor = next
+                iteration++
+                } catch( e ) {
+                struct.status = false
+                struct.messages.push( "API error: " + (e.response?.status || "unknown" ) )
+                return { struct }}
+                }
+
+                const data = accumulated
+                .map( ( a ) => ( { ...a, unixTimestamp: moment( a.timestamp ).unix() } ) )
+                .sort( ( a, b ) => a.unixTimestamp - b.unixTimestamp )
+                .reduce( ( acc, a ) => {
+                acc.openings.push( a.open )
+                acc.closings.push( a.close )
+                acc.highs.push( a.high )
+                acc.lows.push( a.low )
+                acc.volumes.push( a.volume )
+                acc.timestamps.push( a.timestamp )
+                acc.prices.push( a.close )
+                acc.values.push( a.close )
+                return acc
+                }, {
+                openings: [],
+                closings: [],
+                highs: [],
+                lows: [],
+                volumes: [],
+                prices: [],
+                values: [],
+                timestamps: []
+                } )
+
+                struct['data'] = data
+                struct['status'] = true
+                return { struct }
+            }
+        }
+    }
+}

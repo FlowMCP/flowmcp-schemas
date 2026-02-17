@@ -1,0 +1,99 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+
+export const main = {
+    namespace: 'talentprotocol',
+    name: 'Talent Protocol - Advanced Profile Search',
+    description: 'Search Profiles with rich filters, sorting, and pagination (page-based or point-in-time).',
+    version: '2.0.0',
+    docs: ['https://api.talentprotocol.com'],
+    tags: ['identity', 'talent', 'profiles', 'cacheTtlDaily'],
+    root: 'https://api.talentprotocol.com',
+    requiredServerParams: ['TALENT_API_KEY'],
+    headers: {
+        Accept: 'application/json',
+        'X-API-KEY': '{{TALENT_API_KEY}}'
+    },
+    routes: {
+        searchAdvancedProfiles: {
+            method: 'GET',
+            path: '/search/advanced/profiles',
+            description: 'Get profiles that match input query and sort specification via talentprotocol. Supports query, aggregations, returnItems filters.',
+            parameters: [
+                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'aggregations', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'returnItems', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(true)', 'optional()'] } },
+                { position: { key: 'sort', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'optional()'] } },
+                { position: { key: 'per_page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(250)', 'optional()'] } },
+                { position: { key: 'keep_alive_minutes', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(60)', 'optional()'] } },
+                { position: { key: 'point_in_time_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'search_after', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'view', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(normal,minimal,scores_minimal)', options: ['default(normal)', 'optional()'] } },
+                { position: { key: 'debug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
+            ]
+        },
+        getDefaultFields: {
+            method: 'GET',
+            path: '/search/advanced/metadata/fields/profiles/default',
+            description: 'Returns the fields that are allowed in customQuery for profiles (paying API keys only).',
+            parameters: []
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    searchAdvancedProfiles: {
+        preRequest: async ( { struct, payload } ) => {
+            try {
+            const jsonKeys = ['query', 'aggregations', 'sort', 'search_after']
+            const urlObj = new URL( struct.url )
+
+            jsonKeys
+            .forEach( ( k ) => {
+            if( urlObj.searchParams.has( k ) ) {
+            const raw = urlObj.searchParams.get( k )
+            let parsed = raw
+
+            try {
+            parsed = JSON.parse( raw )
+            } catch {
+            parsed = raw
+            }
+
+            const valueStr = typeof parsed === 'string' ? parsed : JSON.stringify( parsed )
+            urlObj.searchParams.set( k, valueStr )
+            }
+            } )
+
+            const page = Number( urlObj.searchParams.get( 'page' ) )
+            if( !isNaN( page ) && page < 1 ) {
+            urlObj.searchParams.set( 'page', '1' )
+            }
+
+            const perPage = Number( urlObj.searchParams.get( 'per_page' ) )
+            if( !isNaN( perPage ) ) {
+            const clamped = Math.max( 1, Math.min( 250, perPage ) )
+            urlObj.searchParams.set( 'per_page', String( clamped ) )
+            }
+
+            const keepAlive = Number( urlObj.searchParams.get( 'keep_alive_minutes' ) )
+            if( !isNaN( keepAlive ) ) {
+            const clamped = Math.max( 1, Math.min( 60, keepAlive ) )
+            urlObj.searchParams.set( 'keep_alive_minutes', String( clamped ) )
+            }
+
+            if( !urlObj.searchParams.get( 'view' ) ) {
+            urlObj.searchParams.set( 'view', 'normal' )
+            }
+
+            struct.url = urlObj.toString()
+            } catch( e ) {
+            throw new Error( `encodeJsonParams error: ${e?.message ?? e}` )
+            }
+
+            return { struct }
+        }
+    }
+} )

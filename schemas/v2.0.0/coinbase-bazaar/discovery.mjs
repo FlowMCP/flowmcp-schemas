@@ -1,0 +1,85 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+// Namespace: "coinbaseBazaar" -> "coinbasebazaar"
+
+export const main = {
+    namespace: 'coinbasebazaar',
+    name: 'Coinbase Bazaar x402 Discovery',
+    description: 'Discover x402-compatible paid resources and services available on the Coinbase Bazaar marketplace',
+    version: '2.0.0',
+    docs: ['https://docs.cdp.coinbase.com/x402/bazaar', 'https://www.x402.org/'],
+    tags: ['payments', 'marketplace', 'crypto', 'cacheTtlDaily'],
+    root: 'https://api.cdp.coinbase.com/platform/v2/x402/discovery',
+    routes: {
+        listResources: {
+            method: 'GET',
+            path: '/resources',
+            description: 'List all x402-compatible paid resources registered on Coinbase Bazaar. Optional filters: limit, offset.',
+            parameters: [
+                { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(20)', 'optional()'] } },
+                { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
+            ]
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    listResources: {
+        postRequest: async ( { response, struct, payload } ) => {
+            try {
+            const raw = response
+            if( !raw || !raw.items ) {
+            return { response }}
+
+            const { items, pagination, x402Version } = raw
+
+            const resources = items
+            .map( ( item ) => {
+            const accepts = ( item.accepts || [] )
+            .map( ( a ) => {
+            const result = {
+            resource: a.resource,
+            description: a.description,
+            network: a.network,
+            scheme: a.scheme,
+            asset: a.asset,
+            assetName: a.extra && a.extra.name,
+            maxAmount: a.maxAmountRequired,
+            payTo: a.payTo,
+            mimeType: a.mimeType,
+            maxTimeoutSeconds: a.maxTimeoutSeconds
+            }
+
+            return result
+            } )
+
+            const result = {
+            resource: item.resource,
+            type: item.type,
+            x402Version: item.x402Version,
+            lastUpdated: item.lastUpdated,
+            paymentOptions: accepts
+            }
+
+            return result
+            } )
+
+            response = {
+            source: "Coinbase Bazaar",
+            x402Version,
+            total: pagination && pagination.total,
+            limit: pagination && pagination.limit,
+            offset: pagination && pagination.offset,
+            resourceCount: resources.length,
+            resources
+            }
+            } catch( error ) {
+            struct.status = false
+            struct.messages.push( `Error formatting resource list: ${error.message}` )
+            }
+
+            return { response }
+        }
+    }
+} )

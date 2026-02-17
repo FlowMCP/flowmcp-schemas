@@ -1,0 +1,48 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+
+export const main = {
+    namespace: 'pinata',
+    name: 'Pinata IPFS Read MCP Interface',
+    description: 'Read content from IPFS via the Pinata gateway — access files by CID (Content Identifier) through Pinata\'s dedicated IPFS gateway with API key authentication.',
+    version: '2.0.0',
+    docs: ['https://gateway.pinata.cloud/'],
+    tags: ['ipfs', 'storage', 'read', 'cacheTtlDaily'],
+    root: 'https://gateway.pinata.cloud/ipfs',
+    routes: {
+        free_read_example: {
+            method: 'GET',
+            path: '/{{cid}}',
+            description: 'Returns a static IPFS-hosted example image via Pinata IPFS. Returns structured JSON response data.',
+            parameters: []
+        },
+        free_read_cid: {
+            method: 'GET',
+            path: '/{{cid}}',
+            description: 'Reads content from any IPFS CID via Pinata IPFS. Returns structured JSON response data.',
+            parameters: [
+                { position: { key: 'cid', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
+            ]
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    free_read_example: {
+        postRequest: async ( { response, struct, payload } ) => {
+            return { response }
+        }
+    },
+    free_read_cid: {
+        executeRequest: async ( { struct, payload } ) => {
+            const { userParams } = payload
+            struct.data = {
+                cid: userParams.cid || 'QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/1',
+                message: 'This is a static example image hosted on IPFS'
+            }
+            struct.status = true
+            return { struct }
+        }
+    }
+} )
