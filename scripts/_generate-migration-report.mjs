@@ -154,8 +154,16 @@ const processAll = async () => {
                     if( needsApiKey ) { stats.needsApiKey++ }
                     if( needsLibrary ) { stats.needsLibrary++ }
 
-                    // A route is "complete" when it has tests + output
-                    if( hasTests && hasOutput ) { stats.complete++ }
+                    // A route is "complete" when it has tests AND either:
+                    // - output schema injected
+                    // - executeRequest handler (provides its own output)
+                    // - postRequest handler with successful capture (handler transforms raw output)
+                    const isComplete = hasTests && (
+                        hasOutput
+                        || hasExecHandler
+                        || ( hasPostHandler && capture === 'ok' )
+                    )
+                    if( isComplete ) { stats.complete++ }
 
                     allRows.push( {
                         namespace,

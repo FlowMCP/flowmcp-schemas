@@ -8,7 +8,11 @@ export const main = {
     version: '2.0.0',
     docs: ['https://station.jup.ag/docs/api/lite-api', 'https://dev.jup.ag/docs/price-api/'],
     tags: ['solana', 'defi', 'swap', 'cacheTtlRealtime'],
-    root: 'https://lite-api.jup.ag',
+    root: 'https://api.jup.ag',
+    requiredServerParams: ['JUPITER_API_KEY'],
+    headers: {
+        'x-api-key': '{{JUPITER_API_KEY}}'
+    },
     routes: {
         getTokenPrice: {
             method: 'GET',

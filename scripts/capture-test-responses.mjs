@@ -254,8 +254,8 @@ async function executeTest( { method, url, headers, bodyParams } ) {
             }
         } )
 
-    if ( bodyParams && ( method === 'POST' || method === 'PUT' ) ) {
-        fetchOpts.body = JSON.stringify( bodyParams )
+    if ( method === 'POST' || method === 'PUT' ) {
+        fetchOpts.body = JSON.stringify( bodyParams || {} )
         // Only set Content-Type if not already provided by schema headers
         const hasContentType = Object.keys( fetchOpts.headers )
             .some( ( k ) => k.toLowerCase() === 'content-type' )

@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T15:54
+Generated: 2026-02-17T16:11
 
 ## Summary
 
@@ -9,12 +9,12 @@ Generated: 2026-02-17T15:54
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
 | With Output Schema | 369 | 53% |
-| Complete (Tests + Output) | 369 | 53% |
-| Capture OK | 369 | 53% |
-| Capture Failed | 48 | 7% |
-| Not Captured | 283 | 40% |
+| Complete (Tests + Output) | 516 | 74% |
+| Capture OK | 374 | 53% |
+| Capture Failed | 26 | 4% |
+| Not Captured | 300 | 43% |
 | Has Handler (post/exec) | 337 | 48% |
-| Needs API Key | 269 | 38% |
+| Needs API Key | 276 | 39% |
 | Needs Library | 182 | 26% |
 
 ## Legend
@@ -492,10 +492,10 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| patent-search | searchPatents | Y | - | fail | - | - | - | non-JSON response |
-| patent-search | searchByTechnology | Y | - | fail | - | - | - | non-JSON response |
-| patent-search | searchByKeywords | Y | - | fail | - | - | - | non-JSON response |
-| patent-search | searchByDate | Y | - | fail | - | - | - | non-JSON response |
+| patent-search | searchPatents | Y | - | - | - | - | - |  |
+| patent-search | searchByTechnology | Y | - | - | - | - | - |  |
+| patent-search | searchByKeywords | Y | - | - | - | - | - |  |
+| patent-search | searchByDate | Y | - | - | - | - | - |  |
 
 ### erc725 (5/8 complete)
 
@@ -544,7 +544,7 @@ Generated: 2026-02-17T15:54
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | getContractEthereum | getContractABI | Y | Y | ok | post | Y | - |  |
 | getContractEthereum | getContractSourceCode | Y | Y | ok | post | Y | - |  |
-| getContractMultichain | getAvailableChains | Y | - | fail | - | Y | - | non-JSON response |
+| getContractMultichain | getAvailableChains | Y | - | - | - | Y | - |  |
 | getContractMultichain | getSmartContractAbi | Y | Y | ok | - | Y | - |  |
 | getContractMultichain | getSourceCode | Y | Y | ok | - | Y | - |  |
 | getGaspriceMultichain | getGasOracle | Y | Y | ok | - | Y | - |  |
@@ -746,13 +746,13 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| jupiter-all | getTokenPrice | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getTokenInfo | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getTokensInMarket | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getAllTradableTokens | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getTaggedTokens | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getNewTokens | Y | - | fail | post | - | - | non-JSON response |
-| jupiter-all | getAllTokens | Y | - | fail | post | - | - | non-JSON response |
+| jupiter-all | getTokenPrice | Y | - | - | post | Y | - |  |
+| jupiter-all | getTokenInfo | Y | - | - | post | Y | - |  |
+| jupiter-all | getTokensInMarket | Y | - | - | post | Y | - |  |
+| jupiter-all | getAllTradableTokens | Y | - | - | post | Y | - |  |
+| jupiter-all | getTaggedTokens | Y | - | - | post | Y | - |  |
+| jupiter-all | getNewTokens | Y | - | - | post | Y | - |  |
+| jupiter-all | getAllTokens | Y | - | - | post | Y | - |  |
 
 ### klinikatlas (6/6 complete)
 
@@ -860,9 +860,9 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| marine-data | getStations | Y | - | fail | post | - | - | non-JSON response |
-| marine-data | getParameters | Y | - | fail | post | - | - | non-JSON response |
-| marine-data | getProjectStations | Y | - | fail | post | - | - | non-JSON response |
+| marine-data | getStations | Y | - | ok | post | - | - |  |
+| marine-data | getParameters | Y | - | ok | post | - | - |  |
+| marine-data | getProjectStations | Y | - | ok | post | - | - |  |
 
 ### newsapi-org (3/3 complete)
 
@@ -876,8 +876,8 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getNews | getLatestNewsdata | Y | - | fail | post | Y | - | non-JSON response |
-| getNews | getCryptoNewsdata | Y | - | fail | post | Y | - | non-JSON response |
+| getNews | getLatestNewsdata | Y | - | ok | post | Y | - |  |
+| getNews | getCryptoNewsdata | Y | - | ok | post | Y | - |  |
 
 ### nina (4/4 complete)
 
@@ -899,8 +899,8 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| olhcv-moralis-evm | getRecursiveOhlcvEVM | Y | - | fail | - | Y | - | HTTP 400 |
-| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | fail | - | Y | - | HTTP 400 |
+| olhcv-moralis-evm | getRecursiveOhlcvEVM | Y | - | - | - | Y | - |  |
+| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | - | - | Y | - |  |
 | olhcv-solana-tracker | getOhlcvSolana | Y | Y | ok | - | Y | - |  |
 
 ### oneinch (0/5 complete)
@@ -1271,6 +1271,6 @@ Generated: 2026-02-17T15:54
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| auctions | searchAuctions | Y | - | fail | - | - | - | non-JSON response |
-| auctions | getAuctionDetail | Y | - | fail | - | - | - | non-JSON response |
-| zwangsversteigerungen | searchAuctions | Y | - | fail | - | - | - | non-JSON response |
+| auctions | searchAuctions | Y | - | - | - | - | - |  |
+| auctions | getAuctionDetail | Y | - | - | - | - | - |  |
+| zwangsversteigerungen | searchAuctions | Y | - | - | - | - | - |  |

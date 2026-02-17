@@ -8,31 +8,32 @@ export const main = {
     version: '2.0.0',
     docs: ['https://newsdata.io/documentation/'],
     tags: ['news', 'media', 'global', 'cacheTtlFrequent'],
-    root: 'https://newsdata.io/api/1/crypto',
+    root: 'https://newsdata.io/api/1',
     requiredServerParams: ['NEWSDATA_API_KEY'],
-    headers: {
-        apikey: '{{NEWSDATA_API_KEY}}'
-    },
+    headers: {},
     routes: {
         getLatestNewsdata: {
             method: 'GET',
-            path: '/',
+            path: '/crypto',
             description: 'Fetch the latest general crypto news from NewsData.io. Returns structured JSON response data.',
-            parameters: [],
+            parameters: [
+                { position: { key: 'apikey', value: '{{NEWSDATA_API_KEY}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
+            ],
             tests: [
                 { _description: 'Get latest general crypto news' }
             ],
         },
         getCryptoNewsdata: {
             method: 'GET',
-            path: '/',
-            description: 'Fetch topic-specific crypto news for a given query and max number of pages. Required: query, max_pages.',
+            path: '/latest',
+            description: 'Fetch topic-specific crypto news for a given query. Required: q.',
             parameters: [
-                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'max_pages', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(5)', 'default(1)'] } }
+                { position: { key: 'apikey', value: '{{NEWSDATA_API_KEY}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'q', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
+                { position: { key: 'category', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default(business)'] } }
             ],
             tests: [
-                { _description: 'Fetch Bitcoin news from 2 pages', query: 'bitcoin', max_pages: 2 }
+                { _description: 'Fetch Bitcoin news', q: 'bitcoin', category: 'business' }
             ],
         }
     }
