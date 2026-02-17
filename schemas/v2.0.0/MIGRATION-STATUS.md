@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T16:36
+Generated: 2026-02-17T16:40
 
 ## Summary
 
@@ -8,10 +8,10 @@ Generated: 2026-02-17T16:36
 |--------|------:|--------:|
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
-| With Output Schema | 377 | 54% |
-| Complete (Tests + Output) | 608 | 87% |
-| Capture OK | 384 | 55% |
-| Capture Failed | 25 | 4% |
+| With Output Schema | 380 | 54% |
+| Complete (Tests + Output) | 611 | 87% |
+| Capture OK | 387 | 55% |
+| Capture Failed | 22 | 3% |
 | Not Captured | 291 | 42% |
 | Has Handler (post/exec) | 426 | 61% |
 | Needs API Key | 276 | 39% |
@@ -953,14 +953,14 @@ Generated: 2026-02-17T16:36
 | read | free_read_cid | Y | - | - | exec | - | - |  |
 | write | upload_text_file | Y | - | - | exec | Y | Y |  |
 
-### poap (1/5 complete)
+### poap (4/5 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| graphql | getTypename | Y | - | fail | - | - | - | HTTP 400 |
-| graphql | getSchemaDefinition | Y | - | fail | - | - | - | HTTP 400 |
+| graphql | getTypename | Y | Y | ok | - | - | - |  |
+| graphql | getSchemaDefinition | Y | Y | ok | - | - | - |  |
 | graphql | getPredefinedQueryList | Y | - | - | exec | - | - |  |
-| graphql | executePrefinedQuery | Y | - | fail | - | - | - | HTTP 400 |
+| graphql | executePrefinedQuery | Y | Y | ok | - | - | - |  |
 | graphql | querySubgraph | Y | Y | ok | - | - | - |  |
 
 ### polymarket (6/6 complete)

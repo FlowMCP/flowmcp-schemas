@@ -22,6 +22,15 @@ export const main = {
             tests: [
                 { _description: 'Simple __typename query test' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { __typename: { type: 'string' } } }
+                    }
+                }
+            },
         },
         getSchemaDefinition: {
             method: 'POST',
@@ -31,6 +40,15 @@ export const main = {
             tests: [
                 { _description: 'Returns full GraphQL schema' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { __schema: { type: 'object', properties: { queryType: { type: 'object' }, types: { type: 'array', items: { type: 'object' } } } } } }
+                    }
+                }
+            },
         },
         getPredefinedQueryList: {
             method: 'GET',
@@ -94,6 +112,15 @@ export const main = {
                     queryId: 'mostPopularDrops'
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { drops: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         querySubgraph: {
             method: 'POST',
@@ -169,6 +196,18 @@ export const handlers = ( { sharedLists, libraries } ) => {
     }
 
     return {
+        getTypename: {
+            preRequest: async ( { struct, payload } ) => {
+                struct.body = { query: '{ __typename }' }
+                return { struct }
+            }
+        },
+        getSchemaDefinition: {
+            preRequest: async ( { struct, payload } ) => {
+                struct.body = { query: '{ __schema { queryType { name } types { name kind } } }' }
+                return { struct }
+            }
+        },
         getPredefinedQueryList: {
             executeRequest: async ( { struct, payload } ) => {
                 struct['status'] = true
@@ -184,7 +223,8 @@ export const handlers = ( { sharedLists, libraries } ) => {
             preRequest: async ( { struct, payload } ) => {
                 const { queryId } = payload
                 const { query } = poapQueries[ queryId ]
-                struct['body']['query'] = query
+                if( !struct.body ) { struct.body = {} }
+                struct.body.query = query
                 return { struct }
             }
         }
