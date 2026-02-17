@@ -214,14 +214,13 @@ function qualifiesForCapture( { schema, handlers } ) {
         return { ok: false, reason: 'requires libraries' }
     }
 
-    // Check for executeRequest handlers — only skip if ALL routes have executeRequest
-    // Mixed schemas (some exec, some post/none) are allowed; individual routes are skipped later
-    if ( handlers ) {
-        const routeHandlers = Object.values( handlers )
-            .filter( ( h ) => h && typeof h === 'object' )
-        const allExecute = routeHandlers.length > 0
-            && routeHandlers.every( ( h ) => h.executeRequest )
-        if ( allExecute ) {
+    // Check for executeRequest handlers — only skip if ALL schema routes have executeRequest
+    // Compare against schema.routes, not just handler entries (unhandled routes are capturable)
+    if ( handlers && schema.routes ) {
+        const routeNames = Object.keys( schema.routes )
+        const allRoutesHaveExec = routeNames.length > 0
+            && routeNames.every( ( rn ) => handlers[rn] && handlers[rn].executeRequest )
+        if ( allRoutesHaveExec ) {
             return { ok: false, reason: 'all routes have executeRequest handlers' }
         }
     }

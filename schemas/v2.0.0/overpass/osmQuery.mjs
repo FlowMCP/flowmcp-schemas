@@ -78,6 +78,10 @@ export const main = {
             path: '/status',
             description: 'Get the current status of the Overpass API server. Returns structured JSON response data.',
             parameters: [],
+            output: {
+                mimeType: 'text/plain',
+                schema: { type: 'string', description: 'Plain text server status (connected database, slots, rate limits)' }
+            },
             tests: [
                 { _description: 'Check Overpass API status' }
             ],

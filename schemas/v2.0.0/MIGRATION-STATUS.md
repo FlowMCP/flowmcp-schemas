@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T16:29
+Generated: 2026-02-17T16:36
 
 ## Summary
 
@@ -8,11 +8,11 @@ Generated: 2026-02-17T16:29
 |--------|------:|--------:|
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
-| With Output Schema | 371 | 53% |
-| Complete (Tests + Output) | 601 | 86% |
-| Capture OK | 381 | 54% |
-| Capture Failed | 26 | 4% |
-| Not Captured | 293 | 42% |
+| With Output Schema | 377 | 54% |
+| Complete (Tests + Output) | 608 | 87% |
+| Capture OK | 384 | 55% |
+| Capture Failed | 25 | 4% |
+| Not Captured | 291 | 42% |
 | Has Handler (post/exec) | 426 | 61% |
 | Needs API Key | 276 | 39% |
 | Needs Library | 182 | 26% |
@@ -329,18 +329,18 @@ Generated: 2026-02-17T16:29
 | mixed-part3 | getMarketCap | Y | Y | ok | - | Y | - |  |
 | mixed-part3 | getCurrencies | Y | Y | ok | - | Y | - |  |
 
-### cointelegraph (0/1 complete)
+### cointelegraph (1/1 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getLatestNews | getLatestNews | Y | - | ok | - | - | - |  |
+| getLatestNews | getLatestNews | Y | Y | ok | - | - | - |  |
 
-### context-7 (1/2 complete)
+### context-7 (2/2 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | getDocumentation | searchLibraryId | Y | Y | ok | post | - | - |  |
-| getDocumentation | getLibraryDocs | Y | - | ok | - | - | - |  |
+| getDocumentation | getLibraryDocs | Y | Y | ok | - | - | - |  |
 
 ### cryptopanic (0/1 complete)
 
@@ -550,13 +550,13 @@ Generated: 2026-02-17T16:29
 | getGaspriceMultichain | getGasOracle | Y | Y | ok | post | Y | - |  |
 | getGaspriceMultichain | estimateGasCost | Y | Y | ok | post | Y | - |  |
 
-### ethscriptions-com (9/11 complete)
+### ethscriptions-com (10/11 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | ethscriptions-api-part1 | listEthscriptions | Y | Y | ok | - | - | - |  |
 | ethscriptions-api-part1 | getEthscription | Y | Y | ok | - | - | - |  |
-| ethscriptions-api-part1 | getEthscriptionData | Y | - | ok | - | - | - |  |
+| ethscriptions-api-part1 | getEthscriptionData | Y | Y | ok | - | - | - |  |
 | ethscriptions-api-part1 | getEthscriptionAttachment | Y | - | fail | - | - | - | Unexpected end of JSON input |
 | ethscriptions-api-part1 | checkEthscriptionExists | Y | Y | ok | - | - | - |  |
 | ethscriptions-api-part1 | checkMultipleEthscriptionsExistence | Y | Y | ok | - | - | - |  |
@@ -913,13 +913,13 @@ Generated: 2026-02-17T16:29
 | swap | getApprove | Y | - | - | - | Y | - |  |
 | swap | getAllowance | Y | - | - | - | Y | - |  |
 
-### overpass (2/3 complete)
+### overpass (3/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | osmQuery | queryRaw | Y | Y | ok | - | - | - |  |
 | osmQuery | findNearby | Y | Y | ok | - | - | - |  |
-| osmQuery | status | Y | - | ok | - | - | - |  |
+| osmQuery | status | Y | Y | ok | - | - | - |  |
 
 ### passport-xyz (0/1 complete)
 
@@ -949,7 +949,7 @@ Generated: 2026-02-17T16:29
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| read | free_read_example | Y | - | fail | post | - | - | non-JSON response |
+| read | free_read_example | Y | - | ok | post | - | - |  |
 | read | free_read_cid | Y | - | - | exec | - | - |  |
 | write | upload_text_file | Y | - | - | exec | Y | Y |  |
 
@@ -1114,13 +1114,13 @@ Generated: 2026-02-17T16:29
 | verification | getSourceFiles | Y | Y | ok | post | - | - |  |
 | verification | getSupportedChains | Y | Y | ok | post | - | - |  |
 
-### spaceid (0/3 complete)
+### spaceid (2/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | spaceid | getSupportedChains | Y | - | - | exec | - | - |  |
-| spaceid | getAddress | Y | - | - | - | - | - |  |
-| spaceid | getName | Y | - | - | - | - | - |  |
+| spaceid | getAddress | Y | Y | ok | - | - | - |  |
+| spaceid | getName | Y | Y | ok | - | - | - |  |
 
 ### stolpersteine-berlin (0/5 complete)
 

@@ -30,6 +30,17 @@ export const main = {
             tests: [
                 { _description: 'Resolve steven.sei to address', domain: 'steven.sei' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        address: { type: 'string' },
+                        code: { type: 'number' },
+                        msg: { type: 'string' }
+                    }
+                }
+            },
         },
         getName: {
             method: 'GET',
@@ -46,6 +57,17 @@ export const main = {
                     address: 'sei1whl4xw33yzgadnm23uhk4q9y39lynlptwjctxp'
                 }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        code: { type: 'number' },
+                        data: { type: 'object', properties: { name: { type: 'string' }, chainID: { type: 'number' }, errMsg: { type: 'string' } } },
+                        msg: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

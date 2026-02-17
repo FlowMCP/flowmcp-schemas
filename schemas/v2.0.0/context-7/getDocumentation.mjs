@@ -43,6 +43,10 @@ export const main = {
                 { position: { key: 'tokens', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'topic', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            output: {
+                mimeType: 'text/markdown',
+                schema: { type: 'string', description: 'Markdown-formatted library documentation snippets' }
+            },
             tests: [
                 { _description: 'Get docs for n8n', libraryId: 'n8n-io/n8n', tokens: 12000 }
             ],

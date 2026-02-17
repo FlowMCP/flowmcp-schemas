@@ -12,11 +12,11 @@ export const main = {
     routes: {
         free_read_example: {
             method: 'GET',
-            path: '/{{cid}}',
-            description: 'Returns a static IPFS-hosted example image via Pinata IPFS. Returns structured JSON response data.',
+            path: '/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/1',
+            description: 'Returns a static IPFS-hosted example (Bored Ape #1 metadata) via Pinata IPFS gateway.',
             parameters: [],
             tests: [
-                { _description: 'Load sample image from IPFS' }
+                { _description: 'Load BAYC #1 metadata from IPFS' }
             ],
         },
         free_read_cid: {

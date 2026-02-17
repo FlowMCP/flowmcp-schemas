@@ -72,6 +72,10 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
+            output: {
+                mimeType: 'image/png',
+                schema: { type: 'string', format: 'binary', description: 'Raw ethscription content data (image/text/binary)' }
+            },
             tests: [
                 { _description: 'Get raw data of ethscription #1', id: '1' }
             ],

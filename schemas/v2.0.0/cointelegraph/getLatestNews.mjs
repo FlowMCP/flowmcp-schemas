@@ -19,6 +19,10 @@ export const main = {
                 { position: { key: 'range', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1h,2h,4h,12h,24h,48h)', options: [] } },
                 { position: { key: 'maxSummaryLength', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(1000)', 'default(150)'] } }
             ],
+            output: {
+                mimeType: 'application/rss+xml',
+                schema: { type: 'string', description: 'RSS/XML feed with news articles (title, link, description, pubDate)' }
+            },
             tests: [
                 {
                     _description: 'Test Cointelegraph latest articles with default settings',
