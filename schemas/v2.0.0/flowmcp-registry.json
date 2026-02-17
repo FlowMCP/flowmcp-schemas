@@ -1,0 +1,1904 @@
+{
+    "name": "flowmcp-schemas",
+    "version": "2.0.0",
+    "description": "Official FlowMCP community schemas - Complete Collection (v2)",
+    "schemaSpec": "2.0.0",
+    "baseDir": "schemas/v2.0.0",
+    "registryType": "all",
+    "shared": [
+        {
+            "file": "_lists/evm-chains.mjs"
+        },
+        {
+            "file": "_lists/german-bundeslaender.mjs"
+        },
+        {
+            "file": "_lists/iso-country-codes.mjs"
+        },
+        {
+            "file": "_lists/iso-language-codes.mjs"
+        },
+        {
+            "file": "_lists/trading-exchanges.mjs"
+        },
+        {
+            "file": "_lists/trading-timeframes.mjs"
+        }
+    ],
+    "schemas": [
+        {
+            "namespace": "aave",
+            "file": "aave/aave.mjs",
+            "name": "AAVE Protocol API",
+            "requiredServerParams": [
+                "THEGRAPH_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "alchemy",
+            "file": "alchemy/contract-read-part1.mjs",
+            "name": "Alchemy Contract Read (Part 1)",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "alchemy",
+            "file": "alchemy/contract-read-part2.mjs",
+            "name": "Alchemy Contract Read (Part 2)",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "alchemy",
+            "file": "alchemy/node-read-part1.mjs",
+            "name": "Alchemy Node Read (Part 1)",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "alchemy",
+            "file": "alchemy/node-read-part2.mjs",
+            "name": "Alchemy Node Read (Part 2)",
+            "requiredServerParams": [
+                "ALCHEMY_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "alternative",
+            "file": "alternative-me/fearAndGreed.mjs",
+            "name": "FearGreedIndex",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/education.mjs",
+            "name": "Arbeitsagentur Ausbildungssuche API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/jobs.mjs",
+            "name": "Arbeitsagentur Jobsuche API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/jobsuche.mjs",
+            "name": "Arbeitsagentur Jobsuche",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "arbeitsagentur",
+            "file": "arbeitsagentur/professions.mjs",
+            "name": "Arbeitsagentur Berufenet API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "autobahn",
+            "file": "autobahn/traffic.mjs",
+            "name": "Autobahn App API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "avalanchemetrics",
+            "file": "avalanche/metrics-api.mjs",
+            "name": "Avalanche Metrics API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "beaconchain",
+            "file": "beaconchain/validatorQueue.mjs",
+            "name": "Ethereum Validator Queue API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "berlinevents",
+            "file": "berlin-de/events.mjs",
+            "name": "Berlin Events API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "berlinfunds",
+            "file": "berlin-de/funds.mjs",
+            "name": "Berlin Funds API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "berlinvergabe",
+            "file": "berlin-de/procurement.mjs",
+            "name": "Berlin Vergabeplattform RSS",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "berlinvhs",
+            "file": "berlin-de/vhs.mjs",
+            "name": "Berlin VHS API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "berlinwfs",
+            "file": "berlin-de/wfs-locations.mjs",
+            "name": "Berlin WFS Locations API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "bicscan",
+            "file": "bicscan/bicscan.mjs",
+            "name": "BICScan API",
+            "requiredServerParams": [
+                "BICSCAN_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "bitget",
+            "file": "bitget/bitget.mjs",
+            "name": "Bitget Crypto Tools",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "blockberry",
+            "file": "blockberry-one/mina-mainnet.mjs",
+            "name": "Blockberry Mina Mainnet API",
+            "requiredServerParams": [
+                "BLOCKBERRY_API_KEY"
+            ]
+        },
+        {
+            "namespace": "blockchaininfo",
+            "file": "blockchain-info/utxoAndBlocks.mjs",
+            "name": "Bitcoin UTXO Analytics",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "blocknative",
+            "file": "blocknative/gasprice.mjs",
+            "name": "Gas Price Estimator",
+            "requiredServerParams": [
+                "BLOCKNATIVE_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "bridgerates",
+            "file": "bridgerates/bridgerates.mjs",
+            "name": "LiFi Bridge API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "bscscan",
+            "file": "bscscan/getContractBinance.mjs",
+            "name": "BSC Scan",
+            "requiredServerParams": [
+                "BSCSCAN_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cryptoorderbook",
+            "file": "ccxt/orderbook.mjs",
+            "name": "Crypto Order Book Metrics",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "ccxt"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "tradingExchanges"
+            ]
+        },
+        {
+            "namespace": "chainlink",
+            "file": "chainlink/getLatestPrices-part1.mjs",
+            "name": "ExampleName (Part 1)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "chainlink",
+            "file": "chainlink/getLatestPrices-part2.mjs",
+            "name": "ExampleName (Part 2)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "chainlinkmulticall",
+            "file": "chainlink/getLatestPricesMulticall-part1.mjs",
+            "name": "Multicall Latest Prices (Part 1)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "chainlinkmulticall",
+            "file": "chainlink/getLatestPricesMulticall-part2.mjs",
+            "name": "Multicall Latest Prices (Part 2)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "chainlist",
+            "file": "chainlist/chainlist.mjs",
+            "name": "Chainlist Tools",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "chartimg",
+            "file": "chart-img-com/tradingview-charts.mjs",
+            "name": "Chart Image API",
+            "requiredServerParams": [
+                "CHART_IMG_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coinbasebazaar",
+            "file": "coinbase-bazaar/discovery.mjs",
+            "name": "Coinbase Bazaar x402 Discovery",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coincap",
+            "file": "coincap/assets.mjs",
+            "name": "AssetsAPI",
+            "requiredServerParams": [
+                "COINCAP_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coincap",
+            "file": "coincap/exchanges.mjs",
+            "name": "CoinCapExchanges",
+            "requiredServerParams": [
+                "COINCAP_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coincap",
+            "file": "coincap/markets.mjs",
+            "name": "CoinCapMarkets",
+            "requiredServerParams": [
+                "COINCAP_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coincap",
+            "file": "coincap/rates.mjs",
+            "name": "CoinCapRates",
+            "requiredServerParams": [
+                "COINCAP_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/coingecko-stablecoins.mjs",
+            "name": "CoinGecko Stablecoins API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/coins.mjs",
+            "name": "CoinGeckoCoins",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/derivatives.mjs",
+            "name": "CoinGeckoDerivatives",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/exchanges.mjs",
+            "name": "CoinGeckoExchanges",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/getCategories.mjs",
+            "name": "CoinGeckoCategories",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/global.mjs",
+            "name": "CoinGeckoGlobal",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/simplePrice.mjs",
+            "name": "CoinGeckoSimplePrice",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coingecko",
+            "file": "coingecko-com/trending.mjs",
+            "name": "CoinGeckoTrending",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coinmarketcap",
+            "file": "coinmarketcap-com/category.mjs",
+            "name": "CoinMarketCap Categories",
+            "requiredServerParams": [
+                "CMC_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "coinmarketcap",
+            "file": "coinmarketcap-com/cmc-index.mjs",
+            "name": "CoinMarketCap100",
+            "requiredServerParams": [
+                "CMC_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coinmarketcap",
+            "file": "coinmarketcap-com/fear-and-greed.mjs",
+            "name": "CMCCryptoFearAndGreed",
+            "requiredServerParams": [
+                "CMC_API_KEY"
+            ]
+        },
+        {
+            "namespace": "coinmarketcap",
+            "file": "coinmarketcap-com/listings.mjs",
+            "name": "CoinMarketCapListingsLatest",
+            "requiredServerParams": [
+                "CMC_API_KEY"
+            ]
+        },
+        {
+            "namespace": "cryptodata",
+            "file": "coinstats/mixed-part1.mjs",
+            "name": "Get Coins (Part 1)",
+            "requiredServerParams": [
+                "COINSTATS_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cryptodata",
+            "file": "coinstats/mixed-part2.mjs",
+            "name": "Get Coins (Part 2)",
+            "requiredServerParams": [
+                "COINSTATS_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cryptodata",
+            "file": "coinstats/mixed-part3.mjs",
+            "name": "Get Coins (Part 3)",
+            "requiredServerParams": [
+                "COINSTATS_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cointelegraph",
+            "file": "cointelegraph/getLatestNews.mjs",
+            "name": "CointelegraphRSS",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "context",
+            "file": "context-7/getDocumentation.mjs",
+            "name": "Context7 Library Docs",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cryptopanic",
+            "file": "cryptopanic/getNews.mjs",
+            "name": "CryptoPanic",
+            "requiredServerParams": [
+                "CRYPTOPANIC_API_KEY"
+            ]
+        },
+        {
+            "namespace": "cryptorank",
+            "file": "cryptorank/funds.mjs",
+            "name": "Cryptorank Funds",
+            "requiredServerParams": [
+                "CRYPTORANK_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "cryptowizards",
+            "file": "cryptowizards-net/analytics.mjs",
+            "name": "CryptoWizards Analytics API",
+            "requiredServerParams": [
+                "CRYPTOWIZARDS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "tradingTimeframes",
+                "tradingExchanges"
+            ]
+        },
+        {
+            "namespace": "dashboarddeutschland",
+            "file": "dashboard-deutschland/statistics.mjs",
+            "name": "Dashboard Deutschland API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "debank",
+            "file": "debank/portfolio.mjs",
+            "name": "DeBank Portfolio API",
+            "requiredServerParams": [
+                "DEBANK_ACCESS_KEY"
+            ]
+        },
+        {
+            "namespace": "destatis",
+            "file": "destatis/catalogue.mjs",
+            "name": "DESTATIS Catalogue",
+            "requiredServerParams": [
+                "STATISTISCHES_BUNDESAMT"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "destatis",
+            "file": "destatis/data.mjs",
+            "name": "DESTATIS Data",
+            "requiredServerParams": [
+                "STATISTISCHES_BUNDESAMT"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "defillama",
+            "file": "defilama/api.mjs",
+            "name": "DeFi Llama MCP",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "defillama",
+            "file": "defilama/coins.mjs",
+            "name": "DeFi Llama Token Prices",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "defillama",
+            "file": "defilama/yields.mjs",
+            "name": "DeFi Llama Liquidity Pools",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "dexpaprika",
+            "file": "dexpaprika/defiPrices.mjs",
+            "name": "DexPaprika DeFi Prices",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "dexscreener",
+            "file": "dexscreener-com/boosted.mjs",
+            "name": "dexscreener-boosted",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "dexscreener",
+            "file": "dexscreener-com/pairs.mjs",
+            "name": "Dexscreener Pairs",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "dexscreener",
+            "file": "dexscreener-com/tokenInfo.mjs",
+            "name": "dexscreener-tokeninfo",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "dexscreener",
+            "file": "dexscreener-com/tokenpairs.mjs",
+            "name": "DexScreener Token Pairs API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "digitaleverwaltung",
+            "file": "digitale-verwaltung/services.mjs",
+            "name": "Digitale Verwaltung API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "dip",
+            "file": "dip/documents.mjs",
+            "name": "DIP Bundestag Documents",
+            "requiredServerParams": [
+                "DIP_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "dip",
+            "file": "dip/proceedings.mjs",
+            "name": "DIP Bundestag Proceedings",
+            "requiredServerParams": [
+                "DIP_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "duneanalytics",
+            "file": "dune-analytics/farcaster.mjs",
+            "name": "FarcasterTrends",
+            "requiredServerParams": [
+                "DUNE_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "duneanalytics",
+            "file": "dune-analytics/getResults.mjs",
+            "name": "DuneAnalytics",
+            "requiredServerParams": [
+                "DUNE_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "duneanalytics",
+            "file": "dune-analytics/trendingContracts.mjs",
+            "name": "DexAndContracts",
+            "requiredServerParams": [
+                "DUNE_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "dwd",
+            "file": "dwd/weather.mjs",
+            "name": "DWD WarnWetter API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ecovisio",
+            "file": "ecovisio/counters.mjs",
+            "name": "Eco-Visio Counter API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ens",
+            "file": "ens/ens-resolution.mjs",
+            "name": "ENS & EVM Name Resolution",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "epo",
+            "file": "epo-org/patent-search.mjs",
+            "name": "European Patent Office RSS Search",
+            "requiredServerParams": [],
+            "hasHandlers": true,
+            "sharedLists": [
+                "isoLanguageCodes"
+            ]
+        },
+        {
+            "namespace": "profilejump",
+            "file": "erc725/profileJump.mjs",
+            "name": "ProfileJump",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "erc725/universalProfile.mjs",
+            "name": "ERC725UniversalProfile",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "@erc725/erc725.js"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/abi-utils.mjs",
+            "name": "Ethers ABI Utils",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/convert-utils.mjs",
+            "name": "Ethers Convert Utils",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/hash-address.mjs",
+            "name": "Ethers Hash & Address Utils",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ethers",
+            "file": "ethers/signature-utils.mjs",
+            "name": "Ethers Signature Utils",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "etherscan",
+            "file": "etherscan/getContractEthereum.mjs",
+            "name": "Etherscan",
+            "requiredServerParams": [
+                "ETHERSCAN_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "etherscan",
+            "file": "etherscan/getContractMultichain.mjs",
+            "name": "SmartContractExplorer",
+            "requiredServerParams": [
+                "ETHERSCAN_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "etherscan",
+            "file": "etherscan/getGaspriceMultichain.mjs",
+            "name": "SmartContractExplorer",
+            "requiredServerParams": [
+                "ETHERSCAN_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "ethscriptions",
+            "file": "ethscriptions-com/ethscriptions-api-part1.mjs",
+            "name": "Ethscriptions API V2 (Part 1)",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "ethscriptions",
+            "file": "ethscriptions-com/ethscriptions-api-part2.mjs",
+            "name": "Ethscriptions API V2 (Part 2)",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "feiertage",
+            "file": "feiertage/holidays.mjs",
+            "name": "Feiertage API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "geoapify",
+            "file": "geoapify/geocoding.mjs",
+            "name": "Geoapify Geocoding",
+            "requiredServerParams": [
+                "GEOAPIFY_API_KEY"
+            ]
+        },
+        {
+            "namespace": "goldrush",
+            "file": "goldrush/streaming.mjs",
+            "name": "GoldRush Streaming API",
+            "requiredServerParams": [
+                "GOLDRUSH_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "goldskynouns",
+            "file": "goldsky-nouns/goldsky-nouns.mjs",
+            "name": "Nouns DAO Subgraph",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "goldskylilnouns",
+            "file": "goldsky-nouns/lil-nouns.mjs",
+            "name": "Lil Nouns Subgraph",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "goldskynouns",
+            "file": "goldsky-nouns/nouns.mjs",
+            "name": "Nouns DAO Subgraph",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "govdata",
+            "file": "govdata-de/datasets.mjs",
+            "name": "GovData.de Open Data Portal",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "govdatasparql",
+            "file": "govdata-de/sparql-analytics.mjs",
+            "name": "GovData.de SPARQL Analytics",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "hnrss",
+            "file": "hnrss/jsonFeeds.mjs",
+            "name": "Hacker News JSON Feeds",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "honeypot",
+            "file": "honeypot/honeypot.mjs",
+            "name": "Honeypot Detector",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part1.mjs",
+            "name": "OHLCV Indicators (Part 1)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part10.mjs",
+            "name": "OHLCV Indicators (Part 10)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part2.mjs",
+            "name": "OHLCV Indicators (Part 2)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part3.mjs",
+            "name": "OHLCV Indicators (Part 3)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part4.mjs",
+            "name": "OHLCV Indicators (Part 4)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part5.mjs",
+            "name": "OHLCV Indicators (Part 5)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part6.mjs",
+            "name": "OHLCV Indicators (Part 6)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part7.mjs",
+            "name": "OHLCV Indicators (Part 7)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part8.mjs",
+            "name": "OHLCV Indicators (Part 8)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicatorts",
+            "file": "indicators/indicatorts-schema-part9.mjs",
+            "name": "OHLCV Indicators (Part 9)",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "infura",
+            "file": "infura/contract-read-part1.mjs",
+            "name": "Infura Contract Read (Part 1)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "infura",
+            "file": "infura/contract-read-part2.mjs",
+            "name": "Infura Contract Read (Part 2)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "infura",
+            "file": "infura/node-read-part1.mjs",
+            "name": "Infura Node Read (Part 1)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "infura",
+            "file": "infura/node-read-part2.mjs",
+            "name": "Infura Node Read (Part 2)",
+            "requiredServerParams": [
+                "INFURA_API_KEY"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "itausschreibung",
+            "file": "itausschreibung/tenders.mjs",
+            "name": "IT-Ausschreibung.de RSS Feed",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "jupiter",
+            "file": "jupiter/jupiter-all.mjs",
+            "name": "Jupiter Token Price Checker",
+            "requiredServerParams": [
+                "JUPITER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "klinikatlas",
+            "file": "klinikatlas/hospitals.mjs",
+            "name": "Klinikatlas Hospitals",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "klinikatlas",
+            "file": "klinikatlas/medical-codes.mjs",
+            "name": "Klinikatlas Medical Codes",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "klinikatlas",
+            "file": "klinikatlas/german-places.mjs",
+            "name": "Klinikatlas German Places",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "llama",
+            "file": "llama-fi/getPools.mjs",
+            "name": "DeFiYieldsServer",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/address-part1.mjs",
+            "name": "LUKSO BlockScout Addresses (Part 1)",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/address-part2.mjs",
+            "name": "LUKSO BlockScout Addresses (Part 2)",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/blocks.mjs",
+            "name": "LUKSO BlockScout Blocks",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/graphql.mjs",
+            "name": "LuksoMainnetSubgraph",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/internal.mjs",
+            "name": "LUKSO BlockScout Meta",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/nfts.mjs",
+            "name": "LUKSO BlockScout NFTs",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/search.mjs",
+            "name": "LUKSO BlockScout Search",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/sourceCode.mjs",
+            "name": "Contract",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/stats.mjs",
+            "name": "LUKSO BlockScout Statistics",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/tokens.mjs",
+            "name": "LUKSO BlockScout Tokens",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "luksonetwork",
+            "file": "lukso-network/transactions.mjs",
+            "name": "LUKSO BlockScout Transactions",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "mcpregistry",
+            "file": "mcp-registry/servers.mjs",
+            "name": "MCP Server Registry",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "medium",
+            "file": "medium-com/rss-feeds.mjs",
+            "name": "Medium RSS Feeds",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "memorylol",
+            "file": "memory-lol/twitterNameChanges.mjs",
+            "name": "TwitterUsernameChanges",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "minascandevnet",
+            "file": "minascan-io/mina-devnet.mjs",
+            "name": "MinaScan Devnet GraphQL API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "minascanmainnet",
+            "file": "minascan-io/mina-mainnet.mjs",
+            "name": "MinaScan Mainnet GraphQL API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/blockchainApi.mjs",
+            "name": "Moralis blockchainApi API",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/defiApi.mjs",
+            "name": "Moralis defiApi API",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/entity.mjs",
+            "name": "Moralis entity API",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/nftApi-part1.mjs",
+            "name": "Moralis nftApi API (Part 1)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/nftApi-part2.mjs",
+            "name": "Moralis nftApi API (Part 2)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/nftApi-part3.mjs",
+            "name": "Moralis nftApi API (Part 3)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/priceApi.mjs",
+            "name": "Moralis priceApi API",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/tokenApi-part1.mjs",
+            "name": "Moralis tokenApi API (Part 1)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/tokenApi-part2.mjs",
+            "name": "Moralis tokenApi API (Part 2)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/utils.mjs",
+            "name": "Moralis utils API",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/walletApi-part1.mjs",
+            "name": "Moralis walletApi API (Part 1)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "moralis",
+            "file": "moralis-com/eth/walletApi-part2.mjs",
+            "name": "Moralis walletApi API (Part 2)",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ]
+        },
+        {
+            "namespace": "mudab",
+            "file": "mudab/marine-data.mjs",
+            "name": "MUDAB Marine Environment Database API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "newsapi",
+            "file": "newsapi-org/news.mjs",
+            "name": "NewsAPI.org",
+            "requiredServerParams": [
+                "NEWSAPI_API_KEY"
+            ]
+        },
+        {
+            "namespace": "newsdata",
+            "file": "newsdata-io/getNews.mjs",
+            "name": "CryptoNews",
+            "requiredServerParams": [
+                "NEWSDATA_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "nina",
+            "file": "nina/warnings.mjs",
+            "name": "NINA Warn-App API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "oeffentlichevergabe",
+            "file": "oeffentlichevergabe/tenders.mjs",
+            "name": "Oeffentliche Vergabe API",
+            "requiredServerParams": [],
+            "requiredLibraries": [
+                "zlib"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ohlcv",
+            "file": "ohlcv/olhcv-moralis-evm.mjs",
+            "name": "Moralis Recursive OHLCV EVM and Ethereum",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains",
+                "tradingTimeframes"
+            ]
+        },
+        {
+            "namespace": "ohlcv",
+            "file": "ohlcv/olhcv-moralis-solana.mjs",
+            "name": "Moralis Recursive OHLCV Solana",
+            "requiredServerParams": [
+                "MORALIS_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "tradingTimeframes"
+            ]
+        },
+        {
+            "namespace": "ohlcv",
+            "file": "ohlcv/olhcv-solana-tracker.mjs",
+            "name": "Solana Tracker OHLCV for Solana",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "tradingTimeframes"
+            ]
+        },
+        {
+            "namespace": "oneinch",
+            "file": "oneinch/swap.mjs",
+            "name": "1inch Swap API",
+            "requiredServerParams": [
+                "ONEINCH_API_KEY"
+            ]
+        },
+        {
+            "namespace": "overpass",
+            "file": "overpass/osmQuery.mjs",
+            "name": "Overpass OSM Query",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "passportonchain",
+            "file": "passport-xyz/onchain-data.mjs",
+            "name": "Passport On-Chain Data API",
+            "requiredServerParams": [
+                "ETHEREUM_MAINNET_ALCHEMY_HTTP",
+                "ARBITRUM_MAINNET_ALCHEMY_HTTP"
+            ],
+            "requiredLibraries": [
+                "ethers"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "pegelonline",
+            "file": "pegelonline/water-levels.mjs",
+            "name": "Pegel-Online API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "pflanzenschutzmittel",
+            "file": "pflanzenschutzmittel/pesticides.mjs",
+            "name": "BVL Pflanzenschutzmittel API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "pinata",
+            "file": "pinata/read.mjs",
+            "name": "Pinata IPFS Read MCP Interface",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "pinata",
+            "file": "pinata/write.mjs",
+            "name": "Pinata SDK Upload",
+            "requiredServerParams": [
+                "PINATA_JWT",
+                "PINATA_GATEWAY"
+            ],
+            "requiredLibraries": [
+                "pinata"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "poap",
+            "file": "poap/graphql.mjs",
+            "name": "POAP GraphQL",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/gammaApi.mjs",
+            "name": "Polymarket Predictions",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/marketInfo.mjs",
+            "name": "Polymarket Predictions",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "polymarket",
+            "file": "polymarket/searchBySlug.mjs",
+            "name": "Fed Rate Cuts 2025",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "redditscanner",
+            "file": "reddit/getTokenMentions.mjs",
+            "name": "Reddit Token Mention Search",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "reisewarnungen",
+            "file": "reisewarnungen/travel-warnings.mjs",
+            "name": "Reisewarnungen API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "rugcheck",
+            "file": "rugcheck/tokenSafety.mjs",
+            "name": "Rugcheck Token Safety",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "safeglobal",
+            "file": "safe-global/transaction-service.mjs",
+            "name": "Safe Transaction Service",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "santiment",
+            "file": "santiment-net/schema.mjs",
+            "name": "SantimentAnalytics",
+            "requiredServerParams": [
+                "SANTIMENT_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/activityEVM.mjs",
+            "name": "Sim by Dune - Activity Feed",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "requiredLibraries": [
+                "indicatorts"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/balancesEVM.mjs",
+            "name": "Sim by Dune - Token Balances",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/balancesSVM.mjs",
+            "name": "Sim by Dune - SVM Token Balances",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/collectiblesEVM.mjs",
+            "name": "Sim by Dune - NFT Collectibles",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/tokenHoldersEVM.mjs",
+            "name": "Sim by Dune - Token Holders",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/tokenInfoEVM.mjs",
+            "name": "Sim by Dune - Token Info",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/transactionsEVM.mjs",
+            "name": "Sim by Dune - Transactions",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "simdune",
+            "file": "simdune/transactionsSVM.mjs",
+            "name": "Sim by Dune - SVM Transactions",
+            "requiredServerParams": [
+                "DUNE_SIM_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "smard",
+            "file": "smard/energy.mjs",
+            "name": "SMARD Energy Data API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "snapshot",
+            "file": "snapshot/snapshot.mjs",
+            "name": "Snapshot DAO Proposals",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--additionalRoutes.mjs",
+            "name": "TokenStatsAPI",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ]
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--chartRoutes.mjs",
+            "name": "TokenChartAPI",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--pnlRoutes.mjs",
+            "name": "PnL Analytics API",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--priceEndpoints.mjs",
+            "name": "TokenPriceAPI",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--tokenEndpoints-part1.mjs",
+            "name": "TokenAPI (Part 1)",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--tokenEndpoints-part2.mjs",
+            "name": "TokenAPI (Part 2)",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--topTraderRoutes.mjs",
+            "name": "TopTradersAPI",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--tradeEndpoints.mjs",
+            "name": "TokenTradeTracker",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solanatracker",
+            "file": "solanatracker-io/--walletEndpoints.mjs",
+            "name": "WalletExplorer",
+            "requiredServerParams": [
+                "SOLANA_TRACKER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solscan",
+            "file": "solscan-io/getChainInfo.mjs",
+            "name": "SolscanChainInfo",
+            "requiredServerParams": [
+                "SOLSCAN_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "solsniffer",
+            "file": "solsniffer-com/analysis.mjs",
+            "name": "SolSniffer",
+            "requiredServerParams": [
+                "SOLSNIFFER_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "sourcify",
+            "file": "sourcify/verification.mjs",
+            "name": "Sourcify Contract Verification",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "spaceid",
+            "file": "spaceid/spaceid.mjs",
+            "name": "SPACE ID Web3 Name API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "stolpersteineberl",
+            "file": "stolpersteine-berlin/memorial-stones.mjs",
+            "name": "Stolpersteine Berlin API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "strahlenschutz",
+            "file": "strahlenschutz/radiation.mjs",
+            "name": "BfS Strahlenschutz ODL API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "swaggerhub",
+            "file": "swaggerhub-com/api-registry.mjs",
+            "name": "SwaggerHub API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "taapi",
+            "file": "taapi/indicators-part1.mjs",
+            "name": "TAAPI.IO Technical Indicators (Part 1)",
+            "requiredServerParams": [
+                "TAAPI_SECRET"
+            ]
+        },
+        {
+            "namespace": "taapi",
+            "file": "taapi/indicators-part2.mjs",
+            "name": "TAAPI.IO Technical Indicators (Part 2)",
+            "requiredServerParams": [
+                "TAAPI_SECRET"
+            ]
+        },
+        {
+            "namespace": "tagesschau",
+            "file": "tagesschau/news.mjs",
+            "name": "Tagesschau API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "talentprotocol",
+            "file": "talent-protocol/advancedSearch.mjs",
+            "name": "Talent Protocol - Advanced Profile Search",
+            "requiredServerParams": [
+                "TALENT_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "tally",
+            "file": "tally/governance.mjs",
+            "name": "Tally Governance API",
+            "requiredServerParams": [
+                "TALLY_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "ted",
+            "file": "ted/procurement.mjs",
+            "name": "TED EU Public Procurement API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "tenderly",
+            "file": "tenderly/public-contracts.mjs",
+            "name": "Tenderly Public Contracts",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "thegraph",
+            "file": "thegraph/getNewUniswapPools.mjs",
+            "name": "UniswapPools",
+            "requiredServerParams": [
+                "THEGRAPH_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "thegraph",
+            "file": "thegraph/getSchema.mjs",
+            "name": "TheGraphSubgraphTools",
+            "requiredServerParams": [
+                "THEGRAPH_API_KEY"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "twitter",
+            "file": "twitter/search.mjs",
+            "name": "Twitter Recent Search",
+            "requiredServerParams": [
+                "TWITTER_BEARER_TOKEN"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "umweltbundesamt",
+            "file": "umweltbundesamt/air-quality.mjs",
+            "name": "Umweltbundesamt Air Quality API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "uniswap",
+            "file": "uniswap-pools/uniswap-pool-explorer.mjs",
+            "name": "Uniswap Pool Explorer",
+            "requiredServerParams": [
+                "THEGRAPH_API_KEY"
+            ],
+            "hasHandlers": true,
+            "sharedLists": [
+                "evmChains"
+            ]
+        },
+        {
+            "namespace": "uniswap",
+            "file": "uniswap-v3/price-discovery.mjs",
+            "name": "Uniswap V3 Price Server",
+            "requiredServerParams": [
+                "ETHEREUM_MAINNET_ALCHEMY_HTTP",
+                "POLYGON_MAINNET_ALCHEMY_HTTP",
+                "ARBITRUM_MAINNET_ALCHEMY_HTTP",
+                "OPTIMISM_MAINNET_ALCHEMY_HTTP"
+            ],
+            "requiredLibraries": [
+                "ethers",
+                "@thanpolas/univ3prices"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "vag",
+            "file": "vag/transit.mjs",
+            "name": "VAG Nuernberg Transit API",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "webcareer",
+            "file": "web3-career/job-listings.mjs",
+            "name": "Web3 Career Job API",
+            "requiredServerParams": [
+                "WEB3_CAREER_API_TOKEN"
+            ],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "wormholescan",
+            "file": "wormholescan/wormholescan.mjs",
+            "name": "Wormhole Metrics API",
+            "requiredServerParams": []
+        },
+        {
+            "namespace": "xpayment",
+            "file": "x402/ping.mjs",
+            "name": "x402 Experimental MCP Interface",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "zvgportal",
+            "file": "zvg-portal/auctions.mjs",
+            "name": "ZVG Portal Foreclosure Auctions",
+            "requiredServerParams": [],
+            "hasHandlers": true,
+            "sharedLists": [
+                "germanBundeslaender"
+            ]
+        },
+        {
+            "namespace": "zvgportal",
+            "file": "zvg-portal/zwangsversteigerungen.mjs",
+            "name": "ZVG Portal Zwangsversteigerungen",
+            "requiredServerParams": [],
+            "hasHandlers": true,
+            "sharedLists": [
+                "germanBundeslaender"
+            ]
+        }
+    ]
+}
