@@ -21,7 +21,21 @@ export const main = {
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(10)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List 5 exchanges', limit: 5 },
+                { _description: 'List exchanges with offset', offset: 2 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        data: { type: 'array', items: { type: 'object', properties: { exchangeId: { type: 'string' }, name: { type: 'string' }, rank: { type: 'string' }, percentTotalVolume: { type: 'string' }, volumeUsd: { type: 'string' }, tradingPairs: { type: 'string' }, socket: { type: 'boolean' }, exchangeUrl: { type: 'string' }, updated: { type: 'number' } } } }
+                    }
+                }
+            },
         },
         getExchangeById: {
             method: 'GET',
@@ -29,7 +43,20 @@ export const main = {
             description: 'Retrieve details for a specific exchange via CoinCap — query by exchange. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch Binance.US exchange', exchange: 'binanceus' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        data: { type: 'object', properties: { exchangeId: { type: 'string' }, name: { type: 'string' }, rank: { type: 'string' }, percentTotalVolume: { type: 'string' }, volumeUsd: { type: 'string' }, tradingPairs: { type: 'string' }, socket: { type: 'boolean' }, exchangeUrl: { type: 'string' }, updated: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

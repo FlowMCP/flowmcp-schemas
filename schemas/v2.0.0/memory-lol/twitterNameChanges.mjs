@@ -17,7 +17,20 @@ export const main = {
             description: 'Fetch username change history for a Twitter user via memoryLol — query by screen name.',
             parameters: [
                 { position: { key: 'screen_name', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^[A-Za-z0-9_]{1,15}$)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Valid handle', screen_name: 'OSINT_Ukraine' },
+                { _description: 'Non-existent handle', screen_name: 'no_user_123456' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        accounts: { type: 'array', items: { type: 'object', properties: { id: { type: 'number' }, id_str: { type: 'string' }, screen_names: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

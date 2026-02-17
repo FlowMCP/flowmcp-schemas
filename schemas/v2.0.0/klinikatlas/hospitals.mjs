@@ -14,37 +14,150 @@ export const main = {
             method: 'GET',
             path: '/locations.json',
             description: 'Get all hospital locations in Germany with name, address, bed count, coordinates, and link to detail page.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all hospital locations' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            street: { type: 'string' },
+                            city: { type: 'string' },
+                            zip: { type: 'string' },
+                            phone: { type: 'string' },
+                            mail: { type: 'string' },
+                            beds_number: { type: 'number' },
+                            latitude: { type: 'string' },
+                            longitude: { type: 'string' },
+                            link: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getIcdCodes: {
             method: 'GET',
             path: '/icd_codes.json',
             description: 'Get all ICD diagnostic codes used in German hospitals with code and description.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all ICD codes' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            icdcode: { type: 'string' },
+                            description: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getOpsCodes: {
             method: 'GET',
             path: '/ops_codes.json',
             description: 'Get all OPS procedure codes (Operationen- und Prozedurenschluessel) used in German hospitals.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all OPS procedure codes' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            opscode: { type: 'string' },
+                            description: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getStateStatistics: {
             method: 'GET',
             path: '/states.json',
             description: 'Get healthcare statistics per federal state including case numbers, caregiver counts, and hospital counts.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get state-level healthcare statistics' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            cases_number: { type: 'number' },
+                            caregivers_number: { type: 'number' },
+                            doctors_number: { type: 'number' },
+                            location_number: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         getGermanPlaces: {
             method: 'GET',
             path: '/german-places.json',
             description: 'Get German cities and places with postal code, municipality, district, and coordinates for hospital location lookup.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get German places with coordinates' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            p: { type: 'string' },
+                            c: { type: 'string' },
+                            m: { type: 'string' },
+                            ct: { type: 'number' },
+                            d: { type: 'string' },
+                            lt: { type: 'string' },
+                            ln: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getGermanStates: {
             method: 'GET',
             path: '/german-states.json',
             description: 'Get all 16 German federal states with their geographic center coordinates. via klinikatlas.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get German states with coordinates' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            state: { type: 'string' },
+                            lat: { type: 'string' },
+                            lon: { type: 'string' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

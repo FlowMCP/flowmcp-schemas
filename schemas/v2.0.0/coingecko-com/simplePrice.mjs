@@ -17,7 +17,20 @@ export const main = {
             parameters: [
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'array()', options: [] } },
                 { position: { key: 'vs_currencies', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test getSimplePrice - should return BTC in USD', ids: ['bitcoin', 'ethereum'], vs_currencies: 'usd' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        bitcoin: { type: 'object', properties: { usd: { type: 'number' } } },
+                        ethereum: { type: 'object', properties: { usd: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getTokenPrice: {
             method: 'GET',
@@ -27,7 +40,24 @@ export const main = {
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'contract_addresses', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'vs_currencies', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test getTokenPrice - should return PEPE token price in USD on Ethereum',
+                    id: 'ethereum',
+                    contract_addresses: '0x6982508145454ce325ddbe47a25d4ec3d2311933',
+                    vs_currencies: 'usd'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        '0x6982508145454ce325ddbe47a25d4ec3d2311933': { type: 'object', properties: { usd: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }
@@ -38,7 +68,8 @@ export const handlers = ( { sharedLists, libraries } ) => ( {
         postRequest: async ( { response, struct, payload } ) => {
             response = Object
             .entries( response )
-            .map( ( [ id, prices ] ) => ( { id, prices } ) )return { response }
+            .map( ( [ id, prices ] ) => ( { id, prices } ) )
+            return { response }
         }
     },
     getTokenPrice: {

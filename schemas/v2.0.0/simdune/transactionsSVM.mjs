@@ -17,13 +17,36 @@ export const main = {
     routes: {
         getTransactionsSVM: {
             method: 'GET',
-            path: '/svm/transactions/{{walletAddress}}',
+            path: '/svm/transactions/:walletAddress',
             description: 'Get detailed transaction history for an SVM address, ordered by descending block time with pagination support.',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^[1-9A-HJ-NP-Za-km-z]{32,44}$)'] } },
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(SOLANA)', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get transactions on Solana with default limit',
+                    walletAddress: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
+                    chainName: 'SOLANA',
+                    limit: '10'
+                },
+                {
+                    _description: 'Get recent transactions on Solana with small limit',
+                    walletAddress: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
+                    chainName: 'SOLANA',
+                    limit: '5'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        transactions: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         }
     }
 }

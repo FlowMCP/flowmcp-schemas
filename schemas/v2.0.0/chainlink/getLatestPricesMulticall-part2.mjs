@@ -26,31 +26,46 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Linea Mainnet (Consensys zkEVM) in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Linea' }
+            ],
         },
         getAllLatestPricesMantle: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Mantle Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Mantle' }
+            ],
         },
         getAllLatestPricesScroll: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Scroll Mainnet (zkEVM L2) in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Scroll' }
+            ],
         },
         getAllLatestPricesZksync: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on zkSync Era Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on zkSync' }
+            ],
         },
         getAllLatestPricesCelo: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Celo Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Celo' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

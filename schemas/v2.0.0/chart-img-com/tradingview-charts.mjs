@@ -27,7 +27,10 @@ export const main = {
                 { position: { key: 'height', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(300)', 'max(1500)', 'default(800)', 'optional()'] } },
                 { position: { key: 'session', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(regular,extended)', options: ['default(extended)', 'optional()'] } },
                 { position: { key: 'timezone', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['default(America/New_York)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Screenshot Tesla stock', symbol: 'NASDAQ:TSLA', interval: '15m', theme: 'dark', height: 600 }
+            ],
         }
     }
 }

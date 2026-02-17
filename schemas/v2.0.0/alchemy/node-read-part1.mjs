@@ -27,7 +27,11 @@ export const main = {
             description: 'Get the latest block number and timestamp for a selected EVM chain.',
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get latest block number on Ethereum', chain: 'ETHEREUM_MAINNET' },
+                { _description: 'Get latest block number on Base', chain: 'BASE_MAINNET' }
+            ],
         },
         getBalance: {
             method: 'GET',
@@ -36,7 +40,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get ETH balance of USDC contract',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getGasPrice: {
             method: 'GET',
@@ -44,7 +55,11 @@ export const main = {
             description: 'Get the current gas price in wei and gwei for the selected chain, including EIP-1559 maxFeePerGas when available.',
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get current gas price on Ethereum', chain: 'ETHEREUM_MAINNET' },
+                { _description: 'Get current gas price on Polygon', chain: 'POLYGON_MAINNET' }
+            ],
         },
         getBlock: {
             method: 'GET',
@@ -53,7 +68,10 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'blockNumber', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum block 17000000 details', chain: 'ETHEREUM_MAINNET', blockNumber: 17000000 }
+            ],
         },
         getCode: {
             method: 'GET',
@@ -62,7 +80,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Check if USDC address is a contract',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getTransactionCount: {
             method: 'GET',
@@ -71,7 +96,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get nonce of USDC contract on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getTransactionByHash: {
             method: 'GET',
@@ -80,7 +112,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get historic Ethereum transaction details',
+                    chain: 'ETHEREUM_MAINNET',
+                    txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
+                }
+            ],
         },
         getTransactionReceipt: {
             method: 'GET',
@@ -89,7 +128,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get receipt of historic Ethereum transaction',
+                    chain: 'ETHEREUM_MAINNET',
+                    txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

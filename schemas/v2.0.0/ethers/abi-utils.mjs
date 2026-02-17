@@ -19,7 +19,14 @@ export const main = {
             parameters: [
                 { position: { key: 'functionSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'data', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]+$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Decode ERC-20 transfer calldata',
+                    functionSignature: 'function transfer(address to, uint256 amount)',
+                    data: '0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000'
+                }
+            ],
         },
         encodeFunctionData: {
             method: 'GET',
@@ -28,7 +35,14 @@ export const main = {
             parameters: [
                 { position: { key: 'functionSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'args', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default([])'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Encode ERC-20 transfer call',
+                    functionSignature: 'function transfer(address to, uint256 amount)',
+                    args: '["0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045", "1000000000000000000"]'
+                }
+            ],
         },
         decodeEventLog: {
             method: 'GET',
@@ -38,7 +52,15 @@ export const main = {
                 { position: { key: 'eventSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'data', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'topics', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(4)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Decode ERC-20 Transfer event',
+                    eventSignature: 'event Transfer(address indexed from, address indexed to, uint256 value)',
+                    data: '0x0000000000000000000000000000000000000000000000000de0b6b3a7640000',
+                    topics: '["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef","0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045","0x000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec7"]'
+                }
+            ],
         },
         computeSelector: {
             method: 'GET',
@@ -46,7 +68,11 @@ export const main = {
             description: 'Compute the 4-byte function selector from a function signature string (e.g. \'transfer(address,uint256)\').',
             parameters: [
                 { position: { key: 'signature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Compute transfer selector', signature: 'transfer(address,uint256)' },
+                { _description: 'Compute approve selector', signature: 'approve(address,uint256)' }
+            ],
         },
         encodeParameters: {
             method: 'GET',
@@ -55,7 +81,14 @@ export const main = {
             parameters: [
                 { position: { key: 'types', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(4)'] } },
                 { position: { key: 'values', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Encode address and uint256',
+                    types: '["address","uint256"]',
+                    values: '["0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045","1000000000000000000"]'
+                }
+            ],
         },
         decodeParameters: {
             method: 'GET',
@@ -64,7 +97,14 @@ export const main = {
             parameters: [
                 { position: { key: 'types', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(4)'] } },
                 { position: { key: 'data', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]+$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Decode address and uint256',
+                    types: '["address","uint256"]',
+                    data: '0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

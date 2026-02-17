@@ -66,7 +66,21 @@ export const main = {
                 { position: { key: 'riskScore-greaterThan', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'riskScore-equals', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'riskScore-lessThan', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List top coins by default sorting', limit: 10 },
+                { _description: 'Search coins by name', name: 'bitcoin', limit: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, icon: { type: 'string' }, name: { type: 'string' }, symbol: { type: 'string' }, rank: { type: 'number' }, price: { type: 'number' }, priceBtc: { type: 'number' }, volume: { type: 'number' }, marketCap: { type: 'number' }, availableSupply: { type: 'number' }, totalSupply: { type: 'number' }, fullyDilutedValuation: { type: 'number' }, liquidityScore: { type: 'number' }, volatilityScore: { type: 'number' }, marketCapScore: { type: 'number' }, riskScore: { type: 'number' }, avgChange: { type: 'number' }, priceChange1h: { type: 'number' }, priceChange1d: { type: 'number' }, priceChange1w: { type: 'number' }, redditUrl: { type: 'string' }, twitterUrl: { type: 'string' }, contractAddresses: { type: 'array', items: { type: 'string' } }, explorers: { type: 'array', items: { type: 'string' } }, color: { type: 'string' }, slug: { type: 'string' } } } },
+                        meta: { type: 'object', properties: { page: { type: 'number' }, limit: { type: 'number' }, itemCount: { type: 'number' }, pageCount: { type: 'number' }, hasPreviousPage: { type: 'boolean' }, hasNextPage: { type: 'boolean' } } }
+                    }
+                }
+            },
         },
         getCoinById: {
             method: 'GET',
@@ -75,7 +89,41 @@ export const main = {
             parameters: [
                 { position: { key: 'coinId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'currency', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Bitcoin details', coinId: 'bitcoin' },
+                { _description: 'Get Ethereum details in EUR', coinId: 'ethereum', currency: 'EUR' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        id: { type: 'string' },
+                        icon: { type: 'string' },
+                        name: { type: 'string' },
+                        symbol: { type: 'string' },
+                        rank: { type: 'number' },
+                        price: { type: 'number' },
+                        priceBtc: { type: 'number' },
+                        volume: { type: 'number' },
+                        marketCap: { type: 'number' },
+                        availableSupply: { type: 'number' },
+                        totalSupply: { type: 'number' },
+                        fullyDilutedValuation: { type: 'number' },
+                        priceChange1h: { type: 'number' },
+                        priceChange1d: { type: 'number' },
+                        priceChange1w: { type: 'number' },
+                        redditUrl: { type: 'string' },
+                        websiteUrl: { type: 'string' },
+                        twitterUrl: { type: 'string' },
+                        contractAddresses: { type: 'array', items: { type: 'string' } },
+                        explorers: { type: 'array', items: { type: 'string' } },
+                        color: { type: 'string' },
+                        slug: { type: 'string' }
+                    }
+                }
+            },
         },
         getCoinChartById: {
             method: 'GET',
@@ -84,7 +132,21 @@ export const main = {
             parameters: [
                 { position: { key: 'coinId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum([\'all\',\'24h\',\'1w\',\'1m\',\'3m\',\'6m\',\'1y\'])', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Bitcoin 24h chart', coinId: 'bitcoin', period: '24h' },
+                { _description: 'Get Ethereum 1-week chart', coinId: 'ethereum', period: '1w' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'array',
+                        items: { type: 'number' }
+                    }
+                }
+            },
         },
         getCoinAvgPrice: {
             method: 'GET',
@@ -93,7 +155,21 @@ export const main = {
             parameters: [
                 { position: { key: 'coinId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'timestamp', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Bitcoin avg price on Jan 1 2024', coinId: 'bitcoin', timestamp: 1704067200 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        USD: { type: 'number' },
+                        BTC: { type: 'number' },
+                        ETH: { type: 'number' }
+                    }
+                }
+            },
         },
         getCoinExchangePrice: {
             method: 'GET',
@@ -104,13 +180,48 @@ export const main = {
                 { position: { key: 'from', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'to', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'timestamp', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'BTC to ETH price on Binance at timestamp', exchange: 'Binance', from: 'BTC', to: 'ETH', timestamp: 1636315200 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        price: { type: 'number' }
+                    }
+                }
+            },
         },
         getTickerExchanges: {
             method: 'GET',
             path: '/tickers/exchanges',
             description: 'Get a list of supported exchanges via cryptodata. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get exchanges listing Bitcoin', coinId: 'bitcoin' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            volume24h: { type: 'number' },
+                            url: { type: 'string' },
+                            id: { type: 'string' },
+                            rank: { type: 'number' },
+                            volume7d: { type: 'number' },
+                            change24h: { type: 'number' },
+                            volume1m: { type: 'number' },
+                            name: { type: 'string' },
+                            icon: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getTickerMarkets: {
             method: 'GET',
@@ -124,13 +235,44 @@ export const main = {
                 { position: { key: 'toCoin', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'coinId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'onlyVerified', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC trading pairs on Binance', coinId: 'bitcoin', exchange: 'binance' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        result: { type: 'array', items: { type: 'object', properties: { _created_at: { type: 'string' }, _updated_at: { type: 'string' }, exchange: { type: 'string' }, from: { type: 'string' }, to: { type: 'string' }, pair: { type: 'string' }, price: { type: 'number' }, pairPrice: { type: 'number' }, volume: { type: 'number' }, pairVolume: { type: 'number' } } } },
+                        meta: { type: 'object', properties: { page: { type: 'number' }, limit: { type: 'number' }, itemCount: { type: 'number' }, pageCount: { type: 'number' }, hasPreviousPage: { type: 'boolean' }, hasNextPage: { type: 'boolean' } } }
+                    }
+                }
+            },
         },
         getBlockchains: {
             method: 'GET',
             path: '/wallet/blockchains',
             description: 'Get a list of supported blockchains by CoinStats via cryptodata. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'List all supported blockchains' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            connectionId: { type: 'string' },
+                            name: { type: 'string' },
+                            icon: { type: 'string' },
+                            chain: { type: 'string' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

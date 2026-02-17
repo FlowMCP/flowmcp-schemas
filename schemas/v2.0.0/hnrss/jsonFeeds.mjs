@@ -25,7 +25,27 @@ export const main = {
                 { position: { key: 'description', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(1)', 'optional()'] } },
                 { position: { key: 'author', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Front page posts', feedPath: 'frontpage.jsonfeed' },
+                { _description: 'Ask HN with 10+ comments', feedPath: 'ask.jsonfeed', comments: 10 },
+                { _description: 'Search for React Native', feedPath: 'newest.jsonfeed', q: 'React Native' },
+                { _description: 'Favorites from user edavis', feedPath: 'favorites.jsonfeed', id: 'edavis' },
+                { _description: 'Replies to user jerf', feedPath: 'replies.jsonfeed', id: 'jerf' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        version: { type: 'string' },
+                        title: { type: 'string' },
+                        description: { type: 'string' },
+                        home_page_url: { type: 'string' },
+                        items: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' }, content_html: { type: 'string' }, url: { type: 'string' }, external_url: { type: 'string' }, date_published: { type: 'string' }, author: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

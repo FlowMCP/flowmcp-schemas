@@ -18,7 +18,21 @@ export const main = {
             method: 'POST',
             path: '/',
             description: 'Retrieves the first 1000 proposals ordered by createdBlock in ascending order. via Goldsky.',
-            parameters: []
+            parameters: [
+                { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['optional()'] } }
+            ],
+            tests: [
+                { _description: 'Fetch first 1000 proposals from Lil Nouns subgraph', query: '{ proposals(first: 5) { id title status forVotes againstVotes } }' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' }
+                    }
+                }
+            },
         },
         getProposalById: {
             method: 'POST',
@@ -26,7 +40,19 @@ export const main = {
             description: 'Fetch a single proposal by its numeric ID via Goldsky. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['regex(^\\\\d+$)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch proposal with ID 327', id: '327' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

@@ -20,7 +20,10 @@ export const main = {
             method: 'GET',
             path: '/chains',
             description: 'List available blockchain aliases via Etherscan. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch available chains' }
+            ],
         },
         getSmartContractAbi: {
             method: 'GET',
@@ -29,7 +32,45 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISN_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,CRONOS_MAINNET,MOONBEAM_MAINNET,MOONRIVER_MAINNET,ARBITRUM_NOVA_MAINNET,BLAST_MAINNET,SONIC_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,BITTORRENT_MAINNET,APECHAIN_MAINNET,ABSTRACT_MAINNET,WORLD_MAINNET,SWELLCHAIN_MAINNET,TAIKO_MAINNET,SOPHON_MAINNET,WEMIX3_MAINNET,XAI_MAINNET,XINFIN_MAINNET,MEMECORE_MAINNET,SEPOLIA_TESTNET,HOLESKY_TESTNET,BASE_SEPOLIA_TESTNET,POLYGON_AMOY_TESTNET,BINANCE_TESTNET,AVALANCHE_FUJI_TESTNET,ARBITRUM_SEPOLIA_TESTNET,OPTIMISN_SEPOLIA_TESTNET,LINEA_SEPOLIA_TESTNET,SCROLL_SEPOLIA_TESTNET,ZKSYNC_SEPOLIA_TESTNET,ABSTRACT_SEPOLIA_TESTNET,BLAST_SEPOLIA_TESTNET,BERACHAIN_BEPOLIA_TESTNET,BITTORRENT_TESTNET,CELO_ALFAJORES_TESTNET,FRAXTAL_TESTNET,MANTLE_SEPOLIA_TESTNET,MEMECORE_TESTNET,MOONBASE_ALPHA_TESTNET,POLYGONZK_CARDONA_TESTNET,SONIC_BLAZE_TESTNET,SOPHON_SEPOLIA_TESTNET,SWELLCHAIN_TESTNET,TAIKO_HEKLA_L2_TESTNET,UNICHAIN_SEPOLIA_TESTNET,WEMIX3_TESTNET,WORLD_SEPOLIA_TESTNET,XAI_SEPOLIA_TESTNET,XINFIN_TESTNET,APECHAIN_CURTIS_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Uniswap V2 Factory on Ethereum',
+                    chainName: 'ETHEREUM_MAINNET',
+                    address: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
+                },
+                {
+                    _description: 'Uniswap V3 Factory on Ethereum',
+                    chainName: 'ETHEREUM_MAINNET',
+                    address: '0x1F98431c8aD98523631AE4a59f267346ea31F984'
+                },
+                {
+                    _description: 'QuickSwap Factory on Polygon',
+                    chainName: 'POLYGON_MAINNET',
+                    address: '0x5757371414417b8c6caad45baef941abc7d3ab32'
+                },
+                {
+                    _description: 'PancakeSwap V2 Factory on BNB Chain',
+                    chainName: 'BINANCE_MAINNET',
+                    address: '0xca143ce32fe78f1f7019d7d551a6402fc5350c73'
+                },
+                {
+                    _description: 'Trader Joe V2.1 Factory on Avalanche',
+                    chainName: 'AVALANCHE_CCHAIN',
+                    address: '0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         },
         getSourceCode: {
             method: 'GET',
@@ -38,7 +79,40 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISN_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,CRONOS_MAINNET,MOONBEAM_MAINNET,MOONRIVER_MAINNET,ARBITRUM_NOVA_MAINNET,BLAST_MAINNET,SONIC_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,BITTORRENT_MAINNET,APECHAIN_MAINNET,ABSTRACT_MAINNET,WORLD_MAINNET,SWELLCHAIN_MAINNET,TAIKO_MAINNET,SOPHON_MAINNET,WEMIX3_MAINNET,XAI_MAINNET,XINFIN_MAINNET,MEMECORE_MAINNET,SEPOLIA_TESTNET,HOLESKY_TESTNET,BASE_SEPOLIA_TESTNET,POLYGON_AMOY_TESTNET,BINANCE_TESTNET,AVALANCHE_FUJI_TESTNET,ARBITRUM_SEPOLIA_TESTNET,OPTIMISN_SEPOLIA_TESTNET,LINEA_SEPOLIA_TESTNET,SCROLL_SEPOLIA_TESTNET,ZKSYNC_SEPOLIA_TESTNET,ABSTRACT_SEPOLIA_TESTNET,BLAST_SEPOLIA_TESTNET,BERACHAIN_BEPOLIA_TESTNET,BITTORRENT_TESTNET,CELO_ALFAJORES_TESTNET,FRAXTAL_TESTNET,MANTLE_SEPOLIA_TESTNET,MEMECORE_TESTNET,MOONBASE_ALPHA_TESTNET,POLYGONZK_CARDONA_TESTNET,SONIC_BLAZE_TESTNET,SOPHON_SEPOLIA_TESTNET,SWELLCHAIN_TESTNET,TAIKO_HEKLA_L2_TESTNET,UNICHAIN_SEPOLIA_TESTNET,WEMIX3_TESTNET,WORLD_SEPOLIA_TESTNET,XAI_SEPOLIA_TESTNET,XINFIN_TESTNET,APECHAIN_CURTIS_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Uniswap V2 Factory on Ethereum',
+                    chainName: 'ETHEREUM_MAINNET',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                },
+                {
+                    _description: 'QuickSwap Factory on Polygon',
+                    chainName: 'POLYGON_MAINNET',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                },
+                {
+                    _description: 'PancakeSwap V2 Factory on BNB Chain',
+                    chainName: 'BINANCE_MAINNET',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                },
+                {
+                    _description: 'Trader Joe V2.1 Factory on Avalanche',
+                    chainName: 'AVALANCHE_CCHAIN',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

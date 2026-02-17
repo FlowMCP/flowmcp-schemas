@@ -18,19 +18,28 @@ export const main = {
             method: 'POST',
             path: '/',
             description: 'Simple GraphQL query to retrieve the __typename root for basic connectivity test.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Simple __typename query test' }
+            ],
         },
         getSchemaDefinition: {
             method: 'POST',
             path: '/',
             description: 'Returns the full GraphQL schema via introspection via POAP. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Returns full GraphQL schema' }
+            ],
         },
         getPredefinedQueryList: {
             method: 'GET',
             path: '/',
             description: 'List all available predefined GraphQL queries for the POAP subgraph via the query catalog endpoint.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Sample query for entity data' }
+            ],
         },
         executePrefinedQuery: {
             method: 'POST',
@@ -38,7 +47,53 @@ export const main = {
             description: 'Execute a predefined GraphQL query on the POAP subgraph — select a query by ID from available templates.',
             parameters: [
                 { position: { key: 'queryId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(poapsFromBerlin,highestAttendanceLastYear,collectorPoaps,mostTransferredPoaps,dropsBasicInfo,poapsByChain,artistsList,recentMoments,topCollectors,mostExclusiveDrops,mostPopularDrops)', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Returns the top 5 POAP drops from Berlin with the most tokens minted, including event details.',
+                    queryId: 'poapsFromBerlin'
+                },
+                {
+                    _description: 'Returns the top 5 POAP drops from 2024 with the most tokens minted, including event details and attendance count.',
+                    queryId: 'highestAttendanceLastYear'
+                },
+                {
+                    _description: 'Retrieves the total POAP count for a specific wallet address and shows a sample of their collected events.',
+                    queryId: 'collectorPoaps'
+                },
+                {
+                    _description: 'Identifies the POAPs with the highest transfer counts, which may indicate high value or popularity in secondary markets.',
+                    queryId: 'mostTransferredPoaps'
+                },
+                {
+                    _description: 'Retrieves basic information about POAP drops including location data, useful for geographic distribution analysis.',
+                    queryId: 'dropsBasicInfo'
+                },
+                {
+                    _description: 'Examines the blockchain network distribution of POAPs, showing which chains are most commonly used for minting.',
+                    queryId: 'poapsByChain'
+                },
+                {
+                    _description: 'Lists artists who have contributed to POAP designs, providing insight into the creative contributors to the ecosystem.',
+                    queryId: 'artistsList'
+                },
+                {
+                    _description: 'Explores user-created moments associated with POAPs, showing how people memorialize their experiences with digital collectibles.',
+                    queryId: 'recentMoments'
+                },
+                {
+                    _description: 'Identifies the most prolific POAP collectors, whose collections could be further analyzed for thematic preferences.',
+                    queryId: 'topCollectors'
+                },
+                {
+                    _description: 'Examines the rarity spectrum of POAP drops by finding those with the fewest minted tokens, indicating exclusivity.',
+                    queryId: 'mostExclusiveDrops'
+                },
+                {
+                    _description: 'Identifies the most popular POAP events of all time based on total participation, showing which events resonated most with the community.',
+                    queryId: 'mostPopularDrops'
+                }
+            ],
         },
         querySubgraph: {
             method: 'POST',
@@ -46,7 +101,10 @@ export const main = {
             description: 'Execute a custom raw GraphQL query on the POAP subgraph — pass any valid GraphQL query string directly.',
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Sample query for entity data', query: 'query { collections_artists { name } }' }
+            ],
         }
     }
 }

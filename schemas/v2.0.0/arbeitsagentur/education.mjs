@@ -20,7 +20,10 @@ export const main = {
             parameters: [
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } },
                 { position: { key: 'size', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get first page of apprenticeships', size: 5 }
+            ],
         },
         searchStudyPrograms: {
             method: 'GET',
@@ -30,7 +33,10 @@ export const main = {
                 { position: { key: 'sw', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } },
                 { position: { key: 'size', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for computer science programs', sw: 'informatik', size: 5 }
+            ],
         }
     }
 }

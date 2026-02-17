@@ -25,17 +25,29 @@ export const main = {
     routes: {
         getRecursiveOhlcvSolana: {
             method: 'GET',
-            path: '/',
+            path: '/token/:chain/pairs/:pairAddress/ohlcv',
             description: 'Fetch OHLCV data recursively until max length or iteration limit is reached. Required: chain, pairAddress, timeframe, fromDateAmount, fromDateUnit, maxResultLength. Optional filters: currency.',
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(mainnet,devnet)', options: [] } },
                 { position: { key: 'pairAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'timeframe', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1s,10s,30s,1m,5m,10m,30m,1h,4h,12h,1d,1w,1M)', options: [] } },
-                { position: { key: 'currency', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(usd,native)', options: [, 'optional()', 'default(usd)'] } },
+                { position: { key: 'currency', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(usd,native)', options: ['optional()', 'default(usd)'] } },
                 { position: { key: 'fromDateAmount', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } },
                 { position: { key: 'fromDateUnit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(minutes,hours,days,weeks,months,years)', options: [] } },
                 { position: { key: 'maxResultLength', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch 7-day OHLCV data for USDC/SOL',
+                    pairAddress: '83v8iPyZihDEjDdY8RdZddyZNyUtXngz69Lgo9Kt5d6d',
+                    chain: 'mainnet',
+                    timeframe: '1m',
+                    currency: 'usd',
+                    fromDateAmount: 7,
+                    fromDateUnit: 'days',
+                    maxResultLength: 1000
+                }
+            ],
         }
     }
 }

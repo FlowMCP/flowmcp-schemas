@@ -31,13 +31,40 @@ export const main = {
                 { position: { key: 'search_after', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'view', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(normal,minimal,scores_minimal)', options: ['default(normal)', 'optional()'] } },
                 { position: { key: 'debug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Top Builder Score (page-based)',
+                    query: '{}',
+                    sort: '{"score":{"order":"desc"},"id":{"order":"desc"}}',
+                    page: 1,
+                    per_page: 25
+                },
+                {
+                    _description: 'Human checkmark and credential filter',
+                    query: '{"humanCheckmark":true,"credentials":[{"slug":"base_basename","valueRange":{"min":1}}]}',
+                    sort: '{"score":{"order":"desc"},"id":{"order":"desc"}}',
+                    page: 1,
+                    per_page: 3
+                },
+                {
+                    _description: 'Point-in-time first page',
+                    query: '{"identity":"ens:vitalik.eth","exactMatch":true}',
+                    sort: '{"id":{"order":"asc"}}',
+                    keep_alive_minutes: 5,
+                    per_page: 50,
+                    view: 'minimal'
+                }
+            ],
         },
         getDefaultFields: {
             method: 'GET',
             path: '/search/advanced/metadata/fields/profiles/default',
             description: 'Returns the fields that are allowed in customQuery for profiles (paying API keys only).',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch default metadata fields' }
+            ],
         }
     }
 }

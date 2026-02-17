@@ -16,7 +16,10 @@ export const main = {
             description: 'Get the current price of a specific token in USDT pair via bitget. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get latest price for BTC', symbol: 'BTC' }
+            ],
         },
         getAnnoucements: {
             method: 'GET',
@@ -24,7 +27,11 @@ export const main = {
             description: 'Search for cryptocurrency announcements within the last month by type. Required: annType.',
             parameters: [
                 { position: { key: 'annType', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(latest_news,coin_listings,trading_competitions_promotions,maintenance_system_updates,symbol_delisting,)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all announcements', annType: '' },
+                { _description: 'Get latest news', annType: 'latest_news' }
+            ],
         },
         getCoinInfo: {
             method: 'GET',
@@ -32,7 +39,10 @@ export const main = {
             description: 'Get full metadata and chain support info for a spot coin via bitget. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'coin', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get coin info for ETH', coin: 'ETH' }
+            ],
         }
     }
 }

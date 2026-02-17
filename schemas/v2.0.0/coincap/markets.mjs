@@ -28,7 +28,23 @@ export const main = {
                 { position: { key: 'assetId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(10)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Default market list' },
+                { _description: 'Markets from BinanceUS', exchangeId: 'binanceus' },
+                { _description: 'Markets for base asset BTC', baseSymbol: 'BTC' },
+                { _description: 'Limit results to 5', limit: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        data: { type: 'array', items: { type: 'object', properties: { exchangeId: { type: 'string' }, rank: { type: 'string' }, baseSymbol: { type: 'string' }, baseId: { type: 'string' }, quoteSymbol: { type: 'string' }, quoteId: { type: 'string' }, priceQuote: { type: 'string' }, priceUsd: { type: 'string' }, volumeUsd24Hr: { type: 'string' }, percentExchangeVolume: { type: 'string' }, tradesCount24Hr: { type: 'number', nullable: true }, updated: { type: 'number' } } } }
+                    }
+                }
+            },
         }
     }
 }

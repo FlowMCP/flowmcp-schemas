@@ -21,7 +21,10 @@ export const main = {
             parameters: [
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(90)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Sentiment for Bitcoin 7 days', asset: 'bitcoin', days: 7 }
+            ],
         },
         get_social_volume: {
             method: 'POST',
@@ -30,7 +33,10 @@ export const main = {
             parameters: [
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(90)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Bitcoin 30-day social volume', asset: 'bitcoin', days: 30 }
+            ],
         },
         alert_social_shift: {
             method: 'POST',
@@ -40,7 +46,10 @@ export const main = {
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'threshold', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['default(50)'] } },
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(2)', 'max(30)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Alert for Bitcoin, 50% threshold, 7 days', asset: 'bitcoin', threshold: 50, days: 7 }
+            ],
         },
         get_trending_words: {
             method: 'POST',
@@ -49,7 +58,10 @@ export const main = {
             parameters: [
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(30)', 'default(7)'] } },
                 { position: { key: 'top_n', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(20)', 'default(5)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Top 5 trending words over 7 days', days: 7, top_n: 5 }
+            ],
         },
         get_social_dominance: {
             method: 'POST',
@@ -58,7 +70,10 @@ export const main = {
             parameters: [
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(30)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Social dominance for Bitcoin', asset: 'bitcoin', days: 7 }
+            ],
         }
     }
 }

@@ -28,7 +28,16 @@ export const main = {
                 { position: { key: 'orderBy', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(timestamp,txcount,volume,tvl)', options: ['default(timestamp)'] } },
                 { position: { key: 'time_range_seconds', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(60)', 'max(86400)', 'default(300)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(100)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch most recent pools on Optimism ordered by volume',
+                    chain: 'OPTIMISM_MAINNET',
+                    orderBy: 'volume',
+                    time_range_seconds: 70777,
+                    limit: 567
+                }
+            ],
         }
     }
 }

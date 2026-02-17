@@ -23,7 +23,23 @@ export const main = {
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'priceChanges', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test priceInformation', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        price: { type: 'number' },
+                        priceQuote: { type: 'number' },
+                        liquidity: { type: 'number' },
+                        marketCap: { type: 'number' },
+                        lastUpdated: { type: 'number' }
+                    }
+                }
+            },
         },
         postPrice: {
             method: 'POST',
@@ -31,7 +47,19 @@ export const main = {
             description: 'Similar to GET /price, but accepts token address in the request body.',
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test postPrice', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump: { type: 'object', properties: { price: { type: 'number' }, priceQuote: { type: 'number' }, liquidity: { type: 'number' }, marketCap: { type: 'number' }, lastUpdated: { type: 'number' } } }
+                    }
+                }
+            },
         },
         multiPriceInformation: {
             method: 'GET',
@@ -40,7 +68,19 @@ export const main = {
             parameters: [
                 { position: { key: 'tokens', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'object()', options: [] } },
                 { position: { key: 'priceChanges', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test multiPriceInformation', tokens: ['CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump'] }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump: { type: 'object', properties: { price: { type: 'number' }, priceQuote: { type: 'number' }, liquidity: { type: 'number' }, marketCap: { type: 'number' }, lastUpdated: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getHistoricPrice: {
             method: 'GET',
@@ -48,7 +88,25 @@ export const main = {
             description: 'Get historic price points for a token (3d, 5d, 7d, 14d, 30d).',
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test getHistoricPrice', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        current: { type: 'number' },
+                        '1d': { type: 'number' },
+                        '3d': { type: 'number' },
+                        '5d': { type: 'number' },
+                        '7d': { type: 'number' },
+                        '14d': { type: 'number' },
+                        '30d': { type: 'number' }
+                    }
+                }
+            },
         },
         getPriceAtTimestamp: {
             method: 'GET',
@@ -57,7 +115,27 @@ export const main = {
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'timestamp', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test getPriceAtTimestamp',
+                    token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    timestamp: 1713907200
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        price: { type: 'number', nullable: true },
+                        closest_timestamp: { type: 'number', nullable: true },
+                        closest_timestamp_unix: { type: 'number', nullable: true },
+                        pool: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         getPriceRange: {
             method: 'GET',
@@ -67,7 +145,25 @@ export const main = {
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'time_from', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } },
                 { position: { key: 'time_to', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test getPriceRange',
+                    token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    time_from: 1738368000,
+                    time_to: 1738540800
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        token: { type: 'string' },
+                        price: { type: 'object', properties: { lowest: { type: 'object', properties: { price: { type: 'number' }, marketcap: { type: 'number' }, time: { type: 'number' } } }, highest: { type: 'object', properties: { price: { type: 'number' }, marketcap: { type: 'number' }, time: { type: 'number' } } } } }
+                    }
+                }
+            },
         },
         postMultiPrice: {
             method: 'POST',
@@ -75,7 +171,22 @@ export const main = {
             description: 'Get price info for multiple tokens (POST version).',
             parameters: [
                 { position: { key: 'tokens', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'object()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test postMultiPrice',
+                    tokens: ['CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump', 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump']
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump: { type: 'object', properties: { price: { type: 'number' }, priceQuote: { type: 'number' }, liquidity: { type: 'number' }, marketCap: { type: 'number' }, lastUpdated: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

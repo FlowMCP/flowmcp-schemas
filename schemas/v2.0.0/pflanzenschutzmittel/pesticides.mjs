@@ -16,7 +16,24 @@ export const main = {
             description: 'Get approved pesticide products with registration number, name, formulation type, and approval dates. Use kennr parameter to look up a specific product.',
             parameters: [
                 { position: { key: 'kennr', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all approved pesticide products' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { m_row$$: { type: 'string' }, kennr: { type: 'string' }, versuchsbez: { type: 'string' }, zul_erstmalig_am: { type: 'string' }, mittelname: { type: 'string' }, formulierung_art: { type: 'string' }, zul_ende: { type: 'string' }, mittel_mit_geringem_risiko: { type: 'string', nullable: true } } } },
+                        hasMore: { type: 'boolean' },
+                        limit: { type: 'number' },
+                        offset: { type: 'number' },
+                        count: { type: 'number' },
+                        links: { type: 'array', items: { type: 'object', properties: { rel: { type: 'string' }, href: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getActiveIngredients: {
             method: 'GET',
@@ -24,7 +41,24 @@ export const main = {
             description: 'Get all active ingredients (Wirkstoffe) used in pesticides with approval status and English names.',
             parameters: [
                 { position: { key: 'wirknr', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all active ingredients' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { m_row$$: { type: 'string' }, wirknr: { type: 'string' }, wirkstoffname: { type: 'string' }, wirkstoffname_en: { type: 'string' }, kategorie: { type: 'string' }, genehmigt: { type: 'string' } } } },
+                        hasMore: { type: 'boolean' },
+                        limit: { type: 'number' },
+                        offset: { type: 'number' },
+                        count: { type: 'number' },
+                        links: { type: 'array', items: { type: 'object', properties: { rel: { type: 'string' }, href: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getCompanies: {
             method: 'GET',
@@ -32,13 +66,47 @@ export const main = {
             description: 'Get pesticide distribution companies, applicants, and importers with addresses and contact details.',
             parameters: [
                 { position: { key: 'adresse_nr', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all pesticide companies' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { firma: { type: 'string', nullable: true }, firmenname: { type: 'string' }, ansprechpartner: { type: 'string', nullable: true }, anschrift_1: { type: 'string' }, anschrift_2: { type: 'string', nullable: true }, anschrift_3: { type: 'string', nullable: true }, anschrift_4: { type: 'string', nullable: true }, anschrift_5: { type: 'string' }, anschrift_6: { type: 'string' }, e_mail: { type: 'string', nullable: true }, fax: { type: 'string' }, telefon: { type: 'string' }, land: { type: 'string' }, adresse_nr: { type: 'number' } } } },
+                        hasMore: { type: 'boolean' },
+                        limit: { type: 'number' },
+                        offset: { type: 'number' },
+                        count: { type: 'number' },
+                        links: { type: 'array', items: { type: 'object', properties: { rel: { type: 'string' }, href: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getRestrictions: {
             method: 'GET',
             path: '/auflagen/',
             description: 'Get usage restrictions and conditions (Auflagen) for approved pesticide products.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all pesticide restrictions' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { m_row$$: { type: 'string' }, auflage: { type: 'string' }, weitere_bedingung: { type: 'string', nullable: true }, ebene: { type: 'string' }, kultur: { type: 'string', nullable: true }, anwendungstechnik: { type: 'string', nullable: true }, abstand: { type: 'string', nullable: true }, anwendbest: { type: 'string' }, redu_abstand: { type: 'string', nullable: true }, auflagenr: { type: 'number' } } } },
+                        hasMore: { type: 'boolean' },
+                        limit: { type: 'number' },
+                        offset: { type: 'number' },
+                        count: { type: 'number' },
+                        links: { type: 'array', items: { type: 'object', properties: { rel: { type: 'string' }, href: { type: 'string' } } } }
+                    }
+                }
+            },
         }
     }
 }

@@ -25,7 +25,15 @@ export const main = {
                 { position: { key: 'lows', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(20)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getKeltnerChannel with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         },
         getMassIndex: {
             method: 'GET',
@@ -36,7 +44,14 @@ export const main = {
                 { position: { key: 'lows', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'emaPeriod', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(9)'] } },
                 { position: { key: 'miPeriod', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(25)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMassIndex with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119'
+                }
+            ],
         },
         getMoneyFlowIndex: {
             method: 'GET',
@@ -48,7 +63,16 @@ export const main = {
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'volumes', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(14)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMoneyFlowIndex with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120',
+                    volumes: '1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400'
+                }
+            ],
         },
         getMoneyFlowIndexStrategy: {
             method: 'GET',
@@ -57,7 +81,13 @@ export const main = {
             parameters: [
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(14)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMoneyFlowIndexStrategy with sample OHLCV data',
+                    asset: '{"closings":[100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120],"highs":[101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121],"lows":[99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119],"openings":[100,101,102,102,104,105,105,107,108,108,110,111,111,113,114,114,116,117,117,119],"volumes":[1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400]}'
+                }
+            ],
         },
         getMovingAverageConvergenceDivergence: {
             method: 'GET',
@@ -68,7 +98,13 @@ export const main = {
                 { position: { key: 'fast', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(12)'] } },
                 { position: { key: 'slow', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(26)'] } },
                 { position: { key: 'signal', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(9)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMovingAverageConvergenceDivergence with sample OHLCV data',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         },
         getMovingAverageConvergenceDivergenceStrategy: {
             method: 'GET',
@@ -79,7 +115,13 @@ export const main = {
                 { position: { key: 'fast', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(12)'] } },
                 { position: { key: 'slow', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(26)'] } },
                 { position: { key: 'signal', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(9)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMovingAverageConvergenceDivergenceStrategy with sample OHLCV data',
+                    asset: '{"closings":[100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120],"highs":[101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121],"lows":[99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119],"openings":[100,101,102,102,104,105,105,107,108,108,110,111,111,113,114,114,116,117,117,119],"volumes":[1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400]}'
+                }
+            ],
         },
         getMovingChandeForecastOscillator: {
             method: 'GET',
@@ -88,7 +130,13 @@ export const main = {
             parameters: [
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(4)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMovingChandeForecastOscillator with sample OHLCV data',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         },
         getMovingMax: {
             method: 'GET',
@@ -97,7 +145,13 @@ export const main = {
             parameters: [
                 { position: { key: 'values', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(4)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getMovingMax with sample OHLCV data',
+                    values: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         }
     },
     requiredLibraries: ['indicatorts']

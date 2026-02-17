@@ -20,7 +20,33 @@ export const main = {
             description: 'Retrieves a risk score from 0 (safe) to 100 (high risk) for a given crypto address or domain.',
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(3)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test risk score lookup for ENS name', query: 'vitalik.eth' },
+                { _description: 'Test risk score lookup for crypto address', query: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        id: { type: 'number' },
+                        query: { type: 'string' },
+                        status: { type: 'string' },
+                        type: { type: 'string' },
+                        premium: { type: 'boolean' },
+                        timestamp: { type: 'string' },
+                        networks: { type: 'array', items: { type: 'string' } },
+                        summary: { type: 'object', properties: { bicscan_score: { type: 'string', nullable: true }, detected_engines: { type: 'string', nullable: true }, total_engines: { type: 'number', nullable: true } } },
+                        category: { type: 'array', items: { type: 'string' } },
+                        assets: { type: 'array', items: { type: 'string' } },
+                        transactions: { type: 'string', nullable: true },
+                        nfts: { type: 'string', nullable: true },
+                        scan_metadata: { type: 'object', properties: { plan: { type: 'string' }, web3_dns: { type: 'array', items: { type: 'string' } }, domain_info: { type: 'string', nullable: true }, token_info: { type: 'string', nullable: true }, query_options: { type: 'object', properties: { sync: { type: 'boolean' }, assets: { type: 'boolean' }, engines: { type: 'array', items: { type: 'string' } } } }, engines: { type: 'array', items: { type: 'string' } } } },
+                        results: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         },
         getAssets: {
             method: 'POST',
@@ -29,7 +55,14 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'engines', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'array()', options: ['default(["ofac"])'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test asset scan for wallet address',
+                    query: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+                    engines: ['ofac']
+                }
+            ],
         }
     }
 }

@@ -28,7 +28,7 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } },
                 { position: { key: 'strategy', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Spread,ZScoreRoll,Copula)', options: [] } },
@@ -41,7 +41,20 @@ export const main = {
                 { position: { key: 'slippage_rate', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'commission_rate', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'stop_loss_rate', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH pair trading backtest',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'BinanceUs',
+                    interval: '1d',
+                    period: 365,
+                    strategy: 'ZScoreRoll',
+                    spread_type: 'Static',
+                    with_history: false
+                }
+            ],
         },
         checkCointegration: {
             method: 'GET',
@@ -50,13 +63,25 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } },
                 { position: { key: 'spread_type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Dynamic,Ou,Static)', options: ['default(Dynamic)', 'optional()'] } },
                 { position: { key: 'roll_w', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(42)', 'optional()'] } },
                 { position: { key: 'with_history', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH cointegration analysis',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'Binance',
+                    interval: '1d',
+                    period: 365,
+                    spread_type: 'Static',
+                    with_history: false
+                }
+            ],
         },
         getCorrelations: {
             method: 'GET',
@@ -65,10 +90,20 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH correlation analysis',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'Binance',
+                    interval: '1d',
+                    period: 365
+                }
+            ],
         },
         analyzeCopula: {
             method: 'GET',
@@ -77,10 +112,20 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH copula dependency analysis',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'Binance',
+                    interval: '1d',
+                    period: 365
+                }
+            ],
         },
         analyzeSpread: {
             method: 'GET',
@@ -89,13 +134,25 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } },
                 { position: { key: 'spread_type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Dynamic,Ou,Static)', options: ['default(Dynamic)', 'optional()'] } },
                 { position: { key: 'roll_w', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(42)', 'optional()'] } },
                 { position: { key: 'with_history', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH spread analysis',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'Binance',
+                    interval: '1d',
+                    period: 365,
+                    spread_type: 'Static',
+                    with_history: false
+                }
+            ],
         },
         analyzeZScores: {
             method: 'GET',
@@ -104,13 +161,25 @@ export const main = {
             parameters: [
                 { position: { key: 'symbol_1', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'symbol_2', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
-                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BINANCE,BINANCE_US,COINBASE,BYBIT,DYDX,FOREX,STOCKS)', options: [] } },
+                { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Binance,BinanceUs,Coinbase,ByBit,Dydx,Forex,Stocks)', options: [] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(5m,1h,1d)', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(30)', 'max(1000)'] } },
                 { position: { key: 'spread_type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Dynamic,Ou,Static)', options: ['default(Dynamic)', 'optional()'] } },
                 { position: { key: 'roll_w', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(42)', 'optional()'] } },
                 { position: { key: 'with_history', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'BTC/ETH z-score analysis',
+                    symbol_1: 'BTCUSDT',
+                    symbol_2: 'ETHUSDT',
+                    exchange: 'Binance',
+                    interval: '1d',
+                    period: 365,
+                    spread_type: 'Static',
+                    with_history: false
+                }
+            ],
         }
     }
 }

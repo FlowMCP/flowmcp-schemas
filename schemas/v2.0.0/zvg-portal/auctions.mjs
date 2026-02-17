@@ -29,7 +29,11 @@ export const main = {
                 { position: { key: 'str', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'art', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'obj_art', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search Berlin auctions', land_abk: 'be', ger_id: '0', order_by: '2' },
+                { _description: 'Search Bayern auctions', land_abk: 'by', ger_id: '0', order_by: '2' }
+            ],
         },
         getAuctionDetail: {
             method: 'GET',
@@ -38,7 +42,10 @@ export const main = {
             parameters: [
                 { position: { key: 'zvg_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'land_abk', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)', 'max(2)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Berlin auction detail', zvg_id: '14171', land_abk: 'be' }
+            ],
         }
     }
 }

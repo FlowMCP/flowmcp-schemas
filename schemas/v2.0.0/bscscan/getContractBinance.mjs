@@ -17,7 +17,21 @@ export const main = {
             description: 'Returns the Contract ABI of a verified smart contract via BSCScan. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Basic test for getContractABI', address: '0xca143ce32fe78f1f7019d7d551a6402fc5350c73' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         },
         getContractSourceCode: {
             method: 'GET',
@@ -25,7 +39,21 @@ export const main = {
             description: 'Returns the Solidity source code of a verified smart contract. Required: address.',
             parameters: [
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Basic test for getContractSourceCode', address: '0xca143ce32fe78f1f7019d7d551a6402fc5350c73' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

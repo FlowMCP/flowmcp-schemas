@@ -18,7 +18,11 @@ export const main = {
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)', 'optional()'] } },
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'default(1)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search German procurement notices from 2026', query: 'CY = DEU AND PD >= 20260101', limit: 5 },
+                { _description: 'Search all recent EU notices', query: 'PD >= 20260101', limit: 3 }
+            ],
         }
     }
 }

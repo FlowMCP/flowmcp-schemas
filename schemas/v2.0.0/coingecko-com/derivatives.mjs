@@ -14,7 +14,32 @@ export const main = {
             method: 'GET',
             path: '/derivatives/exchanges',
             description: 'Fetch the list of derivative exchanges via CoinGecko. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Test getDerivativesExchanges - should return a list of derivative exchanges' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            id: { type: 'string' },
+                            open_interest_btc: { type: 'number' },
+                            trade_volume_24h_btc: { type: 'string' },
+                            number_of_perpetual_pairs: { type: 'number' },
+                            number_of_futures_pairs: { type: 'number' },
+                            image: { type: 'string' },
+                            year_established: { type: 'number' },
+                            country: { type: 'string' },
+                            description: { type: 'string' },
+                            url: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getDerivativeExchangesByIds: {
             method: 'GET',
@@ -22,7 +47,35 @@ export const main = {
             description: 'Fetch the list of derivative exchanges by IDs via CoinGecko. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'exchange_ids', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'array()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test getExchangesByIds - should return a list of derivative exchanges by IDs',
+                    exchange_ids: ['binance_futures', 'okex_futures']
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            id: { type: 'string' },
+                            open_interest_btc: { type: 'number' },
+                            trade_volume_24h_btc: { type: 'string' },
+                            number_of_perpetual_pairs: { type: 'number' },
+                            number_of_futures_pairs: { type: 'number' },
+                            image: { type: 'string' },
+                            year_established: { type: 'number' },
+                            country: { type: 'string' },
+                            description: { type: 'string' },
+                            url: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getDerivativeProductsByExchangeId: {
             method: 'GET',
@@ -31,7 +84,43 @@ export const main = {
             parameters: [
                 { position: { key: 'exchange_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'minimal_output', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test getDerivativesByExchangeId - should return a list of derivative products by exchange ID',
+                    exchange_id: 'binance_futures'
+                },
+                {
+                    _description: 'Test getDerivativesByExchangeId - should return a list of derivative products by exchange ID',
+                    exchange_id: 'binance_futures',
+                    minimal_output: 'false'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            market: { type: 'string' },
+                            symbol: { type: 'string' },
+                            index_id: { type: 'string' },
+                            price: { type: 'string' },
+                            price_percentage_change_24h: { type: 'number' },
+                            contract_type: { type: 'string' },
+                            index: { type: 'number' },
+                            basis: { type: 'number' },
+                            spread: { type: 'number' },
+                            funding_rate: { type: 'number' },
+                            open_interest: { type: 'number' },
+                            volume_24h: { type: 'number' },
+                            last_traded_at: { type: 'number' },
+                            expired_at: { type: 'string', nullable: true }
+                        }
+                    }
+                }
+            },
         }
     }
 }

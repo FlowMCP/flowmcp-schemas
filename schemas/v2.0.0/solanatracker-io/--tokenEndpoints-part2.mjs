@@ -23,25 +23,105 @@ export const main = {
             method: 'GET',
             path: '/tokens/trending',
             description: 'Get the top 100 trending tokens based on transaction volume in the past hour.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get top 100 trending Solana tokens' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, uri: { type: 'string' }, decimals: { type: 'number' }, isMutable: { type: 'boolean' }, description: { type: 'string' }, image: { type: 'string' }, showName: { type: 'boolean' }, extensions: { type: 'object' }, website: { type: 'string' }, twitter: { type: 'string' }, telegram: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, creator: { type: 'object' }, createdOn: { type: 'string' }, hasFileMetaData: { type: 'boolean' }, creation: { type: 'object' } } },
+                            pools: { type: 'array', items: { type: 'object' } },
+                            events: { type: 'object', properties: { '1m': { type: 'object' }, '5m': { type: 'object' }, '15m': { type: 'object' }, '30m': { type: 'object' }, '1h': { type: 'object' }, '2h': { type: 'object' }, '3h': { type: 'object' }, '4h': { type: 'object' }, '5h': { type: 'object' }, '6h': { type: 'object' }, '12h': { type: 'object' }, '24h': { type: 'object' } } },
+                            risk: { type: 'object', properties: { snipers: { type: 'object' }, insiders: { type: 'object' }, bundlers: { type: 'object' }, top10: { type: 'number' }, dev: { type: 'object' }, fees: { type: 'object' }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'object' } }, score: { type: 'number' } } },
+                            holders: { type: 'number' },
+                            buysCount: { type: 'number' },
+                            sellsCount: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         tokensByVolume: {
             method: 'GET',
             path: '/tokens/volume',
             description: 'Get top 100 tokens by volume (default timeframe) via Solana Tracker. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get top 100 Solana tokens by volume' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, uri: { type: 'string' }, decimals: { type: 'number' }, isMutable: { type: 'boolean' }, description: { type: 'string' }, image: { type: 'string' }, hasFileMetaData: { type: 'boolean' }, strictSocials: { type: 'object' }, creation: { type: 'object' } } },
+                            pools: { type: 'array', items: { type: 'object' } },
+                            events: { type: 'object', properties: { '1m': { type: 'object' }, '5m': { type: 'object' }, '15m': { type: 'object' }, '30m': { type: 'object' }, '1h': { type: 'object' }, '2h': { type: 'object' }, '3h': { type: 'object' }, '4h': { type: 'object' }, '5h': { type: 'object' }, '6h': { type: 'object' }, '12h': { type: 'object' }, '24h': { type: 'object' } } },
+                            risk: { type: 'object', properties: { snipers: { type: 'object' }, insiders: { type: 'object' }, bundlers: { type: 'object' }, top10: { type: 'number' }, dev: { type: 'object' }, fees: { type: 'object' }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'object' } }, score: { type: 'number' } } },
+                            buys: { type: 'number' },
+                            sells: { type: 'number' },
+                            txns: { type: 'number' },
+                            holders: { type: 'number' },
+                            totalVolume: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         tokenOverview: {
             method: 'GET',
             path: '/tokens/multi/all',
             description: 'Overview of latest, graduating, and graduated tokens via Solana Tracker. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get overview of latest and graduated tokens' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        latest: { type: 'array', items: { type: 'object', properties: { token: { type: 'object' }, pools: { type: 'array', items: { type: 'object' } }, events: { type: 'object' }, risk: { type: 'object' }, buys: { type: 'number' }, sells: { type: 'number' }, txns: { type: 'number' }, holders: { type: 'number' } } } },
+                        graduating: { type: 'array', items: { type: 'object', properties: { token: { type: 'object' }, pools: { type: 'array', items: { type: 'object' } }, events: { type: 'object' }, risk: { type: 'object' }, buys: { type: 'number' }, sells: { type: 'number' }, txns: { type: 'number' }, holders: { type: 'number' } } } },
+                        graduated: { type: 'array', items: { type: 'object', properties: { token: { type: 'object' }, pools: { type: 'array', items: { type: 'object' } }, events: { type: 'object' }, risk: { type: 'object' }, buys: { type: 'number' }, sells: { type: 'number' }, txns: { type: 'number' }, holders: { type: 'number' } } } }
+                    }
+                }
+            },
         },
         graduatedTokens: {
             method: 'GET',
             path: '/tokens/multi/graduated',
             description: 'Overview of all graduated tokens (Pumpvision/Moonshot) via Solana Tracker. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all graduated tokens' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, uri: { type: 'string' }, decimals: { type: 'number' }, description: { type: 'string' }, showName: { type: 'boolean' }, image: { type: 'string' }, createdOn: { type: 'string' }, hasFileMetaData: { type: 'boolean' }, strictSocials: { type: 'object' }, creation: { type: 'object' } } },
+                            pools: { type: 'array', items: { type: 'object' } },
+                            events: { type: 'object', properties: { '1m': { type: 'object' }, '5m': { type: 'object' }, '15m': { type: 'object' }, '30m': { type: 'object' }, '1h': { type: 'object' }, '2h': { type: 'object' }, '3h': { type: 'object' }, '4h': { type: 'object' }, '5h': { type: 'object' }, '6h': { type: 'object' }, '12h': { type: 'object' }, '24h': { type: 'object' } } },
+                            risk: { type: 'object', properties: { snipers: { type: 'object' }, insiders: { type: 'object' }, bundlers: { type: 'object' }, top10: { type: 'number' }, dev: { type: 'object' }, fees: { type: 'object' }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'object' } }, score: { type: 'number' } } },
+                            buys: { type: 'number' },
+                            sells: { type: 'number' },
+                            txns: { type: 'number' },
+                            holders: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         tokenByPool: {
             method: 'GET',
@@ -49,7 +129,26 @@ export const main = {
             description: 'Get token by pool address via Solana Tracker — query by poolAddress. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'poolAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get token by Raydium SOL-USDC pool', poolAddress: '58oQChx4yWmvKdwLLZzBi4ChoCc2fqCUWBkwMihLYQo2' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, uri: { type: 'string' }, decimals: { type: 'number' }, hasFileMetaData: { type: 'boolean' }, image: { type: 'string' }, strictSocials: { type: 'object' }, creation: { type: 'object', properties: { creator: { type: 'string' }, created_tx: { type: 'string' }, created_time: { type: 'number' } } } } },
+                        pools: { type: 'array', items: { type: 'object', properties: { poolId: { type: 'string' }, liquidity: { type: 'object' }, price: { type: 'object' }, tokenSupply: { type: 'number' }, lpBurn: { type: 'number' }, tokenAddress: { type: 'string' }, marketCap: { type: 'object' }, market: { type: 'string' }, raydium: { type: 'object' }, quoteToken: { type: 'string' }, decimals: { type: 'number' }, security: { type: 'object' }, lastUpdated: { type: 'number' }, deployer: { type: 'string', nullable: true }, txns: { type: 'object' } } } },
+                        events: { type: 'object', properties: { '1m': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '5m': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '15m': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '30m': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '1h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '2h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '3h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '4h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '5h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '6h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '12h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } }, '24h': { type: 'object', properties: { priceChangePercentage: { type: 'number' } } } } },
+                        risk: { type: 'object', properties: { snipers: { type: 'object', properties: { count: { type: 'number' }, totalBalance: { type: 'number' }, totalPercentage: { type: 'number' }, wallets: { type: 'array', items: { type: 'string' } } } }, insiders: { type: 'object', properties: { count: { type: 'number' }, totalBalance: { type: 'number' }, totalPercentage: { type: 'number' }, wallets: { type: 'array', items: { type: 'string' } } } }, top10: { type: 'number' }, dev: { type: 'object', properties: { percentage: { type: 'number' }, amount: { type: 'number' } } }, fees: { type: 'object', properties: { totalTrading: { type: 'number' }, totalTips: { type: 'number' }, total: { type: 'number' } } }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'string' } }, score: { type: 'number' }, jupiterVerified: { type: 'boolean' } } },
+                        buys: { type: 'number' },
+                        sells: { type: 'number' },
+                        txns: { type: 'number' },
+                        holders: { type: 'number' }
+                    }
+                }
+            },
         },
         trendingTokensByTimeframe: {
             method: 'GET',
@@ -57,7 +156,29 @@ export const main = {
             description: 'Get trending tokens by specific timeframe (e.g., 5m, 24h) via Solana Tracker — query by timeframe.',
             parameters: [
                 { position: { key: 'timeframe', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get trending tokens in last 24h', timeframe: '24h' },
+                { _description: 'Get trending tokens in last 5 minutes', timeframe: '5m' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, decimals: { type: 'number' }, uri: { type: 'string' }, hasFileMetaData: { type: 'boolean' }, description: { type: 'string' }, image: { type: 'string' }, showName: { type: 'boolean' }, createdOn: { type: 'string' }, twitter: { type: 'string' }, website: { type: 'string' }, creation: { type: 'object' } } },
+                            pools: { type: 'array', items: { type: 'object' } },
+                            events: { type: 'object', properties: { '1m': { type: 'object' }, '5m': { type: 'object' }, '15m': { type: 'object' }, '30m': { type: 'object' }, '1h': { type: 'object' }, '2h': { type: 'object' }, '3h': { type: 'object' }, '4h': { type: 'object' }, '5h': { type: 'object' }, '6h': { type: 'object' }, '12h': { type: 'object' }, '24h': { type: 'object' } } },
+                            risk: { type: 'object', properties: { snipers: { type: 'object' }, insiders: { type: 'object' }, top10: { type: 'number' }, dev: { type: 'object' }, fees: { type: 'object' }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'string' } }, score: { type: 'number' }, jupiterVerified: { type: 'boolean' } } },
+                            holders: { type: 'number' },
+                            buysCount: { type: 'number' },
+                            sellsCount: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         tokensByVolumeTimeframe: {
             method: 'GET',
@@ -65,7 +186,30 @@ export const main = {
             description: 'Get top 100 tokens by volume for a specific timeframe via Solana Tracker — query by timeframe.',
             parameters: [
                 { position: { key: 'timeframe', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get tokens by volume in last 24h', timeframe: '24h' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            token: { type: 'object', properties: { name: { type: 'string' }, symbol: { type: 'string' }, mint: { type: 'string' }, uri: { type: 'string' }, decimals: { type: 'number' }, description: { type: 'string' }, image: { type: 'string' }, hasFileMetaData: { type: 'boolean' }, strictSocials: { type: 'object' }, creation: { type: 'object' } } },
+                            pools: { type: 'array', items: { type: 'object' } },
+                            events: { type: 'object', properties: { '1m': { type: 'object' }, '5m': { type: 'object' }, '15m': { type: 'object' }, '30m': { type: 'object' }, '1h': { type: 'object' }, '2h': { type: 'object' }, '3h': { type: 'object' }, '4h': { type: 'object' }, '5h': { type: 'object' }, '6h': { type: 'object' }, '12h': { type: 'object' }, '24h': { type: 'object' } } },
+                            risk: { type: 'object', properties: { snipers: { type: 'object' }, insiders: { type: 'object' }, top10: { type: 'number' }, dev: { type: 'object' }, fees: { type: 'object' }, rugged: { type: 'boolean' }, risks: { type: 'array', items: { type: 'string' } }, score: { type: 'number' }, jupiterVerified: { type: 'boolean' } } },
+                            buys: { type: 'number' },
+                            sells: { type: 'number' },
+                            txns: { type: 'number' },
+                            holders: { type: 'number' },
+                            totalVolume: { type: 'number' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

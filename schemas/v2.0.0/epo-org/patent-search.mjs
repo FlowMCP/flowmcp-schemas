@@ -22,7 +22,12 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'lng', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(de,en,fr)', options: ['default(en)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for AI patents in English', query: 'txt = artificial and txt = intelligence', lng: 'en' },
+                { _description: 'Search for blockchain patents in German', query: 'txt = blockchain', lng: 'de' },
+                { _description: 'Search for renewable energy patents', query: 'txt = renewable and txt = energy', lng: 'en' }
+            ],
         },
         searchByTechnology: {
             method: 'GET',
@@ -31,7 +36,12 @@ export const main = {
             parameters: [
                 { position: { key: 'technology', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(artificial intelligence,machine learning,blockchain,renewable energy,biotechnology,nanotechnology,quantum computing,robotics,autonomous vehicles,5G)', options: [] } },
                 { position: { key: 'lng', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(de,en,fr)', options: ['default(en)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search AI technology patents', technology: 'artificial intelligence', lng: 'en' },
+                { _description: 'Search blockchain technology patents', technology: 'blockchain', lng: 'en' },
+                { _description: 'Search quantum computing patents in German', technology: 'quantum computing', lng: 'de' }
+            ],
         },
         searchByKeywords: {
             method: 'GET',
@@ -42,7 +52,24 @@ export const main = {
                 { position: { key: 'operator', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(AND,OR)', options: ['default(AND)', 'optional()'] } },
                 { position: { key: 'field', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(txt,ti,ab,in)', options: ['default(txt)', 'optional()'] } },
                 { position: { key: 'lng', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(de,en,fr)', options: ['default(en)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Search patents with multiple keywords',
+                    keywords: ['neural', 'network', 'deep'],
+                    operator: 'AND',
+                    field: 'txt',
+                    lng: 'en'
+                },
+                { _description: 'Search by title keywords', keywords: ['solar', 'panel'], operator: 'AND', field: 'ti', lng: 'en' },
+                {
+                    _description: 'Search abstract with OR operator',
+                    keywords: ['battery', 'fuel cell'],
+                    operator: 'OR',
+                    field: 'ab',
+                    lng: 'de'
+                }
+            ],
         },
         searchByDate: {
             method: 'GET',
@@ -53,7 +80,23 @@ export const main = {
                 { position: { key: 'from_date', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'to_date', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'lng', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(de,en,fr)', options: ['default(en)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Search recent AI patents',
+                    query: 'txt = artificial intelligence',
+                    from_date: '2023-01-01',
+                    to_date: '2024-12-31',
+                    lng: 'en'
+                },
+                {
+                    _description: 'Search historical blockchain patents',
+                    query: 'txt = blockchain',
+                    from_date: '2008-01-01',
+                    to_date: '2020-12-31',
+                    lng: 'en'
+                }
+            ],
         }
     }
 }

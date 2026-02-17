@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T15:16
+Generated: 2026-02-17T15:40
 
 ## Summary
 
@@ -8,10 +8,10 @@ Generated: 2026-02-17T15:16
 |--------|------:|--------:|
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
-| With Output Schema | 242 | 35% |
-| Complete (Tests + Output) | 242 | 35% |
-| Capture OK | 316 | 45% |
-| Capture Failed | 101 | 14% |
+| With Output Schema | 354 | 51% |
+| Complete (Tests + Output) | 354 | 51% |
+| Capture OK | 344 | 49% |
+| Capture Failed | 73 | 10% |
 | Not Captured | 283 | 40% |
 | Has Handler (post/exec) | 337 | 48% |
 | Needs API Key | 269 | 38% |
@@ -30,13 +30,13 @@ Generated: 2026-02-17T15:16
 
 ## Routes
 
-### aave (0/3 complete)
+### aave (3/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| aave | getReserves | Y | - | ok | - | Y | - |  |
-| aave | getUserData | Y | - | ok | - | Y | - |  |
-| aave | getProtocolData | Y | - | ok | - | Y | - |  |
+| aave | getReserves | Y | Y | ok | - | Y | - |  |
+| aave | getUserData | Y | Y | ok | - | Y | - |  |
+| aave | getProtocolData | Y | Y | ok | - | Y | - |  |
 
 ### alchemy (0/19 complete)
 
@@ -130,11 +130,11 @@ Generated: 2026-02-17T15:16
 | wfs-locations | dog_parks | Y | Y | ok | - | - | - |  |
 | wfs-locations | bbq_areas | Y | Y | ok | - | - | - |  |
 
-### bicscan (0/2 complete)
+### bicscan (1/2 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| bicscan | getRiskScore | Y | - | ok | - | Y | - |  |
+| bicscan | getRiskScore | Y | Y | ok | - | Y | - |  |
 | bicscan | getAssets | Y | - | fail | - | Y | - | HTTP 429 |
 
 ### bitget (0/3 complete)
@@ -145,16 +145,16 @@ Generated: 2026-02-17T15:16
 | bitget | getAnnoucements | Y | - | - | exec | - | - |  |
 | bitget | getCoinInfo | Y | - | - | exec | - | - |  |
 
-### blockberry-one (0/6 complete)
+### blockberry-one (6/6 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| mina-mainnet | getDashboardInfo | Y | - | ok | - | Y | - |  |
-| mina-mainnet | getAccountByHash | Y | - | ok | - | Y | - |  |
-| mina-mainnet | getAccountBalance | Y | - | ok | - | Y | - |  |
-| mina-mainnet | getBlocks | Y | - | ok | - | Y | - |  |
-| mina-mainnet | getZkAppTransactions | Y | - | ok | - | Y | - |  |
-| mina-mainnet | getZkAppByAddress | Y | - | ok | - | Y | - |  |
+| mina-mainnet | getDashboardInfo | Y | Y | ok | - | Y | - |  |
+| mina-mainnet | getAccountByHash | Y | Y | ok | - | Y | - |  |
+| mina-mainnet | getAccountBalance | Y | Y | ok | - | Y | - |  |
+| mina-mainnet | getBlocks | Y | Y | ok | - | Y | - |  |
+| mina-mainnet | getZkAppTransactions | Y | Y | ok | - | Y | - |  |
+| mina-mainnet | getZkAppByAddress | Y | Y | ok | - | Y | - |  |
 
 ### blockchain-info (2/2 complete)
 
@@ -163,11 +163,11 @@ Generated: 2026-02-17T15:16
 | utxoAndBlocks | getUTXO | Y | Y | ok | - | - | - |  |
 | utxoAndBlocks | getBlockStats | Y | Y | ok | - | - | - |  |
 
-### blocknative (0/1 complete)
+### blocknative (1/1 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| gasprice | getGasPrices | Y | - | ok | - | Y | - |  |
+| gasprice | getGasPrices | Y | Y | ok | - | Y | - |  |
 
 ### bridgerates (3/4 complete)
 
@@ -178,12 +178,12 @@ Generated: 2026-02-17T15:16
 | bridgerates | getConnections | Y | Y | ok | - | - | - |  |
 | bridgerates | getTransferStatus | Y | - | fail | - | - | - | HTTP 400 |
 
-### bscscan (0/2 complete)
+### bscscan (2/2 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getContractBinance | getContractABI | Y | - | ok | post | Y | - |  |
-| getContractBinance | getContractSourceCode | Y | - | ok | post | Y | - |  |
+| getContractBinance | getContractABI | Y | Y | ok | post | Y | - |  |
+| getContractBinance | getContractSourceCode | Y | Y | ok | post | Y | - |  |
 
 ### ccxt (0/2 complete)
 
@@ -246,19 +246,19 @@ Generated: 2026-02-17T15:16
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | discovery | listResources | Y | Y | ok | post | - | - |  |
 
-### coincap (0/9 complete)
+### coincap (9/9 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| assets | listAssets | Y | - | ok | - | Y | - |  |
-| assets | singleAsset | Y | - | ok | - | Y | - |  |
-| assets | assetMarkets | Y | - | ok | - | Y | - |  |
-| assets | assetHistory | Y | - | ok | - | Y | - |  |
-| exchanges | listExchanges | Y | - | ok | - | Y | - |  |
-| exchanges | getExchangeById | Y | - | ok | - | Y | - |  |
-| markets | listMarkets | Y | - | ok | - | Y | - |  |
-| rates | listRates | Y | - | ok | - | Y | - |  |
-| rates | getRateBySlug | Y | - | ok | - | Y | - |  |
+| assets | listAssets | Y | Y | ok | - | Y | - |  |
+| assets | singleAsset | Y | Y | ok | - | Y | - |  |
+| assets | assetMarkets | Y | Y | ok | - | Y | - |  |
+| assets | assetHistory | Y | Y | ok | - | Y | - |  |
+| exchanges | listExchanges | Y | Y | ok | - | Y | - |  |
+| exchanges | getExchangeById | Y | Y | ok | - | Y | - |  |
+| markets | listMarkets | Y | Y | ok | - | Y | - |  |
+| rates | listRates | Y | Y | ok | - | Y | - |  |
+| rates | getRateBySlug | Y | Y | ok | - | Y | - |  |
 
 ### coingecko-com (26/26 complete)
 
@@ -268,11 +268,11 @@ Generated: 2026-02-17T15:16
 | coingecko-stablecoins | getCurrentPrice | Y | Y | ok | post | - | - |  |
 | coingecko-stablecoins | getHistoricalData | Y | Y | ok | post | - | - |  |
 | coingecko-stablecoins | analyzePegStability | Y | Y | ok | post | - | - |  |
-| coins | getCoinsList | Y | Y | fail | - | - | - | HTTP 429 |
-| coins | getCoinsMarkets | Y | Y | fail | - | - | - | HTTP 429 |
-| coins | getCoinById | Y | Y | fail | - | - | - | HTTP 429 |
-| coins | getCoinMarketChart | Y | Y | fail | - | - | - | HTTP 429 |
-| coins | getCoinHistory | Y | Y | fail | - | - | - | HTTP 429 |
+| coins | getCoinsList | Y | Y | ok | - | - | - |  |
+| coins | getCoinsMarkets | Y | Y | ok | - | - | - |  |
+| coins | getCoinById | Y | Y | ok | - | - | - |  |
+| coins | getCoinMarketChart | Y | Y | ok | - | - | - |  |
+| coins | getCoinHistory | Y | Y | ok | - | - | - |  |
 | coins | getCoinTickers | Y | Y | fail | - | - | - | HTTP 429 |
 | coins | getCoinContractInfo | Y | Y | fail | - | - | - | HTTP 429 |
 | derivatives | getDerivativeExchangeIds | Y | Y | fail | post | - | - | HTTP 429 |
@@ -282,52 +282,52 @@ Generated: 2026-02-17T15:16
 | exchanges | getExchangeById | Y | Y | fail | post | - | - | HTTP 429 |
 | exchanges | getExchangeTickers | Y | Y | fail | post | - | - | HTTP 429 |
 | getCategories | getAvailableCoinCategoryIds | Y | Y | fail | post | - | - | HTTP 429 |
-| getCategories | getCoinCategoryDetailsByIds | Y | Y | fail | post | - | - | HTTP 429 |
-| global | getGlobalData | Y | Y | fail | post | - | - | HTTP 429 |
-| global | getDeFiGlobalData | Y | Y | fail | post | - | - | HTTP 429 |
-| simplePrice | getSimplePrice | Y | Y | fail | post | - | - | HTTP 429 |
-| simplePrice | getTokenPrice | Y | Y | fail | post | - | - | HTTP 429 |
+| getCategories | getCoinCategoryDetailsByIds | Y | Y | ok | post | - | - |  |
+| global | getGlobalData | Y | Y | ok | post | - | - |  |
+| global | getDeFiGlobalData | Y | Y | ok | post | - | - |  |
+| simplePrice | getSimplePrice | Y | Y | ok | post | - | - |  |
+| simplePrice | getTokenPrice | Y | Y | ok | post | - | - |  |
 | trending | getTrendingCoins | Y | Y | ok | post | - | - |  |
 | trending | getTrendingNfts | Y | Y | ok | post | - | - |  |
 | trending | getTrendingCategories | Y | Y | ok | post | - | - |  |
 
-### coinmarketcap-com (0/10 complete)
+### coinmarketcap-com (10/10 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| category | getCategories | Y | - | ok | post | Y | - |  |
-| category | getCategory | Y | - | ok | post | Y | - |  |
-| category | getIdMap | Y | - | ok | post | Y | - |  |
-| category | getMetadataV2 | Y | - | ok | post | Y | - |  |
-| category | getQuotesLatestV2 | Y | - | ok | post | Y | - |  |
-| cmc-index | getHistorical | Y | - | ok | - | Y | - |  |
-| cmc-index | getLatest | Y | - | ok | - | Y | - |  |
-| fear-and-greed | getFearAndGreedHistorical | Y | - | ok | - | Y | - |  |
-| fear-and-greed | getFearAndGreedLatest | Y | - | ok | - | Y | - |  |
-| listings | listingsLatest | Y | - | ok | - | Y | - |  |
+| category | getCategories | Y | Y | ok | post | Y | - |  |
+| category | getCategory | Y | Y | ok | post | Y | - |  |
+| category | getIdMap | Y | Y | ok | post | Y | - |  |
+| category | getMetadataV2 | Y | Y | ok | post | Y | - |  |
+| category | getQuotesLatestV2 | Y | Y | ok | post | Y | - |  |
+| cmc-index | getHistorical | Y | Y | ok | - | Y | - |  |
+| cmc-index | getLatest | Y | Y | ok | - | Y | - |  |
+| fear-and-greed | getFearAndGreedHistorical | Y | Y | ok | - | Y | - |  |
+| fear-and-greed | getFearAndGreedLatest | Y | Y | ok | - | Y | - |  |
+| listings | listingsLatest | Y | Y | ok | - | Y | - |  |
 
-### coinstats (0/18 complete)
+### coinstats (18/18 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| mixed-part1 | getCoins | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getCoinById | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getCoinChartById | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getCoinAvgPrice | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getCoinExchangePrice | Y | - | fail | - | Y | - | HTTP 400 |
-| mixed-part1 | getTickerExchanges | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getTickerMarkets | Y | - | ok | - | Y | - |  |
-| mixed-part1 | getBlockchains | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getWalletBalance | Y | - | fail | - | Y | - | HTTP 400 |
-| mixed-part2 | getWalletBalances | Y | - | fail | - | Y | - | HTTP 400 |
-| mixed-part2 | getExchanges | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getFiatCurrencies | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getNewsSources | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getNews | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getNewsByType | Y | - | ok | - | Y | - |  |
-| mixed-part2 | getNewsById | Y | - | fail | - | Y | - | HTTP 400 |
-| mixed-part3 | getMarketCap | Y | - | ok | - | Y | - |  |
-| mixed-part3 | getCurrencies | Y | - | ok | - | Y | - |  |
+| mixed-part1 | getCoins | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getCoinById | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getCoinChartById | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getCoinAvgPrice | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getCoinExchangePrice | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getTickerExchanges | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getTickerMarkets | Y | Y | ok | - | Y | - |  |
+| mixed-part1 | getBlockchains | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getWalletBalance | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getWalletBalances | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getExchanges | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getFiatCurrencies | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getNewsSources | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getNews | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getNewsByType | Y | Y | ok | - | Y | - |  |
+| mixed-part2 | getNewsById | Y | Y | ok | - | Y | - |  |
+| mixed-part3 | getMarketCap | Y | Y | ok | - | Y | - |  |
+| mixed-part3 | getCurrencies | Y | Y | ok | - | Y | - |  |
 
 ### cointelegraph (0/1 complete)
 
@@ -456,14 +456,14 @@ Generated: 2026-02-17T15:16
 | proceedings | listPersonen | Y | - | - | post | Y | - |  |
 | proceedings | getPerson | Y | - | - | - | Y | - |  |
 
-### dune-analytics (0/7 complete)
+### dune-analytics (1/7 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | farcaster | farcasterGetTrendingMemecoins | Y | - | fail | post | Y | - | HTTP 404 |
 | farcaster | farcasterGetTrendingChannels | Y | - | fail | post | Y | - | HTTP 404 |
 | farcaster | farcasterGetTrendingUsers | Y | - | fail | post | Y | - | HTTP 404 |
-| getResults | getLatestResult | Y | - | ok | post | Y | - |  |
+| getResults | getLatestResult | Y | Y | ok | post | Y | - |  |
 | trendingContracts | getDexPairStats | Y | - | fail | post | Y | - | HTTP 404 |
 | trendingContracts | getTrendingContracts | Y | - | fail | post | Y | - | HTTP 404 |
 | trendingContracts | getMarketShare | Y | - | fail | post | Y | - | HTTP 404 |
@@ -538,17 +538,17 @@ Generated: 2026-02-17T15:16
 | signature-utils | hashMessage | Y | - | - | exec | - | Y |  |
 | signature-utils | recoverAddress | Y | - | - | exec | - | Y |  |
 
-### etherscan (0/7 complete)
+### etherscan (6/7 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getContractEthereum | getContractABI | Y | - | ok | post | Y | - |  |
-| getContractEthereum | getContractSourceCode | Y | - | ok | post | Y | - |  |
+| getContractEthereum | getContractABI | Y | Y | ok | post | Y | - |  |
+| getContractEthereum | getContractSourceCode | Y | Y | ok | post | Y | - |  |
 | getContractMultichain | getAvailableChains | Y | - | fail | - | Y | - | non-JSON response |
-| getContractMultichain | getSmartContractAbi | Y | - | ok | - | Y | - |  |
-| getContractMultichain | getSourceCode | Y | - | ok | - | Y | - |  |
-| getGaspriceMultichain | getGasOracle | Y | - | ok | - | Y | - |  |
-| getGaspriceMultichain | estimateGasCost | Y | - | ok | - | Y | - |  |
+| getContractMultichain | getSmartContractAbi | Y | Y | ok | - | Y | - |  |
+| getContractMultichain | getSourceCode | Y | Y | ok | - | Y | - |  |
+| getGaspriceMultichain | getGasOracle | Y | Y | ok | - | Y | - |  |
+| getGaspriceMultichain | estimateGasCost | Y | Y | ok | - | Y | - |  |
 
 ### ethscriptions-com (9/11 complete)
 
@@ -588,7 +588,7 @@ Generated: 2026-02-17T15:16
 | streaming | searchToken | Y | - | - | post | Y | - |  |
 | streaming | getWalletPnL | Y | - | - | post | Y | - |  |
 
-### goldsky-nouns (1/9 complete)
+### goldsky-nouns (2/9 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
@@ -596,7 +596,7 @@ Generated: 2026-02-17T15:16
 | goldsky-nouns | getCurrentAuctions | Y | - | fail | - | - | - | HTTP 404 |
 | goldsky-nouns | getNounDetails | Y | - | fail | - | - | - | HTTP 404 |
 | goldsky-nouns | getTopDelegates | Y | - | fail | - | - | - | HTTP 404 |
-| lil-nouns | getProposals | Y | - | fail | - | - | - | HTTP 400 |
+| lil-nouns | getProposals | Y | Y | ok | - | - | - |  |
 | lil-nouns | getProposalById | Y | Y | ok | - | - | - |  |
 | nouns | getCandidateProposals | Y | - | fail | - | - | - | HTTP 404 |
 | nouns | getActivePendingUpdatableProposers | Y | - | fail | - | - | - | HTTP 404 |
@@ -847,13 +847,13 @@ Generated: 2026-02-17T15:16
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | twitterNameChanges | queryUsernameChanges | Y | Y | ok | post | - | - |  |
 
-### minascan-io (2/4 complete)
+### minascan-io (4/4 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| mina-devnet | getMinaDevnetSchema | Y | - | fail | - | - | - | non-JSON response |
+| mina-devnet | getMinaDevnetSchema | Y | Y | ok | - | - | - |  |
 | mina-devnet | getMinaDevnetQuery | Y | Y | ok | - | - | - |  |
-| mina-mainnet | getMinaMainnetSchema | Y | - | fail | - | - | - | non-JSON response |
+| mina-mainnet | getMinaMainnetSchema | Y | Y | ok | - | - | - |  |
 | mina-mainnet | getMinaMainnetQuery | Y | Y | ok | - | - | - |  |
 
 ### mudab (0/3 complete)
@@ -864,13 +864,13 @@ Generated: 2026-02-17T15:16
 | marine-data | getParameters | Y | - | fail | post | - | - | non-JSON response |
 | marine-data | getProjectStations | Y | - | fail | post | - | - | non-JSON response |
 
-### newsapi-org (0/3 complete)
+### newsapi-org (3/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| news | getTopHeadlines | Y | - | ok | - | Y | - |  |
-| news | getEverything | Y | - | ok | - | Y | - |  |
-| news | getSources | Y | - | ok | - | Y | - |  |
+| news | getTopHeadlines | Y | Y | ok | - | Y | - |  |
+| news | getEverything | Y | Y | ok | - | Y | - |  |
+| news | getSources | Y | Y | ok | - | Y | - |  |
 
 ### newsdata-io (0/2 complete)
 
@@ -895,13 +895,13 @@ Generated: 2026-02-17T15:16
 | tenders | getNoticesByDay | Y | - | - | exec | - | Y |  |
 | tenders | getNoticesByMonth | Y | - | - | exec | - | Y |  |
 
-### ohlcv (0/3 complete)
+### ohlcv (1/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | olhcv-moralis-evm | getRecursiveOhlcvEVM | Y | - | fail | - | Y | - | HTTP 400 |
-| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | fail | - | Y | - | HTTP 404 |
-| olhcv-solana-tracker | getOhlcvSolana | Y | - | ok | - | Y | - |  |
+| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | fail | - | Y | - | HTTP 400 |
+| olhcv-solana-tracker | getOhlcvSolana | Y | Y | ok | - | Y | - |  |
 
 ### oneinch (0/5 complete)
 
@@ -1018,19 +1018,19 @@ Generated: 2026-02-17T15:16
 | schema | get_trending_words | Y | - | - | - | Y | - |  |
 | schema | get_social_dominance | Y | - | - | - | Y | - |  |
 
-### simdune (0/9 complete)
+### simdune (6/9 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | activityEVM | getActivityEVM | Y | - | - | - | Y | Y |  |
 | activityEVM | getActivityDetailedEVM | Y | - | - | - | Y | Y |  |
-| balancesEVM | getBalancesEVM | Y | - | fail | - | Y | - | HTTP 400 |
-| balancesSVM | getBalancesSVM | Y | - | fail | - | Y | - | HTTP 400 |
-| collectiblesEVM | getCollectiblesEVM | Y | - | fail | - | Y | - | non-JSON response |
-| tokenHoldersEVM | getTokenHoldersEVM | Y | - | fail | - | Y | - | non-JSON response |
+| balancesEVM | getBalancesEVM | Y | Y | ok | - | Y | - |  |
+| balancesSVM | getBalancesSVM | Y | Y | ok | - | Y | - |  |
+| collectiblesEVM | getCollectiblesEVM | Y | Y | ok | - | Y | - |  |
+| tokenHoldersEVM | getTokenHoldersEVM | Y | Y | ok | - | Y | - |  |
 | tokenInfoEVM | getTokenInfoEVM | Y | - | fail | - | Y | - | HTTP 400 |
-| transactionsEVM | getTransactionsEVM | Y | - | fail | - | Y | - | non-JSON response |
-| transactionsSVM | getTransactionsSVM | Y | - | fail | - | Y | - | HTTP 400 |
+| transactionsEVM | getTransactionsEVM | Y | Y | ok | - | Y | - |  |
+| transactionsSVM | getTransactionsSVM | Y | Y | ok | - | Y | - |  |
 
 ### smard (0/2 complete)
 
@@ -1047,50 +1047,50 @@ Generated: 2026-02-17T15:16
 | snapshot | listProposals | Y | - | fail | - | - | - | HTTP 400 |
 | snapshot | getProposalDetails | Y | - | fail | - | - | - | HTTP 400 |
 
-### solanatracker-io (0/40 complete)
+### solanatracker-io (40/40 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| --additionalRoutes | tokenStats | Y | - | ok | - | Y | - |  |
-| --additionalRoutes | tokenStatsByPool | Y | - | ok | - | Y | - |  |
-| --chartRoutes | chartData | Y | - | ok | post | Y | - |  |
-| --chartRoutes | chartDataByPool | Y | - | ok | post | Y | - |  |
-| --pnlRoutes | profitAndLossData | Y | - | ok | post | Y | - |  |
-| --pnlRoutes | pnlForSpecificToken | Y | - | ok | post | Y | - |  |
-| --pnlRoutes | firstBuyers | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | priceInformation | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | postPrice | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | multiPriceInformation | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | getHistoricPrice | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | getPriceAtTimestamp | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | getPriceRange | Y | - | ok | post | Y | - |  |
-| --priceEndpoints | postMultiPrice | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | tokenInformation | Y | - | ok | - | Y | - |  |
-| --tokenEndpoints-part1 | tokenHolders | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | topTokenHolders | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | allTimeHighPrice | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | tokensByDeployer | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | search | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | latestTokens | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part1 | multipleTokens | Y | - | fail | post | Y | - | HTTP 400 |
-| --tokenEndpoints-part2 | trendingTokens | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | tokensByVolume | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | tokenOverview | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | graduatedTokens | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | tokenByPool | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | trendingTokensByTimeframe | Y | - | ok | post | Y | - |  |
-| --tokenEndpoints-part2 | tokensByVolumeTimeframe | Y | - | ok | post | Y | - |  |
-| --topTraderRoutes | topTradersAll | Y | - | ok | post | Y | - |  |
-| --topTraderRoutes | topTradersAllPaged | Y | - | ok | post | Y | - |  |
-| --topTraderRoutes | topTradersByToken | Y | - | ok | post | Y | - |  |
-| --tradeEndpoints | tokenTrades | Y | - | ok | post | Y | - |  |
-| --tradeEndpoints | tradesByWallet | Y | - | ok | post | Y | - |  |
-| --tradeEndpoints | tokenPoolTrades | Y | - | fail | post | Y | - | HTTP 400 |
-| --tradeEndpoints | userPoolTrades | Y | - | fail | post | Y | - | HTTP 400 |
-| --walletEndpoints | walletInformation | Y | - | ok | post | Y | - |  |
-| --walletEndpoints | walletTokensBasic | Y | - | fail | post | Y | - | HTTP 500 |
-| --walletEndpoints | walletTokensPaged | Y | - | fail | post | Y | - | HTTP 400 |
-| --walletEndpoints | walletTrades | Y | - | ok | post | Y | - |  |
+| --additionalRoutes | tokenStats | Y | Y | ok | - | Y | - |  |
+| --additionalRoutes | tokenStatsByPool | Y | Y | ok | - | Y | - |  |
+| --chartRoutes | chartData | Y | Y | ok | post | Y | - |  |
+| --chartRoutes | chartDataByPool | Y | Y | ok | post | Y | - |  |
+| --pnlRoutes | profitAndLossData | Y | Y | ok | post | Y | - |  |
+| --pnlRoutes | pnlForSpecificToken | Y | Y | ok | post | Y | - |  |
+| --pnlRoutes | firstBuyers | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | priceInformation | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | postPrice | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | multiPriceInformation | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | getHistoricPrice | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | getPriceAtTimestamp | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | getPriceRange | Y | Y | ok | post | Y | - |  |
+| --priceEndpoints | postMultiPrice | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | tokenInformation | Y | Y | ok | - | Y | - |  |
+| --tokenEndpoints-part1 | tokenHolders | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | topTokenHolders | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | allTimeHighPrice | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | tokensByDeployer | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | search | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | latestTokens | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part1 | multipleTokens | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | trendingTokens | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | tokensByVolume | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | tokenOverview | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | graduatedTokens | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | tokenByPool | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | trendingTokensByTimeframe | Y | Y | ok | post | Y | - |  |
+| --tokenEndpoints-part2 | tokensByVolumeTimeframe | Y | Y | ok | post | Y | - |  |
+| --topTraderRoutes | topTradersAll | Y | Y | ok | post | Y | - |  |
+| --topTraderRoutes | topTradersAllPaged | Y | Y | ok | post | Y | - |  |
+| --topTraderRoutes | topTradersByToken | Y | Y | ok | post | Y | - |  |
+| --tradeEndpoints | tokenTrades | Y | Y | ok | post | Y | - |  |
+| --tradeEndpoints | tradesByWallet | Y | Y | ok | post | Y | - |  |
+| --tradeEndpoints | tokenPoolTrades | Y | Y | ok | post | Y | - |  |
+| --tradeEndpoints | userPoolTrades | Y | Y | ok | post | Y | - |  |
+| --walletEndpoints | walletInformation | Y | Y | ok | post | Y | - |  |
+| --walletEndpoints | walletTokensBasic | Y | Y | ok | post | Y | - |  |
+| --walletEndpoints | walletTokensPaged | Y | Y | ok | post | Y | - |  |
+| --walletEndpoints | walletTrades | Y | Y | ok | post | Y | - |  |
 
 ### solscan-io (0/1 complete)
 
@@ -1198,13 +1198,13 @@ Generated: 2026-02-17T15:16
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | public-contracts | getPublicContract | Y | Y | ok | post | - | - |  |
 
-### thegraph (0/3 complete)
+### thegraph (2/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | getNewUniswapPools | getNewPools | Y | - | - | - | Y | - |  |
-| getSchema | getSubgraphSchema | Y | - | ok | post | Y | - |  |
-| getSchema | querySubgraph | Y | - | ok | post | Y | - |  |
+| getSchema | getSubgraphSchema | Y | Y | ok | post | Y | - |  |
+| getSchema | querySubgraph | Y | Y | ok | post | Y | - |  |
 
 ### twitter (0/1 complete)
 

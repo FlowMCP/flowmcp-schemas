@@ -21,7 +21,19 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Full getData() from testnet',
+                    address: '0x7b2C957209897bc4423162e57D8C3CA863DCfBCc',
+                    chainName: 'LUKSO_TESTNET'
+                },
+                {
+                    _description: 'Full getData() from mainnet',
+                    address: '0x7b035f7cDBB0e44E52722dd2e89917232908e962',
+                    chainName: 'LUKSO_MAINNET'
+                }
+            ],
         },
         fetchProfileMetadata: {
             method: 'GET',
@@ -30,7 +42,19 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'fetchData() with LSP3Profile from testnet',
+                    address: '0x7b2C957209897bc4423162e57D8C3CA863DCfBCc',
+                    chainName: 'LUKSO_TESTNET'
+                },
+                {
+                    _description: 'fetchData() with LSP3Profile from mainnet',
+                    address: '0x7b035f7cDBB0e44E52722dd2e89917232908e962',
+                    chainName: 'LUKSO_MAINNET'
+                }
+            ],
         },
         getUniversalReceiverAddress: {
             method: 'GET',
@@ -39,7 +63,19 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'getData() LSP1UniversalReceiverDelegate on testnet',
+                    address: '0xFF7E89acaBce3ed97Ed528288D3b8F113557A8c8',
+                    chainName: 'LUKSO_TESTNET'
+                },
+                {
+                    _description: 'getData() LSP1UniversalReceiverDelegate on mainnet',
+                    address: '0x7b035f7cDBB0e44E52722dd2e89917232908e962',
+                    chainName: 'LUKSO_MAINNET'
+                }
+            ],
         }
     },
     requiredLibraries: ['@erc725/erc725.js']

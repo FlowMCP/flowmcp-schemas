@@ -21,7 +21,10 @@ export const main = {
             description: 'Analyze a Solana token using its address and return risk and token metadata. Required: token_address.',
             parameters: [
                 { position: { key: 'token_address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(32)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Analyze example token address', token_address: 'So11111111111111111111111111111111111111112' }
+            ],
         }
     }
 }

@@ -15,7 +15,10 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'List supported chains and their domain suffixes (static, compiled from docs). via spaceid.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Return supported chains list' }
+            ],
         },
         getAddress: {
             method: 'GET',
@@ -23,7 +26,10 @@ export const main = {
             description: 'Resolve domain name to wallet address (e.g. steven.sei → sei1whl4xw...). Required: domain.',
             parameters: [
                 { position: { key: 'domain', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Resolve steven.sei to address', domain: 'steven.sei' }
+            ],
         },
         getName: {
             method: 'GET',
@@ -32,7 +38,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chainid', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Resolve Sei address to steven.sei',
+                    chainid: '902',
+                    address: 'sei1whl4xw33yzgadnm23uhk4q9y39lynlptwjctxp'
+                }
+            ],
         }
     }
 }

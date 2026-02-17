@@ -21,13 +21,37 @@ export const main = {
     routes: {
         getTransactionsEVM: {
             method: 'GET',
-            path: '/evm/transactions/{{walletAddress}}',
+            path: '/evm/transactions/:walletAddress',
             description: 'Get detailed transaction history for an EVM address across supported chains, with block data and gas information.',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE,OPTIMISM_MAINNET,BASE_MAINNET,BNB_CHAIN,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL,ZKSYNC_ERA,MANTLE,CELO_MAINNET,GNOSIS_CHAIN,FANTOM,ARBITRUM_NOVA,BLAST_MAINNET,BERACHAIN,LISK,MODE,METIS,ZORA_NETWORK,BOBA_NETWORK,MINT_MAINNET,DEGEN_CHAIN,ANCIENT8,KAIA,OPBNB,BOB,FLARE,CYBER,PROOF_OF_PLAY,HYPER_EVM,BASE_SEPOLIA,AVALANCHE_FUJI)', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get Vitalik\'s transactions on Ethereum mainnet',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    limit: '5',
+                    chainName: 'ETHEREUM_MAINNET'
+                },
+                {
+                    _description: 'Get transactions on Base mainnet',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    limit: '3',
+                    chainName: 'BASE_MAINNET'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        next_offset: { type: 'string' },
+                        transactions: { type: 'array', items: { type: 'object', properties: { chain: { type: 'string' }, chain_id: { type: 'number' }, address: { type: 'string' }, block_time: { type: 'string' }, block_number: { type: 'number' }, index: { type: 'number' }, hash: { type: 'string' }, block_hash: { type: 'string' }, value: { type: 'string' }, transaction_type: { type: 'string' }, from: { type: 'string' }, to: { type: 'string' }, nonce: { type: 'string' }, gas_price: { type: 'string' }, gas_used: { type: 'string' }, effective_gas_price: { type: 'string' }, success: { type: 'boolean' }, data: { type: 'string' }, logs: { type: 'array', items: { type: 'string' } } } } }
+                    }
+                }
+            },
         }
     }
 }

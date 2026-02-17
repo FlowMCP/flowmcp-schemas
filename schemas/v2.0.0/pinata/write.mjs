@@ -21,7 +21,10 @@ export const main = {
             parameters: [
                 { position: { key: 'filename', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'content', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Upload hello.txt with text content', filename: 'hello.txt', content: 'hello world!' }
+            ],
         }
     },
     requiredLibraries: ['pinata']

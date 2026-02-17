@@ -20,7 +20,19 @@ export const main = {
             description: 'Fetch the schema of a subgraph via introspection query via The Graph. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'subgraphId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Introspect Uniswap V3 subgraph', subgraphId: '5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errors: { type: 'array', items: { type: 'object', properties: { message: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         querySubgraph: {
             method: 'POST',
@@ -29,7 +41,23 @@ export const main = {
             parameters: [
                 { position: { key: 'subgraphId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Sample query for entity data',
+                    subgraphId: '5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV',
+                    query: 'query { pools(first: 2) { id } }'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errors: { type: 'array', items: { type: 'object', properties: { message: { type: 'string' } } } }
+                    }
+                }
+            },
         }
     }
 }

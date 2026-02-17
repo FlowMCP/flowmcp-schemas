@@ -22,7 +22,30 @@ export const main = {
             description: 'Get detailed stats for a token over various time intervals.',
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test tokenStats', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        '1m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '5m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '15m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '30m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '1h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '2h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '3h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '4h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '5h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '6h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '12h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '24h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } }
+                    }
+                }
+            },
         },
         tokenStatsByPool: {
             method: 'GET',
@@ -31,7 +54,33 @@ export const main = {
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'pool', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test tokenStatsByPool',
+                    token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    pool: '9Tb2ohu5P16BpBarqd3N27WnkF51Ukfs8Z1GzzLDxVZW'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        '5m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '15m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '30m': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '1h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '2h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '3h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '4h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '5h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '6h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '12h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } },
+                        '24h': { type: 'object', properties: { buyers: { type: 'number' }, sellers: { type: 'number' }, volume: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' }, total: { type: 'number' } } }, transactions: { type: 'number' }, buys: { type: 'number' }, sells: { type: 'number' }, wallets: { type: 'number' }, price: { type: 'number' }, priceChangePercentage: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

@@ -14,7 +14,20 @@ export const main = {
             method: 'GET',
             path: '/haltestellen.json/VGN',
             description: 'Get all public transit stops in the Nuremberg VGN network. Returns stop name, coordinates, and available transport modes.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all VGN transit stops' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Metadata: { type: 'object', properties: { Version: { type: 'string' }, Timestamp: { type: 'string' } } },
+                        Haltestellen: { type: 'array', items: { type: 'object', properties: { Haltestellenname: { type: 'string' }, VAGKennung: { type: 'string' }, VGNKennung: { type: 'number' }, Longitude: { type: 'number' }, Latitude: { type: 'number' }, Produkte: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getDepartures: {
             method: 'GET',
@@ -22,7 +35,23 @@ export const main = {
             description: 'Get real-time departures for a specific stop. Use VGN stop ID from getStops. Returns line, direction, scheduled and actual departure times.',
             parameters: [
                 { position: { key: 'stopId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['default("510")'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get departures for Nuernberg Hauptbahnhof', stopId: '510' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Metadata: { type: 'object', properties: { Version: { type: 'string' }, Timestamp: { type: 'string' } } },
+                        Haltestellenname: { type: 'string' },
+                        VAGKennung: { type: 'string' },
+                        VGNKennung: { type: 'number' },
+                        Abfahrten: { type: 'array', items: { type: 'object', properties: { Linienname: { type: 'string' }, Haltepunkt: { type: 'string' }, Richtung: { type: 'string' }, Richtungstext: { type: 'string' }, AbfahrtszeitSoll: { type: 'string' }, AbfahrtszeitIst: { type: 'string' }, Produkt: { type: 'string' }, Longitude: { type: 'number' }, Latitude: { type: 'number' }, Fahrtnummer: { type: 'number' }, Betriebstag: { type: 'string' }, Fahrtartnummer: { type: 'number' }, Besetzgrad: { type: 'string' }, Prognose: { type: 'boolean' }, HaltesteigText: { type: 'string' } } } }
+                    }
+                }
+            },
         }
     }
 }

@@ -30,7 +30,16 @@ export const main = {
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get ERC-1155 balance via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
+                    walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
+                    tokenId: '1'
+                }
+            ],
         },
         erc1155Uri: {
             method: 'GET',
@@ -40,7 +49,15 @@ export const main = {
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get ERC-1155 URI via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
+                    tokenId: '1'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

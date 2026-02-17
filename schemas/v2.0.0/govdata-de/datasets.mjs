@@ -20,7 +20,23 @@ export const main = {
                 { position: { key: 'sort', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(score desc, metadata_modified desc)', 'optional()'] } },
                 { position: { key: 'rows', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)', 'optional()'] } },
                 { position: { key: 'start', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for energy datasets', q: 'energie', rows: 5 },
+                { _description: 'Search for climate datasets', q: 'klima', rows: 3 },
+                { _description: 'Search for transport datasets', q: 'verkehr', rows: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        help: { type: 'string' },
+                        success: { type: 'boolean' },
+                        result: { type: 'object', properties: { count: { type: 'number' }, facets: { type: 'object' }, results: { type: 'array', items: { type: 'object' } }, sort: { type: 'string' }, search_facets: { type: 'object' } } }
+                    }
+                }
+            },
         },
         getDataset: {
             method: 'GET',
@@ -28,7 +44,21 @@ export const main = {
             description: 'Get full details for a specific dataset by its name or ID via govdata. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get energy production index dataset', id: 'produktionsindex-energie' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        help: { type: 'string' },
+                        success: { type: 'boolean' },
+                        result: { type: 'object', properties: { author: { type: 'string', nullable: true }, author_email: { type: 'string', nullable: true }, creator_user_id: { type: 'string' }, id: { type: 'string' }, isopen: { type: 'boolean' }, license_id: { type: 'string' }, license_title: { type: 'string' }, maintainer: { type: 'string', nullable: true }, maintainer_email: { type: 'string', nullable: true }, metadata_created: { type: 'string' }, metadata_modified: { type: 'string' }, name: { type: 'string' }, notes: { type: 'string' }, num_resources: { type: 'number' }, num_tags: { type: 'number' }, organization: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, type: { type: 'string' }, description: { type: 'string' }, image_url: { type: 'string' }, created: { type: 'string' }, is_organization: { type: 'boolean' }, approval_status: { type: 'string' }, state: { type: 'string' } } }, owner_org: { type: 'string' }, private: { type: 'boolean' }, state: { type: 'string' }, title: { type: 'string' }, type: { type: 'string' }, url: { type: 'string', nullable: true }, version: { type: 'string', nullable: true }, extras: { type: 'array', items: { type: 'object' } }, groups: { type: 'array', items: { type: 'object' } }, resources: { type: 'array', items: { type: 'object' } }, tags: { type: 'array', items: { type: 'object' } }, relationships_as_subject: { type: 'array', items: { type: 'string' } }, relationships_as_object: { type: 'array', items: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         listGroups: {
             method: 'GET',
@@ -37,7 +67,21 @@ export const main = {
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List all groups with details', limit: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        help: { type: 'string' },
+                        success: { type: 'boolean' },
+                        result: { type: 'array', items: { type: 'object', properties: { approval_status: { type: 'string' }, created: { type: 'string' }, description: { type: 'string' }, display_name: { type: 'string' }, id: { type: 'string' }, image_display_url: { type: 'string' }, image_url: { type: 'string' }, is_organization: { type: 'boolean' }, name: { type: 'string' }, num_followers: { type: 'number' }, package_count: { type: 'number' }, state: { type: 'string' }, title: { type: 'string' }, type: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         listOrganizations: {
             method: 'GET',
@@ -46,7 +90,21 @@ export const main = {
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List organizations', limit: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        help: { type: 'string' },
+                        success: { type: 'boolean' },
+                        result: { type: 'array', items: { type: 'object', properties: { approval_status: { type: 'string' }, created: { type: 'string' }, description: { type: 'string' }, display_name: { type: 'string' }, id: { type: 'string' }, image_display_url: { type: 'string' }, image_url: { type: 'string' }, is_organization: { type: 'boolean' }, name: { type: 'string' }, num_followers: { type: 'number' }, package_count: { type: 'number' }, state: { type: 'string' }, title: { type: 'string' }, type: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         searchTags: {
             method: 'GET',
@@ -55,7 +113,22 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(20)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for climate tags', query: 'klima', limit: 10 },
+                { _description: 'Search for energy tags', query: 'energie', limit: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        help: { type: 'string' },
+                        success: { type: 'boolean' },
+                        result: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         }
     }
 }

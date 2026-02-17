@@ -25,7 +25,10 @@ export const main = {
                 { position: { key: 'sort_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'filters', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'columns', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get DEX pairs for optimism', chain: 'optimism', limit: 5 }
+            ],
         },
         getTrendingContracts: {
             method: 'GET',
@@ -37,7 +40,10 @@ export const main = {
                 { position: { key: 'sort_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'filters', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'columns', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get trending contracts on base', chain: 'base', limit: 3 }
+            ],
         },
         getMarketShare: {
             method: 'GET',
@@ -50,7 +56,10 @@ export const main = {
                 { position: { key: 'sort_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'filters', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'columns', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get DEX market share for polygon', market: 'dex', chain: 'polygon', limit: 5 }
+            ],
         }
     }
 }

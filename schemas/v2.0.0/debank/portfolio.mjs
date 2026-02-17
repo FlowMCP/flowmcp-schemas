@@ -20,7 +20,10 @@ export const main = {
             description: 'Get total USD balance of a wallet address across all supported chains. Required: id.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Vitalik total balance', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
+            ],
         },
         getUsedChains: {
             method: 'GET',
@@ -28,7 +31,10 @@ export const main = {
             description: 'Get list of chains that a wallet address has interacted with Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Vitalik used chains', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
+            ],
         },
         getTokenList: {
             method: 'GET',
@@ -38,7 +44,10 @@ export const main = {
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'is_all', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum tokens for Vitalik', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain_id: 'eth' }
+            ],
         },
         getProtocolList: {
             method: 'GET',
@@ -47,7 +56,10 @@ export const main = {
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum protocol positions', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain_id: 'eth' }
+            ],
         },
         getAllProtocols: {
             method: 'GET',
@@ -55,7 +67,10 @@ export const main = {
             description: 'Get all DeFi protocol positions across all chains for a wallet Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all protocol positions for Vitalik', id: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
+            ],
         },
         getTokenInfo: {
             method: 'GET',
@@ -64,7 +79,10 @@ export const main = {
             parameters: [
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get USDC token info on Ethereum', chain_id: 'eth', id: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' }
+            ],
         }
     }
 }

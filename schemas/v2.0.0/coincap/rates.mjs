@@ -20,7 +20,21 @@ export const main = {
             description: 'Retrieve all conversion rates or filter by comma-separated slugs. Optional filters: ids.',
             parameters: [
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get all rates' },
+                { _description: 'Filter rates by bitcoin,ethereum', ids: 'bitcoin,ethereum' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        data: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, symbol: { type: 'string' }, currencySymbol: { type: 'string' }, type: { type: 'string' }, rateUsd: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getRateBySlug: {
             method: 'GET',
@@ -28,7 +42,21 @@ export const main = {
             description: 'Retrieve a specific conversion rate by slug via CoinCap — query by slug. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get bitcoin rate', slug: 'bitcoin' },
+                { _description: 'Get invalid rate', slug: 'invalid-slug' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        timestamp: { type: 'number' },
+                        data: { type: 'object', properties: { id: { type: 'string' }, symbol: { type: 'string' }, currencySymbol: { type: 'string' }, rateUsd: { type: 'string' }, type: { type: 'string' } } }
+                    }
+                }
+            },
         }
     }
 }

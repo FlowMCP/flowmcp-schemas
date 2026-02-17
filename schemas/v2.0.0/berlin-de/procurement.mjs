@@ -14,7 +14,10 @@ export const main = {
             method: 'GET',
             path: '/vergabeplattform/veroeffentlichungen/bekanntmachungen/feed.rss',
             description: 'Get current public procurement notices from the Berlin Vergabeplattform. Returns tender announcements including title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all current Berlin procurement notices' }
+            ],
         }
     }
 }

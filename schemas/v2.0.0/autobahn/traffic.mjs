@@ -14,7 +14,19 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'List all available German motorway identifiers (A1, A2, etc.) Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'List all motorways' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        roads: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         },
         getRoadworks: {
             method: 'GET',
@@ -22,7 +34,20 @@ export const main = {
             description: 'Get current roadworks and construction sites for a specific motorway. Required: roadId.',
             parameters: [
                 { position: { key: 'roadId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get roadworks on A1', roadId: 'A1' },
+                { _description: 'Get roadworks on A7', roadId: 'A7' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        roadworks: { type: 'array', items: { type: 'object', properties: { identifier: { type: 'string' }, icon: { type: 'string' }, isBlocked: { type: 'string' }, future: { type: 'boolean' }, extent: { type: 'string' }, point: { type: 'string' }, startLcPosition: { type: 'string' }, impact: { type: 'object' }, display_type: { type: 'string' }, subtitle: { type: 'string' }, title: { type: 'string' }, startTimestamp: { type: 'string' }, coordinate: { type: 'object' }, description: { type: 'array', items: { type: 'string' } }, routeRecommendation: { type: 'array', items: { type: 'string' } }, footer: { type: 'array', items: { type: 'string' } }, lorryParkingFeatureIcons: { type: 'array', items: { type: 'string' } }, geometry: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getWarnings: {
             method: 'GET',
@@ -30,7 +55,20 @@ export const main = {
             description: 'Get current traffic warnings for a specific motorway via Autobahn API — query by roadId.',
             parameters: [
                 { position: { key: 'roadId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get warnings on A1', roadId: 'A1' },
+                { _description: 'Get warnings on A3', roadId: 'A3' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        warning: { type: 'array', items: { type: 'object', properties: { identifier: { type: 'string' }, icon: { type: 'string' }, isBlocked: { type: 'string' }, future: { type: 'boolean' }, extent: { type: 'string' }, point: { type: 'string' }, startLcPosition: { type: 'string' }, display_type: { type: 'string' }, subtitle: { type: 'string' }, title: { type: 'string' }, startTimestamp: { type: 'string' }, delayTimeValue: { type: 'string' }, abnormalTrafficType: { type: 'string' }, averageSpeed: { type: 'string' }, coordinate: { type: 'object' }, description: { type: 'array', items: { type: 'string' } }, routeRecommendation: { type: 'array', items: { type: 'string' } }, footer: { type: 'array', items: { type: 'string' } }, lorryParkingFeatureIcons: { type: 'array', items: { type: 'string' } }, source: { type: 'string' }, geometry: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getClosures: {
             method: 'GET',
@@ -38,7 +76,20 @@ export const main = {
             description: 'Get current road closures for a specific motorway via Autobahn API — query by roadId.',
             parameters: [
                 { position: { key: 'roadId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get closures on A1', roadId: 'A1' },
+                { _description: 'Get closures on A5', roadId: 'A5' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        closure: { type: 'array', items: { type: 'object', properties: { identifier: { type: 'string' }, icon: { type: 'string' }, isBlocked: { type: 'string' }, future: { type: 'boolean' }, extent: { type: 'string' }, point: { type: 'string' }, startLcPosition: { type: 'string' }, impact: { type: 'object' }, display_type: { type: 'string' }, subtitle: { type: 'string' }, title: { type: 'string' }, coordinate: { type: 'object' }, description: { type: 'array', items: { type: 'string' } }, routeRecommendation: { type: 'array', items: { type: 'string' } }, footer: { type: 'array', items: { type: 'string' } }, lorryParkingFeatureIcons: { type: 'array', items: { type: 'string' } }, geometry: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getChargingStations: {
             method: 'GET',
@@ -46,7 +97,20 @@ export const main = {
             description: 'Get electric vehicle charging stations along a specific motorway. Required: roadId.',
             parameters: [
                 { position: { key: 'roadId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get charging stations on A1', roadId: 'A1' },
+                { _description: 'Get charging stations on A9', roadId: 'A9' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        electric_charging_station: { type: 'array', items: { type: 'object', properties: { identifier: { type: 'string' }, icon: { type: 'string' }, isBlocked: { type: 'string' }, future: { type: 'boolean' }, extent: { type: 'string' }, point: { type: 'string' }, display_type: { type: 'string' }, subtitle: { type: 'string' }, title: { type: 'string' }, coordinate: { type: 'object' }, description: { type: 'array', items: { type: 'string' } }, routeRecommendation: { type: 'array', items: { type: 'string' } }, footer: { type: 'array', items: { type: 'string' } }, lorryParkingFeatureIcons: { type: 'array', items: { type: 'string' } } } } }
+                    }
+                }
+            },
         },
         getWebcams: {
             method: 'GET',
@@ -54,7 +118,20 @@ export const main = {
             description: 'Get traffic webcams along a specific motorway via Autobahn API — query by roadId.',
             parameters: [
                 { position: { key: 'roadId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get webcams on A9', roadId: 'A9' },
+                { _description: 'Get webcams on A3', roadId: 'A3' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        webcam: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         }
     }
 }

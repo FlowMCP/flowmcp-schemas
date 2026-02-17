@@ -21,7 +21,27 @@ export const main = {
             description: 'Fetch latest result for a Dune query ID (returns CSV string). Required: query_id.',
             parameters: [
                 { position: { key: 'query_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Retrieve latest result from query ID', query_id: 4032586 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        execution_id: { type: 'string' },
+                        query_id: { type: 'number' },
+                        is_execution_finished: { type: 'boolean' },
+                        state: { type: 'string' },
+                        submitted_at: { type: 'string' },
+                        expires_at: { type: 'string' },
+                        execution_started_at: { type: 'string' },
+                        execution_ended_at: { type: 'string' },
+                        result: { type: 'object', properties: { rows: { type: 'array', items: { type: 'object' } }, metadata: { type: 'object', properties: { column_names: { type: 'array', items: { type: 'string' } }, column_types: { type: 'array', items: { type: 'string' } }, row_count: { type: 'number' }, result_set_bytes: { type: 'number' }, total_row_count: { type: 'number' }, total_result_set_bytes: { type: 'number' }, datapoint_count: { type: 'number' }, pending_time_millis: { type: 'number' }, execution_time_millis: { type: 'number' } } } } }
+                    }
+                }
+            },
         }
     }
 }

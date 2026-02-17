@@ -18,7 +18,11 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'search_query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for USDT on mainnet', chainName: 'LUKSO_MAINNET', search_query: 'USDT' },
+                { _description: 'Search for LYX on testnet', chainName: 'LUKSO_TESTNET', search_query: 'LYX' }
+            ],
         },
         searchRedirect: {
             method: 'GET',
@@ -27,7 +31,11 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'search_query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Redirect check for USDT', chainName: 'LUKSO_MAINNET', search_query: 'USDT' },
+                { _description: 'Redirect check for LYX', chainName: 'LUKSO_TESTNET', search_query: 'LYX' }
+            ],
         }
     }
 }

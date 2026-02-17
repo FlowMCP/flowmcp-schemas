@@ -24,7 +24,13 @@ export const main = {
                 { position: { key: 'values', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'fast', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(14)'] } },
                 { position: { key: 'slow', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(30)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAbsolutePriceOscillator with sample OHLCV data',
+                    values: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         },
         getAbsolutePriceOscillatorStrategy: {
             method: 'GET',
@@ -34,7 +40,13 @@ export const main = {
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'fast', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(14)'] } },
                 { position: { key: 'slow', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(30)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAbsolutePriceOscillatorStrategy with sample OHLCV data',
+                    asset: '{"closings":[100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120],"highs":[101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121],"lows":[99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119],"openings":[100,101,102,102,104,105,105,107,108,108,110,111,111,113,114,114,116,117,117,119],"volumes":[1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400]}'
+                }
+            ],
         },
         getAccelerationBands: {
             method: 'GET',
@@ -46,7 +58,15 @@ export const main = {
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(20)'] } },
                 { position: { key: 'multiplier', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(4)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAccelerationBands with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         },
         getAccelerationBandsStrategy: {
             method: 'GET',
@@ -56,7 +76,13 @@ export const main = {
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(20)'] } },
                 { position: { key: 'multiplier', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(4)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAccelerationBandsStrategy with sample OHLCV data',
+                    asset: '{"closings":[100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120],"highs":[101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121],"lows":[99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119],"openings":[100,101,102,102,104,105,105,107,108,108,110,111,111,113,114,114,116,117,117,119],"volumes":[1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400]}'
+                }
+            ],
         },
         getAccumulationDistribution: {
             method: 'GET',
@@ -67,7 +93,16 @@ export const main = {
                 { position: { key: 'lows', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'volumes', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAccumulationDistribution with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120',
+                    volumes: '1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400'
+                }
+            ],
         },
         getAroon: {
             method: 'GET',
@@ -77,7 +112,14 @@ export const main = {
                 { position: { key: 'highs', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'lows', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(25)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAroon with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119'
+                }
+            ],
         },
         getAroonStrategy: {
             method: 'GET',
@@ -86,7 +128,13 @@ export const main = {
             parameters: [
                 { position: { key: 'asset', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(25)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAroonStrategy with sample OHLCV data',
+                    asset: '{"closings":[100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120],"highs":[101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121],"lows":[99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119],"openings":[100,101,102,102,104,105,105,107,108,108,110,111,111,113,114,114,116,117,117,119],"volumes":[1000,1200,900,1100,1300,800,1000,1400,900,1200,1100,1000,1300,1500,800,1200,1000,1100,900,1400]}'
+                }
+            ],
         },
         getAverageTrueRange: {
             method: 'GET',
@@ -97,7 +145,15 @@ export const main = {
                 { position: { key: 'lows', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'closings', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'period', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['optional()', 'default(14)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute getAverageTrueRange with sample OHLCV data',
+                    highs: '101,103,102,104,106,105,107,109,108,110,112,111,113,115,114,116,118,117,119,121',
+                    lows: '99,101,100,102,104,103,105,107,106,108,110,109,111,113,112,114,116,115,117,119',
+                    closings: '100,102,101,103,105,104,106,108,107,109,111,110,112,114,113,115,117,116,118,120'
+                }
+            ],
         }
     },
     requiredLibraries: ['indicatorts']

@@ -27,7 +27,19 @@ export const main = {
                 { position: { key: 'time_to', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'marketCap', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'removeOutliers', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()', 'default(true)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test chartData', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        oclhv: { type: 'array', items: { type: 'object', properties: { open: { type: 'number' }, close: { type: 'number' }, low: { type: 'number' }, high: { type: 'number' }, volume: { type: 'number' }, time: { type: 'number' } } } }
+                    }
+                }
+            },
         },
         chartDataByPool: {
             method: 'GET',
@@ -41,7 +53,23 @@ export const main = {
                 { position: { key: 'time_to', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'marketCap', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'removeOutliers', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()', 'default(true)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test chartDataByPool',
+                    token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    pool: '9Tb2ohu5P16BpBarqd3N27WnkF51Ukfs8Z1GzzLDxVZW'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        oclhv: { type: 'array', items: { type: 'object', properties: { open: { type: 'number' }, close: { type: 'number' }, low: { type: 'number' }, high: { type: 'number' }, volume: { type: 'number' }, time: { type: 'number' } } } }
+                    }
+                }
+            },
         }
     }
 }

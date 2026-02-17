@@ -17,7 +17,21 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'pairAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get pair data', chainId: 'bsc', pairAddress: '0x0FCeAc6f12dF0c11f4534534fc4ae68751B5862D' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        schemaVersion: { type: 'string' },
+                        pairs: { type: 'string', nullable: true },
+                        pair: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         checkTokenOrders: {
             method: 'GET',
@@ -26,7 +40,20 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Check token orders', chainId: 'solana', tokenAddress: '5i3WMss2Ldnkw3CnrBoGrkPiVwpAKuGoHULPdbaxpump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        orders: { type: 'array', items: { type: 'object', properties: { chainId: { type: 'string' }, tokenAddress: { type: 'string' }, type: { type: 'string' }, status: { type: 'string' }, paymentTimestamp: { type: 'number' } } } },
+                        boosts: { type: 'array', items: { type: 'object', properties: { chainId: { type: 'string' }, tokenAddress: { type: 'string' }, id: { type: 'string' }, amount: { type: 'number' }, paymentTimestamp: { type: 'number' } } } }
+                    }
+                }
+            },
         }
     }
 }

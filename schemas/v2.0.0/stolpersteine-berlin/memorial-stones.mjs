@@ -18,7 +18,10 @@ export const main = {
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(1000)', 'default(100)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'First 50 Stolpersteine', limit: 50 }
+            ],
         },
         searchStones: {
             method: 'GET',
@@ -31,7 +34,10 @@ export const main = {
                 { position: { key: 'birth_year', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1800)', 'max(1945)', 'optional()'] } },
                 { position: { key: 'death_year', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1933)', 'max(1945)', 'optional()'] } },
                 { position: { key: 'persecution_reason', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Jude,politisch,Zeuge-Jehovas,Sinti-Roma,Homosexuell,Euthanasie,Widerstand)', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search by name', name: 'Cohen' }
+            ],
         },
         getStonesByDistrict: {
             method: 'GET',
@@ -41,7 +47,10 @@ export const main = {
                 { position: { key: 'bezirk', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Mitte,Friedrichshain-Kreuzberg,Pankow,Charlottenburg-Wilmersdorf,Spandau,Steglitz-Zehlendorf,Tempelhof-Schoeneberg,Neukoelln,Treptow-Koepenick,Marzahn-Hellersdorf,Lichtenberg,Reinickendorf)', options: [] } },
                 { position: { key: 'ortsteil', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'sort_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(name,address,installation_date,birth_year)', options: ['default(name)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'All stones in Mitte', bezirk: 'Mitte' }
+            ],
         },
         getStonesByPerson: {
             method: 'GET',
@@ -52,7 +61,10 @@ export const main = {
                 { position: { key: 'age_at_death', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(child,youth,adult,elderly)', options: ['optional()'] } },
                 { position: { key: 'family_group', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'include_biography', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(true)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Person by ID', person_id: '12345' }
+            ],
         },
         getStonesByLocation: {
             method: 'GET',
@@ -63,7 +75,10 @@ export const main = {
                 { position: { key: 'lon', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(13.0)', 'max(13.8)', 'optional()'] } },
                 { position: { key: 'radius', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0.1)', 'max(5.0)', 'default(1.0)', 'optional()'] } },
                 { position: { key: 'street', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Stones near Alexanderplatz', lat: 52.52, lon: 13.405, radius: 0.5 }
+            ],
         }
     }
 }

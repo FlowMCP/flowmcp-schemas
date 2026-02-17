@@ -23,20 +23,34 @@ export const main = {
     routes: {
         getActivityEVM: {
             method: 'GET',
-            path: '/evm/activity/{{walletAddress}}?limit=100&maxPages=10&requestDelay=500',
+            path: '/evm/activity/:walletAddress?limit=100&maxPages=10&requestDelay=500',
             description: 'Get decoded activity feed for a wallet address including transfers, swaps, mints, burns, approvals, and contract interactions. Supported chains: ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE,OPTIMISM_MAINNET,BASE_MAINNET,BNB_CHAIN,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL,ZKSYNC_ERA,MANTLE,CELO_MAINNET,GNOSIS_CHAIN,FANTOM,ARBITRUM_NOVA,BLAST_MAINNET,SONIC,BERACHAIN,UNICHAIN,ZKEVM,FRAXTAL,APE_CHAIN,ABSTRACT,WORLD,SWELLCHAIN,WEMIX,XAI,RONIN,LISK,MODE,METIS,ZORA_NETWORK,BOBA_NETWORK,MINT_MAINNET,DEGEN_CHAIN,ANCIENT8,KAIA,OPBNB,BOB,FLARE,CYBER,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,HYPER_EVM,INK,SEI,SONEIUM,SHAPE,REDSTONE,RARI,OMNI,CORN,B3,HAM_CHAIN,HYCHAIN,FUNKICHAIN,FORMA,SUPERPOSITION,SUPERSEED,ZERO_NETWORK,ETHEREUM_SEPOLIA,BASE_SEPOLIA,AVALANCHE_FUJI',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get Vitalik\'s activity feed on all supported chains',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                }
+            ],
         },
         getActivityDetailedEVM: {
             method: 'GET',
-            path: '/evm/activity/{{walletAddress}}',
+            path: '/evm/activity/:walletAddress',
             description: 'Get decoded activity feed for a wallet address including transfers, swaps, mints, burns, approvals, and contract interactions. Supported chains: ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE,OPTIMISM_MAINNET,BASE_MAINNET,BNB_CHAIN,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL,ZKSYNC_ERA,MANTLE,CELO_MAINNET,GNOSIS_CHAIN,FANTOM,ARBITRUM_NOVA,BLAST_MAINNET,SONIC,BERACHAIN,UNICHAIN,ZKEVM,FRAXTAL,APE_CHAIN,ABSTRACT,WORLD,SWELLCHAIN,WEMIX,XAI,RONIN,LISK,MODE,METIS,ZORA_NETWORK,BOBA_NETWORK,MINT_MAINNET,DEGEN_CHAIN,ANCIENT8,KAIA,OPBNB,BOB,FLARE,CYBER,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,HYPER_EVM,INK,SEI,SONEIUM,SHAPE,REDSTONE,RARI,OMNI,CORN,B3,HAM_CHAIN,HYCHAIN,FUNKICHAIN,FORMA,SUPERPOSITION,SUPERSEED,ZERO_NETWORK,ETHEREUM_SEPOLIA,BASE_SEPOLIA,AVALANCHE_FUJI',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get Vitalik\'s activity feed on all supported chains',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    limit: '10'
+                },
+                { _description: 'Get Vitalik activity with small limit', walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', limit: '5' }
+            ],
         }
     },
     requiredLibraries: ['indicatorts']

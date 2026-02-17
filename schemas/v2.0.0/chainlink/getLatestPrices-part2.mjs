@@ -27,7 +27,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Base Mainnet (Coinbase L2). Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(AXL/USD,CBETH/ETH,BRL/USD,TBTC/USD,USDC/USD,RDNT/USD,USR/USD,DAI/USD,OP/USD,LINK/ETH,USDS/USD,CBETH/USD,XAU/USD,USDM/USD,RETH/ETH,RSETH/ETH,EUR/USD,OGN/USD,ETH/USD,COMP/USD,WIF/USD,STG/USD,LINK/USD,SNX/USD,POL/USD,STETH/ETH,PEPE/USD,MEW/USD,AVAX/USD,MATIC/USD,BTC/USD,LBTC/BTC,GHO/USD,SHIB/USD,MAVIA/USD,ZRO/USD,ZBU/USD,WSTETH/ETH,APT/USD,MLN/USD,AERO/USD,USDT/USD,WBTC/USD,SOL/USD,TRUMP/USD,DOGE/USD,MELANIA/USD,DEGEN/USD,BNB/USD,EURC/USD,WELL/USD,YFI/USD,MOG/USD,RSR/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Base', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceLinea: {
             method: 'GET',
@@ -35,7 +38,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Linea Mainnet (Consensys zkEVM). Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETH/USD,LINK/USD,WSTETH/USD,FOXY/USD,AAVE/USD,ARB/USD,LINK/ETH,USDC/USD,BTC/USD,EUR/USD,DAI/USD,POL/USD,USDT/USD,RSETH/ETH,MATIC/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Linea', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceMantle: {
             method: 'GET',
@@ -43,7 +49,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Mantle Mainnet. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETH/USD,USDC/USD,LINK/USD,BTC/USD,MNT/USD,USDT/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Mantle', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceScroll: {
             method: 'GET',
@@ -51,7 +60,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Scroll Mainnet (zkEVM L2). Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(WSTETH/ETH,COMP/USD,STG/USD,BNB/USD,LINK/USD,ETH/USD,SCR/USD,SOL/USD,AVAX/USD,DAI/USD,RSETH/ETH,CRV/USD,WBTC/USD,LINK/ETH,DOGE/USD,STETH/USD,BTC/USD,RETH/ETH,AAVE/USD,USDT/USD,USDC/USD,WBTC/BTC)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Scroll', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceZksync: {
             method: 'GET',
@@ -59,7 +71,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on zkSync Era Mainnet. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(PEPE/USD,LINK/USD,LINK/ETH,AAVE/USD,USDC/USD,UNI/USD,MELANIA/USD,DAI/USD,DOGE/USD,ETH/USD,BTC/USD,ZK/USD,TRUMP/USD,USDM/USD,USDT/USD,SOL/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on zkSync', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceCelo: {
             method: 'GET',
@@ -67,7 +82,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Celo Mainnet. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(CUSD/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get CELO/USD price on Celo', feedName: 'CELO/USD' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

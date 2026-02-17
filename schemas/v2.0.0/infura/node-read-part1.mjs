@@ -27,7 +27,10 @@ export const main = {
             description: 'Get the latest block number and timestamp for a selected EVM chain.',
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get latest block on Ethereum via Infura', chain: 'ETHEREUM_MAINNET' }
+            ],
         },
         getBalance: {
             method: 'GET',
@@ -36,7 +39,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get ETH balance of USDC contract via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getGasPrice: {
             method: 'GET',
@@ -44,7 +54,10 @@ export const main = {
             description: 'Get the current gas price in wei and gwei for the selected chain, including EIP-1559 maxFeePerGas when available.',
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get gas price on Ethereum via Infura', chain: 'ETHEREUM_MAINNET' }
+            ],
         },
         getBlock: {
             method: 'GET',
@@ -53,7 +66,10 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'blockNumber', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get block 17000000 via Infura', chain: 'ETHEREUM_MAINNET', blockNumber: 17000000 }
+            ],
         },
         getCode: {
             method: 'GET',
@@ -62,7 +78,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Check USDC bytecode via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getTransactionCount: {
             method: 'GET',
@@ -71,7 +94,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC nonce via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                }
+            ],
         },
         getTransactionByHash: {
             method: 'GET',
@@ -80,7 +110,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get transaction details via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
+                }
+            ],
         },
         getTransactionReceipt: {
             method: 'GET',
@@ -89,7 +126,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get transaction receipt via Infura',
+                    chain: 'ETHEREUM_MAINNET',
+                    txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

@@ -31,7 +31,12 @@ export const main = {
                 { position: { key: 'vtermin', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'btermin', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'order_by', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(1,2,3)', options: ['default(2)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search auctions in Berlin', land_abk: 'be' },
+                { _description: 'Search auctions in Bavaria', land_abk: 'by' },
+                { _description: 'Search auctions in NRW', land_abk: 'nw' }
+            ],
         }
     }
 }

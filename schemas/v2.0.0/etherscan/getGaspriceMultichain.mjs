@@ -22,7 +22,24 @@ export const main = {
             description: 'Fetch current gas oracle data for a given chain via Etherscan. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,POLYGON_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Gas oracle on Ethereum Mainnet', chainName: 'ETHEREUM_MAINNET' },
+                { _description: 'Gas oracle on Arbitrum One', chainName: 'CELO_MAINNET' },
+                { _description: 'Gas oracle on Polygon', chainName: 'POLYGON_MAINNET' },
+                { _description: 'Gas oracle on Binance Smart Chain', chainName: 'BINANCE_MAINNET' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         },
         estimateGasCost: {
             method: 'GET',
@@ -31,7 +48,21 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,POLYGON_MAINNET,BINANCE_MAINNET,AVALANCHE_CCHAIN)', options: [] } },
                 { position: { key: 'gasprice', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Estimate gas cost on Ethereum with 2 Gwei', chainName: 'ETHEREUM_MAINNET', gasprice: '2000000000' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

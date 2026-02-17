@@ -30,7 +30,21 @@ export const main = {
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'functionSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'args', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default([])'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Read USDC name() on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    functionSignature: 'function name() view returns (string)'
+                },
+                {
+                    _description: 'Read USDC decimals() on Polygon',
+                    chain: 'POLYGON_MAINNET',
+                    address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+                    functionSignature: 'function decimals() view returns (uint8)'
+                }
+            ],
         },
         erc20TokenInfo: {
             method: 'GET',
@@ -39,7 +53,19 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC token info on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+                },
+                {
+                    _description: 'Get WETH token info on Arbitrum',
+                    chain: 'ARBITRUM_ONE_MAINNET',
+                    contractAddress: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
+                }
+            ],
         },
         erc20BalanceOf: {
             method: 'GET',
@@ -49,7 +75,15 @@ export const main = {
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC balance of Uniswap Router on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
+                }
+            ],
         },
         erc20Allowance: {
             method: 'GET',
@@ -60,7 +94,16 @@ export const main = {
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'owner', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'spender', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Check USDC allowance from WETH to Uniswap Router',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    owner: '0xC02aaA39b223FE8D0A0e5CC4764e055256e07c6f',
+                    spender: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
+                }
+            ],
         },
         erc721TokenInfo: {
             method: 'GET',
@@ -69,7 +112,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get BAYC NFT collection info on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
+                }
+            ],
         },
         erc721OwnerOf: {
             method: 'GET',
@@ -79,7 +129,15 @@ export const main = {
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get owner of BAYC token #1 on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
+                    tokenId: '1'
+                }
+            ],
         },
         erc721TokenURI: {
             method: 'GET',
@@ -89,7 +147,15 @@ export const main = {
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get metadata URI of BAYC token #1',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
+                    tokenId: '1'
+                }
+            ],
         },
         erc721BalanceOf: {
             method: 'GET',
@@ -99,7 +165,15 @@ export const main = {
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get BAYC balance of Uniswap Router on Ethereum',
+                    chain: 'ETHEREUM_MAINNET',
+                    contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
+                    walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

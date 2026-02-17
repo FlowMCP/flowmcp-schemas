@@ -14,7 +14,19 @@ export const main = {
             method: 'GET',
             path: '/VHSKURSE/OpenData/Kurse.json',
             description: 'Complete catalog of VHS courses across all Berlin districts via Berlin.de. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all VHS courses from Berlin' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        veranstaltungen: { type: 'object', properties: { veranstaltung: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

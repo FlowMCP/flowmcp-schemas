@@ -16,7 +16,43 @@ export const main = {
             description: 'Get all counting stations for a public organization by its ID. Known German IDs: 888 (Rostock), 4586 (global bike display), 6116 (Schwerin), 6997 (Greifswald), 6811 (Boeblingen). Returns station name, coordinates, and photo URLs.',
             parameters: [
                 { position: { key: 'idOrganisme', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Rostock counting stations', idOrganisme: '888' },
+                { _description: 'Get global bike counter display', idOrganisme: '4586' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id_pdc_img: { type: 'number' },
+                            idPdc: { type: 'number' },
+                            lat: { type: 'number' },
+                            lon: { type: 'number' },
+                            nom: { type: 'string' },
+                            photo: { type: 'array', items: { type: 'object' } },
+                            lienPublic: { type: 'string' },
+                            pratique: { type: 'array', items: { type: 'object' } },
+                            mainPratique: { type: 'number' },
+                            debut: { type: 'string' },
+                            debutPeriode: { type: 'string' },
+                            current_year_default: { type: 'number' },
+                            externalUrl: { type: 'string' },
+                            nomOrganisme: { type: 'string' },
+                            logo: { type: 'string' },
+                            pays: { type: 'string' },
+                            sig: { type: 'number' },
+                            today: { type: 'string' },
+                            total: { type: 'number' },
+                            lastDay: { type: 'number' },
+                            moyD: { type: 'number' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

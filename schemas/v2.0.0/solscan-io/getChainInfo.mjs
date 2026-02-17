@@ -18,7 +18,10 @@ export const main = {
             method: 'GET',
             path: '/chaininfo',
             description: 'Returns Solana blockchain information such as block height and transaction count.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Basic test to fetch chain information' }
+            ],
         }
     }
 }

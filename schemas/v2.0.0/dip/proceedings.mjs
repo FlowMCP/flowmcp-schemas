@@ -24,7 +24,11 @@ export const main = {
                 { position: { key: 'f.beratungsstand', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.deskriptor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Vorgaenge of current legislative period', 'f.wahlperiode': 20 },
+                { _description: 'Search Vorgaenge by descriptor', 'f.deskriptor': 'Klimaschutz', 'f.wahlperiode': 20 }
+            ],
         },
         getVorgang: {
             method: 'GET',
@@ -32,7 +36,10 @@ export const main = {
             description: 'Get a single Vorgang (legislative proceeding) by its ID from the German Bundestag. Returns full proceeding details including related documents and activities.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Vorgang by ID', id: 306510 }
+            ],
         },
         listVorgangspositionen: {
             method: 'GET',
@@ -44,7 +51,10 @@ export const main = {
                 { position: { key: 'f.datum.end', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Vorgangspositionen of current period', 'f.wahlperiode': 20 }
+            ],
         },
         getVorgangsposition: {
             method: 'GET',
@@ -52,7 +62,10 @@ export const main = {
             description: 'Get a single Vorgangsposition (proceeding position) by its ID from the German Bundestag.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Vorgangsposition by ID', id: 362553 }
+            ],
         },
         listAktivitaeten: {
             method: 'GET',
@@ -65,7 +78,11 @@ export const main = {
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.dokumentart', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Aktivitaeten of current period', 'f.wahlperiode': 20 },
+                { _description: 'List Aktivitaeten by date range', 'f.datum.start': '2024-01-01', 'f.datum.end': '2024-06-30' }
+            ],
         },
         getAktivitaet: {
             method: 'GET',
@@ -73,7 +90,10 @@ export const main = {
             description: 'Get a single Aktivitaet (parliamentary activity) by its ID from the German Bundestag.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Aktivitaet by ID', id: 944899 }
+            ],
         },
         listPersonen: {
             method: 'GET',
@@ -85,7 +105,11 @@ export const main = {
                 { position: { key: 'f.datum.end', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.person', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Personen of current period', 'f.wahlperiode': 20 },
+                { _description: 'Search Personen by name', 'f.person': 'Merz' }
+            ],
         },
         getPerson: {
             method: 'GET',
@@ -93,7 +117,10 @@ export const main = {
             description: 'Get a single Person (member of parliament) by their ID from the German Bundestag. Returns full biographical and political details.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Person by ID', id: 857 }
+            ],
         }
     }
 }

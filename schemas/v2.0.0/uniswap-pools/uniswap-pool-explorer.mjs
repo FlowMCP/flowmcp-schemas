@@ -26,7 +26,14 @@ export const main = {
             parameters: [
                 { position: { key: 'token_address', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET)', options: ['default(ETHEREUM_MAINNET)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Query USDC pools on Ethereum',
+                    token_address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+                    chain: 'ETHEREUM_MAINNET'
+                }
+            ],
         },
         getPoolData: {
             method: 'POST',
@@ -35,7 +42,14 @@ export const main = {
             parameters: [
                 { position: { key: 'pool_id', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['length(42)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET)', options: ['default(ETHEREUM_MAINNET)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get data for USDC/ETH pool',
+                    pool_id: '0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8',
+                    chain: 'ETHEREUM_MAINNET'
+                }
+            ],
         }
     }
 }

@@ -20,7 +20,17 @@ export const main = {
                 { position: { key: 'country', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'tag', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(50)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch 5 remote jobs tagged with blockchain in Canada',
+                    remote: 'true',
+                    tag: 'blockchain',
+                    country: 'canada',
+                    limit: 5
+                },
+                { _description: 'Fetch default jobs with no filters' }
+            ],
         }
     }
 }

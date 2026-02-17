@@ -17,19 +17,28 @@ export const main = {
             method: 'POST',
             path: '/STATION_SMALL',
             description: 'Get all marine monitoring stations. Returns station name, type, and compartment.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all marine stations' }
+            ],
         },
         getParameters: {
             method: 'POST',
             path: '/MV_PARAMETER',
             description: 'Get all measured parameters including pollutants, nutrients, and biological indicators with their parameter groups.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all measurement parameters' }
+            ],
         },
         getProjectStations: {
             method: 'POST',
             path: '/PROJECTSTATION_SMALL',
             description: 'Get monitoring stations associated with specific research projects. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get project stations' }
+            ],
         }
     }
 }

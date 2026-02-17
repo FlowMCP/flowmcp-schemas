@@ -26,49 +26,73 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'List all supported EVM chains for Chainlink bulk price feed lookups via Multicall3 (Ethereum, Binance, Polygon, Avalanche, Arbitrum, Optimism, Base, Linea, Mantle, Scroll, zkSync, Celo).',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'List all chains for multicall price feeds' }
+            ],
         },
         getAllLatestPricesEthereum: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Ethereum Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Ethereum' }
+            ],
         },
         getAllLatestPricesBinance: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Binance Smart Chain (BSC) in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on BSC' }
+            ],
         },
         getAllLatestPricesPolygon: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Polygon Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Polygon' }
+            ],
         },
         getAllLatestPricesAvalanche: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Avalanche C-Chain in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Avalanche' }
+            ],
         },
         getAllLatestPricesAribitrum: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Arbitrum One in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Arbitrum' }
+            ],
         },
         getAllLatestPricesOptimism: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Optimism Mainnet in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Optimism' }
+            ],
         },
         getAllLatestPricesBase: {
             method: 'GET',
             path: '/',
             description: 'Batch-fetch all Chainlink oracle prices on Base Mainnet (Coinbase L2) in a single Multicall3 aggregate3 call. Returns every available price feed at once.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all latest Chainlink prices on Base' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

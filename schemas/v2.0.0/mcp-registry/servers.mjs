@@ -18,7 +18,20 @@ export const main = {
             parameters: [
                 { position: { key: 'count', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(30)', 'optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List first 5 servers', count: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        servers: { type: 'array', items: { type: 'object', properties: { server: { type: 'object' }, _meta: { type: 'object' } } } },
+                        metadata: { type: 'object', properties: { nextCursor: { type: 'string' }, count: { type: 'number' } } }
+                    }
+                }
+            },
         },
         searchServers: {
             method: 'GET',
@@ -27,7 +40,20 @@ export const main = {
             parameters: [
                 { position: { key: 'count', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(30)', 'optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List servers for search', count: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        servers: { type: 'array', items: { type: 'object', properties: { server: { type: 'object' }, _meta: { type: 'object' } } } },
+                        metadata: { type: 'object', properties: { nextCursor: { type: 'string' }, count: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

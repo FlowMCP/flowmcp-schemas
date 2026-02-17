@@ -16,7 +16,10 @@ export const main = {
             description: 'Get available timestamps for a SMARD data filter. Filter IDs: 1223=realized generation, 1224=forecasted generation, 1225=total grid load, 4169=installed capacity.',
             parameters: [
                 { position: { key: 'filterId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['default("1223")'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get index for realized generation', filterId: '1223' }
+            ],
         },
         getLatestData: {
             method: 'GET',
@@ -24,7 +27,11 @@ export const main = {
             description: 'Get the latest energy data for a filter. Automatically fetches the most recent timestamp from the index. Filter IDs: 1223=realized generation, 1224=forecasted generation, 1225=total grid load.',
             parameters: [
                 { position: { key: 'filterId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['default("1223")'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get latest realized generation data', filterId: '1223' },
+                { _description: 'Get latest grid load data', filterId: '1225' }
+            ],
         }
     }
 }

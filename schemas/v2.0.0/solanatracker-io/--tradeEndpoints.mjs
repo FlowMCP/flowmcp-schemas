@@ -22,7 +22,22 @@ export const main = {
             description: 'Get the latest trades for a token across all pools.',
             parameters: [
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test tokenTrades', tokenAddress: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        trades: { type: 'array', items: { type: 'object', properties: { tx: { type: 'string' }, amount: { type: 'number' }, priceUsd: { type: 'number' }, volume: { type: 'number' }, volumeSol: { type: 'number' }, type: { type: 'string' }, wallet: { type: 'string' }, time: { type: 'number' }, program: { type: 'string' }, pools: { type: 'array', items: { type: 'string' } } } } },
+                        nextCursor: { type: 'number' },
+                        hasNextPage: { type: 'boolean' },
+                        sortDirection: { type: 'string' }
+                    }
+                }
+            },
         },
         tradesByWallet: {
             method: 'GET',
@@ -34,7 +49,26 @@ export const main = {
                 { position: { key: 'showMeta', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'parseJupiter', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'hideArb', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test tradesByWallet',
+                    tokenAddress: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    owner: 'suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        trades: { type: 'array', items: { type: 'string' } },
+                        nextCursor: { type: 'string', nullable: true },
+                        hasNextPage: { type: 'boolean' },
+                        sortDirection: { type: 'string' }
+                    }
+                }
+            },
         },
         tokenPoolTrades: {
             method: 'GET',
@@ -43,7 +77,22 @@ export const main = {
             parameters: [
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'poolAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test tokenPoolTrades', tokenAddress: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', poolAddress: '8QaXeHBrShJTdtN1rWCccBxpSVvKEA1QXVc7sharBYUr' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        trades: { type: 'array', items: { type: 'string' } },
+                        nextCursor: { type: 'string', nullable: true },
+                        hasNextPage: { type: 'boolean' },
+                        sortDirection: { type: 'string' }
+                    }
+                }
+            },
         },
         userPoolTrades: {
             method: 'GET',
@@ -53,7 +102,22 @@ export const main = {
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'poolAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'owner', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test userPoolTrades', tokenAddress: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', poolAddress: '8QaXeHBrShJTdtN1rWCccBxpSVvKEA1QXVc7sharBYUr', owner: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        trades: { type: 'array', items: { type: 'string' } },
+                        nextCursor: { type: 'string', nullable: true },
+                        hasNextPage: { type: 'boolean' },
+                        sortDirection: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

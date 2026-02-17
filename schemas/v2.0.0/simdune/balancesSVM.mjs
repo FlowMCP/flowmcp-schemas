@@ -17,13 +17,41 @@ export const main = {
     routes: {
         getBalancesSVM: {
             method: 'GET',
-            path: '/svm/balances/{{walletAddress}}',
+            path: '/svm/balances/:walletAddress',
             description: 'Get realtime token balances with USD valuations for native, SPL, and SPL-2022 tokens across supported SVM chains.',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^[1-9A-HJ-NP-Za-km-z]{32,44}$)'] } },
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(SOLANA,ECLIPSE)', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get token balances on Solana',
+                    walletAddress: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
+                    chainName: 'SOLANA',
+                    limit: '10'
+                },
+                {
+                    _description: 'Get token balances on Eclipse',
+                    walletAddress: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
+                    chainName: 'ECLIPSE',
+                    limit: '5'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        processing_time_ms: { type: 'number' },
+                        wallet_address: { type: 'string' },
+                        next_offset: { type: 'string', nullable: true },
+                        balances_count: { type: 'number' },
+                        balances: { type: 'array', items: { type: 'string' } },
+                        errors: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         }
     }
 }

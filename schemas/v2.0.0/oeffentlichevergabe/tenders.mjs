@@ -19,7 +19,10 @@ export const main = {
             description: 'Get all public procurement notices published on a specific day. Format: YYYY-MM-DD. Returns tender title, buyer, CPV classification, delivery location. Data available from 2022-12-01 onwards, not today or future dates.',
             parameters: [
                 { position: { key: 'pubDay', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get notices from Jan 30 2026', pubDay: '2026-01-30' }
+            ],
         },
         getNoticesByMonth: {
             method: 'GET',
@@ -27,7 +30,10 @@ export const main = {
             description: 'Get all public procurement notices published in a specific month. Format: YYYY-MM. Returns tender title, buyer, CPV classification, delivery location. Data available from 2022-12 onwards.',
             parameters: [
                 { position: { key: 'pubMonth', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get notices from Dec 2025', pubMonth: '2025-12' }
+            ],
         }
     },
     requiredLibraries: ['zlib']

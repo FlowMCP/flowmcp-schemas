@@ -14,7 +14,10 @@ export const main = {
             method: 'GET',
             path: '/{{cid}}',
             description: 'Returns a static IPFS-hosted example image via Pinata IPFS. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Load sample image from IPFS' }
+            ],
         },
         free_read_cid: {
             method: 'GET',
@@ -22,7 +25,10 @@ export const main = {
             description: 'Reads content from any IPFS CID via Pinata IPFS. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'cid', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Read arbitrary CID', cid: 'QmYwAPJzv5CZsnAzt8auV2Annh6wKghpMdJtKhHgGMRFjx' }
+            ],
         }
     }
 }

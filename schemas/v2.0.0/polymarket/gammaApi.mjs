@@ -30,7 +30,27 @@ export const main = {
                 { position: { key: 'recurrence', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'exclude_tag_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[0-9,]+$)'] } },
                 { position: { key: 'optimized', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(true,false)', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Basic search for bnb with defaults', q: 'bnb', limit_per_type: 10 },
+                {
+                    _description: 'Search open events; include tags',
+                    q: 'election',
+                    events_status: 'open',
+                    search_tags: 'true',
+                    limit_per_type: 5
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        events: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, ticker: { type: 'string' }, slug: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, startDate: { type: 'string' }, creationDate: { type: 'string' }, endDate: { type: 'string' }, image: { type: 'string' }, icon: { type: 'string' }, active: { type: 'boolean' }, closed: { type: 'boolean' }, archived: { type: 'boolean' }, new: { type: 'boolean' }, featured: { type: 'boolean' }, restricted: { type: 'boolean' }, liquidity: { type: 'number' }, volume: { type: 'number' }, openInterest: { type: 'number' }, createdAt: { type: 'string' }, updatedAt: { type: 'string' }, competitive: { type: 'number' }, volume24hr: { type: 'number' }, volume1wk: { type: 'number' }, volume1mo: { type: 'number' }, volume1yr: { type: 'number' }, enableOrderBook: { type: 'boolean' }, liquidityClob: { type: 'number' }, negRisk: { type: 'boolean' }, commentCount: { type: 'number' }, markets: { type: 'array', items: { type: 'object' } }, tags: { type: 'array', items: { type: 'object' } }, cyom: { type: 'boolean' }, showAllOutcomes: { type: 'boolean' }, showMarketImages: { type: 'boolean' }, enableNegRisk: { type: 'boolean' }, automaticallyActive: { type: 'boolean' }, seriesSlug: { type: 'string' }, negRiskAugmented: { type: 'boolean' }, pendingDeployment: { type: 'boolean' }, deploying: { type: 'boolean' }, requiresTranslation: { type: 'boolean' } } } },
+                        pagination: { type: 'object', properties: { hasMore: { type: 'boolean' }, totalResults: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getEvents: {
             method: 'GET',
@@ -45,7 +65,81 @@ export const main = {
                 { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[A-Za-z0-9-_,]+$)'] } },
                 { position: { key: 'tag_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'closed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(true,false)', options: ['default(false)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Top events by volume',
+                    limit: 5,
+                    offset: 0,
+                    order: 'volume,markets.volume',
+                    ascending: 'false',
+                    closed: 'false'
+                },
+                {
+                    _description: 'Filter by slug',
+                    slug: 'us-presidential-election-2024',
+                    limit: 10,
+                    offset: 0,
+                    order: 'volume,markets.volume',
+                    ascending: 'false',
+                    closed: 'false'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            ticker: { type: 'string' },
+                            slug: { type: 'string' },
+                            title: { type: 'string' },
+                            description: { type: 'string' },
+                            resolutionSource: { type: 'string' },
+                            startDate: { type: 'string' },
+                            creationDate: { type: 'string' },
+                            endDate: { type: 'string' },
+                            image: { type: 'string' },
+                            icon: { type: 'string' },
+                            active: { type: 'boolean' },
+                            closed: { type: 'boolean' },
+                            archived: { type: 'boolean' },
+                            new: { type: 'boolean' },
+                            featured: { type: 'boolean' },
+                            restricted: { type: 'boolean' },
+                            liquidity: { type: 'number' },
+                            volume: { type: 'number' },
+                            openInterest: { type: 'number' },
+                            createdAt: { type: 'string' },
+                            updatedAt: { type: 'string' },
+                            competitive: { type: 'number' },
+                            volume24hr: { type: 'number' },
+                            volume1wk: { type: 'number' },
+                            volume1mo: { type: 'number' },
+                            volume1yr: { type: 'number' },
+                            enableOrderBook: { type: 'boolean' },
+                            liquidityClob: { type: 'number' },
+                            negRisk: { type: 'boolean' },
+                            commentCount: { type: 'number' },
+                            markets: { type: 'array', items: { type: 'object' } },
+                            tags: { type: 'array', items: { type: 'object' } },
+                            cyom: { type: 'boolean' },
+                            showAllOutcomes: { type: 'boolean' },
+                            showMarketImages: { type: 'boolean' },
+                            enableNegRisk: { type: 'boolean' },
+                            automaticallyActive: { type: 'boolean' },
+                            gmpChartMode: { type: 'string' },
+                            negRiskAugmented: { type: 'boolean' },
+                            cumulativeMarkets: { type: 'boolean' },
+                            pendingDeployment: { type: 'boolean' },
+                            deploying: { type: 'boolean' },
+                            requiresTranslation: { type: 'boolean' }
+                        }
+                    }
+                }
+            },
         },
         getMarkets: {
             method: 'GET',
@@ -60,7 +154,99 @@ export const main = {
                 { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[A-Za-z0-9-_,]+$)'] } },
                 { position: { key: 'condition_ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[A-Za-z0-9,-]+$)'] } },
                 { position: { key: 'closed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(true,false)', options: ['default(false)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Most active markets', limit: 10, offset: 0, order: 'volume', ascending: 'false', closed: 'false' },
+                { _description: 'Closed markets only', closed: 'true', limit: 5, offset: 0, order: 'volume', ascending: 'false' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            question: { type: 'string' },
+                            conditionId: { type: 'string' },
+                            slug: { type: 'string' },
+                            resolutionSource: { type: 'string' },
+                            endDate: { type: 'string' },
+                            liquidity: { type: 'string' },
+                            startDate: { type: 'string' },
+                            image: { type: 'string' },
+                            icon: { type: 'string' },
+                            description: { type: 'string' },
+                            outcomes: { type: 'string' },
+                            outcomePrices: { type: 'string' },
+                            volume: { type: 'string' },
+                            active: { type: 'boolean' },
+                            closed: { type: 'boolean' },
+                            marketMakerAddress: { type: 'string' },
+                            createdAt: { type: 'string' },
+                            updatedAt: { type: 'string' },
+                            new: { type: 'boolean' },
+                            featured: { type: 'boolean' },
+                            submitted_by: { type: 'string' },
+                            archived: { type: 'boolean' },
+                            resolvedBy: { type: 'string' },
+                            restricted: { type: 'boolean' },
+                            groupItemTitle: { type: 'string' },
+                            questionID: { type: 'string' },
+                            enableOrderBook: { type: 'boolean' },
+                            orderPriceMinTickSize: { type: 'number' },
+                            orderMinSize: { type: 'number' },
+                            volumeNum: { type: 'number' },
+                            liquidityNum: { type: 'number' },
+                            endDateIso: { type: 'string' },
+                            startDateIso: { type: 'string' },
+                            hasReviewedDates: { type: 'boolean' },
+                            gameStartTime: { type: 'string' },
+                            secondsDelay: { type: 'number' },
+                            clobTokenIds: { type: 'string' },
+                            umaBond: { type: 'string' },
+                            umaReward: { type: 'string' },
+                            volumeClob: { type: 'number' },
+                            liquidityClob: { type: 'number' },
+                            customLiveness: { type: 'number' },
+                            acceptingOrders: { type: 'boolean' },
+                            negRisk: { type: 'boolean' },
+                            negRiskRequestID: { type: 'string' },
+                            events: { type: 'array', items: { type: 'object' } },
+                            ready: { type: 'boolean' },
+                            funded: { type: 'boolean' },
+                            acceptingOrdersTimestamp: { type: 'string' },
+                            cyom: { type: 'boolean' },
+                            competitive: { type: 'number' },
+                            pagerDutyNotificationEnabled: { type: 'boolean' },
+                            approved: { type: 'boolean' },
+                            rewardsMinSize: { type: 'number' },
+                            rewardsMaxSpread: { type: 'number' },
+                            spread: { type: 'number' },
+                            oneHourPriceChange: { type: 'number' },
+                            lastTradePrice: { type: 'number' },
+                            bestBid: { type: 'number' },
+                            bestAsk: { type: 'number' },
+                            automaticallyActive: { type: 'boolean' },
+                            clearBookOnStart: { type: 'boolean' },
+                            manualActivation: { type: 'boolean' },
+                            negRiskOther: { type: 'boolean' },
+                            gameId: { type: 'string' },
+                            sportsMarketType: { type: 'string' },
+                            umaResolutionStatuses: { type: 'string' },
+                            pendingDeployment: { type: 'boolean' },
+                            deploying: { type: 'boolean' },
+                            deployingTimestamp: { type: 'string' },
+                            rfqEnabled: { type: 'boolean' },
+                            eventStartTime: { type: 'string' },
+                            holdingRewardsEnabled: { type: 'boolean' },
+                            feesEnabled: { type: 'boolean' },
+                            requiresTranslation: { type: 'boolean' },
+                            feeType: { type: 'number', nullable: true }
+                        }
+                    }
+                }
+            },
         }
     }
 }

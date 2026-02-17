@@ -25,7 +25,25 @@ export const main = {
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } },
                 { position: { key: 'size', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } },
                 { position: { key: 'angebotsart', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search software jobs in Berlin', was: 'software', wo: 'berlin', size: 5 },
+                { _description: 'Search all jobs', size: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        stellenangebote: { type: 'array', items: { type: 'object', properties: { beruf: { type: 'string' }, titel: { type: 'string' }, refnr: { type: 'string' }, arbeitsort: { type: 'object' }, arbeitgeber: { type: 'string' }, aktuelleVeroeffentlichungsdatum: { type: 'string' }, modifikationsTimestamp: { type: 'string' }, eintrittsdatum: { type: 'string' }, kundennummerHash: { type: 'string' } } } },
+                        maxErgebnisse: { type: 'number' },
+                        page: { type: 'number' },
+                        size: { type: 'number' },
+                        woOutput: { type: 'object', properties: { bereinigterOrt: { type: 'string' }, suchmodus: { type: 'string' }, koordinaten: { type: 'array', items: { type: 'object' } } } },
+                        facetten: { type: 'object', properties: { befristung: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, verguetung: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, externestellenboersen: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, behinderung: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, berufsfeld: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, pav: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, arbeitsort: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, veroeffentlichtseit: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, ausbildungsart: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, weitereberufe: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, schulbildung: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, arbeitsort_plz: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, arbeitgeber: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, beruf: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, ausbildungsverguetung: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, quereinstieg: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, branche: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, arbeitszeit: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, eintrittsdatum: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } }, zeitarbeit: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } } } }
+                    }
+                }
+            },
         },
         searchJobsByEmployer: {
             method: 'GET',
@@ -35,7 +53,22 @@ export const main = {
                 { position: { key: 'arbeitgeber', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } },
                 { position: { key: 'size', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search Deutsche Bahn jobs', arbeitgeber: 'Deutsche Bahn', size: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        maxErgebnisse: { type: 'number' },
+                        page: { type: 'number' },
+                        size: { type: 'number' },
+                        facetten: { type: 'object', properties: { arbeitgeber: { type: 'object', properties: { counts: { type: 'object' }, maxCount: { type: 'number' } } } } }
+                    }
+                }
+            },
         }
     }
 }

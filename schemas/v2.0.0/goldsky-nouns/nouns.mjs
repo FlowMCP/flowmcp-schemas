@@ -20,7 +20,10 @@ export const main = {
             description: 'Retrieve up to 1000 candidate proposals from the subgraph via Goldsky. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'default(1000)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch candidate proposals', first: 1000 }
+            ],
         },
         getActivePendingUpdatableProposers: {
             method: 'POST',
@@ -28,7 +31,10 @@ export const main = {
             description: 'Get proposers with ACTIVE or PENDING proposals where endBlock is still in the future.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'default(1000)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch active and pending proposals', first: 1000 }
+            ],
         },
         getLatestAuctions: {
             method: 'POST',
@@ -37,7 +43,10 @@ export const main = {
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'default(1000)'] } },
                 { position: { key: 'skip', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['default(0)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch 1000 latest auctions', first: 1000, skip: 0 }
+            ],
         }
     }
 }

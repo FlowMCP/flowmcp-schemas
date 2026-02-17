@@ -18,7 +18,19 @@ export const main = {
             parameters: [
                 { position: { key: 'source', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(coingecko)', options: [] } },
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test price for Ethereum via CoinGecko ID', source: 'coingecko', token: 'ethereum' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        coins: { type: 'object' }
+                    }
+                }
+            },
         }
     }
 }

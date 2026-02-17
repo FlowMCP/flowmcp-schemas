@@ -19,7 +19,10 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'Returns a Markdown-formatted list of supported chain IDs and names Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch list of supported chains' }
+            ],
         },
         getTokenPrice: {
             method: 'GET',
@@ -28,7 +31,19 @@ export const main = {
             parameters: [
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'chainAlias', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_MAINNET,OPTIMISM_MAINNET)', options: ['default(ETHEREUM_MAINNET)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch token price for DAI on Ethereum',
+                    tokenAddress: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+                    chainAlias: 'ETHEREUM_MAINNET'
+                },
+                {
+                    _description: 'Fetch token price for USDC on Polygon',
+                    tokenAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+                    chainAlias: 'POLYGON_MAINNET'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers', '@thanpolas/univ3prices']

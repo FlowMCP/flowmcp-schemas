@@ -19,7 +19,11 @@ export const main = {
             parameters: [
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'decimals', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(77)', 'optional()', 'default(18)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Format 1 ETH in wei', value: '1000000000000000000', decimals: 18 },
+                { _description: 'Format 1 USDC (6 decimals)', value: '1000000', decimals: 6 }
+            ],
         },
         parseUnits: {
             method: 'GET',
@@ -28,7 +32,11 @@ export const main = {
             parameters: [
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'decimals', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(77)', 'optional()', 'default(18)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Parse 1.5 ETH to wei', value: '1.5', decimals: 18 },
+                { _description: 'Parse 100 USDC to atomic units', value: '100', decimals: 6 }
+            ],
         },
         formatEther: {
             method: 'GET',
@@ -36,7 +44,11 @@ export const main = {
             description: 'Format a wei value to ether (18 decimals). Shorthand for formatUnits(value, 18).',
             parameters: [
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Format 1 ETH', value: '1000000000000000000' },
+                { _description: 'Format 0.5 ETH', value: '500000000000000000' }
+            ],
         },
         parseEther: {
             method: 'GET',
@@ -44,7 +56,11 @@ export const main = {
             description: 'Parse an ether string to wei. Shorthand for parseUnits(value, 18).',
             parameters: [
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Parse 1.0 ETH', value: '1.0' },
+                { _description: 'Parse 0.001 ETH', value: '0.001' }
+            ],
         },
         hexlify: {
             method: 'GET',
@@ -52,7 +68,11 @@ export const main = {
             description: 'Convert a number or numeric string to a 0x-prefixed hex string.',
             parameters: [
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Hexlify 255', value: '255' },
+                { _description: 'Hexlify 1000000', value: '1000000' }
+            ],
         },
         toUtf8String: {
             method: 'GET',
@@ -60,7 +80,10 @@ export const main = {
             description: 'Decode a hex-encoded byte string to its UTF-8 text representation.',
             parameters: [
                 { position: { key: 'data', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]*$)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Decode Hello World hex', data: '0x48656c6c6f20576f726c64' }
+            ],
         },
         toUtf8Bytes: {
             method: 'GET',
@@ -68,7 +91,10 @@ export const main = {
             description: 'Encode a UTF-8 text string to its hex-encoded byte representation.',
             parameters: [
                 { position: { key: 'text', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Encode Hello World to hex', text: 'Hello World' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

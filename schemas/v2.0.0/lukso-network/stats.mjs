@@ -17,7 +17,37 @@ export const main = {
             description: 'General blockchain stats via LUKSO BlockScout. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch general stats', chainName: 'LUKSO_MAINNET' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        average_block_time: { type: 'number' },
+                        coin_image: { type: 'string', nullable: true },
+                        coin_price: { type: 'number', nullable: true },
+                        coin_price_change_percentage: { type: 'number', nullable: true },
+                        gas_price_updated_at: { type: 'string' },
+                        gas_prices: { type: 'object', properties: { slow: { type: 'number' }, average: { type: 'number' }, fast: { type: 'number' } } },
+                        gas_prices_update_in: { type: 'number' },
+                        gas_used_today: { type: 'string' },
+                        market_cap: { type: 'string' },
+                        network_utilization_percentage: { type: 'number' },
+                        secondary_coin_image: { type: 'string', nullable: true },
+                        secondary_coin_price: { type: 'number', nullable: true },
+                        static_gas_price: { type: 'number', nullable: true },
+                        total_addresses: { type: 'string' },
+                        total_blocks: { type: 'string' },
+                        total_gas_used: { type: 'string' },
+                        total_transactions: { type: 'string' },
+                        transactions_today: { type: 'string' },
+                        tvl: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         getTransactionChart: {
             method: 'GET',
@@ -25,7 +55,19 @@ export const main = {
             description: 'Transaction activity chart via LUKSO BlockScout. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get tx chart', chainName: 'LUKSO_TESTNET' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        chart_data: { type: 'array', items: { type: 'object', properties: { date: { type: 'string' }, transactions_count: { type: 'number' } } } }
+                    }
+                }
+            },
         },
         getMarketChart: {
             method: 'GET',
@@ -33,7 +75,20 @@ export const main = {
             description: 'Token market stats (price, cap, etc.) via LUKSO BlockScout. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get market chart', chainName: 'LUKSO_MAINNET' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        available_supply: { type: 'number' },
+                        chart_data: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         }
     }
 }

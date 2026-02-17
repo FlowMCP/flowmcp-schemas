@@ -26,7 +26,11 @@ export const main = {
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'backtrack', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(50)', 'optional()'] } },
                 { position: { key: 'optInTimePeriod', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(2)', 'max(100)', 'default(14)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT RSI on Binance (1h)', symbol: 'BTC/USDT' },
+                { _description: 'Get ETH/USDT RSI on daily timeframe', symbol: 'ETH/USDT', interval: '1d' }
+            ],
         },
         getMACD: {
             method: 'GET',
@@ -37,7 +41,11 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'backtrack', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(50)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT MACD on Binance', symbol: 'BTC/USDT' },
+                { _description: 'Get ETH/USDT MACD on 4h timeframe', symbol: 'ETH/USDT', interval: '4h' }
+            ],
         },
         getBollingerBands: {
             method: 'GET',
@@ -48,7 +56,10 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'optInTimePeriod', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(2)', 'max(100)', 'default(20)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT Bollinger Bands', symbol: 'BTC/USDT' }
+            ],
         },
         getEMA: {
             method: 'GET',
@@ -59,7 +70,11 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'optInTimePeriod', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(2)', 'max(200)', 'default(20)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT 20-period EMA', symbol: 'BTC/USDT' },
+                { _description: 'Get ETH/USDT 50-period EMA', symbol: 'ETH/USDT', optInTimePeriod: 50 }
+            ],
         },
         getSMA: {
             method: 'GET',
@@ -70,7 +85,11 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'optInTimePeriod', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(2)', 'max(200)', 'default(20)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT 20-period SMA', symbol: 'BTC/USDT' },
+                { _description: 'Get BTC/USDT 200-period SMA daily', symbol: 'BTC/USDT', optInTimePeriod: 200, interval: '1d' }
+            ],
         },
         getStochastic: {
             method: 'GET',
@@ -80,7 +99,10 @@ export const main = {
                 { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(binance)', 'optional()'] } },
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT Stochastic oscillator', symbol: 'BTC/USDT' }
+            ],
         },
         getATR: {
             method: 'GET',
@@ -91,7 +113,10 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } },
                 { position: { key: 'optInTimePeriod', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(2)', 'max(100)', 'default(14)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT Average True Range', symbol: 'BTC/USDT' }
+            ],
         },
         getStochRSI: {
             method: 'GET',
@@ -101,7 +126,10 @@ export const main = {
                 { position: { key: 'exchange', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(binance)', 'optional()'] } },
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } },
                 { position: { key: 'interval', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1m,5m,15m,30m,1h,2h,4h,12h,1d,1w)', options: ['default(1h)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USDT Stochastic RSI', symbol: 'BTC/USDT' }
+            ],
         }
     }
 }

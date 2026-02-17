@@ -21,13 +21,40 @@ export const main = {
     routes: {
         getCollectiblesEVM: {
             method: 'GET',
-            path: '/evm/collectibles/{{walletAddress}}',
+            path: '/evm/collectibles/:walletAddress',
             description: 'Get NFT collectibles (ERC721/ERC1155) with metadata, images, and collection details for a wallet address.',
             parameters: [
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE,OPTIMISM_MAINNET,BASE_MAINNET,BNB_CHAIN,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL,ZKSYNC_ERA,MANTLE,CELO_MAINNET,GNOSIS_CHAIN,FANTOM,ARBITRUM_NOVA,BLAST_MAINNET,SONIC,BERACHAIN,UNICHAIN,ZKEVM,FRAXTAL,APE_CHAIN,ABSTRACT,WORLD,SWELLCHAIN,WEMIX,XAI,RONIN,LISK,MODE,METIS,ZORA_NETWORK,BOBA_NETWORK,MINT_MAINNET,DEGEN_CHAIN,ANCIENT8,KAIA,OPBNB,BOB,FLARE,CYBER,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,HYPER_EVM,INK,SEI,SONEIUM,SHAPE,REDSTONE,RARI,OMNI,CORN,B3,HAM_CHAIN,HYCHAIN,FUNKICHAIN,FORMA,SUPERPOSITION,SUPERSEED,ZERO_NETWORK,TRON,ETHEREUM_SEPOLIA,BASE_SEPOLIA,AVALANCHE_FUJI,MONAD_TESTNET)', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(2500)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get Vitalik\'s NFT collectibles on Ethereum',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    limit: '10',
+                    chainName: 'ETHEREUM_MAINNET'
+                },
+                {
+                    _description: 'Get NFT collectibles on Base',
+                    walletAddress: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    limit: '5',
+                    chainName: 'BASE_MAINNET'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        address: { type: 'string' },
+                        entries: { type: 'array', items: { type: 'object', properties: { contract_address: { type: 'string' }, token_standard: { type: 'string' }, token_id: { type: 'string' }, chain: { type: 'string' }, chain_id: { type: 'number' }, name: { type: 'string' }, description: { type: 'string' }, symbol: { type: 'string' }, last_sale_price: { type: 'string' }, metadata: { type: 'object' }, is_spam: { type: 'boolean' }, balance: { type: 'string' }, last_acquired: { type: 'string' } } } },
+                        next_offset: { type: 'string' },
+                        request_time: { type: 'string' },
+                        response_time: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

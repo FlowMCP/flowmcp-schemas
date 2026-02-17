@@ -10,7 +10,8 @@ export const main = {
     tags: ['professions', 'germany', 'employment', 'education', 'cacheTtlDaily'],
     root: 'https://rest.arbeitsagentur.de/infosysbub/bnet',
     headers: {
-        'X-API-Key': 'infosysbub-berufenet'
+        'X-API-Key': 'infosysbub-berufenet',
+        'Accept': '*/*'
     },
     routes: {
         searchProfessions: {
@@ -20,7 +21,22 @@ export const main = {
             parameters: [
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } },
                 { position: { key: 'size', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(25)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get first page of professions', size: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        _embedded: { type: 'object', properties: { berufSucheList: { type: 'array', items: { type: 'object' } } } },
+                        _links: { type: 'object', properties: { first: { type: 'object', properties: { href: { type: 'string' } } }, self: { type: 'object', properties: { href: { type: 'string' } } }, next: { type: 'object', properties: { href: { type: 'string' } } }, last: { type: 'object', properties: { href: { type: 'string' } } } } },
+                        page: { type: 'object', properties: { size: { type: 'number' }, totalElements: { type: 'number' }, totalPages: { type: 'number' }, number: { type: 'number' } } },
+                        aggregations: { type: 'object', properties: { BERUFSGRUPPEN: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getProfessionDetail: {
             method: 'GET',
@@ -28,7 +44,39 @@ export const main = {
             description: 'Get detailed information about a specific profession by its BERUFENET ID. Use IDs from searchProfessions results.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get profession detail for 3-D-Artist', id: 27272 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'number' },
+                            kldb2010: { type: 'string' },
+                            kurzBezeichnungNeutral: { type: 'string' },
+                            bezeichnungNeutral: { type: 'string' },
+                            codenr: { type: 'string' },
+                            bilder: { type: 'array', items: { type: 'object' } },
+                            bkgr: { type: 'object', properties: { id: { type: 'number' }, typ: { type: 'object' } } },
+                            beschreibungszustand: { type: 'object', properties: { id: { type: 'string' } } },
+                            infofelder: { type: 'array', items: { type: 'object' } },
+                            steckbrief: { type: 'string', nullable: true },
+                            aufstiegsweiterbildungen: { type: 'array', items: { type: 'object' } },
+                            anpassungsweiterbildungen: { type: 'array', items: { type: 'object' } },
+                            fachrichtungen: { type: 'array', items: { type: 'string' } },
+                            metaFachrichtung: { type: 'string', nullable: true },
+                            taetigkeitsfelder: { type: 'array', items: { type: 'object' } },
+                            atEinsatzmoeglichkeiten: { type: 'array', items: { type: 'string' } },
+                            berufDossier: { type: 'object', properties: { text: { type: 'string' }, filename: { type: 'string' } } },
+                            metaeinheit: { type: 'boolean' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

@@ -19,7 +19,25 @@ export const main = {
                 { position: { key: 'state', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(PUBLISHED,UNPUBLISHED)', options: ['optional()'] } },
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for finance-related APIs', query: 'finance', state: 'PUBLISHED' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        description: { type: 'string' },
+                        url: { type: 'string' },
+                        offset: { type: 'number' },
+                        totalCount: { type: 'number' },
+                        blocked: { type: 'boolean' },
+                        apis: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, description: { type: 'string' }, summary: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, properties: { type: 'array', items: { type: 'object' } } } } }
+                    }
+                }
+            },
         },
         listApiVersions: {
             method: 'GET',
@@ -28,7 +46,25 @@ export const main = {
             parameters: [
                 { position: { key: 'owner', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'api', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List versions of registry-api', owner: 'swagger-hub', api: 'registry-api' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        description: { type: 'string' },
+                        url: { type: 'string' },
+                        offset: { type: 'number' },
+                        totalCount: { type: 'number' },
+                        blocked: { type: 'boolean' },
+                        apis: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, description: { type: 'string' }, summary: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, properties: { type: 'array', items: { type: 'object' } } } } }
+                    }
+                }
+            },
         }
     }
 }

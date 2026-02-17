@@ -19,7 +19,14 @@ export const main = {
             parameters: [
                 { position: { key: 'message', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'signature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]+$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Verify a signed message',
+                    message: 'Hello World',
+                    signature: '0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff'
+                }
+            ],
         },
         verifyTypedData: {
             method: 'GET',
@@ -30,7 +37,16 @@ export const main = {
                 { position: { key: 'types', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'value', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'signature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]+$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Verify EIP-712 typed data',
+                    domain: '{"name":"Test","version":"1","chainId":1}',
+                    types: '{"Message":[{"name":"content","type":"string"}]}',
+                    value: '{"content":"Hello"}',
+                    signature: '0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff'
+                }
+            ],
         },
         hashMessage: {
             method: 'GET',
@@ -38,7 +54,10 @@ export const main = {
             description: 'Hash a message with the Ethereum signed message prefix: \'\\x19Ethereum Signed Message:\\n\' + length + message. Returns the digest used for signature verification.',
             parameters: [
                 { position: { key: 'message', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Hash a simple message', message: 'Hello World' }
+            ],
         },
         recoverAddress: {
             method: 'GET',
@@ -47,7 +66,14 @@ export const main = {
             parameters: [
                 { position: { key: 'digest', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } },
                 { position: { key: 'signature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]+$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Recover address from digest and signature',
+                    digest: '0xa1de988600a42c4b4ab089b619297c17d53cffae5d5120d82d8a92d0bb3b78f2',
+                    signature: '0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff'
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

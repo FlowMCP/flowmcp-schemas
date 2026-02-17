@@ -16,7 +16,25 @@ export const main = {
             description: 'Get the latest 1-hour ambient dose rate readings from all measuring stations. Returns station name, location, radiation value in microsieverts per hour, and measurement timestamp.',
             parameters: [
                 { position: { key: 'maxFeatures', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default("50")', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get latest radiation readings (50 stations)' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        type: { type: 'string' },
+                        features: { type: 'array', items: { type: 'object', properties: { type: { type: 'string' }, id: { type: 'string' }, geometry: { type: 'object' }, geometry_name: { type: 'string' }, properties: { type: 'object' } } } },
+                        totalFeatures: { type: 'number' },
+                        numberMatched: { type: 'number' },
+                        numberReturned: { type: 'number' },
+                        timeStamp: { type: 'string' },
+                        crs: { type: 'object', properties: { type: { type: 'string' }, properties: { type: 'object', properties: { name: { type: 'string' } } } } }
+                    }
+                }
+            },
         },
         getStationTimeseries: {
             method: 'GET',
@@ -26,7 +44,25 @@ export const main = {
                 { position: { key: 'viewparams', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'sortBy', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default("end_measure+D")', 'optional()'] } },
                 { position: { key: 'maxFeatures', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default("24")', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get 24h timeseries for station Pruem', viewparams: 'kenn:072322961' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        type: { type: 'string' },
+                        features: { type: 'array', items: { type: 'object', properties: { type: { type: 'string' }, id: { type: 'string' }, geometry: { type: 'object' }, geometry_name: { type: 'string' }, properties: { type: 'object' } } } },
+                        totalFeatures: { type: 'number' },
+                        numberMatched: { type: 'number' },
+                        numberReturned: { type: 'number' },
+                        timeStamp: { type: 'string' },
+                        crs: { type: 'object', properties: { type: { type: 'string' }, properties: { type: 'object', properties: { name: { type: 'string' } } } } }
+                    }
+                }
+            },
         }
     }
 }

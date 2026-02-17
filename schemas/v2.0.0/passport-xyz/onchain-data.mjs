@@ -21,7 +21,15 @@ export const main = {
             description: 'Get complete Passport data (score, credentials, humanity status) for an address across all networks using multicall',
             parameters: [
                 { position: { key: 'userAddress', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get full passport data for test address', userAddress: '0xc383D7319191276E8BEA6643583466c092b49517' },
+                {
+                    _description: 'Get passport data for another test address',
+                    userAddress: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'
+                },
+                { _description: 'Test with address that has no data', userAddress: '0x0000000000000000000000000000000000000001' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

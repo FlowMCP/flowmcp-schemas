@@ -21,12 +21,25 @@ export const main = {
     routes: {
         getTokenInfoEVM: {
             method: 'GET',
-            path: '/evm/token-info/{{tokenAddress}}',
+            path: '/evm/token-info/:tokenAddress',
             description: 'Get token metadata including symbol, name, decimals, USD price, and logo URLs for native and ERC20 tokens.',
             parameters: [
                 { position: { key: 'tokenAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$|^native$)'] } },
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE,OPTIMISM_MAINNET,BASE_MAINNET,BNB_CHAIN,AVALANCHE_CCHAIN,LINEA_MAINNET,SCROLL,ZKSYNC_ERA,MANTLE,CELO_MAINNET,GNOSIS_CHAIN,FANTOM,ARBITRUM_NOVA,BLAST_MAINNET,SONIC,BERACHAIN,UNICHAIN,ZKEVM,FRAXTAL,APE_CHAIN,ABSTRACT,WORLD,SWELLCHAIN,TAIKO,SOPHON,WEMIX,XAI,FLOW,RONIN,LISK,MODE,METIS,ZORA_NETWORK,BOBA_NETWORK,MINT_MAINNET,DEGEN_CHAIN,ANCIENT8,KAIA,OPBNB,BOB,FLARE,CYBER,PROOF_OF_PLAY,PROOF_OF_PLAY_BOSS,HYPER_EVM,INK,SEI,SONEIUM,SHAPE,REDSTONE,RARI,OMNI,CORN,B3,HAM_CHAIN,HYCHAIN,FUNKICHAIN,FORMA,SUPERPOSITION,SUPERSEED,ZERO_NETWORK,LENS,PLUME,HEMI,KATANA,SOMNIA,TAC,ETHEREUM_SEPOLIA,BASE_SEPOLIA,AVALANCHE_FUJI,MONAD_TESTNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC token info on Ethereum',
+                    tokenAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    chainName: 'ETHEREUM_MAINNET'
+                },
+                { _description: 'Get native ETH info', tokenAddress: 'native', chainName: 'ETHEREUM_MAINNET' },
+                {
+                    _description: 'Get USDC token info on Base',
+                    tokenAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+                    chainName: 'BASE_MAINNET'
+                }
+            ],
         }
     }
 }

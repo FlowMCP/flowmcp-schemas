@@ -22,7 +22,21 @@ export const main = {
                 { position: { key: 'filter', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(verified,unverified,empty,1,2,3)', options: ['optional()'] } },
                 { position: { key: 'verified_at_start_timestamp', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
                 { position: { key: 'verified_at_end_timestamp', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List verified contracts', chainName: 'LUKSO_MAINNET', page: 1, offset: 10, filter: 'verified' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' },
+                        result: { type: 'array', items: { type: 'object', properties: { ABI: { type: 'string' }, Address: { type: 'string' }, CompilerVersion: { type: 'string' }, ContractName: { type: 'string' }, OptimizationUsed: { type: 'string' } } } },
+                        status: { type: 'string' }
+                    }
+                }
+            },
         },
         getabi: {
             method: 'GET',
@@ -31,7 +45,25 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get ABI for known address',
+                    chainName: 'LUKSO_MAINNET',
+                    address: '0xd9db270c1b5e3bd161e8c8503c55ceabee709552'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' },
+                        result: { type: 'string' },
+                        status: { type: 'string' }
+                    }
+                }
+            },
         },
         getsourcecode: {
             method: 'GET',
@@ -40,7 +72,25 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch source code for contract',
+                    chainName: 'LUKSO_MAINNET',
+                    address: '0xd9db270c1b5e3bd161e8c8503c55ceabee709552'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' },
+                        result: { type: 'array', items: { type: 'object', properties: { AdditionalSources: { type: 'array', items: { type: 'object' } }, CompilerSettings: { type: 'object' }, IsProxy: { type: 'string' }, SourceCode: { type: 'string' }, ABI: { type: 'string' }, ContractName: { type: 'string' }, CompilerVersion: { type: 'string' }, OptimizationUsed: { type: 'string' }, EVMVersion: { type: 'string' }, FileName: { type: 'string' }, Address: { type: 'string' } } } },
+                        status: { type: 'string' }
+                    }
+                }
+            },
         },
         getcontractcreation: {
             method: 'GET',
@@ -49,7 +99,25 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'contractaddresses', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get creation data for contracts',
+                    chainName: 'LUKSO_MAINNET',
+                    contractaddresses: '0xd9db270c1b5e3bd161e8c8503c55ceabee709552'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        message: { type: 'string' },
+                        result: { type: 'array', items: { type: 'object', properties: { blockNumber: { type: 'string' }, contractAddress: { type: 'string' }, contractCreator: { type: 'string' }, contractFactory: { type: 'string' }, creationBytecode: { type: 'string' }, timestamp: { type: 'string' }, txHash: { type: 'string' } } } },
+                        status: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

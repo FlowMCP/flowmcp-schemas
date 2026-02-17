@@ -28,7 +28,26 @@ export const main = {
                 { position: { key: 'system', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'network', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'confidenceLevels', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'array()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Ethereum default alias', chainName: 'ETHEREUM_MAINNET' },
+                { _description: 'Zora alias + confidence levels', chainName: 'ZORA_MAINNET', confidenceLevels: '70,90,99' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        system: { type: 'string' },
+                        network: { type: 'string' },
+                        unit: { type: 'string' },
+                        maxPrice: { type: 'number' },
+                        currentBlockNumber: { type: 'number' },
+                        msSinceLastBlock: { type: 'number' },
+                        blockPrices: { type: 'array', items: { type: 'object', properties: { blockNumber: { type: 'number' }, estimatedTransactionCount: { type: 'number' }, baseFeePerGas: { type: 'number' }, blobBaseFeePerGas: { type: 'number' }, estimatedPrices: { type: 'array', items: { type: 'object' } } } } }
+                    }
+                }
+            },
         }
     }
 }

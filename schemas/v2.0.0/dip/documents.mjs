@@ -23,7 +23,11 @@ export const main = {
                 { position: { key: 'f.dokumentnummer', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.zuordnung', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BT,BR,BV,EK)', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Drucksachen of current legislative period', 'f.wahlperiode': 20 },
+                { _description: 'Search Drucksachen by title', 'f.titel': 'Klimaschutz', 'f.wahlperiode': 20 }
+            ],
         },
         getDrucksache: {
             method: 'GET',
@@ -31,7 +35,10 @@ export const main = {
             description: 'Get a single Drucksache (printed paper) by its ID from the German Bundestag. Returns full document details.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Drucksache by ID', id: 305038 }
+            ],
         },
         listDrucksacheTexts: {
             method: 'GET',
@@ -43,7 +50,10 @@ export const main = {
                 { position: { key: 'f.datum.end', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Drucksache full texts', 'f.wahlperiode': 20 }
+            ],
         },
         getDrucksacheText: {
             method: 'GET',
@@ -51,7 +61,10 @@ export const main = {
             description: 'Get the full text of a single Drucksache by its ID from the German Bundestag.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Drucksache full text by ID', id: 305038 }
+            ],
         },
         listPlenarprotokolle: {
             method: 'GET',
@@ -65,7 +78,11 @@ export const main = {
                 { position: { key: 'f.dokumentnummer', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.zuordnung', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(BT,BR,BV,EK)', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Plenarprotokolle of current period', 'f.wahlperiode': 20 },
+                { _description: 'List Plenarprotokolle by date range', 'f.datum.start': '2024-01-01', 'f.datum.end': '2024-12-31' }
+            ],
         },
         getPlenarprotokoll: {
             method: 'GET',
@@ -73,7 +90,10 @@ export const main = {
             description: 'Get a single Plenarprotokoll (plenary protocol) by its ID from the German Bundestag.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Plenarprotokoll by ID', id: 118542 }
+            ],
         },
         listPlenarprotokollTexts: {
             method: 'GET',
@@ -85,7 +105,10 @@ export const main = {
                 { position: { key: 'f.datum.end', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'f.titel', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'cursor', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Plenarprotokoll full texts', 'f.wahlperiode': 20 }
+            ],
         },
         getPlenarprotokollText: {
             method: 'GET',
@@ -93,7 +116,10 @@ export const main = {
             description: 'Get the full text of a single Plenarprotokoll by its ID from the German Bundestag.',
             parameters: [
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Plenarprotokoll full text by ID', id: 118542 }
+            ],
         }
     }
 }

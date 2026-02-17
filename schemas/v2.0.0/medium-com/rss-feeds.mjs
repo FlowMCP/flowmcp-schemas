@@ -16,7 +16,12 @@ export const main = {
             description: 'Get RSS feed for articles with a specific tag via Medium — query by tag. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'tag', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get articles tagged with bitcoin', tag: 'bitcoin' },
+                { _description: 'Get articles tagged with artificial-intelligence', tag: 'artificial-intelligence' },
+                { _description: 'Get articles tagged with programming', tag: 'programming' }
+            ],
         },
         getUserFeed: {
             method: 'GET',
@@ -24,7 +29,11 @@ export const main = {
             description: 'Get RSS feed for a specific Medium user\'s articles. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'username', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get articles from a specific user', username: 'medium' },
+                { _description: 'Get articles from another user', username: 'towardsdatascience' }
+            ],
         },
         getPublicationFeed: {
             method: 'GET',
@@ -32,7 +41,12 @@ export const main = {
             description: 'Get RSS feed for a specific Medium publication — query by publication. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'publication', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get articles from Towards Data Science', publication: 'towards-data-science' },
+                { _description: 'Get articles from The Startup', publication: 'swlh' },
+                { _description: 'Get articles from Better Programming', publication: 'better-programming' }
+            ],
         },
         getTopicFeed: {
             method: 'GET',
@@ -40,7 +54,12 @@ export const main = {
             description: 'Get RSS feed for a specific Medium topic — query by topic. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'topic', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(technology,programming,data-science,artificial-intelligence,machine-learning,blockchain,cryptocurrency,startup,business,design,ux,ui,marketing,science,health,politics,culture,sports,entertainment,travel,food,lifestyle)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get technology topic feed', topic: 'technology' },
+                { _description: 'Get programming topic feed', topic: 'programming' },
+                { _description: 'Get blockchain topic feed', topic: 'blockchain' }
+            ],
         }
     }
 }

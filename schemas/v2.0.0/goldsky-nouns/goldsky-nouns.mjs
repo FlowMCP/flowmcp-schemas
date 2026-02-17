@@ -20,7 +20,11 @@ export const main = {
             description: 'Retrieve recent proposals with detailed voting information via Goldsky. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch recent proposals', first: 10 },
+                { _description: 'Fetch 5 proposals', first: 5 }
+            ],
         },
         getCurrentAuctions: {
             method: 'POST',
@@ -28,7 +32,11 @@ export const main = {
             description: 'Get current and recent auction data with bid information via Goldsky. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'default(5)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch recent auctions', first: 5 },
+                { _description: 'Fetch 3 auctions', first: 3 }
+            ],
         },
         getNounDetails: {
             method: 'POST',
@@ -36,7 +44,11 @@ export const main = {
             description: 'Get detailed Noun information including traits, owner, and voting history. Required: nounId.',
             parameters: [
                 { position: { key: 'nounId', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get details for Noun #1', nounId: '1' },
+                { _description: 'Get details for Noun #100', nounId: '100' }
+            ],
         },
         getTopDelegates: {
             method: 'POST',
@@ -44,7 +56,10 @@ export const main = {
             description: 'Get delegates with the highest voting power in the Nouns DAO. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'default(10)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get top 10 delegates', first: 10 }
+            ],
         }
     }
 }

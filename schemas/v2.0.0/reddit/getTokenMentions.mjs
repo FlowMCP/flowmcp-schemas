@@ -18,13 +18,40 @@ export const main = {
             parameters: [
                 { position: { key: 'q', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Reddit search for ETH with default limit', q: 'ETH OR Ethereum crypto' },
+                { _description: 'Reddit search for SOL with custom limit', q: 'SOL OR Solana crypto', limit: 25 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        kind: { type: 'string' },
+                        data: { type: 'object', properties: { modhash: { type: 'string' }, dist: { type: 'number' }, facets: { type: 'object' }, after: { type: 'string' }, geo_filter: { type: 'string' }, children: { type: 'array', items: { type: 'object' } }, before: { type: 'string', nullable: true } } }
+                    }
+                }
+            },
         },
         getHotMemes: {
             method: 'GET',
             path: '/r/memes/hot/.json',
             description: 'Retrieve hot posts from r/memes subreddit via redditScanner. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch hot memes from r/memes' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        kind: { type: 'string' },
+                        data: { type: 'object', properties: { after: { type: 'string' }, dist: { type: 'number' }, modhash: { type: 'string' }, geo_filter: { type: 'string', nullable: true }, children: { type: 'array', items: { type: 'object' } }, before: { type: 'string', nullable: true } } }
+                    }
+                }
+            },
         }
     }
 }

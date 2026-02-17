@@ -18,13 +18,39 @@ export const main = {
     routes: {
         getTokenHoldersEVM: {
             method: 'GET',
-            path: '/evm/token-holders/{{chain_id}}/{{token_address}}',
+            path: '/evm/token-holders/:chain_id/:token_address',
             description: 'Get token holders for ERC20 or ERC721 tokens, ranked by wallet value with balance details.',
             parameters: [
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(1,137,42161,10,8453,56,43114,59144,5000,42220,100,250,42170,81457,80094,33139,2741,1135,34443,1088,288,185,666666666,888888888,8217,204,60808,14,7560,70700,999,57073,166,21000000,5112,2911,84532,43113)', options: [] } },
                 { position: { key: 'token_address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(500)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC holders on Base',
+                    chain_id: '8453',
+                    token_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+                    limit: '10'
+                },
+                {
+                    _description: 'Get USDC holders on Ethereum mainnet',
+                    chain_id: '1',
+                    token_address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    limit: '5'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        token_address: { type: 'string' },
+                        chain_id: { type: 'number' },
+                        holders: { type: 'array', items: { type: 'object', properties: { wallet_address: { type: 'string' }, balance: { type: 'string' }, first_acquired: { type: 'string' }, has_initiated_transfer: { type: 'boolean' } } } },
+                        next_offset: { type: 'string' }
+                    }
+                }
+            },
         }
     }
 }

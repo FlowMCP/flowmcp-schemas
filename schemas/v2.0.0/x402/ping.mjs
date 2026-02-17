@@ -15,13 +15,19 @@ export const main = {
             method: 'GET',
             path: '/ping',
             description: 'Simple free route to verify server responsiveness via x402. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Basic ping test' }
+            ],
         },
         paid_ping: {
             method: 'GET',
             path: '/vault/item',
             description: 'Simulated paid route to test vault access via x402. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Basic paid ping test' }
+            ],
         }
     }
 }

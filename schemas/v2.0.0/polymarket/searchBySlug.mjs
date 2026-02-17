@@ -17,7 +17,10 @@ export const main = {
             description: 'Get market data for Fed rate cuts in 2025 by slug via Polymarket — query by slug.',
             parameters: [
                 { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(fedRateCuts2025)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test Fed Cut Market 2025', slug: 'fedRateCuts2025' }
+            ],
         }
     }
 }

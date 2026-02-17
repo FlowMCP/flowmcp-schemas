@@ -14,25 +14,101 @@ export const main = {
             method: 'GET',
             path: '/dwd/mapData.json',
             description: 'Get current DWD (Deutscher Wetterdienst) weather warnings across Germany via nina.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all DWD weather warnings' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            version: { type: 'number' },
+                            startDate: { type: 'string' },
+                            expiresDate: { type: 'string' },
+                            severity: { type: 'string' },
+                            urgency: { type: 'string' },
+                            type: { type: 'string' },
+                            i18nTitle: { type: 'object', properties: { de: { type: 'string' }, en: { type: 'string' }, ar: { type: 'string' }, es: { type: 'string' }, fr: { type: 'string' }, pl: { type: 'string' }, ru: { type: 'string' }, tr: { type: 'string' } } }
+                        }
+                    }
+                }
+            },
         },
         getMowasWarnings: {
             method: 'GET',
             path: '/mowas/mapData.json',
             description: 'Get current MOWAS (Modulares Warnsystem) official civil protection warnings via nina.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all MOWAS civil protection warnings' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            version: { type: 'number' },
+                            startDate: { type: 'string' },
+                            severity: { type: 'string' },
+                            urgency: { type: 'string' },
+                            type: { type: 'string' },
+                            i18nTitle: { type: 'object', properties: { de: { type: 'string' } } },
+                            transKeys: { type: 'object', properties: { event: { type: 'string' } } }
+                        }
+                    }
+                }
+            },
         },
         getBiwappWarnings: {
             method: 'GET',
             path: '/biwapp/mapData.json',
             description: 'Get current BIWAPP (Buerger Info und Warn App) municipal warnings Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all BIWAPP municipal warnings' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            version: { type: 'number' },
+                            startDate: { type: 'string' },
+                            expiresDate: { type: 'string' },
+                            severity: { type: 'string' },
+                            urgency: { type: 'string' },
+                            type: { type: 'string' },
+                            i18nTitle: { type: 'object', properties: { de: { type: 'string' } } }
+                        }
+                    }
+                }
+            },
         },
         getKatwarnWarnings: {
             method: 'GET',
             path: '/katwarn/mapData.json',
             description: 'Get current KATWARN alerts for disaster and crisis situations Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all KATWARN alerts' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: { type: 'string' }
+                }
+            },
         }
     }
 }

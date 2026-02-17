@@ -14,19 +14,61 @@ export const main = {
             method: 'GET',
             path: '/search/trending',
             description: 'Fetch the top trending cryptocurrency coins from CoinGecko based on recent search activity and market interest.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Test getTrendingCoins - should return a list of trending coins' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        coins: { type: 'array', items: { type: 'object', properties: { item: { type: 'object' } } } },
+                        nfts: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, symbol: { type: 'string' }, thumb: { type: 'string' }, nft_contract_id: { type: 'number' }, native_currency_symbol: { type: 'string' }, floor_price_in_native_currency: { type: 'number' }, floor_price_24h_percentage_change: { type: 'number' }, data: { type: 'object' } } } },
+                        categories: { type: 'array', items: { type: 'object', properties: { id: { type: 'number' }, name: { type: 'string' }, market_cap_1h_change: { type: 'number' }, slug: { type: 'string' }, coins_count: { type: 'string' }, data: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getTrendingNfts: {
             method: 'GET',
             path: '/search/trending',
             description: 'Fetch the top trending NFT collections from CoinGecko based on recent search activity and market interest.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Test getTrendingNfts - should return a list of trending NFTs' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        coins: { type: 'array', items: { type: 'object', properties: { item: { type: 'object' } } } },
+                        nfts: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, symbol: { type: 'string' }, thumb: { type: 'string' }, nft_contract_id: { type: 'number' }, native_currency_symbol: { type: 'string' }, floor_price_in_native_currency: { type: 'number' }, floor_price_24h_percentage_change: { type: 'number' }, data: { type: 'object' } } } },
+                        categories: { type: 'array', items: { type: 'object', properties: { id: { type: 'number' }, name: { type: 'string' }, market_cap_1h_change: { type: 'number' }, slug: { type: 'string' }, coins_count: { type: 'string' }, data: { type: 'object' } } } }
+                    }
+                }
+            },
         },
         getTrendingCategories: {
             method: 'GET',
             path: '/search/trending',
             description: 'Fetch trending categories from CoinGecko. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Test getTrendingCategories - should return a list of trending categories' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        coins: { type: 'array', items: { type: 'object', properties: { item: { type: 'object' } } } },
+                        nfts: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, symbol: { type: 'string' }, thumb: { type: 'string' }, nft_contract_id: { type: 'number' }, native_currency_symbol: { type: 'string' }, floor_price_in_native_currency: { type: 'number' }, floor_price_24h_percentage_change: { type: 'number' }, data: { type: 'object' } } } },
+                        categories: { type: 'array', items: { type: 'object', properties: { id: { type: 'number' }, name: { type: 'string' }, market_cap_1h_change: { type: 'number' }, slug: { type: 'string' }, coins_count: { type: 'string' }, data: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

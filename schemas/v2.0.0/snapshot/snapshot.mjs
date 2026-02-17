@@ -19,7 +19,10 @@ export const main = {
             description: 'Fetch a list of available Snapshot spaces. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test list of Snapshot spaces', first: 10 }
+            ],
         },
         listProposals: {
             method: 'POST',
@@ -28,7 +31,10 @@ export const main = {
             parameters: [
                 { position: { key: 'space', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch proposals for ENS space', space: 'ens.eth', first: 10 }
+            ],
         },
         getProposalDetails: {
             method: 'POST',
@@ -36,7 +42,10 @@ export const main = {
             description: 'Fetch detailed information for a specific proposal via Snapshot. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'proposalId', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch proposal details for a known proposal ID', proposalId: '0x123abc456def' }
+            ],
         }
     }
 }

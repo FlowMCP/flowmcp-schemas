@@ -17,7 +17,19 @@ export const main = {
             description: 'Execute a GraphQL query against the LUKSO mainnet subgraph via LUKSO BlockScout.',
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Simple entity fetch', query: 'query { _meta { block { number } } }' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errors: { type: 'array', items: { type: 'object', properties: { message: { type: 'string' }, locations: { type: 'array', items: { type: 'object' } } } } }
+                    }
+                }
+            },
         },
         fectchLuksoExplorer: {
             method: 'POST',
@@ -25,7 +37,22 @@ export const main = {
             description: 'Run a raw GraphQL query on a lukso explorer via LUKSO BlockScout. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Sample query for entity data',
+                    query: 'query { transaction(hash: "0x4bfc02eff230de3ae789102369bc302569ed23822f9cb253af9020851e7766ac") { hash fromAddressHash toAddressHash value gasUsed status blockNumber } }'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { transaction: { type: 'object', properties: { blockNumber: { type: 'number' }, fromAddressHash: { type: 'string' }, gasUsed: { type: 'string' }, hash: { type: 'string' }, status: { type: 'string' }, toAddressHash: { type: 'string' }, value: { type: 'string' } } } } }
+                    }
+                }
+            },
         }
     }
 }

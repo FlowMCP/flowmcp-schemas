@@ -17,7 +17,25 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Check USDC on Ethereum', chainId: 1, address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        matchId: { type: 'string' },
+                        creationMatch: { type: 'string' },
+                        runtimeMatch: { type: 'string' },
+                        verifiedAt: { type: 'string' },
+                        match: { type: 'string' },
+                        chainId: { type: 'string' },
+                        address: { type: 'string' }
+                    }
+                }
+            },
         },
         checkByAddresses: {
             method: 'GET',
@@ -26,7 +44,23 @@ export const main = {
             parameters: [
                 { position: { key: 'addresses', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)'] } },
                 { position: { key: 'chainIds', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Check USDC on Ethereum', addresses: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', chainIds: '1' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            address: { type: 'string' },
+                            chainIds: { type: 'array', items: { type: 'object' } }
+                        }
+                    }
+                }
+            },
         },
         getSourceFileTree: {
             method: 'GET',
@@ -35,7 +69,20 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get USDT source files on Ethereum', chainId: 1, address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        files: { type: 'array', items: { type: 'string' } }
+                    }
+                }
+            },
         },
         getSourceFiles: {
             method: 'GET',
@@ -44,13 +91,46 @@ export const main = {
             parameters: [
                 { position: { key: 'chainId', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['length(42)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get USDC source on Ethereum', chainId: 1, address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        files: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, path: { type: 'string' }, content: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getSupportedChains: {
             method: 'GET',
             path: '/chains',
             description: 'Get the list of all chains supported by Sourcify. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'List all supported chains' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            chainId: { type: 'number' },
+                            rpc: { type: 'array', items: { type: 'string' } },
+                            traceSupportedRPCs: { type: 'array', items: { type: 'object' } },
+                            supported: { type: 'boolean' },
+                            etherscanAPI: { type: 'boolean' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

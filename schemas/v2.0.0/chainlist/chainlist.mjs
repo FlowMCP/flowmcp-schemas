@@ -17,7 +17,10 @@ export const main = {
             description: 'Returns detailed information for a chain given its numeric chainId. Required: chain_id.',
             parameters: [
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch Ethereum Mainnet', chain_id: 1 }
+            ],
         },
         getChainsByKeyword: {
             method: 'GET',
@@ -26,7 +29,11 @@ export const main = {
             parameters: [
                 { position: { key: 'keyword', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for Ethereum', keyword: 'eth' },
+                { _description: 'Search for ZK', keyword: 'zk', limit: 2 }
+            ],
         },
         getExplorerURLs: {
             method: 'GET',
@@ -34,7 +41,11 @@ export const main = {
             description: 'Returns all block explorer URLs for a specific chain ID via Chainlist. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum explorers', chain_id: 1 },
+                { _description: 'Get Polygon explorers', chain_id: 137 }
+            ],
         },
         getRPCEndpoints: {
             method: 'GET',
@@ -44,7 +55,11 @@ export const main = {
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)'] } },
                 { position: { key: 'test_speed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default(false)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'default(10)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum RPC endpoints', chain_id: 1 },
+                { _description: 'Get Arbitrum RPCs with speed test', chain_id: 42161, test_speed: 'true', limit: 5 }
+            ],
         },
         getWebsocketEndpoints: {
             method: 'GET',
@@ -54,7 +69,11 @@ export const main = {
                 { position: { key: 'chain_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)'] } },
                 { position: { key: 'test_speed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default(false)'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get Ethereum WebSocket endpoints', chain_id: 1 },
+                { _description: 'Get BSC WebSockets with speed test', chain_id: 56, test_speed: 'true', limit: 3 }
+            ],
         }
     }
 }

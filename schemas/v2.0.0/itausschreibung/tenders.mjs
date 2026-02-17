@@ -14,37 +14,55 @@ export const main = {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_ausschreibungen.xml',
             description: 'Get all recent IT tenders and procurement notices across all categories. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all recent IT tenders' }
+            ],
         },
         getSoftwareTenders: {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_software.xml',
             description: 'Get recent IT tenders in the software development category. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get software tenders' }
+            ],
         },
         getHardwareTenders: {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_hardware.xml',
             description: 'Get recent IT tenders in the hardware category. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get hardware tenders' }
+            ],
         },
         getInternetTenders: {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_internet_multimedia_marketing.xml',
             description: 'Get recent IT tenders in the internet, multimedia, and marketing category. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get internet and multimedia tenders' }
+            ],
         },
         getTelecomTenders: {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_telekommunikation_tk.xml',
             description: 'Get recent IT tenders in the telecommunications category. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get telecom tenders' }
+            ],
         },
         getConsultingTenders: {
             method: 'GET',
             path: '/ausschreibungen-auftraege/rss_schulung_beratung.xml',
             description: 'Get recent IT tenders in the training and consulting category. Returns title, description, link, and publication date.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get consulting and training tenders' }
+            ],
         }
     }
 }

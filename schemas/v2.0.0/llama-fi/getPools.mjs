@@ -14,7 +14,20 @@ export const main = {
             method: 'GET',
             path: '/pools',
             description: 'Fetch DeFi yield pools overview, optionally filtering by blockchain or project name',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch all pools overview' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        data: { type: 'array', items: { type: 'object', properties: { chain: { type: 'string' }, project: { type: 'string' }, symbol: { type: 'string' }, tvlUsd: { type: 'number' }, apyBase: { type: 'number' }, apyReward: { type: 'string', nullable: true }, apy: { type: 'number' }, rewardTokens: { type: 'string', nullable: true }, pool: { type: 'string' }, apyPct1D: { type: 'number' }, apyPct7D: { type: 'number' }, apyPct30D: { type: 'number' }, stablecoin: { type: 'boolean' }, ilRisk: { type: 'string' }, exposure: { type: 'string' }, predictions: { type: 'object' }, poolMeta: { type: 'string', nullable: true }, mu: { type: 'number' }, sigma: { type: 'number' }, count: { type: 'number' }, outlier: { type: 'boolean' }, underlyingTokens: { type: 'array', items: { type: 'string' } }, il7d: { type: 'string', nullable: true }, apyBase7d: { type: 'string', nullable: true }, apyMean30d: { type: 'number' }, volumeUsd1d: { type: 'number', nullable: true }, volumeUsd7d: { type: 'number', nullable: true }, apyBaseInception: { type: 'string', nullable: true } } } }
+                    }
+                }
+            },
         },
         getPools: {
             method: 'GET',
@@ -23,7 +36,23 @@ export const main = {
             parameters: [
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'project', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch all pools' },
+                { _description: 'Fetch pools filtered by chain', chain: 'Ethereum' },
+                { _description: 'Fetch pools filtered by project', project: 'aave-v3' },
+                { _description: 'Fetch pools filtered by chain and project', chain: 'Ethereum', project: 'lido' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        data: { type: 'array', items: { type: 'object', properties: { chain: { type: 'string' }, project: { type: 'string' }, symbol: { type: 'string' }, tvlUsd: { type: 'number' }, apyBase: { type: 'number' }, apyReward: { type: 'string', nullable: true }, apy: { type: 'number' }, rewardTokens: { type: 'string', nullable: true }, pool: { type: 'string' }, apyPct1D: { type: 'number' }, apyPct7D: { type: 'number' }, apyPct30D: { type: 'number' }, stablecoin: { type: 'boolean' }, ilRisk: { type: 'string' }, exposure: { type: 'string' }, predictions: { type: 'object' }, poolMeta: { type: 'string', nullable: true }, mu: { type: 'number' }, sigma: { type: 'number' }, count: { type: 'number' }, outlier: { type: 'boolean' }, underlyingTokens: { type: 'array', items: { type: 'string' } }, il7d: { type: 'string', nullable: true }, apyBase7d: { type: 'string', nullable: true }, apyMean30d: { type: 'number' }, volumeUsd1d: { type: 'number', nullable: true }, volumeUsd7d: { type: 'number', nullable: true }, apyBaseInception: { type: 'string', nullable: true } } } }
+                    }
+                }
+            },
         }
     }
 }

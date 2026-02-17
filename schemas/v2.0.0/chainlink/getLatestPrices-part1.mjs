@@ -25,7 +25,10 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'List all supported EVM chains for Chainlink single-feed price lookups (Ethereum, Binance, Polygon, Avalanche, Arbitrum, Optimism, Base, Linea, Mantle, Scroll, zkSync, Celo).',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'List all supported Chainlink chains' }
+            ],
         },
         getAvailableFeedsForChain: {
             method: 'GET',
@@ -33,7 +36,11 @@ export const main = {
             description: 'List all available Chainlink price feed pairs for a selected chain. Returns feed names (e.g., ETH/USD, BTC/USD) that can be queried via the chain-specific getLatestPrice routes.',
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,ARBITRUM_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List Chainlink feeds on Ethereum', chainName: 'ETHEREUM_MAINNET' },
+                { _description: 'List Chainlink feeds on Polygon', chainName: 'POLYGON_MAINNET' }
+            ],
         },
         getLatestPriceEthereum: {
             method: 'GET',
@@ -41,7 +48,11 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Ethereum Mainnet. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(FIL/ETH,FDUSD/USD,UNI/ETH,NEIRO/USD,USDT/ETH,CSPX/USD,BAT/ETH,USDT/USD,XAU/USD,SUSHI/ETH,KNC/USD,AVAX/USD,C3M/EUR,PERP/ETH,CBETH/ETH,BAT/USD,COMP/ETH,COMP/USD,KRW/USD,USDC/ETH,STETH/USD,DPI/USD,BAL/USD,1INCH/ETH,MAVIA/USD,LINK/ETH,AAVE/ETH,ZRX/ETH,LUSD/USD,TAO/USD,AUD/USD,PYUSD/USD,XCN/USD,LBTC/BTC,ZBU/USD,RSR/USD,AVAIL/USD,ALCX/ETH,BTC/USD,SWETH/ETH,GRT/ETH,LRC/ETH,YFI/USD,TUSD/ETH,GBP/USD,CHF/USD,USDS/USD,EIGEN/USD,ENJ/ETH,SKY/USD,LINK/USD,SUSHI/USD,PAXG/USD,AGEUR/EUR,1INCH/USD,SAND/USD,ENS/USD,MKR/ETH,RSETH/ETH,DAI/USD,KNC/ETH,USR/USD,BUSD/USD,ETH/BTC,ETH/USD,RLUSD/USD,SWELL/ETH,FTM/ETH,USDM/USD,DPI/ETH,SHV/USD,CNY/USD,BAL/ETH,SNX/ETH,DAI/ETH,APE/USD,FRAX/USD,HIGH/USD,YFI/ETH,MANA/ETH,RDNT/USD,USD0/USD,RPL/USD,GRT/USD,UST/ETH,EUR/USD,MLN/ETH,SUSD/ETH,OETH/ETH,SPELL/USD,FTT/ETH,BADGER/ETH,JPY/USD,CVX/ETH,WBTC/BTC,BNB/USD,XAG/USD,TRY/USD,IDR/USD,MATIC/USD,CVX/USD,STETH/ETH,CAD/USD,TBTC/USD,IB01/USD,STG/USD,REN/ETH,IBTA/USD,SOL/USD,BTC/ETH,CRV/ETH,USDP/USD,NZD/USD,FXS/USD,IMX/USD,FRAX/ETH,SNX/USD,RETH/ETH,USDC/USD,APE/ETH,AMPL/ETH,SHIB/ETH,AAVE/USD,AMPL/USD,CRV/USD,UNI/USD,ZRX/USD,MKR/USD,CRVUSD/USD,ARB/USD,LDO/ETH,SGD/USD,GHO/USD,TUSD/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Ethereum', feedName: 'ETH/USD' },
+                { _description: 'Get BTC/USD price on Ethereum', feedName: 'BTC/USD' }
+            ],
         },
         getLatestPriceBinance: {
             method: 'GET',
@@ -49,7 +60,11 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Binance Smart Chain (BSC). Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(DOT/USD,TRX/USD,JPY/USD,AXS/USD,INR/USD,LTC/BNB,FIL/USD,WING/USD,COIN/USD,CRV/USD,BUSD/BNB,UNI/BNB,YFI/USD,DOGE/USD,1INCH/USD,CHR/USD,DAI/BNB,NVDA/USD,DOT/BNB,BAND/BNB,XAG/USD,LINK/BNB,TSLA/USD,ADA/USD,USDC/USD,WIN/USD,WSTETH/USD,UNI/USD,EOS/USD,EUR/USD,PFE/USD,XVS/BNB,USDT/BNB,KAVA/USD,ETH/USD,ONT/USD,BTC/BNB,PAXG/USD,MXN/USD,BETH/USD,KNC/USD,SPY/USD,ATOM/USD,SPELL/USD,SUSHI/USD,BTC/USD,C98/USD,TWT/BNB,SHIB/USD,PHP/USD,SOL/USD,CAKE/USD,CFX/USD,INJ/USD,GBP/USD,BAND/USD,ETH/BNB,POL/USD,DODO/USD,BTC/ETH,BUSD/USD,THB/USD,XTZ/BNB,NULS/USD,SXP/USD,FTM/USD,WOO/USD,MS/USD,XRP/USD,LINK/USD,AAVE/USD,AUD/USD,ZBU/USD,FET/USD,VET/USD,CHF/USD,ZAR/USD,GME/USD,ADA/BNB,TUSD/USD,FXS/USD,XRP/BNB,FDUSD/USD,MASK/USD,XVS/USD,ONG/USD,ICP/USD,USDE/USD,JPM/USD,RDNT/USD,GOOGL/USD,WTI/USD,HIGH/USD,BCH/BNB,MATIC/USD,BSW/USD,BNB/USD,AMZN/USD,LINA/USD,AVAX/USD,AAPL/USD,FRAX/USD,COMP/USD,USDC/BNB,XTZ/USD,GMT/USD,NEAR/USD,MSFT/USD,USDT/USD,META/USD,CAKE/BNB,DAI/USD,NFLX/USD,SGD/USD,ALPACA/USD,BCH/USD,YFI/BNB,MRNA/USD,XLM/USD,QQQ/USD,EOS/BNB,XAU/USD,KLAY/USD,BRL/USD,LTC/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get BTC/USD price on BSC', feedName: 'BTC/USD' },
+                { _description: 'Get ETH/USD price on BSC', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPricePolygon: {
             method: 'GET',
@@ -57,7 +72,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Polygon Mainnet. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(BTC/USD,WBTC/USD,SGD/USD,PHP/USD,QUICK/USD,XAG/USD,CVX/USD,MANA/USD,XAU/USD,GHST/ETH,MATIC/USD,DODO/USD,UNI/ETH,WOO/USD,MSFT/USD,KRW/USD,OM/USD,KAVA/USD,TUSD/USD,AMZN/USD,AGEUR/USD,DOGE/USD,SUSHI/ETH,BNB/USD,DAI/ETH,FIL/USD,SOL/USD,COP/USD,NZD/USD,CHZ/USD,MXN/USD,QNT/USD,LINK/USD,TSLA/USD,AAVE/ETH,DPI/USD,IDR/USD,GNS/USD,EUR/USD,WSTETH/ETH,USDS/USD,ILS/USD,TRX/USD,GRT/USD,GHST/USD,KNC/USD,LTC/USD,GOOGL/USD,ILV/ETH,ZAR/USD,MLN/ETH,CNY/USD,PLN/USD,BAL/ETH,ETH/USD,COMP/USD,YFI/USD,PAXG/USD,LINK/MATIC,FB/USD,WBTC/ETH,AUD/USD,DOT/USD,XMR/USD,INR/USD,THB/USD,FTM/USD,USDT/USD,BAL/USD,XTZ/USD,XPT/USD,XRP/USD,MKR/USD,CAD/USD,BRL/USD,UNI/USD,EOS/USD,TRY/USD,SNX/USD,FXS/USD,APE/USD,USDT/ETH,BADGER/ETH,AXS/USD,YFI/ETH,AAVE/USD,SEK/USD,SUSHI/USD,CBETH/ETH,CRV/USD,THETA/USD,MKR/ETH,USDC/ETH,OGN/USD,BCH/USD,FTT/USD,JPY/USD,DASH/USD,FRAX/USD,SLP/USD,SHIB/USD,SAND/USD,BTC/ETH,BAT/USD,AVAX/USD,MATIC/ETH,1INCH/USD,BADGER/USD,XLM/USD,ETC/USD,DPI/ETH,ALGO/USD,STORJ/USD,HBAR/USD,USDC/USD,GBP/USD,AAPL/USD,ALCX/USD,ADA/USD,DAI/USD,LINK/ETH,DGB/USD,ZEC/USD,UMA/USD,CRV/ETH,ICP/USD,CHF/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Polygon', feedName: 'ETH/USD' }
+            ],
         },
         getLatestPriceAvalanche: {
             method: 'GET',
@@ -65,7 +83,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Avalanche C-Chain. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(SAND/USD,SNX/USD,XAU/USD,WSTETH/ETH,ALPHA/USD,CVX/USD,QI/USD,EUR/USD,BAT/USD,WOO/ETH,CHF/USD,KNC/USD,SGD/USD,WBTC/USD,ADA/USD,AUSD/USD,XAVA/USD,AXS/USD,FRAX/USD,FXS/USD,JOE/USD,FTM/USD,USDC/USD,LINK/AVAX,SUSHI/USD,CZK/USD,BEAM/USD,POL/USD,SPELL/USD,TRY/USD,FIL/USD,GHO/USD,GMX/USD,ARB/USD,DAI/USD,LINK/USD,ETH/USD,MKR/USD,DOT/USD,UNI/USD,NEAR/USD,XAG/USD,MATIC/USD,JPY/USD,COMP/USD,TUSD/USD,BNB/USD,BTC/USD,UST/USD,COQ/USD,MANA/USD,AAVE/USD,YFI/USD,AVAX/USD,EURC/USD,USDT/USD,CRV/USD,CHZ/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get AVAX/USD price on Avalanche', feedName: 'AVAX/USD' }
+            ],
         },
         getLatestPriceAribitrum: {
             method: 'GET',
@@ -73,7 +94,11 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Arbitrum One. Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(AAPL/USD,SPY/USD,OP/USD,NVDA/USD,XAG/USD,HSK/USD,WSTETH/ETH,TSLA/USD,GOOGL/USD,RETH/ETH,WBTC/BTC,STX/USD,XRP/USD,CNY/USD,KNC/USD,LUSD/USD,KRW/USD,USDC/USD,APE/USD,DOT/USD,PAXG/USD,LTC/USD,ETH/USD,SNX/USD,SWETH/ETH,LBTC/BTC,AAVE/USD,BTC/ETH,CVX/USD,GHO/USD,AUD/USD,RPL/USD,ARB/USD,ORDER/USD,CAKE/USD,WTI/USD,STG/USD,PENDLE/USD,GNS/USD,CAD/USD,COMP/USD,BAL/USD,MKR/USD,AMZN/USD,RSR/USD,MELANIA/USD,FRAX/USD,PHP/USD,MSFT/USD,MAGIC/USD,BRL/USD,COIN/USD,SHIB/USD,YFI/USD,PEPE/USD,AXL/USD,IOTX/USD,WIF/USD,FTM/USD,GRT/USD,ATOM/USD,GBP/USD,CRV/USD,EUR/USD,SHIB/ETH,TIA/USD,SGD/USD,WOO/USD,TRY/USD,ULTI/USD,ENA/USD,SOL/USD,XVS/USD,TBTC/BTC,BTC/USD,RDNT/USD,MLN/USD,LINK/USD,BNB/USD,AXS/USD,MATIC/USD,ZAR/USD,TAO/USD,META/USD,MNT/USD,STETH/ETH,LDO/USD,ZRO/USD,TBTC/USD,USDT/USD,TRUMP/USD,STETH/USD,TUSD/USD,CHF/USD,GMX/USD,DAI/USD,BONE/USD,XAI/USD,CRVUSD/USD,LINK/ETH,JOE/USD,1INCH/USD,JPY/USD,WBTC/USD,NEAR/USD,DOGE/USD,CBETH/ETH,RON/USD,DODO/USD,ORDI/USD,AVAX/USD,SEK/USD,SEI/USD,XAU/USD,ASTR/USD,USDD/USD,USDM/USD,POL/USD,SUSHI/USD,DPI/USD,RSETH/ETH,ADA/USD,UNI/USD,SPELL/USD,FXS/USD,WEMIX/USD,USDV/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Arbitrum', feedName: 'ETH/USD' },
+                { _description: 'Get ARB/USD price on Arbitrum', feedName: 'ARB/USD' }
+            ],
         },
         getLatestPriceOptimism: {
             method: 'GET',
@@ -81,7 +106,10 @@ export const main = {
             description: 'Fetch the latest Chainlink oracle price for a selected trading pair on Optimism Mainnet (OP Stack). Calls latestRoundData() on-chain via Infura RPC.',
             parameters: [
                 { position: { key: 'feedName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETH/USD,WSTETH/ETH,FLOW/USD,TBTC/USD,BTC/USD,WSTETH/USD,GMX/USD,UMA/USD,STETH/USD,FTM/USD,SUSD/USD,DYDX/USD,LUSD/USD,STX/USD,MATIC/USD,STETH/ETH,RUNE/USD,ZRX/USD,TRX/USD,USDM/USD,BNB/USD,ORDI/USD,INR/USD,ALGO/USD,APT/USD,VELO/USD,APE/USD,ZIL/USD,FLOKI/USD,ANKR/USD,GRT/USD,BAL/USD,MKR/USD,OP/USD,XLM/USD,ETC/USD,JUP/USD,SNX/USD,IMX/USD,LINK/USD,SAND/USD,TIA/USD,WIF/USD,CBETH/ETH,EOS/USD,WBTC/USD,RNDR/USD,ONE/USD,AUD/USD,YFI/USD,ENJ/USD,XTZ/USD,INJ/USD,XAU/USD,AXS/USD,ARB/USD,CRV/USD,AAVE/USD,ATOM/USD,RETH/ETH,SUSHI/USD,UNI/USD,DOGE/USD,PEPE/USD,POL/USD,ETH/BTC,SOL/USD,BCH/USD,FET/USD,EUR/USD,PENDLE/USD,USDT/USD,RPL/USD,WLD/USD,FIL/USD,SHIB/USD,LDO/USD,RSETH/ETH,ADA/USD,SATS/USD,BRL/USD,XMR/USD,BONK/USD,PERP/USD,NEAR/USD,PYTH/USD,MAV/USD,LINK/ETH,DOT/USD,SEI/USD,JTO/USD,AVAX/USD,COMP/USD,FRAX/USD,JPY/USD,XRP/USD,ZEC/USD,WELL/USD,BLUR/USD,DAI/USD,1INCH/USD,STRK/USD,CELO/USD,FXS/USD,CVX/USD,XAG/USD,ICP/USD,USDC/USD,SUI/USD,KNC/USD,MEME/USD,LTC/USD,TRB/USD)', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get ETH/USD price on Optimism', feedName: 'ETH/USD' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

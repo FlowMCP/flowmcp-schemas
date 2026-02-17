@@ -18,7 +18,10 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'Fetch the latest general crypto news from NewsData.io. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get latest general crypto news' }
+            ],
         },
         getCryptoNewsdata: {
             method: 'GET',
@@ -27,7 +30,10 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'max_pages', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(5)', 'default(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch Bitcoin news from 2 pages', query: 'bitcoin', max_pages: 2 }
+            ],
         }
     }
 }

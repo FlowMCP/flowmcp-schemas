@@ -38,7 +38,28 @@ export const main = {
                 { position: { key: 'cryptocurrency_type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(all,coins,tokens)', options: ['optional()'] } },
                 { position: { key: 'tag', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
                 { position: { key: 'aux', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Basic call without parameters' },
+                { _description: 'Paginated call with start=10 and limit=50', start: 10, limit: 50 },
+                {
+                    _description: 'Filter by market cap and sort descending by price',
+                    market_cap_min: 10000000,
+                    sort: 'price',
+                    sort_dir: 'desc'
+                },
+                { _description: 'Filter using convert with USD', convert: 'USD' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'object', properties: { timestamp: { type: 'string' }, error_code: { type: 'number' }, error_message: { type: 'string', nullable: true }, elapsed: { type: 'number' }, credit_count: { type: 'number' }, notice: { type: 'string', nullable: true }, total_count: { type: 'number' } } },
+                        data: { type: 'array', items: { type: 'object', properties: { id: { type: 'number' }, name: { type: 'string' }, symbol: { type: 'string' }, slug: { type: 'string' }, num_market_pairs: { type: 'number' }, date_added: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, max_supply: { type: 'number' }, circulating_supply: { type: 'number' }, total_supply: { type: 'number' }, infinite_supply: { type: 'boolean' }, minted_market_cap: { type: 'number' }, platform: { type: 'string', nullable: true }, cmc_rank: { type: 'number' }, self_reported_circulating_supply: { type: 'number', nullable: true }, self_reported_market_cap: { type: 'number', nullable: true }, tvl_ratio: { type: 'string', nullable: true }, last_updated: { type: 'string' }, quote: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

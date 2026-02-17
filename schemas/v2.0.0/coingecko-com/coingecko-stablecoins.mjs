@@ -19,7 +19,53 @@ export const main = {
                 { position: { key: 'category', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(stablecoins)'] } },
                 { position: { key: 'order', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(market_cap_desc)'] } },
                 { position: { key: 'per_page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(250)', 'default(50)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get top 50 stablecoins by market cap',
+                    vs_currency: 'usd',
+                    category: 'stablecoins',
+                    order: 'market_cap_desc',
+                    per_page: 50
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' },
+                            symbol: { type: 'string' },
+                            name: { type: 'string' },
+                            image: { type: 'string' },
+                            current_price: { type: 'number' },
+                            market_cap: { type: 'number' },
+                            market_cap_rank: { type: 'number' },
+                            fully_diluted_valuation: { type: 'number' },
+                            total_volume: { type: 'number' },
+                            high_24h: { type: 'number' },
+                            low_24h: { type: 'number' },
+                            price_change_24h: { type: 'number' },
+                            price_change_percentage_24h: { type: 'number' },
+                            market_cap_change_24h: { type: 'number' },
+                            market_cap_change_percentage_24h: { type: 'number' },
+                            circulating_supply: { type: 'number' },
+                            total_supply: { type: 'number' },
+                            max_supply: { type: 'number', nullable: true },
+                            ath: { type: 'number' },
+                            ath_change_percentage: { type: 'number' },
+                            ath_date: { type: 'string' },
+                            atl: { type: 'number' },
+                            atl_change_percentage: { type: 'number' },
+                            atl_date: { type: 'string' },
+                            roi: { type: 'string', nullable: true },
+                            last_updated: { type: 'string' }
+                        }
+                    }
+                }
+            },
         },
         getCurrentPrice: {
             method: 'GET',
@@ -29,7 +75,26 @@ export const main = {
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(tether,usd-coin,dai,ethena-usde,first-digital-usd,paypal-usd,true-usd)'] } },
                 { position: { key: 'vs_currencies', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(usd)'] } },
                 { position: { key: 'include_24hr_change', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(true)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get current prices for major stablecoins',
+                    ids: 'tether,usd-coin,dai',
+                    vs_currencies: 'usd',
+                    include_24hr_change: true
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        dai: { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        tether: { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        'usd-coin': { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getHistoricalData: {
             method: 'GET',
@@ -39,7 +104,22 @@ export const main = {
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(tether,usd-coin,dai,ethena-usde,first-digital-usd,paypal-usd,true-usd,frax,gemini-dollar,paxos-standard)', options: [] } },
                 { position: { key: 'vs_currency', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(usd)'] } },
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(90)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get 7-day historical data for USDT', id: 'tether', vs_currency: 'usd', days: 7 },
+                { _description: 'Get 30-day historical data for USDC', id: 'usd-coin', vs_currency: 'usd', days: 30 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        prices: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
+                        market_caps: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
+                        total_volumes: { type: 'array', items: { type: 'array', items: { type: 'number' } } }
+                    }
+                }
+            },
         },
         analyzePegStability: {
             method: 'GET',
@@ -49,7 +129,28 @@ export const main = {
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(tether,usd-coin,dai,ethena-usde,first-digital-usd)'] } },
                 { position: { key: 'vs_currencies', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['default(usd)'] } },
                 { position: { key: 'include_24hr_change', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(true)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Analyze peg stability for top 5 stablecoins',
+                    ids: 'tether,usd-coin,dai,ethena-usde,first-digital-usd',
+                    vs_currencies: 'usd',
+                    include_24hr_change: true
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        dai: { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        'ethena-usde': { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        'first-digital-usd': { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        tether: { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } },
+                        'usd-coin': { type: 'object', properties: { usd: { type: 'number' }, usd_24h_change: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

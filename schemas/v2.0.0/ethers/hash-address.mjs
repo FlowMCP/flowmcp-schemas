@@ -19,7 +19,11 @@ export const main = {
             parameters: [
                 { position: { key: 'data', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'inputType', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(hex,text)', options: ['optional()', 'default(hex)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Hash hex data', data: '0x1234', inputType: 'hex' },
+                { _description: 'Hash text string', data: 'Hello World', inputType: 'text' }
+            ],
         },
         solidityPackedKeccak256: {
             method: 'GET',
@@ -28,7 +32,14 @@ export const main = {
             parameters: [
                 { position: { key: 'types', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(4)'] } },
                 { position: { key: 'values', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Pack address and uint256',
+                    types: '["address","uint256"]',
+                    values: '["0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045","1"]'
+                }
+            ],
         },
         getCreate2Address: {
             method: 'GET',
@@ -38,7 +49,15 @@ export const main = {
                 { position: { key: 'deployer', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'salt', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } },
                 { position: { key: 'initCodeHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Compute Uniswap V3 pool address',
+                    deployer: '0x1F98431c8aD98523631AE4a59f267346ea31F984',
+                    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+                    initCodeHash: '0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54'
+                }
+            ],
         },
         getCreateAddress: {
             method: 'GET',
@@ -47,7 +66,10 @@ export const main = {
             parameters: [
                 { position: { key: 'deployer', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'nonce', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Compute CREATE address for nonce 0', deployer: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', nonce: 0 }
+            ],
         },
         checksumAddress: {
             method: 'GET',
@@ -55,7 +77,10 @@ export const main = {
             description: 'Convert an Ethereum address to its EIP-55 checksummed format. Validates that the input is a valid 20-byte address.',
             parameters: [
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Checksum lowercase address', address: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045' }
+            ],
         },
         namehash: {
             method: 'GET',
@@ -63,7 +88,11 @@ export const main = {
             description: 'Compute the ENS namehash for a domain name. Used for resolving ENS names on-chain.',
             parameters: [
                 { position: { key: 'name', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Hash vitalik.eth', name: 'vitalik.eth' },
+                { _description: 'Hash eth TLD', name: 'eth' }
+            ],
         }
     },
     requiredLibraries: ['ethers']

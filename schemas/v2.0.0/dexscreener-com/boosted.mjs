@@ -14,13 +14,60 @@ export const main = {
             method: 'GET',
             path: '/token-boosts/latest/v1',
             description: 'Get the latest boosted tokens via DexScreener. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch latest boosted tokens' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            url: { type: 'string' },
+                            chainId: { type: 'string' },
+                            tokenAddress: { type: 'string' },
+                            description: { type: 'string' },
+                            icon: { type: 'string' },
+                            header: { type: 'string' },
+                            openGraph: { type: 'string' },
+                            links: { type: 'array', items: { type: 'object' } },
+                            totalAmount: { type: 'number' },
+                            amount: { type: 'number' }
+                        }
+                    }
+                }
+            },
         },
         getMostActiveBoostedTokens: {
             method: 'GET',
             path: '/token-boosts/top/v1',
             description: 'Get tokens with most active boosts via DexScreener. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch most active boosted tokens' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            url: { type: 'string' },
+                            chainId: { type: 'string' },
+                            tokenAddress: { type: 'string' },
+                            description: { type: 'string' },
+                            icon: { type: 'string' },
+                            header: { type: 'string' },
+                            openGraph: { type: 'string' },
+                            links: { type: 'array', items: { type: 'object' } },
+                            totalAmount: { type: 'number' }
+                        }
+                    }
+                }
+            },
         }
     }
 }

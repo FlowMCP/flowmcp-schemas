@@ -14,13 +14,39 @@ export const main = {
             method: 'GET',
             path: '/validators/queue',
             description: 'Fetches current Ethereum validator activation queue statistics. via beaconchain.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Basic activation queue fetch' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        data: { type: 'object', properties: { beaconchain_entering: { type: 'number' }, beaconchain_exiting: { type: 'number' }, validatorscount: { type: 'number' }, beaconchain_entering_balance: { type: 'number' }, beaconchain_exiting_balance: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getExitQueue: {
             method: 'GET',
             path: '/validators/queue',
             description: 'Fetches current Ethereum validator exit queue statistics via beaconchain. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Basic exit queue fetch' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        data: { type: 'object', properties: { beaconchain_entering: { type: 'number' }, beaconchain_exiting: { type: 'number' }, validatorscount: { type: 'number' }, beaconchain_entering_balance: { type: 'number' }, beaconchain_exiting_balance: { type: 'number' } } }
+                    }
+                }
+            },
         },
         getValidatorStatus: {
             method: 'GET',
@@ -28,7 +54,23 @@ export const main = {
             description: 'Fetches validator status details by public key via beaconchain — query by pubkey.',
             parameters: [
                 { position: { key: 'pubkey', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{96}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch validator details for example public key',
+                    pubkey: '0xa1d1ad0714035353258038e964ae9675dc0252ee22cea896825c01458e1807bfad2f9969338798548d9858a571f7425c'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        data: { type: 'object', properties: { activationeligibilityepoch: { type: 'number' }, activationepoch: { type: 'number' }, balance: { type: 'number' }, effectivebalance: { type: 'number' }, exitepoch: { type: 'number' }, lastattestationslot: { type: 'number' }, name: { type: 'string' }, pubkey: { type: 'string' }, slashed: { type: 'boolean' }, status: { type: 'string' }, validatorindex: { type: 'number' }, withdrawableepoch: { type: 'number' }, withdrawalcredentials: { type: 'string' }, total_withdrawals: { type: 'number' } } }
+                    }
+                }
+            },
         }
     }
 }

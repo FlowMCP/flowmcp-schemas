@@ -21,7 +21,24 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address_hash', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get token balances on LUKSO mainnet',
+                    chainName: 'LUKSO_MAINNET',
+                    address_hash: '0x7609bF8e9DE5446dBbD1C11ef7aBe00a17B4C5bB'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'string' } },
+                        next_page_params: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         getFlatTokenBalances: {
             method: 'GET',
@@ -30,7 +47,21 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address_hash', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get flat token balances on LUKSO',
+                    chainName: 'LUKSO_MAINNET',
+                    address_hash: '0x7609bF8e9DE5446dBbD1C11ef7aBe00a17B4C5bB'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: { type: 'string' }
+                }
+            },
         },
         getCoinBalanceHistory: {
             method: 'GET',
@@ -39,7 +70,24 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address_hash', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get LYX balance history on LUKSO',
+                    chainName: 'LUKSO_MAINNET',
+                    address_hash: '0x7609bF8e9DE5446dBbD1C11ef7aBe00a17B4C5bB'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'string' } },
+                        next_page_params: { type: 'string', nullable: true }
+                    }
+                }
+            },
         },
         getCoinBalanceByDay: {
             method: 'GET',
@@ -48,7 +96,24 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(LUKSO_MAINNET,LUKSO_TESTNET)', options: [] } },
                 { position: { key: 'address_hash', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get daily LYX balance on LUKSO',
+                    chainName: 'LUKSO_MAINNET',
+                    address_hash: '0x7609bF8e9DE5446dBbD1C11ef7aBe00a17B4C5bB'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'string' } },
+                        days: { type: 'number' }
+                    }
+                }
+            },
         }
     }
 }

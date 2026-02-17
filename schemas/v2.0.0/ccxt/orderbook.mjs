@@ -27,7 +27,10 @@ export const main = {
                 { position: { key: 'exchange_id', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(BINANCE,KRAKEN,COINBASE,BITFINEX,OKX,BYBIT)', options: [] } },
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'depth_percentage', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(0.01)', 'max(10)', 'default(1.0)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Basic ETH/USDT test on Binance', exchange_id: 'BINANCE', symbol: 'ETH/USDT', depth_percentage: 1 }
+            ],
         },
         compareOrderbook: {
             method: 'POST',
@@ -37,7 +40,16 @@ export const main = {
                 { position: { key: 'symbol', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'depth_percentage', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(0.01)', 'max(10)', 'default(1.0)'] } },
                 { position: { key: 'exchanges', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'array()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Compare ETH/USDT across all supported exchanges', symbol: 'ETH/USDT', depth_percentage: 1 },
+                {
+                    _description: 'Compare BTC/USDT on Binance and Kraken',
+                    symbol: 'BTC/USDT',
+                    exchanges: ['BINANCE', 'KRAKEN'],
+                    depth_percentage: 1
+                }
+            ],
         }
     },
     requiredLibraries: ['ccxt']

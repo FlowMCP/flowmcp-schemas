@@ -19,13 +19,58 @@ export const main = {
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'default(1)', 'optional()'] } },
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(20)', 'optional()'] } },
                 { position: { key: 'ars', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get first page of services' },
+                { _description: 'Get services for Schleswig-Holstein', ars: '010000000000' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        content: { type: 'array', items: { type: 'object', properties: { leika_key: { type: 'string' }, leika_name: { type: 'string' }, ars: { type: 'string' }, ars_name: { type: 'string' }, ars_federal_state: { type: 'string' }, bundesland: { type: 'string' }, leika_bezeichnung: { type: 'string' }, ozgid: { type: 'number' }, ozg_bezeichnung: { type: 'string' }, url: { type: 'string' }, online_status: { type: 'string' }, aktiv: { type: 'string' }, art_flaechendeckung: { type: 'string' } } } },
+                        pageable: { type: 'object', properties: { pageNumber: { type: 'number' }, pageSize: { type: 'number' }, sort: { type: 'object', properties: { sorted: { type: 'boolean' }, unsorted: { type: 'boolean' }, empty: { type: 'boolean' } } }, offset: { type: 'number' }, unpaged: { type: 'boolean' }, paged: { type: 'boolean' } } },
+                        totalElements: { type: 'number' },
+                        totalPages: { type: 'number' },
+                        last: { type: 'boolean' },
+                        numberOfElements: { type: 'number' },
+                        size: { type: 'number' },
+                        number: { type: 'number' },
+                        sort: { type: 'object', properties: { sorted: { type: 'boolean' }, unsorted: { type: 'boolean' }, empty: { type: 'boolean' } } },
+                        first: { type: 'boolean' },
+                        empty: { type: 'boolean' }
+                    }
+                }
+            },
         },
         getAdminRegions: {
             method: 'GET',
             path: '/ars',
             description: 'Get all administrative region codes (Amtlicher Regionalschluessel / ARS) with their names. Use these codes to filter services by region.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get all administrative region codes' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        content: { type: 'array', items: { type: 'object', properties: { ars: { type: 'string' }, ars_name: { type: 'string' } } } },
+                        pageable: { type: 'object', properties: { pageNumber: { type: 'number' }, pageSize: { type: 'number' }, sort: { type: 'object', properties: { sorted: { type: 'boolean' }, unsorted: { type: 'boolean' }, empty: { type: 'boolean' } } }, offset: { type: 'number' }, unpaged: { type: 'boolean' }, paged: { type: 'boolean' } } },
+                        totalElements: { type: 'number' },
+                        totalPages: { type: 'number' },
+                        last: { type: 'boolean' },
+                        numberOfElements: { type: 'number' },
+                        size: { type: 'number' },
+                        number: { type: 'number' },
+                        sort: { type: 'object', properties: { sorted: { type: 'boolean' }, unsorted: { type: 'boolean' }, empty: { type: 'boolean' } } },
+                        first: { type: 'boolean' },
+                        empty: { type: 'boolean' }
+                    }
+                }
+            },
         }
     }
 }

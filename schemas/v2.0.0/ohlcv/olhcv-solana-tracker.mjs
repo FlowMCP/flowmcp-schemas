@@ -34,7 +34,28 @@ export const main = {
                 { position: { key: 'fromDateUnit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(minutes,hours,days,weeks,months,years)', options: [] } },
                 { position: { key: 'marketCap', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)'] } },
                 { position: { key: 'removeOutliers', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(false)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: '7 days chart data for token/pool',
+                    token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump',
+                    pool: '9Tb2ohu5P16BpBarqd3N27WnkF51Ukfs8Z1GzzLDxVZW',
+                    type: '1d',
+                    fromDateAmount: 7,
+                    fromDateUnit: 'days',
+                    marketCap: 'false',
+                    removeOutliers: 'false'
+                }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        oclhv: { type: 'array', items: { type: 'object', properties: { open: { type: 'number' }, close: { type: 'number' }, low: { type: 'number' }, high: { type: 'number' }, volume: { type: 'number' }, time: { type: 'number' } } } }
+                    }
+                }
+            },
         }
     }
 }

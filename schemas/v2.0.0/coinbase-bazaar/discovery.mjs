@@ -18,7 +18,21 @@ export const main = {
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(20)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List first 5 resources', limit: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        items: { type: 'array', items: { type: 'object', properties: { accepts: { type: 'array', items: { type: 'object' } }, lastUpdated: { type: 'string' }, metadata: { type: 'object' }, resource: { type: 'string' }, type: { type: 'string' }, x402Version: { type: 'number' } } } },
+                        pagination: { type: 'object', properties: { limit: { type: 'number' }, offset: { type: 'number' }, total: { type: 'number' } } },
+                        x402Version: { type: 'number' }
+                    }
+                }
+            },
         }
     }
 }

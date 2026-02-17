@@ -14,7 +14,21 @@ export const main = {
             method: 'GET',
             path: '/',
             description: 'Retrieve the latest Fear & Greed Index via alternative.me. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Get current FNG value' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        data: { type: 'array', items: { type: 'object', properties: { value: { type: 'string' }, value_classification: { type: 'string' }, timestamp: { type: 'string' }, time_until_update: { type: 'string' } } } },
+                        metadata: { type: 'object', properties: { error: { type: 'string' } } }
+                    }
+                }
+            }
         },
         getHistoricalFng: {
             method: 'GET',
@@ -22,7 +36,21 @@ export const main = {
             description: 'Get historical Fear & Greed Index values for past days via alternative.me. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch FNG for past 5 days', days: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        data: { type: 'array', items: { type: 'object', properties: { value: { type: 'string' }, value_classification: { type: 'string' }, timestamp: { type: 'string' }, time_until_update: { type: 'string' } } } },
+                        metadata: { type: 'object', properties: { error: { type: 'string' } } }
+                    }
+                }
+            }
         },
         analyzeFngTrend: {
             method: 'GET',
@@ -30,7 +58,21 @@ export const main = {
             description: 'Analyze the trend of the Fear & Greed Index over a number of days. Required: days.',
             parameters: [
                 { position: { key: 'days', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(7)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Analyze FNG trend for last 10 days', days: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        data: { type: 'array', items: { type: 'object', properties: { value: { type: 'string' }, value_classification: { type: 'string' }, timestamp: { type: 'string' }, time_until_update: { type: 'string' } } } },
+                        metadata: { type: 'object', properties: { error: { type: 'string' } } }
+                    }
+                }
+            }
         }
     }
 }

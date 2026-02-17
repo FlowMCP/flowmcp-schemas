@@ -30,7 +30,16 @@ export const main = {
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'fromBlock', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } },
                 { position: { key: 'toBlock', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get USDC Transfer logs in 10-block range',
+                    chain: 'ETHEREUM_MAINNET',
+                    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+                    fromBlock: 17000000,
+                    toBlock: 17000010
+                }
+            ],
         }
     },
     requiredLibraries: ['ethers']

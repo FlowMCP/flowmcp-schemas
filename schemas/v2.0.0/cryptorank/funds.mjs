@@ -25,13 +25,28 @@ export const main = {
                 { position: { key: 'skip', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)'] } },
                 { position: { key: 'tier', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^[1-5](,[1-5])*$)', 'optional()'] } },
                 { position: { key: 'type', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Default sort, first 100', sortBy: 'tier', sortDirection: 'ASC', limit: '100', skip: 0 },
+                {
+                    _description: 'Filter by tiers 1,2 and Venture type',
+                    sortBy: 'portfolio',
+                    sortDirection: 'DESC',
+                    limit: '100',
+                    skip: 0,
+                    tier: '1,2',
+                    type: 'Venture'
+                }
+            ],
         },
         getAllFunds: {
             method: 'GET',
             path: '/funds/map',
             description: 'Fetch the complete map/list of investors and funds via Cryptorank. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch all funds' }
+            ],
         },
         getFundBasic: {
             method: 'GET',
@@ -39,7 +54,10 @@ export const main = {
             description: 'Fetch basic metrics for a specific fund by ID via Cryptorank — query by fund id.',
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch fund basic data', fund_id: 1 }
+            ],
         },
         getFundDetail: {
             method: 'GET',
@@ -47,7 +65,10 @@ export const main = {
             description: 'Fetch comprehensive fund profile, investments, rounds, and metadata by ID. Required: fund_id.',
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch comprehensive fund data', fund_id: 1 }
+            ],
         },
         getFundTeam: {
             method: 'GET',
@@ -55,7 +76,10 @@ export const main = {
             description: 'Fetch detailed team information for a specific fund by ID via Cryptorank — query by fund id.',
             parameters: [
                 { position: { key: 'fund_id', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch team for fund', fund_id: 1 }
+            ],
         }
     }
 }

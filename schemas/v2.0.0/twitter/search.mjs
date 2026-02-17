@@ -21,7 +21,10 @@ export const main = {
             description: 'Search for recent tweets matching a given query via Twitter/X. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Get tweets from twitterdev', query: 'bitcoin' }
+            ],
         }
     }
 }

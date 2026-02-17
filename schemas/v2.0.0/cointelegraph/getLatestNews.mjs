@@ -18,7 +18,15 @@ export const main = {
                 { position: { key: 'category', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(all,editors_pick,altcoin,bitcoin,blockchain,ethereum,litecoin,monero,regulation,features,analysis,follow_up,in_depth,quiz,market_analysis,top_10_cryptocurrencies,weekly_overview)', options: [] } },
                 { position: { key: 'range', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(1h,2h,4h,12h,24h,48h)', options: [] } },
                 { position: { key: 'maxSummaryLength', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'max(1000)', 'default(150)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Test Cointelegraph latest articles with default settings',
+                    category: 'all',
+                    range: '24h',
+                    maxSummaryLength: 150
+                }
+            ],
         }
     }
 }

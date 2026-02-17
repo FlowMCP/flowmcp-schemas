@@ -16,7 +16,13 @@ export const main = {
             description: 'Returns the price of one or more tokens, optionally against a specified vsToken (defaults to USDC).',
             parameters: [
                 { position: { key: 'ids', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Preis von JUP und SOL gegen USDC',
+                    ids: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN,So11111111111111111111111111111111111111112'
+                }
+            ],
         },
         getTokenInfo: {
             method: 'GET',
@@ -24,7 +30,10 @@ export const main = {
             description: 'Get information about a token using its mint address via Jupiter — query by mintAddress.',
             parameters: [
                 { position: { key: 'mintAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Info for JUP token', mintAddress: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN' }
+            ],
         },
         getTokensInMarket: {
             method: 'GET',
@@ -32,13 +41,19 @@ export const main = {
             description: 'Get list of token mints belonging to a market address via Jupiter — query by marketAddress.',
             parameters: [
                 { position: { key: 'marketAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Tokens in SOL-USDC market', marketAddress: 'BVRbyLjjfSBcoyiYFuxbgKYnWuiFaF9CSXEa5vdSZ9Hh' }
+            ],
         },
         getAllTradableTokens: {
             method: 'GET',
             path: '/tokens/v1/mints/tradable',
             description: 'Retrieve a list of all tradable token mints on Jupiter. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch tradable token mints' }
+            ],
         },
         getTaggedTokens: {
             method: 'GET',
@@ -46,19 +61,28 @@ export const main = {
             description: 'Fetch token info for tokens matching specific tags via Jupiter — query by tags. Returns structured JSON response data.',
             parameters: [
                 { position: { key: 'tags', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Fetch LST tagged tokens', tags: 'lst' }
+            ],
         },
         getNewTokens: {
             method: 'GET',
             path: '/tokens/v1/new',
             description: 'Retrieve new tokens, ordered by creation timestamp via Jupiter. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch newly listed tokens' }
+            ],
         },
         getAllTokens: {
             method: 'GET',
             path: '/tokens/v1/all',
             description: 'Fetch all tokens indexed by Jupiter. This is a large payload. Returns structured JSON response data.',
-            parameters: []
+            parameters: [],
+            tests: [
+                { _description: 'Fetch all token metadata' }
+            ],
         }
     }
 }

@@ -25,7 +25,11 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)', options: [] } },
                 { position: { key: 'name', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Resolve vitalik.eth on Ethereum mainnet', chainName: 'ETHEREUM_MAINNET', name: 'vitalik.eth' },
+                { _description: 'Resolve chainlink.eth on Ethereum mainnet', chainName: 'ETHEREUM_MAINNET', name: 'andr3a5.eth' }
+            ],
         },
         lookupAddress: {
             method: 'GET',
@@ -34,7 +38,14 @@ export const main = {
             parameters: [
                 { position: { key: 'chainName', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,SEPOLIA_TESTNET,ARBITRUM_ONE_MAINNET,AVALANCHE_MAINNET,BASE_MAINNET,BINANCE_MAINNET,CELO_MAINNET,LINEA_MAINNET,MANTLE_MAINNET,SCROLL_MAINNET,OPTIMISM_MAINNET,POLYGON_MAINNET,ZKSYNC_MAINNET)', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['length(42)', 'regex(^0x[a-fA-F0-9]{40}$)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Reverse lookup a known address on mainnet',
+                    chainName: 'ETHEREUM_MAINNET',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                }
+            ],
         },
         supportMatrix: {
             method: 'GET',
@@ -42,7 +53,11 @@ export const main = {
             description: 'Returns the supported networks for ENS resolution and whether SEI is supported. Required: includeAll.',
             parameters: [
                 { position: { key: 'includeAll', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: [] } }
-            ]
+            ],
+            tests: [
+                { _description: 'List support matrix (default)', includeAll: false },
+                { _description: 'List support matrix (verbose)', includeAll: true }
+            ],
         }
     },
     requiredLibraries: ['ethers']

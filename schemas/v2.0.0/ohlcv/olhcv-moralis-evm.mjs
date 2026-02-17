@@ -27,7 +27,7 @@ export const main = {
     routes: {
         getRecursiveOhlcvEVM: {
             method: 'GET',
-            path: '/api/v2.2/pairs/{{pairAddress}}/ohlcv',
+            path: '/api/v2.2/pairs/:pairAddress/ohlcv',
             description: 'Fetch OHLCV data recursively until max length or iteration limit is reached. Required: pairAddress, chain, timeframe, currency, fromDateAmount, fromDateUnit, maxResultLength.',
             parameters: [
                 { position: { key: 'pairAddress', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
@@ -37,7 +37,19 @@ export const main = {
                 { position: { key: 'fromDateAmount', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: [] } },
                 { position: { key: 'fromDateUnit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(minutes,hours,days,weeks,months,years)', options: [] } },
                 { position: { key: 'maxResultLength', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional(), default(1000)'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Fetch 7-day OHLCV data for WETH/USDC Uniswap V2 pair on Ethereum',
+                    pairAddress: '0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc',
+                    chain: 'ETHEREUM_MAINNET',
+                    timeframe: '1m',
+                    currency: 'usd',
+                    fromDateAmount: 7,
+                    fromDateUnit: 'days',
+                    maxResultLength: 1000
+                }
+            ],
         }
     }
 }

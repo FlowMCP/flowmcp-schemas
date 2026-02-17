@@ -22,7 +22,10 @@ export const main = {
             parameters: [
                 { position: { key: 'query', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(1)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(BASE_MAINNET,SOLANA_MAINNET,BSC_MAINNET,ETH_MAINNET,MONAD_MAINNET)', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Search for Ethereum token', query: 'ethereum' }
+            ],
         },
         getWalletPnL: {
             method: 'POST',
@@ -31,7 +34,14 @@ export const main = {
             parameters: [
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'enum(BASE_MAINNET,SOLANA_MAINNET,BSC_MAINNET,ETH_MAINNET,MONAD_MAINNET)', options: ['default(ETH_MAINNET)', 'optional()'] } }
-            ]
+            ],
+            tests: [
+                {
+                    _description: 'Get wallet PnL on Ethereum',
+                    address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                    chain: 'ETH_MAINNET'
+                }
+            ],
         }
     }
 }

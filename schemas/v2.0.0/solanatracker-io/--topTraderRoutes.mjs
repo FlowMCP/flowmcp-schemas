@@ -23,7 +23,22 @@ export const main = {
             parameters: [
                 { position: { key: 'expandPnl', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
                 { position: { key: 'sortBy', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(total,winPercentage)', options: ['optional()'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test topTradersAll' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        wallets: { type: 'array', items: { type: 'object', properties: { wallet: { type: 'string' }, summary: { type: 'object' } } } },
+                        hasNext: { type: 'boolean' },
+                        currentPage: { type: 'number' },
+                        pageSize: { type: 'number' }
+                    }
+                }
+            },
         },
         topTradersAllPaged: {
             method: 'GET',
@@ -31,7 +46,22 @@ export const main = {
             description: 'Get the most profitable traders across all tokens, paginated by page number. Required: page.',
             parameters: [
                 { position: { key: 'page', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'number()', options: ['min(1)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test topTradersAllPaged', page: 1 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        wallets: { type: 'array', items: { type: 'object', properties: { wallet: { type: 'string' }, summary: { type: 'object' } } } },
+                        hasNext: { type: 'boolean' },
+                        currentPage: { type: 'number' },
+                        pageSize: { type: 'number' }
+                    }
+                }
+            },
         },
         topTradersByToken: {
             method: 'GET',
@@ -39,7 +69,30 @@ export const main = {
             description: 'Get the top 100 most profitable traders for a specific token. via Solana Tracker.',
             parameters: [
                 { position: { key: 'token', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(2)', 'max(20)'] } }
-            ]
+            ],
+            tests: [
+                { _description: 'Test topTradersByToken', token: 'CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            wallet: { type: 'string' },
+                            held: { type: 'number' },
+                            sold: { type: 'number' },
+                            holding: { type: 'number' },
+                            realized: { type: 'number' },
+                            unrealized: { type: 'number' },
+                            total: { type: 'number' },
+                            total_invested: { type: 'number' },
+                            tx_counts: { type: 'object', properties: { buys: { type: 'number' }, sells: { type: 'number' } } }
+                        }
+                    }
+                }
+            },
         }
     }
 }
