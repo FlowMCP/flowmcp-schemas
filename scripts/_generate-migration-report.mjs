@@ -32,9 +32,10 @@ function loadCaptures() {
                 const data = JSON.parse( fs.readFileSync( p, 'utf8' ) )
                 const key = `${data.namespace}/${data.schema}.mjs::${data.route}`
 
+                // HTTP 2xx is successful even if response is non-JSON (RSS, XML, text, PNG)
+                // parseError only means capture couldn't parse as JSON, not that the API failed
                 const isOk = data.response.status >= 200
-                    && data.response.status < 400
-                    && !data.response.parseError
+                    && data.response.status < 300
 
                 // Keep best result per route (success > failure)
                 if( !captures[key] || ( isOk && !captures[key].ok ) ) {
@@ -117,11 +118,40 @@ const processAll = async () => {
 
             // Get handler map
             let handlerMap = null
+            let sourceHandlerTypes = null
             if( mod.handlers && typeof mod.handlers === 'function' ) {
                 try {
                     handlerMap = mod.handlers( { sharedLists: {}, libraries: {} } )
                 } catch {
-                    // ok
+                    // Handler factory crashed (needs sharedLists/libraries)
+                    // Fall back to source-code analysis
+                    const source = fs.readFileSync( filePath, 'utf8' )
+                    const handlerIdx = source.indexOf( 'export const handlers' )
+                    if( handlerIdx !== -1 ) {
+                        const handlerSource = source.slice( handlerIdx )
+                        sourceHandlerTypes = {}
+                        const routeNames = Object.keys( schema.routes )
+
+                        // Find positions of each route name in handler source
+                        const positions = routeNames
+                            .map( ( rn ) => ( { name: rn, idx: handlerSource.indexOf( rn + ':' ) } ) )
+                            .filter( ( p ) => p.idx !== -1 )
+                            .sort( ( a, b ) => a.idx - b.idx )
+
+                        positions
+                            .forEach( ( pos, i ) => {
+                                const start = pos.idx
+                                const end = i < positions.length - 1
+                                    ? positions[i + 1].idx
+                                    : handlerSource.length
+                                const snippet = handlerSource.slice( start, end )
+                                sourceHandlerTypes[pos.name] = {
+                                    exec: snippet.includes( 'executeRequest' ),
+                                    post: snippet.includes( 'postRequest' ),
+                                    pre: snippet.includes( 'preRequest' )
+                                }
+                            } )
+                    }
                 }
             }
 
@@ -131,8 +161,14 @@ const processAll = async () => {
 
                     const hasTests = !!( route.tests && Array.isArray( route.tests ) && route.tests.length > 0 )
                     const hasOutput = !!route.output
-                    const hasPostHandler = !!( handlerMap && handlerMap[routeName] && handlerMap[routeName].postRequest )
-                    const hasExecHandler = !!( handlerMap && handlerMap[routeName] && handlerMap[routeName].executeRequest )
+                    let hasPostHandler = !!( handlerMap && handlerMap[routeName] && handlerMap[routeName].postRequest )
+                    let hasExecHandler = !!( handlerMap && handlerMap[routeName] && handlerMap[routeName].executeRequest )
+
+                    // Source-code fallback for crashed handlers
+                    if( !handlerMap && sourceHandlerTypes && sourceHandlerTypes[routeName] ) {
+                        hasExecHandler = sourceHandlerTypes[routeName].exec
+                        hasPostHandler = sourceHandlerTypes[routeName].post
+                    }
 
                     const captureKey = `${namespace}/${fileName.replace( '.mjs', '' )}.mjs::${routeName}`
                     const captureResult = captures[captureKey]

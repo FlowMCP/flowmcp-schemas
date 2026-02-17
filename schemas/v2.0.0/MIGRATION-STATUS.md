@@ -1,6 +1,6 @@
 # FlowMCP v2.0.0 — Migration Status
 
-Generated: 2026-02-17T16:11
+Generated: 2026-02-17T16:29
 
 ## Summary
 
@@ -8,12 +8,12 @@ Generated: 2026-02-17T16:11
 |--------|------:|--------:|
 | Total Routes | 700 | 100% |
 | With Tests | 700 | 100% |
-| With Output Schema | 369 | 53% |
-| Complete (Tests + Output) | 516 | 74% |
-| Capture OK | 374 | 53% |
+| With Output Schema | 371 | 53% |
+| Complete (Tests + Output) | 601 | 86% |
+| Capture OK | 381 | 54% |
 | Capture Failed | 26 | 4% |
-| Not Captured | 300 | 43% |
-| Has Handler (post/exec) | 337 | 48% |
+| Not Captured | 293 | 42% |
+| Has Handler (post/exec) | 426 | 61% |
 | Needs API Key | 276 | 39% |
 | Needs Library | 182 | 26% |
 
@@ -42,25 +42,25 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| contract-read-part1 | readContract | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20TokenInfo | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20Allowance | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721TokenInfo | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721OwnerOf | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721TokenURI | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part2 | erc1155BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part2 | erc1155Uri | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBlockNumber | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBalance | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getGasPrice | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBlock | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getCode | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionCount | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionByHash | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionReceipt | Y | - | - | - | Y | Y |  |
-| node-read-part2 | getLogs | Y | - | - | - | Y | Y |  |
+| contract-read-part1 | readContract | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20TokenInfo | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20Allowance | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721TokenInfo | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721OwnerOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721TokenURI | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part2 | erc1155BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part2 | erc1155Uri | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBlockNumber | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBalance | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getGasPrice | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBlock | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getCode | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionCount | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionByHash | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionReceipt | Y | - | - | exec | Y | Y |  |
+| node-read-part2 | getLogs | Y | - | - | exec | Y | Y |  |
 
 ### alternative-me (3/3 complete)
 
@@ -137,11 +137,11 @@ Generated: 2026-02-17T16:11
 | bicscan | getRiskScore | Y | Y | ok | - | Y | - |  |
 | bicscan | getAssets | Y | Y | ok | - | Y | - |  |
 
-### bitget (0/3 complete)
+### bitget (1/3 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| bitget | getTokenPrice | Y | - | - | - | - | - |  |
+| bitget | getTokenPrice | Y | Y | ok | - | - | - |  |
 | bitget | getAnnoucements | Y | - | - | exec | - | - |  |
 | bitget | getCoinInfo | Y | - | - | exec | - | - |  |
 
@@ -167,7 +167,7 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| gasprice | getGasPrices | Y | Y | ok | - | Y | - |  |
+| gasprice | getGasPrices | Y | Y | ok | post | Y | - |  |
 
 ### bridgerates (3/4 complete)
 
@@ -189,40 +189,40 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| orderbook | calculateOrderbook | Y | - | - | - | - | Y |  |
-| orderbook | compareOrderbook | Y | - | - | - | - | Y |  |
+| orderbook | calculateOrderbook | Y | - | - | exec | - | Y |  |
+| orderbook | compareOrderbook | Y | - | - | exec | - | Y |  |
 
 ### chainlink (0/27 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getLatestPrices-part1 | getAvailableChains | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getAvailableFeedsForChain | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPriceEthereum | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPriceBinance | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPricePolygon | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPriceAvalanche | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPriceAribitrum | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part1 | getLatestPriceOptimism | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceBase | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceLinea | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceMantle | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceScroll | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceZksync | Y | - | - | - | Y | Y |  |
-| getLatestPrices-part2 | getLatestPriceCelo | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAvailableChains | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesEthereum | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesBinance | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesPolygon | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesAvalanche | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesAribitrum | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesOptimism | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part1 | getAllLatestPricesBase | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part2 | getAllLatestPricesLinea | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part2 | getAllLatestPricesMantle | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part2 | getAllLatestPricesScroll | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part2 | getAllLatestPricesZksync | Y | - | - | - | Y | Y |  |
-| getLatestPricesMulticall-part2 | getAllLatestPricesCelo | Y | - | - | - | Y | Y |  |
+| getLatestPrices-part1 | getAvailableChains | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getAvailableFeedsForChain | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPriceEthereum | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPriceBinance | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPricePolygon | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPriceAvalanche | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPriceAribitrum | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part1 | getLatestPriceOptimism | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceBase | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceLinea | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceMantle | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceScroll | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceZksync | Y | - | - | exec | Y | Y |  |
+| getLatestPrices-part2 | getLatestPriceCelo | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAvailableChains | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesEthereum | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesBinance | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesPolygon | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesAvalanche | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesAribitrum | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesOptimism | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part1 | getAllLatestPricesBase | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part2 | getAllLatestPricesLinea | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part2 | getAllLatestPricesMantle | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part2 | getAllLatestPricesScroll | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part2 | getAllLatestPricesZksync | Y | - | - | exec | Y | Y |  |
+| getLatestPricesMulticall-part2 | getAllLatestPricesCelo | Y | - | - | exec | Y | Y |  |
 
 ### chainlist (0/5 complete)
 
@@ -333,14 +333,14 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getLatestNews | getLatestNews | Y | - | fail | - | - | - | non-JSON response |
+| getLatestNews | getLatestNews | Y | - | ok | - | - | - |  |
 
 ### context-7 (1/2 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | getDocumentation | searchLibraryId | Y | Y | ok | post | - | - |  |
-| getDocumentation | getLibraryDocs | Y | - | fail | - | - | - | non-JSON response |
+| getDocumentation | getLibraryDocs | Y | - | ok | - | - | - |  |
 
 ### cryptopanic (0/1 complete)
 
@@ -484,18 +484,18 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| ens-resolution | resolveName | Y | - | - | - | Y | Y |  |
-| ens-resolution | lookupAddress | Y | - | - | - | Y | Y |  |
-| ens-resolution | supportMatrix | Y | - | - | - | Y | Y |  |
+| ens-resolution | resolveName | Y | - | - | exec | Y | Y |  |
+| ens-resolution | lookupAddress | Y | - | - | exec | Y | Y |  |
+| ens-resolution | supportMatrix | Y | - | - | exec | Y | Y |  |
 
 ### epo-org (0/4 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| patent-search | searchPatents | Y | - | - | - | - | - |  |
-| patent-search | searchByTechnology | Y | - | - | - | - | - |  |
-| patent-search | searchByKeywords | Y | - | - | - | - | - |  |
-| patent-search | searchByDate | Y | - | - | - | - | - |  |
+| patent-search | searchPatents | Y | - | - | exec | - | - |  |
+| patent-search | searchByTechnology | Y | - | - | exec | - | - |  |
+| patent-search | searchByKeywords | Y | - | - | exec | - | - |  |
+| patent-search | searchByDate | Y | - | - | exec | - | - |  |
 
 ### erc725 (5/8 complete)
 
@@ -544,11 +544,11 @@ Generated: 2026-02-17T16:11
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | getContractEthereum | getContractABI | Y | Y | ok | post | Y | - |  |
 | getContractEthereum | getContractSourceCode | Y | Y | ok | post | Y | - |  |
-| getContractMultichain | getAvailableChains | Y | - | - | - | Y | - |  |
-| getContractMultichain | getSmartContractAbi | Y | Y | ok | - | Y | - |  |
-| getContractMultichain | getSourceCode | Y | Y | ok | - | Y | - |  |
-| getGaspriceMultichain | getGasOracle | Y | Y | ok | - | Y | - |  |
-| getGaspriceMultichain | estimateGasCost | Y | Y | ok | - | Y | - |  |
+| getContractMultichain | getAvailableChains | Y | - | - | exec | Y | - |  |
+| getContractMultichain | getSmartContractAbi | Y | Y | ok | post | Y | - |  |
+| getContractMultichain | getSourceCode | Y | Y | ok | post | Y | - |  |
+| getGaspriceMultichain | getGasOracle | Y | Y | ok | post | Y | - |  |
+| getGaspriceMultichain | estimateGasCost | Y | Y | ok | post | Y | - |  |
 
 ### ethscriptions-com (9/11 complete)
 
@@ -556,7 +556,7 @@ Generated: 2026-02-17T16:11
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | ethscriptions-api-part1 | listEthscriptions | Y | Y | ok | - | - | - |  |
 | ethscriptions-api-part1 | getEthscription | Y | Y | ok | - | - | - |  |
-| ethscriptions-api-part1 | getEthscriptionData | Y | - | fail | - | - | - | non-JSON response |
+| ethscriptions-api-part1 | getEthscriptionData | Y | - | ok | - | - | - |  |
 | ethscriptions-api-part1 | getEthscriptionAttachment | Y | - | fail | - | - | - | Unexpected end of JSON input |
 | ethscriptions-api-part1 | checkEthscriptionExists | Y | Y | ok | - | - | - |  |
 | ethscriptions-api-part1 | checkMultipleEthscriptionsExistence | Y | Y | ok | - | - | - |  |
@@ -711,25 +711,25 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| contract-read-part1 | readContract | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20TokenInfo | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc20Allowance | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721TokenInfo | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721OwnerOf | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721TokenURI | Y | - | - | - | Y | Y |  |
-| contract-read-part1 | erc721BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part2 | erc1155BalanceOf | Y | - | - | - | Y | Y |  |
-| contract-read-part2 | erc1155Uri | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBlockNumber | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBalance | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getGasPrice | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getBlock | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getCode | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionCount | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionByHash | Y | - | - | - | Y | Y |  |
-| node-read-part1 | getTransactionReceipt | Y | - | - | - | Y | Y |  |
-| node-read-part2 | getLogs | Y | - | - | - | Y | Y |  |
+| contract-read-part1 | readContract | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20TokenInfo | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc20Allowance | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721TokenInfo | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721OwnerOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721TokenURI | Y | - | - | exec | Y | Y |  |
+| contract-read-part1 | erc721BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part2 | erc1155BalanceOf | Y | - | - | exec | Y | Y |  |
+| contract-read-part2 | erc1155Uri | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBlockNumber | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBalance | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getGasPrice | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getBlock | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getCode | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionCount | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionByHash | Y | - | - | exec | Y | Y |  |
+| node-read-part1 | getTransactionReceipt | Y | - | - | exec | Y | Y |  |
+| node-read-part2 | getLogs | Y | - | - | exec | Y | Y |  |
 
 ### itausschreibung (0/6 complete)
 
@@ -899,9 +899,9 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| olhcv-moralis-evm | getRecursiveOhlcvEVM | Y | - | - | - | Y | - |  |
-| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | - | - | Y | - |  |
-| olhcv-solana-tracker | getOhlcvSolana | Y | Y | ok | - | Y | - |  |
+| olhcv-moralis-evm | getRecursiveOhlcvEVM | Y | - | - | exec | Y | - |  |
+| olhcv-moralis-solana | getRecursiveOhlcvSolana | Y | - | - | exec | Y | - |  |
+| olhcv-solana-tracker | getOhlcvSolana | Y | Y | ok | post | Y | - |  |
 
 ### oneinch (0/5 complete)
 
@@ -919,13 +919,13 @@ Generated: 2026-02-17T16:11
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
 | osmQuery | queryRaw | Y | Y | ok | - | - | - |  |
 | osmQuery | findNearby | Y | Y | ok | - | - | - |  |
-| osmQuery | status | Y | - | fail | - | - | - | non-JSON response |
+| osmQuery | status | Y | - | ok | - | - | - |  |
 
 ### passport-xyz (0/1 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| onchain-data | getFullPassportData | Y | - | - | - | Y | Y |  |
+| onchain-data | getFullPassportData | Y | - | - | exec | Y | Y |  |
 
 ### pegelonline (4/4 complete)
 
@@ -949,19 +949,19 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| read | free_read_example | Y | - | - | post | - | - |  |
+| read | free_read_example | Y | - | fail | post | - | - | non-JSON response |
 | read | free_read_cid | Y | - | - | exec | - | - |  |
 | write | upload_text_file | Y | - | - | exec | Y | Y |  |
 
-### poap (0/5 complete)
+### poap (1/5 complete)
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| graphql | getTypename | Y | - | - | - | - | - |  |
-| graphql | getSchemaDefinition | Y | - | - | - | - | - |  |
+| graphql | getTypename | Y | - | fail | - | - | - | HTTP 400 |
+| graphql | getSchemaDefinition | Y | - | fail | - | - | - | HTTP 400 |
 | graphql | getPredefinedQueryList | Y | - | - | exec | - | - |  |
-| graphql | executePrefinedQuery | Y | - | - | - | - | - |  |
-| graphql | querySubgraph | Y | - | - | - | - | - |  |
+| graphql | executePrefinedQuery | Y | - | fail | - | - | - | HTTP 400 |
+| graphql | querySubgraph | Y | Y | ok | - | - | - |  |
 
 ### polymarket (6/6 complete)
 
@@ -1022,7 +1022,7 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| activityEVM | getActivityEVM | Y | - | - | - | Y | Y |  |
+| activityEVM | getActivityEVM | Y | - | - | exec | Y | Y |  |
 | activityEVM | getActivityDetailedEVM | Y | - | - | - | Y | Y |  |
 | balancesEVM | getBalancesEVM | Y | Y | ok | - | Y | - |  |
 | balancesSVM | getBalancesSVM | Y | Y | ok | - | Y | - |  |
@@ -1036,7 +1036,7 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| energy | getFilterIndex | Y | - | - | post | - | - |  |
+| energy | getFilterIndex | Y | - | ok | post | - | - |  |
 | energy | getLatestData | Y | - | - | exec | - | - |  |
 
 ### snapshot (3/3 complete)
@@ -1202,7 +1202,7 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| getNewUniswapPools | getNewPools | Y | - | - | - | Y | - |  |
+| getNewUniswapPools | getNewPools | Y | - | - | post | Y | - |  |
 | getSchema | getSubgraphSchema | Y | Y | ok | post | Y | - |  |
 | getSchema | querySubgraph | Y | Y | ok | post | Y | - |  |
 
@@ -1271,6 +1271,6 @@ Generated: 2026-02-17T16:11
 
 | File | Route | Tests | Output | Capture | Handler | Key | Lib | Note |
 |------|-------|:-----:|:------:|:-------:|:-------:|:---:|:---:|------|
-| auctions | searchAuctions | Y | - | - | - | - | - |  |
-| auctions | getAuctionDetail | Y | - | - | - | - | - |  |
-| zwangsversteigerungen | searchAuctions | Y | - | - | - | - | - |  |
+| auctions | searchAuctions | Y | - | - | exec | - | - |  |
+| auctions | getAuctionDetail | Y | - | - | exec | - | - |  |
+| zwangsversteigerungen | searchAuctions | Y | - | - | exec | - | - |  |

@@ -20,6 +20,18 @@ export const main = {
             tests: [
                 { _description: 'Get latest price for BTC', symbol: 'BTC' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        code: { type: 'string' },
+                        msg: { type: 'string' },
+                        requestTime: { type: 'number' },
+                        data: { type: 'array', items: { type: 'object', properties: { open: { type: 'string' }, symbol: { type: 'string' }, high24h: { type: 'string' }, low24h: { type: 'string' }, lastPr: { type: 'string' }, quoteVolume: { type: 'string' }, baseVolume: { type: 'string' }, usdtVolume: { type: 'string' }, ts: { type: 'string' }, bidPr: { type: 'string' }, askPr: { type: 'string' }, bidSz: { type: 'string' }, askSz: { type: 'string' }, openUtc: { type: 'string' }, changeUtc24h: { type: 'string' }, change24h: { type: 'string' } } } }
+                    }
+                }
+            },
         },
         getAnnoucements: {
             method: 'GET',

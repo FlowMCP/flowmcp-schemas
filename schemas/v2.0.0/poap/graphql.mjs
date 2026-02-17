@@ -105,6 +105,15 @@ export const main = {
             tests: [
                 { _description: 'Sample query for entity data', query: 'query { collections_artists { name } }' }
             ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { collections_artists: { type: 'array', items: { type: 'object' } } } }
+                    }
+                }
+            },
         }
     }
 }

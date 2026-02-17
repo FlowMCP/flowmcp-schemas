@@ -214,12 +214,15 @@ function qualifiesForCapture( { schema, handlers } ) {
         return { ok: false, reason: 'requires libraries' }
     }
 
-    // Check for executeRequest handlers
+    // Check for executeRequest handlers — only skip if ALL routes have executeRequest
+    // Mixed schemas (some exec, some post/none) are allowed; individual routes are skipped later
     if ( handlers ) {
-        const hasExecute = Object.values( handlers )
-            .some( ( h ) => h && typeof h === 'object' && h.executeRequest )
-        if ( hasExecute ) {
-            return { ok: false, reason: 'has executeRequest handlers' }
+        const routeHandlers = Object.values( handlers )
+            .filter( ( h ) => h && typeof h === 'object' )
+        const allExecute = routeHandlers.length > 0
+            && routeHandlers.every( ( h ) => h.executeRequest )
+        if ( allExecute ) {
+            return { ok: false, reason: 'all routes have executeRequest handlers' }
         }
     }
 
@@ -398,15 +401,49 @@ const processAll = async () => {
 
             // Build handler map with shared lists for qualification + preRequest
             let handlerMap = null
+            let sourceHandlerTypes = null
             if ( mod.handlers && typeof mod.handlers === 'function' ) {
                 try {
                     handlerMap = mod.handlers( { sharedLists, libraries: {} } )
                 } catch {
-                    // Handler factory might fail without proper deps — that's ok for qualification
+                    // Handler factory crashed (needs libraries/sharedLists) — source-code fallback
+                    const source = fs.readFileSync( filePath, 'utf8' )
+                    const handlerIdx = source.indexOf( 'export const handlers' )
+                    if ( handlerIdx !== -1 ) {
+                        const handlerSource = source.slice( handlerIdx )
+                        sourceHandlerTypes = {}
+                        const routeNames = Object.keys( schema.routes )
+                        const positions = routeNames
+                            .map( ( rn ) => ( { name: rn, idx: handlerSource.indexOf( rn + ':' ) } ) )
+                            .filter( ( p ) => p.idx !== -1 )
+                            .sort( ( a, b ) => a.idx - b.idx )
+                        positions
+                            .forEach( ( pos, i ) => {
+                                const end = i < positions.length - 1 ? positions[i + 1].idx : handlerSource.length
+                                const snippet = handlerSource.slice( pos.idx, end )
+                                sourceHandlerTypes[pos.name] = {
+                                    exec: snippet.includes( 'executeRequest' ),
+                                    post: snippet.includes( 'postRequest' ),
+                                    pre: snippet.includes( 'preRequest' )
+                                }
+                            } )
+                    }
                 }
             }
 
-            const { ok, reason } = qualifiesForCapture( { schema, handlers: handlerMap } )
+            // For qualification, build a synthetic handler map from source types if needed
+            let qualHandlers = handlerMap
+            if ( !handlerMap && sourceHandlerTypes ) {
+                qualHandlers = {}
+                Object.entries( sourceHandlerTypes )
+                    .forEach( ( [ rn, types ] ) => {
+                        qualHandlers[rn] = {}
+                        if ( types.exec ) { qualHandlers[rn].executeRequest = true }
+                        if ( types.post ) { qualHandlers[rn].postRequest = true }
+                    } )
+            }
+
+            const { ok, reason } = qualifiesForCapture( { schema, handlers: qualHandlers } )
             if ( !ok ) {
                 stats.schemasSkipped++
                 if ( verbose ) { console.log( `  SKIP ${namespace}/${fileName} — ${reason}` ) }
@@ -422,8 +459,10 @@ const processAll = async () => {
                     return
                 }
 
-                // Check if this specific route has executeRequest
-                if ( handlerMap && handlerMap[routeName] && handlerMap[routeName].executeRequest ) {
+                // Check if this specific route has executeRequest (from handlerMap or source analysis)
+                const hasExecFromMap = handlerMap && handlerMap[routeName] && handlerMap[routeName].executeRequest
+                const hasExecFromSource = sourceHandlerTypes && sourceHandlerTypes[routeName] && sourceHandlerTypes[routeName].exec
+                if ( hasExecFromMap || hasExecFromSource ) {
                     if ( verbose ) { console.log( `    SKIP ${routeName} — has executeRequest` ) }
                     stats.testsSkipped += route.tests.length
                     return
