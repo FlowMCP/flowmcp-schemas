@@ -616,6 +616,13 @@
             "hasHandlers": true
         },
         {
+            "namespace": "servicebund",
+            "file": "service-bund-de/tenders.mjs",
+            "name": "service.bund.de Procurement Tenders",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
             "namespace": "smard",
             "file": "smard/energy.mjs",
             "name": "SMARD Energy Data API",
