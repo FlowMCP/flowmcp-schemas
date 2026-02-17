@@ -10,4 +10,5 @@ node_modules
 *.tmp
 .DS_Store
 coverage
+.captures/
 .flowmcp/
