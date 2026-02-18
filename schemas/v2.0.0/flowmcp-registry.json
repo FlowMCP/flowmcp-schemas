@@ -814,6 +814,20 @@
             ]
         },
         {
+            "namespace": "gesetzede",
+            "file": "gesetze-de/law-index.mjs",
+            "name": "German Federal Laws Index",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "gesetzedecontent",
+            "file": "gesetze-de/law-content.mjs",
+            "name": "German Federal Laws Content",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
             "namespace": "goldrush",
             "file": "goldrush/streaming.mjs",
             "name": "GoldRush Streaming API",

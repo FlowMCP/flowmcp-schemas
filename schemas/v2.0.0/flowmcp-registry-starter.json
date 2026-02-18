@@ -326,6 +326,20 @@
             "hasHandlers": true
         },
         {
+            "namespace": "gesetzede",
+            "file": "gesetze-de/law-index.mjs",
+            "name": "German Federal Laws Index",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "gesetzedecontent",
+            "file": "gesetze-de/law-content.mjs",
+            "name": "German Federal Laws Content",
+            "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
             "namespace": "goldskynouns",
             "file": "goldsky-nouns/goldsky-nouns.mjs",
             "name": "Nouns DAO Subgraph",
