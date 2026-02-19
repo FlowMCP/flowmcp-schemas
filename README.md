@@ -40,7 +40,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | blocknative | gasprice.mjs | 1 | getGasPrices | BLOCKNATIVE_API_KEY | new, cacheTtlRealtime |
 | bridgeRates | bridgerates.mjs | 4 | getSupportedChains, getSupportedTools, getConnections, getTransferStatus |  | bridge, crosschain, defi, cacheTtlRealtime |
 | bscscan | getContractBinance.mjs | 2 | getContractABI, getContractSourceCode | BSCSCAN_API_KEY | test, cacheTtlDaily |
-| bundesnetzagentur | ev-charging.mjs | 4 | getStations, getStationById, getStationsByCity, getStationsByRadius |  | ev, charging, germany, infrastructure, energy, mobility, cacheTtlStandard |
+| bundesnetzagentur | ev-charging.mjs | 4 | getStations, getStationById, getStationsByCity, getStationsByRadius |  | ev, charging, germany, infrastructure, energy, mobility, cacheTtlDaily |
 | chainlist | chainlist.mjs | 5 | getChainById, getChainsByKeyword, getExplorerURLs, getRPCEndpoints, getWebsocketEndpoints |  | production, blockchain, rpc, network, cacheTtlStatic |
 | chartImg | tradingview-charts.mjs | 1 | getAdvancedChart | CHART_IMG_API_KEY | charts, visualization, trading, cacheTtlStatic |
 | coinbaseBazaar | discovery.mjs | 1 | listResources |  | payments, marketplace, crypto, cacheTtlDaily |
@@ -94,9 +94,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | geoapify | geocoding.mjs | 3 | forwardGeocode, reverseGeocode, autocomplete | GEOAPIFY_API_KEY | geocoding, maps, places, cacheTtlDaily |
 | goldrush | blockchain-data.mjs | 8 | getBalances, getTransactions, getChains, getTokenHolders, getTokenPrice, getAddressActivity, getErc20Transfers, getTransactionSummary | GOLDRUSH_API_KEY | crypto, blockchain, defi, multichain, wallets, cacheTtlFrequent |
 | goldrush | streaming.mjs | 2 | searchToken, getWalletPnL | GOLDRUSH_API_KEY | crypto, defi, blockchain, tokens, cacheTtlDaily |
-| goldskyNouns | goldsky-nouns.mjs | 4 | getRecentProposals, getCurrentAuctions, getNounDetails, getTopDelegates |  | production, dao, governance, nft, cacheTtlDaily |
+| goldskyNouns | goldsky-nouns.mjs | 7 | getRecentProposals, getCurrentAuctions, getNounDetails, getTopDelegates, getCandidateProposals, getActivePendingUpdatableProposers, getLatestAuctions |  | production, dao, governance, nft, cacheTtlDaily |
 | goldskyLilNouns | lil-nouns.mjs | 2 | getProposals, getProposalById |  | production, data, api, cacheTtlDaily |
-| goldskyNouns | nouns.mjs | 3 | getCandidateProposals, getActivePendingUpdatableProposers, getLatestAuctions |  | production, dao, governance, nft, cacheTtlDaily |
 | govdata | datasets.mjs | 5 | searchDatasets, getDataset, listGroups, listOrganizations, searchTags |  | government, opendata, germany, cacheTtlDaily |
 | hnrss | jsonFeeds.mjs | 1 | getFeed |  | news, hackernews, feeds, cacheTtlDaily |
 | honeypot | honeypot.mjs | 1 | check |  | production, security, token, validation, cacheTtlFrequent |
@@ -187,7 +186,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | wormholescan | wormholescan.mjs | 7 | getCrossChainActivity, getMoneyFlow, getTopAssetsByVolume, getTopChainPairsByNumTransfers, getTopSymbolsByVolume, getTopCorridors, getKpiList |  | data, api, cacheTtlFrequent |
 | x402 | ping.mjs | 2 | free_ping, paid_ping |  | payments, protocol, micropayments, cacheTtlStatic |
 | zvgPortal | auctions.mjs | 2 | searchAuctions, getAuctionDetail |  | immobilien, auktionen, justiz, cacheTtlDaily |
-| zvgportal | zwangsversteigerungen.mjs | 1 | searchAuctions |  | immobilien, auktionen, justiz, cacheTtlDaily |
+| zvgPortal | zwangsversteigerungen.mjs | 1 | searchAuctions |  | immobilien, auktionen, justiz, cacheTtlDaily |
 
 ---
 
