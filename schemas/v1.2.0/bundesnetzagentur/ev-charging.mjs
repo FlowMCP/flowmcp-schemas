@@ -3,7 +3,7 @@ export const schema = {
     name: "Bundesnetzagentur EV Charging API",
     description: "German Federal Network Agency (Bundesnetzagentur) EV charging station registry providing station locations, operators, connector types, and power ratings via ArcGIS FeatureServer",
     docs: ["https://ladestationen.api.bund.dev/", "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/E-Mobilitaet/start.html"],
-    tags: ["ev", "charging", "germany", "infrastructure", "energy", "mobility", "cacheTtlStandard"],
+    tags: ["ev", "charging", "germany", "infrastructure", "energy", "mobility", "cacheTtlDaily"],
     flowMCP: "1.2.0",
     root: "https://services2.arcgis.com/jUpNdisbWqRpMo35/arcgis/rest/services/Ladesaeulen_in_Deutschland/FeatureServer/0",
     requiredServerParams: [],

@@ -4,7 +4,7 @@ const bundeslandEnum = 'enum(' + GERMAN_BUNDESLAENDER.map( ( b ) => b.code ).joi
 
 
 export const schema = {
-    namespace: "zvgportal",
+    namespace: "zvgPortal",
     name: "ZVG Portal Zwangsversteigerungen",
     description: "Search German foreclosure auctions (Zwangsversteigerungen) from the official ZVG portal of German courts",
     docs: ["https://www.zvg-portal.de"],
