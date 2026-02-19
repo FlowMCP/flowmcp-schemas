@@ -4,8 +4,8 @@
 
 export const main = {
     namespace: 'polymarket',
-    name: 'Fed Rate Cuts 2025',
-    description: 'Access Polymarket prediction market data for Fed rate cut events via the Gamma API. Returns market outcomes, probabilities, and trading volume.',
+    name: 'Polymarket Event by Slug',
+    description: 'Look up any Polymarket prediction event by its URL slug via the Gamma API. Returns event details with embedded markets, outcomes and probabilities.',
     version: '2.0.0',
     docs: ['https://polymarket.com'],
     tags: ['prediction', 'markets', 'events', 'cacheTtlFrequent'],
@@ -14,12 +14,13 @@ export const main = {
         searchBySlug: {
             method: 'GET',
             path: '/events/slug/:slug',
-            description: 'Get market data for Fed rate cuts in 2025 by slug via Polymarket — query by slug.',
+            description: 'Get full event data including all markets by URL slug via Polymarket. Use getEvents to discover slugs first.',
             parameters: [
-                { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(fedRateCuts2025)', options: [] } }
+                { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'string()', options: ['min(3)'] } }
             ],
             tests: [
-                { _description: 'Test Fed Cut Market 2025', slug: 'fedRateCuts2025' }
+                { _description: 'Fed rate cuts 2025', slug: 'how-many-fed-rate-cuts-in-2025' },
+                { _description: 'MLS 2026 MVP', slug: 'mls-2026-most-valuable-player' }
             ],
             output: {
                 mimeType: 'application/json',
@@ -77,38 +78,25 @@ export const main = {
 
 
 export const handlers = ( { sharedLists, libraries } ) => {
-
-    const selection = {
-        fedRateCuts2025: 'how-many-fed-rate-cuts-in-2025'
-    }
-
     return {
         searchBySlug: {
-            preRequest: async ( { struct, payload } ) => {
-                const key = payload.slug;
-                if( selection[ key ] ) {
-                struct['url'] = struct.url.replace( key, selection[ key ] )
-                } else {
-                throw new Error( `Selection not found.` )
-                }
-                return { struct }
-            },
             postRequest: async ( { response, struct, payload } ) => {
                 if( !response || !response.markets ) {
-                struct.status = false
-                struct.messages.push( `Error` )
-                return { response }}
-
-                response = response?.markets
-                .map( ( market ) => {
-                const prices = JSON.parse(market.outcomePrices || "[]")
-                return {
-                question: market.question,
-                outcomes: JSON.parse(market.outcomes || "[]"),
-                prices: prices.map(p => Math.round(parseFloat(p) * 100)),
-                lastTrade: Math.round(parseFloat(market.lastTradePrice || "0") * 100)
+                    struct.status = false
+                    struct.messages.push( 'No markets found for this slug.' )
+                    return { response }
                 }
-                } )
+                response = response?.markets
+                    .map( ( market ) => {
+                        const prices = JSON.parse( market.outcomePrices || '[]' )
+                        const result = {
+                            question: market.question,
+                            outcomes: JSON.parse( market.outcomes || '[]' ),
+                            prices: prices.map( ( p ) => Math.round( parseFloat( p ) * 100 ) ),
+                            lastTrade: Math.round( parseFloat( market.lastTradePrice || '0' ) * 100 )
+                        }
+                        return result
+                    } )
 
                 return { response }
             }

@@ -55,7 +55,7 @@ export const main = {
         getEvents: {
             method: 'GET',
             path: '/events',
-            description: 'List events with embedded markets. Mirrors /events and formats each event with a markets table.',
+            description: 'List events with embedded markets. Supports date range filtering, slug search, and sorting by volume.',
             parameters: [
                 { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(10)'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['default(0)'] } },
@@ -64,7 +64,11 @@ export const main = {
                 { position: { key: 'id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[0-9,]+$)'] } },
                 { position: { key: 'slug', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'regex(^[A-Za-z0-9-_,]+$)'] } },
                 { position: { key: 'tag_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()'] } },
-                { position: { key: 'closed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(true,false)', options: ['default(false)'] } }
+                { position: { key: 'closed', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(true,false)', options: ['default(false)'] } },
+                { position: { key: 'start_date_min', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'start_date_max', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'end_date_min', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
+                { position: { key: 'end_date_max', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
             tests: [
                 {
@@ -76,12 +80,10 @@ export const main = {
                     closed: 'false'
                 },
                 {
-                    _description: 'Filter by slug',
-                    slug: 'us-presidential-election-2024',
-                    limit: 10,
-                    offset: 0,
-                    order: 'volume,markets.volume',
-                    ascending: 'false',
+                    _description: 'Events ending in H2 2025',
+                    limit: 5,
+                    end_date_min: '2025-06-01T00:00:00Z',
+                    end_date_max: '2025-12-31T23:59:59Z',
                     closed: 'false'
                 }
             ],
