@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.infura.io/api/networks', 'https://ethereum.org/en/developers/docs/apis/json-rpc/'],
     tags: ['blockchain', 'evm', 'rpc', 'multichain', 'infura', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}',
     requiredServerParams: ['INFURA_API_KEY'],
@@ -26,10 +26,10 @@ export const main = {
             path: '/',
             description: 'Get the latest block number and timestamp for a selected EVM chain.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } }
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } }
             ],
             tests: [
-                { _description: 'Get latest block on Ethereum via Infura', chain: 'ETHEREUM_MAINNET' }
+                { _description: 'Get latest block on Ethereum via Infura', chain: 'mainnet' }
             ],
         },
         getBalance: {
@@ -37,13 +37,13 @@ export const main = {
             path: '/',
             description: 'Get the native token balance (ETH, POL, BNB, etc.) for an address on the selected chain.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get ETH balance of USDC contract via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
                 }
             ],
@@ -53,10 +53,10 @@ export const main = {
             path: '/',
             description: 'Get the current gas price in wei and gwei for the selected chain, including EIP-1559 maxFeePerGas when available.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } }
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } }
             ],
             tests: [
-                { _description: 'Get gas price on Ethereum via Infura', chain: 'ETHEREUM_MAINNET' }
+                { _description: 'Get gas price on Ethereum via Infura', chain: 'mainnet' }
             ],
         },
         getBlock: {
@@ -64,11 +64,11 @@ export const main = {
             path: '/',
             description: 'Get block details by block number, including hash, parentHash, timestamp, gasUsed, transaction count, and miner.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'blockNumber', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
             ],
             tests: [
-                { _description: 'Get block 17000000 via Infura', chain: 'ETHEREUM_MAINNET', blockNumber: 17000000 }
+                { _description: 'Get block 17000000 via Infura', chain: 'mainnet', blockNumber: 17000000 }
             ],
         },
         getCode: {
@@ -76,13 +76,13 @@ export const main = {
             path: '/',
             description: 'Get the bytecode deployed at an address. Returns whether the address is a contract and the bytecode length.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Check USDC bytecode via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
                 }
             ],
@@ -92,13 +92,13 @@ export const main = {
             path: '/',
             description: 'Get the transaction count (nonce) for an address on the selected chain.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get USDC nonce via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
                 }
             ],
@@ -108,13 +108,13 @@ export const main = {
             path: '/',
             description: 'Get transaction details by transaction hash, including from, to, value, gasPrice, blockNumber, and input data.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get transaction details via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
                 }
             ],
@@ -124,13 +124,13 @@ export const main = {
             path: '/',
             description: 'Get the transaction receipt by hash, including status, gasUsed, logs count, and created contract address if applicable.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'txHash', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{64}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get transaction receipt via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     txHash: '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060'
                 }
             ],
@@ -144,25 +144,20 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const infuraChains = EVM_CHAINS
-        .filter( ( c ) => c.infuraSubdomain !== undefined && !c.isTestnet )
-    const infuraSubDomain = infuraChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.infuraSubdomain
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( infuraSubDomain ).join( ',' ) + ')'
+    const validSubdomains = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.infuraSubdomain !== undefined )
+            .map( ( c ) => c.infuraSubdomain )
+    )
 
     return {
         getBlockNumber: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -193,12 +188,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getBalance: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -207,7 +200,7 @@ export const handlers = ( { sharedLists, libraries } ) => {
                 try {
                 const provider = new ethers.JsonRpcProvider( payload.url )
                 const balanceWei = await provider.getBalance( address )
-                const chainInfo = infuraChains.find( ( c ) => c.alias === chain )
+                const chainInfo = EVM_CHAINS.find( ( c ) => c.infuraSubdomain === chain )
                 struct.data = {
                 chain,
                 address,
@@ -226,12 +219,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getGasPrice: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -258,12 +249,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getBlock: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -300,12 +289,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getCode: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -333,12 +320,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getTransactionCount: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -363,12 +348,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getTransactionByHash: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -406,12 +389,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getTransactionReceipt: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {

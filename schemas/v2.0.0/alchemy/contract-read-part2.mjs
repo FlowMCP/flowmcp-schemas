@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.alchemy.com/reference/api-overview', 'https://docs.ethers.org/v6/api/contract/', 'https://eips.ethereum.org/EIPS/eip-20'],
     tags: ['blockchain', 'evm', 'smartcontract', 'token', 'multichain', 'alchemy', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--alchemy-slug--.g.alchemy.com/v2/{{ALCHEMY_API_KEY}}',
     requiredServerParams: ['ALCHEMY_API_KEY'],
@@ -26,7 +26,7 @@ export const main = {
             path: '/',
             description: 'Get the ERC-1155 token balance for a wallet address and token ID on a specific contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
@@ -34,7 +34,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Get ERC-1155 balance on OpenSea Shared Storefront',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
                     tokenId: '1'
@@ -46,14 +46,14 @@ export const main = {
             path: '/',
             description: 'Get the metadata URI for a specific ERC-1155 token ID on a contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get ERC-1155 metadata URI on OpenSea Shared',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
                     tokenId: '1'
                 }
@@ -68,14 +68,11 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const alchemyChains = EVM_CHAINS
-        .filter( ( c ) => c.alchemyNetworkSlug !== undefined && !c.isTestnet )
-    const alchemySlug = alchemyChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.alchemyNetworkSlug
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( alchemySlug ).join( ',' ) + ')'
+    const validSlugs = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.alchemyNetworkSlug !== undefined )
+            .map( ( c ) => c.alchemyNetworkSlug )
+    )
     const ERC20_ABI = [
         'function name() view returns (string)',
         'function symbol() view returns (string)',
@@ -100,12 +97,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc1155BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -133,12 +128,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc1155Uri: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {

@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.alchemy.com/reference/api-overview', 'https://docs.ethers.org/v6/api/contract/', 'https://eips.ethereum.org/EIPS/eip-20'],
     tags: ['blockchain', 'evm', 'smartcontract', 'token', 'multichain', 'alchemy', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--alchemy-slug--.g.alchemy.com/v2/{{ALCHEMY_API_KEY}}',
     requiredServerParams: ['ALCHEMY_API_KEY'],
@@ -26,7 +26,7 @@ export const main = {
             path: '/',
             description: 'Call any read-only (view/pure) function on a smart contract using a human-readable function signature. Provide args as a JSON array string.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'functionSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'args', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default([])'] } }
@@ -34,13 +34,13 @@ export const main = {
             tests: [
                 {
                     _description: 'Read USDC name() on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     functionSignature: 'function name() view returns (string)'
                 },
                 {
                     _description: 'Read USDC decimals() on Polygon',
-                    chain: 'POLYGON_MAINNET',
+                    chain: 'polygon-mainnet',
                     address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
                     functionSignature: 'function decimals() view returns (uint8)'
                 }
@@ -51,18 +51,18 @@ export const main = {
             path: '/',
             description: 'Get ERC-20 token info: name, symbol, decimals, and total supply for a contract address.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get USDC token info on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
                 },
                 {
                     _description: 'Get WETH token info on Arbitrum',
-                    chain: 'ARBITRUM_ONE_MAINNET',
+                    chain: 'arb-mainnet',
                     contractAddress: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
                 }
             ],
@@ -72,14 +72,14 @@ export const main = {
             path: '/',
             description: 'Get the ERC-20 token balance for a wallet address on a specific contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get USDC balance of Uniswap Router on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
                 }
@@ -90,7 +90,7 @@ export const main = {
             path: '/',
             description: 'Get the ERC-20 allowance granted by an owner to a spender for a specific token contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'owner', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'spender', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
@@ -98,7 +98,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Check USDC allowance from WETH to Uniswap Router',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     owner: '0xC02aaA39b223FE8D0A0e5CC4764e055256e07c6f',
                     spender: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
@@ -110,13 +110,13 @@ export const main = {
             path: '/',
             description: 'Get ERC-721 NFT collection info: name and symbol for a contract address.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get BAYC NFT collection info on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
                 }
             ],
@@ -126,14 +126,14 @@ export const main = {
             path: '/',
             description: 'Get the owner address of a specific ERC-721 token by its token ID.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get owner of BAYC token #1 on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     tokenId: '1'
                 }
@@ -144,14 +144,14 @@ export const main = {
             path: '/',
             description: 'Get the token URI (metadata URL) for a specific ERC-721 token by its token ID.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get metadata URI of BAYC token #1',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     tokenId: '1'
                 }
@@ -162,14 +162,14 @@ export const main = {
             path: '/',
             description: 'Get the number of ERC-721 tokens owned by a wallet address for a specific collection.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET,GNOSIS_MAINNET,FANTOM_MAINNET,MOONBEAM_MAINNET,BLAST_MAINNET,BERACHAIN_MAINNET,UNICHAIN_MAINNET,POLYGONZK_MAINNET,FRAXTAL_MAINNET,WORLD_MAINNET,OPBNB_MAINNET,SONEIUM_MAINNET,ZETACHAIN_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:alchemyNetworkSlug}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get BAYC balance of Uniswap Router on Ethereum',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'eth-mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
                 }
@@ -184,14 +184,11 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const alchemyChains = EVM_CHAINS
-        .filter( ( c ) => c.alchemyNetworkSlug !== undefined && !c.isTestnet )
-    const alchemySlug = alchemyChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.alchemyNetworkSlug
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( alchemySlug ).join( ',' ) + ')'
+    const validSlugs = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.alchemyNetworkSlug !== undefined )
+            .map( ( c ) => c.alchemyNetworkSlug )
+    )
     const ERC20_ABI = [
         'function name() view returns (string)',
         'function symbol() view returns (string)',
@@ -216,12 +213,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         readContract: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -253,12 +248,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20TokenInfo: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -293,12 +286,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -332,12 +323,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20Allowance: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -372,12 +361,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721TokenInfo: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -407,12 +394,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721OwnerOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -439,12 +424,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721TokenURI: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -471,12 +454,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const slug = alchemySlug[ chain ]
-                if( !slug ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSlugs.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--alchemy-slug--', slug )
+                struct.url = struct.url.replace( '--alchemy-slug--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {

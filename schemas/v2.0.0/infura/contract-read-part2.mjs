@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.infura.io/api/networks', 'https://docs.ethers.org/v6/api/contract/', 'https://eips.ethereum.org/EIPS/eip-20'],
     tags: ['blockchain', 'evm', 'smartcontract', 'token', 'multichain', 'infura', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}',
     requiredServerParams: ['INFURA_API_KEY'],
@@ -26,7 +26,7 @@ export const main = {
             path: '/',
             description: 'Get the ERC-1155 token balance for a wallet address and token ID on a specific contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
@@ -34,7 +34,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Get ERC-1155 balance via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
                     tokenId: '1'
@@ -46,14 +46,14 @@ export const main = {
             path: '/',
             description: 'Get the metadata URI for a specific ERC-1155 token ID on a contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get ERC-1155 URI via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
                     tokenId: '1'
                 }
@@ -68,14 +68,11 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const infuraChains = EVM_CHAINS
-        .filter( ( c ) => c.infuraSubdomain !== undefined && !c.isTestnet )
-    const infuraSubDomain = infuraChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.infuraSubdomain
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( infuraSubDomain ).join( ',' ) + ')'
+    const validSubdomains = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.infuraSubdomain !== undefined )
+            .map( ( c ) => c.infuraSubdomain )
+    )
     const ERC20_ABI = [
         'function name() view returns (string)',
         'function symbol() view returns (string)',
@@ -100,12 +97,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc1155BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -133,12 +128,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc1155Uri: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {

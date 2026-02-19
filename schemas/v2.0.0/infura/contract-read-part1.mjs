@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.infura.io/api/networks', 'https://docs.ethers.org/v6/api/contract/', 'https://eips.ethereum.org/EIPS/eip-20'],
     tags: ['blockchain', 'evm', 'smartcontract', 'token', 'multichain', 'infura', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}',
     requiredServerParams: ['INFURA_API_KEY'],
@@ -26,7 +26,7 @@ export const main = {
             path: '/',
             description: 'Call any read-only (view/pure) function on a smart contract using a human-readable function signature. Provide args as a JSON array string.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'functionSignature', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(10)'] } },
                 { position: { key: 'args', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()', 'default([])'] } }
@@ -34,7 +34,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Read USDC name() on Ethereum via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     functionSignature: 'function name() view returns (string)'
                 }
@@ -45,13 +45,13 @@ export const main = {
             path: '/',
             description: 'Get ERC-20 token info: name, symbol, decimals, and total supply for a contract address.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get USDC token info on Ethereum via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
                 }
             ],
@@ -61,14 +61,14 @@ export const main = {
             path: '/',
             description: 'Get the ERC-20 token balance for a wallet address on a specific contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get USDC balance of Uniswap Router via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
                 }
@@ -79,7 +79,7 @@ export const main = {
             path: '/',
             description: 'Get the ERC-20 allowance granted by an owner to a spender for a specific token contract.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'owner', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'spender', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
@@ -87,7 +87,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Check USDC allowance via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     owner: '0xC02aaA39b223FE8D0A0e5CC4764e055256e07c6f',
                     spender: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
@@ -99,13 +99,13 @@ export const main = {
             path: '/',
             description: 'Get ERC-721 NFT collection info: name and symbol for a contract address.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get BAYC collection info via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
                 }
             ],
@@ -115,14 +115,14 @@ export const main = {
             path: '/',
             description: 'Get the owner address of a specific ERC-721 token by its token ID.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get owner of BAYC #1 via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     tokenId: '1'
                 }
@@ -133,14 +133,14 @@ export const main = {
             path: '/',
             description: 'Get the token URI (metadata URL) for a specific ERC-721 token by its token ID.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'tokenId', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } }
             ],
             tests: [
                 {
                     _description: 'Get BAYC #1 metadata URI via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     tokenId: '1'
                 }
@@ -151,14 +151,14 @@ export const main = {
             path: '/',
             description: 'Get the number of ERC-721 tokens owned by a wallet address for a specific collection.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'contractAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'walletAddress', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } }
             ],
             tests: [
                 {
                     _description: 'Get BAYC balance via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     contractAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
                     walletAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564'
                 }
@@ -173,14 +173,11 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const infuraChains = EVM_CHAINS
-        .filter( ( c ) => c.infuraSubdomain !== undefined && !c.isTestnet )
-    const infuraSubDomain = infuraChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.infuraSubdomain
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( infuraSubDomain ).join( ',' ) + ')'
+    const validSubdomains = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.infuraSubdomain !== undefined )
+            .map( ( c ) => c.infuraSubdomain )
+    )
     const ERC20_ABI = [
         'function name() view returns (string)',
         'function symbol() view returns (string)',
@@ -205,12 +202,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         readContract: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -242,12 +237,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20TokenInfo: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -282,12 +275,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -321,12 +312,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc20Allowance: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -361,12 +350,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721TokenInfo: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -396,12 +383,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721OwnerOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -428,12 +413,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721TokenURI: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
@@ -460,12 +443,10 @@ export const handlers = ( { sharedLists, libraries } ) => {
         erc721BalanceOf: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {

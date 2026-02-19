@@ -16,7 +16,7 @@ export const main = {
     docs: ['https://docs.infura.io/api/networks', 'https://ethereum.org/en/developers/docs/apis/json-rpc/'],
     tags: ['blockchain', 'evm', 'rpc', 'multichain', 'infura', 'cacheTtlRealtime'],
     sharedLists: [
-        { ref: 'evmChains', version: '2.0.0' }
+        { ref: 'evmChains', version: '2.0.0', filter: { key: 'isTestnet', value: false } }
     ],
     root: 'https://--infura-subdomain--.infura.io/v3/{{INFURA_API_KEY}}',
     requiredServerParams: ['INFURA_API_KEY'],
@@ -26,7 +26,7 @@ export const main = {
             path: '/',
             description: 'Get event logs for a contract address within a block range (max 10000 blocks). Returns topics, data, and transaction hash per log entry.',
             parameters: [
-                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum(ETHEREUM_MAINNET,POLYGON_MAINNET,ARBITRUM_ONE_MAINNET,OPTIMISM_MAINNET,BASE_MAINNET,BINANCE_MAINNET,AVALANCHE_MAINNET,LINEA_MAINNET,SCROLL_MAINNET,ZKSYNC_MAINNET,MANTLE_MAINNET,CELO_MAINNET)', options: [] } },
+                { position: { key: 'chain', value: '{{USER_PARAM}}', location: 'insert' }, z: { primitive: 'enum({{evmChains:infuraSubdomain}})', options: [] } },
                 { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['regex(^0x[a-fA-F0-9]{40}$)'] } },
                 { position: { key: 'fromBlock', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } },
                 { position: { key: 'toBlock', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)'] } }
@@ -34,7 +34,7 @@ export const main = {
             tests: [
                 {
                     _description: 'Get USDC logs in 10-block range via Infura',
-                    chain: 'ETHEREUM_MAINNET',
+                    chain: 'mainnet',
                     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
                     fromBlock: 17000000,
                     toBlock: 17000010
@@ -50,25 +50,20 @@ export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
     const EVM_CHAINS = sharedLists['evmChains']
 
-    const infuraChains = EVM_CHAINS
-        .filter( ( c ) => c.infuraSubdomain !== undefined && !c.isTestnet )
-    const infuraSubDomain = infuraChains
-        .reduce( ( acc, c ) => {
-            acc[ c.alias ] = c.infuraSubdomain
-            return acc
-        }, {} )
-    const chainEnum = 'enum(' + Object.keys( infuraSubDomain ).join( ',' ) + ')'
+    const validSubdomains = new Set(
+        EVM_CHAINS
+            .filter( ( c ) => c.infuraSubdomain !== undefined )
+            .map( ( c ) => c.infuraSubdomain )
+    )
 
     return {
         getLogs: {
             preRequest: async ( { struct, payload } ) => {
                 const { chain } = payload
-                const subdomain = infuraSubDomain[ chain ]
-                if( !subdomain ) {
-                throw new Error( `Unsupported chain: ${chain}` )
-
+                if( !validSubdomains.has( chain ) ) {
+                    throw new Error( `Unsupported chain: ${chain}` )
                 }
-                struct.url = struct.url.replace( '--infura-subdomain--', subdomain )
+                struct.url = struct.url.replace( '--infura-subdomain--', chain )
                 return { struct }
             },
             executeRequest: async ( { struct, payload } ) => {
