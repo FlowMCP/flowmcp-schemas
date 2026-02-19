@@ -25,7 +25,7 @@ export const main = {
             ],
             tests: [
                 { _description: 'Gas oracle on Ethereum Mainnet', chainName: 'ETHEREUM_MAINNET' },
-                { _description: 'Gas oracle on Arbitrum One', chainName: 'CELO_MAINNET' },
+                { _description: 'Gas oracle on Arbitrum One', chainName: 'ARBITRUM_ONE_MAINNET' },
                 { _description: 'Gas oracle on Polygon', chainName: 'POLYGON_MAINNET' },
                 { _description: 'Gas oracle on Binance Smart Chain', chainName: 'BINANCE_MAINNET' }
             ],
@@ -78,12 +78,6 @@ export const handlers = ( { sharedLists, libraries } ) => {
             acc[ chain.etherscanAlias ] = { chainId: chain.etherscanChainId, name: chain.name }
             return acc
         }, {} )
-    const gasOracleAliases = [
-        'ETHEREUM_MAINNET', 'SEPOLIA_TESTNET', 'ARBITRUM_ONE_MAINNET',
-        'POLYGON_MAINNET', 'BINANCE_MAINNET', 'AVALANCHE_CCHAIN'
-    ]
-    const gasOracleEnum = 'enum(' + gasOracleAliases.join( ',' ) + ')'
-
     return {
         getGasOracle: {
             preRequest: async ( { struct, payload } ) => {
