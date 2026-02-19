@@ -41,5 +41,11 @@
     "talib": "^1.1.6",
     "twitter-api-v2": "^1.23.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "canvas": "^3.2.1",
+    "trading-signals": "^7.4.3",
+    "vega": "^6.2.0",
+    "vega-lite": "^6.4.2",
+    "yahoo-finance2": "^3.13.0"
+  }
 }
