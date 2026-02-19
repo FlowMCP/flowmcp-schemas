@@ -56,6 +56,137 @@ export const handlers = ( { sharedLists, libraries } ) => {
 
     const bundeslandEnum = 'enum(' + GERMAN_BUNDESLAENDER.map( ( b ) => b.code ).join( ',' ) + ')'
 
+    const _fetchHeaders = {
+        'User-Agent': 'Mozilla/5.0 (compatible; FlowMCP/1.0)',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'de-DE,de;q=0.9'
+    }
+
+    const _stripHtml = ( str ) => {
+        const cleaned = str
+            .replace( /<[^>]*>/g, '' )
+            .replace( /&nbsp;/g, ' ' )
+            .replace( /&auml;/g, 'ä' )
+            .replace( /&ouml;/g, 'ö' )
+            .replace( /&uuml;/g, 'ü' )
+            .replace( /&szlig;/g, 'ß' )
+            .replace( /&Auml;/g, 'Ä' )
+            .replace( /&Ouml;/g, 'Ö' )
+            .replace( /&Uuml;/g, 'Ü' )
+            .replace( /&euro;/g, '€' )
+            .replace( /&#128;/g, '€' )
+            .replace( /&amp;/g, '&' )
+            .replace( /&sect;/g, '§' )
+            .replace( /\s+/g, ' ' )
+            .trim()
+
+        return cleaned
+    }
+
+    const _extractField = ( block, label ) => {
+        const regex = new RegExp( label + '[\\s\\S]*?<\\/td>\\s*<td[^>]*>([\\s\\S]*?)<\\/td>', 'i' )
+        const match = block.match( regex )
+
+        if( !match ) { return '' }
+        const raw = _stripHtml( match[1] )
+
+        return raw
+    }
+
+    const _parseSearchHTML = ( html ) => {
+        const auctions = []
+        const blocks = html.split( /<hr>/i )
+
+        blocks
+            .forEach( ( block ) => {
+                const hasAktenzeichen = /Aktenzeichen/i.test( block )
+                if( !hasAktenzeichen ) { return }
+
+                const nobrMatches = []
+                const nobrRegex = /<nobr>([^<]+)<\/nobr>/gi
+                let nobrM = nobrRegex.exec( block )
+                const collectNobr = () => {
+                    if( !nobrM ) { return }
+                    nobrMatches.push( nobrM[1] )
+                    nobrM = nobrRegex.exec( block )
+                    collectNobr()
+                }
+                collectNobr()
+
+                const azValue = nobrMatches
+                    .find( ( v ) => /\d+\s*K\s*\d+/i.test( v ) ) || ''
+                const aktenzeichen = _stripHtml( azValue )
+                    .replace( /\(Detailansicht\)/i, '' ).trim()
+
+                const zvgIdMatch = block.match( /zvg_id=(\d+)/ )
+                const zvgId = zvgIdMatch ? zvgIdMatch[1] : ''
+
+                const amtsgericht = _extractField( block, 'Amtsgericht' )
+                const objektRaw = _extractField( block, 'Objekt/Lage' )
+                const objekt = objektRaw.replace( /<!--[^>]*-->/g, '' ).replace( /\s*:\s*/, ': ' ).trim()
+                const verkehrswert = _extractField( block, 'Verkehrswert' )
+                const termin = _extractField( block, 'Termin' )
+
+                if( !aktenzeichen || !objekt ) { return }
+
+                auctions.push( { aktenzeichen, zvgId, amtsgericht, objekt, verkehrswert, termin } )
+            } )
+
+        const countMatch = html.match( /Insgesamt\s+(\d+)/i )
+        const totalCount = countMatch ? parseInt( countMatch[1] ) : auctions.length
+
+        return { totalCount, auctions }
+    }
+
+    const _parseDetailHTML = ( html, landAbk, zvgId ) => {
+        const getField = ( label ) => {
+            const regex = new RegExp( label + '[^<]*<\\/(?:td|nobr|TD|NOBR)>(?:\\s*<\\/(?:td|nobr|TD|NOBR)>)*\\s*<td[^>]*>([\\s\\S]*?)<\\/td>', 'i' )
+            const match = html.match( regex )
+
+            if( !match ) { return null }
+            const raw = _stripHtml( match[1] )
+
+            return raw || null
+        }
+
+        const azMatch = html.match( /<b>(\d{4}[^<]{5,30})<\/b>\s*<\/td>/i )
+        const aktenzeichen = azMatch ? _stripHtml( azMatch[1] ) : null
+
+        const amtsgerichtMatch = html.match( /Amtsgericht:\s*([^<]+)/i )
+        const amtsgericht = amtsgerichtMatch ? _stripHtml( amtsgerichtMatch[1] ) : null
+
+        const attachments = []
+        const attachRegex = /href="([^"]*showAnhang[^"]*)"\s*\/?>([^<]*)/gi
+        let attM = attachRegex.exec( html )
+        const collectAttachments = () => {
+            if( !attM ) { return }
+            const href = attM[1].replace( /^\?/, 'index.php?' ).trim()
+            const attachUrl = 'https://www.zvg-portal.de/' + href
+            const name = _stripHtml( attM[2] )
+            attachments.push( { name, url: attachUrl } )
+            attM = attachRegex.exec( html )
+            collectAttachments()
+        }
+        collectAttachments()
+
+        const detail = {
+            zvgId,
+            landAbk,
+            aktenzeichen,
+            amtsgericht,
+            art: getField( 'Art der Versteigerung' ),
+            grundbuch: getField( 'Grundbuch' ),
+            objekt: getField( 'Objekt/Lage' ),
+            beschreibung: getField( 'Beschreibung' ),
+            verkehrswert: getField( 'Verkehrswert' ),
+            termin: getField( 'Termin' ),
+            ortDerVersteigerung: getField( 'Ort der Versteigerung' ),
+            attachments
+        }
+
+        return detail
+    }
+
     return {
         searchAuctions: {
             executeRequest: async ( { struct, payload } ) => {
@@ -90,7 +221,7 @@ export const handlers = ( { sharedLists, libraries } ) => {
                 const response = await fetch( 'https://www.zvg-portal.de/index.php?button=Suchen', {
                 method: 'POST',
                 headers: {
-                ...schema.handlers._fetchHeaders,
+                ..._fetchHeaders,
                 'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: formData.toString()
@@ -103,7 +234,7 @@ export const handlers = ( { sharedLists, libraries } ) => {
                 return { struct }}
 
                 const html = await response.text()
-                const { totalCount, auctions } = schema.handlers._parseSearchHTML( html )
+                const { totalCount, auctions } = _parseSearchHTML( html )
 
                 struct['data'] = {
                 source: 'zvg-portal.de',
@@ -122,8 +253,18 @@ export const handlers = ( { sharedLists, libraries } ) => {
         getAuctionDetail: {
             executeRequest: async ( { struct, payload } ) => {
                 try {
-                const response = await fetch( payload.url, {
-                headers: schema.handlers._fetchHeaders
+                const rawUrl = payload.url
+                const zvgIdMatch = rawUrl.match( /zvg_id=(\d+)/ )
+                const landAbkMatch = rawUrl.match( /land_abk=([a-z]{2})/ )
+                const zvgId = zvgIdMatch ? zvgIdMatch[1] : null
+                const landAbk = landAbkMatch ? landAbkMatch[1] : null
+                const detailUrl = `https://www.zvg-portal.de/index.php?button=showZvg&zvg_id=${zvgId}&land_abk=${landAbk}`
+
+                const response = await fetch( detailUrl, {
+                headers: {
+                ..._fetchHeaders,
+                'Referer': 'https://www.zvg-portal.de/index.php'
+                }
                 } )
 
                 if( !response.ok ) {
@@ -133,10 +274,7 @@ export const handlers = ( { sharedLists, libraries } ) => {
                 return { struct }}
 
                 const html = await response.text()
-                const url = new URL( payload.url )
-                const landAbk = url.searchParams.get( 'land_abk' )
-                const zvgId = url.searchParams.get( 'zvg_id' )
-                const detail = schema.handlers._parseDetailHTML( html, landAbk, zvgId )
+                const detail = _parseDetailHTML( html, landAbk, zvgId )
 
                 struct['data'] = {
                 source: 'zvg-portal.de',

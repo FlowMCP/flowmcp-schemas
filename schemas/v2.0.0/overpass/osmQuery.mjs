@@ -1,5 +1,7 @@
 // Migrated from v1.2.0 -> v2.0.0
 // Category: handlers-clean
+// Note: Overpass API has strict rate limits (2 concurrent slots per IP).
+// Shared executeRequest with retry/backoff handles 429 and 504 errors.
 
 export const main = {
     namespace: 'overpass',
@@ -90,19 +92,106 @@ export const main = {
 }
 
 
-export const handlers = ( { sharedLists, libraries } ) => ( {
-    findNearby: {
-        preRequest: async ( { struct, payload } ) => {
-            const { lat, lon, radius = 500, amenity } = payload
-            const query = `[out:json][timeout:25];node[amenity=${amenity}](around:${radius},${lat},${lon});out body;`
+export const handlers = ( { sharedLists, libraries } ) => {
+    const fetchWithRetry = async ( { struct } ) => {
+        const maxRetries = 3
+        const baseDelay = 2000
+        let lastError = null
 
-            const url = new URL( struct.url )
-            const params = new URLSearchParams()
-            params.set( 'data', query )
-            url.search = params.toString()
-            struct.url = url.toString()
+        const attempts = Array.from( { length: maxRetries }, ( _, i ) => i )
 
-            return { struct }
+        const tryFetch = async ( { attempt } ) => {
+            if( attempt > 0 ) {
+                const delay = baseDelay * Math.pow( 2, attempt - 1 )
+                await new Promise( ( resolve ) => setTimeout( resolve, delay ) )
+            }
+
+            const response = await fetch( struct.url, {
+                method: struct.method || 'GET',
+                headers: struct.headers || {}
+            } )
+
+            if( response.status === 429 || response.status === 504 ) {
+                const err = new Error( `Overpass API rate limited (HTTP ${response.status}), attempt ${attempt + 1}/${maxRetries}` )
+                err.retryable = true
+
+                throw err
+            }
+
+            if( !response.ok ) {
+                throw new Error( `HTTP ${response.status}: ${response.statusText}` )
+            }
+
+            const contentType = response.headers.get( 'content-type' ) || ''
+            const data = contentType.includes( 'json' )
+                ? await response.json()
+                : await response.text()
+
+            return data
+        }
+
+        let result = null
+        let succeeded = false
+
+        await attempts
+            .reduce( async ( previousAttempt, attempt ) => {
+                await previousAttempt
+                if( succeeded ) { return }
+
+                try {
+                    result = await tryFetch( { attempt } )
+                    succeeded = true
+                } catch( error ) {
+                    lastError = error
+                    if( !error.retryable ) { succeeded = false; throw error }
+                }
+            }, Promise.resolve() )
+
+        if( !succeeded ) {
+            throw lastError || new Error( 'All retry attempts failed' )
+        }
+
+        return result
+    }
+
+    return {
+        queryRaw: {
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const data = await fetchWithRetry( { struct } )
+                    struct.data = data
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Overpass query failed: ${error.message}` )
+                }
+
+                return { struct }
+            }
+        },
+        findNearby: {
+            preRequest: async ( { struct, payload } ) => {
+                const { lat, lon, radius = 500, amenity } = payload
+                const query = `[out:json][timeout:25];node[amenity=${amenity}](around:${radius},${lat},${lon});out body;`
+
+                const url = new URL( struct.url )
+                const params = new URLSearchParams()
+                params.set( 'data', query )
+                url.search = params.toString()
+                struct.url = url.toString()
+
+                return { struct }
+            },
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const data = await fetchWithRetry( { struct } )
+                    struct.data = data
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Overpass nearby query failed: ${error.message}` )
+                }
+
+                return { struct }
+            }
         }
     }
-} )
+}

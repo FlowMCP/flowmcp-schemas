@@ -38,6 +38,7 @@ export const main = {
 
 export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
+    const { Interface } = ethers
 
     const passportDecoderAbi = [
         'function getPassport(address userAddress) view returns (bytes32[])',

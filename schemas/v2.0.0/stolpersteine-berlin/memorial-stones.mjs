@@ -1,6 +1,8 @@
 // Migrated from v1.2.0 -> v2.0.0
 // Category: handlers-clean
 // Namespace: "stolpersteineBerl" -> "stolpersteineberl"
+// Note: The API serves a static JSON file — no server-side filtering.
+// All search/filter routes fetch the full dataset and filter client-side.
 
 export const main = {
     namespace: 'stolpersteineberl',
@@ -8,638 +10,316 @@ export const main = {
     description: 'Access information about Stolpersteine (memorial stones) in Berlin commemorating victims of Nazi persecution',
     version: '2.0.0',
     docs: ['https://www.stolpersteine-berlin.de/', 'https://www.stolpersteine-berlin.de/de/api'],
-    tags: ['memorial', 'history', 'berlin', 'cacheTtlDaily'],
+    tags: ['memorial', 'history', 'berlin'],
     root: 'https://www.stolpersteine-berlin.de',
     routes: {
         getAllStones: {
             method: 'GET',
             path: '/de/api/json/stolpersteine.json',
-            description: 'Get all Stolpersteine in Berlin via stolpersteineBerl. Supports limit, offset filters.',
+            description: 'Get all Stolpersteine in Berlin. Returns the complete dataset. Use limit/offset for pagination.',
             parameters: [
-                { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(1000)', 'default(100)', 'optional()'] } },
+                { position: { key: 'limit', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1)', 'max(10000)', 'default(100)', 'optional()'] } },
                 { position: { key: 'offset', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0)', 'default(0)', 'optional()'] } }
             ],
+            preload: {
+                enabled: true,
+                ttl: 2592000,
+                description: 'All Stolpersteine in Berlin (~6.8MB, rarely changes)'
+            },
             tests: [
                 { _description: 'First 50 Stolpersteine', limit: 50 }
-            ],
+            ]
         },
         searchStones: {
             method: 'GET',
             path: '/de/api/json/stolpersteine.json',
-            description: 'Search Stolpersteine by person name, address, or other criteria. Optional filters: q, name, address, birth_year, death_year, persecution_reason.',
+            description: 'Search Stolpersteine by person name or address. Filtering happens client-side on the full dataset.',
             parameters: [
                 { position: { key: 'q', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)', 'optional()'] } },
                 { position: { key: 'name', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(2)', 'optional()'] } },
-                { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)', 'optional()'] } },
-                { position: { key: 'birth_year', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1800)', 'max(1945)', 'optional()'] } },
-                { position: { key: 'death_year', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(1933)', 'max(1945)', 'optional()'] } },
-                { position: { key: 'persecution_reason', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Jude,politisch,Zeuge-Jehovas,Sinti-Roma,Homosexuell,Euthanasie,Widerstand)', options: ['optional()'] } }
+                { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)', 'optional()'] } }
             ],
+            preload: {
+                enabled: true,
+                ttl: 2592000,
+                description: 'Fetches full dataset, filters client-side'
+            },
             tests: [
                 { _description: 'Search by name', name: 'Cohen' }
-            ],
+            ]
         },
         getStonesByDistrict: {
             method: 'GET',
             path: '/de/api/json/stolpersteine.json',
-            description: 'Get Stolpersteine in specific Berlin districts via stolpersteineBerl. Supports ortsteil, sort_by filters.',
+            description: 'Get Stolpersteine in a specific Berlin district. Filtering happens client-side.',
             parameters: [
                 { position: { key: 'bezirk', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(Mitte,Friedrichshain-Kreuzberg,Pankow,Charlottenburg-Wilmersdorf,Spandau,Steglitz-Zehlendorf,Tempelhof-Schoeneberg,Neukoelln,Treptow-Koepenick,Marzahn-Hellersdorf,Lichtenberg,Reinickendorf)', options: [] } },
-                { position: { key: 'ortsteil', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } },
-                { position: { key: 'sort_by', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(name,address,installation_date,birth_year)', options: ['default(name)', 'optional()'] } }
+                { position: { key: 'ortsteil', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['optional()'] } }
             ],
+            preload: {
+                enabled: true,
+                ttl: 2592000,
+                description: 'Fetches full dataset, filters by district client-side'
+            },
             tests: [
                 { _description: 'All stones in Mitte', bezirk: 'Mitte' }
-            ],
-        },
-        getStonesByPerson: {
-            method: 'GET',
-            path: '/de/api/json/stolpersteine.json',
-            description: 'Get detailed information about specific victims commemorated by Stolpersteine. Optional filters: person_id, age_at_death, family_group, include_biography.',
-            parameters: [
-                { position: { key: 'person_id', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)', 'optional()'] } },
-                { position: { key: 'age_at_death', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(child,youth,adult,elderly)', options: ['optional()'] } },
-                { position: { key: 'family_group', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['optional()'] } },
-                { position: { key: 'include_biography', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'boolean()', options: ['default(true)', 'optional()'] } }
-            ],
-            tests: [
-                { _description: 'Person by ID', person_id: '12345' }
-            ],
+            ]
         },
         getStonesByLocation: {
             method: 'GET',
             path: '/de/api/json/stolpersteine.json',
-            description: 'Get Stolpersteine near a specific location or coordinates via stolpersteineBerl. Supports lat, lon, radius filters.',
+            description: 'Get Stolpersteine near coordinates. Filtering by distance happens client-side.',
             parameters: [
-                { position: { key: 'lat', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(52.3)', 'max(52.7)', 'optional()'] } },
-                { position: { key: 'lon', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(13.0)', 'max(13.8)', 'optional()'] } },
-                { position: { key: 'radius', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0.1)', 'max(5.0)', 'default(1.0)', 'optional()'] } },
-                { position: { key: 'street', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(3)', 'optional()'] } }
+                { position: { key: 'lat', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(52.3)', 'max(52.7)'] } },
+                { position: { key: 'lon', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(13.0)', 'max(13.8)'] } },
+                { position: { key: 'radius', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['min(0.1)', 'max(5.0)', 'default(1.0)', 'optional()'] } }
             ],
+            preload: {
+                enabled: true,
+                ttl: 2592000,
+                description: 'Fetches full dataset, filters by proximity client-side'
+            },
             tests: [
                 { _description: 'Stones near Alexanderplatz', lat: 52.52, lon: 13.405, radius: 0.5 }
-            ],
+            ]
         }
     }
 }
 
 
-export const handlers = ( { sharedLists, libraries } ) => ( {
-    getAllStones: {
-        executeRequest: async ( { struct, payload } ) => {
-            try {
-            // Check cache first
-            const now = Date.now()
-            const cache = schema.handlers._cache
+export const handlers = ( { sharedLists, libraries } ) => {
+    const _cache = { data: null, timestamp: null, ttl: 3600000 }
 
-            if( cache.data && cache.timestamp && (now - cache.timestamp) < cache.ttl ) {
-            // Use cached data
-            const data = cache.data
-            struct.data = {
-            source: "Stolpersteine Berlin (cached)",
-            stoneCount: data.length,
-            stolpersteine: data,
-            fromCache: true,
-            cachedAt: new Date(cache.timestamp).toISOString()
-            }
-            struct.status = true
-            return { struct }}
-
-            // Fetch fresh data
-            const response = await fetch(payload.url)
-            if( !response.ok ) {
-            struct.status = false
-            struct.messages.push( `HTTP ${response.status}: ${response.statusText}` )
-            return { struct }}
-
-            const data = await response.json()
-
-            // Cache the raw data
-            cache.data = data
-            cache.timestamp = now
-
-            if( Array.isArray( data ) ) {
-            const stolpersteine = data.map( stone => ({
-            id: stone.id || stone.nummer,
-            person: {
-            firstName: stone.first_name || stone.vorname,
-            lastName: stone.last_name || stone.nachname,
-            fullName: stone.full_name || stone.vollername,
-            birthDate: stone.birth_date || stone.geburtsdatum,
-            birthPlace: stone.birth_place || stone.geburtsort,
-            deathDate: stone.death_date || stone.todesdatum,
-            deathPlace: stone.death_place || stone.todesort,
-            ageAtDeath: stone.age_at_death || stone.alter_beim_tod
-            },
-            persecution: {
-            reason: stone.persecution_reason || stone.verfolgungsgrund,
-            deportationDate: stone.deportation_date || stone.deportation,
-            deportationDestination: stone.deportation_destination || stone.deportationsziel,
-            captureDate: stone.capture_date || stone.verhaftung,
-            escapeAttempt: stone.escape_attempt || stone.fluchtversuch
-            },
-            location: {
-            address: stone.address || stone.adresse,
-            district: stone.district || stone.bezirk,
-            neighborhood: stone.neighborhood || stone.ortsteil,
-            coordinates: {
-            lat: stone.lat || stone.latitude,
-            lon: stone.lon || stone.longitude
-            },
-            lastKnownAddress: stone.last_known_address || stone.letzte_adresse
-            },
-            memorial: {
-            installationDate: stone.installation_date || stone.verlegung,
-            artist: stone.artist || stone.kuenstler || "Gunter Demnig",
-            condition: stone.condition || stone.zustand,
-            verified: stone.verified || stone.verifiziert,
-            sponsor: stone.sponsor || stone.pate
-            },
-            biography: {
-            profession: stone.profession || stone.beruf,
-            family: stone.family || stone.familie || [],
-            education: stone.education || stone.bildung,
-            resistance: stone.resistance || stone.widerstand,
-            additionalInfo: stone.additional_info || stone.zusatzinfo
-            },
-            sources: stone.sources || stone.quellen || [],
-            lastUpdated: stone.last_updated || stone.aktualisiert
-            }) )
-
-            struct.data = {
-            source: "Stolpersteine Berlin",
-            stoneCount: stolpersteine.length,
-            stolpersteine: stolpersteine
-            }
-            } else {
-            struct.data = data
-            }
-
-            } catch( error ) {
-            struct.status = false
-            struct.messages.push( `Error parsing Stolpersteine JSON: ${error.message}` )
-            }
-
-            return { struct }
+    const fetchAllStones = async () => {
+        const now = Date.now()
+        if( _cache.data && _cache.timestamp && ( now - _cache.timestamp ) < _cache.ttl ) {
+            return { stones: _cache.data, fromCache: true }
         }
-    },
-    searchStones: {
-        preRequest: async ( { struct, payload } ) => {
-            const { q, name, address, birth_year, death_year, persecution_reason } = payload
 
-            const searchParams = new URLSearchParams()
-
-            if( q ) searchParams.append( 'search', q )
-            if( name ) searchParams.append( 'name', name )
-            if( address ) searchParams.append( 'address', address )
-            if( birth_year ) searchParams.append( 'birth_year', birth_year.toString() )
-            if( death_year ) searchParams.append( 'death_year', death_year.toString() )
-            if( persecution_reason ) searchParams.append( 'persecution', persecution_reason )
-
-            if( searchParams.toString() ) {
-            struct.url += struct.url.includes('?') ? `&${searchParams.toString()}` : `?${searchParams.toString()}`
-            }
-
-            return { struct }
-        },
-        executeRequest: async ( { struct, payload } ) => {
-            try {
-            // Check cache first
-            const now = Date.now()
-            const cache = schema.handlers._cache
-
-            if( cache.data && cache.timestamp && (now - cache.timestamp) < cache.ttl ) {
-            // Use cached data
-            const data = cache.data
-            struct.data = {
-            source: "Stolpersteine Berlin (cached)",
-            stoneCount: data.length,
-            stolpersteine: data,
-            fromCache: true,
-            cachedAt: new Date(cache.timestamp).toISOString()
-            }
-            struct.status = true
-            return { struct }}
-
-            // Fetch fresh data
-            const response = await fetch(payload.url)
-            if( !response.ok ) {
-            struct.status = false
-            struct.messages.push( `HTTP ${response.status}: ${response.statusText}` )
-            return { struct }}
-
-            const data = await response.json()
-
-            // Cache the raw data
-            cache.data = data
-            cache.timestamp = now
-
-            if( Array.isArray( data ) ) {
-            const stolpersteine = data.map( stone => ({
-            id: stone.id || stone.nummer,
-            person: {
-            firstName: stone.first_name || stone.vorname,
-            lastName: stone.last_name || stone.nachname,
-            fullName: stone.full_name || stone.vollername,
-            birthDate: stone.birth_date || stone.geburtsdatum,
-            birthPlace: stone.birth_place || stone.geburtsort,
-            deathDate: stone.death_date || stone.todesdatum,
-            deathPlace: stone.death_place || stone.todesort,
-            ageAtDeath: stone.age_at_death || stone.alter_beim_tod
-            },
-            persecution: {
-            reason: stone.persecution_reason || stone.verfolgungsgrund,
-            deportationDate: stone.deportation_date || stone.deportation,
-            deportationDestination: stone.deportation_destination || stone.deportationsziel,
-            captureDate: stone.capture_date || stone.verhaftung,
-            escapeAttempt: stone.escape_attempt || stone.fluchtversuch
-            },
-            location: {
-            address: stone.address || stone.adresse,
-            district: stone.district || stone.bezirk,
-            neighborhood: stone.neighborhood || stone.ortsteil,
-            coordinates: {
-            lat: stone.lat || stone.latitude,
-            lon: stone.lon || stone.longitude
-            },
-            lastKnownAddress: stone.last_known_address || stone.letzte_adresse
-            },
-            memorial: {
-            installationDate: stone.installation_date || stone.verlegung,
-            artist: stone.artist || stone.kuenstler || "Gunter Demnig",
-            condition: stone.condition || stone.zustand,
-            verified: stone.verified || stone.verifiziert,
-            sponsor: stone.sponsor || stone.pate
-            },
-            biography: {
-            profession: stone.profession || stone.beruf,
-            family: stone.family || stone.familie || [],
-            education: stone.education || stone.bildung,
-            resistance: stone.resistance || stone.widerstand,
-            additionalInfo: stone.additional_info || stone.zusatzinfo
-            },
-            sources: stone.sources || stone.quellen || [],
-            lastUpdated: stone.last_updated || stone.aktualisiert
-            }) )
-
-            struct.data = {
-            source: "Stolpersteine Berlin",
-            stoneCount: stolpersteine.length,
-            stolpersteine: stolpersteine
-            }
-            } else {
-            struct.data = data
-            }
-
-            } catch( error ) {
-            struct.status = false
-            struct.messages.push( `Error parsing Stolpersteine JSON: ${error.message}` )
-            }
-
-            return { struct }
+        const response = await fetch( 'https://www.stolpersteine-berlin.de/de/api/json/stolpersteine.json' )
+        if( !response.ok ) {
+            throw new Error( `HTTP ${response.status}: ${response.statusText}` )
         }
-    },
-    getStonesByDistrict: {
-        preRequest: async ( { struct, payload } ) => {
-            const { bezirk, ortsteil, sort_by } = payload
 
-            const filterParams = new URLSearchParams()
+        const data = await response.json()
+        _cache.data = data
+        _cache.timestamp = now
 
-            if( bezirk ) filterParams.append( 'district', bezirk )
-            if( ortsteil ) filterParams.append( 'neighborhood', ortsteil )
-            if( sort_by ) filterParams.append( 'sort', sort_by )
+        return { stones: data, fromCache: false }
+    }
 
-            if( filterParams.toString() ) {
-            struct.url += struct.url.includes('?') ? `&${filterParams.toString()}` : `?${filterParams.toString()}`
-            }
-
-            return { struct }
-        },
-        executeRequest: async ( { struct, payload } ) => {
-            try {
-            // Check cache first
-            const now = Date.now()
-            const cache = schema.handlers._cache
-
-            if( cache.data && cache.timestamp && (now - cache.timestamp) < cache.ttl ) {
-            // Use cached data
-            const data = cache.data
-            struct.data = {
-            source: "Stolpersteine Berlin (cached)",
-            stoneCount: data.length,
-            stolpersteine: data,
-            fromCache: true,
-            cachedAt: new Date(cache.timestamp).toISOString()
-            }
-            struct.status = true
-            return { struct }}
-
-            // Fetch fresh data
-            const response = await fetch(payload.url)
-            if( !response.ok ) {
-            struct.status = false
-            struct.messages.push( `HTTP ${response.status}: ${response.statusText}` )
-            return { struct }}
-
-            const data = await response.json()
-
-            // Cache the raw data
-            cache.data = data
-            cache.timestamp = now
-
-            if( Array.isArray( data ) ) {
-            const stolpersteine = data.map( stone => ({
+    const normalizeStone = ( stone ) => {
+        const normalized = {
             id: stone.id || stone.nummer,
-            person: {
-            firstName: stone.first_name || stone.vorname,
-            lastName: stone.last_name || stone.nachname,
-            fullName: stone.full_name || stone.vollername,
-            birthDate: stone.birth_date || stone.geburtsdatum,
-            birthPlace: stone.birth_place || stone.geburtsort,
-            deathDate: stone.death_date || stone.todesdatum,
-            deathPlace: stone.death_place || stone.todesort,
-            ageAtDeath: stone.age_at_death || stone.alter_beim_tod
-            },
-            persecution: {
-            reason: stone.persecution_reason || stone.verfolgungsgrund,
-            deportationDate: stone.deportation_date || stone.deportation,
-            deportationDestination: stone.deportation_destination || stone.deportationsziel,
-            captureDate: stone.capture_date || stone.verhaftung,
-            escapeAttempt: stone.escape_attempt || stone.fluchtversuch
-            },
-            location: {
-            address: stone.address || stone.adresse,
-            district: stone.district || stone.bezirk,
-            neighborhood: stone.neighborhood || stone.ortsteil,
-            coordinates: {
-            lat: stone.lat || stone.latitude,
-            lon: stone.lon || stone.longitude
-            },
-            lastKnownAddress: stone.last_known_address || stone.letzte_adresse
-            },
-            memorial: {
-            installationDate: stone.installation_date || stone.verlegung,
-            artist: stone.artist || stone.kuenstler || "Gunter Demnig",
-            condition: stone.condition || stone.zustand,
-            verified: stone.verified || stone.verifiziert,
-            sponsor: stone.sponsor || stone.pate
-            },
-            biography: {
-            profession: stone.profession || stone.beruf,
-            family: stone.family || stone.familie || [],
-            education: stone.education || stone.bildung,
-            resistance: stone.resistance || stone.widerstand,
-            additionalInfo: stone.additional_info || stone.zusatzinfo
-            },
-            sources: stone.sources || stone.quellen || [],
-            lastUpdated: stone.last_updated || stone.aktualisiert
-            }) )
-
-            struct.data = {
-            source: "Stolpersteine Berlin",
-            stoneCount: stolpersteine.length,
-            stolpersteine: stolpersteine
-            }
-            } else {
-            struct.data = data
-            }
-
-            } catch( error ) {
-            struct.status = false
-            struct.messages.push( `Error parsing Stolpersteine JSON: ${error.message}` )
-            }
-
-            return { struct }
+            firstName: stone.first_name || stone.vorname || '',
+            lastName: stone.last_name || stone.nachname || '',
+            fullName: stone.full_name || stone.vollername || '',
+            birthDate: stone.birth_date || stone.geburtsdatum || '',
+            deathDate: stone.death_date || stone.todesdatum || '',
+            persecutionReason: stone.persecution_reason || stone.verfolgungsgrund || '',
+            address: stone.address || stone.adresse || '',
+            district: stone.district || stone.bezirk || '',
+            neighborhood: stone.neighborhood || stone.ortsteil || '',
+            lat: parseFloat( stone.lat || stone.latitude ) || null,
+            lon: parseFloat( stone.lon || stone.longitude ) || null,
+            installationDate: stone.installation_date || stone.verlegung || ''
         }
-    },
-    getStonesByPerson: {
-        preRequest: async ( { struct, payload } ) => {
-            const { person_id, age_at_death, family_group, include_biography } = payload
 
-            const personParams = new URLSearchParams()
+        return normalized
+    }
 
-            if( person_id ) personParams.append( 'person_id', person_id )
-            if( age_at_death ) personParams.append( 'age_category', age_at_death )
-            if( family_group !== undefined ) personParams.append( 'family_group', family_group.toString() )
-            if( include_biography !== undefined ) personParams.append( 'biography', include_biography.toString() )
+    const haversineKm = ( { lat1, lon1, lat2, lon2 } ) => {
+        const toRad = ( deg ) => deg * Math.PI / 180
+        const R = 6371
+        const dLat = toRad( lat2 - lat1 )
+        const dLon = toRad( lon2 - lon1 )
+        const a = Math.sin( dLat / 2 ) * Math.sin( dLat / 2 ) +
+            Math.cos( toRad( lat1 ) ) * Math.cos( toRad( lat2 ) ) *
+            Math.sin( dLon / 2 ) * Math.sin( dLon / 2 )
+        const c = 2 * Math.atan2( Math.sqrt( a ), Math.sqrt( 1 - a ) )
+        const distance = R * c
 
-            if( personParams.toString() ) {
-            struct.url += struct.url.includes('?') ? `&${personParams.toString()}` : `?${personParams.toString()}`
+        return distance
+    }
+
+    return {
+        getAllStones: {
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const { stones, fromCache } = await fetchAllStones()
+
+                    if( !Array.isArray( stones ) ) {
+                        struct.data = stones
+                        return { struct }
+                    }
+
+                    const limit = payload.limit || 100
+                    const offset = payload.offset || 0
+                    const sliced = stones.slice( offset, offset + limit )
+                    const normalized = sliced
+                        .map( ( stone ) => normalizeStone( stone ) )
+
+                    struct.data = {
+                        source: 'Stolpersteine Berlin',
+                        totalCount: stones.length,
+                        returnedCount: normalized.length,
+                        offset,
+                        limit,
+                        fromCache,
+                        stolpersteine: normalized
+                    }
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Error fetching Stolpersteine: ${error.message}` )
+                }
+
+                return { struct }
             }
-
-            return { struct }
         },
-        executeRequest: async ( { struct, payload } ) => {
-            try {
-            // Check cache first
-            const now = Date.now()
-            const cache = schema.handlers._cache
+        searchStones: {
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const { stones, fromCache } = await fetchAllStones()
 
-            if( cache.data && cache.timestamp && (now - cache.timestamp) < cache.ttl ) {
-            // Use cached data
-            const data = cache.data
-            struct.data = {
-            source: "Stolpersteine Berlin (cached)",
-            stoneCount: data.length,
-            stolpersteine: data,
-            fromCache: true,
-            cachedAt: new Date(cache.timestamp).toISOString()
+                    if( !Array.isArray( stones ) ) {
+                        struct.data = stones
+                        return { struct }
+                    }
+
+                    const q = ( payload.q || '' ).toLowerCase()
+                    const name = ( payload.name || '' ).toLowerCase()
+                    const address = ( payload.address || '' ).toLowerCase()
+
+                    const filtered = stones
+                        .filter( ( stone ) => {
+                            const stoneStr = JSON.stringify( stone ).toLowerCase()
+                            const fullName = ( stone.full_name || stone.vollername || stone.first_name || stone.vorname || '' ).toLowerCase()
+                            const lastName = ( stone.last_name || stone.nachname || '' ).toLowerCase()
+                            const stoneAddr = ( stone.address || stone.adresse || '' ).toLowerCase()
+
+                            if( q && !stoneStr.includes( q ) ) { return false }
+                            if( name && !fullName.includes( name ) && !lastName.includes( name ) ) { return false }
+                            if( address && !stoneAddr.includes( address ) ) { return false }
+
+                            return true
+                        } )
+                        .map( ( stone ) => normalizeStone( stone ) )
+
+                    struct.data = {
+                        source: 'Stolpersteine Berlin',
+                        query: { q: q || null, name: name || null, address: address || null },
+                        totalCount: stones.length,
+                        matchCount: filtered.length,
+                        fromCache,
+                        stolpersteine: filtered
+                    }
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Error searching Stolpersteine: ${error.message}` )
+                }
+
+                return { struct }
             }
-            struct.status = true
-            return { struct }}
-
-            // Fetch fresh data
-            const response = await fetch(payload.url)
-            if( !response.ok ) {
-            struct.status = false
-            struct.messages.push( `HTTP ${response.status}: ${response.statusText}` )
-            return { struct }}
-
-            const data = await response.json()
-
-            // Cache the raw data
-            cache.data = data
-            cache.timestamp = now
-
-            if( Array.isArray( data ) ) {
-            const stolpersteine = data.map( stone => ({
-            id: stone.id || stone.nummer,
-            person: {
-            firstName: stone.first_name || stone.vorname,
-            lastName: stone.last_name || stone.nachname,
-            fullName: stone.full_name || stone.vollername,
-            birthDate: stone.birth_date || stone.geburtsdatum,
-            birthPlace: stone.birth_place || stone.geburtsort,
-            deathDate: stone.death_date || stone.todesdatum,
-            deathPlace: stone.death_place || stone.todesort,
-            ageAtDeath: stone.age_at_death || stone.alter_beim_tod
-            },
-            persecution: {
-            reason: stone.persecution_reason || stone.verfolgungsgrund,
-            deportationDate: stone.deportation_date || stone.deportation,
-            deportationDestination: stone.deportation_destination || stone.deportationsziel,
-            captureDate: stone.capture_date || stone.verhaftung,
-            escapeAttempt: stone.escape_attempt || stone.fluchtversuch
-            },
-            location: {
-            address: stone.address || stone.adresse,
-            district: stone.district || stone.bezirk,
-            neighborhood: stone.neighborhood || stone.ortsteil,
-            coordinates: {
-            lat: stone.lat || stone.latitude,
-            lon: stone.lon || stone.longitude
-            },
-            lastKnownAddress: stone.last_known_address || stone.letzte_adresse
-            },
-            memorial: {
-            installationDate: stone.installation_date || stone.verlegung,
-            artist: stone.artist || stone.kuenstler || "Gunter Demnig",
-            condition: stone.condition || stone.zustand,
-            verified: stone.verified || stone.verifiziert,
-            sponsor: stone.sponsor || stone.pate
-            },
-            biography: {
-            profession: stone.profession || stone.beruf,
-            family: stone.family || stone.familie || [],
-            education: stone.education || stone.bildung,
-            resistance: stone.resistance || stone.widerstand,
-            additionalInfo: stone.additional_info || stone.zusatzinfo
-            },
-            sources: stone.sources || stone.quellen || [],
-            lastUpdated: stone.last_updated || stone.aktualisiert
-            }) )
-
-            struct.data = {
-            source: "Stolpersteine Berlin",
-            stoneCount: stolpersteine.length,
-            stolpersteine: stolpersteine
-            }
-            } else {
-            struct.data = data
-            }
-
-            } catch( error ) {
-            struct.status = false
-            struct.messages.push( `Error parsing Stolpersteine JSON: ${error.message}` )
-            }
-
-            return { struct }
-        }
-    },
-    getStonesByLocation: {
-        preRequest: async ( { struct, payload } ) => {
-            const { lat, lon, radius = 1.0, street } = payload
-
-            const locationParams = new URLSearchParams()
-
-            if( lat && lon ) {
-            locationParams.append( 'lat', lat.toString() )
-            locationParams.append( 'lon', lon.toString() )
-            locationParams.append( 'radius', radius.toString() )
-            }
-            if( street ) locationParams.append( 'street', street )
-
-            if( locationParams.toString() ) {
-            struct.url += struct.url.includes('?') ? `&${locationParams.toString()}` : `?${locationParams.toString()}`
-            }
-
-            return { struct }
         },
-        executeRequest: async ( { struct, payload } ) => {
-            try {
-            // Check cache first
-            const now = Date.now()
-            const cache = schema.handlers._cache
+        getStonesByDistrict: {
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const { stones, fromCache } = await fetchAllStones()
 
-            if( cache.data && cache.timestamp && (now - cache.timestamp) < cache.ttl ) {
-            // Use cached data
-            const data = cache.data
-            struct.data = {
-            source: "Stolpersteine Berlin (cached)",
-            stoneCount: data.length,
-            stolpersteine: data,
-            fromCache: true,
-            cachedAt: new Date(cache.timestamp).toISOString()
+                    if( !Array.isArray( stones ) ) {
+                        struct.data = stones
+                        return { struct }
+                    }
+
+                    const bezirk = ( payload.bezirk || '' ).toLowerCase()
+                    const ortsteil = ( payload.ortsteil || '' ).toLowerCase()
+
+                    const filtered = stones
+                        .filter( ( stone ) => {
+                            const stoneDistrict = ( stone.district || stone.bezirk || '' ).toLowerCase()
+                            const stoneNeighborhood = ( stone.neighborhood || stone.ortsteil || '' ).toLowerCase()
+
+                            if( bezirk && !stoneDistrict.includes( bezirk ) ) { return false }
+                            if( ortsteil && !stoneNeighborhood.includes( ortsteil ) ) { return false }
+
+                            return true
+                        } )
+                        .map( ( stone ) => normalizeStone( stone ) )
+
+                    struct.data = {
+                        source: 'Stolpersteine Berlin',
+                        filter: { bezirk: payload.bezirk, ortsteil: payload.ortsteil || null },
+                        totalCount: stones.length,
+                        matchCount: filtered.length,
+                        fromCache,
+                        stolpersteine: filtered
+                    }
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Error filtering Stolpersteine by district: ${error.message}` )
+                }
+
+                return { struct }
             }
-            struct.status = true
-            return { struct }}
+        },
+        getStonesByLocation: {
+            executeRequest: async ( { struct, payload } ) => {
+                try {
+                    const { stones, fromCache } = await fetchAllStones()
 
-            // Fetch fresh data
-            const response = await fetch(payload.url)
-            if( !response.ok ) {
-            struct.status = false
-            struct.messages.push( `HTTP ${response.status}: ${response.statusText}` )
-            return { struct }}
+                    if( !Array.isArray( stones ) ) {
+                        struct.data = stones
+                        return { struct }
+                    }
 
-            const data = await response.json()
+                    const targetLat = payload.lat
+                    const targetLon = payload.lon
+                    const radiusKm = payload.radius || 1.0
 
-            // Cache the raw data
-            cache.data = data
-            cache.timestamp = now
+                    const filtered = stones
+                        .filter( ( stone ) => {
+                            const stoneLat = parseFloat( stone.lat || stone.latitude )
+                            const stoneLon = parseFloat( stone.lon || stone.longitude )
 
-            if( Array.isArray( data ) ) {
-            const stolpersteine = data.map( stone => ({
-            id: stone.id || stone.nummer,
-            person: {
-            firstName: stone.first_name || stone.vorname,
-            lastName: stone.last_name || stone.nachname,
-            fullName: stone.full_name || stone.vollername,
-            birthDate: stone.birth_date || stone.geburtsdatum,
-            birthPlace: stone.birth_place || stone.geburtsort,
-            deathDate: stone.death_date || stone.todesdatum,
-            deathPlace: stone.death_place || stone.todesort,
-            ageAtDeath: stone.age_at_death || stone.alter_beim_tod
-            },
-            persecution: {
-            reason: stone.persecution_reason || stone.verfolgungsgrund,
-            deportationDate: stone.deportation_date || stone.deportation,
-            deportationDestination: stone.deportation_destination || stone.deportationsziel,
-            captureDate: stone.capture_date || stone.verhaftung,
-            escapeAttempt: stone.escape_attempt || stone.fluchtversuch
-            },
-            location: {
-            address: stone.address || stone.adresse,
-            district: stone.district || stone.bezirk,
-            neighborhood: stone.neighborhood || stone.ortsteil,
-            coordinates: {
-            lat: stone.lat || stone.latitude,
-            lon: stone.lon || stone.longitude
-            },
-            lastKnownAddress: stone.last_known_address || stone.letzte_adresse
-            },
-            memorial: {
-            installationDate: stone.installation_date || stone.verlegung,
-            artist: stone.artist || stone.kuenstler || "Gunter Demnig",
-            condition: stone.condition || stone.zustand,
-            verified: stone.verified || stone.verifiziert,
-            sponsor: stone.sponsor || stone.pate
-            },
-            biography: {
-            profession: stone.profession || stone.beruf,
-            family: stone.family || stone.familie || [],
-            education: stone.education || stone.bildung,
-            resistance: stone.resistance || stone.widerstand,
-            additionalInfo: stone.additional_info || stone.zusatzinfo
-            },
-            sources: stone.sources || stone.quellen || [],
-            lastUpdated: stone.last_updated || stone.aktualisiert
-            }) )
+                            if( isNaN( stoneLat ) || isNaN( stoneLon ) ) { return false }
 
-            struct.data = {
-            source: "Stolpersteine Berlin",
-            stoneCount: stolpersteine.length,
-            stolpersteine: stolpersteine
+                            const dist = haversineKm( {
+                                lat1: targetLat,
+                                lon1: targetLon,
+                                lat2: stoneLat,
+                                lon2: stoneLon
+                            } )
+
+                            return dist <= radiusKm
+                        } )
+                        .map( ( stone ) => {
+                            const normalized = normalizeStone( stone )
+                            normalized.distanceKm = haversineKm( {
+                                lat1: targetLat,
+                                lon1: targetLon,
+                                lat2: normalized.lat,
+                                lon2: normalized.lon
+                            } )
+
+                            return normalized
+                        } )
+                        .sort( ( a, b ) => a.distanceKm - b.distanceKm )
+
+                    struct.data = {
+                        source: 'Stolpersteine Berlin',
+                        filter: { lat: targetLat, lon: targetLon, radiusKm },
+                        totalCount: stones.length,
+                        matchCount: filtered.length,
+                        fromCache,
+                        stolpersteine: filtered
+                    }
+                } catch( error ) {
+                    struct.status = false
+                    struct.messages.push( `Error filtering Stolpersteine by location: ${error.message}` )
+                }
+
+                return { struct }
             }
-            } else {
-            struct.data = data
-            }
-
-            } catch( error ) {
-            struct.status = false
-            struct.messages.push( `Error parsing Stolpersteine JSON: ${error.message}` )
-            }
-
-            return { struct }
         }
     }
-} )
+}

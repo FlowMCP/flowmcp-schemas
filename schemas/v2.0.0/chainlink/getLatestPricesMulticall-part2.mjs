@@ -74,6 +74,7 @@ export const main = {
 
 export const handlers = ( { sharedLists, libraries } ) => {
     const ethers = libraries['ethers']
+    const { Interface } = ethers
     const EVM_CHAINS = sharedLists['evmChains']
 
     const multicall3Abi = [{
