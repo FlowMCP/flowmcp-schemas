@@ -94,6 +94,23 @@ export const main = {
             tests: [
                 { _description: 'Fetch all token metadata' }
             ],
+        },
+        getSwapQuote: {
+            method: 'GET',
+            path: '/swap/v1/quote',
+            description: 'Get an optimal swap quote across all Solana DEXes. Returns output amount, price impact, slippage, fee breakdown and full route plan with AMM details.',
+            parameters: [
+                { position: { key: 'inputMint', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'outputMint', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'amount', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(1)'] } },
+                { position: { key: 'slippageBps', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'number()', options: ['optional()', 'default(50)'] } },
+                { position: { key: 'swapMode', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'enum(ExactIn,ExactOut)', options: ['optional()', 'default(ExactIn)'] } }
+            ],
+            output: {mimeType:'application/json',schema:{type:'object',properties:{inputMint:{type:'string'},inAmount:{type:'string'},outputMint:{type:'string'},outAmount:{type:'string'},otherAmountThreshold:{type:'string'},swapMode:{type:'string'},slippageBps:{type:'number'},priceImpactPct:{type:'string'},routePlan:{type:'array',items:{type:'object',properties:{swapInfo:{type:'object',properties:{ammKey:{type:'string'},label:{type:'string'},inputMint:{type:'string'},outputMint:{type:'string'},inAmount:{type:'string'},outAmount:{type:'string'}}},percent:{type:'number'}}}},swapUsdValue:{type:'string'}}}},
+            tests: [
+                { _description: 'Quote 1 SOL to USDC', inputMint: 'So11111111111111111111111111111111111111112', outputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', amount: '1000000000', slippageBps: 50 },
+                { _description: 'Quote 100 USDC to SOL', inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'So11111111111111111111111111111111111111112', amount: '100000000', slippageBps: 50 }
+            ],
         }
     }
 }
@@ -167,6 +184,17 @@ export const handlers = ( { sharedLists, libraries } ) => ( {
         }
     },
     getAllTokens: {
+        postRequest: async ( { response, struct, payload } ) => {
+            try {
+            // response = response?.data
+            } catch (err) {
+            struct.status = false;
+            struct.messages.push( 'Error', err );
+            }
+            return { response }
+        }
+    },
+    getSwapQuote: {
         postRequest: async ( { response, struct, payload } ) => {
             try {
             // response = response?.data
