@@ -17,7 +17,7 @@ View the documentation at: https://flowmcp.github.io/flowmcp-schemas/
 
 ## 🔧 Generation
 
-The documentation is automatically generated from the schemas in `/schemas/v1.2.0/`.
+The documentation is automatically generated from the schemas in `/schemas/v2.0.0/`.
 
 To regenerate the documentation:
 ```bash
@@ -25,7 +25,7 @@ npm run docs:generate
 ```
 
 This will:
-1. Scan all schemas in the v1.2.0 directory
+1. Scan all schemas in the v2.0.0 directory
 2. Extract metadata and route information
 3. Generate `schemas-data.json` with all data
 4. Create `index.html` with embedded data and visualization

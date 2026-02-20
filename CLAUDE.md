@@ -92,10 +92,10 @@ npm run test:coverage:src
    - Adds metadata to schemas
    - Key methods: `loadFromFolder()`, private helper methods for processing
 
-2. **Schema Structure** (`schemas/v1.2.0/`): Organized API schemas by provider
+2. **Schema Structure** (`schemas/v2.0.0/`): Organized API schemas by provider
    - Each provider has its own folder
-   - Schemas define API endpoints, parameters, and tests
-   - Follow FlowMCP schema format with namespace, routes, and modifiers
+   - Schemas define API endpoints with `export const main` (v2 format)
+   - Optional `export const handlers` for pre/post/execute request hooks
 
 3. **Test Utilities** (`tests/`):
    - `test-by-namespace.mjs`: Tests schemas filtered by namespace
@@ -103,17 +103,18 @@ npm run test:coverage:src
    - `helpers/Print.mjs`: Logging utilities
    - `helpers/Overview.mjs`: Schema overview utilities
 
-### Schema Format
+### Schema Format (v2.0.0)
 
-Each schema file exports an object with:
+Each schema file exports `main` (required) and optionally `handlers`:
 - `namespace`: Unique identifier for the API provider
 - `name`: Schema name
 - `description`: Purpose description
-- `flowMCP`: Version compatibility
-- `root`: Base API URL (may include placeholders)
-- `requiredServerParams`: Required environment variables (e.g., API keys)
-- `routes`: Object defining available endpoints with parameters and tests
-- `modifiers`: Processing hooks for request/response handling
+- `version`: Schema version (`'2.0.0'`)
+- `docs`: Array of documentation URLs
+- `tags`: Semantic tags for categorization
+- `root`: Base API URL (may include `{{PLACEHOLDER}}`)
+- `requiredServerParams`: Environment variables needed (e.g., API keys)
+- `routes`: Object defining endpoints with `method`, `path`, `parameters`
 
 ### Important Patterns
 
@@ -126,8 +127,8 @@ Each schema file exports an object with:
    - `outputType`: Control output format ('onlyPath', 'onlySchema', or full)
 
 3. **File Organization**:
-   - Current schemas: `schemas/v1.2.0/`
-   - Legacy/old schemas: `old/` and `schemas/v1.1.1/`
+   - Current schemas: `schemas/v2.0.0/`
+   - Legacy schemas: `schemas/v1.2.0/` and `schemas/v1.1.1/`
    - Test files: `tests/`
    - Source code: `src/`
 
@@ -139,95 +140,82 @@ Each schema file exports an object with:
 4. **Error Handling**: Check for missing required params and validate schema structure
 5. **File System Operations**: Use Node.js built-in `fs` and `path` modules for file operations
 
-## Schema Creation (FlowMCP v1.2.2 Spec)
+## Schema Creation (FlowMCP v2.0.0 Spec)
 
-### Top-Level Structure (all 11 fields required)
+### Top-Level Structure
 
 ```javascript
-export const schema = {
-    namespace: "providerName",           // letters only, /^[a-zA-Z]+$/
-    name: "Provider API",                // human-readable name
-    description: "What this API does",   // brief explanation
-    docs: ["https://provider.com/docs"], // array of documentation URLs
-    tags: ["crypto", "defi"],            // semantic tags, NO hardcoded route refs
-    flowMCP: "1.2.0",                    // version string "x.x.x"
-    root: "https://api.provider.com",    // base URL, {{PLACEHOLDER}} allowed
-    requiredServerParams: ["API_KEY"],   // all placeholders except {{USER_PARAM}}
-    headers: {                           // request headers
-        "Authorization": "Bearer {{API_KEY}}"
+export const main = {
+    namespace: 'providerName',             // letters only, /^[a-zA-Z]+$/
+    name: 'Provider API',                  // human-readable name
+    description: 'What this API does',     // brief explanation
+    version: '2.0.0',                      // schema version
+    docs: [ 'https://provider.com/docs' ], // array of documentation URLs
+    tags: [ 'crypto', 'defi' ],            // semantic tags
+    root: 'https://api.provider.com',      // base URL, {{PLACEHOLDER}} allowed
+    requiredServerParams: [ 'API_KEY' ],   // env vars for {{PLACEHOLDER}} in headers
+    headers: {                             // request headers (optional)
+        'Authorization': 'Bearer {{API_KEY}}'
     },
-    routes: { /* ... */ },               // route definitions
-    handlers: { /* ... */ }              // handler functions
+    routes: { /* ... */ }
 }
+
+// Optional: handler factory for pre/post/execute hooks
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    getResource: {
+        postRequest: async ( { response, struct, payload } ) => {
+            return { response: response['result'] }
+        }
+    }
+} )
 ```
 
-### Route Structure (all 6 keys required per route)
+### Route Structure
 
 ```javascript
 routes: {
     getResource: {
-        requestMethod: "GET",                    // GET, POST, PUT, DELETE
-        description: "What this route does",     // brief explanation
-        route: "/resource/:id",                  // path, :param for inserts
-        parameters: [ /* ... */ ],               // array of parameter objects
-        tests: [ /* ... */ ],                    // array of test cases
-        modifiers: [ /* ... */ ]                 // array or empty []
+        method: 'GET',                              // GET, POST, PUT, DELETE
+        path: '/resource/:id',                      // path with :param placeholders
+        description: 'What this route does',        // brief explanation
+        parameters: {
+            id: { type: 'string', required: true, description: 'Resource ID' },
+            limit: { type: 'number', required: false, default: 10, description: 'Max results' }
+        }
     }
 }
 ```
 
-### Parameter Format (SINGLE LINE! Strict Convention)
+### Parameter Types
+
+| Type | Example |
+|------|---------|
+| `string` | `{ type: 'string', required: true }` |
+| `number` | `{ type: 'number', required: false, default: 10 }` |
+| `boolean` | `{ type: 'boolean', required: false, default: false }` |
+| `enum` | `{ type: 'enum', values: [ 'asc', 'desc' ], required: true }` |
+| `array` | `{ type: 'array', required: false }` |
+
+### Handler Phases (v2)
 
 ```javascript
-parameters: [
-    { position: { key: "id", value: "{{USER_PARAM}}", location: "insert" }, z: { primitive: "string()", options: ["length(24)"] } },
-    { position: { key: "limit", value: "{{USER_PARAM}}", location: "query" }, z: { primitive: "number()", options: ["min(1)", "max(100)", "default(10)"] } },
-    { position: { key: "name", value: "{{USER_PARAM}}", location: "body" }, z: { primitive: "string()", options: ["min(2)", "max(50)"] } }
-]
-```
-
-- **`location`** values: `query`, `insert`, `body`
-- **`primitive`** values: `string()`, `number()`, `boolean()`, `enum()`, `array()`
-- **`options`**: `length(n)`, `min(n)`, `max(n)`, `regex(x)`, `optional()`, `default(x)`
-- Every parameter with `{{USER_PARAM}}` MUST have a valid `z` object with `primitive` and `options`
-
-### Modifier Format
-
-```javascript
-modifiers: [
-    { phase: "pre", handlerName: "validateInput" },
-    { phase: "execute", handlerName: "customFetch" },
-    { phase: "post", handlerName: "formatOutput" }
-]
-```
-
-- Valid phases: `pre`, `execute`, `post`
-- Each `handlerName` must match a function in the `handlers` block
-
-### Handler Format
-
-```javascript
-handlers: {
-    formatOutput: async ({ struct, payload, userParams, routeName, phaseType }) => {
-        // struct.data = processed result
-        // struct.status = false for errors
-        // struct.messages.push('error message') for error details
-        return { struct, payload }
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    routeName: {
+        preRequest: async ( { struct, payload } ) => {
+            // Modify request before sending
+            return { struct, payload }
+        },
+        executeRequest: async ( { struct, payload } ) => {
+            // Replace standard HTTP fetch entirely
+            return { response: customData }
+        },
+        postRequest: async ( { response, struct, payload } ) => {
+            // Transform response after receiving
+            return { response: transformedData }
+        }
     }
-}
+} )
 ```
-
-### Test Format
-
-```javascript
-tests: [
-    { _description: "Describe what this test does", id: "abc123", limit: 10 },
-    { _description: "Another test case", id: "xyz789" }
-]
-```
-
-- `_description` is **required** in every test
-- Only keys defined in `parameters` are allowed (no unknown fields)
 
 ### Namespace Rules
 - Only letters allowed: `/^[a-zA-Z]+$/`
@@ -244,7 +232,7 @@ tests: [
 ### Validation & Test Commands
 
 ```bash
-npm run validate:all        # Validate ALL v1.2.0 schemas for structure & duplicates
+npm run validate:all        # Validate ALL schemas for structure & duplicates
 npm run validate:ai         # AI-optimized report for new schemas
 npm run validate:tags       # Detect hardcoded tags
 npm run validate:flowmcp    # FlowMCP schema-loading test
@@ -255,11 +243,9 @@ npm run validate:flowmcp    # FlowMCP schema-loading test
 1. **Develop** in `tests/new-schemas/PROVIDER/`
 2. **Validate** with `npm run validate:ai`
 3. **Live-test** with `node tests/manual/test-schemas.mjs --namespace=NAME`
-4. **After approval**: Move to `schemas/v1.2.0/`
+4. **After approval**: Move to `schemas/v2.0.0/PROVIDER/`
 
 ### Reference Files
 
-- **Official Spec**: `node_modules/flowmcp/spec/v.1.2.2-spec.md`
-- **Perfect Example**: `tests/schema-validation/examples/perfect-schema-example.mjs`
-- **Broken Example**: `tests/schema-validation/examples/broken-schema-example.mjs`
+- **Official Spec**: [FlowMCP Specification v2.0.0](https://github.com/FlowMCP/flowmcp-specification)
 - **Schema Guidelines**: `schemas/SCHEMAS.md`

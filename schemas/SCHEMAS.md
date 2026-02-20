@@ -6,7 +6,8 @@ This document provides comprehensive guidelines for managing and developing Flow
 
 ### Version Organization
 
-- **`v1.2.0/`** - Current stable schemas following FlowMCP v1.2.0+ specification
+- **`v2.0.0/`** - Current stable schemas following FlowMCP v2.0.0 specification
+- **`v1.2.0/`** - Legacy v1.2.0 schemas (deprecated, kept for reference)
 - **`v1.1.1/`** - Legacy schemas for FlowMCP v1.1.1
 - **`not_supported/`** - Special cases and experimental schemas not yet supported
 
@@ -20,29 +21,28 @@ Each version folder contains provider-specific subdirectories organized by compa
 
 ## FlowMCP Specification Compliance
 
-All schemas must follow the [FlowMCP v1.2.2 specification](https://github.com/FlowMCP/flowmcp-core/blob/main/spec/v.1.2.2-spec.md).
+All schemas must follow the [FlowMCP v2.0.0 specification](https://github.com/FlowMCP/flowmcp-specification).
 
 ### Required Schema Fields
 
 ```javascript
-export const schema = {
-    namespace: "providername",        // Letters only, unique identifier
-    name: "SchemaName",              // Descriptive name
-    description: "Clear description", // Purpose and functionality
-    docs: ["https://api-docs-url"],  // Documentation links
-    tags: ["module.route"],          // Format: module.route
-    flowMCP: "1.2.0",               // Version compatibility
-    root: "https://api.example.com", // Base URL with optional placeholders
-    requiredServerParams: ["API_KEY"], // Environment variables needed
-    headers: {},                     // Optional headers
-    routes: {                        // API endpoints definition
-        routeName: {
-            requestMethod: "GET",
-            description: "Route description",
-            route: "/endpoint",
-            parameters: [],
-            tests: [{ _description: "Test description" }],
-            modifiers: []
+export const main = {
+    namespace: 'providername',           // Letters only, unique identifier
+    name: 'Provider API',               // Descriptive name
+    description: 'Clear description',   // Purpose and functionality
+    version: '2.0.0',                   // Schema version
+    docs: [ 'https://api-docs-url' ],   // Documentation links
+    tags: [ 'category', 'domain' ],     // Semantic tags
+    root: 'https://api.example.com',    // Base URL with optional {{PLACEHOLDER}}
+    requiredServerParams: [ 'API_KEY' ],// Environment variables needed
+    routes: {
+        getResource: {
+            method: 'GET',
+            path: '/endpoint',
+            description: 'Route description',
+            parameters: {
+                id: { type: 'string', required: true, description: 'Resource ID' }
+            }
         }
     }
 }
