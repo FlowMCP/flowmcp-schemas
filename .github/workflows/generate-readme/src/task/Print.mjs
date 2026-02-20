@@ -56,8 +56,8 @@ class Print {
                     fileName,
                     routeNames.length,
                     shortRoutes,
-                    schema.requiredServerParams.join(', '),
-                    schema.tags.join(', ')
+                    ( requiredServerParams || [] ).join( ', ' ),
+                    ( tags || [] ).join( ', ' )
                 ]
                     .join( ' | ' )
 
@@ -84,7 +84,8 @@ class Print {
             .from( 
                 preparedParams
                     .reduce( ( acc, { requiredServerParams } ) => {
-                        acc.add( ...requiredServerParams)
+                        ( requiredServerParams || [] )
+                            .forEach( ( param ) => { acc.add( param ) } )
                         return acc
                     }, new Set() )
             )
