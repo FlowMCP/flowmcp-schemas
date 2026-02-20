@@ -68,6 +68,7 @@ class SchemaImporter {
             } ) )
             .filter( ( { absolutePath } ) => absolutePath.endsWith( '.mjs' ) )
             .filter( ( { absolutePath } ) => !absolutePath.includes( '/_shared/' ) )
+            .filter( ( { absolutePath } ) => !absolutePath.includes( '/_lists/' ) )
         
         return result
     }
@@ -110,7 +111,8 @@ class SchemaImporter {
             schemas
                 .map( async ( item ) => {
                     const { absolutePath } = item
-                    const { schema } = await import( absolutePath )
+                    const module = await import( absolutePath )
+                    const schema = module.schema || module.main
                     item['schema'] = schema
                     return item
                 } )
