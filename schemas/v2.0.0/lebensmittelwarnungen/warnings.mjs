@@ -1,5 +1,5 @@
 // Lebensmittelwarnungen API — Food & Product Safety Warnings (BVL)
-// Public hardcoded API key in Authorization header
+// Requires API key (documented at github.com/bundesAPI/lebensmittelwarnung-api)
 // Source: lebensmittelwarnung.de
 
 export const main = {
@@ -10,9 +10,9 @@ export const main = {
     docs: ['https://lebensmittelwarnung.api.bund.dev/', 'https://github.com/bundesAPI/lebensmittelwarnung-api'],
     tags: ['government', 'food', 'safety', 'consumer', 'germany', 'opendata', 'cacheTtlFrequent'],
     root: 'https://megov.bayern.de/verbraucherschutz/baystmuv-verbraucherinfo/rest/api',
-    requiredServerParams: [],
+    requiredServerParams: ['LEBENSMITTELWARNUNGEN_API_KEY'],
     headers: {
-        'Authorization': 'baystmuv-vi-1.0 os=ios, key=9d9e8972-ff15-4943-8fea-117b5a973c61'
+        'Authorization': 'baystmuv-vi-1.0 os=ios, key={{LEBENSMITTELWARNUNGEN_API_KEY}}'
     },
     routes: {
         getWarnings: {

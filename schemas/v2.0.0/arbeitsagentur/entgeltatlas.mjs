@@ -1,5 +1,5 @@
 // Entgeltatlas API — Wage & Salary Data (Bundesagentur fuer Arbeit)
-// Public API key documented in official GitHub repo
+// Requires API key (documented at github.com/bundesAPI/entgeltatlas-api)
 // Source: entgeltatlas.api.bund.dev
 
 export const main = {
@@ -10,9 +10,9 @@ export const main = {
     docs: ['https://entgeltatlas.api.bund.dev/', 'https://github.com/bundesAPI/entgeltatlas-api'],
     tags: ['government', 'employment', 'wages', 'salary', 'germany', 'opendata', 'cacheTtlDaily'],
     root: 'https://rest.arbeitsagentur.de/infosysbub/entgeltatlas/pc/v1',
-    requiredServerParams: [],
+    requiredServerParams: ['ENTGELTATLAS_API_KEY'],
     headers: {
-        'X-API-Key': 'c4f0d292-9d0f-4763-87dd-d3f9e78fb006'
+        'X-API-Key': '{{ENTGELTATLAS_API_KEY}}'
     },
     routes: {
         getEntgelte: {
