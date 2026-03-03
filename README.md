@@ -28,6 +28,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | arbeitsagentur | professions.mjs | 2 | searchProfessions, getProfessionDetail |  | professions, germany, employment, education, cacheTtlDaily |
 | autobahn | traffic.mjs | 6 | listRoads, getRoadworks, getWarnings, getClosures, getChargingStations, getWebcams |  | traffic, germany, infrastructure, cacheTtlFrequent |
 | avalanchemetrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics, cacheTtlDaily |
+| aviationstack | aviationstack.mjs | 6 | getFlights, getAirports, getAirlines, getCities, getCountries, getAirplanes | AVIATIONSTACK_API_KEY | aviation, flights, airports, airlines, cacheTtlFrequent |
 | avnu | avnu.mjs | 3 | getSwapQuote, getTokens, getSources |  | starknet, defi, swap, cacheTtlRealtime |
 | balancer | balancer.mjs | 5 | getTopPools, getPoolById, getTokenPrices, getProtocolMetrics, getSwapPaths |  | defi, amm, liquidity, pools, cacheTtlFrequent |
 | beaconchain | validatorQueue.mjs | 3 | getActivationQueue, getExitQueue, getValidatorStatus |  | ethereum, validators, staking, cacheTtlDaily |
@@ -119,6 +120,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | discogs | discogs.mjs | 6 | search, getRelease, getMasterRelease, getArtist, getArtistReleases, getLabel |  | music, releases, artists, vinyl, database, cacheTtlDaily |
 | doaj | doaj.mjs | 4 | searchArticles, searchJournals, getArticle, getJournal |  | science, journals, openaccess, articles, research, cacheTtlDaily |
 | dpla | dpla.mjs | 8 | searchItems, searchByTitle, searchByCreator, getItem, searchWithFacets, searchByDateRange, searchByLocation, searchCollections | DPLA_API_KEY | library, archive, culturalheritage, metadata, opendata, cacheTtlDaily |
+| duckduckgo | duckduckgo.mjs | 1 | instantAnswer |  | search, knowledge, reference, cacheTtlDaily |
 | duneanalytics | farcaster.mjs | 3 | farcasterGetTrendingMemecoins, farcasterGetTrendingChannels, farcasterGetTrendingUsers | DUNE_API_KEY | analytics, farcaster, social, cacheTtlDaily |
 | duneanalytics | getResults.mjs | 1 | getLatestResult | DUNE_API_KEY | analytics, queries, data, cacheTtlDaily |
 | duneanalytics | trendingContracts.mjs | 3 | getDexPairStats, getTrendingContracts, getMarketShare | DUNE_API_KEY | analytics, contracts, trending, cacheTtlFrequent |
@@ -139,6 +141,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ercnft | erc721.mjs | 4 | tokenInfo, ownerOf, tokenURI, balanceOf | ALCHEMY_API_KEY, INFURA_API_KEY | erc721, nft, token, ownership, metadata, onchain, multichain |
 | profilejump | profileJump.mjs | 5 | prices, hotProfiles, tokensList, profilesList, profileByAddress |  | lukso, identity, profiles, cacheTtlDaily |
 | luksonetwork | universalProfile.mjs | 3 | readProfileData, fetchProfileMetadata, getUniversalReceiverAddress |  | lukso, identity, profiles, cacheTtlDaily |
+| esagaia | esaGaia.mjs | 6 | coneSearch, brightStars, nearbyStars, highProperMotion, colorMagnitudeDiagram, variableStars |  | astronomy, stars, esa, opendata, cacheTtlStatic |
 | ethers | abi-utils.mjs | 6 | decodeFunctionData, encodeFunctionData, decodeEventLog, computeSelector, encodeParameters, decodeParameters |  | blockchain, evm, abi, encoding, decoding, offline |
 | ethers | convert-utils.mjs | 7 | formatUnits, parseUnits, formatEther, parseEther, hexlify, toUtf8String, toUtf8Bytes |  | blockchain, evm, conversion, units, encoding, offline |
 | ethers | hash-address.mjs | 6 | keccak256, solidityPackedKeccak256, getCreate2Address, getCreateAddress, checksumAddress, namehash |  | blockchain, evm, hash, address, offline |
@@ -153,8 +156,10 @@ Below is a list of all available schemas in this library, grouped by provider an
 | europeanparliament | europeanParliament.mjs | 4 | listMeps, getMep, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
 | europeana | europeana.mjs | 2 | searchRecords, getRecord | EUROPEANA_API_KEY | culture, heritage, museums, europe, cacheTtlDaily |
 | eurostat | eurostat.mjs | 3 | getDataset, listDataflows, getDataStructure |  | statistics, europe, economy, demographics, cacheTtlDaily |
+| familysearch | familySearch.mjs | 6 | searchPlaces, searchPlacesFuzzy, searchByJurisdiction, searchByCoordinates, getPlaceTypes, searchByTypeAndDate |  | genealogy, history, places, geography, cacheTtlStatic |
 | faostat | faostat.mjs | 4 | getData, listDomains, getAreaCodes, getItemCodes |  | agriculture, food, statistics, international, cacheTtlDaily |
 | feiertage | holidays.mjs | 2 | getAllHolidays, getStateHolidays |  | holidays, germany, calendar, cacheTtlStatic |
+| footballdata | footballdata.mjs | 8 | listCompetitions, getCompetition, getCompetitionMatches, getCompetitionStandings, getCompetitionTopScorers, getCompetitionTeams, getTeam, getTodaysMatches | FOOTBALLDATA_API_KEY | sports, football, soccer, competitions, worldwide, cacheTtlFrequent |
 | fred | fred.mjs | 5 | searchSeries, getSeriesObservations, getSeriesInfo, getReleases, getCategory | FRED_API_KEY | economics, finance, statistics, government, cacheTtlDaily |
 | freedictionary | free-dictionary.mjs | 1 | getWordDefinition |  | dictionary, language, english, definitions, cacheTtlDaily |
 | gbif | gbif.mjs | 5 | matchSpeciesName, searchSpecies, searchOccurrences, getSpeciesById, getSpeciesVernacularNames |  | biodiversity, species, ecology, science, opendata, taxonomy, cacheTtlDaily |
@@ -273,6 +278,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | nasadonki | nasadonki.mjs | 6 | getSolarFlares, getCoronalMassEjections, getGeomagneticStorms, getHighSpeedStreams, getNotifications, getSolarEnergeticParticles | SERVER_PARAM:NASA_API_KEY | nasa, spaceweather, solar, science, alerts, cacheTtlFrequent |
 | nasaearthimagery | nasaearthimagery.mjs | 2 | getEarthImagery, getEarthAssets | NASA_API_KEY | nasa, earth, satellite, imagery, landsat, science, cacheTtlDaily |
 | nasaepic | nasaepic.mjs | 5 | getNaturalLatest, getNaturalByDate, getEnhancedLatest, getEnhancedByDate, getAvailableDates | SERVER_PARAM:NASA_API_KEY | nasa, earth, satellite, images, science, climate, cacheTtlDaily |
+| nasaexoplanet | nasaExoplanet.mjs | 7 | searchByName, recentDiscoveries, habitableZoneCandidates, byDiscoveryMethod, stellarHosts, discoveryStatistics, coneSearch |  | astronomy, exoplanets, nasa, opendata, cacheTtlDaily |
 | nasamarsrover | nasamarsrover.mjs | 4 | getPhotosBySol, getPhotosByEarthDate, getLatestPhotos, getMissionManifest | SERVER_PARAM:NASA_API_KEY | nasa, mars, rover, space, images, science, cacheTtlDaily |
 | nasaneows | nasaneows.mjs | 4 | getFeed, lookupAsteroid, browseAsteroids, getTodayFeed | NASA_API_KEY | nasa, asteroids, space, planetary-defense, science, cacheTtlFrequent |
 | nasatechport | nasatechport.mjs | 6 | getProject, getProjectIds, searchProjects, getProgram, getPrograms, getOrganization | NASA_API_KEY | nasa, technology, research, space, science, cacheTtlDaily |
@@ -300,14 +306,21 @@ Below is a list of all available schemas in this library, grouped by provider an
 | openlegaldata | openLegalData.mjs | 6 | searchCases, listCases, searchLaws, listLaws, listLawBooks, listStates |  | legal, germany, courts, opendata, law, cacheTtlDaily |
 | openlibrary | openLibrary.mjs | 6 | searchBooks, getWorkByKey, getBookByIsbn, getAuthorByKey, searchAuthors, getSubjectBooks |  | books, library, literature, education, cacheTtlDaily |
 | openmeteo | openMeteoAirQuality.mjs | 3 | getAirQualityForecast, getCurrentAirQuality, getPollenForecast |  | airquality, pollution, environment, forecast, health, opendata, cacheTtlHourly |
+| openmeteomarine | openMeteoMarine.mjs | 6 | getMarineForecast, getCurrentMarineConditions, getDailyMarineAggregates, getSwellDetails, getOceanCurrentsAndTemperature, getHistoricalMarineData |  | weather, ocean, marine, forecast, cacheTtlFrequent |
 | opennotify | opennotify.mjs | 2 | getIssPosition, getPeopleInSpace |  | space, iss, astronauts, tracking, cacheTtlRealtime |
 | openstates | openStates.mjs | 4 | searchPeople, searchBills, getGeoLegislators, listJurisdictions | OPENSTATES_API_KEY | politics, government, legislature, usa, cacheTtlDaily |
 | openaire | openaire.mjs | 5 | searchPublications, searchDatasets, searchSoftware, searchResearchProducts, searchProjects |  | science, research, publications, openaccess, funding, cacheTtlDaily |
 | openalex | openalex.mjs | 8 | searchWorks, getWork, searchAuthors, getAuthor, searchInstitutions, searchFunders, searchTopics, autocompleteEntities |  | science, research, academic, publications, citations, cacheTtlDaily |
 | opencellid | opencellid.mjs | 4 | getCellPosition, getCellsInArea, getCellCountInArea, addMeasurement | OPENCELLID_API_KEY | telecom, geolocation, celltowers, mobile, coverage, cacheTtlDaily |
 | opencitations | opencitations.mjs | 5 | getCitations, getReferences, getCitationCount, getReferenceCount, getCitation |  | science, citations, openaccess, doi, research, cacheTtlDaily |
+| opencorporates | opencorporates.mjs | 5 | searchCompanies, getCompany, searchOfficers, getCompanyFilings, searchByRegisteredAddress | OPENCORPORATES_API_KEY | companies, corporate, registry, business, compliance, cacheTtlDaily |
 | openfda | openfda.mjs | 5 | searchDrugEvents, searchDrugLabels, searchDrugEnforcement, searchFoodEnforcement, searchDeviceEvents |  | health, medicine, fda, drugs, safety, recalls, regulatory, cacheTtlDaily |
+| openfigi | openfigi.mjs | 4 | mapIdentifiers, searchInstruments, filterInstruments, getMappingValues |  | finance, identifiers, securities, opendata, cacheTtlDaily |
+| openfootball | openfootball.mjs | 8 | getBundesliga, getPremierLeague, getLaLiga, getSerieA, getLigue, getBundesligaTwo, getChampionship, getChampionsLeague |  | sports, football, soccer, opendata, cacheTtlStatic |
+| openligadb | openligadb.mjs | 8 | getAvailableLeagues, getMatchdayData, getSeasonMatches, getLeagueTable, getGoalGetters, getAvailableTeams, getAvailableGroups, getCurrentMatchday |  | sports, football, soccer, bundesliga, germany, cacheTtlFrequent |
+| openplz | openplz.mjs | 8 | getGermanFederalStates, searchGermanLocalities, searchGermanStreets, germanFullTextSearch, getAustrianProvinces, searchAustrianLocalities, getSwissCantons, searchSwissLocalities |  | geodata, postalcodes, municipalities, germany, austria, switzerland, opendata, cacheTtlStatic |
 | openrouteservice | openrouteservice.mjs | 7 | directions, isochrones, matrix, geocodeSearch, geocodeReverse, elevation, optimization | ORS_API_KEY | routing, geocoding, maps, isochrones, geospatial, openstreetmap, cacheTtlDaily |
+| opensanctions | opensanctions.mjs | 6 | searchEntities, getEntity, getAdjacentEntities, matchEntities, getCatalog, getStatements | OPENSANCTIONS_API_KEY | sanctions, compliance, pep, screening, aml, cacheTtlDaily |
 | opensea | opensea.mjs | 5 | getCollectionStats, getCollection, getNft, getEventsByCollection, getListingsByCollection | OPENSEA_API_KEY | nft, marketplace, ethereum, cacheTtlFrequent |
 | opensky | openskyNetwork.mjs | 6 | getAllStates, getFlightsAll, getFlightsByAircraft, getArrivalsByAirport, getDeparturesByAirport, getTrack |  | aviation, tracking, geospatial, transportation, cacheTtlRealtime |
 | orca | orca.mjs | 3 | getWhirlpools, getWhirlpoolByAddress, getTokens |  | defi, solana, dex, clmm, cacheTtlFrequent |
@@ -492,6 +505,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "ALCHEMY_API_KEY": "",
                 "ALTMETRIC_API_KEY": "",
                 "ARBITRUM_MAINNET_ALCHEMY_HTTP": "",
+                "AVIATIONSTACK_API_KEY": "",
                 "BICSCAN_API_KEY": "",
                 "BIRDEYE_API_KEY": "",
                 "BLOCKBERRY_API_KEY": "",
@@ -519,6 +533,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "ETHEREUM_MAINNET_ALCHEMY_HTTP": "",
                 "ETHERSCAN_API_KEY": "",
                 "EUROPEANA_API_KEY": "",
+                "FOOTBALLDATA_API_KEY": "",
                 "FRED_API_KEY": "",
                 "GEOAPIFY_API_KEY": "",
                 "GEONAMES_USERNAME": "",
@@ -543,6 +558,8 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "OMIM_API_KEY": "",
                 "ONEINCH_API_KEY": "",
                 "OPENCELLID_API_KEY": "",
+                "OPENCORPORATES_API_KEY": "",
+                "OPENSANCTIONS_API_KEY": "",
                 "OPENSEA_API_KEY": "",
                 "OPENSTATES_API_KEY": "",
                 "OPTIMISM_MAINNET_ALCHEMY_HTTP": "",
