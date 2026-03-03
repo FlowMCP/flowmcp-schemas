@@ -21,6 +21,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | alchemy | node-read-part2.mjs | 1 | getLogs | ALCHEMY_API_KEY | blockchain, evm, rpc, multichain, alchemy, cacheTtlRealtime |
 | alternative | fearAndGreed.mjs | 3 | getCurrentFng, getHistoricalFng, analyzeFngTrend |  | crypto, sentiment, index, cacheTtlFrequent |
 | altmetric | altmetric.mjs | 7 | getByDoi, getByPmid, getByArxivId, getByIsbn, getByAltmetricId, fetchByDoi, listCitations | ALTMETRIC_API_KEY | science, metrics, socialmedia, research, citations, cacheTtlDaily |
+| aqicn | aqicn.mjs | 4 | getCityAqi, getGeoAqi, searchStations, getStationById | AQICN_API_TOKEN | environment, air-quality, health, pollution, cacheTtlFrequent |
 | arbeitsagentur | education.mjs | 2 | searchApprenticeships, searchStudyPrograms |  | education, germany, apprenticeship, training, cacheTtlDaily |
 | arbeitsagentur | entgeltatlas.mjs | 7 | getEntgelte, getMediandaten, getPrimaererMedian, getRegionen, getGeschlechter, getAlter, getBranchen | ENTGELTATLAS_API_KEY | government, employment, wages, salary, germany, opendata, cacheTtlDaily |
 | arbeitsagentur | jobs.mjs | 2 | searchJobs, searchJobsByEmployer |  | jobs, germany, employment, labor, cacheTtlDaily |
@@ -62,6 +63,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | chartimg | tradingview-charts.mjs | 1 | getAdvancedChart | CHART_IMG_API_KEY | charts, visualization, trading, cacheTtlStatic |
 | charts | VegaLiteCharts.mjs | 4 | generateCandlestickChart, generateLineChart, generateMultiLineChart, generateBarChart |  | charts, visualization, trading, offline |
 | chembl | chembl.mjs | 8 | getMolecule, searchMolecules, getTarget, searchTargets, getActivities, getAssay, getMechanism, getSimilarMolecules |  | science, chemistry, drugs, pharmacology, bioactivity, cacheTtlDaily |
+| ckandatagov | ckanDatagov.mjs | 6 | searchDatasets, getDataset, listOrganizations, listTags, listGroups, searchResources |  | government, opendata, datasets, usa, cacheTtlDaily |
 | clinicaltrials | clinicaltrialsgov.mjs | 3 | listStudies, getStudy, listStudyFields |  | health, medicine, clinicaltrials, research, fda, science, cacheTtlDaily |
 | coinbasebazaar | discovery.mjs | 1 | listResources |  | payments, marketplace, crypto, cacheTtlDaily |
 | coincap | assets.mjs | 4 | listAssets, singleAsset, assetMarkets, assetHistory | COINCAP_API_KEY | crypto, prices, marketdata, cacheTtlRealtime |
@@ -90,6 +92,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | context | getDocumentation.mjs | 2 | searchLibraryId, getLibraryDocs |  | documentation, search, developer, cacheTtlStatic |
 | coreac | core.mjs | 7 | searchWorks, getWork, searchOutputs, getOutput, searchDataProviders, searchJournals, discoverFulltext | CORE_API_KEY | science, openaccess, research, publications, repositories, cacheTtlDaily |
 | cosmos | cosmos-bank.mjs | 6 | getBalances, getSupply, getValidators, getDelegations, getProposals, getCommunityPool |  | cosmos, staking, governance, cacheTtlFrequent |
+| crossref | crossref.mjs | 8 | searchWorks, getWork, searchFunders, getFunder, searchMembers, searchJournals, getJournal, listTypes |  | science, research, publications, citations, doi, cacheTtlDaily |
 | cryptopanic | getNews.mjs | 1 | getCryptoCryptopanicNews | CRYPTOPANIC_API_KEY | crypto, news, aggregator, cacheTtlFrequent |
 | cryptorank | funds.mjs | 5 | searchFunds, getAllFunds, getFundBasic, getFundDetail, getFundTeam | CRYPTORANK_API_KEY | funds, investors, analytics, cacheTtlDaily |
 | cryptowizards | analytics.mjs | 6 | runBacktest, checkCointegration, getCorrelations, analyzeCopula, analyzeSpread, analyzeZScores | CRYPTOWIZARDS_API_KEY | production, analytics, trading, backtest, cacheTtlDaily |
@@ -99,6 +102,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | dailymed | dailymed.mjs | 6 | searchSpls, getSplById, getDrugNames, getDrugClasses, getNdcs, getUniis |  | health, drugs, fda, pharmacy, labels, cacheTtlDaily |
 | dashboarddeutschland | statistics.mjs | 3 | getDashboards, getIndicator, getGeoData |  | statistics, germany, economy, destatis, cacheTtlDaily |
 | datacite | datacite.mjs | 7 | searchDois, getDoiById, listClients, listProviders, getProviderById, getDoiActivities, heartbeat |  | doi, research, metadata, science, opendata, cacheTtlDaily |
+| dawum | dawum.mjs | 3 | getAllData, getNewestSurveys, getLastUpdate |  | politics, elections, polls, germany, surveys, cacheTtlDaily |
 | dblp | dblp.mjs | 3 | searchPublications, searchAuthors, searchVenues |  | bibliography, research, papers, academic, computerscience, opendata, cacheTtlDaily |
 | debank | portfolio.mjs | 6 | getTotalBalance, getUsedChains, getTokenList, getProtocolList, getAllProtocols, getTokenInfo | DEBANK_ACCESS_KEY | defi, portfolio, wallet, crypto, cacheTtlFrequent |
 | debridge | debridge.mjs | 6 | getSupportedChains, getTokenList, getBridgeQuote, getOrderById, getOrderStatus, getOrderIdsByTxHash |  | bridge, crosschain, defi, cacheTtlFrequent |
@@ -130,7 +134,9 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ecb | ecbSdmx.mjs | 5 | getExchangeRates, getInterestRates, getMonetaryAggregates, getInflationData, getGenericData |  | finance, economics, central-bank, exchange-rates, cacheTtlDaily |
 | ecovisio | counters.mjs | 1 | getCountersByOrganization |  | mobility, germany, cycling, pedestrian, cacheTtlDaily |
 | eeawaterbase | eeaWaterbase.mjs | 4 | runQuery, queryCo2Cars, queryClimatePolicies, queryEunisSpecies |  | environment, europe, opendata, science, climate, cacheTtlDaily |
+| electricitymaps | electricityMaps.mjs | 5 | listZones, getLatestCarbonIntensity, getCarbonIntensityHistory, getLatestPowerBreakdown, getPowerBreakdownHistory | ELECTRICITYMAPS_AUTH_TOKEN | energy, carbon, electricity, climate, cacheTtlFrequent |
 | emsc | emscSeismic.mjs | 2 | queryEvents, getEventById |  | earthquake, seismology, geology, hazards, cacheTtlFrequent |
+| energycharts | energy-charts.mjs | 7 | getPublicPower, getInstalledPower, getPrice, getRenewableShareForecast, getSignal, getCrossBorderElectricityTrading, getTotalPower |  | energy, electricity, renewables, europe, power, cacheTtlFrequent |
 | ens | ens-public.mjs | 5 | resolveName, lookupAddress, getTextRecords, getAvatar, getContentHash |  | ethereum, domain, identity, ens, cacheTtlDaily |
 | ens | ens-resolution.mjs | 3 | resolveName, lookupAddress, supportMatrix | INFURA_API_KEY | production, domain, identity, ethereum, cacheTtlDaily |
 | enso | enso.mjs | 6 | getRoute, getProtocols, getNetworks, getTokens, getTokenPrice, getAggregators | ENSO_API_KEY | defi, routing, swap, multichain, cacheTtlFrequent |
@@ -186,6 +192,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | honeypot | honeypot.mjs | 1 | check |  | production, security, token, validation, cacheTtlFrequent |
 | hudoc | hudoc.mjs | 5 | searchCases, searchJudgments, searchDecisions, searchCommunicatedCases, searchGrandChamber |  | legal, humanrights, europe, courts, cacheTtlDaily |
 | igdb | igdb.mjs | 8 | searchGames, searchPlatforms, searchCompanies, searchGenres, searchGameEngines, searchFranchises, getGameCovers, multiQuery | IGDB_CLIENT_ID, IGDB_ACCESS_TOKEN | games, entertainment, database, platforms, twitch, cacheTtlDaily |
+| imfdatamapper | imfdatamapper.mjs | 6 | listIndicators, listCountries, listGroups, getIndicatorAllCountries, getIndicatorByCountry, getIndicatorByGroup |  | economics, finance, macroeconomics, international, statistics, cacheTtlDaily |
 | imf | imfSdmx.mjs | 4 | listDataflows, getCompactData, getDataStructure, getCodeList |  | economics, finance, statistics, international, cacheTtlDaily |
 | inaturalist | inaturalist.mjs | 5 | getObservations, getSpeciesCounts, searchTaxa, getTaxonById, getPlacesAutocomplete |  | nature, biodiversity, species, citizenscience, observations, ecology, cacheTtlFrequent |
 | indicatorts | indicatorts-schema-part1.mjs | 8 | getAbsolutePriceOscillator, getAbsolutePriceOscillatorStrategy, getAccelerationBands, getAccelerationBandsStrategy, getAccumulationDistribution, getAroon, getAroonStrategy, getAverageTrueRange |  | trading, indicators, analysis, cacheTtlFrequent |
@@ -277,6 +284,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | nasaapod | nasaapod.mjs | 3 | getApod, getApodRange, getApodRandom | NASA_API_KEY | nasa, astronomy, space, images, science, cacheTtlDaily |
 | nasadonki | nasadonki.mjs | 6 | getSolarFlares, getCoronalMassEjections, getGeomagneticStorms, getHighSpeedStreams, getNotifications, getSolarEnergeticParticles | SERVER_PARAM:NASA_API_KEY | nasa, spaceweather, solar, science, alerts, cacheTtlFrequent |
 | nasaearthimagery | nasaearthimagery.mjs | 2 | getEarthImagery, getEarthAssets | NASA_API_KEY | nasa, earth, satellite, imagery, landsat, science, cacheTtlDaily |
+| nasaeonet | nasaEonet.mjs | 5 | getEvents, getEventById, getCategories, getEventsByCategory, getSources |  | nasa, environment, disasters, geospatial, cacheTtlFrequent |
 | nasaepic | nasaepic.mjs | 5 | getNaturalLatest, getNaturalByDate, getEnhancedLatest, getEnhancedByDate, getAvailableDates | SERVER_PARAM:NASA_API_KEY | nasa, earth, satellite, images, science, climate, cacheTtlDaily |
 | nasaexoplanet | nasaExoplanet.mjs | 7 | searchByName, recentDiscoveries, habitableZoneCandidates, byDiscoveryMethod, stellarHosts, discoveryStatistics, coneSearch |  | astronomy, exoplanets, nasa, opendata, cacheTtlDaily |
 | nasamarsrover | nasamarsrover.mjs | 4 | getPhotosBySol, getPhotosByEarthDate, getLatestPhotos, getMissionManifest | SERVER_PARAM:NASA_API_KEY | nasa, mars, rover, space, images, science, cacheTtlDaily |
@@ -294,6 +302,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | noaa | noaaWeatherAlerts.mjs | 5 | getActiveAlertsByArea, getAlertTypes, getPointMetadata, getForecastByGrid, getLatestObservation |  | weather, alerts, forecast, noaa, us, government, opendata, cacheTtlShort |
 | nominatim | nominatim.mjs | 3 | search, reverse, lookup |  | geocoding, maps, openstreetmap, address, geolocation, cacheTtlDaily |
 | nvd | nvdCve.mjs | 7 | getCveById, searchCvesBySeverity, searchCvesByKeyword, searchCvesByDateRange, searchCvesByCwe, getCveChangeHistory, searchRecentlyModifiedCves |  | security, vulnerability, cve, cpe, cacheTtlDaily |
+| nwsweather | nwsWeather.mjs | 6 | getPoint, getForecast, getHourlyForecast, getActiveAlerts, getStations, getLatestObservation |  | weather, forecast, alerts, government, geolocation, cacheTtlFrequent |
 | obis | obis.mjs | 5 | searchOccurrences, getChecklist, getTaxon, listDatasets, listNodes |  | biodiversity, ocean, marine, species, ecology, cacheTtlDaily |
 | oeffentlichevergabe | tenders.mjs | 2 | getNoticesByDay, getNoticesByMonth |  | procurement, germany, tenders, government, cacheTtlDaily |
 | ohlcv | olhcv-moralis-evm.mjs | 1 | getRecursiveOhlcvEVM | MORALIS_API_KEY | evm, ohlcv, charts, cacheTtlRealtime |
@@ -305,6 +314,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | openfoodfacts | openFoodFacts.mjs | 4 | getProductByBarcode, searchProducts, getProductsByCategory, getProductsByBrand |  | food, nutrition, health, barcode, opendata, cacheTtlDaily |
 | openlegaldata | openLegalData.mjs | 6 | searchCases, listCases, searchLaws, listLaws, listLawBooks, listStates |  | legal, germany, courts, opendata, law, cacheTtlDaily |
 | openlibrary | openLibrary.mjs | 6 | searchBooks, getWorkByKey, getBookByIsbn, getAuthorByKey, searchAuthors, getSubjectBooks |  | books, library, literature, education, cacheTtlDaily |
+| openmeteoweather | openMeteoWeather.mjs | 4 | getCurrentWeather, getHourlyForecast, getDailyForecast, getWeatherHistory |  | weather, forecast, climate, geolocation, opendata, cacheTtlFrequent |
 | openmeteo | openMeteoAirQuality.mjs | 3 | getAirQualityForecast, getCurrentAirQuality, getPollenForecast |  | airquality, pollution, environment, forecast, health, opendata, cacheTtlHourly |
 | openmeteomarine | openMeteoMarine.mjs | 6 | getMarineForecast, getCurrentMarineConditions, getDailyMarineAggregates, getSwellDetails, getOceanCurrentsAndTemperature, getHistoricalMarineData |  | weather, ocean, marine, forecast, cacheTtlFrequent |
 | opennotify | opennotify.mjs | 2 | getIssPosition, getPeopleInSpace |  | space, iss, astronauts, tracking, cacheTtlRealtime |
@@ -312,6 +322,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | openaire | openaire.mjs | 5 | searchPublications, searchDatasets, searchSoftware, searchResearchProducts, searchProjects |  | science, research, publications, openaccess, funding, cacheTtlDaily |
 | openalex | openalex.mjs | 8 | searchWorks, getWork, searchAuthors, getAuthor, searchInstitutions, searchFunders, searchTopics, autocompleteEntities |  | science, research, academic, publications, citations, cacheTtlDaily |
 | opencellid | opencellid.mjs | 4 | getCellPosition, getCellsInArea, getCellCountInArea, addMeasurement | OPENCELLID_API_KEY | telecom, geolocation, celltowers, mobile, coverage, cacheTtlDaily |
+| openchargemap | openchargemap.mjs | 4 | searchChargingStations, getStationById, getReferenceData, searchByBoundingBox | OPENCHARGEMAP_API_KEY | ev, charging, transport, energy, geospatial, cacheTtlFrequent |
 | opencitations | opencitations.mjs | 5 | getCitations, getReferences, getCitationCount, getReferenceCount, getCitation |  | science, citations, openaccess, doi, research, cacheTtlDaily |
 | opencorporates | opencorporates.mjs | 5 | searchCompanies, getCompany, searchOfficers, getCompanyFilings, searchByRegisteredAddress | OPENCORPORATES_API_KEY | companies, corporate, registry, business, compliance, cacheTtlDaily |
 | openfda | openfda.mjs | 5 | searchDrugEvents, searchDrugLabels, searchDrugEnforcement, searchFoodEnforcement, searchDeviceEvents |  | health, medicine, fda, drugs, safety, recalls, regulatory, cacheTtlDaily |
@@ -322,6 +333,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | openrouteservice | openrouteservice.mjs | 7 | directions, isochrones, matrix, geocodeSearch, geocodeReverse, elevation, optimization | ORS_API_KEY | routing, geocoding, maps, isochrones, geospatial, openstreetmap, cacheTtlDaily |
 | opensanctions | opensanctions.mjs | 6 | searchEntities, getEntity, getAdjacentEntities, matchEntities, getCatalog, getStatements | OPENSANCTIONS_API_KEY | sanctions, compliance, pep, screening, aml, cacheTtlDaily |
 | opensea | opensea.mjs | 5 | getCollectionStats, getCollection, getNft, getEventsByCollection, getListingsByCollection | OPENSEA_API_KEY | nft, marketplace, ethereum, cacheTtlFrequent |
+| opensensemap | opensensemap.mjs | 5 | listBoxes, getBox, getSensorData, getStats, searchBoxesByLocation |  | environment, sensors, iot, air-quality, opendata, cacheTtlFrequent |
 | opensky | openskyNetwork.mjs | 6 | getAllStates, getFlightsAll, getFlightsByAircraft, getArrivalsByAirport, getDeparturesByAirport, getTrack |  | aviation, tracking, geospatial, transportation, cacheTtlRealtime |
 | orca | orca.mjs | 3 | getWhirlpools, getWhirlpoolByAddress, getTokens |  | defi, solana, dex, clmm, cacheTtlFrequent |
 | orcid | orcid.mjs | 8 | searchResearchers, getRecord, getPersonDetails, getWorks, getEmployments, getEducations, getFundings, getActivities |  | science, research, researchers, academic, profiles, cacheTtlDaily |
@@ -350,6 +362,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | restcountries | rest-countries.mjs | 6 | getAllCountries, getCountryByName, getCountryByCode, getCountriesByRegion, getCountriesByCurrency, getCountriesByLanguage |  | countries, geography, world, international, cacheTtlDaily |
 | retractionwatch | retractionwatch.mjs | 6 | getRetractions, getRetractionsByDateRange, searchRetractions, getWorkByDoi, getRetractionsFromPublisher, searchJournals |  | science, retractions, scholarly, integrity, research, cacheTtlDaily |
 | rijksmuseum | rijksmuseum.mjs | 3 | searchCollection, searchByObjectNumber, searchByDescription |  | art, museum, culture, heritage, netherlands, cacheTtlStatic |
+| rkicovid | rki-covid.mjs | 7 | getGermany, getGermanyHistory, getStates, getStateByAbbreviation, getVaccinations, getDistricts, getTestingHistory |  | health, epidemiology, covid, germany, rki, cacheTtlDaily |
 | ror | ror.mjs | 4 | searchOrganizations, advancedSearchOrganizations, matchAffiliation, getOrganization |  | science, research, organizations, identifiers, cacheTtlDaily |
 | rugcheck | tokenSafety.mjs | 6 | getTokenReport, getTokenVotes, getRecentTokens, getTrendingTokens, getNewTokens, getVerifiedTokens |  | solana, security, tokens, cacheTtlFrequent |
 | rxnorm | rxnorm.mjs | 7 | getDrugs, findRxcuiByString, getRxNormName, getNDCs, getAllProperties, getRelatedByRelationship, getRxNormVersion |  | health, drugs, medicine, pharmacy, nomenclature, cacheTtlDaily |
@@ -403,6 +416,9 @@ Below is a list of all available schemas in this library, grouped by provider an
 | thegraph | getSchema.mjs | 2 | getSubgraphSchema, querySubgraph | THEGRAPH_API_KEY | defi, subgraph, graphql, cacheTtlStatic |
 | tle | tle-api.mjs | 2 | searchSatellites, getSatelliteById |  | satellite, space, orbit, tle, norad, cacheTtlDaily |
 | tmdb | tmdb.mjs | 7 | searchMovies, searchTvShows, getMovieDetails, getMovieCredits, getTrendingMovies, getPopularMovies, discoverMovies | TMDB_API_KEY | movies, tv, entertainment, media, cacheTtlDaily |
+| transitousmotis | transitousMotis.mjs | 3 | geocode, planTrip, reverseGeocode |  | transport, public-transit, europe, routing, timetable, cacheTtlFrequent |
+| transportrestdb | transportRestDb.mjs | 6 | searchLocations, getStop, getDepartures, getArrivals, planJourney, getTrip |  | transport, railway, germany, public-transit, timetable, cacheTtlFrequent |
+| transportrestvbb | transportRestVbb.mjs | 5 | searchLocations, getStop, getDepartures, getArrivals, planJourney |  | transport, public-transit, berlin, germany, timetable, cacheTtlFrequent |
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN | social, search, mentions, cacheTtlFrequent |
 | ubaluftqualitaet | ubaluftqualitaet.mjs | 8 | getAirQuality, getAirQualityLimits, getMeasurements, getComponents, getMetadata, getAnnualBalances, getExceedances, getThresholds |  | environment, air-quality, germany, government, health, cacheTtlFrequent |
 | umweltbundesamt | air-quality.mjs | 5 | getStations, searchStations, getComponents, getAirQualityIndex, getMeasurements |  | airquality, germany, environment, pollution |
@@ -429,6 +445,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | yahoofinance | Quote.mjs | 2 | getQuote, getQuoteBatch |  | trading, stocks, crypto, forex, prices |
 | yahoofinance | Search.mjs | 1 | searchSymbol |  | trading, stocks, crypto, forex, search |
 | yfinance | chart.mjs | 2 | getOhlcv, getQuote |  | finance, prices, ohlcv, stocks, crypto, cacheTtlDaily |
+| zdb | zdb.mjs | 4 | searchTitles, getTitle, searchTitlesLookup, searchTitlesData |  | libraries, journals, serials, bibliography, germany, cacheTtlDaily |
 | zenodo | zenodo.mjs | 5 | searchRecords, getRecord, searchCommunities, searchLicenses, searchFunders |  | science, research, datasets, openaccess, publications, cacheTtlDaily |
 | zerox | zerox.mjs | 4 | getPrice, getQuote, getPermitPrice, getPermitQuote | ZEROX_API_KEY | defi, dex, swap, aggregator, cacheTtlRealtime |
 | zoll | customs.mjs | 6 | getExchangeRates, getCategories, getProducts, getCountries, getProductGroups, getProductUnits |  | government, customs, tariffs, trade, germany, opendata, cacheTtlDaily |
@@ -504,6 +521,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
             "env": {
                 "ALCHEMY_API_KEY": "",
                 "ALTMETRIC_API_KEY": "",
+                "AQICN_API_TOKEN": "",
                 "ARBITRUM_MAINNET_ALCHEMY_HTTP": "",
                 "AVIATIONSTACK_API_KEY": "",
                 "BICSCAN_API_KEY": "",
@@ -528,6 +546,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "DUNE_API_KEY": "",
                 "DUNE_SIM_API_KEY": "",
                 "EBIRD_API_KEY": "",
+                "ELECTRICITYMAPS_AUTH_TOKEN": "",
                 "ENSO_API_KEY": "",
                 "ENTGELTATLAS_API_KEY": "",
                 "ETHEREUM_MAINNET_ALCHEMY_HTTP": "",
@@ -558,6 +577,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "OMIM_API_KEY": "",
                 "ONEINCH_API_KEY": "",
                 "OPENCELLID_API_KEY": "",
+                "OPENCHARGEMAP_API_KEY": "",
                 "OPENCORPORATES_API_KEY": "",
                 "OPENSANCTIONS_API_KEY": "",
                 "OPENSEA_API_KEY": "",
