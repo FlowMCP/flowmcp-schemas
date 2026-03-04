@@ -43,6 +43,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | bicscan | bicscan.mjs | 2 | getRiskScore, getAssets | BICSCAN_API_KEY | security, risk, scanning, cacheTtlDaily |
 | biorxiv | biorxiv.mjs | 6 | getContentDetails, getDetailsByDoi, getPublishedArticles, getPublisherArticles, getSummaryStatistics, getUsageStatistics |  | science, preprints, biology, medicine, research, cacheTtlDaily |
 | birdeye | birdeye.mjs | 5 | getTokenPrice, getHistoryPrice, getOHLCV, getTrendingTokens, searchToken | BIRDEYE_API_KEY | crypto, solana, analytics, defi, cacheTtlFrequent |
+| bis | bisStatistics.mjs | 8 | getCentralBankPolicyRates, getEffectiveExchangeRates, getCreditToGdpGaps, getPropertyPrices, getConsumerPrices, getUsDollarExchangeRates, getDebtSecurities, getGenericData |  | economics, finance, central-bank, statistics, cacheTtlDaily |
 | bitget | bitget.mjs | 3 | getTokenPrice, getAnnoucements, getCoinInfo |  | production, exchange, trading, price, cacheTtlDaily |
 | blockberry | mina-mainnet.mjs | 6 | getDashboardInfo, getAccountByHash, getAccountBalance, getBlocks, getZkAppTransactions, getZkAppByAddress | BLOCKBERRY_API_KEY | production, blockchain, explorer, mina, cacheTtlDaily |
 | blockchaininfo | utxoAndBlocks.mjs | 2 | getUTXO, getBlockStats |  | bitcoin, blockchain, utxo, cacheTtlDaily |
@@ -105,6 +106,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | datacite | datacite.mjs | 7 | searchDois, getDoiById, listClients, listProviders, getProviderById, getDoiActivities, heartbeat |  | doi, research, metadata, science, opendata, cacheTtlDaily |
 | dawum | dawum.mjs | 3 | getAllData, getNewestSurveys, getLastUpdate |  | politics, elections, polls, germany, surveys, cacheTtlDaily |
 | dblp | dblp.mjs | 3 | searchPublications, searchAuthors, searchVenues |  | bibliography, research, papers, academic, computerscience, opendata, cacheTtlDaily |
+| dbpedia | dbpedia.mjs | 6 | countriesWithCapitals, entityLookup, musiciansByGenre, universitiesByCountry, filmsByDirector, querySparql |  | knowledge, linkeddata, sparql, wikipedia, cacheTtlDaily |
 | debank | portfolio.mjs | 6 | getTotalBalance, getUsedChains, getTokenList, getProtocolList, getAllProtocols, getTokenInfo | DEBANK_ACCESS_KEY | defi, portfolio, wallet, crypto, cacheTtlFrequent |
 | debridge | debridge.mjs | 6 | getSupportedChains, getTokenList, getBridgeQuote, getOrderById, getOrderStatus, getOrderIdsByTxHash |  | bridge, crosschain, defi, cacheTtlFrequent |
 | defillama | api.mjs | 3 | getProtocols, getProtocolTvl, getChainTvl |  | defi, tvl, protocols, cacheTtlFrequent |
@@ -159,6 +161,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | etherscan | getGaspriceMultichain.mjs | 2 | getGasOracle, estimateGasCost | ETHERSCAN_API_KEY | evm, gas, fees, cacheTtlRealtime |
 | ethscriptions | ethscriptions-api-part1.mjs | 8 | listEthscriptions, getEthscription, getEthscriptionData, getEthscriptionAttachment, checkEthscriptionExists, checkMultipleEthscriptionsExistence, listTransfers, listTokens |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | ethscriptions | ethscriptions-api-part2.mjs | 3 | getTokenDetails, getTokenHistoricalState, getIndexerStatus |  | nft, ethereum, inscriptions, cacheTtlDaily |
+| euparliament | euParliament.mjs | 6 | listMeps, getMep, listMeetings, getMeeting, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
 | europepmc | europepmc.mjs | 6 | searchArticles, getCitations, getReferences, getDatabaseLinks, getLabsLinks, getSearchFields |  | science, publications, biomedical, openaccess, research, cacheTtlDaily |
 | europeanparliament | europeanParliament.mjs | 4 | listMeps, getMep, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
 | europeana | europeana.mjs | 2 | searchRecords, getRecord | EUROPEANA_API_KEY | culture, heritage, museums, europe, cacheTtlDaily |
@@ -166,6 +169,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | familysearch | familySearch.mjs | 6 | searchPlaces, searchPlacesFuzzy, searchByJurisdiction, searchByCoordinates, getPlaceTypes, searchByTypeAndDate |  | genealogy, history, places, geography, cacheTtlStatic |
 | faostat | faostat.mjs | 4 | getData, listDomains, getAreaCodes, getItemCodes |  | agriculture, food, statistics, international, cacheTtlDaily |
 | feiertage | holidays.mjs | 2 | getAllHolidays, getStateHolidays |  | holidays, germany, calendar, cacheTtlStatic |
+| flixbus | flixbus.mjs | 3 | autocompleteCities, autocompleteStations, searchTrips |  | transport, bus, europe, travel, booking, cacheTtlFrequent |
 | footballdata | footballdata.mjs | 8 | listCompetitions, getCompetition, getCompetitionMatches, getCompetitionStandings, getCompetitionTopScorers, getCompetitionTeams, getTeam, getTodaysMatches | FOOTBALLDATA_API_KEY | sports, football, soccer, competitions, worldwide, cacheTtlFrequent |
 | fred | fred.mjs | 5 | searchSeries, getSeriesObservations, getSeriesInfo, getReleases, getCategory | FRED_API_KEY | economics, finance, statistics, government, cacheTtlDaily |
 | freedictionary | free-dictionary.mjs | 1 | getWordDefinition |  | dictionary, language, english, definitions, cacheTtlDaily |
@@ -305,6 +309,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | nvd | nvdCve.mjs | 7 | getCveById, searchCvesBySeverity, searchCvesByKeyword, searchCvesByDateRange, searchCvesByCwe, getCveChangeHistory, searchRecentlyModifiedCves |  | security, vulnerability, cve, cpe, cacheTtlDaily |
 | nwsweather | nwsWeather.mjs | 6 | getPoint, getForecast, getHourlyForecast, getActiveAlerts, getStations, getLatestObservation |  | weather, forecast, alerts, government, geolocation, cacheTtlFrequent |
 | obis | obis.mjs | 5 | searchOccurrences, getChecklist, getTaxon, listDatasets, listNodes |  | biodiversity, ocean, marine, species, ecology, cacheTtlDaily |
+| oecd | oecdData.mjs | 4 | getEconomicOutlook, getConsumerPrices, getHousePrices, getKeyEconomicIndicators |  | economics, statistics, government, international, cacheTtlDaily |
 | oeffentlichevergabe | tenders.mjs | 2 | getNoticesByDay, getNoticesByMonth |  | procurement, germany, tenders, government, cacheTtlDaily |
 | ohlcv | olhcv-moralis-evm.mjs | 1 | getRecursiveOhlcvEVM | MORALIS_API_KEY | evm, ohlcv, charts, cacheTtlRealtime |
 | ohlcv | olhcv-moralis-solana.mjs | 1 | getRecursiveOhlcvSolana | MORALIS_API_KEY | solana, ohlcv, charts, cacheTtlRealtime |
@@ -372,6 +377,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | sciteai | sciteai.mjs | 8 | getTallies, getPaper, searchPapers, getCitingPapers, getCitedByPapers, getRecommendedPapers, getTalliesBySections, getJournalTallies | SCITE_API_KEY | science, citations, research, publications, academic, cacheTtlDaily |
 | semanticscholar | semanticscholar.mjs | 8 | searchPapers, getPaper, getPaperCitations, getPaperReferences, getPaperAuthors, searchAuthors, getAuthor, getAuthorPapers |  | science, research, academic, papers, citations, cacheTtlDaily |
 | sensorcommunity | sensorcommunity.mjs | 8 | getSensorData, filterByType, filterByArea, filterByCountry, filterByBox, averageFiveMinutes, averageOneHour, dustSensorsOnly |  | environment, airquality, sensors, opendata, citizenscience, cacheTtlFrequent |
+| serlo | serlo.mjs | 6 | getSchema, listSubjects, getContentById, getTaxonomyTerm, getRecentActivity, queryGraphql |  | education, oer, learning, graphql, cacheTtlDaily |
 | servicebund | tenders.mjs | 6 | searchTenders, getTendersByState, getTendersByCategory, getAwardedContracts, searchByKeyword, getRecentTenders |  | procurement, tenders, germany, government, opendata |
 | sherparomeo | sherpaRomeo.mjs | 3 | searchPublications, searchPublishers, getPublicationById | SHERPA_API_KEY | academic, publishing, openaccess, research, cacheTtlDaily |
 | shodan | shodaninternetdb.mjs | 1 | lookupIp |  | security, network, infosec, vulnerability, ports, cacheTtlDaily |
@@ -435,6 +441,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | waybackmachine | waybackMachine.mjs | 5 | searchCaptures, searchCapturesFiltered, latestCapture, countPages, searchByDomain |  | archive, web, history, snapshots, crawl, cacheTtlDaily |
 | webcareer | job-listings.mjs | 1 | queryJobs | WEB3_CAREER_API_TOKEN | production, jobs, career, crypto, cacheTtlDaily |
 | whogho | whogho.mjs | 5 | getIndicators, getIndicatorData, getDimensions, getDimensionValues, getCountries |  | health, who, statistics, global, indicators, cacheTtlDaily |
+| wikidata | wikidata.mjs | 6 | countriesByPopulation, citiesByCountry, programmingLanguages, universitiesByCountry, nobelLaureatesByYear, querySparql |  | knowledge, linkeddata, sparql, opendata, cacheTtlDaily |
 | wikimediacommons | wikimediaCommons.mjs | 6 | searchFiles, getImageInfo, getExtendedMetadata, getCategoryMembers, searchWithImageInfo, getFileCategories |  | media, images, opendata, creativecommons, wikipedia, cacheTtlDaily |
 | wikipedia | wikipedia.mjs | 4 | getPageSummary, searchArticles, openSearch, getMediaList |  | knowledge, encyclopedia, search, cacheTtlDaily |
 | wipoipc | wipoipc.mjs | 1 | checkSymbolValidity |  | patents, intellectualproperty, classification, government, international, cacheTtlStatic |
