@@ -184,7 +184,9 @@ Below is a list of all available schemas in this library, grouped by provider an
 | eurostat | eurostat.mjs | 3 | getDataset, listDataflows, getDataStructure |  | statistics, europe, economy, demographics, cacheTtlDaily |
 | familysearch | familySearch.mjs | 6 | searchPlaces, searchPlacesFuzzy, searchByJurisdiction, searchByCoordinates, getPlaceTypes, searchByTypeAndDate |  | genealogy, history, places, geography, cacheTtlStatic |
 | faostat | faostat.mjs | 4 | getData, listDomains, getAreaCodes, getItemCodes |  | agriculture, food, statistics, international, cacheTtlDaily |
+| farmsubsidy | farmsubsidy.mjs | 4 | searchRecipients, listCountries, searchSchemes, searchPayments | FARMSUBSIDY_API_KEY | agriculture, subsidies, eu, government, finance, cacheTtlDaily |
 | feiertage | holidays.mjs | 2 | getAllHolidays, getStateHolidays |  | holidays, germany, calendar, cacheTtlStatic |
+| fightingdisinformation | fighting-disinformation.mjs | 2 | searchTools, getToolDetail |  | disinformation, factcheck, media, research, catalog, cacheTtlWeekly |
 | flixbus | flixbus.mjs | 3 | autocompleteCities, autocompleteStations, searchTrips |  | transport, bus, europe, travel, booking, cacheTtlFrequent |
 | footballdata | footballdata.mjs | 8 | listCompetitions, getCompetition, getCompetitionMatches, getCompetitionStandings, getCompetitionTopScorers, getCompetitionTeams, getTeam, getTodaysMatches | FOOTBALLDATA_API_KEY | sports, football, soccer, competitions, worldwide, cacheTtlFrequent |
 | frankfurter | frankfurter.mjs | 4 | getLatest, getHistorical, getTimeSeries, listCurrencies |  | finance, currency, exchange, opendata, cacheTtlDaily |
@@ -247,6 +249,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | infura | node-read-part1.mjs | 8 | getBlockNumber, getBalance, getGasPrice, getBlock, getCode, getTransactionCount, getTransactionByHash, getTransactionReceipt | INFURA_API_KEY | blockchain, evm, rpc, multichain, infura, cacheTtlRealtime |
 | infura | node-read-part2.mjs | 1 | getLogs | INFURA_API_KEY | blockchain, evm, rpc, multichain, infura, cacheTtlRealtime |
 | inkar | inkar.mjs | 7 | listCategories, getIndicatorsByCategory, searchIndicators, getIndicatorInfo, getTimePeriods, getData, getRegions |  | statistics, germany, opendata, demographics, cacheTtlDaily |
+| insolvenzbekanntmachungen | insolvenzbekanntmachungen.mjs | 1 | searchInsolvencies |  | insolvency, legal, germany, government, finance, cacheTtlDaily |
 | internetarchive | internetArchive.mjs | 5 | searchItems, getMetadata, getMetadataField, getFilesSlice, checkAvailability |  | archive, library, books, media, search, opendata, cacheTtlDaily |
 | ipuparline | ipuParline.mjs | 6 | listCountries, getCountry, listParliaments, getParliament, listChambers, getElections |  | politics, parliament, democracy, elections, cacheTtlDaily |
 | irys | irys.mjs | 2 | getTransactions, getTransactionById |  | irys, arweave, storage, decentralized, cacheTtlFrequent |
@@ -482,6 +485,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | uscongress | us-congress.mjs | 7 | listBills, listBillsByCongress, getBill, listMembers, getMember, listCommittees, listNominations | CONGRESS_API_KEY | politics, usa, legislation, opendata, cacheTtlDaily |
 | usdafooddata | usdaFoodData.mjs | 4 | searchFoods, getFoodById, listFoods, getMultipleFoods | USDA_API_KEY | nutrition, food, health, science, government, cacheTtlDaily |
 | usgs | usgsEarthquake.mjs | 5 | queryEarthquakes, queryByRadius, countEarthquakes, getEventById, getSignificantEarthquakes |  | earthquakes, geology, geospatial, hazards, cacheTtlFrequent |
+| usptopeds | uspto-peds.mjs | 8 | searchApplications, getApplication, getApplicationContinuity, getApplicationAssignment, getApplicationTransactions, getApplicationDocuments, searchTrialProceedings, getStatusCodes | USPTO_API_KEY | patents, intellectual-property, government, legal, us, cacheTtlDaily |
 | vag | transit.mjs | 2 | getStops, getDepartures |  | transit, germany, realtime, nuremberg, cacheTtlStatic |
 | vanda | vanda.mjs | 4 | searchObjects, getObject, clusterSearch, searchByMaterial |  | museum, art, culture, design, history, cacheTtlStatic |
 | waybackmachine | waybackMachine.mjs | 5 | searchCaptures, searchCapturesFiltered, latestCapture, countPages, searchByDomain |  | archive, web, history, snapshots, crawl, cacheTtlDaily |
@@ -608,6 +612,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "ETHEREUM_MAINNET_ALCHEMY_HTTP": "",
                 "ETHERSCAN_API_KEY": "",
                 "EUROPEANA_API_KEY": "",
+                "FARMSUBSIDY_API_KEY": "",
                 "FEC_API_KEY": "",
                 "FOOTBALLDATA_API_KEY": "",
                 "FRED_API_KEY": "",
@@ -664,6 +669,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "TWITTER_BEARER_TOKEN": "",
                 "UNPAYWALL_EMAIL": "",
                 "USDA_API_KEY": "",
+                "USPTO_API_KEY": "",
                 "WEB3_CAREER_API_TOKEN": "",
                 "WTO_API_KEY": "",
                 "ZEROX_API_KEY": ""
