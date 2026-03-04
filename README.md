@@ -92,6 +92,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | cointelegraph | getLatestNews.mjs | 1 | getLatestNews |  | crypto, news, media, cacheTtlFrequent |
 | connectedpapers | connectedpapers.mjs | 3 | getGraph, getRemainingUsages, getFreeAccessPapers | CONNECTED_PAPERS_API_KEY | academic, research, papers, citations, graphs, cacheTtlDaily |
 | context | getDocumentation.mjs | 2 | searchLibraryId, getLibraryDocs |  | documentation, search, developer, cacheTtlStatic |
+| copernicusland | copernicusland.mjs | 4 | searchDatasets, listProducts, datasetsByProduct, getDatasetDetail |  | geospatial, environment, europe, opendata, cacheTtlDaily |
 | coreac | core.mjs | 7 | searchWorks, getWork, searchOutputs, getOutput, searchDataProviders, searchJournals, discoverFulltext | CORE_API_KEY | science, openaccess, research, publications, repositories, cacheTtlDaily |
 | cosmos | cosmos-bank.mjs | 6 | getBalances, getSupply, getValidators, getDelegations, getProposals, getCommunityPool |  | cosmos, staking, governance, cacheTtlFrequent |
 | crossref | crossref.mjs | 8 | searchWorks, getWork, searchFunders, getFunder, searchMembers, searchJournals, getJournal, listTypes |  | science, research, publications, citations, doi, cacheTtlDaily |
