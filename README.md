@@ -435,6 +435,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN | social, search, mentions, cacheTtlFrequent |
 | ubaluftqualitaet | ubaluftqualitaet.mjs | 8 | getAirQuality, getAirQualityLimits, getMeasurements, getComponents, getMetadata, getAnnualBalances, getExceedances, getThresholds |  | environment, air-quality, germany, government, health, cacheTtlFrequent |
 | umweltbundesamt | air-quality.mjs | 5 | getStations, searchStations, getComponents, getAirQualityIndex, getMeasurements |  | airquality, germany, environment, pollution |
+| undata | undata.mjs | 6 | listDataflows, ghgEmissions, energyStatistics, energyBalance, countryIndicators, educationStatistics |  | statistics, environment, energy, education, opendata, sdmx, cacheTtlDaily |
 | unescoworldheritage | unescoWorldHeritage.mjs | 4 | searchSites, getSitesByCountry, getDangerSites, getDatasetInfo |  | culture, heritage, geography, tourism, unesco, cacheTtlStatic |
 | uniprot | uniprot.mjs | 5 | searchProteins, getProteinEntry, searchUniref, searchUniparc, searchProteomes |  | science, biology, proteins, genomics, bioinformatics, cacheTtlDaily |
 | uniswap | uniswap-pool-explorer.mjs | 2 | getTokenPools, getPoolData | THEGRAPH_API_KEY | production, cacheTtlDaily |
