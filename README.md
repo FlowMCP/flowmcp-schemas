@@ -101,6 +101,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | curve | pools.mjs | 6 | getPoolsByChain, getPoolsByRegistry, getBigPools, getPoolList, getTokens, getPlatforms |  | defi, dex, liquidity, pools, multichain, cacheTtlFrequent |
 | dailymed | dailymed.mjs | 6 | searchSpls, getSplById, getDrugNames, getDrugClasses, getNdcs, getUniis |  | health, drugs, fda, pharmacy, labels, cacheTtlDaily |
 | dashboarddeutschland | statistics.mjs | 3 | getDashboards, getIndicator, getGeoData |  | statistics, germany, economy, destatis, cacheTtlDaily |
+| dataeuropaeu | dataEuropaEu.mjs | 3 | searchDatasets, getDataset, listCatalogues |  | opendata, government, europe, datasets, catalog, cacheTtlDaily |
 | datacite | datacite.mjs | 7 | searchDois, getDoiById, listClients, listProviders, getProviderById, getDoiActivities, heartbeat |  | doi, research, metadata, science, opendata, cacheTtlDaily |
 | dawum | dawum.mjs | 3 | getAllData, getNewestSurveys, getLastUpdate |  | politics, elections, polls, germany, surveys, cacheTtlDaily |
 | dblp | dblp.mjs | 3 | searchPublications, searchAuthors, searchVenues |  | bibliography, research, papers, academic, computerscience, opendata, cacheTtlDaily |
