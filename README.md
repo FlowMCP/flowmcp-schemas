@@ -162,6 +162,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ercnft | erc721.mjs | 4 | tokenInfo, ownerOf, tokenURI, balanceOf | ALCHEMY_API_KEY, INFURA_API_KEY | erc721, nft, token, ownership, metadata, onchain, multichain |
 | profilejump | profileJump.mjs | 5 | prices, hotProfiles, tokensList, profilesList, profileByAddress |  | lukso, identity, profiles, cacheTtlDaily |
 | luksonetwork | universalProfile.mjs | 3 | readProfileData, fetchProfileMetadata, getUniversalReceiverAddress |  | lukso, identity, profiles, cacheTtlDaily |
+| ergast | ergast-f1.mjs | 5 | getSeasonSchedule, getRaceResults, getDriverStandings, getConstructorStandings, getDriver |  | sports, motorsport, statistics, opendata, cacheTtlDaily |
 | esagaia | esaGaia.mjs | 6 | coneSearch, brightStars, nearbyStars, highProperMotion, colorMagnitudeDiagram, variableStars |  | astronomy, stars, esa, opendata, cacheTtlStatic |
 | ethers | abi-utils.mjs | 6 | decodeFunctionData, encodeFunctionData, decodeEventLog, computeSelector, encodeParameters, decodeParameters |  | blockchain, evm, abi, encoding, decoding, offline |
 | ethers | convert-utils.mjs | 7 | formatUnits, parseUnits, formatEther, parseEther, hexlify, toUtf8String, toUtf8Bytes |  | blockchain, evm, conversion, units, encoding, offline |
