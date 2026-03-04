@@ -27,6 +27,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | arbeitsagentur | jobs.mjs | 2 | searchJobs, searchJobsByEmployer |  | jobs, germany, employment, labor, cacheTtlDaily |
 | arbeitsagentur | jobsuche.mjs | 2 | searchJobs, searchJobsApp |  | jobs, employment, germany, cacheTtlDaily |
 | arbeitsagentur | professions.mjs | 2 | searchProfessions, getProfessionDetail |  | professions, germany, employment, education, cacheTtlDaily |
+| artinstitutechi | art-institute-chicago.mjs | 4 | searchArtworks, getArtwork, searchArtists, listArtworks |  | art, museum, culture, opendata, cacheTtlDaily |
 | arxiv | arxiv.mjs | 4 | searchPapers, searchByAuthor, searchByCategory, getPaperById |  | science, research, preprints, openaccess, cacheTtlDaily |
 | autobahn | traffic.mjs | 6 | listRoads, getRoadworks, getWarnings, getClosures, getChargingStations, getWebcams |  | traffic, germany, infrastructure, cacheTtlFrequent |
 | avalanchemetrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics, cacheTtlDaily |
@@ -129,6 +130,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | dip | proceedings.mjs | 8 | listVorgaenge, getVorgang, listVorgangspositionen, getVorgangsposition, listAktivitaeten, getAktivitaet, listPersonen, getPerson | DIP_API_KEY | parliament, germany, opendata, legislation, cacheTtlDaily |
 | dipbundestag | dipbundestag.mjs | 8 | listVorgaenge, getVorgang, listDrucksachen, getDrucksache, listPlenarprotokolle, listPersonen, getPerson, listAktivitaeten | DIP_BUNDESTAG_API_KEY | politics, germany, parliament, legislation, opendata, cacheTtlDaily |
 | discogs | discogs.mjs | 6 | search, getRelease, getMasterRelease, getArtist, getArtistReleases, getLabel |  | music, releases, artists, vinyl, database, cacheTtlDaily |
+| diseasesh | disease-sh.mjs | 5 | getGlobalStats, getCountryStats, getAllCountries, getHistorical, getContinentStats |  | health, covid, statistics, opendata, cacheTtlFrequent |
 | dnb | dnb.mjs | 5 | searchByTitle, searchByAuthor, searchByIsbn, searchBySubject, searchAuthorities |  | library, bibliography, germany, opendata, cacheTtlDaily |
 | doaj | doaj.mjs | 4 | searchArticles, searchJournals, getArticle, getJournal |  | science, journals, openaccess, articles, research, cacheTtlDaily |
 | dpla | dpla.mjs | 8 | searchItems, searchByTitle, searchByCreator, getItem, searchWithFacets, searchByDateRange, searchByLocation, searchCollections | DPLA_API_KEY | library, archive, culturalheritage, metadata, opendata, cacheTtlDaily |
@@ -241,6 +243,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | irys | irys.mjs | 2 | getTransactions, getTransactionById |  | irys, arweave, storage, decentralized, cacheTtlFrequent |
 | itausschreibung | tenders.mjs | 6 | getAllTenders, getSoftwareTenders, getHardwareTenders, getInternetTenders, getTelecomTenders, getConsultingTenders |  | procurement, germany, tenders, it, cacheTtlDaily |
 | iucnredlist | iucnRedList.mjs | 8 | getAssessment, getSpeciesByName, getSpeciesByCountry, getSpeciesByCategory, getSpeciesByHabitat, getSpeciesByThreat, getSpeciesCount, listCountries | IUCN_API_TOKEN | science, conservation, biodiversity, species, environment, cacheTtlDaily |
+| jikan | jikan.mjs | 4 | searchAnime, getAnime, searchManga, getTopAnime |  | entertainment, anime, manga, opendata, cacheTtlDaily |
 | jplcad | jplcad.mjs | 4 | getCloseApproaches, getPotentiallyHazardous, getByObject, getByMagnitude |  | jpl, nasa, asteroids, closeapproach, planetarydefense, science, cacheTtlDaily |
 | jpl | jplfireball.mjs | 1 | getFireballs |  | nasa, space, science, fireball, meteor, planetarydefense, cacheTtlDaily |
 | jplsbdb | jplsbdb.mjs | 4 | lookupBody, lookupBodyWithPhysics, lookupBodyWithCloseApproaches, searchByDesignation |  | jpl, nasa, asteroids, comets, space, planetarydefense, science, cacheTtlDaily |
@@ -330,6 +333,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | omdb | omdb.mjs | 3 | searchMovies, getByImdbId, getByTitle | OMDB_API_KEY | movies, entertainment, media, cacheTtlDaily |
 | omim | omim.mjs | 8 | getEntry, searchEntries, searchGeneMap, getGeneMapByChromosome, getClinicalSynopsis, searchClinicalSynopsis, getAllelicVariants, getReferences | OMIM_API_KEY | science, genetics, medicine, health, genomics, cacheTtlDaily |
 | oneinch | swap.mjs | 5 | getQuote, getSwap, getTokens, getApprove, getAllowance | ONEINCH_API_KEY | defi, swap, ethereum, trading, cacheTtlRealtime |
+| openbrewerydb | open-brewery-db.mjs | 4 | listBreweries, searchBreweries, getBrewery, getRandomBrewery |  | food, beverage, opendata, cacheTtlDaily |
 | openfoodfacts | openFoodFacts.mjs | 4 | getProductByBarcode, searchProducts, getProductsByCategory, getProductsByBrand |  | food, nutrition, health, barcode, opendata, cacheTtlDaily |
 | openlegaldata | openLegalData.mjs | 6 | searchCases, listCases, searchLaws, listLaws, listLawBooks, listStates |  | legal, germany, courts, opendata, law, cacheTtlDaily |
 | openlibrary | openLibrary.mjs | 6 | searchBooks, getWorkByKey, getBookByIsbn, getAuthorByKey, searchAuthors, getSubjectBooks |  | books, library, literature, education, cacheTtlDaily |
@@ -446,6 +450,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | transitousmotis | transitousMotis.mjs | 3 | geocode, planTrip, reverseGeocode |  | transport, public-transit, europe, routing, timetable, cacheTtlFrequent |
 | transportrestdb | transportRestDb.mjs | 6 | searchLocations, getStop, getDepartures, getArrivals, planJourney, getTrip |  | transport, railway, germany, public-transit, timetable, cacheTtlFrequent |
 | transportrestvbb | transportRestVbb.mjs | 5 | searchLocations, getStop, getDepartures, getArrivals, planJourney |  | transport, public-transit, berlin, germany, timetable, cacheTtlFrequent |
+| tvmaze | tvmaze.mjs | 5 | searchShows, getShow, getShowEpisodes, getShowCast, getSchedule |  | entertainment, tv, media, opendata, cacheTtlDaily |
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN | social, search, mentions, cacheTtlFrequent |
 | ubaluftqualitaet | ubaluftqualitaet.mjs | 8 | getAirQuality, getAirQualityLimits, getMeasurements, getComponents, getMetadata, getAnnualBalances, getExceedances, getThresholds |  | environment, air-quality, germany, government, health, cacheTtlFrequent |
 | ukparliament | uk-parliament.mjs | 4 | searchMembers, getMember, getMemberVotingRecord, getMemberContactDetails |  | politics, uk, legislation, opendata, cacheTtlDaily |
