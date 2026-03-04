@@ -57,6 +57,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | bscscan | getContractBinance.mjs | 2 | getContractABI, getContractSourceCode | BSCSCAN_API_KEY | test, cacheTtlDaily |
 | bundesbank | bundesbankStatistics.mjs | 5 | getTimeSeries, getDataflow, listDataflows, getDataStructure, getCodelist |  | economics, finance, statistics, germany, central-bank, cacheTtlDaily |
 | bundeshaushalt | budget.mjs | 3 | getBudgetByEinzelplan, getBudgetByFunction, getBudgetByGroup |  | government, finance, budget, germany, opendata, cacheTtlDaily |
+| bundeswahlleiterin | bundeswahlleiterin.mjs | 5 | getResults, searchConstituencies, getPartyResults, getNationalSummary, getStructuralData |  | government, elections, germany, opendata, cacheTtlStatic |
 | catalogueoflife | catalogueoflife.mjs | 5 | searchNames, getNameUsage, matchName, listVocabulary, getApiVersion |  | taxonomy, biology, species, science, cacheTtlDaily |
 | cryptoorderbook | orderbook.mjs | 2 | calculateOrderbook, compareOrderbook |  | production, trading, orderbook, exchange, cacheTtlRealtime |
 | chainlinkmulticall | price-feeds-multicall.mjs | 3 | getAvailableChains, getAvailableFeeds, getAllLatestPrices | INFURA_API_KEY | oracle, price, feeds, chainlink, multicall, batch, onchain, cacheTtlRealtime |
@@ -329,6 +330,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | openmeteo | openMeteoAirQuality.mjs | 3 | getAirQualityForecast, getCurrentAirQuality, getPollenForecast |  | airquality, pollution, environment, forecast, health, opendata, cacheTtlHourly |
 | openmeteomarine | openMeteoMarine.mjs | 6 | getMarineForecast, getCurrentMarineConditions, getDailyMarineAggregates, getSwellDetails, getOceanCurrentsAndTemperature, getHistoricalMarineData |  | weather, ocean, marine, forecast, cacheTtlFrequent |
 | opennotify | opennotify.mjs | 2 | getIssPosition, getPeopleInSpace |  | space, iss, astronauts, tracking, cacheTtlRealtime |
+| opsd | opsd.mjs | 5 | listPlants, searchPlants, getPlantsByLocation, getEnergyMix, listCountries |  | energy, environment, europe, opendata, cacheTtlDaily |
 | openstates | openStates.mjs | 4 | searchPeople, searchBills, getGeoLegislators, listJurisdictions | OPENSTATES_API_KEY | politics, government, legislature, usa, cacheTtlDaily |
 | openaire | openaire.mjs | 5 | searchPublications, searchDatasets, searchSoftware, searchResearchProducts, searchProjects |  | science, research, publications, openaccess, funding, cacheTtlDaily |
 | openalex | openalex.mjs | 8 | searchWorks, getWork, searchAuthors, getAuthor, searchInstitutions, searchFunders, searchTopics, autocompleteEntities |  | science, research, academic, publications, citations, cacheTtlDaily |
