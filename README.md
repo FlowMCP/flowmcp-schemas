@@ -70,6 +70,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | chembl | chembl.mjs | 8 | getMolecule, searchMolecules, getTarget, searchTargets, getActivities, getAssay, getMechanism, getSimilarMolecules |  | science, chemistry, drugs, pharmacology, bioactivity, cacheTtlDaily |
 | ckandatagov | ckanDatagov.mjs | 6 | searchDatasets, getDataset, listOrganizations, listTags, listGroups, searchResources |  | government, opendata, datasets, usa, cacheTtlDaily |
 | clinicaltrials | clinicaltrialsgov.mjs | 3 | listStudies, getStudy, listStudyFields |  | health, medicine, clinicaltrials, research, fda, science, cacheTtlDaily |
+| cocktaildb | cocktaildb.mjs | 5 | searchCocktails, getCocktail, filterByIngredient, listCategories, getRandomCocktail |  | food, beverage, recipes, opendata, cacheTtlDaily |
 | coinbasebazaar | discovery.mjs | 1 | listResources |  | payments, marketplace, crypto, cacheTtlDaily |
 | coincap | assets.mjs | 4 | listAssets, singleAsset, assetMarkets, assetHistory | COINCAP_API_KEY | crypto, prices, marketdata, cacheTtlRealtime |
 | coincap | exchanges.mjs | 2 | listExchanges, getExchangeById | COINCAP_API_KEY | crypto, exchanges, marketdata, cacheTtlFrequent |
@@ -109,6 +110,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | dashboarddeutschland | statistics.mjs | 3 | getDashboards, getIndicator, getGeoData |  | statistics, germany, economy, destatis, cacheTtlDaily |
 | dataeuropaeu | dataEuropaEu.mjs | 3 | searchDatasets, getDataset, listCatalogues |  | opendata, government, europe, datasets, catalog, cacheTtlDaily |
 | datacite | datacite.mjs | 7 | searchDois, getDoiById, listClients, listProviders, getProviderById, getDoiActivities, heartbeat |  | doi, research, metadata, science, opendata, cacheTtlDaily |
+| datamuse | datamuse.mjs | 2 | findWords, autocomplete |  | language, reference, nlp, opendata, cacheTtlStatic |
 | dawum | dawum.mjs | 3 | getAllData, getNewestSurveys, getLastUpdate |  | politics, elections, polls, germany, surveys, cacheTtlDaily |
 | dblp | dblp.mjs | 3 | searchPublications, searchAuthors, searchVenues |  | bibliography, research, papers, academic, computerscience, opendata, cacheTtlDaily |
 | dbpedia | dbpedia.mjs | 6 | countriesWithCapitals, entityLookup, musiciansByGenre, universitiesByCountry, filmsByDirector, querySparql |  | knowledge, linkeddata, sparql, wikipedia, cacheTtlDaily |
@@ -181,6 +183,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | feiertage | holidays.mjs | 2 | getAllHolidays, getStateHolidays |  | holidays, germany, calendar, cacheTtlStatic |
 | flixbus | flixbus.mjs | 3 | autocompleteCities, autocompleteStations, searchTrips |  | transport, bus, europe, travel, booking, cacheTtlFrequent |
 | footballdata | footballdata.mjs | 8 | listCompetitions, getCompetition, getCompetitionMatches, getCompetitionStandings, getCompetitionTopScorers, getCompetitionTeams, getTeam, getTodaysMatches | FOOTBALLDATA_API_KEY | sports, football, soccer, competitions, worldwide, cacheTtlFrequent |
+| frankfurter | frankfurter.mjs | 4 | getLatest, getHistorical, getTimeSeries, listCurrencies |  | finance, currency, exchange, opendata, cacheTtlDaily |
 | fred | fred.mjs | 5 | searchSeries, getSeriesObservations, getSeriesInfo, getReleases, getCategory | FRED_API_KEY | economics, finance, statistics, government, cacheTtlDaily |
 | freedictionary | free-dictionary.mjs | 1 | getWordDefinition |  | dictionary, language, english, definitions, cacheTtlDaily |
 | gbif | gbif.mjs | 5 | matchSpeciesName, searchSpecies, searchOccurrences, getSpeciesById, getSpeciesVernacularNames |  | biodiversity, species, ecology, science, opendata, taxonomy, cacheTtlDaily |
@@ -275,6 +278,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | magiceden | magiceden.mjs | 5 | getCollectionStats, getCollectionListings, getCollectionActivities, getTokenListings, getTokenActivities |  | nft, solana, marketplace, cacheTtlFrequent |
 | marktstammdaten | energy-units.mjs | 5 | getStromerzeugung, getFilterColumnsStromerzeugung, getFilterColumnsStromverbrauch, getFilterColumnsGaserzeugung, getFilterColumnsGasverbrauch |  | government, energy, electricity, gas, germany, opendata, cacheTtlDaily |
 | mcpregistry | servers.mjs | 2 | listServers, searchServers |  | mcp, registry, ai, tools, cacheTtlDaily |
+| mealdb | mealdb.mjs | 5 | searchMeals, getMeal, listCategories, filterByArea, getRandomMeal |  | food, recipes, cooking, opendata, cacheTtlDaily |
 | mediacloud | mediacloud.mjs | 8 | totalCount, countOverTime, storyList, sampleStories, topWords, topSources, topLanguages, getStory |  | news, media, journalism, analysis, nlp, cacheTtlDaily |
 | medium | rss-feeds.mjs | 4 | getTagFeed, getUserFeed, getPublicationFeed, getTopicFeed |  | content, social, feeds, cacheTtlDaily |
 | memorylol | twitterNameChanges.mjs | 1 | queryUsernameChanges |  | social, twitter, history, cacheTtlDaily |
@@ -360,6 +364,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | opensea | opensea.mjs | 5 | getCollectionStats, getCollection, getNft, getEventsByCollection, getListingsByCollection | OPENSEA_API_KEY | nft, marketplace, ethereum, cacheTtlFrequent |
 | opensensemap | opensensemap.mjs | 5 | listBoxes, getBox, getSensorData, getStats, searchBoxesByLocation |  | environment, sensors, iot, air-quality, opendata, cacheTtlFrequent |
 | opensky | openskyNetwork.mjs | 6 | getAllStates, getFlightsAll, getFlightsByAircraft, getArrivalsByAirport, getDeparturesByAirport, getTrack |  | aviation, tracking, geospatial, transportation, cacheTtlRealtime |
+| opentdb | opentdb.mjs | 3 | getQuestions, listCategories, getCategoryCount |  | entertainment, trivia, education, opendata, cacheTtlDaily |
 | orca | orca.mjs | 3 | getWhirlpools, getWhirlpoolByAddress, getTokens |  | defi, solana, dex, clmm, cacheTtlFrequent |
 | orcid | orcid.mjs | 8 | searchResearchers, getRecord, getPersonDetails, getWorks, getEmployments, getEducations, getFundings, getActivities |  | science, research, researchers, academic, profiles, cacheTtlDaily |
 | overpass | osmQuery.mjs | 3 | queryRaw, findNearby, status |  | openstreetmap, geodata, maps, cacheTtlDaily |
@@ -372,6 +377,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | pinata | read.mjs | 2 | free_read_example, free_read_cid |  | ipfs, storage, read, cacheTtlDaily |
 | pinata | write.mjs | 1 | upload_text_file | PINATA_JWT, PINATA_GATEWAY | ipfs, storage, write, cacheTtlDaily |
 | poap | graphql.mjs | 5 | getTypename, getSchemaDefinition, getPredefinedQueryList, executePrefinedQuery, querySubgraph |  | nft, attendance, graphql, events, cacheTtlDaily |
+| pokeapi | pokeapi.mjs | 5 | getPokemon, listPokemon, getAbility, getType, getEvolutionChain |  | entertainment, gaming, opendata, cacheTtlStatic |
 | polymarket | gammaApi.mjs | 3 | searchEvents, getEvents, getMarkets |  | predictions, markets, events, cacheTtlFrequent |
 | polymarket | marketInfo.mjs | 2 | getMarkets, getMarketInfo |  | prediction, markets, trading, cacheTtlFrequent |
 | polymarket | searchBySlug.mjs | 1 | searchBySlug |  | prediction, markets, events, cacheTtlFrequent |
@@ -388,6 +394,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | reliefweb | reliefweb.mjs | 5 | searchReports, searchDisasters, searchJobs, getReportById, searchCountries |  | humanitarian, disasters, crises, unocha, opendata, news, cacheTtlHourly |
 | restcountries | rest-countries.mjs | 6 | getAllCountries, getCountryByName, getCountryByCode, getCountriesByRegion, getCountriesByCurrency, getCountriesByLanguage |  | countries, geography, world, international, cacheTtlDaily |
 | retractionwatch | retractionwatch.mjs | 6 | getRetractions, getRetractionsByDateRange, searchRetractions, getWorkByDoi, getRetractionsFromPublisher, searchJournals |  | science, retractions, scholarly, integrity, research, cacheTtlDaily |
+| rickandmorty | rickandmorty.mjs | 4 | getCharacters, getCharacter, getEpisodes, getLocations |  | entertainment, tv, opendata, cacheTtlStatic |
 | rijksmuseum | rijksmuseum.mjs | 3 | searchCollection, searchByObjectNumber, searchByDescription |  | art, museum, culture, heritage, netherlands, cacheTtlStatic |
 | rkicovid | rki-covid.mjs | 7 | getGermany, getGermanyHistory, getStates, getStateByAbbreviation, getVaccinations, getDistricts, getTestingHistory |  | health, epidemiology, covid, germany, rki, cacheTtlDaily |
 | ror | ror.mjs | 4 | searchOrganizations, advancedSearchOrganizations, matchAffiliation, getOrganization |  | science, research, organizations, identifiers, cacheTtlDaily |
@@ -436,6 +443,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | stolpersteineberl | memorial-stones.mjs | 4 | getAllStones, searchStones, getStonesByDistrict, getStonesByLocation |  | memorial, history, berlin |
 | strahlenschutz | radiation.mjs | 2 | getLatestReadings, getStationTimeseries |  | radiation, germany, environment, safety, cacheTtlFrequent |
 | swaggerhub | api-registry.mjs | 2 | searchApis, listApiVersions |  | production, api, documentation, registry, cacheTtlDaily |
+| swapi | swapi.mjs | 5 | searchPeople, getPerson, getFilm, getPlanet, getStarship |  | entertainment, movies, opendata, cacheTtlStatic |
 | taapi | indicators-part1.mjs | 8 | getRSI, getMACD, getBollingerBands, getEMA, getSMA, getStochastic, getATR, getStochRSI | TAAPI_SECRET | crypto, trading, indicators, cacheTtlFrequent |
 | taapi | indicators-part2.mjs | 2 | getVWAP, getIchimoku | TAAPI_SECRET | crypto, trading, indicators, cacheTtlFrequent |
 | tagesschau | news.mjs | 4 | getHomepage, getNews, searchArticles, getChannels |  | news, germany, media, cacheTtlFrequent |
