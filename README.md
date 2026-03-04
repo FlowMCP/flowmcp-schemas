@@ -27,6 +27,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | arbeitsagentur | jobs.mjs | 2 | searchJobs, searchJobsByEmployer |  | jobs, germany, employment, labor, cacheTtlDaily |
 | arbeitsagentur | jobsuche.mjs | 2 | searchJobs, searchJobsApp |  | jobs, employment, germany, cacheTtlDaily |
 | arbeitsagentur | professions.mjs | 2 | searchProfessions, getProfessionDetail |  | professions, germany, employment, education, cacheTtlDaily |
+| arxiv | arxiv.mjs | 4 | searchPapers, searchByAuthor, searchByCategory, getPaperById |  | science, research, preprints, openaccess, cacheTtlDaily |
 | autobahn | traffic.mjs | 6 | listRoads, getRoadworks, getWarnings, getClosures, getChargingStations, getWebcams |  | traffic, germany, infrastructure, cacheTtlFrequent |
 | avalanchemetrics | metrics-api.mjs | 8 | listChains, getChainInfo, getChainMetrics, getRollingWindowMetrics, getStakingMetrics, getValidatorMetrics, getICMSummary, getICMTimeseries |  | blockchain, avalanche, metrics, staking, analytics, cacheTtlDaily |
 | aviationstack | aviationstack.mjs | 6 | getFlights, getAirports, getAirlines, getCities, getCountries, getAirplanes | AVIATIONSTACK_API_KEY | aviation, flights, airports, airlines, cacheTtlFrequent |
@@ -125,6 +126,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | dip | proceedings.mjs | 8 | listVorgaenge, getVorgang, listVorgangspositionen, getVorgangsposition, listAktivitaeten, getAktivitaet, listPersonen, getPerson | DIP_API_KEY | parliament, germany, opendata, legislation, cacheTtlDaily |
 | dipbundestag | dipbundestag.mjs | 8 | listVorgaenge, getVorgang, listDrucksachen, getDrucksache, listPlenarprotokolle, listPersonen, getPerson, listAktivitaeten | DIP_BUNDESTAG_API_KEY | politics, germany, parliament, legislation, opendata, cacheTtlDaily |
 | discogs | discogs.mjs | 6 | search, getRelease, getMasterRelease, getArtist, getArtistReleases, getLabel |  | music, releases, artists, vinyl, database, cacheTtlDaily |
+| dnb | dnb.mjs | 5 | searchByTitle, searchByAuthor, searchByIsbn, searchBySubject, searchAuthorities |  | library, bibliography, germany, opendata, cacheTtlDaily |
 | doaj | doaj.mjs | 4 | searchArticles, searchJournals, getArticle, getJournal |  | science, journals, openaccess, articles, research, cacheTtlDaily |
 | dpla | dpla.mjs | 8 | searchItems, searchByTitle, searchByCreator, getItem, searchWithFacets, searchByDateRange, searchByLocation, searchCollections | DPLA_API_KEY | library, archive, culturalheritage, metadata, opendata, cacheTtlDaily |
 | duckduckgo | duckduckgo.mjs | 1 | instantAnswer |  | search, knowledge, reference, cacheTtlDaily |
@@ -144,6 +146,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ens | ens-resolution.mjs | 3 | resolveName, lookupAddress, supportMatrix | INFURA_API_KEY | production, domain, identity, ethereum, cacheTtlDaily |
 | enso | enso.mjs | 6 | getRoute, getProtocols, getNetworks, getTokens, getTokenPrice, getAggregators | ENSO_API_KEY | defi, routing, swap, multichain, cacheTtlFrequent |
 | entgeltatlas | entgeltatlas.mjs | 6 | getSalaryByOccupation, getRegions, getIndustries, getAgeGroups, getGenders, getMedianData | ENTGELTATLAS_API_KEY | employment, wages, germany, government, statistics, cacheTtlDaily |
+| epodata | epoLinkedData.mjs | 6 | listApplications, getApplication, getPublication, getFamily, lookupCpc, listPublications |  | patents, research, linkeddata, cacheTtlDaily |
 | epo | patent-search.mjs | 4 | searchPatents, searchByTechnology, searchByKeywords, searchByDate |  | patents, research, search, cacheTtlDaily |
 | ercmultitoken | erc1155.mjs | 2 | balanceOf, uri | ALCHEMY_API_KEY, INFURA_API_KEY | erc1155, multitoken, nft, semifungible, balance, onchain, multichain |
 | erctoken | erc20.mjs | 3 | tokenInfo, balanceOf, allowance | ALCHEMY_API_KEY, INFURA_API_KEY | erc20, token, fungible, balance, allowance, onchain, multichain |
@@ -162,6 +165,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ethscriptions | ethscriptions-api-part1.mjs | 8 | listEthscriptions, getEthscription, getEthscriptionData, getEthscriptionAttachment, checkEthscriptionExists, checkMultipleEthscriptionsExistence, listTransfers, listTokens |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | ethscriptions | ethscriptions-api-part2.mjs | 3 | getTokenDetails, getTokenHistoricalState, getIndexerStatus |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | euparliament | euParliament.mjs | 6 | listMeps, getMep, listMeetings, getMeeting, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
+| eurlex | eurLex.mjs | 6 | searchRegulations, searchDirectives, lookupByCelex, recentLegislation, searchByEuroVoc, querySparql |  | law, government, europe, sparql, cacheTtlDaily |
 | europepmc | europepmc.mjs | 6 | searchArticles, getCitations, getReferences, getDatabaseLinks, getLabsLinks, getSearchFields |  | science, publications, biomedical, openaccess, research, cacheTtlDaily |
 | europeanparliament | europeanParliament.mjs | 4 | listMeps, getMep, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
 | europeana | europeana.mjs | 2 | searchRecords, getRecord | EUROPEANA_API_KEY | culture, heritage, museums, europe, cacheTtlDaily |
@@ -381,6 +385,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | servicebund | tenders.mjs | 6 | searchTenders, getTendersByState, getTendersByCategory, getAwardedContracts, searchByKeyword, getRecentTenders |  | procurement, tenders, germany, government, opendata |
 | sherparomeo | sherpaRomeo.mjs | 3 | searchPublications, searchPublishers, getPublicationById | SHERPA_API_KEY | academic, publishing, openaccess, research, cacheTtlDaily |
 | shodan | shodaninternetdb.mjs | 1 | lookupIp |  | security, network, infosec, vulnerability, ports, cacheTtlDaily |
+| simbad | simbad.mjs | 6 | coneSearch, objectByType, objectTypeStats, objectMagnitudes, objectIdentifiers, queryAdql |  | astronomy, science, opendata, cacheTtlDaily |
 | simdune | activityEVM.mjs | 2 | getActivityEVM, getActivityDetailedEVM | DUNE_SIM_API_KEY | production, activity, analytics, feed, cacheTtlDaily |
 | simdune | balancesEVM.mjs | 1 | getBalancesEVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio, cacheTtlDaily |
 | simdune | balancesSVM.mjs | 1 | getBalancesSVM | DUNE_SIM_API_KEY | production, balances, analytics, portfolio, svm, solana, cacheTtlDaily |
