@@ -392,6 +392,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | safeglobal | transaction-service.mjs | 4 | getSafeInfo, getSafeBalances, getMultisigTransactions, getIncomingTransfers |  | ethereum, multisig, defi, wallet, cacheTtlFrequent |
 | santiment | schema.mjs | 5 | get_sentiment_balance, get_social_volume, alert_social_shift, get_trending_words, get_social_dominance | SANTIMENT_API_KEY | crypto, analytics, sentiment, cacheTtlFrequent |
 | sciteai | sciteai.mjs | 8 | getTallies, getPaper, searchPapers, getCitingPapers, getCitedByPapers, getRecommendedPapers, getTalliesBySections, getJournalTallies | SCITE_API_KEY | science, citations, research, publications, academic, cacheTtlDaily |
+| secdata | sec-data.mjs | 3 | getCompanyFacts, getCompanyFilings, getCompanyConcept |  | finance, usa, sec, opendata, cacheTtlDaily |
+| secedgar | sec-edgar.mjs | 1 | searchFilings |  | finance, usa, sec, opendata, cacheTtlDaily |
 | semanticscholar | semanticscholar.mjs | 8 | searchPapers, getPaper, getPaperCitations, getPaperReferences, getPaperAuthors, searchAuthors, getAuthor, getAuthorPapers |  | science, research, academic, papers, citations, cacheTtlDaily |
 | sensorcommunity | sensorcommunity.mjs | 8 | getSensorData, filterByType, filterByArea, filterByCountry, filterByBox, averageFiveMinutes, averageOneHour, dustSensorsOnly |  | environment, airquality, sensors, opendata, citizenscience, cacheTtlFrequent |
 | serlo | serlo.mjs | 6 | getSchema, listSubjects, getContentById, getTaxonomyTerm, getRecentActivity, queryGraphql |  | education, oer, learning, graphql, cacheTtlDaily |
@@ -446,6 +448,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | transportrestvbb | transportRestVbb.mjs | 5 | searchLocations, getStop, getDepartures, getArrivals, planJourney |  | transport, public-transit, berlin, germany, timetable, cacheTtlFrequent |
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN | social, search, mentions, cacheTtlFrequent |
 | ubaluftqualitaet | ubaluftqualitaet.mjs | 8 | getAirQuality, getAirQualityLimits, getMeasurements, getComponents, getMetadata, getAnnualBalances, getExceedances, getThresholds |  | environment, air-quality, germany, government, health, cacheTtlFrequent |
+| ukparliament | uk-parliament.mjs | 4 | searchMembers, getMember, getMemberVotingRecord, getMemberContactDetails |  | politics, uk, legislation, opendata, cacheTtlDaily |
 | umweltbundesamt | air-quality.mjs | 5 | getStations, searchStations, getComponents, getAirQualityIndex, getMeasurements |  | airquality, germany, environment, pollution |
 | uncomtrade | un-comtrade.mjs | 5 | getTradeData, getDataAvailability, listReferences, listReporters, listTradeRegimes |  | trade, economics, international, opendata, cacheTtlDaily |
 | undata | undata.mjs | 6 | listDataflows, ghgEmissions, energyStatistics, energyBalance, countryIndicators, educationStatistics |  | statistics, environment, energy, education, opendata, sdmx, cacheTtlDaily |
