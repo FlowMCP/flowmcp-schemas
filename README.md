@@ -67,6 +67,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | chainlist | chainlist.mjs | 5 | getChainById, getChainsByKeyword, getExplorerURLs, getRPCEndpoints, getWebsocketEndpoints |  | production, blockchain, rpc, network, cacheTtlStatic |
 | chartimg | tradingview-charts.mjs | 1 | getAdvancedChart | CHART_IMG_API_KEY | charts, visualization, trading, cacheTtlStatic |
 | charts | VegaLiteCharts.mjs | 4 | generateCandlestickChart, generateLineChart, generateMultiLineChart, generateBarChart |  | charts, visualization, trading, offline |
+| cheapshark | cheapshark.mjs | 4 | getDeals, searchGames, getGameDetails, listStores |  | entertainment, gaming, shopping, opendata, cacheTtlFrequent |
 | chembl | chembl.mjs | 8 | getMolecule, searchMolecules, getTarget, searchTargets, getActivities, getAssay, getMechanism, getSimilarMolecules |  | science, chemistry, drugs, pharmacology, bioactivity, cacheTtlDaily |
 | ckandatagov | ckanDatagov.mjs | 6 | searchDatasets, getDataset, listOrganizations, listTags, listGroups, searchResources |  | government, opendata, datasets, usa, cacheTtlDaily |
 | clinicaltrials | clinicaltrialsgov.mjs | 3 | listStudies, getStudy, listStudyFields |  | health, medicine, clinicaltrials, research, fda, science, cacheTtlDaily |
@@ -207,6 +208,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | gutendex | gutendex.mjs | 5 | listBooks, getBookById, searchByTopic, searchByAuthorLifespan, getBooksByIds |  | books, ebooks, literature, gutenberg, cacheTtlDaily |
 | harvardart | harvardArtMuseums.mjs | 4 | searchObjects, getObject, searchPeople, listExhibitions | HARVARD_ART_API_KEY | art, museums, culture, education, cacheTtlDaily |
 | hathitrust | hathitrust.mjs | 8 | briefLookupByOclc, briefLookupByIsbn, briefLookupByLccn, fullLookupByOclc, fullLookupByIsbn, fullLookupByLccn, briefLookupByHtid, briefLookupByRecordNumber |  | library, books, archives, bibliography, cacheTtlDaily |
+| hebcal | hebcal.mjs | 3 | getHolidays, getShabbatTimes, convertDate |  | reference, calendar, religion, opendata, cacheTtlDaily |
 | hnrss | jsonFeeds.mjs | 1 | getFeed |  | news, hackernews, feeds, cacheTtlDaily |
 | hochwasserzentralen | flood-monitoring.mjs | 2 | getStations, getAlerts |  | government, environment, flood, weather, germany, opendata, cacheTtlRealtime |
 | hochwasserzentralen | hochwasserzentralen.mjs | 4 | getGaugeInfo, getStateInfoPost, getStateInfoGet, getGaugeLocations |  | floods, hydrology, germany, geospatial, cacheTtlFrequent |
