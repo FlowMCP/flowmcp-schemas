@@ -315,6 +315,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | nihreporter | nihreporter.mjs | 3 | searchProjects, searchPublications, searchClinicalStudies |  | science, research, funding, grants, biomedical, cacheTtlDaily |
 | nina | warnings.mjs | 4 | getDwdWarnings, getMowasWarnings, getBiwappWarnings, getKatwarnWarnings |  | warnings, germany, safety, cacheTtlFrequent |
 | nina | ninaWarnApp.mjs | 7 | getDashboard, getWarningById, getMowasMapData, getDwdMapData, getKatwarnMapData, getLhpMapData, getEventCodes |  | warnings, emergency, germany, weather, cacheTtlRealtime |
+| noaaclimate | noaa-climate.mjs | 4 | getDailySummaries, getGlobalSummary, getGlobalHourly, getClimateNormals |  | weather, climate, science, usa, opendata, cacheTtlDaily |
 | noaa | noaaWeatherAlerts.mjs | 5 | getActiveAlertsByArea, getAlertTypes, getPointMetadata, getForecastByGrid, getLatestObservation |  | weather, alerts, forecast, noaa, us, government, opendata, cacheTtlShort |
 | nobelprize | nobel-prize.mjs | 3 | listPrizes, searchLaureates, getLaureate |  | science, awards, history, opendata, cacheTtlDaily |
 | nominatim | nominatim.mjs | 3 | search, reverse, lookup |  | geocoding, maps, openstreetmap, address, geolocation, cacheTtlDaily |
@@ -370,10 +371,12 @@ Below is a list of all available schemas in this library, grouped by provider an
 | polymarket | gammaApi.mjs | 3 | searchEvents, getEvents, getMarkets |  | predictions, markets, events, cacheTtlFrequent |
 | polymarket | marketInfo.mjs | 2 | getMarkets, getMarketInfo |  | prediction, markets, trading, cacheTtlFrequent |
 | polymarket | searchBySlug.mjs | 1 | searchBySlug |  | prediction, markets, events, cacheTtlFrequent |
+| pubchem | pubchem.mjs | 5 | getCompoundByName, getCompoundProperties, searchCompoundByName, autocompleteCompound, getCompoundSynonyms |  | chemistry, science, drugs, opendata, cacheTtlDaily |
 | pubmedncbi | pubmedNcbi.mjs | 8 | searchArticles, getArticleSummary, fetchAbstract, getDatabaseInfo, findRelatedArticles, globalSearch, spellCheck, citationMatch |  | biomedical, science, literature, health, research, cacheTtlDaily |
 | pumpfun | pumpfun.mjs | 4 | getCoins, getCoinByMint, getCurrentlyLive, getUserProfile |  | crypto, solana, memecoins, defi, cacheTtlFrequent |
 | pvgis | pvgis.mjs | 6 | pvCalculation, monthlyRadiation, dailyRadiation, hourlySeries, typicalMeteoYear, horizonProfile |  | energy, solar, photovoltaic, radiation, climate, eu, cacheTtlStatic |
 | quickchart | charts.mjs | 2 | renderChart, getChartUrl |  | charts, visualization, images, cacheTtlStatic |
+| rcsbpdb | rcsb-pdb.mjs | 5 | getEntry, getEntityInfo, getUniprotMapping, getAssembly, getChemicalComponent |  | biology, science, protein, opendata, cacheTtlDaily |
 | redditscanner | getTokenMentions.mjs | 2 | getTokenMentions, getHotMemes |  | social, sentiment, crypto, cacheTtlFrequent |
 | regionalatlas | regionalatlas.mjs | 4 | getIndicatorByState, getIndicatorByKreis, getIndicatorByRegierungsbezirk, listAvailableIndicators |  | germany, statistics, demographics, regional, opendata, cacheTtlDaily |
 | regionalstatistik | regionalstatistik.mjs | 6 | searchStatistics, searchTables, getTableData, searchVariables, findAll, getQualitySigns | REGIONALSTATISTIK_USERNAME, REGIONALSTATISTIK_PASSWORD | germany, statistics, demographics, regional, opendata, census, cacheTtlDaily |
@@ -451,6 +454,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | uniswap | uniswap-pool-explorer.mjs | 2 | getTokenPools, getPoolData | THEGRAPH_API_KEY | production, cacheTtlDaily |
 | uniswap | price-discovery.mjs | 2 | getSupportedChains, getTokenPrice | ETHEREUM_MAINNET_ALCHEMY_HTTP, POLYGON_MAINNET_ALCHEMY_HTTP, ARBITRUM_MAINNET_ALCHEMY_HTTP, OPTIMISM_MAINNET_ALCHEMY_HTTP | production, dex, trading, defi, cacheTtlRealtime |
 | unpaywall | unpaywall.mjs | 1 | getByDoi | UNPAYWALL_EMAIL | science, openaccess, publications, doi, research, cacheTtlDaily |
+| uscongress | us-congress.mjs | 7 | listBills, listBillsByCongress, getBill, listMembers, getMember, listCommittees, listNominations | CONGRESS_API_KEY | politics, usa, legislation, opendata, cacheTtlDaily |
 | usdafooddata | usdaFoodData.mjs | 4 | searchFoods, getFoodById, listFoods, getMultipleFoods | USDA_API_KEY | nutrition, food, health, science, government, cacheTtlDaily |
 | usgs | usgsEarthquake.mjs | 5 | queryEarthquakes, queryByRadius, countEarthquakes, getEventById, getSignificantEarthquakes |  | earthquakes, geology, geospatial, hazards, cacheTtlFrequent |
 | vag | transit.mjs | 2 | getStops, getDepartures |  | transit, germany, realtime, nuremberg, cacheTtlStatic |
@@ -559,6 +563,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "CMC_API_KEY": "",
                 "COINCAP_API_KEY": "",
                 "COINSTATS_API_KEY": "",
+                "CONGRESS_API_KEY": "",
                 "CONNECTED_PAPERS_API_KEY": "",
                 "CORE_API_KEY": "",
                 "CRYPTOPANIC_API_KEY": "",
