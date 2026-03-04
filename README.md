@@ -60,6 +60,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | bundeswahlleiterin | bundeswahlleiterin.mjs | 5 | getResults, searchConstituencies, getPartyResults, getNationalSummary, getStructuralData |  | government, elections, germany, opendata, cacheTtlStatic |
 | catalogueoflife | catalogueoflife.mjs | 5 | searchNames, getNameUsage, matchName, listVocabulary, getApiVersion |  | taxonomy, biology, species, science, cacheTtlDaily |
 | cryptoorderbook | orderbook.mjs | 2 | calculateOrderbook, compareOrderbook |  | production, trading, orderbook, exchange, cacheTtlRealtime |
+| cernopendata | cern-open-data.mjs | 2 | searchRecords, getRecord |  | science, physics, opendata, research, cacheTtlDaily |
 | chainlinkmulticall | price-feeds-multicall.mjs | 3 | getAvailableChains, getAvailableFeeds, getAllLatestPrices | INFURA_API_KEY | oracle, price, feeds, chainlink, multicall, batch, onchain, cacheTtlRealtime |
 | chainlink | price-feeds.mjs | 3 | getAvailableChains, getAvailableFeeds, getLatestPrice | INFURA_API_KEY | oracle, price, feeds, chainlink, onchain, cacheTtlRealtime |
 | chainlist | chainlist.mjs | 5 | getChainById, getChainsByKeyword, getExplorerURLs, getRPCEndpoints, getWebsocketEndpoints |  | production, blockchain, rpc, network, cacheTtlStatic |
@@ -344,6 +345,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | opencitations | opencitations.mjs | 5 | getCitations, getReferences, getCitationCount, getReferenceCount, getCitation |  | science, citations, openaccess, doi, research, cacheTtlDaily |
 | opencorporates | opencorporates.mjs | 5 | searchCompanies, getCompany, searchOfficers, getCompanyFilings, searchByRegisteredAddress | OPENCORPORATES_API_KEY | companies, corporate, registry, business, compliance, cacheTtlDaily |
 | openfda | openfda.mjs | 5 | searchDrugEvents, searchDrugLabels, searchDrugEnforcement, searchFoodEnforcement, searchDeviceEvents |  | health, medicine, fda, drugs, safety, recalls, regulatory, cacheTtlDaily |
+| openfec | openfec.mjs | 4 | searchCandidates, getCandidateTotals, searchCommittees, getElectionSummary | FEC_API_KEY | politics, finance, usa, opendata, cacheTtlDaily |
 | openfigi | openfigi.mjs | 4 | mapIdentifiers, searchInstruments, filterInstruments, getMappingValues |  | finance, identifiers, securities, opendata, cacheTtlDaily |
 | openfootball | openfootball.mjs | 8 | getBundesliga, getPremierLeague, getLaLiga, getSerieA, getLigue, getBundesligaTwo, getChampionship, getChampionsLeague |  | sports, football, soccer, opendata, cacheTtlStatic |
 | openligadb | openligadb.mjs | 8 | getAvailableLeagues, getMatchdayData, getSeasonMatches, getLeagueTable, getGoalGetters, getAvailableTeams, getAvailableGroups, getCurrentMatchday |  | sports, football, soccer, bundesliga, germany, cacheTtlFrequent |
@@ -576,6 +578,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "ETHEREUM_MAINNET_ALCHEMY_HTTP": "",
                 "ETHERSCAN_API_KEY": "",
                 "EUROPEANA_API_KEY": "",
+                "FEC_API_KEY": "",
                 "FOOTBALLDATA_API_KEY": "",
                 "FRED_API_KEY": "",
                 "GEOAPIFY_API_KEY": "",
