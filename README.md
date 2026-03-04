@@ -134,6 +134,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | discogs | discogs.mjs | 6 | search, getRelease, getMasterRelease, getArtist, getArtistReleases, getLabel |  | music, releases, artists, vinyl, database, cacheTtlDaily |
 | diseasesh | disease-sh.mjs | 5 | getGlobalStats, getCountryStats, getAllCountries, getHistorical, getContinentStats |  | health, covid, statistics, opendata, cacheTtlFrequent |
 | dnb | dnb.mjs | 5 | searchByTitle, searchByAuthor, searchByIsbn, searchBySubject, searchAuthorities |  | library, bibliography, germany, opendata, cacheTtlDaily |
+| dndapi | dnd-api.mjs | 5 | listClasses, getSpell, getMonster, searchSpells, getClass |  | entertainment, gaming, reference, opendata, cacheTtlStatic |
 | doaj | doaj.mjs | 4 | searchArticles, searchJournals, getArticle, getJournal |  | science, journals, openaccess, articles, research, cacheTtlDaily |
 | dpla | dpla.mjs | 8 | searchItems, searchByTitle, searchByCreator, getItem, searchWithFacets, searchByDateRange, searchByLocation, searchCollections | DPLA_API_KEY | library, archive, culturalheritage, metadata, opendata, cacheTtlDaily |
 | duckduckgo | duckduckgo.mjs | 1 | instantAnswer |  | search, knowledge, reference, cacheTtlDaily |
@@ -304,6 +305,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | morpho | vaults.mjs | 3 | getVaults, getVaultByAddress, getVaultFactories |  | defi, lending, morpho, vaults, multichain, cacheTtlFrequent |
 | mudab | marine-data.mjs | 3 | getStations, getParameters, getProjectStations |  | marine, germany, environment, monitoring, cacheTtlFrequent |
 | musicbrainz | musicBrainz.mjs | 6 | searchArtist, lookupArtist, searchRecording, searchRelease, lookupRecording, searchReleaseGroup |  | music, metadata, artists, recordings, opendata, cacheTtlDaily |
+| nagerdate | nager-date.mjs | 4 | getPublicHolidays, getNextHolidays, getLongWeekends, listCountries |  | reference, calendar, opendata, cacheTtlDaily |
 | nasaapod | nasaapod.mjs | 3 | getApod, getApodRange, getApodRandom | NASA_API_KEY | nasa, astronomy, space, images, science, cacheTtlDaily |
 | nasadonki | nasadonki.mjs | 6 | getSolarFlares, getCoronalMassEjections, getGeomagneticStorms, getHighSpeedStreams, getNotifications, getSolarEnergeticParticles | SERVER_PARAM:NASA_API_KEY | nasa, spaceweather, solar, science, alerts, cacheTtlFrequent |
 | nasaearthimagery | nasaearthimagery.mjs | 2 | getEarthImagery, getEarthAssets | NASA_API_KEY | nasa, earth, satellite, imagery, landsat, science, cacheTtlDaily |
