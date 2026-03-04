@@ -167,6 +167,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ethscriptions | ethscriptions-api-part1.mjs | 8 | listEthscriptions, getEthscription, getEthscriptionData, getEthscriptionAttachment, checkEthscriptionExists, checkMultipleEthscriptionsExistence, listTransfers, listTokens |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | ethscriptions | ethscriptions-api-part2.mjs | 3 | getTokenDetails, getTokenHistoricalState, getIndexerStatus |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | euparliament | euParliament.mjs | 6 | listMeps, getMep, listMeetings, getMeeting, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
+| eusafetygate | eu-safety-gate.mjs | 6 | listLanguages, listCountries, listEnums, listReportYears, getLatestReport, listReports |  | consumer-safety, eu, product-recalls, opendata, cacheTtlDaily |
 | eurlex | eurLex.mjs | 6 | searchRegulations, searchDirectives, lookupByCelex, recentLegislation, searchByEuroVoc, querySparql |  | law, government, europe, sparql, cacheTtlDaily |
 | europepmc | europepmc.mjs | 6 | searchArticles, getCitations, getReferences, getDatabaseLinks, getLabsLinks, getSearchFields |  | science, publications, biomedical, openaccess, research, cacheTtlDaily |
 | europeanparliament | europeanParliament.mjs | 4 | listMeps, getMep, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
@@ -194,6 +195,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | googlefactcheck | googleFactCheck.mjs | 3 | searchClaims, searchClaimsByImage, listClaimReviewMarkup | GOOGLE_API_KEY | factcheck, claims, misinformation, verification, news, cacheTtlDaily |
 | govdata | datasets.mjs | 5 | searchDatasets, getDataset, listGroups, listOrganizations, searchTags |  | government, opendata, germany, cacheTtlDaily |
 | govdatasparql | sparql-analytics.mjs | 7 | getCatalogOverview, searchByTheme, getRecentDatasets, getFormatDistribution, getTopPublishers, getTopKeywords, getDatasetsByPublisher |  | government, opendata, germany, sparql, analytics, cacheTtlDaily |
+| greix | greix.mjs | 7 | listCities, getCity, listPropertyTypes, listNeighborhoods, getCityPricePeriod, getCityMetrics, getNeighborhoodMetricsMap |  | real-estate, germany, economics, opendata, cacheTtlDaily |
 | gutendex | gutendex.mjs | 5 | listBooks, getBookById, searchByTopic, searchByAuthorLifespan, getBooksByIds |  | books, ebooks, literature, gutenberg, cacheTtlDaily |
 | harvardart | harvardArtMuseums.mjs | 4 | searchObjects, getObject, searchPeople, listExhibitions | HARVARD_ART_API_KEY | art, museums, culture, education, cacheTtlDaily |
 | hathitrust | hathitrust.mjs | 8 | briefLookupByOclc, briefLookupByIsbn, briefLookupByLccn, fullLookupByOclc, fullLookupByIsbn, fullLookupByLccn, briefLookupByHtid, briefLookupByRecordNumber |  | library, books, archives, bibliography, cacheTtlDaily |
@@ -231,6 +233,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | infura | contract-read.mjs | 1 | readContract | INFURA_API_KEY | blockchain, evm, smartcontract, multichain, infura, cacheTtlRealtime |
 | infura | node-read-part1.mjs | 8 | getBlockNumber, getBalance, getGasPrice, getBlock, getCode, getTransactionCount, getTransactionByHash, getTransactionReceipt | INFURA_API_KEY | blockchain, evm, rpc, multichain, infura, cacheTtlRealtime |
 | infura | node-read-part2.mjs | 1 | getLogs | INFURA_API_KEY | blockchain, evm, rpc, multichain, infura, cacheTtlRealtime |
+| inkar | inkar.mjs | 7 | listCategories, getIndicatorsByCategory, searchIndicators, getIndicatorInfo, getTimePeriods, getData, getRegions |  | statistics, germany, opendata, demographics, cacheTtlDaily |
 | internetarchive | internetArchive.mjs | 5 | searchItems, getMetadata, getMetadataField, getFilesSlice, checkAvailability |  | archive, library, books, media, search, opendata, cacheTtlDaily |
 | ipuparline | ipuParline.mjs | 6 | listCountries, getCountry, listParliaments, getParliament, listChambers, getElections |  | politics, parliament, democracy, elections, cacheTtlDaily |
 | irys | irys.mjs | 2 | getTransactions, getTransactionById |  | irys, arweave, storage, decentralized, cacheTtlFrequent |
@@ -449,6 +452,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | vanda | vanda.mjs | 4 | searchObjects, getObject, clusterSearch, searchByMaterial |  | museum, art, culture, design, history, cacheTtlStatic |
 | waybackmachine | waybackMachine.mjs | 5 | searchCaptures, searchCapturesFiltered, latestCapture, countPages, searchByDomain |  | archive, web, history, snapshots, crawl, cacheTtlDaily |
 | webcareer | job-listings.mjs | 1 | queryJobs | WEB3_CAREER_API_TOKEN | production, jobs, career, crypto, cacheTtlDaily |
+| wegweiserkommune | wegweiser-kommune.mjs | 8 | listIndicators, listTopics, listRegions, getStatisticsTypes, getStatisticsData, getIndicatorInfo, getRegionInfo, listDemographicTypes |  | statistics, germany, demographics, opendata, cacheTtlDaily |
 | whogho | whogho.mjs | 5 | getIndicators, getIndicatorData, getDimensions, getDimensionValues, getCountries |  | health, who, statistics, global, indicators, cacheTtlDaily |
 | wikidata | wikidata.mjs | 6 | countriesByPopulation, citiesByCountry, programmingLanguages, universitiesByCountry, nobelLaureatesByYear, querySparql |  | knowledge, linkeddata, sparql, opendata, cacheTtlDaily |
 | wikimediacommons | wikimediaCommons.mjs | 6 | searchFiles, getImageInfo, getExtendedMetadata, getCategoryMembers, searchWithImageInfo, getFileCategories |  | media, images, opendata, creativecommons, wikipedia, cacheTtlDaily |
