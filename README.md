@@ -95,6 +95,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | cryptodata | mixed-part2.mjs | 8 | getWalletBalance, getWalletBalances, getExchanges, getFiatCurrencies, getNewsSources, getNews, getNewsByType, getNewsById | COINSTATS_API_KEY | production, price, market, data, cacheTtlFrequent |
 | cryptodata | mixed-part3.mjs | 2 | getMarketCap, getCurrencies | COINSTATS_API_KEY | production, price, market, data, cacheTtlFrequent |
 | cointelegraph | getLatestNews.mjs | 1 | getLatestNews |  | crypto, news, media, cacheTtlFrequent |
+| conceptnet | conceptnet.mjs | 3 | lookupConcept, queryRelationships, findRelated |  | nlp, knowledge-graph, semantics, linguistics, cacheTtlLong |
 | connectedpapers | connectedpapers.mjs | 3 | getGraph, getRemainingUsages, getFreeAccessPapers | CONNECTED_PAPERS_API_KEY | academic, research, papers, citations, graphs, cacheTtlDaily |
 | context | getDocumentation.mjs | 2 | searchLibraryId, getLibraryDocs |  | documentation, search, developer, cacheTtlStatic |
 | copernicusland | copernicusland.mjs | 4 | searchDatasets, listProducts, datasetsByProduct, getDatasetDetail |  | geospatial, environment, europe, opendata, cacheTtlDaily |
@@ -215,6 +216,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | hochwasserzentralen | hochwasserzentralen.mjs | 4 | getGaugeInfo, getStateInfoPost, getStateInfoGet, getGaugeLocations |  | floods, hydrology, germany, geospatial, cacheTtlFrequent |
 | honeypot | honeypot.mjs | 1 | check |  | production, security, token, validation, cacheTtlFrequent |
 | hudoc | hudoc.mjs | 5 | searchCases, searchJudgments, searchDecisions, searchCommunicatedCases, searchGrandChamber |  | legal, humanrights, europe, courts, cacheTtlDaily |
+| iceportal | iceportal.mjs | 2 | getTrainStatus, getTripInfo |  | transport, train, germany, realtime, geospatial, cacheTtlRealtime |
 | igdb | igdb.mjs | 8 | searchGames, searchPlatforms, searchCompanies, searchGenres, searchGameEngines, searchFranchises, getGameCovers, multiQuery | IGDB_CLIENT_ID, IGDB_ACCESS_TOKEN | games, entertainment, database, platforms, twitch, cacheTtlDaily |
 | imfdatamapper | imfdatamapper.mjs | 6 | listIndicators, listCountries, listGroups, getIndicatorAllCountries, getIndicatorByCountry, getIndicatorByGroup |  | economics, finance, macroeconomics, international, statistics, cacheTtlDaily |
 | imf | imfSdmx.mjs | 4 | listDataflows, getCompactData, getDataStructure, getCodeList |  | economics, finance, statistics, international, cacheTtlDaily |
@@ -260,6 +262,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | klinikatlas | german-places.mjs | 5 | searchPlaces, getPlaceByZip, getPlacesByDistrict, getPlacesNearby, getGermanStates |  | healthcare, germany, geography, places, cacheTtlDaily |
 | klinikatlas | hospitals.mjs | 5 | getAllHospitals, searchHospitals, getHospitalsByCity, getHospitalsNearby, getStateStatistics |  | healthcare, germany, hospitals, cacheTtlDaily |
 | klinikatlas | medical-codes.mjs | 4 | searchIcdCodes, getIcdCode, searchOpsCodes, getOpsCode |  | healthcare, germany, medical, icd, ops, cacheTtlDaily |
+| ladesaeulenregister | ladesaeulenregister.mjs | 3 | queryStations, queryByLocation, getRecordCount |  | ev, charging, transport, energy, germany, geospatial, government, cacheTtlDaily |
 | lastfm | lastfm.mjs | 5 | searchArtists, getArtistInfo, searchTracks, getTopArtists, getAlbumInfo | LASTFM_API_KEY | music, entertainment, charts, recommendations, cacheTtlDaily |
 | lebensmittelwarnung | lebensmittelwarnung.mjs | 1 | getWarnings |  | food, safety, germany, consumer, warnings, cacheTtlFrequent |
 | lebensmittelwarnungen | warnings.mjs | 1 | getWarnings | LEBENSMITTELWARNUNGEN_API_KEY | government, food, safety, consumer, germany, opendata, cacheTtlFrequent |
@@ -292,6 +295,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | minascandevnet | mina-devnet.mjs | 2 | getMinaDevnetSchema, getMinaDevnetQuery |  | production, blockchain, explorer, mina, cacheTtlDaily |
 | minascanmainnet | mina-mainnet.mjs | 2 | getMinaMainnetSchema, getMinaMainnetQuery |  | production, blockchain, explorer, mina, cacheTtlDaily |
 | minorplanetcenter | minorPlanetCenter.mjs | 4 | searchOrbits, searchByOrbitalElements, searchNearEarthObjects, searchByMagnitude |  | astronomy, asteroids, space, science, cacheTtlDaily |
+| mobilitydatabase | mobilitydatabase.mjs | 6 | searchFeeds, listGtfsFeeds, getGtfsFeed, listGtfsRtFeeds, listGbfsFeeds, getMetadata | MOBILITY_DB_TOKEN | transport, transit, gtfs, geospatial, catalog, cacheTtlDaily |
 | moralis | blockchainApi.mjs | 7 | /block/:block_number_or_hash, /dateToBlock, /transaction/:transaction_hash/verbose, /:address/verbose, /latestBlockNumber/:chain, /transaction/:transaction_hash, /:address | MORALIS_API_KEY | evm, blockchain, blocks, cacheTtlFrequent |
 | moralis | defiApi.mjs | 3 | /wallets/:address/defi/:protocol/positions, /wallets/:address/defi/positions, /wallets/:address/defi/summary | MORALIS_API_KEY | evm, defi, positions, cacheTtlFrequent |
 | moralis | entity.mjs | 1 | /entities/categories | MORALIS_API_KEY | evm, identity, entities, cacheTtlDaily |
@@ -621,6 +625,7 @@ This configuration snippet demonstrates how to start FlowMCP with a Claude-compa
                 "LEBENSMITTELWARNUNGEN_API_KEY": "",
                 "LENS_API_KEY": "",
                 "LOBBYREGISTER_API_KEY": "",
+                "MOBILITY_DB_TOKEN": "",
                 "MORALIS_API_KEY": "",
                 "NASA_API_KEY": "",
                 "NEWSAPI_API_KEY": "",
