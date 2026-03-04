@@ -182,6 +182,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | freedictionary | free-dictionary.mjs | 1 | getWordDefinition |  | dictionary, language, english, definitions, cacheTtlDaily |
 | gbif | gbif.mjs | 5 | matchSpeciesName, searchSpecies, searchOccurrences, getSpeciesById, getSpeciesVernacularNames |  | biodiversity, species, ecology, science, opendata, taxonomy, cacheTtlDaily |
 | gdacs | gdacsDisasterAlerts.mjs | 4 | getRecentEvents, getEventData, getEventGeometry, getEventsForApp |  | disasters, alerts, geospatial, emergencies, cacheTtlFrequent |
+| gdelt | gdelt.mjs | 5 | searchArticles, getTimelineVolume, getTimelineTone, searchContext, getToneChart |  | news, media, global, opendata, cacheTtlFrequent |
 | genesisdestatis | genesisdestatis.mjs | 8 | findTerm, catalogueTables, catalogueStatistics, catalogueVariables, getTableData, getMetadataTable, getMetadataStatistic, getTablesForStatistic |  | statistics, germany, government, economy, population, cacheTtlDaily |
 | geoapify | geocoding.mjs | 3 | forwardGeocode, reverseGeocode, autocomplete | GEOAPIFY_API_KEY | geocoding, maps, places, cacheTtlDaily |
 | geonames | geonames.mjs | 8 | search, get, postalCodeSearch, countryInfo, timezone, findNearbyPlaceName, elevation, weather | GEONAMES_USERNAME | geography, geocoding, places, postalcodes, timezone, elevation, cacheTtlDaily |
@@ -314,6 +315,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | nina | warnings.mjs | 4 | getDwdWarnings, getMowasWarnings, getBiwappWarnings, getKatwarnWarnings |  | warnings, germany, safety, cacheTtlFrequent |
 | nina | ninaWarnApp.mjs | 7 | getDashboard, getWarningById, getMowasMapData, getDwdMapData, getKatwarnMapData, getLhpMapData, getEventCodes |  | warnings, emergency, germany, weather, cacheTtlRealtime |
 | noaa | noaaWeatherAlerts.mjs | 5 | getActiveAlertsByArea, getAlertTypes, getPointMetadata, getForecastByGrid, getLatestObservation |  | weather, alerts, forecast, noaa, us, government, opendata, cacheTtlShort |
+| nobelprize | nobel-prize.mjs | 3 | listPrizes, searchLaureates, getLaureate |  | science, awards, history, opendata, cacheTtlDaily |
 | nominatim | nominatim.mjs | 3 | search, reverse, lookup |  | geocoding, maps, openstreetmap, address, geolocation, cacheTtlDaily |
 | nvd | nvdCve.mjs | 7 | getCveById, searchCvesBySeverity, searchCvesByKeyword, searchCvesByDateRange, searchCvesByCwe, getCveChangeHistory, searchRecentlyModifiedCves |  | security, vulnerability, cve, cpe, cacheTtlDaily |
 | nwsweather | nwsWeather.mjs | 6 | getPoint, getForecast, getHourlyForecast, getActiveAlerts, getStations, getLatestObservation |  | weather, forecast, alerts, government, geolocation, cacheTtlFrequent |
@@ -440,6 +442,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | twitter | search.mjs | 1 | searchRecentTweets | TWITTER_BEARER_TOKEN | social, search, mentions, cacheTtlFrequent |
 | ubaluftqualitaet | ubaluftqualitaet.mjs | 8 | getAirQuality, getAirQualityLimits, getMeasurements, getComponents, getMetadata, getAnnualBalances, getExceedances, getThresholds |  | environment, air-quality, germany, government, health, cacheTtlFrequent |
 | umweltbundesamt | air-quality.mjs | 5 | getStations, searchStations, getComponents, getAirQualityIndex, getMeasurements |  | airquality, germany, environment, pollution |
+| uncomtrade | un-comtrade.mjs | 5 | getTradeData, getDataAvailability, listReferences, listReporters, listTradeRegimes |  | trade, economics, international, opendata, cacheTtlDaily |
 | undata | undata.mjs | 6 | listDataflows, ghgEmissions, energyStatistics, energyBalance, countryIndicators, educationStatistics |  | statistics, environment, energy, education, opendata, sdmx, cacheTtlDaily |
 | unescoworldheritage | unescoWorldHeritage.mjs | 4 | searchSites, getSitesByCountry, getDangerSites, getDatasetInfo |  | culture, heritage, geography, tourism, unesco, cacheTtlStatic |
 | uniprot | uniprot.mjs | 5 | searchProteins, getProteinEntry, searchUniref, searchUniparc, searchProteomes |  | science, biology, proteins, genomics, bioinformatics, cacheTtlDaily |
