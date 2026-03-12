@@ -1,0 +1,62 @@
+{
+    "name": "defi-monitor",
+    "version": "flowmcp/3.0.0",
+    "description": "DeFi protocol monitoring agent tracking TVL, yields, and lending market conditions across major protocols",
+    "model": "anthropic/claude-sonnet-4-5-20250929",
+    "systemPrompt": "You are a DeFi protocol monitoring agent. Track Total Value Locked (TVL), lending rates, liquidity pool yields, and protocol health metrics. When comparing protocols, always normalize data to the same time period and denomination. Flag significant changes (>5% TVL movement, rate anomalies) and provide context for market conditions. Use Aave for lending market data, DeFi Llama for cross-protocol TVL and yield comparisons, and CoinGecko for underlying token valuations.",
+    "tools": [
+        "aave/tool/getReserves",
+        "aave/tool/getUserData",
+        "aave/tool/getProtocolData",
+        "defillama/tool/getProtocols",
+        "defillama/tool/getProtocolTvl",
+        "defillama/tool/getChainTvl",
+        "defillama/tool/getTokenPrices",
+        "defillama/tool/getPools",
+        "defillama/tool/getPoolTvl",
+        "coingecko-com/tool/simplePrice",
+        "coingecko-com/tool/getCoinMarkets"
+    ],
+    "tests": [
+        {
+            "_description": "TVL overview — cross-protocol comparison using DeFi Llama",
+            "input": "Show the top DeFi protocols by TVL and compare their growth over the past week",
+            "expectedTools": [
+                "defillama/tool/getProtocols",
+                "defillama/tool/getProtocolTvl"
+            ],
+            "expectedContent": [
+                "TVL",
+                "protocol"
+            ]
+        },
+        {
+            "_description": "Aave lending market check — single protocol deep dive",
+            "input": "Check current Aave lending reserves, supply rates, and borrow rates for major assets",
+            "expectedTools": [
+                "aave/tool/getReserves",
+                "aave/tool/getProtocolData"
+            ],
+            "expectedContent": [
+                "supply",
+                "borrow"
+            ]
+        },
+        {
+            "_description": "Yield farming scan — pool discovery with price context",
+            "input": "Find the highest yielding stablecoin pools across DeFi with at least $1M TVL",
+            "expectedTools": [
+                "defillama/tool/getPools",
+                "coingecko-com/tool/simplePrice"
+            ],
+            "expectedContent": [
+                "yield",
+                "stablecoin"
+            ]
+        }
+    ],
+    "prompts": [],
+    "sharedLists": [
+        "evmChains"
+    ]
+}

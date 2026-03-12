@@ -18,7 +18,8 @@
     "validate:flowmcp": "node tests/schema-validation/flowmcp-load-test.mjs",
     "docs:generate": "node scripts/generate-docs.mjs",
     "generate:static": "node tests/manual/0-generate-static-import.mjs",
-    "generate:registry": "node scripts/generate-registry.mjs"
+    "generate:registry": "node scripts/generate-registry.mjs",
+    "generate:catalog": "node scripts/generate-catalog-registry.mjs"
   },
   "keywords": [],
   "engines": {
