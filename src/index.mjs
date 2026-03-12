@@ -128,9 +128,10 @@ class SchemaImporter {
         schemas = schemas
             .map( ( item ) => {
                 const { schema, absolutePath } = item
-                const { namespace, routes, tags, requiredServerParams } = schema
+                const { namespace, tools, routes, tags, requiredServerParams } = schema
+                const toolEntries = tools || routes || {}
                 item = { ...item, namespace, tags, requiredServerParams }
-                item['routeNames'] = Object.keys( routes )
+                item['routeNames'] = Object.keys( toolEntries )
                 item['schemaFolder'] = path.basename( path.dirname( absolutePath ) ) 
                 item['schemaName'] = path.basename( absolutePath, '.mjs' )
                 item['fileName'] = path.basename( absolutePath )
