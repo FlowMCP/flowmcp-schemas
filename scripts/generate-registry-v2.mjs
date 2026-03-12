@@ -4,8 +4,8 @@ import { pathToFileURL } from 'node:url'
 
 
 const REPO_ROOT = new URL( '..', import.meta.url ).pathname
-const SCHEMA_DIR = join( REPO_ROOT, 'schemas', 'v2.0.0' )
-const BASE_DIR = 'schemas/v2.0.0'
+const SCHEMA_DIR = join( REPO_ROOT, 'schemas', 'v3.0.0' )
+const BASE_DIR = 'schemas/v3.0.0'
 const OUTPUT_ALL = join( SCHEMA_DIR, 'flowmcp-registry.json' )
 const OUTPUT_STARTER = join( SCHEMA_DIR, 'flowmcp-registry-starter.json' )
 const LISTS_DIR_NAME = '_lists'

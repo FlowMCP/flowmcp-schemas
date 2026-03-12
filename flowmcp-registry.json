@@ -1,9 +1,9 @@
 {
     "name": "flowmcp-schemas",
-    "version": "2.0.0",
-    "description": "Official FlowMCP community schemas - Complete Collection (v2)",
-    "schemaSpec": "2.0.0",
-    "baseDir": "schemas/v2.0.0",
+    "version": "3.0.0",
+    "description": "Official FlowMCP community schemas - Complete Collection (v3)",
+    "schemaSpec": "3.0.0",
+    "baseDir": "schemas/v3.0.0",
     "registryType": "all",
     "shared": [
         {

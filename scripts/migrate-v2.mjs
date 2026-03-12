@@ -13,18 +13,18 @@ class SchemaMigrator {
         const { file, migrate, verbose } = args
 
         console.log( '\n' + '='.repeat( 60 ) )
-        console.log( '  FlowMCP Schema Migrator  v1.2.0 -> v2.0.0' )
+        console.log( '  FlowMCP Schema Migrator  v1.2.0 -> v3.0.0' )
         console.log( '='.repeat( 60 ) )
 
         const sourceDir = path.resolve( __dirname, '../schemas/v1.2.0' )
-        const outputDir = path.resolve( __dirname, '../schemas/v2.0.0' )
+        const outputDir = path.resolve( __dirname, '../schemas/v3.0.0' )
 
         const files = file
             ? [ path.resolve( sourceDir, file ) ]
             : SchemaMigrator.#collectSchemaFiles( { sourceDir } )
 
         console.log( `\n  Source:  schemas/v1.2.0/` )
-        console.log( `  Output:  schemas/v2.0.0/` )
+        console.log( `  Output:  schemas/v3.0.0/` )
         console.log( `  Files:   ${files.length}` )
         console.log( `  Mode:    ${migrate ? 'MIGRATE' : 'DRY RUN (analyze only)'}` )
         console.log( '' )
@@ -565,7 +565,7 @@ class SchemaMigrator {
     static #generateOutputFile( { main, handlerCode, category, warnings } ) {
         const lines = []
 
-        lines.push( '// Migrated from v1.2.0 -> v2.0.0' )
+        lines.push( '// Migrated from v1.2.0 -> v3.0.0' )
         lines.push( `// Category: ${category}` )
         if( warnings.length > 0 ) {
             warnings

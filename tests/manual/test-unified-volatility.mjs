@@ -1,5 +1,5 @@
 import { createRequire } from 'module'
-import { main, handlers } from '../../schemas/v2.0.0/indicators/unified-volatility.mjs'
+import { main, handlers } from '../../schemas/v3.0.0/indicators/unified-volatility.mjs'
 
 const require = createRequire( import.meta.url )
 

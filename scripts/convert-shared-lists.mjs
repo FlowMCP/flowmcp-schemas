@@ -69,10 +69,10 @@ class SharedListConverter {
         console.log( '='.repeat( 60 ) )
 
         const sourceDir = path.resolve( __dirname, '../schemas/v1.2.0/_shared' )
-        const outputDir = path.resolve( __dirname, '../schemas/v2.0.0/_lists' )
+        const outputDir = path.resolve( __dirname, '../schemas/v3.0.0/_lists' )
 
         console.log( `\n  Source:  schemas/v1.2.0/_shared/` )
-        console.log( `  Output:  schemas/v2.0.0/_lists/` )
+        console.log( `  Output:  schemas/v3.0.0/_lists/` )
         console.log( `  Mode:    ${migrate ? 'WRITE' : 'DRY RUN'}` )
         console.log( '' )
 

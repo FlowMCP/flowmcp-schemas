@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
 
 
-const schemasDir = resolve( import.meta.dirname, '../../schemas/v2.0.0' )
+const schemasDir = resolve( import.meta.dirname, '../../schemas/v3.0.0' )
 
 const pilotSchemas = [
     { name: 'berlin-de/events.mjs', hasHandlers: false },
@@ -15,7 +15,7 @@ const pilotSchemas = [
 let passed = 0
 let failed = 0
 
-console.log( '\n  v2.0.0 Pilot Schema Verification\n' )
+console.log( '\n  v3.0.0 Pilot Schema Verification\n' )
 
 const results = pilotSchemas
     .map( async ( { name, hasHandlers } ) => {

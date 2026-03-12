@@ -6,7 +6,7 @@ import { readdir } from 'fs/promises'
 import { join, basename } from 'path'
 import { pathToFileURL } from 'url'
 
-const SCHEMA_DIR = new URL( '../../schemas/v2.0.0/', import.meta.url ).pathname
+const SCHEMA_DIR = new URL( '../../schemas/v3.0.0/', import.meta.url ).pathname
 const LISTS_DIR = join( SCHEMA_DIR, '_lists' )
 
 const args = process.argv.slice( 2 )

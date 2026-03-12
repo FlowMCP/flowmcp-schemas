@@ -1,4 +1,4 @@
-// Live test for DESTATIS v2.0.0 schemas — catalogue + data
+// Live test for DESTATIS v3.0.0 schemas — catalogue + data
 // Runs each route's first test case through the full v2 pipeline
 import { Pipeline } from '../../../flowmcp-core/src/v2/task/Pipeline.mjs'
 import { Fetch } from '../../../flowmcp-core/src/v2/task/Fetch.mjs'
@@ -22,7 +22,7 @@ envContent
     } )
 
 
-const schemasDir = resolve( import.meta.dirname, '../../schemas/v2.0.0' )
+const schemasDir = resolve( import.meta.dirname, '../../schemas/v3.0.0' )
 
 const testSchemas = [
     {
@@ -52,7 +52,7 @@ let failed = 0
 const total = testSchemas
     .reduce( ( acc, s ) => acc + s.routes.length, 0 )
 
-console.log( `\n  DESTATIS v2.0.0 Live Test (${total} routes)\n` )
+console.log( `\n  DESTATIS v3.0.0 Live Test (${total} routes)\n` )
 
 const schemaResults = testSchemas
     .map( async ( { file, routes } ) => {

@@ -92,7 +92,7 @@ npm run test:coverage:src
    - Adds metadata to schemas
    - Key methods: `loadFromFolder()`, private helper methods for processing
 
-2. **Schema Structure** (`schemas/v2.0.0/`): Organized API schemas by provider
+2. **Schema Structure** (`schemas/v3.0.0/`): Organized API schemas by provider
    - Each provider has its own folder
    - Schemas define API endpoints with `export const main` (v2 format)
    - Optional `export const handlers` for pre/post/execute request hooks
@@ -103,18 +103,18 @@ npm run test:coverage:src
    - `helpers/Print.mjs`: Logging utilities
    - `helpers/Overview.mjs`: Schema overview utilities
 
-### Schema Format (v2.0.0)
+### Schema Format (v3.0.0)
 
 Each schema file exports `main` (required) and optionally `handlers`:
 - `namespace`: Unique identifier for the API provider
 - `name`: Schema name
 - `description`: Purpose description
-- `version`: Schema version (`'2.0.0'`)
+- `version`: Schema version (`'3.0.0'`)
 - `docs`: Array of documentation URLs
 - `tags`: Semantic tags for categorization
 - `root`: Base API URL (may include `{{PLACEHOLDER}}`)
 - `requiredServerParams`: Environment variables needed (e.g., API keys)
-- `routes`: Object defining endpoints with `method`, `path`, `parameters`
+- `tools`: Object defining endpoints with `method`, `path`, `parameters`
 
 ### Important Patterns
 
@@ -127,7 +127,7 @@ Each schema file exports `main` (required) and optionally `handlers`:
    - `outputType`: Control output format ('onlyPath', 'onlySchema', or full)
 
 3. **File Organization**:
-   - Current schemas: `schemas/v2.0.0/`
+   - Current schemas: `schemas/v3.0.0/`
    - Legacy schemas: `schemas/v1.2.0/` and `schemas/v1.1.1/`
    - Test files: `tests/`
    - Source code: `src/`
@@ -140,7 +140,7 @@ Each schema file exports `main` (required) and optionally `handlers`:
 4. **Error Handling**: Check for missing required params and validate schema structure
 5. **File System Operations**: Use Node.js built-in `fs` and `path` modules for file operations
 
-## Schema Creation (FlowMCP v2.0.0 Spec)
+## Schema Creation (FlowMCP v3.0.0 Spec)
 
 ### Top-Level Structure
 
@@ -149,7 +149,7 @@ export const main = {
     namespace: 'providerName',             // letters only, /^[a-zA-Z]+$/
     name: 'Provider API',                  // human-readable name
     description: 'What this API does',     // brief explanation
-    version: '2.0.0',                      // schema version
+    version: '3.0.0',                      // schema version
     docs: [ 'https://provider.com/docs' ], // array of documentation URLs
     tags: [ 'crypto', 'defi' ],            // semantic tags
     root: 'https://api.provider.com',      // base URL, {{PLACEHOLDER}} allowed
@@ -157,7 +157,7 @@ export const main = {
     headers: {                             // request headers (optional)
         'Authorization': 'Bearer {{API_KEY}}'
     },
-    routes: { /* ... */ }
+    tools: { /* ... */ }
 }
 
 // Optional: handler factory for pre/post/execute hooks
@@ -170,14 +170,14 @@ export const handlers = ( { sharedLists, libraries } ) => ( {
 } )
 ```
 
-### Route Structure
+### Tool Structure
 
 ```javascript
-routes: {
+tools: {
     getResource: {
         method: 'GET',                              // GET, POST, PUT, DELETE
         path: '/resource/:id',                      // path with :param placeholders
-        description: 'What this route does',        // brief explanation
+        description: 'What this tool does',         // brief explanation
         parameters: {
             id: { type: 'string', required: true, description: 'Resource ID' },
             limit: { type: 'number', required: false, default: 10, description: 'Max results' }
@@ -226,7 +226,7 @@ export const handlers = ( { sharedLists, libraries } ) => ( {
 - Do NOT hardcode route references like `["provider.getRoute1", "provider.getRoute2"]`
 
 ### Schema Size
-- Maximum **10 routes** per schema file
+- Maximum **10 tools** per schema file
 - Split large APIs into multiple schema files by domain
 
 ### Validation & Test Commands
@@ -243,9 +243,9 @@ npm run validate:flowmcp    # FlowMCP schema-loading test
 1. **Develop** in `tests/new-schemas/PROVIDER/`
 2. **Validate** with `npm run validate:ai`
 3. **Live-test** with `node tests/manual/test-schemas.mjs --namespace=NAME`
-4. **After approval**: Move to `schemas/v2.0.0/PROVIDER/`
+4. **After approval**: Move to `schemas/v3.0.0/PROVIDER/`
 
 ### Reference Files
 
-- **Official Spec**: [FlowMCP Specification v2.0.0](https://github.com/FlowMCP/flowmcp-specification)
+- **Official Spec**: [FlowMCP Specification v3.0.0](https://github.com/FlowMCP/flowmcp-specification)
 - **Schema Guidelines**: `schemas/SCHEMAS.md`

@@ -1,146 +1,66 @@
 export const main = {
     namespace: 'aqicn',
-    name: 'AQICN World Air Quality Index',
-    description: 'Real-time air quality data from 10,000+ monitoring stations worldwide. Provides AQI values, PM2.5, PM10, O3, NO2, SO2, CO concentrations, and health recommendations.',
+    name: 'AQICN',
+    description: 'Access real-time air quality data from 10K+ monitoring stations worldwide via the World Air Quality Index (WAQI) API. Get AQI readings, pollutant levels (PM2.5, PM10, O3, NO2, SO2, CO), and forecasts by city name or geographic coordinates.',
     version: '2.0.0',
     docs: ['https://aqicn.org/json-api/doc/'],
-    tags: ['environment', 'air-quality', 'health', 'pollution', 'cacheTtlFrequent'],
+    tags: ['air-quality', 'environment', 'pollution', 'health', 'aqi', 'cacheTtlFrequent'],
     root: 'https://api.waqi.info',
     requiredServerParams: ['AQICN_API_TOKEN'],
     headers: {},
     routes: {
-        getCityAqi: {
+        getFeedByCity: {
             method: 'GET',
             path: '/feed/:city/',
-            description: 'Get real-time air quality index (AQI) for a city by name. Returns AQI value, dominant pollutant, individual pollutant concentrations (PM2.5, PM10, O3, NO2, SO2, CO), and weather data.',
+            description: 'Get real-time air quality data for a city. Returns AQI value, dominant pollutant, individual pollutant readings (PM2.5, PM10, O3, NO2, SO2, CO), weather data, and multi-day forecast.',
             parameters: [
                 { position: { key: 'city', value: '{{CITY}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'token', value: '{{SERVER_PARAM:AQICN_API_TOKEN}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
             tests: [
-                { _description: 'Get AQI for Beijing', CITY: 'beijing' },
-                { _description: 'Get AQI for London', CITY: 'london' }
-            ],
-            output: {
-                mimeType: 'application/json',
-                schema: {
-                    type: 'object',
-                    properties: {
-                        status: { type: 'string' },
-                        data: {
-                            type: 'object',
-                            properties: {
-                                aqi: { type: 'number' },
-                                idx: { type: 'number' },
-                                city: { type: 'object' },
-                                dominentpol: { type: 'string' },
-                                iaqi: { type: 'object' },
-                                time: { type: 'object' },
-                                forecast: { type: 'object' },
-                                attributions: { type: 'array', items: { type: 'object' } }
-                            }
-                        }
-                    }
-                }
-            }
+                { _description: 'Get AQI for Beijing', city: 'beijing' },
+                { _description: 'Get AQI for London', city: 'london' },
+                { _description: 'Get AQI for New York', city: 'new-york' }
+            ]
         },
-        getGeoAqi: {
+        getFeedByGeo: {
             method: 'GET',
-            path: '/feed/geo::latitude;:longitude/',
-            description: 'Get real-time AQI for a geographic coordinate. Returns the nearest monitoring station data with full pollutant breakdown.',
+            path: '/feed/geo::lat;:lng/',
+            description: 'Get real-time air quality data for the nearest monitoring station to the given latitude and longitude coordinates. Returns the same data structure as the city feed.',
             parameters: [
-                { position: { key: 'latitude', value: '{{LATITUDE}}', location: 'insert' }, z: { primitive: 'number()', options: [] } },
-                { position: { key: 'longitude', value: '{{LONGITUDE}}', location: 'insert' }, z: { primitive: 'number()', options: [] } },
+                { position: { key: 'lat', value: '{{LATITUDE}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'lng', value: '{{LONGITUDE}}', location: 'insert' }, z: { primitive: 'string()', options: [] } },
                 { position: { key: 'token', value: '{{SERVER_PARAM:AQICN_API_TOKEN}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
             tests: [
-                { _description: 'Get AQI for Berlin coordinates', LATITUDE: '52.52', LONGITUDE: '13.405' },
-                { _description: 'Get AQI for New York coordinates', LATITUDE: '40.71', LONGITUDE: '-74.01' }
-            ],
-            output: {
-                mimeType: 'application/json',
-                schema: {
-                    type: 'object',
-                    properties: {
-                        status: { type: 'string' },
-                        data: {
-                            type: 'object',
-                            properties: {
-                                aqi: { type: 'number' },
-                                idx: { type: 'number' },
-                                city: { type: 'object' },
-                                iaqi: { type: 'object' },
-                                time: { type: 'object' }
-                            }
-                        }
-                    }
-                }
-            }
+                { _description: 'Get AQI near Berlin', lat: '52.52', lng: '13.405' },
+                { _description: 'Get AQI near Tokyo', lat: '35.6762', lng: '139.6503' }
+            ]
         },
-        searchStations: {
-            method: 'GET',
-            path: '/search/',
-            description: 'Search for air quality monitoring stations by keyword. Returns a list of matching stations with their current AQI and location.',
-            parameters: [
-                { position: { key: 'keyword', value: '{{KEYWORD}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
-                { position: { key: 'token', value: '{{SERVER_PARAM:AQICN_API_TOKEN}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
-            ],
-            tests: [
-                { _description: 'Search for Munich stations', KEYWORD: 'munich' },
-                { _description: 'Search for Tokyo stations', KEYWORD: 'tokyo' }
-            ],
-            output: {
-                mimeType: 'application/json',
-                schema: {
-                    type: 'object',
-                    properties: {
-                        status: { type: 'string' },
-                        data: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    uid: { type: 'number' },
-                                    aqi: { type: 'string' },
-                                    station: { type: 'object' },
-                                    time: { type: 'object' }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        getStationById: {
+        getFeedByStationId: {
             method: 'GET',
             path: '/feed/@:stationId/',
-            description: 'Get real-time AQI data for a specific monitoring station by its unique station ID.',
+            description: 'Get real-time air quality data for a specific monitoring station by its numeric station ID.',
             parameters: [
                 { position: { key: 'stationId', value: '{{STATION_ID}}', location: 'insert' }, z: { primitive: 'number()', options: [] } },
                 { position: { key: 'token', value: '{{SERVER_PARAM:AQICN_API_TOKEN}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
             tests: [
-                { _description: 'Get Shanghai station data', STATION_ID: '1437' }
+                { _description: 'Get AQI for station 1437 (Shanghai)', stationId: 1437 }
+            ]
+        },
+        searchStations: {
+            method: 'GET',
+            path: '/search/',
+            description: 'Search for air quality monitoring stations by keyword. Returns a list of matching stations with their AQI values, coordinates, and URLs.',
+            parameters: [
+                { position: { key: 'keyword', value: '{{KEYWORD}}', location: 'query' }, z: { primitive: 'string()', options: [] } },
+                { position: { key: 'token', value: '{{SERVER_PARAM:AQICN_API_TOKEN}}', location: 'query' }, z: { primitive: 'string()', options: [] } }
             ],
-            output: {
-                mimeType: 'application/json',
-                schema: {
-                    type: 'object',
-                    properties: {
-                        status: { type: 'string' },
-                        data: {
-                            type: 'object',
-                            properties: {
-                                aqi: { type: 'number' },
-                                idx: { type: 'number' },
-                                city: { type: 'object' },
-                                iaqi: { type: 'object' },
-                                time: { type: 'object' }
-                            }
-                        }
-                    }
-                }
-            }
+            tests: [
+                { _description: 'Search stations in Berlin', keyword: 'berlin' },
+                { _description: 'Search stations in Paris', keyword: 'paris' }
+            ]
         }
     }
 }

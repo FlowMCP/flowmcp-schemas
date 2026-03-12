@@ -1,6 +1,6 @@
 /**
  * Read successful captures, generate output schemas via OutputSchemaGenerator,
- * and inject them into v2.0.0 schema files.
+ * and inject them into v3.0.0 schema files.
  *
  * By default only processes routes WITHOUT postRequest handlers (raw response = final response).
  * Use --include-handlers to also inject output schemas for routes with postRequest handlers.
@@ -22,8 +22,8 @@ const verbose = args.includes( '--verbose' )
 const includeHandlers = args.includes( '--include-handlers' )
 const nsFilter = args.find( ( a ) => a.startsWith( '--namespace=' ) )?.split( '=' )[1] || null
 
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
-const CAPTURE_DIR = path.resolve( '.captures/v2.0.0' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
+const CAPTURE_DIR = path.resolve( '.captures/v3.0.0' )
 
 
 // ──────────────────────────────────────────────

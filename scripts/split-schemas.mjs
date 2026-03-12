@@ -18,10 +18,10 @@ class SchemaSplitter {
         console.log( '  Schema Splitter  (max 8 routes per file)' )
         console.log( '='.repeat( 60 ) )
 
-        const schemaDir = path.resolve( __dirname, '../schemas/v2.0.0' )
+        const schemaDir = path.resolve( __dirname, '../schemas/v3.0.0' )
         const oversized = await SchemaSplitter.#findOversizedSchemas( { schemaDir } )
 
-        console.log( `\n  Directory:  schemas/v2.0.0/` )
+        console.log( `\n  Directory:  schemas/v3.0.0/` )
         console.log( `  Oversized:  ${oversized.length} schemas` )
         console.log( `  Mode:       ${migrate ? 'WRITE' : 'DRY RUN'}` )
         console.log( '' )

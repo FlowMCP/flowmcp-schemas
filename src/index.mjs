@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 class SchemaImporter {
     static async loadFromFolder( {
-        schemaRootFolder = "./../schemas/v2.0.0/",
+        schemaRootFolder = "./../schemas/v3.0.0/",
         excludeSchemasWithImports = true,
         excludeSchemasWithRequiredServerParams = false,
         addAdditionalMetaData = false,
@@ -26,7 +26,7 @@ class SchemaImporter {
 
 
     static async loadFromFolderStatic( {
-        schemaRootFolder = "./../schemas/v2.0.0/",
+        schemaRootFolder = "./../schemas/v3.0.0/",
         excludeSchemasWithImports = true,
         excludeSchemasWithRequiredServerParams = false,
         addAdditionalMetaData = false,

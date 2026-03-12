@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 
-const V2 = path.resolve( 'schemas/v2.0.0' )
+const V2 = path.resolve( 'schemas/v3.0.0' )
 const namespaces = fs.readdirSync( V2 )
     .filter( ( d ) => d !== '_shared' && d[0] !== '.' )
     .filter( ( d ) => fs.statSync( path.join( V2, d ) ).isDirectory() )

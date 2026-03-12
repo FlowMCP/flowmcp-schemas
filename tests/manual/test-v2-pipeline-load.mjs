@@ -2,7 +2,7 @@ import { Pipeline } from '../../../flowmcp-core/src/v2/task/Pipeline.mjs'
 import { resolve } from 'node:path'
 
 
-const schemasDir = resolve( import.meta.dirname, '../../schemas/v2.0.0' )
+const schemasDir = resolve( import.meta.dirname, '../../schemas/v3.0.0' )
 
 const pilotSchemas = [
     'berlin-de/events.mjs',
@@ -13,7 +13,7 @@ const pilotSchemas = [
 let passed = 0
 let failed = 0
 
-console.log( '\n  v2.0.0 Full Pipeline Load Test\n' )
+console.log( '\n  v3.0.0 Full Pipeline Load Test\n' )
 
 const results = pilotSchemas
     .map( async ( name ) => {

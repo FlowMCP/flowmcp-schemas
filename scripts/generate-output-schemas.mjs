@@ -1,5 +1,5 @@
 // generate-output-schemas.mjs
-// Bulk output schema generator for v2.0.0 schemas
+// Bulk output schema generator for v3.0.0 schemas
 // Analyzes handler code via TEXT ANALYSIS (not dynamic import)
 // and inserts output fields into route definitions.
 //
@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url'
 
 
 const __filename = fileURLToPath( import.meta.url )
-const SCHEMAS_DIR = join( __filename, '..', '..', 'schemas', 'v2.0.0' )
+const SCHEMAS_DIR = join( __filename, '..', '..', 'schemas', 'v3.0.0' )
 const SKIP_DIRS = [ '_lists', '_shared' ]
 
 const NUMBER_HINTS = [

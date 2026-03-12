@@ -1,0 +1,81 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+
+export const main = {
+    namespace: 'bscscan',
+    name: 'BSC Scan',
+    description: 'Retrieve smart contract ABI and verified Solidity source code from BSCScan (Binance Smart Chain explorer). Returns the contract interface definition and full source for any verified contract address on BSC.',
+    version: '3.0.0',
+    docs: ['https://docs.bscscan.com/'],
+    tags: ['test', 'cacheTtlDaily'],
+    root: 'https://api.bscscan.com/',
+    requiredServerParams: ['BSCSCAN_API_KEY'],
+    tools: {
+        getContractABI: {
+            method: 'GET',
+            path: '/api?module=contract&action=getabi&apikey={{BSCSCAN_API_KEY}}',
+            description: 'Returns the Contract ABI of a verified smart contract via BSCScan. Returns structured JSON response data.',
+            parameters: [
+                { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
+            ],
+            tests: [
+                { _description: 'Basic test for getContractABI', address: '0xca143ce32fe78f1f7019d7d551a6402fc5350c73' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
+        },
+        getContractSourceCode: {
+            method: 'GET',
+            path: '/api?module=contract&action=getsourcecode&apikey={{BSCSCAN_API_KEY}}',
+            description: 'Returns the Solidity source code of a verified smart contract. Required: address.',
+            parameters: [
+                { position: { key: 'address', value: '{{USER_PARAM}}', location: 'query' }, z: { primitive: 'string()', options: ['min(42)', 'max(42)'] } }
+            ],
+            tests: [
+                { _description: 'Basic test for getContractSourceCode', address: '0xca143ce32fe78f1f7019d7d551a6402fc5350c73' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        status: { type: 'string' },
+                        message: { type: 'string' },
+                        result: { type: 'string' }
+                    }
+                }
+            },
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    getContractABI: {
+        postRequest: async ( { response, struct, payload } ) => {
+            if( response.status !== "1" ) {
+            throw new Error( response.message )
+            }
+            response = response.result
+            return { response }
+        }
+    },
+    getContractSourceCode: {
+        postRequest: async ( { response, struct, payload } ) => {
+            if( response.status !== "1" ) {
+            throw new Error( response.message )
+            }
+            response = response.result
+            return { response }
+        }
+    }
+} )

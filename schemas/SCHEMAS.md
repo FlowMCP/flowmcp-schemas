@@ -6,7 +6,8 @@ This document provides comprehensive guidelines for managing and developing Flow
 
 ### Version Organization
 
-- **`v2.0.0/`** - Current stable schemas following FlowMCP v2.0.0 specification
+- **`v3.0.0/`** - Current stable schemas following FlowMCP v3.0.0 specification
+- **`v2.0.0/`** - Legacy v2.0.0 schemas (deprecated, migrated to v3.0.0)
 - **`v1.2.0/`** - Legacy v1.2.0 schemas (deprecated, kept for reference)
 - **`v1.1.1/`** - Legacy schemas for FlowMCP v1.1.1
 - **`not_supported/`** - Special cases and experimental schemas not yet supported
@@ -21,7 +22,7 @@ Each version folder contains provider-specific subdirectories organized by compa
 
 ## FlowMCP Specification Compliance
 
-All schemas must follow the [FlowMCP v2.0.0 specification](https://github.com/FlowMCP/flowmcp-specification).
+All schemas must follow the [FlowMCP v3.0.0 specification](https://github.com/FlowMCP/flowmcp-specification).
 
 ### Required Schema Fields
 
@@ -30,16 +31,16 @@ export const main = {
     namespace: 'providername',           // Letters only, unique identifier
     name: 'Provider API',               // Descriptive name
     description: 'Clear description',   // Purpose and functionality
-    version: '2.0.0',                   // Schema version
+    version: '3.0.0',                   // Schema version
     docs: [ 'https://api-docs-url' ],   // Documentation links
     tags: [ 'category', 'domain' ],     // Semantic tags
     root: 'https://api.example.com',    // Base URL with optional {{PLACEHOLDER}}
     requiredServerParams: [ 'API_KEY' ],// Environment variables needed
-    routes: {
+    tools: {
         getResource: {
             method: 'GET',
             path: '/endpoint',
-            description: 'Route description',
+            description: 'Tool description',
             parameters: {
                 id: { type: 'string', required: true, description: 'Resource ID' }
             }
@@ -50,7 +51,7 @@ export const main = {
 
 ### Schema Size Guidelines
 
-- **Maximum 10 routes per schema** - Keeps complexity manageable for AI processing
+- **Maximum 10 tools per schema** - Keeps complexity manageable for AI processing
 - **Split large APIs by category** - Example: Moralis split into blockchain, defi, nft, etc.
 - **Alternative splitting strategies** - If categories don't apply, use other logical divisions
 
@@ -63,7 +64,7 @@ export const main = {
 - Enables searching for all methods from a specific provider
 - Examples: `chainlink`, `coingecko`, `moralis`
 
-### Route Descriptions
+### Tool Descriptions
 
 - **Critical for discoverability** - These descriptions appear in MCP clients
 - Be specific about functionality and use cases
@@ -80,11 +81,11 @@ export const main = {
 - Generic descriptors: `["production", "beta", "stable"]`
 
 **❌ FORBIDDEN TAG PATTERNS:**
-- `namespace.routeName` (e.g., `"chainlink.getPrice"`)
-- Direct route references that break after server-side filtering
-- Any hardcoded references to specific route names
+- `namespace.toolName` (e.g., `"chainlink.getPrice"`)
+- Direct tool references that break after server-side filtering
+- Any hardcoded references to specific tool names
 
-**Why this matters**: When schemas are filtered by tags on the server (e.g., `activateTags: ["chainlink.getPrice"]`), only matching routes are kept. If tags still contain references to filtered-out routes, FlowMCP validation will fail.
+**Why this matters**: When schemas are filtered by tags on the server (e.g., `activateTags: ["chainlink.getPrice"]`), only matching tools are kept. If tags still contain references to filtered-out tools, FlowMCP validation will fail.
 
 **Examples:**
 ```javascript
@@ -114,9 +115,9 @@ parameters: [
 
 ### Test Requirements
 
-- **Minimum one test per route** - No exceptions
+- **Minimum one test per tool** - No exceptions
 - Tests must demonstrate route functionality clearly
-- Include parameter variations for complex routes
+- Include parameter variations for complex tools
 - Use real, working parameter values
 - Descriptive test names explaining the scenario
 
@@ -135,7 +136,7 @@ Before any repository release:
 1. **All schemas must be valid** according to FlowMCP specification
 2. **Functional testing required** with real API keys where needed
 3. **Test responses must be meaningful** for internal processing
-4. **No broken or non-functional routes** allowed
+4. **No broken or non-functional tools** allowed
 
 ### API Key Management
 
@@ -176,13 +177,13 @@ For providers with extensive APIs (100+ endpoints):
 
 - **Prioritize commonly used endpoints** in initial schema versions
 - **Group related functionality** together
-- **Use clear, descriptive route names** that match API documentation
+- **Use clear, descriptive tool names** that match API documentation
 - **Include relevant modifiers** for request/response processing
 
 ### Documentation
 
 - **Link to official API docs** in the `docs` field
-- **Explain complex parameters** in route descriptions
+- **Explain complex parameters** in tool descriptions
 - **Document expected response formats** where helpful
 - **Include usage examples** in test descriptions
 
@@ -220,9 +221,9 @@ When schemas don't work as expected, debugging modifiers can help diagnose issue
 Use the `pre` phase to inspect what is being sent to the API:
 
 ```javascript
-routes: {
-    yourRoute: {
-        // ... route configuration
+tools: {
+    yourTool: {
+        // ... tool configuration
         modifiers: [
             { phase: "pre", handlerName: "debugRequest" }
         ]
@@ -230,13 +231,13 @@ routes: {
 },
 handlers: {
     debugRequest: async ({ struct, payload }) => {
-        console.log("🔍 DEBUG REQUEST:")
+        console.log("DEBUG REQUEST:")
         console.log("URL:", payload.url)
         console.log("Method:", payload.method)
         console.log("Headers:", payload.headers)
         console.log("Body:", payload.body)
         console.log("Query params:", payload.query)
-        
+
         return { struct, payload }
     }
 }
@@ -247,9 +248,9 @@ handlers: {
 Use the `post` phase to examine raw API responses:
 
 ```javascript
-routes: {
-    yourRoute: {
-        // ... route configuration
+tools: {
+    yourTool: {
+        // ... tool configuration
         modifiers: [
             { phase: "post", handlerName: "debugResponse" }
         ]
@@ -257,13 +258,13 @@ routes: {
 },
 handlers: {
     debugResponse: async ({ struct, payload }) => {
-        console.log("🔍 DEBUG RESPONSE:")
+        console.log("DEBUG RESPONSE:")
         console.log("Status:", struct.status)
         console.log("HTTP Status:", struct.httpStatus)
         console.log("Raw Data:", struct.dataAsString)
         console.log("Headers:", struct.responseHeaders)
         console.log("Messages:", struct.messages)
-        
+
         return { struct, payload }
     }
 }
@@ -290,7 +291,7 @@ modifiers: [
 #### Issue: 404 Not Found errors
 - **Symptom**: HTTP 404 responses from API
 - **Debug**: Use `pre` modifier to verify the constructed URL
-- **Common causes**: Incorrect route paths, missing path parameters, API changes
+- **Common causes**: Incorrect tool paths, missing path parameters, API changes
 
 #### Issue: Authentication failures
 - **Symptom**: 401/403 errors or "unauthorized" responses

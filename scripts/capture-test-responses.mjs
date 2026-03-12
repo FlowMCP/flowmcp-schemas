@@ -74,8 +74,8 @@ function resolveServerParams( { text } ) {
     return result
 }
 
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
-const CAPTURE_DIR = path.resolve( '.captures/v2.0.0' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
+const CAPTURE_DIR = path.resolve( '.captures/v3.0.0' )
 const SHARED_DIR = path.resolve( 'schemas/v1.2.0/_shared' )
 
 

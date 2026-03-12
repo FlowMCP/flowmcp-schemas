@@ -1,17 +1,17 @@
 /**
- * Generate a comprehensive migration tracking document for all v2.0.0 routes.
+ * Generate a comprehensive migration tracking document for all v3.0.0 routes.
  * One line per route with status columns for tests, output, captures, handlers.
  *
- * Output: schemas/v2.0.0/MIGRATION-STATUS.md
+ * Output: schemas/v3.0.0/MIGRATION-STATUS.md
  */
 
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
-const CAPTURE_DIR = path.resolve( '.captures/v2.0.0' )
-const OUTPUT_PATH = path.resolve( 'schemas/v2.0.0/MIGRATION-STATUS.md' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
+const CAPTURE_DIR = path.resolve( '.captures/v3.0.0' )
+const OUTPUT_PATH = path.resolve( 'schemas/v3.0.0/MIGRATION-STATUS.md' )
 
 // ──────────────────────────────────────────────
 // Collect capture results
@@ -228,7 +228,7 @@ await processAll()
 
 const lines = []
 
-lines.push( '# FlowMCP v2.0.0 — Migration Status' )
+lines.push( '# FlowMCP v3.0.0 — Migration Status' )
 lines.push( '' )
 lines.push( `Generated: ${new Date().toISOString().slice( 0, 16 )}` )
 lines.push( '' )

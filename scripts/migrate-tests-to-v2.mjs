@@ -1,10 +1,10 @@
 /**
- * Migrate tests from v1.2.0 schemas to v2.0.0 schemas.
+ * Migrate tests from v1.2.0 schemas to v3.0.0 schemas.
  *
  * Strategy:
  * 1. Dynamic import() each v1.2.0 schema to get test objects as real JS
  * 2. Serialize each test to a formatted string
- * 3. Text-inject into the v2.0.0 file after the output block (or parameters block)
+ * 3. Text-inject into the v3.0.0 file after the output block (or parameters block)
  *
  * Usage:
  *   node scripts/migrate-tests-to-v2.mjs --dry-run    # Preview only
@@ -23,7 +23,7 @@ const verbose = args.includes( '--verbose' )
 const nsFilter = args.find( ( a ) => a.startsWith( '--namespace=' ) )?.split( '=' )[1] || null
 
 const V1_DIR = path.resolve( 'schemas/v1.2.0' )
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
 
 const stats = {
     v1FilesScanned: 0,
@@ -85,7 +85,7 @@ function buildTestsBlock( { tests, routeIndent } ) {
 }
 
 /**
- * Find the injection point in a v2.0.0 file for a given route.
+ * Find the injection point in a v3.0.0 file for a given route.
  * Returns the index after the output block or parameters block.
  */
 function findInjectionPoint( { content, routeName } ) {
@@ -179,7 +179,7 @@ function findMatchingBracket( { content, startIdx } ) {
 }
 
 // Main
-console.log( `\nFlowMCP Test Migration v1.2.0 -> v2.0.0` )
+console.log( `\nFlowMCP Test Migration v1.2.0 -> v3.0.0` )
 console.log( `Mode: ${dryRun ? 'DRY-RUN' : 'APPLY'}` )
 if ( nsFilter ) { console.log( `Filter: ${nsFilter}` ) }
 console.log( '' )
@@ -248,7 +248,7 @@ const processNamespaces = async () => {
                 return
             }
 
-            // Inject into v2.0.0 file
+            // Inject into v3.0.0 file
             let v2Content = fs.readFileSync( v2Path, 'utf-8' )
             let injectedCount = 0
 

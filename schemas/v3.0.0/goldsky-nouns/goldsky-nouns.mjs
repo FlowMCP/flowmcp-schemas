@@ -1,0 +1,258 @@
+// Migrated from v1.2.0 -> v2.0.0
+// Category: handlers-clean
+// Namespace: "goldskyNouns" -> "goldskynouns"
+
+export const main = {
+    namespace: 'goldskynouns',
+    name: 'Nouns DAO Subgraph',
+    description: 'Query Nouns DAO governance data from the Goldsky subgraph — recent proposals, current auctions, individual Noun details, and top delegates by voting power.',
+    version: '3.0.0',
+    docs: ['https://docs.goldsky.com', 'https://nouns.wtf'],
+    tags: ['production', 'dao', 'governance', 'nft', 'cacheTtlDaily'],
+    root: 'https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns/prod/gn',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    tools: {
+        getRecentProposals: {
+            method: 'POST',
+            path: '/',
+            description: 'Retrieve recent proposals with detailed voting information via Goldsky. Returns structured JSON response data.',
+            parameters: [
+                { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(100)', 'default(10)'] } }
+            ],
+            tests: [
+                { _description: 'Fetch recent proposals', first: 10 },
+                { _description: 'Fetch 5 proposals', first: 5 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { proposals: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, status: { type: 'string' }, createdTimestamp: { type: 'string' }, proposer: { type: 'object', properties: { id: { type: 'string' } } }, forVotes: { type: 'string' }, againstVotes: { type: 'string' }, abstainVotes: { type: 'string' } } } } } }
+                    }
+                }
+            },
+        },
+        getCurrentAuctions: {
+            method: 'POST',
+            path: '/',
+            description: 'Get current and recent auction data with bid information via Goldsky. Returns structured JSON response data.',
+            parameters: [
+                { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'default(5)'] } }
+            ],
+            tests: [
+                { _description: 'Fetch recent auctions', first: 5 },
+                { _description: 'Fetch 3 auctions', first: 3 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { auctions: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, noun: { type: 'object', properties: { id: { type: 'string' } } }, amount: { type: 'string' }, startTime: { type: 'string' }, endTime: { type: 'string' }, bidder: { type: 'object', properties: { id: { type: 'string' } } }, settled: { type: 'boolean' }, bids: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, amount: { type: 'string' }, bidder: { type: 'object', properties: { id: { type: 'string' } } }, blockTimestamp: { type: 'string' } } } } } } } } }
+                    }
+                }
+            },
+        },
+        getNounDetails: {
+            method: 'POST',
+            path: '/',
+            description: 'Get detailed Noun information including traits, owner, and voting history. Required: nounId.',
+            parameters: [
+                { position: { key: 'nounId', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'string()', options: [] } }
+            ],
+            tests: [
+                { _description: 'Get details for Noun #1', nounId: '1' },
+                { _description: 'Get details for Noun #100', nounId: '100' }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { noun: { type: 'object', properties: { id: { type: 'string' }, owner: { type: 'object', properties: { id: { type: 'string' } } }, seed: { type: 'object', properties: { background: { type: 'number' }, body: { type: 'number' }, accessory: { type: 'number' }, head: { type: 'number' }, glasses: { type: 'number' } } }, votes: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, support: { type: 'boolean' }, votes: { type: 'number' }, proposal: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } } } } } } } }
+                    }
+                }
+            },
+        },
+        getTopDelegates: {
+            method: 'POST',
+            path: '/',
+            description: 'Get delegates with the highest voting power in the Nouns DAO. Returns structured JSON response data.',
+            parameters: [
+                { position: { key: 'first', value: '{{USER_PARAM}}', location: 'body' }, z: { primitive: 'number()', options: ['min(1)', 'max(50)', 'default(10)'] } }
+            ],
+            tests: [
+                { _description: 'Get top 10 delegates', first: 10 }
+            ],
+            output: {
+                mimeType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        data: { type: 'object', properties: { delegates: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, delegatedVotes: { type: 'string' }, tokenHoldersRepresentedAmount: { type: 'number' }, proposals: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } }, votes: { type: 'array', items: { type: 'object', properties: { id: { type: 'string' }, support: { type: 'boolean' }, proposal: { type: 'object', properties: { id: { type: 'string' }, title: { type: 'string' } } } } } } } } } } }
+                    }
+                }
+            },
+        }
+    }
+}
+
+
+export const handlers = ( { sharedLists, libraries } ) => ( {
+    getRecentProposals: {
+        preRequest: async ( { struct, payload } ) => {
+            const { first } = payload;
+
+            // Remove trailing slash from URL
+            struct.url = struct.url.replace(/\/$/, '');
+
+            const query = `
+            query GetRecentProposals($first: Int!) {
+            proposals(first: $first, orderBy: createdTimestamp, orderDirection: desc) {
+            id
+            title
+            description
+            status
+            createdTimestamp
+            proposer {
+            id
+            }
+            forVotes
+            againstVotes
+            abstainVotes
+            }
+            }
+            `;
+
+            struct.body = {
+            query,
+            variables: { first }
+            };
+
+            return { struct }
+        }
+    },
+    getCurrentAuctions: {
+        preRequest: async ( { struct, payload } ) => {
+            const { first } = payload;
+
+            // Remove trailing slash from URL
+            struct.url = struct.url.replace(/\/$/, '');
+
+            const query = `
+            query GetCurrentAuctions($first: Int!) {
+            auctions(first: $first, orderBy: startTime, orderDirection: desc) {
+            id
+            noun {
+            id
+            }
+            amount
+            startTime
+            endTime
+            bidder {
+            id
+            }
+            settled
+            bids(first: 5, orderBy: amount, orderDirection: desc) {
+            id
+            amount
+            bidder {
+            id
+            }
+            blockTimestamp
+            }
+            }
+            }
+            `;
+
+            struct.body = {
+            query,
+            variables: { first }
+            };
+
+            return { struct }
+        }
+    },
+    getNounDetails: {
+        preRequest: async ( { struct, payload } ) => {
+            const { nounId } = payload;
+
+            // Remove trailing slash from URL
+            struct.url = struct.url.replace(/\/$/, '');
+
+            const query = `
+            query GetNounDetails($nounId: String!) {
+            noun(id: $nounId) {
+            id
+            owner {
+            id
+            }
+            seed {
+            background
+            body
+            accessory
+            head
+            glasses
+            }
+            votes(first: 10, orderBy: blockTimestamp, orderDirection: desc) {
+            id
+            support
+            votes
+            proposal {
+            id
+            title
+            }
+            }
+            }
+            }
+            `;
+
+            struct.body = {
+            query,
+            variables: { nounId }
+            };
+
+            return { struct }
+        }
+    },
+    getTopDelegates: {
+        preRequest: async ( { struct, payload } ) => {
+            const { first } = payload;
+
+            // Remove trailing slash from URL
+            struct.url = struct.url.replace(/\/$/, '');
+
+            const query = `
+            query GetTopDelegates($first: Int!) {
+            delegates(first: $first, orderBy: delegatedVotes, orderDirection: desc) {
+            id
+            delegatedVotes
+            tokenHoldersRepresentedAmount
+            proposals(first: 3) {
+            id
+            title
+            }
+            votes(first: 5, orderBy: blockTimestamp, orderDirection: desc) {
+            id
+            support
+            proposal {
+            id
+            title
+            }
+            }
+            }
+            }
+            `;
+
+            struct.body = {
+            query,
+            variables: { first }
+            };
+
+            return { struct }
+        }
+    }
+} )

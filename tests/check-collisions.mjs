@@ -13,15 +13,15 @@ for( const dir of batch5 ) {
     }
 }
 
-const prodDirs = await readdir( 'schemas/v2.0.0' )
+const prodDirs = await readdir( 'schemas/v3.0.0' )
 const prodNs = []
 for( const dir of prodDirs ) {
     if( dir.startsWith( '_' ) || dir.startsWith( '.' ) || dir.endsWith( '.md' ) ) { continue }
-    const files = await readdir( join( 'schemas/v2.0.0', dir ) ).catch( () => [] )
+    const files = await readdir( join( 'schemas/v3.0.0', dir ) ).catch( () => [] )
     for( const f of files ) {
         if( f.indexOf( '.mjs' ) === -1 ) { continue }
         try {
-            const mod = await import( new URL( join( 'schemas/v2.0.0', dir, f ), 'file://' + process.cwd() + '/' ).href )
+            const mod = await import( new URL( join( 'schemas/v3.0.0', dir, f ), 'file://' + process.cwd() + '/' ).href )
             if( mod.main ) { prodNs.push( mod.main.namespace ) }
         } catch( e ) { /* skip */ }
     }

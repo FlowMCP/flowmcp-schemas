@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const dir = '.captures/v2.0.0'
+const dir = '.captures/v3.0.0'
 const failures = []
 
 const walk = ( d ) => {

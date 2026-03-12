@@ -5,7 +5,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
 
 // Known output schemas per route pattern
 const outputPatterns = {

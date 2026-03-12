@@ -1,9 +1,9 @@
 /**
- * Add tests to v2.0.0 schemas that are missing them.
+ * Add tests to v3.0.0 schemas that are missing them.
  * TST001 requires at least 1 test per route.
  *
  * Strategy:
- * 1. Dynamic import() each v2.0.0 schema
+ * 1. Dynamic import() each v3.0.0 schema
  * 2. Identify routes without tests
  * 3. Generate appropriate tests based on parameter patterns
  * 4. Text-inject into the file
@@ -23,7 +23,7 @@ const dryRun = args.includes( '--dry-run' ) || !args.includes( '--apply' )
 const verbose = args.includes( '--verbose' )
 const nsFilter = args.find( ( a ) => a.startsWith( '--namespace=' ) )?.split( '=' )[1] || null
 
-const V2_DIR = path.resolve( 'schemas/v2.0.0' )
+const V2_DIR = path.resolve( 'schemas/v3.0.0' )
 
 // ──────────────────────────────────────────────
 // Well-known PUBLIC addresses (no personal data)

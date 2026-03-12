@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath( import.meta.url )
 const __dirname = path.dirname( __filename )
-const v2Dir = path.resolve( __dirname, '../schemas/v2.0.0' )
+const v2Dir = path.resolve( __dirname, '../schemas/v3.0.0' )
 
 const MIGRATE = process.argv.includes( '--migrate' )
 

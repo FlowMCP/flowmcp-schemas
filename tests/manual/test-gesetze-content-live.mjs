@@ -1,11 +1,11 @@
-// Live test for Gesetze aus dem Internet — Law Content v2.0.0 — all 5 routes
+// Live test for Gesetze aus dem Internet — Law Content v3.0.0 — all 5 routes
 // No API key required — public static site
 import { Pipeline } from '../../../flowmcp-core/src/v2/task/Pipeline.mjs'
 import { Fetch } from '../../../flowmcp-core/src/v2/task/Fetch.mjs'
 import { resolve } from 'node:path'
 
 
-const schemasDir = resolve( import.meta.dirname, '../../schemas/v2.0.0' )
+const schemasDir = resolve( import.meta.dirname, '../../schemas/v3.0.0' )
 
 const testRoutes = [
     { route: 'getLawOverview', params: { slug: 'gg' } },
@@ -27,7 +27,7 @@ let passed = 0
 let failed = 0
 const total = testRoutes.length
 
-console.log( `\n  Gesetze aus dem Internet — Law Content v2.0.0 Live Test (${total} routes)\n` )
+console.log( `\n  Gesetze aus dem Internet — Law Content v3.0.0 Live Test (${total} routes)\n` )
 
 const filePath = resolve( schemasDir, 'gesetze-de/law-content.mjs' )
 let pipeline = null

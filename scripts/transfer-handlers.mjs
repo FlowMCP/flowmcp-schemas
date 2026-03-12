@@ -13,17 +13,17 @@ class HandlerTransfer {
         const { migrate, verbose, file } = args
 
         console.log( '\n' + '='.repeat( 60 ) )
-        console.log( '  FlowMCP Handler Transfer  v1.2.0 -> v2.0.0' )
+        console.log( '  FlowMCP Handler Transfer  v1.2.0 -> v3.0.0' )
         console.log( '='.repeat( 60 ) )
 
-        const v2Dir = path.resolve( __dirname, '../schemas/v2.0.0' )
+        const v2Dir = path.resolve( __dirname, '../schemas/v3.0.0' )
         const v1Dir = path.resolve( __dirname, '../schemas/v1.2.0' )
 
         const v2Files = file
             ? [ path.resolve( v2Dir, file ) ]
             : HandlerTransfer.#findStubFiles( { v2Dir } )
 
-        console.log( `\n  V2 Dir:   schemas/v2.0.0/` )
+        console.log( `\n  V2 Dir:   schemas/v3.0.0/` )
         console.log( `  V1 Dir:   schemas/v1.2.0/` )
         console.log( `  Files:    ${v2Files.length}` )
         console.log( `  Mode:     ${migrate ? 'TRANSFER' : 'DRY RUN'}` )
@@ -71,7 +71,7 @@ class HandlerTransfer {
                         '',
                         '  --migrate   Write changes (default: dry run)',
                         '  --verbose   Detailed output',
-                        '  --file=X    Single file (relative to schemas/v2.0.0/)',
+                        '  --file=X    Single file (relative to schemas/v3.0.0/)',
                         '  --help      Show this help',
                     ].join( '\n' ) )
                     process.exit( 0 )
