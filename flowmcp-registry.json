@@ -37,23 +37,8 @@
         },
         {
             "namespace": "alchemy",
-            "file": "alchemy/contract-read-part1.mjs",
-            "name": "Alchemy Contract Read (Part 1)",
-            "requiredServerParams": [
-                "ALCHEMY_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
-        {
-            "namespace": "alchemy",
-            "file": "alchemy/contract-read-part2.mjs",
-            "name": "Alchemy Contract Read (Part 2)",
+            "file": "alchemy/contract-read.mjs",
+            "name": "Alchemy Contract Read",
             "requiredServerParams": [
                 "ALCHEMY_API_KEY"
             ],
@@ -252,23 +237,8 @@
         },
         {
             "namespace": "chainlink",
-            "file": "chainlink/getLatestPrices-part1.mjs",
-            "name": "ExampleName (Part 1)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
-        {
-            "namespace": "chainlink",
-            "file": "chainlink/getLatestPrices-part2.mjs",
-            "name": "ExampleName (Part 2)",
+            "file": "chainlink/price-feeds.mjs",
+            "name": "Chainlink Price Feeds",
             "requiredServerParams": [
                 "INFURA_API_KEY"
             ],
@@ -282,23 +252,8 @@
         },
         {
             "namespace": "chainlinkmulticall",
-            "file": "chainlink/getLatestPricesMulticall-part1.mjs",
-            "name": "Multicall Latest Prices (Part 1)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
-        {
-            "namespace": "chainlinkmulticall",
-            "file": "chainlink/getLatestPricesMulticall-part2.mjs",
-            "name": "Multicall Latest Prices (Part 2)",
+            "file": "chainlink/price-feeds-multicall.mjs",
+            "name": "Chainlink Multicall Price Feeds",
             "requiredServerParams": [
                 "INFURA_API_KEY"
             ],
@@ -947,23 +902,8 @@
         },
         {
             "namespace": "infura",
-            "file": "infura/contract-read-part1.mjs",
-            "name": "Infura Contract Read (Part 1)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
-        {
-            "namespace": "infura",
-            "file": "infura/contract-read-part2.mjs",
-            "name": "Infura Contract Read (Part 2)",
+            "file": "infura/contract-read.mjs",
+            "name": "Infura Contract Read",
             "requiredServerParams": [
                 "INFURA_API_KEY"
             ],

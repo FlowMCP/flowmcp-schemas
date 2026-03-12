@@ -37,7 +37,7 @@
         },
         {
             "namespace": "alchemy",
-            "file": "alchemy/contract-read-part1.mjs",
+            "file": "alchemy/contract-read.mjs",
             "name": "Alchemy Contract Read (Part 1)",
             "requiredServerParams": [
                 "ALCHEMY_API_KEY"
@@ -50,21 +50,8 @@
                 "evmChains"
             ]
         },
-        {
-            "namespace": "alchemy",
-            "file": "alchemy/contract-read-part2.mjs",
-            "name": "Alchemy Contract Read (Part 2)",
-            "requiredServerParams": [
-                "ALCHEMY_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
+
+
         {
             "namespace": "alchemy",
             "file": "alchemy/node-read-part1.mjs",
@@ -252,7 +239,7 @@
         },
         {
             "namespace": "chainlink",
-            "file": "chainlink/getLatestPrices-part1.mjs",
+            "file": "chainlink/price-feeds.mjs",
             "name": "ExampleName (Part 1)",
             "requiredServerParams": [
                 "INFURA_API_KEY"
@@ -265,24 +252,11 @@
                 "evmChains"
             ]
         },
-        {
-            "namespace": "chainlink",
-            "file": "chainlink/getLatestPrices-part2.mjs",
-            "name": "ExampleName (Part 2)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
+
+
         {
             "namespace": "chainlinkmulticall",
-            "file": "chainlink/getLatestPricesMulticall-part1.mjs",
+            "file": "chainlink/price-feeds-multicall.mjs",
             "name": "Multicall Latest Prices (Part 1)",
             "requiredServerParams": [
                 "INFURA_API_KEY"
@@ -295,21 +269,8 @@
                 "evmChains"
             ]
         },
-        {
-            "namespace": "chainlinkmulticall",
-            "file": "chainlink/getLatestPricesMulticall-part2.mjs",
-            "name": "Multicall Latest Prices (Part 2)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
+
+
         {
             "namespace": "chainlist",
             "file": "chainlist/chainlist.mjs",
@@ -986,7 +947,7 @@
         },
         {
             "namespace": "infura",
-            "file": "infura/contract-read-part1.mjs",
+            "file": "infura/contract-read.mjs",
             "name": "Infura Contract Read (Part 1)",
             "requiredServerParams": [
                 "INFURA_API_KEY"
@@ -999,21 +960,8 @@
                 "evmChains"
             ]
         },
-        {
-            "namespace": "infura",
-            "file": "infura/contract-read-part2.mjs",
-            "name": "Infura Contract Read (Part 2)",
-            "requiredServerParams": [
-                "INFURA_API_KEY"
-            ],
-            "requiredLibraries": [
-                "ethers"
-            ],
-            "hasHandlers": true,
-            "sharedLists": [
-                "evmChains"
-            ]
-        },
+
+
         {
             "namespace": "infura",
             "file": "infura/node-read-part1.mjs",
