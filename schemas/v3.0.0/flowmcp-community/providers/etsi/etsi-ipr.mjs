@@ -10,24 +10,7 @@ export const main = {
     headers: {},
     tools: {},
     resources: {},
-    prompts: {
-        about: {
-            name: 'about',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'etsi',
-            description: 'Overview of ETSI IPR database — what data is available, scale, export options',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/about.mjs'
-        },
-        searchDeclarations: {
-            name: 'search-declarations',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'etsi',
-            description: 'Step-by-step Playwright workflow to search SEP declarations and export results as CSV',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/search-declarations.mjs'
-        }
+    skills: {
+        'search-declarations': { file: './skills/search-declarations.mjs' }
     }
 }

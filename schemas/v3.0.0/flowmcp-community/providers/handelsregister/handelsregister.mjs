@@ -10,24 +10,7 @@ export const main = {
     headers: {},
     tools: {},
     resources: {},
-    prompts: {
-        about: {
-            name: 'about',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'handelsregister',
-            description: 'Overview of Handelsregister — what data is available, how to search, limitations',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/about.mjs'
-        },
-        searchCompany: {
-            name: 'search-company',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'handelsregister',
-            description: 'Step-by-step Playwright workflow to search for a company in the German commercial register',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/search-company.mjs'
-        }
+    skills: {
+        'search-company': { file: './skills/search-company.mjs' }
     }
 }

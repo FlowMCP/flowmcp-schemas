@@ -1,16 +1,13 @@
-export const content = `Download vehicle statistics from KBA using Playwright browser automation.
-
-## Prerequisites
-- Playwright MCP server must be available
-- User should specify which statistics they need (e.g., new registrations by manufacturer, fleet by fuel type)
-
+const content = `
 ## Option A: KBA Website (Excel downloads)
 
 ### Step 1: Navigate to statistics overview
+
 Open https://www.kba.de/DE/Statistik/Fahrzeuge/fahrzeuge_node.html in the browser.
 Wait for the navigation tree to load.
 
 ### Step 2: Select category
+
 The main categories are:
 - **Neuzulassungen** — new vehicle registrations (monthly/annual)
 - **Bestand** — current vehicle fleet
@@ -18,13 +15,15 @@ The main categories are:
 - **Ausserdienststellungen** — deregistrations
 - **Hauptuntersuchungen** — vehicle inspections
 
-Click the category matching [[statisticType]].
+Click the category matching {{input:statisticType}}.
 
 ### Step 3: Navigate to sub-category
+
 Sub-categories include: vehicle class, manufacturer/brand, region, fuel type, emissions, owner type.
-Select the sub-category matching [[subCategory]] if provided.
+Select the sub-category if the user specified a more specific request.
 
 ### Step 4: Download Excel file
+
 Look for download links (Excel icon or "Download" text).
 Click to download the Excel file.
 Note the file name and date for reference.
@@ -32,21 +31,56 @@ Note the file name and date for reference.
 ## Option B: ArcGIS Statistikportal (CSV/GeoJSON)
 
 ### Step 1: Navigate to portal
+
 Open https://das-kba-statistikportal.hub.arcgis.com/search in the browser.
 
 ### Step 2: Search or browse
-Use the search bar to find datasets matching [[statisticType]].
+
+Use the search bar to find datasets matching {{input:statisticType}}.
 Or browse by category: Fahrzeuge, Kraftfahrende, Kraftverkehr.
 
 ### Step 3: Select dataset
+
 Click on the dataset card to open the detail view.
 Review the dataset description and available fields.
 
 ### Step 4: Download data
+
 Look for download options: CSV, KML, ZIP, GeoJSON.
-Select [[exportFormat]] (default: CSV) and download.
+Select {{input:exportFormat}} and download.
 
 ## Output
+
 Report the downloaded file name, format, and a preview of the first few rows.
 If the data contains regional breakdowns, note the geographic coverage.
 `
+
+
+export const skill = {
+    name: 'download-statistics',
+    version: 'flowmcp-skill/1.0.0',
+    description: 'Navigate KBA website or ArcGIS Statistikportal to download German vehicle registration statistics as Excel or CSV using Playwright.',
+    requires: {
+        tools: [],
+        resources: [],
+        external: ['playwright']
+    },
+    input: [
+        {
+            key: 'statisticType',
+            type: 'enum',
+            description: 'Category of vehicle statistics to download',
+            required: true,
+            values: ['Neuzulassungen', 'Bestand', 'Umschreibungen', 'Ausserdienststellungen', 'Hauptuntersuchungen']
+        },
+        {
+            key: 'exportFormat',
+            type: 'enum',
+            description: 'Preferred download format (only for ArcGIS portal)',
+            required: false,
+            values: ['CSV', 'KML', 'GeoJSON', 'ZIP']
+        }
+    ],
+    output: 'Downloaded statistics file with filename, format, and preview of first rows.',
+    content
+}

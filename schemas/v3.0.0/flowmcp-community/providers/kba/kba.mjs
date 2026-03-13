@@ -10,24 +10,7 @@ export const main = {
     headers: {},
     tools: {},
     resources: {},
-    prompts: {
-        about: {
-            name: 'about',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'kba',
-            description: 'Overview of KBA data sources — website downloads, ArcGIS portal, open data via Mobilithek',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/about.mjs'
-        },
-        downloadStatistics: {
-            name: 'download-statistics',
-            version: 'flowmcp-prompt/1.0.0',
-            namespace: 'kba',
-            description: 'Step-by-step Playwright workflow to navigate KBA and download vehicle statistics as Excel/CSV',
-            dependsOn: [],
-            references: [],
-            contentFile: './prompts/download-statistics.mjs'
-        }
+    skills: {
+        'download-statistics': { file: './skills/download-statistics.mjs' }
     }
 }
