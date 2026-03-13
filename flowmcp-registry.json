@@ -801,6 +801,22 @@
             "hasHandlers": true
         },
         {
+            "namespace": "indicators",
+            "file": "indicators/chart-generator.mjs",
+            "name": "Chart Generator",
+            "requiredServerParams": [],
+            "requiredLibraries": ["echarts"],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "indicators",
+            "file": "indicators/token-search.mjs",
+            "name": "Token Search",
+            "requiredServerParams": [],
+            "requiredLibraries": ["better-sqlite3"],
+            "hasHandlers": true
+        },
+        {
             "namespace": "indicatorts",
             "file": "indicators/indicatorts-schema-part1.mjs",
             "name": "OHLCV Indicators (Part 1)",
@@ -1243,6 +1259,7 @@
             "requiredServerParams": [
                 "MORALIS_API_KEY"
             ],
+            "requiredLibraries": ["moment"],
             "hasHandlers": true,
             "sharedLists": [
                 "evmChains",
@@ -1256,6 +1273,7 @@
             "requiredServerParams": [
                 "MORALIS_API_KEY"
             ],
+            "requiredLibraries": ["moment"],
             "hasHandlers": true,
             "sharedLists": [
                 "tradingTimeframes"
@@ -1268,6 +1286,7 @@
             "requiredServerParams": [
                 "SOLANA_TRACKER_API_KEY"
             ],
+            "requiredLibraries": ["moment"],
             "hasHandlers": true,
             "sharedLists": [
                 "tradingTimeframes"
@@ -1779,6 +1798,30 @@
             "file": "x402/ping.mjs",
             "name": "x402 Experimental MCP Interface",
             "requiredServerParams": [],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "yahoofinance",
+            "file": "yahoo-finance/Ohlcv.mjs",
+            "name": "YahooFinanceOhlcv",
+            "requiredServerParams": [],
+            "requiredLibraries": ["yahoo-finance2"],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "yahoofinance",
+            "file": "yahoo-finance/Quote.mjs",
+            "name": "YahooFinanceQuote",
+            "requiredServerParams": [],
+            "requiredLibraries": ["yahoo-finance2"],
+            "hasHandlers": true
+        },
+        {
+            "namespace": "yahoofinance",
+            "file": "yahoo-finance/Search.mjs",
+            "name": "YahooFinanceSearch",
+            "requiredServerParams": [],
+            "requiredLibraries": ["yahoo-finance2"],
             "hasHandlers": true
         },
         {

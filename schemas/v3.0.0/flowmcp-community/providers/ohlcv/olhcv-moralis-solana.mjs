@@ -1,11 +1,8 @@
 // Migrated from v1.2.0 -> v2.0.0
 // Category: handlers-imports
-// REPLACE: axios -> native fetch (not in requiredLibraries)
-// REPLACE: moment -> native Date/Intl (not in requiredLibraries)
-// Import: import axios from "axios"
-// Import: import moment from "moment"
-// Import: import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
-// Module-level code: 14 lines
+// DONE: axios -> native fetch
+// DONE: moment -> requiredLibraries
+// SharedLists: tradingTimeframes
 
 export const main = {
     namespace: 'ohlcv',
@@ -19,6 +16,7 @@ export const main = {
     ],
     root: 'https://solana-gateway.moralis.io',
     requiredServerParams: ['MORALIS_API_KEY'],
+    requiredLibraries: ['moment'],
     headers: {
         'X-API-Key': '{{MORALIS_API_KEY}}'
     },
@@ -54,6 +52,7 @@ export const main = {
 
 
 export const handlers = ( { sharedLists, libraries } ) => {
+    const moment = libraries['moment']
     const TRADING_TIMEFRAMES = sharedLists['tradingTimeframes']
 
     const moralisTimeframes = TRADING_TIMEFRAMES
@@ -62,14 +61,6 @@ export const handlers = ( { sharedLists, libraries } ) => {
             acc[ t.alias ] = t.moralisSlug
             return acc
         }, {} )
-    const fromDateUnits = {
-        'minutes': 60,
-        'hours': 3600,
-        'days': 86400,
-        'weeks': 604800,
-        'months': 2592000,
-        'years': 31536000
-    }
 
     return {
         getRecursiveOhlcvSolana: {
@@ -82,47 +73,94 @@ export const handlers = ( { sharedLists, libraries } ) => {
                 const root = 'https://solana-gateway.moralis.io'
                 const url = `${root}/token/${chain}/pairs/${pairAddress}/ohlcv`
 
-                let accumulated = [], cursor = null, iteration = 0, maxIterations = 5
-                while( iteration < maxIterations && accumulated.length < maxResultLength ) {
-                try {
+                let accumulated = []
+                let cursor = null
+                let iteration = 0
+                const maxIterations = 5
                 const { headers } = payload
-                const params = { chain, timeframe, currency, fromDate, toDate, cursor, limit: 1000 }
-                const res = await axios.get( url, { headers, params } )
-                const { result, cursor: next } = res.data
-                if( !Array.isArray( result ) ) { break }
-                accumulated.push( ...result )
-                if( !next ) { break }
-                cursor = next
-                iteration++
-                } catch( e ) {
-                struct.status = false;
-                struct.messages.push( "API error: " + (e.response?.status || "unknown") )
-                return { struct }}
+
+                let keepFetching = true
+                const fetchPage = async () => {
+                    if( iteration >= maxIterations || accumulated.length >= maxResultLength || !keepFetching ) {
+                        return
+                    }
+
+                    try {
+                        const params = new URLSearchParams( {
+                            chain, timeframe, currency, fromDate, toDate, 'limit': '1000'
+                        } )
+
+                        if( cursor ) { params.set( 'cursor', cursor ) }
+
+                        const res = await fetch( `${url}?${params.toString()}`, { headers } )
+
+                        if( !res.ok ) {
+                            struct.status = false
+                            struct.messages.push( `API error: ${res.status}` )
+                            keepFetching = false
+                            return
+                        }
+
+                        const body = await res.json()
+                        const { result, cursor: next } = body
+
+                        if( !Array.isArray( result ) ) {
+                            keepFetching = false
+                            return
+                        }
+
+                        result.forEach( ( item ) => { accumulated.push( item ) } )
+
+                        if( !next ) {
+                            keepFetching = false
+                            return
+                        }
+
+                        cursor = next
+                        iteration = iteration + 1
+                        await fetchPage()
+                    } catch( e ) {
+                        struct.status = false
+                        struct.messages.push( `API error: ${e.message}` )
+                        keepFetching = false
+                    }
+                }
+
+                await fetchPage()
+
+                if( !struct.status ) {
+                    return { struct }
                 }
 
                 const data = accumulated
-                .map( ( a ) => ( { ...a, unixTimestamp: moment(a.timestamp).unix() } ) )
-                .sort( ( a, b ) => a['unixTimestamp'] - b['unixTimestamp'] )
-                .reduce( ( acc, a ) => {
-                acc.openings.push( a.open )
-                acc.closings.push( a.close )
-                acc.highs.push( a.high )
-                acc.lows.push( a.low )
-                acc.volumes.push( a.volume )
-                acc.timestamps.push( a.timestamp )
-                acc.prices.push( a.close )
-                acc.values.push( a.close )
-                return acc
-                }, {
-                openings: [],
-                closings: [],
-                highs: [],
-                lows: [],
-                volumes: [],
-                prices: [],
-                values: [],
-                timestamps: []
-                } )
+                    .map( ( a ) => {
+                        const unixTimestamp = moment( a.timestamp ).unix()
+
+                        return { open: a.open, close: a.close, high: a.high, low: a.low, volume: a.volume, timestamp: a.timestamp, unixTimestamp }
+                    } )
+                    .sort( ( a, b ) => a['unixTimestamp'] - b['unixTimestamp'] )
+                    .reduce( ( acc, a ) => {
+                        acc.openings.push( a.open )
+                        acc.closings.push( a.close )
+                        acc.highs.push( a.high )
+                        acc.lows.push( a.low )
+                        acc.volumes.push( a.volume )
+                        acc.timestamps.push( a.timestamp )
+                        acc.prices.push( a.close )
+                        acc.values.push( a.close )
+
+                        return acc
+                    }, {
+                        openings: [],
+                        closings: [],
+                        highs: [],
+                        lows: [],
+                        volumes: [],
+                        prices: [],
+                        values: [],
+                        timestamps: []
+                    } )
+
                 struct['data'] = data
                 struct['status'] = true
 

@@ -43,7 +43,9 @@
     "twitter-api-v2": "^1.23.2"
   },
   "dependencies": {
+    "better-sqlite3": "^12.6.2",
     "canvas": "^3.2.1",
+    "echarts": "^6.0.0",
     "trading-signals": "^7.4.3",
     "vega": "^6.2.0",
     "vega-lite": "^6.4.2",

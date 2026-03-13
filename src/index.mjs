@@ -126,15 +126,30 @@ class SchemaImporter {
         if( addAdditionalMetaData === false ) { return schemas }
 
         schemas = schemas
+            .filter( ( item ) => {
+                const hasSchema = item['schema'] !== undefined && item['schema'] !== null
+
+                return hasSchema
+            } )
             .map( ( item ) => {
                 const { schema, absolutePath } = item
-                const { namespace, tools, routes, tags, requiredServerParams } = schema
+                const { namespace, tools, routes, tags, requiredServerParams, resources } = schema
                 const toolEntries = tools || routes || {}
+                const resourceEntries = resources || {}
+                const resourceQueryNames = Object.values( resourceEntries )
+                    .reduce( ( acc, r ) => {
+                        const queryNames = Object.keys( r['queries'] || {} )
+
+                        return acc.concat( queryNames )
+                    }, [] )
+
                 item = { ...item, namespace, tags, requiredServerParams }
                 item['routeNames'] = Object.keys( toolEntries )
-                item['schemaFolder'] = path.basename( path.dirname( absolutePath ) ) 
+                item['resourceQueryNames'] = resourceQueryNames
+                item['schemaFolder'] = path.basename( path.dirname( absolutePath ) )
                 item['schemaName'] = path.basename( absolutePath, '.mjs' )
                 item['fileName'] = path.basename( absolutePath )
+
                 return item
             } )
 

@@ -1,9 +1,7 @@
 // Migrated from v1.2.0 -> v2.0.0
 // Category: handlers-imports
-// REPLACE: moment -> native Date/Intl (not in requiredLibraries)
-// Import: import moment from "moment"
-// Import: import { TRADING_TIMEFRAMES } from '../_shared/tradingTimeframes.mjs'
-// Module-level code: 14 lines
+// DONE: moment -> requiredLibraries
+// SharedLists: tradingTimeframes
 
 export const main = {
     namespace: 'ohlcv',
@@ -17,6 +15,7 @@ export const main = {
     ],
     root: 'https://data.solanatracker.io',
     requiredServerParams: ['SOLANA_TRACKER_API_KEY'],
+    requiredLibraries: ['moment'],
     headers: {
         'x-api-key': '{{SOLANA_TRACKER_API_KEY}}',
         'Content-Type': 'application/json'
@@ -62,6 +61,7 @@ export const main = {
 
 
 export const handlers = ( { sharedLists, libraries } ) => {
+    const moment = libraries['moment']
     const TRADING_TIMEFRAMES = sharedLists['tradingTimeframes']
 
     const solanaTrackerTimeframes = TRADING_TIMEFRAMES
@@ -104,36 +104,43 @@ export const handlers = ( { sharedLists, libraries } ) => {
             },
             postRequest: async ( { response, struct, payload } ) => {
                 try {
-                const { oclhv } = response
-                const result = oclhv
-                .map( ( a ) => ({ ...a, unixTimestamp: a.time, timestamp: moment( a.timestamp ).toISOString() } ) )
-                .sort( ( a, b ) => a.unixTimestamp - b.unixTimestamp )
-                .reduce( ( acc, a ) => {
-                acc.openings.push( a.open )
-                acc.closings.push( a.close )
-                acc.highs.push( a.high )
-                acc.lows.push( a.low )
-                acc.volumes.push( a.volume )
-                acc.timestamps.push( a.timestamp )
-                acc.prices.push( a.close )
-                acc.values.push( a.close )
+                    const { oclhv } = response
+                    const result = oclhv
+                        .map( ( a ) => {
+                            const unixTimestamp = a.time
+                            const timestamp = moment( a.timestamp ).toISOString()
 
-                return acc
-                }, {
-                openings: [],
-                closings: [],
-                highs: [],
-                lows: [],
-                volumes: [],
-                prices: [],
-                values: [],
-                timestamps: []
-                });
-                response = result
+                            return { open: a.open, close: a.close, high: a.high, low: a.low, volume: a.volume, unixTimestamp, timestamp }
+                        } )
+                        .sort( ( a, b ) => a.unixTimestamp - b.unixTimestamp )
+                        .reduce( ( acc, a ) => {
+                            acc.openings.push( a.open )
+                            acc.closings.push( a.close )
+                            acc.highs.push( a.high )
+                            acc.lows.push( a.low )
+                            acc.volumes.push( a.volume )
+                            acc.timestamps.push( a.timestamp )
+                            acc.prices.push( a.close )
+                            acc.values.push( a.close )
+
+                            return acc
+                        }, {
+                            openings: [],
+                            closings: [],
+                            highs: [],
+                            lows: [],
+                            volumes: [],
+                            prices: [],
+                            values: [],
+                            timestamps: []
+                        } )
+
+                    response = result
                 } catch( e ) {
-                struct.status = false
-                struct.messages.push( "Error transforming chart data: " + (e.response?.status || "unknown") )
+                    struct.status = false
+                    struct.messages.push( `Error transforming chart data: ${e.message}` )
                 }
+
                 return { response }
             }
         }
