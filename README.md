@@ -176,6 +176,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | etherscan | getGaspriceMultichain.mjs | 2 | getGasOracle, estimateGasCost | ETHERSCAN_API_KEY | evm, gas, fees, cacheTtlRealtime |
 | ethscriptions | ethscriptions-api-part1.mjs | 8 | listEthscriptions, getEthscription, getEthscriptionData, getEthscriptionAttachment, checkEthscriptionExists, checkMultipleEthscriptionsExistence, listTransfers, listTokens |  | nft, ethereum, inscriptions, cacheTtlDaily |
 | ethscriptions | ethscriptions-api-part2.mjs | 3 | getTokenDetails, getTokenHistoricalState, getIndexerStatus |  | nft, ethereum, inscriptions, cacheTtlDaily |
+| etsi | etsi-ipr.mjs | 0 |  |  | patents, standards, telecom, 5g, wifi, sep, playwright |
 | euparliament | euParliament.mjs | 6 | listMeps, getMep, listMeetings, getMeeting, listCorporateBodies, listDocuments |  | politics, europe, government, parliament, cacheTtlDaily |
 | eusafetygate | eu-safety-gate.mjs | 6 | listLanguages, listCountries, listEnums, listReportYears, getLatestReport, listReports |  | consumer-safety, eu, product-recalls, opendata, cacheTtlDaily |
 | eurlex | eurLex.mjs | 6 | searchRegulations, searchDirectives, lookupByCelex, recentLegislation, searchByEuroVoc, querySparql |  | law, government, europe, sparql, cacheTtlDaily |
@@ -212,6 +213,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | greix | greix.mjs | 7 | listCities, getCity, listPropertyTypes, listNeighborhoods, getCityPricePeriod, getCityMetrics, getNeighborhoodMetricsMap |  | real-estate, germany, economics, opendata, cacheTtlDaily |
 | gtfsde | transit.mjs | 0 |  |  | germany, transit, opendata, mobility |
 | gutendex | gutendex.mjs | 5 | listBooks, getBookById, searchByTopic, searchByAuthorLifespan, getBooksByIds |  | books, ebooks, literature, gutenberg, cacheTtlDaily |
+| handelsregister | handelsregister.mjs | 0 |  |  | germany, legal, companies, register, playwright |
 | harvardart | harvardArtMuseums.mjs | 4 | searchObjects, getObject, searchPeople, listExhibitions | HARVARD_ART_API_KEY | art, museums, culture, education, cacheTtlDaily |
 | hathitrust | hathitrust.mjs | 8 | briefLookupByOclc, briefLookupByIsbn, briefLookupByLccn, fullLookupByOclc, fullLookupByIsbn, fullLookupByLccn, briefLookupByHtid, briefLookupByRecordNumber |  | library, books, archives, bibliography, cacheTtlDaily |
 | hebcal | hebcal.mjs | 3 | getHolidays, getShabbatTimes, convertDate |  | reference, calendar, religion, opendata, cacheTtlDaily |
@@ -263,6 +265,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | jplsbdb | jplsbdb.mjs | 4 | lookupBody, lookupBodyWithPhysics, lookupBodyWithCloseApproaches, searchByDesignation |  | jpl, nasa, asteroids, comets, space, planetarydefense, science, cacheTtlDaily |
 | jplsentry | jplsentry.mjs | 5 | getSentryObject, getSentryObjectBySpk, getSentrySummary, getVirtualImpactors, getRemovedObjects |  | nasa, space, asteroid, impact, neo, science, cacheTtlDaily |
 | jupiter | jupiter-all.mjs | 8 | getTokenPrice, getTokenInfo, getTokensInMarket, getAllTradableTokens, getTaggedTokens, getNewTokens, getAllTokens, getSwapQuote | JUPITER_API_KEY | solana, defi, swap, cacheTtlRealtime |
+| kba | kba.mjs | 0 |  |  | germany, vehicles, statistics, opendata, playwright |
 | kegg | kegg.mjs | 8 | getInfo, listEntries, listByOrganism, findEntries, getEntry, linkEntries, convertIds, getDrugInteractions |  | biology, genomics, pathways, compounds, science, cacheTtlDaily |
 | klinikatlas | german-places.mjs | 5 | searchPlaces, getPlaceByZip, getPlacesByDistrict, getPlacesNearby, getGermanStates |  | healthcare, germany, geography, places, cacheTtlDaily |
 | klinikatlas | hospitals.mjs | 5 | getAllHospitals, searchHospitals, getHospitalsByCity, getHospitalsNearby, getStateStatistics |  | healthcare, germany, hospitals, cacheTtlDaily |
@@ -270,7 +273,6 @@ Below is a list of all available schemas in this library, grouped by provider an
 | ladesaeulenregister | ladesaeulenregister.mjs | 3 | queryStations, queryByLocation, getRecordCount |  | ev, charging, transport, energy, germany, geospatial, government, cacheTtlDaily |
 | ladestationen | ladestationen.mjs | 1 | queryStations |  | germany, mobility, ev, charging, opendata |
 | lastfm | lastfm.mjs | 5 | searchArtists, getArtistInfo, searchTracks, getTopArtists, getAlbumInfo | LASTFM_API_KEY | music, entertainment, charts, recommendations, cacheTtlDaily |
-| lebensmittelwarnung | lebensmittelwarnung.mjs | 1 | getWarnings |  | food, safety, germany, consumer, warnings, cacheTtlFrequent |
 | lebensmittelwarnungen | warnings.mjs | 1 | getWarnings | LEBENSMITTELWARNUNGEN_API_KEY | government, food, safety, consumer, germany, opendata, cacheTtlFrequent |
 | lensorg | lensorg.mjs | 8 | searchScholarlyWorks, getScholarlyWork, searchPatents, getPatent, getScholarlySchema, getPatentSchema, getScholarlyApiUsage, getPatentApiUsage | LENS_API_KEY | science, patents, research, publications, citations, openaccess, cacheTtlDaily |
 | libraryofcongress | libraryOfCongress.mjs | 7 | searchAll, searchBooks, searchPhotos, searchMaps, listCollections, searchCollection, searchNewspapers |  | library, books, archives, government, history, cacheTtlDaily |
