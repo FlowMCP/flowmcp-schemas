@@ -1,7 +1,7 @@
 export const main = {
     namespace: 'gtfsde',
     name: 'GTFS-DE German Public Transit',
-    description: 'Search German public transit stops, routes, and agencies from the official GTFS-DE dataset. 680K+ stops, 24K+ routes covering all German public transport. Requires local SQLite database at ~/.flowmcp/data/gtfs-de.db',
+    description: 'Search German public transit stops, routes, and agencies from the official GTFS-DE dataset. 680K+ stops, 24K+ routes covering all German public transport.',
     version: '3.0.0',
     docs: ['https://gtfs.de/en/feeds/de_full/'],
     tags: ['germany', 'transit', 'opendata', 'mobility'],
@@ -12,30 +12,14 @@ export const main = {
     resources: {
         transitDb: {
             source: 'sqlite',
-            lifecycle: 'persistent',
+            mode: 'in-memory',
+            origin: 'global',
+            name: 'gtfsde-transit.db',
             description: 'German public transit data with 680K+ stops and 24K+ routes. Supports full-text search for stops and route lookup.',
-            database: '~/.flowmcp/data/gtfs-de.db',
             queries: {
                 getSchema: {
-                    sql: "SELECT name, sql FROM sqlite_master WHERE type='table' ORDER BY name",
-                    description: 'Returns the database schema (table names and CREATE statements).',
-                    parameters: [],
-                    output: {
-                        mimeType: 'application/json',
-                        schema: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    name: { type: 'string', description: 'Table name' },
-                                    sql: { type: 'string', description: 'CREATE TABLE statement' }
-                                }
-                            }
-                        }
-                    },
-                    tests: [
-                        { _description: 'Get all table definitions' }
-                    ]
+                    sql: "SELECT name, sql FROM sqlite_master WHERE type='table'",
+                    description: 'Returns the database schema'
                 },
                 searchStops: {
                     sql: "SELECT s.stop_id, s.stop_name, s.stop_lat, s.stop_lon, s.location_type, s.parent_station FROM stops_fts fts JOIN stops s ON s.rowid = fts.rowid WHERE stops_fts MATCH ? LIMIT ?",
@@ -113,24 +97,6 @@ export const main = {
                     },
                     tests: [
                         { _description: 'Get routes at a stop', stop_id: '175272' }
-                    ]
-                },
-                freeQuery: {
-                    sql: '{{DYNAMIC_SQL}}',
-                    description: 'Execute a custom read-only SQL query against the GTFS-DE database. Only SELECT statements are allowed. Tables: stops, routes, trips, stop_times, agency, calendar, calendar_dates.',
-                    parameters: [
-                        { position: { key: 'sql', value: '{{USER_PARAM}}' }, z: { primitive: 'string()', options: ['min(6)'] } },
-                        { position: { key: 'limit', value: '{{USER_PARAM}}' }, z: { primitive: 'number()', options: ['optional()', 'default(100)', 'max(1000)'] } }
-                    ],
-                    output: {
-                        mimeType: 'application/json',
-                        schema: {
-                            type: 'array',
-                            items: { type: 'object' }
-                        }
-                    },
-                    tests: [
-                        { _description: 'Count all stops', sql: 'SELECT COUNT(*) as count FROM stops', limit: 1 }
                     ]
                 }
             }

@@ -1,7 +1,7 @@
 export const main = {
     namespace: 'ofacsdn',
     name: 'OFAC SDN Sanctions List',
-    description: 'Search the US Treasury OFAC Specially Designated Nationals (SDN) sanctions list locally. 18K+ sanctioned entities with addresses, aliases, and remarks. Requires local SQLite database at ~/.flowmcp/data/ofac-sdn.db',
+    description: 'Search the US Treasury OFAC Specially Designated Nationals (SDN) sanctions list locally. 18K+ sanctioned entities with addresses, aliases, and remarks.',
     version: '3.0.0',
     docs: ['https://ofac.treasury.gov/sanctions-list-service'],
     tags: ['sanctions', 'compliance', 'kyc', 'opendata'],
@@ -12,30 +12,14 @@ export const main = {
     resources: {
         sanctionsDb: {
             source: 'sqlite',
-            lifecycle: 'persistent',
+            mode: 'in-memory',
+            origin: 'global',
+            name: 'ofacsdn-sanctions.db',
             description: 'US Treasury OFAC SDN sanctions list with 18K+ entities. Supports full-text search by name and lookup by entry number.',
-            database: '~/.flowmcp/data/ofac-sdn.db',
             queries: {
                 getSchema: {
-                    sql: "SELECT name, sql FROM sqlite_master WHERE type='table' ORDER BY name",
-                    description: 'Returns the database schema (table names and CREATE statements).',
-                    parameters: [],
-                    output: {
-                        mimeType: 'application/json',
-                        schema: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    name: { type: 'string', description: 'Table name' },
-                                    sql: { type: 'string', description: 'CREATE TABLE statement' }
-                                }
-                            }
-                        }
-                    },
-                    tests: [
-                        { _description: 'Get all table definitions' }
-                    ]
+                    sql: "SELECT name, sql FROM sqlite_master WHERE type='table'",
+                    description: 'Returns the database schema'
                 },
                 searchSanctions: {
                     sql: "SELECT s.ent_num, s.sdn_name, s.sdn_type, s.program, s.remarks FROM sdn_fts fts JOIN sdn s ON s.ent_num = fts.rowid WHERE sdn_fts MATCH ? LIMIT ?",
@@ -89,24 +73,6 @@ export const main = {
                     },
                     tests: [
                         { _description: 'Check if name appears on sanctions list', name: 'Banco Nacional' }
-                    ]
-                },
-                freeQuery: {
-                    sql: '{{DYNAMIC_SQL}}',
-                    description: 'Execute a custom read-only SQL query against the OFAC SDN database. Only SELECT statements are allowed.',
-                    parameters: [
-                        { position: { key: 'sql', value: '{{USER_PARAM}}' }, z: { primitive: 'string()', options: ['min(6)'] } },
-                        { position: { key: 'limit', value: '{{USER_PARAM}}' }, z: { primitive: 'number()', options: ['optional()', 'default(100)', 'max(1000)'] } }
-                    ],
-                    output: {
-                        mimeType: 'application/json',
-                        schema: {
-                            type: 'array',
-                            items: { type: 'object' }
-                        }
-                    },
-                    tests: [
-                        { _description: 'Count all sanctioned entities', sql: 'SELECT COUNT(*) as count FROM sdn', limit: 1 }
                     ]
                 }
             }
