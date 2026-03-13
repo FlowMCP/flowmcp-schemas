@@ -143,6 +143,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | duneanalytics | farcaster.mjs | 3 | farcasterGetTrendingMemecoins, farcasterGetTrendingChannels, farcasterGetTrendingUsers | DUNE_API_KEY | analytics, farcaster, social, cacheTtlDaily |
 | duneanalytics | getResults.mjs | 1 | getLatestResult | DUNE_API_KEY | analytics, queries, data, cacheTtlDaily |
 | duneanalytics | trendingContracts.mjs | 3 | getDexPairStats, getTrendingContracts, getMarketShare | DUNE_API_KEY | analytics, contracts, trending, cacheTtlFrequent |
+| dwd | warnings.mjs | 2 | getStationWeather, getWeatherWarnings |  | weather, germany, warnings, opendata |
 | dwd | weather.mjs | 1 | getStationOverview |  | weather, germany, forecast, cacheTtlFrequent |
 | dwds | dwds.mjs | 6 | getWordFrequency, getDictionarySnippet, getRandomEntries, getIpaPronunciation, getGoetheWordList, searchCorpus |  | dictionary, language, german, linguistics, cacheTtlDaily |
 | ebird | ebird.mjs | 4 | getRecentObservations, getNotableObservations, getNearbyObservations, getHotspots | EBIRD_API_KEY | birds, nature, biodiversity, science, cacheTtlFrequent |
@@ -209,6 +210,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | govdata | datasets.mjs | 5 | searchDatasets, getDataset, listGroups, listOrganizations, searchTags |  | government, opendata, germany, cacheTtlDaily |
 | govdatasparql | sparql-analytics.mjs | 7 | getCatalogOverview, searchByTheme, getRecentDatasets, getFormatDistribution, getTopPublishers, getTopKeywords, getDatasetsByPublisher |  | government, opendata, germany, sparql, analytics, cacheTtlDaily |
 | greix | greix.mjs | 7 | listCities, getCity, listPropertyTypes, listNeighborhoods, getCityPricePeriod, getCityMetrics, getNeighborhoodMetricsMap |  | real-estate, germany, economics, opendata, cacheTtlDaily |
+| gtfsde | transit.mjs | 0 |  |  | germany, transit, opendata, mobility |
 | gutendex | gutendex.mjs | 5 | listBooks, getBookById, searchByTopic, searchByAuthorLifespan, getBooksByIds |  | books, ebooks, literature, gutenberg, cacheTtlDaily |
 | harvardart | harvardArtMuseums.mjs | 4 | searchObjects, getObject, searchPeople, listExhibitions | HARVARD_ART_API_KEY | art, museums, culture, education, cacheTtlDaily |
 | hathitrust | hathitrust.mjs | 8 | briefLookupByOclc, briefLookupByIsbn, briefLookupByLccn, fullLookupByOclc, fullLookupByIsbn, fullLookupByLccn, briefLookupByHtid, briefLookupByRecordNumber |  | library, books, archives, bibliography, cacheTtlDaily |
@@ -266,6 +268,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | klinikatlas | hospitals.mjs | 5 | getAllHospitals, searchHospitals, getHospitalsByCity, getHospitalsNearby, getStateStatistics |  | healthcare, germany, hospitals, cacheTtlDaily |
 | klinikatlas | medical-codes.mjs | 4 | searchIcdCodes, getIcdCode, searchOpsCodes, getOpsCode |  | healthcare, germany, medical, icd, ops, cacheTtlDaily |
 | ladesaeulenregister | ladesaeulenregister.mjs | 3 | queryStations, queryByLocation, getRecordCount |  | ev, charging, transport, energy, germany, geospatial, government, cacheTtlDaily |
+| ladestationen | ladestationen.mjs | 1 | queryStations |  | germany, mobility, ev, charging, opendata |
 | lastfm | lastfm.mjs | 5 | searchArtists, getArtistInfo, searchTracks, getTopArtists, getAlbumInfo | LASTFM_API_KEY | music, entertainment, charts, recommendations, cacheTtlDaily |
 | lebensmittelwarnung | lebensmittelwarnung.mjs | 1 | getWarnings |  | food, safety, germany, consumer, warnings, cacheTtlFrequent |
 | lebensmittelwarnungen | warnings.mjs | 1 | getWarnings | LEBENSMITTELWARNUNGEN_API_KEY | government, food, safety, consumer, germany, opendata, cacheTtlFrequent |
@@ -343,6 +346,8 @@ Below is a list of all available schemas in this library, grouped by provider an
 | obis | obis.mjs | 5 | searchOccurrences, getChecklist, getTaxon, listDatasets, listNodes |  | biodiversity, ocean, marine, species, ecology, cacheTtlDaily |
 | oecd | oecdData.mjs | 4 | getEconomicOutlook, getConsumerPrices, getHousePrices, getKeyEconomicIndicators |  | economics, statistics, government, international, cacheTtlDaily |
 | oeffentlichevergabe | tenders.mjs | 2 | getNoticesByDay, getNoticesByMonth |  | procurement, germany, tenders, government, cacheTtlDaily |
+| ofacsdn | sanctions.mjs | 0 |  |  | sanctions, compliance, kyc, opendata |
+| offeneregister | companies.mjs | 0 |  |  | germany, companies, handelsregister, opendata |
 | ohlcv | olhcv-moralis-evm.mjs | 1 | getRecursiveOhlcvEVM | MORALIS_API_KEY | evm, ohlcv, charts, cacheTtlRealtime |
 | ohlcv | olhcv-moralis-solana.mjs | 1 | getRecursiveOhlcvSolana | MORALIS_API_KEY | solana, ohlcv, charts, cacheTtlRealtime |
 | ohlcv | olhcv-solana-tracker.mjs | 1 | getOhlcvSolana | SOLANA_TRACKER_API_KEY | solana, ohlcv, charts, cacheTtlRealtime |
@@ -380,6 +385,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | orca | orca.mjs | 3 | getWhirlpools, getWhirlpoolByAddress, getTokens |  | defi, solana, dex, clmm, cacheTtlFrequent |
 | orcid | orcid.mjs | 8 | searchResearchers, getRecord, getPersonDetails, getWorks, getEmployments, getEducations, getFundings, getActivities |  | science, research, researchers, academic, profiles, cacheTtlDaily |
 | overpass | osmQuery.mjs | 3 | queryRaw, findNearby, status |  | openstreetmap, geodata, maps, cacheTtlDaily |
+| overturemaps | berlin-pois.mjs | 0 |  |  | berlin, pois, opendata, geospatial |
 | pangaea | pangaea.mjs | 5 | searchDatasets, elasticSearch, getDatasetMetadata, downloadDatasetTab, getDatasetJsonLd |  | earth-science, environment, climate, ocean, geoscience, research, cacheTtlDaily |
 | passportonchain | onchain-data.mjs | 1 | getFullPassportData | ETHEREUM_MAINNET_ALCHEMY_HTTP, ARBITRUM_MAINNET_ALCHEMY_HTTP | identity, attestation, gitcoin, cacheTtlDaily |
 | patentsview | patentsview.mjs | 8 | searchPatents, searchInventors, searchAssignees, getPatentCitations, searchPublications, searchLocations, searchCpcGroups, getPatentClaims | PATENTSVIEW_API_KEY | patents, intellectual-property, research, government, usa, cacheTtlDaily |
@@ -402,6 +408,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 | redditscanner | getTokenMentions.mjs | 2 | getTokenMentions, getHotMemes |  | social, sentiment, crypto, cacheTtlFrequent |
 | regionalatlas | regionalatlas.mjs | 4 | getIndicatorByState, getIndicatorByKreis, getIndicatorByRegierungsbezirk, listAvailableIndicators |  | germany, statistics, demographics, regional, opendata, cacheTtlDaily |
 | regionalstatistik | regionalstatistik.mjs | 6 | searchStatistics, searchTables, getTableData, searchVariables, findAll, getQualitySigns | REGIONALSTATISTIK_USERNAME, REGIONALSTATISTIK_PASSWORD | germany, statistics, demographics, regional, opendata, census, cacheTtlDaily |
+| reisewarnung | reisewarnung.mjs | 4 | getAllWarnings, getWarningById, getStateNames, getHealthcare |  | germany, travel, safety, warnings, opendata |
 | reisewarnungen | travel-warnings.mjs | 2 | getAllWarnings, getCountryWarning |  | travel, warnings, germany, safety, cacheTtlDaily |
 | reliefweb | reliefweb.mjs | 5 | searchReports, searchDisasters, searchJobs, getReportById, searchCountries |  | humanitarian, disasters, crises, unocha, opendata, news, cacheTtlHourly |
 | restcountries | rest-countries.mjs | 6 | getAllCountries, getCountryByName, getCountryByCode, getCountriesByRegion, getCountriesByCurrency, getCountriesByLanguage |  | countries, geography, world, international, cacheTtlDaily |
