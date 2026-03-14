@@ -14,6 +14,7 @@ Below is a list of all available schemas in this library, grouped by provider an
 
 | Namespace | Schema Name | Route Names Count | Route Names (shortened) | Required Server Params | Tags |
 |-----------|--------------|-------------------|--------------------------|-------------------------|------|
+|  | agent.mjs | 20 | 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 |  |  |
 | aave | aave.mjs | 3 | getReserves, getUserData, getProtocolData | THEGRAPH_API_KEY | defi, lending, protocol, cacheTtlDaily |
 | abgeordnetenwatch | abgeordnetenwatch.mjs | 5 | listPoliticians, getPolitician, listParliaments, listParliamentPeriods, listCandidaciesMandates |  | politics, germany, parliament, opendata, democracy, cacheTtlDaily |
 | alchemy | contract-read.mjs | 1 | readContract | ALCHEMY_API_KEY | blockchain, evm, smartcontract, multichain, alchemy, cacheTtlRealtime |
