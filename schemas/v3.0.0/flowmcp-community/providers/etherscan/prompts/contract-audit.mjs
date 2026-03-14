@@ -10,7 +10,7 @@ export const prompt = {
         'etherscan.getGasOracle'
     ],
     references: [],
-    content: `Perform a quick security audit of the smart contract at [[contractAddress]] on Ethereum.
+    content: `Perform a quick security audit of the smart contract at {{input:contractAddress}} on Ethereum.
 
 ## Step 1: Contract Verification
 Use etherscan.getContractSourceCode to check if the contract is verified on Etherscan.

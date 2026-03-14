@@ -10,7 +10,7 @@ export const prompt = {
         'coingecko.getCoinMarketChart'
     ],
     references: [],
-    content: `Compare the price performance of the following tokens: [[tokenList]].
+    content: `Compare the price performance of the following tokens: {{input:tokenList}}.
 
 ## Step 1: Current Prices
 Use coingecko.getSimplePrice to fetch current USD prices for all tokens in a single call.
@@ -19,14 +19,14 @@ Use coingecko.getSimplePrice to fetch current USD prices for all tokens in a sin
 Use coingecko.getCoinsMarkets to retrieve market cap, 24h volume, and circulating supply for each token. Sort by market cap descending.
 
 ## Step 3: Historical Performance
-For each token, use coingecko.getCoinMarketChart with [[timeframeDays]] days to get the price history.
+For each token, use coingecko.getCoinMarketChart with {{input:timeframeDays}} days to get the price history.
 
 ## Step 4: Comparison Report
 Create a comparison table with:
-| Token | Price (USD) | 24h Change | [[timeframeDays]]d Change | Market Cap | Volume/MCap Ratio |
+| Token | Price (USD) | 24h Change | {{input:timeframeDays}}d Change | Market Cap | Volume/MCap Ratio |
 
 Identify:
-- Best performer over [[timeframeDays]] days
+- Best performer over {{input:timeframeDays}} days
 - Highest volume relative to market cap (potential momentum indicator)
 - Any significant price divergences between correlated tokens
 
